@@ -25,3 +25,11 @@ error_signatures: []
 - [Model records](../models/README.md)
 - [Runtime records](../runtimes/README.md)
 - [Procedures](../procedures/README.md)
+
+## Operational Guides & Model Records
+- [Qwen 3.8 27B Canonical Record](../models/qwen3.8-27b.md)
+- [llama.cpp Optimization & Draft-MTP Tuning](../runtimes/llamacpp-qwen3.8.md)
+- [Autonomous Coding Agent Tuning](../procedures/coding-agent-tuning.md)
+- [Multimodal Video & Vision Procedures](../procedures/multimodal-workflows.md)
+- [LiteLLM Integration](../clients/litellm.md)
+- [Pi Coding Agent Integration](../clients/pi.md)
