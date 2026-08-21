@@ -56,5 +56,8 @@ Brief description of the concept or component.
 
 1. Read the target raw file via context-mode tools.
 2. Draft the OKF document based on the template.
-3. Write the file to its proper location.
-4. (Optional) Run `qmd update` using `qmd-operator` so the new wiki file is searchable.
+3. Write the file to its proper location (e.g. `kb/models/`, `kb/procedures/`, `kb/runtimes/`).
+4. **Mandatory Delivery Gate:**
+   - Link all cross-references in `wiki/index.md` or parent files.
+   - Run `kb-bootstrap validate --dir kb` and verify 0 dead links.
+   - Run `qmd update` and execute a verification search: `qmd search "<term>" -c localllm-wiki`.
