@@ -1,4 +1,4 @@
-name: localllm-kb
+name: localllm-kb-wiki
 paths:
   - ../../kb/
 exclude:

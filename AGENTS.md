@@ -48,6 +48,17 @@ repository name is unchanged. Prefer explicit artifact filenames and hashes.
 
 ## QMD
 
+## QMD Search Collections
+
+This knowledge base is indexed in local QMD using two dedicated collections:
+- `localllm-wiki` — Canonical OKF knowledge (models, runtimes, procedures, clients, receipts).
+  - Search: `qmd search "<term>" -c localllm-wiki`
+  - Query: `qmd query "<intent>" -c localllm-wiki`
+- `localllm-raw` — Raw source captures, benchmarks, and Reddit dumps.
+  - Search: `qmd search "<term>" -c localllm-raw`
+  - Query: `qmd query "<intent>" -c localllm-raw`
+
+
 Use the project-local `qmd.json` and `qmd/collections/` configuration for this
 KB. Keep collections scoped to `kb/`; do not index the whole `T:/Code` tree from
 this project. After adding or changing Markdown, run `qmd update` for the
