@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.qmd/
+qmd/vector.db
+qmd/embeddings/
+*.egg-info/
+.env
+.env.*
+
+# Local raw captures and generated evidence may contain sensitive data.
+kb/raw/**
+kb/receipts/**
+!kb/raw/.gitkeep
+!kb/receipts/.gitkeep
+
+# Local model artifacts and caches must never enter this repository.
+*.gguf
+*.safetensors
+models/
+artifacts/

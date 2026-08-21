@@ -1,0 +1,6 @@
+name: localllm-kb
+paths:
+  - ../../kb/
+exclude:
+  - "**/.DS_Store"
+  - "**/raw/**"
