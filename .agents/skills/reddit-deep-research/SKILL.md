@@ -97,7 +97,7 @@ The extractor:
 - processes only selected `pending` or `error` records;
 - skips successful immutable captures;
 - stores one JSON capture per Reddit thread under `raw/`;
-- records title, cleaned post body, top comments, query provenance, quality components, readiness metadata, and outbound links;
+- records title, cleaned post body, top comments, query provenance, explainable quality components, separate human-review metadata, readiness metadata, and outbound links;
 - rejects shell/error pages and empty or too-short posts with stable readiness reasons;
 - appends sanitized failures to `errors.jsonl`;
 - writes `outbound-references.json` and an explicit `follow-up.json` ledger.
@@ -136,7 +136,7 @@ Do not conflate outbound verification counts with the number of Reddit sources. 
 
 ### Step 6 — Evaluate quality and saturation
 
-Keep deterministic score components visible. Treat the bundled keyword score as triage, not final truth.
+Keep source-type, evidence-field, relevance, scoring-version, and human-review components visible. The bundled score is deterministic triage, not final truth; keyword presence alone cannot produce a high-quality result when evidence fields are absent.
 
 Default discovery saturation requires five consecutive completed query records yielding fewer than two new unique URLs, after all hypothesis dimensions are covered. Saturation can stop discovery; it cannot turn failed extraction into completed research.
 

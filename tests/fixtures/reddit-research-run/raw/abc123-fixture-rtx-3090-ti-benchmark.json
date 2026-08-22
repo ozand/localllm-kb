@@ -16,10 +16,26 @@
   "discovered_by_query_ids": ["query-1"],
   "quality": {
     "score": 0.8,
-    "evidence": 0.8,
+    "source_type": "benchmark",
+    "source_type_score": 1.0,
+    "evidence_fields": {
+      "body_present": true,
+      "measurements": true,
+      "environment": true,
+      "exact_commands": true,
+      "primary_reference": true,
+      "community_scrutiny": true
+    },
+    "evidence_completeness": 0.95,
     "relevance": 0.8,
-    "community_scrutiny": 0.8,
-    "method": "fixture"
+    "scoring_version": "evidence-triage-v2",
+    "method": "deterministic-source-type-and-evidence-v2"
+  },
+  "review": {
+    "decision": "unreviewed",
+    "rationale": null,
+    "reviewer": null,
+    "follow_up_status": "not-started"
   },
   "outbound_references": [
     {

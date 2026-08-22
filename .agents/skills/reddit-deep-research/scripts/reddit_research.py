@@ -431,16 +431,97 @@ def discover(args: argparse.Namespace) -> int:
     return 0 if run["counts"]["selected"] >= run["target_selected_sources"] or run["saturation"]["reached"] else 3
 
 
+SCORING_VERSION = "evidence-triage-v2"
+REVIEW_DECISIONS = {"unreviewed", "accepted", "rejected", "needs-follow-up"}
+REVIEW_FOLLOW_UP_STATES = {"not-started", "queued", "in-progress", "complete"}
+
+
+def classify_source_type(capture: dict[str, Any]) -> str:
+    text = " ".join([str(capture.get("title", "")), str(capture.get("post_body", ""))]).lower()
+    if re.search(r"\b(benchmark|benchmarked|benchmarks|performance|tokens?/s|tok/s|throughput)\b", text):
+        return "benchmark"
+    if re.search(r"\b(config|configuration|flags?|command|llama\.cpp|vllm|setup)\b", text):
+        return "configuration"
+    if re.search(r"\b(error|failed|failure|troubleshoot|oom|problem|issue)\b", text):
+        return "troubleshooting"
+    if re.search(r"\b(vs\.?|versus|compare|comparison)\b", text):
+        return "comparison"
+    if re.search(r"\b(announcement|announced|released|release|coming|official|news)\b", text):
+        return "announcement"
+    if re.search(r"\b(question|help|recommend|which|what should)\b", text):
+        return "question"
+    return "discussion"
+
+
+def extract_evidence_fields(capture: dict[str, Any]) -> dict[str, bool]:
+    body = str(capture.get("post_body", ""))
+    title = str(capture.get("title", ""))
+    comments = capture.get("comments", [])
+    combined = " ".join([title, body, *[str(item.get("text", "")) for item in comments]]).lower()
+    links = capture.get("external_links", []) or capture.get("outbound_references", [])
+    link_values = [item if isinstance(item, str) else item.get("url", "") for item in links]
+    return {
+        "body_present": len(body.strip()) >= 20,
+        "measurements": bool(re.search(r"\b\d+(?:[.,]\d+)?\s*(?:tok(?:ens)?/s|t/s|gb|mb|w|°c|c|k|khz|mhz|%)\b", combined, re.I)),
+        "environment": bool(re.search(r"\b(rtx|gpu|vram|cuda|ram|model|quant|llama\.cpp|vllm|windows|linux|macos)\b", combined)),
+        "exact_commands": bool("--" in combined or "command" in combined or "```" in combined or "-ngl" in combined),
+        "primary_reference": any(re.search(r"github\.com|huggingface\.co|nvidia\.com", str(value), re.I) for value in link_values),
+        "community_scrutiny": len(comments) >= 2,
+    }
+
+
 def score_capture(capture: dict[str, Any], keywords: list[str]) -> dict[str, Any]:
-    combined = " ".join([capture.get("title", ""), capture.get("post_body", ""), *[item.get("text", "") for item in capture.get("comments", [])]]).lower()
-    evidence_terms = ["tok/s", "tokens/s", "vram", "gb", "context", "watt", "power limit", "temperature", "command", "--"]
-    evidence_hits = sum(term in combined for term in evidence_terms)
+    source_type = classify_source_type(capture)
+    evidence_fields = extract_evidence_fields(capture)
+    field_weights = {
+        "body_present": 0.10,
+        "measurements": 0.25,
+        "environment": 0.20,
+        "exact_commands": 0.20,
+        "primary_reference": 0.15,
+        "community_scrutiny": 0.10,
+    }
+    evidence_completeness = round(sum(weight for field, weight in field_weights.items() if evidence_fields[field]), 3)
+    source_type_weights = {
+        "benchmark": 1.0,
+        "configuration": 0.90,
+        "troubleshooting": 0.80,
+        "comparison": 0.75,
+        "question": 0.55,
+        "announcement": 0.45,
+        "discussion": 0.50,
+    }
+    source_type_score = source_type_weights[source_type]
+    combined = " ".join([str(capture.get("title", "")), str(capture.get("post_body", ""))]).lower()
     relevance_hits = sum(term.lower() in combined for term in keywords)
-    scrutiny = min(len(capture.get("comments", [])) / 10.0, 1.0)
-    evidence = min(evidence_hits / 5.0, 1.0)
-    relevance = min(relevance_hits / max(len(keywords), 1), 1.0)
-    total = round(0.45 * evidence + 0.35 * relevance + 0.20 * scrutiny, 3)
-    return {"score": total, "evidence": round(evidence, 3), "relevance": round(relevance, 3), "community_scrutiny": round(scrutiny, 3), "method": "deterministic-keyword-v1"}
+    relevance_score = round(min(relevance_hits / max(len(keywords), 1), 1.0), 3)
+    total = round(0.30 * source_type_score + 0.55 * evidence_completeness + 0.15 * relevance_score, 3)
+    if not evidence_fields["body_present"] or (
+        not evidence_fields["measurements"]
+        and not evidence_fields["exact_commands"]
+        and not evidence_fields["primary_reference"]
+        and not evidence_fields["community_scrutiny"]
+    ):
+        total = min(total, 0.45)
+    return {
+        "score": total,
+        "source_type": source_type,
+        "source_type_score": round(source_type_score, 3),
+        "evidence_fields": evidence_fields,
+        "evidence_completeness": evidence_completeness,
+        "relevance": relevance_score,
+        "scoring_version": SCORING_VERSION,
+        "method": "deterministic-source-type-and-evidence-v2",
+    }
+
+
+def default_review() -> dict[str, Any]:
+    return {
+        "decision": "unreviewed",
+        "rationale": None,
+        "reviewer": None,
+        "follow_up_status": "not-started",
+    }
 
 
 def normalize_outbound_url(value: str) -> tuple[str | None, str | None]:
@@ -590,6 +671,7 @@ def extract(args: argparse.Namespace) -> int:
                 "discovered_by_query_ids": item["discovered_by_query_ids"],
             })
             capture["quality"] = score_capture(capture, keywords)
+            capture["review"] = default_review()
             capture["outbound_references"] = [
                 {"url": url, "verification_state": "unverified", "verified_at": None, "final_url": None, "note": "captured from Reddit DOM; filtering and verification are separate stages"}
                 for url in capture.pop("external_links", [])
@@ -602,6 +684,7 @@ def extract(args: argparse.Namespace) -> int:
                 "status": "captured",
                 "capture_file": f"raw/{filename}",
                 "quality": capture["quality"],
+                "review": capture["review"],
                 "outbound_reference_count": len(capture["outbound_references"]),
                 "last_error": None,
             })
@@ -784,9 +867,15 @@ def validate(args: argparse.Namespace) -> int:
                 problems.append(f"capture is not kebab-case: {capture_path.name}")
             else:
                 capture = json_load(capture_path)
-                for field in ("canonical_url", "captured_at", "quality", "discovered_by_query_ids"):
+                for field in ("canonical_url", "captured_at", "quality", "review", "discovered_by_query_ids"):
                     if field not in capture:
                         problems.append(f"capture {capture_file} lacks {field}")
+                quality = capture.get("quality", {})
+                if quality.get("scoring_version") != SCORING_VERSION:
+                    problems.append(f"capture {capture_file} has unsupported scoring version")
+                review = capture.get("review", {})
+                if review.get("decision") not in REVIEW_DECISIONS or review.get("follow_up_status") not in REVIEW_FOLLOW_UP_STATES:
+                    problems.append(f"capture {capture_file} has invalid review state")
                 for reference in capture.get("outbound_references", []):
                     if reference.get("verification_state") not in VERIFICATION_STATES:
                         problems.append(f"capture {capture_file} has invalid outbound verification state")
