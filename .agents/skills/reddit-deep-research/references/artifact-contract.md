@@ -94,7 +94,8 @@ Per-thread raw JSON is immutable after successful creation. Outbound verificatio
 - post body;
 - selected top comments with authors/scores as exposed by Reddit;
 - query IDs that discovered the thread;
-- deterministic quality score and scoring method;
+- deterministic quality score with source type, evidence fields, score components, and scoring version;
+- separate human-review metadata (`decision`, `rationale`, `reviewer`, `follow_up_status`);
 - outbound references with verification state.
 
 If a capture must be corrected, create a new versioned run or an explicit replacement artifact; do not rewrite historical evidence silently.

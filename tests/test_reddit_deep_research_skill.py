@@ -124,13 +124,39 @@ def test_shell_and_empty_captures_return_stable_not_ready_reasons():
     assert module.capture_readiness_reason({**base, "title": "A thread", "post_body": "useful post body", "has_post_element": False}) == "missing-post-element"
 
 
-def test_quality_score_is_deterministic_and_bounded():
+def test_quality_score_is_deterministic_explainable_and_bounded():
     module = load_script("reddit_research.py")
-    capture = {"title": "RTX 3090 Ti benchmark", "post_body": "24GB VRAM 50 tok/s 64k context 300 watt power limit command --flash-attn", "comments": [{"text": "replicated", "author": "a", "score": "3"}] * 10}
+    capture = {
+        "title": "RTX 3090 Ti benchmark",
+        "post_body": "24GB VRAM 50 tok/s 64k context 300 watt power limit command --flash-attn",
+        "comments": [{"text": "replicated", "author": "a", "score": "3"}] * 10,
+        "external_links": ["https://github.com/org/repo"],
+    }
     score = module.score_capture(capture, ["rtx 3090 ti", "vram", "context"])
     assert score == module.score_capture(capture, ["rtx 3090 ti", "vram", "context"])
     assert 0 <= score["score"] <= 1
-    assert score["method"] == "deterministic-keyword-v1"
+    assert score["scoring_version"] == "evidence-triage-v2"
+    assert score["source_type"] == "benchmark"
+    assert score["evidence_fields"]["measurements"] is True
+    assert score["evidence_fields"]["environment"] is True
+    assert score["evidence_fields"]["exact_commands"] is True
+    assert score["evidence_fields"]["primary_reference"] is True
+    assert score["method"] == "deterministic-source-type-and-evidence-v2"
+
+
+def test_keywords_alone_cannot_create_high_quality_score():
+    module = load_script("reddit_research.py")
+    capture = {"title": "RTX 3090 Ti Qwen VRAM context", "post_body": "vram context qwen llama.cpp tokens/s power temperature", "comments": []}
+    score = module.score_capture(capture, ["rtx 3090 ti", "vram", "context", "qwen"])
+    assert score["evidence_completeness"] < 0.5
+    assert score["score"] < 0.6
+
+
+def test_review_metadata_is_separate_and_serializable():
+    module = load_script("reddit_research.py")
+    review = module.default_review()
+    assert review == {"decision": "unreviewed", "rationale": None, "reviewer": None, "follow_up_status": "not-started"}
+    assert set(review) == {"decision", "rationale", "reviewer", "follow_up_status"}
 
 
 def test_error_sanitizer_redacts_paths_and_secrets():
