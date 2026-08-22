@@ -1,7 +1,7 @@
 ---
 name: reddit-deep-research
 description: >
-  Use this skill when the user asks for deep, mass, exhaustive, or 50+ source Reddit research; investigation of community benchmarks, hardware configurations, local LLM deployments, troubleshooting, or emerging AI behavior; or an auditable Reddit corpus with links and citations. Run hypothesis-driven discovery through Surf CLI, preserve every query/search URL and selected thread URL, capture posts/comments and outbound evidence, score source quality, resume failures, and produce separate immutable raw and OKF synthesis artifacts.
+  Use this skill when the user asks for deep, mass, exhaustive, or 50+ source Reddit research; investigation of community benchmarks, hardware configurations, local LLM deployments, troubleshooting, or an auditable Reddit corpus with links and citations. Run hypothesis-driven discovery through Surf CLI, preserve every query/search URL and selected thread URL, capture posts/comments and outbound evidence, score source quality, resume failures, sanitize publication copies, and produce separate immutable raw and OKF synthesis artifacts.
 compatibility: Requires Python 3.8+, Surf CLI, and an authenticated Chromium tab when Reddit content requires login.
 ---
 
@@ -16,27 +16,29 @@ Use this skill for:
 - requests for deep or mass Reddit research, especially `50+` sources;
 - `r/LocalLLaMA` hardware, model, runtime, benchmark, and troubleshooting investigations;
 - community evidence that must later be distilled into a canonical KB;
-- follow-up research when Reddit claims contain GitHub, Hugging Face, Gist, or vendor references.
+- follow-up research when Reddit claims contain GitHub, Hugging Face, Gist, or vendor references;
+- auditing or preparing a sanitized publication copy of research artifacts.
 
 Do not use it for a single known Reddit URL that only needs a quick quotation, or for non-Reddit web research with no community-source requirement.
 
 ## Non-negotiable rules
 
 1. **Load this skill explicitly before execution.** In the final receipt, state that `reddit-deep-research` governed the run.
-2. **Use checked-in scripts.** Run `.agents/skills/reddit-deep-research/scripts/reddit_research.py` and `render_research.py`. Do not invent the collector in `C:/Temp`, `/tmp`, an agent session folder, or inline code as the only executable copy.
+2. **Use checked-in scripts.** Run the bundled scripts under `.agents/skills/reddit-deep-research/scripts/`. Do not invent the collector or sanitizer in `C:/Temp`, `/tmp`, an agent session folder, or inline code as the only executable copy.
 3. **Preserve all discovery provenance.** Store every query, sort, time filter, and exact search URL, including failed attempts.
 4. **Preserve all source URLs.** Every discovered and selected canonical Reddit thread URL must remain in the manifest with discovery-query IDs and processing status.
 5. **Count researched sources honestly.** A search result is not a researched source. Count only successfully captured threads or explicit skips with reasons. Do not say `50+ researched` when only 47 captures succeeded.
 6. **Keep raw and synthesis separate.** Per-thread raw JSON is immutable. Corpus and synthesis Markdown are derived artifacts and never replace raw evidence.
 7. **Do not promote Reddit observations to facts.** Separate community observations, upstream claims, locally validated facts, and hypotheses.
 8. **Verify outbound claims separately.** A linked GitHub/Hugging Face page starts as `unverified`; preserve its verification state.
-9. **Use repository-relative paths in artifacts.** Never store browser profiles, cookies, authorization headers, API keys, private prompts, or unsanitized local paths.
+9. **Use repository-relative paths in artifacts.** Never store browser profiles, cookies, authorization headers, API keys, private prompts, or unsanitized local paths in generated project artifacts.
 10. **Use kebab-case and OKF frontmatter.** Rendered Markdown must pass the artifact contract.
+11. **Sanitize only explicit copies.** Use `sanitize_artifacts.py` with separate input/output paths. Never modify immutable raw captures in place.
 
 ## Required references
 
 - Read [`references/research-methodology.md`](references/research-methodology.md) before designing hypotheses, query coverage, quality scoring, saturation, or outbound verification.
-- Read [`references/artifact-contract.md`](references/artifact-contract.md) before creating, resuming, validating, or rendering a run.
+- Read [`references/artifact-contract.md`](references/artifact-contract.md) before creating, resuming, validating, rendering, or publishing a run.
 - Use [`assets/queries.example.txt`](assets/queries.example.txt) as a query-matrix starting point for hardware research.
 - Use [`assets/run-config.example.json`](assets/run-config.example.json) when documenting run parameters.
 
@@ -122,15 +124,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py verify-out
   --limit 25
 ```
 
-This records bounded reachability, redirects, and timestamps in the separate outbound ledger. Filtering excludes irrelevant/static/private links as `skipped`; included references are ordered by deterministic priority. A successful page load remains `unverified`. Failed access is recorded as `failed`. After manually inspecting the referenced evidence, promote it explicitly:
-
-```bash
-python .agents/skills/reddit-deep-research/scripts/reddit_research.py mark-outbound \
-  --run-dir kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08 \
-  --reference-id <THREAD_ID:INDEX> \
-  --state verified \
-  --note "Inspected upstream benchmark command and environment section."
-```
+This records bounded reachability, redirects, and timestamps in the separate outbound ledger. Filtering excludes irrelevant/static/private links as `skipped`; included references are ordered by deterministic priority. A successful page load remains `unverified`. Failed access is recorded as `failed`. After manually inspecting the referenced evidence, promote it explicitly with `mark-outbound`.
 
 Do not conflate outbound verification counts with the number of Reddit sources. Outbound verification updates the bounded ledger, never immutable per-thread raw captures. The `--limit` flag applies only to included `unverified` references.
 
@@ -150,91 +144,73 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py validate \
   --require-target
 ```
 
-Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness metadata, outbound verification states, and whether the source target or saturation rule is satisfied.
+Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness and review metadata, outbound verification states, and whether the source target or saturation rule is satisfied.
 
 Resolve or explicitly report remaining `pending` and `error` records before describing the research as complete.
 
 ### Step 8 — Render separate OKF artifacts
 
-```bash
-python .agents/skills/reddit-deep-research/scripts/render_research.py corpus \
-  --run-dir kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08 \
-  --output kb/raw/research/rtx-3090-ti-llm-optimization-2026-08-corpus.md
+Use `render_research.py corpus` and `synthesis` as documented in the artifact contract. The corpus must list all exact search URLs and all selected Reddit URLs. The synthesis must report coverage and failures and must not invent consensus.
 
-python .agents/skills/reddit-deep-research/scripts/render_research.py synthesis \
-  --run-dir kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08 \
-  --output kb/raw/research/rtx-3090-ti-llm-optimization-2026-08-synthesis.md \
-  --minimum-score 0.5
+### Step 9 — Audit a publication candidate
+
+Before publishing a research corpus, audit a source tree without exposing matched values:
+
+```bash
+python .agents/skills/reddit-deep-research/scripts/sanitize_artifacts.py audit \
+  --input kb/raw/research/runs/<run-id>
 ```
 
-The corpus must list all exact search URLs and all selected Reddit URLs. The synthesis must report coverage and failures and must not invent consensus. Manually add claim clusters only with supporting URLs and evidence labels.
+The audit report contains only file counts and category counts. It does not print matched paths, IPs, tokens, or surrounding text. Treat any finding as a publication blocker until explicitly reviewed.
 
-### Step 9 — Update and query the KB index
+### Step 10 — Create a sanitized publication copy
+
+Never modify `kb/raw/research/` or a run's immutable `raw/` directory in place. Write to an explicit separate destination:
+
+```bash
+python .agents/skills/reddit-deep-research/scripts/sanitize_artifacts.py sanitize \
+  --input kb/raw/research/runs/<run-id> \
+  --output kb/raw/research/published/<run-id>
+```
+
+The sanitizer is deterministic and idempotent. It replaces only documented regex categories:
+
+- Windows absolute paths → `<windows-path>`;
+- selected Unix absolute paths → `<unix-path>`;
+- RFC1918/loopback endpoints → `<private-endpoint>`;
+- supported assignments/tokens → category-specific redaction markers.
+
+Re-run `audit` against the publication copy. Publish only after the report has zero findings and manifests/receipts remain internally consistent. The sanitizer is bounded detection, not proof that arbitrary secrets or private data are absent.
+
+### Step 11 — Update and query the KB index
 
 From the project root:
 
 ```bash
 python -m pytest -q
-kb-bootstrap validate --dir kb --check-collections
+kb-bootstrap validate --dir kb
 qmd update
 qmd search "<topic terms>" -c localllm-raw
 ```
 
 Confirm raw research remains absent from the canonical wiki collection.
 
-### Step 10 — Report an auditable completion receipt
+### Step 12 — Report an auditable completion receipt
 
-Generate a machine-readable receipt:
-
-```bash
-python .agents/skills/reddit-deep-research/scripts/reddit_research.py receipt \
-  --run-dir kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08 \
-  --output kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08/receipt.json
-```
-
-The command exits non-zero when selected extraction remains incomplete or neither the source target nor saturation condition is met. Report:
-
-- skill used: `reddit-deep-research`;
-- run ID and repository-relative run directory;
-- number of query records, unique discovered URLs, selected URLs, successful captures, skips, and errors;
-- whether target or saturation was reached;
-- corpus and synthesis paths;
-- script paths used;
-- outbound verification counts;
-- residual risks and unverified claims.
-
-Never report only a polished conclusion without the source/manifests receipt.
-
-## Batch defaults
-
-| Setting | Default |
-|---|---:|
-| Selected Reddit source target | 50 |
-| Distinct query strings | >= 10 |
-| Search sorts | relevance, top, new |
-| Top comments captured | 15 |
-| Saturation window | 5 completed queries |
-| Minimum new URLs per query before low-yield | 2 |
-| Synthesis quality threshold | 0.5 |
-
-Change a default only when the run manifest records the reason.
+Report skill used, run ID, repository-relative paths, query/discovered/selected/captured/skipped/error counts, audit category counts, sanitized output path, test results, residual risks, and whether the publication gate passed. Never report only a polished conclusion without the source/manifests receipt.
 
 ## Gotchas
 
-- **The description is the trigger.** Requests saying “mass research,” “deep research,” or “50+ sources” must activate this skill even if the user does not explicitly say Reddit when the context is an existing Reddit investigation.
-- **Do not use temporary scripts.** The prior failure mode was generating collectors under `C:/Temp`, then leaving no reusable implementation in the skill.
-- **Do not hide source URLs inside a huge JSON dump.** Persist explicit query and thread manifests and render a corpus document where links are reviewable.
+- **Do not use temporary scripts.** All collection and sanitization code must be checked in under the skill.
+- **Do not publish an unaudited raw corpus.** Public Reddit content can still contain usernames, local paths, LAN endpoints, or copied credentials.
+- **Do not sanitize in place.** Immutable evidence and publication copies must remain separate.
+- **Do not print audit matches.** Reports contain category/count metadata only.
+- **Regex coverage is bounded.** A zero count means no supported pattern matched; it does not prove the corpus contains no possible sensitive data.
 - **Do not confuse discovered, selected, and captured counts.** Report all three.
 - **Do not claim completion after partial success.** Forty-seven successful captures out of fifty-five attempts is `partial`, not “50+ researched.”
-- **Reddit DOM changes.** Keep selector fallbacks in the bundled script and record stable readiness failures instead of treating shell/error pages as captures.
-- **Reddit pages contain irrelevant anchors.** Filter navigation/ad links and verify only evidence-bearing outbound references.
 - **Quality scores are heuristics.** A high score does not validate a claim.
 - **QMD search relevance is not evidence confidence.** A 97% search match only means retrieval relevance.
-- **No generator template currently exists.** This skill is project-local and intentionally not added to `kb_bootstrap/templates/skills/` under Issue #3. Reassess alignment if a reusable template is introduced later.
-
-## Evals
-
-Read [`evals/evals.json`](evals/evals.json) when evaluating changes to this skill. Run baseline and with-skill comparisons using the `skill-evaluator` agent as described by the `skill-creator` methodology. Cover completeness/provenance, outbound evidence/OKF separation, and resume/error handling.
+- **No generator template currently exists.** This skill is project-local and intentionally not added to `kb_bootstrap/templates/skills/`.
 
 ## Related
 

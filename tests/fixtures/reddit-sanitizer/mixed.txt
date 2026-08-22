@@ -1,0 +1,7 @@
+Public benchmark: 50 tok/s on RTX 3090 Ti.
+Windows: C:\Users\alice\models\Qwen.gguf
+Unix: /home/alice/models/Qwen.gguf
+Private endpoint: http://192.168.1.111:8080/v1
+Secret forms: api_key=super-secret-value bearer eyJhbGciOiJfake sk-abcdefghijklmnop
+Keep this URL: https://github.com/org/repo?x=1
+Keep this text: 192.0.2.10 and /research/notes.
