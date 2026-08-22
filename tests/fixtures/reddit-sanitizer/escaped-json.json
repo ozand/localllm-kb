@@ -1,0 +1,1 @@
+{"command":"llama-server -m \"C:\\Users\\fixture\\models\\Qwen.gguf\" --ctx-size 65536","unix":"--model \"/home/fixture/models/Qwen.gguf\"","keep":"https://github.com/org/repo"}
