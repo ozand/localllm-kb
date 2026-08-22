@@ -65,6 +65,41 @@ def test_resume_contract_excludes_successful_captures():
     assert module.TERMINAL_STATUSES == {"captured", "skipped"}
 
 
+def test_retry_history_summaries_cover_success_retry_and_exhaustion():
+    module = load_script("reddit_research.py")
+    immediate = {"query_id": "q-immediate", "status": "completed", "attempt_history": []}
+    module.record_attempt(immediate, "discovery", "success", False, elapsed_ms=4)
+    assert module.summarize_attempts(immediate)["attempts"] == 1
+    assert module.summarize_attempts(immediate)["final_status"] == "completed"
+
+    recovered = {"thread_id": "t-recovered", "status": "captured", "attempt_history": []}
+    module.record_attempt(recovered, "extraction", "failure", True, "timeout", elapsed_ms=10)
+    module.record_attempt(recovered, "extraction", "success", False, elapsed_ms=8)
+    summary = module.summarize_attempts(recovered)
+    assert summary["attempts"] == 2
+    assert summary["retry_count"] == 1
+    assert summary["retryable_failures"] == 1
+    assert summary["final_outcome"] == "success"
+
+    exhausted = {"thread_id": "t-exhausted", "status": "error", "attempt_history": []}
+    for _ in range(3):
+        module.record_attempt(exhausted, "extraction", "failure", True, "C:/private/token=secret", elapsed_ms=5)
+    summary = module.summarize_attempts(exhausted)
+    assert summary["attempts"] == 3
+    assert summary["retry_count"] == 2
+    assert summary["final_status"] == "error"
+    assert all("private" not in entry["reason"] and "secret" not in entry["reason"] for entry in exhausted["attempt_history"])
+
+
+def test_retry_history_distinguishes_non_retryable_failure():
+    module = load_script("reddit_research.py")
+    record = {"thread_id": "t-invalid", "status": "error", "attempt_history": []}
+    module.record_attempt(record, "extraction", "failure", False, "missing post body")
+    summary = module.summarize_attempts(record)
+    assert summary["non_retryable_failures"] == 1
+    assert summary["retryable_failures"] == 0
+
+
 def test_validator_rejects_partial_selected_extraction(tmp_path):
     run = json.loads((FIXTURE / "run.json").read_text(encoding="utf-8"))
     run["threads"][0]["status"] = "error"

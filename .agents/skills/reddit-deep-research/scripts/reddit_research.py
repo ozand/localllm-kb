@@ -15,12 +15,14 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 
 SCHEMA_VERSION = 1
+ATTEMPT_HISTORY_VERSION = "attempt-history-v1"
 DEFAULT_SUBREDDIT = "LocalLLaMA"
 DEFAULT_SORTS = ("relevance", "top", "new")
 TERMINAL_STATUSES = {"captured", "skipped"}
@@ -244,6 +246,68 @@ def surf_js(tab: str, script: str, work_dir: Path, name: str) -> Any:
     return parse_json_output(raw)
 
 
+def empty_retry_summary(operation_id: str, status: str = "pending") -> dict[str, Any]:
+    return {
+        "operation_id": operation_id,
+        "attempts": 0,
+        "retry_count": 0,
+        "successful_attempts": 0,
+        "retryable_failures": 0,
+        "non_retryable_failures": 0,
+        "final_outcome": None,
+        "final_status": status,
+        "elapsed_ms": 0,
+    }
+
+
+def summarize_attempts(record: dict[str, Any]) -> dict[str, Any]:
+    history = record.get("attempt_history", [])
+    failures = [item for item in history if item.get("outcome") == "failure"]
+    summary = empty_retry_summary(str(record.get("query_id") or record.get("thread_id") or "unknown"), str(record.get("status", "unknown")))
+    summary.update({
+        "attempts": len(history),
+        "retry_count": max(0, len(history) - 1),
+        "successful_attempts": sum(item.get("outcome") == "success" for item in history),
+        "retryable_failures": sum(item.get("retry_classification") == "retryable" for item in failures),
+        "non_retryable_failures": sum(item.get("retry_classification") == "non-retryable" for item in failures),
+        "final_outcome": history[-1].get("outcome") if history else None,
+        "final_status": record.get("status", "unknown"),
+        "elapsed_ms": sum(int(item.get("elapsed_ms", 0)) for item in history),
+    })
+    return summary
+
+
+def record_attempt(record: dict[str, Any], operation: str, outcome: str, retryable: bool, reason: str | None = None, started_at: str | None = None, elapsed_ms: int = 0) -> dict[str, Any]:
+    history = record.setdefault("attempt_history", [])
+    entry = {
+        "schema_version": ATTEMPT_HISTORY_VERSION,
+        "attempt": len(history) + 1,
+        "operation": operation,
+        "query_id": record.get("query_id"),
+        "thread_id": record.get("thread_id"),
+        "started_at": started_at or utc_now(),
+        "elapsed_ms": max(0, int(elapsed_ms)),
+        "outcome": outcome,
+        "retry_classification": "success" if outcome == "success" else ("retryable" if retryable else "non-retryable"),
+        "reason": sanitize_diagnostic(reason) if reason else None,
+    }
+    history.append(entry)
+    record["retry_summary"] = summarize_attempts(record)
+    return entry
+
+
+def update_retry_summaries(run: dict[str, Any]) -> dict[str, Any]:
+    queries = []
+    for query in run.get("query_plan", []):
+        query["retry_summary"] = summarize_attempts(query)
+        queries.append(query["retry_summary"])
+    threads = []
+    for thread in run.get("threads", []):
+        thread["retry_summary"] = summarize_attempts(thread)
+        threads.append(thread["retry_summary"])
+    return {"schema_version": ATTEMPT_HISTORY_VERSION, "run_id": run.get("run_id"), "queries": queries, "threads": threads}
+
+
 def query_record(subreddit: str, query: str, sort: str, time_filter: str | None) -> dict[str, Any]:
     search_url = (
         f"https://www.reddit.com/r/{subreddit}/search/?q={quote(query)}"
@@ -264,6 +328,8 @@ def query_record(subreddit: str, query: str, sort: str, time_filter: str | None)
         "discovered_count": 0,
         "new_unique_count": 0,
         "error": None,
+        "attempt_history": [],
+        "retry_summary": empty_retry_summary(digest, "pending"),
     }
 
 
@@ -368,6 +434,7 @@ def new_run_manifest(args: argparse.Namespace, queries: list[str]) -> dict[str, 
             "run_manifest": "run.json",
             "query_manifest": "queries.json",
             "thread_manifest": "threads.json",
+            "retry_summary": "retry-summary.json",
             "errors": "errors.jsonl",
             "outbound_references": "outbound-references.json",
             "follow_up": "follow-up.json",
@@ -376,8 +443,10 @@ def new_run_manifest(args: argparse.Namespace, queries: list[str]) -> dict[str, 
 
 
 def write_derived_manifests(run_dir: Path, run: dict[str, Any]) -> None:
+    retry_summary = update_retry_summaries(run)
     json_dump(run_dir / "queries.json", {"schema_version": SCHEMA_VERSION, "run_id": run["run_id"], "queries": run["query_plan"]})
     json_dump(run_dir / "threads.json", {"schema_version": SCHEMA_VERSION, "run_id": run["run_id"], "threads": run["threads"]})
+    json_dump(run_dir / "retry-summary.json", retry_summary)
     json_dump(run_dir / "run.json", run)
 
 
@@ -459,6 +528,7 @@ def discover(args: argparse.Namespace) -> int:
             break
         try:
             query["attempts"] += 1
+            attempt_started = time.monotonic()
             run_surf(args.tab, ["go", query["search_url"]], timeout=args.timeout)
             run_surf(args.tab, ["wait", str(args.wait_seconds)], timeout=args.timeout)
             for _ in range(args.scrolls):
@@ -484,6 +554,8 @@ def discover(args: argparse.Namespace) -> int:
                         "quality": None,
                         "outbound_reference_count": 0,
                         "last_error": None,
+                        "attempt_history": [],
+                        "retry_summary": empty_retry_summary(thread_id(url), "pending"),
                     }
                     run["threads"].append(record)
                     known[url] = record
@@ -491,10 +563,14 @@ def discover(args: argparse.Namespace) -> int:
                 elif query["query_id"] not in known[url]["discovered_by_query_ids"]:
                     known[url]["discovered_by_query_ids"].append(query["query_id"])
             query.update({"status": "completed", "discovered_count": len(candidates), "new_unique_count": new_count, "error": None})
+            record_attempt(query, "discovery", "success", False, elapsed_ms=round((time.monotonic() - attempt_started) * 1000))
             low_yield = low_yield + 1 if new_count < run["saturation"]["minimum_new_sources"] else 0
         except Exception as exc:  # noqa: BLE001
-            query.update({"status": "error", "error": str(exc)[:300]})
-            append_error(run_dir, "discovery", query["query_id"], type(exc).__name__, str(exc), True)
+            retryable = True
+            reason = sanitize_diagnostic(str(exc))
+            query.update({"status": "error", "error": reason})
+            record_attempt(query, "discovery", "failure", retryable, type(exc).__name__ + ": " + reason, elapsed_ms=round((time.monotonic() - attempt_started) * 1000))
+            append_error(run_dir, "discovery", query["query_id"], type(exc).__name__, str(exc), retryable)
         run["saturation"]["consecutive_low_yield_queries"] = low_yield
         if low_yield >= run["saturation"]["window_size"]:
             run["saturation"].update({"reached": True, "reason": "consecutive discovery queries yielded fewer than the configured minimum new sources"})
@@ -739,6 +815,7 @@ def extract(args: argparse.Namespace) -> int:
             break
         try:
             item["attempts"] += 1
+            attempt_started = time.monotonic()
             run_surf(args.tab, ["go", item["canonical_url"]], timeout=args.timeout)
             run_surf(args.tab, ["wait", str(args.wait_seconds)], timeout=args.timeout)
             script = EXTRACT_JS.replace("__COMMENT_LIMIT__", str(args.comment_limit))
@@ -770,11 +847,15 @@ def extract(args: argparse.Namespace) -> int:
                 "outbound_reference_count": len(capture["outbound_references"]),
                 "last_error": None,
             })
+            record_attempt(item, "extraction", "success", False, elapsed_ms=round((time.monotonic() - attempt_started) * 1000))
         except CaptureNotReadyError as exc:
             item.update({"status": "error", "last_error": {"type": type(exc).__name__, "reason": exc.reason}})
+            record_attempt(item, "extraction", "failure", False, type(exc).__name__ + ": " + exc.reason, elapsed_ms=round((time.monotonic() - attempt_started) * 1000))
             append_error(run_dir, "extraction", item["thread_id"], type(exc).__name__, exc.reason, False)
         except Exception as exc:  # noqa: BLE001
-            item.update({"status": "error", "last_error": {"type": type(exc).__name__, "message": sanitize_diagnostic(str(exc))}})
+            reason = sanitize_diagnostic(str(exc))
+            item.update({"status": "error", "last_error": {"type": type(exc).__name__, "message": reason}})
+            record_attempt(item, "extraction", "failure", True, type(exc).__name__ + ": " + reason, elapsed_ms=round((time.monotonic() - attempt_started) * 1000))
             append_error(run_dir, "extraction", item["thread_id"], type(exc).__name__, str(exc), True)
         processed += 1
         run["updated_at"] = utc_now()
@@ -819,6 +900,7 @@ def skip_thread(args: argparse.Namespace) -> int:
         "skipped_at": utc_now(),
         "last_error": None,
     })
+    record_attempt(item, "extraction", "success", False, "explicit skip: " + args.reason)
     run["updated_at"] = utc_now()
     update_counts(run)
     run["status"] = "captured" if completion_requirements(run)["complete"] else "partial"
@@ -907,6 +989,7 @@ def write_receipt(args: argparse.Namespace) -> int:
         "target_selected_sources": run.get("target_selected_sources"),
         "saturation": run.get("saturation"),
         "coverage": run.get("coverage", {"mode": "disabled", "complete": True, "covered_dimensions": [], "uncovered_dimensions": []}),
+        "retry_summary": run.get("artifacts", {}).get("retry_summary", "retry-summary.json"),
         "scripts": [
             ".agents/skills/reddit-deep-research/scripts/reddit_research.py",
             ".agents/skills/reddit-deep-research/scripts/render_research.py",
@@ -937,7 +1020,18 @@ def validate(args: argparse.Namespace) -> int:
         problems.append("duplicate canonical thread URLs")
     if not query_ids:
         problems.append("query plan is empty")
+    for query in run.get("query_plan", []):
+        history = query.get("attempt_history", [])
+        if query.get("attempts", 0) != len(history):
+            problems.append(f"query {query.get('query_id')} attempts do not match attempt history")
+        if query.get("retry_summary") != summarize_attempts(query):
+            problems.append(f"query {query.get('query_id')} has stale retry summary")
     for item in run.get("threads", []):
+        history = item.get("attempt_history", [])
+        if item.get("attempts", 0) != len(history):
+            problems.append(f"thread {item.get('thread_id')} attempts do not match attempt history")
+        if item.get("retry_summary") != summarize_attempts(item):
+            problems.append(f"thread {item.get('thread_id')} has stale retry summary")
         if not item.get("discovered_by_query_ids"):
             problems.append(f"thread {item.get('thread_id')} has no query provenance")
         if not set(item.get("discovered_by_query_ids", [])).issubset(query_ids):
@@ -973,7 +1067,7 @@ def validate(args: argparse.Namespace) -> int:
     coverage = run.get("coverage", {"mode": "disabled", "complete": True, "uncovered_dimensions": []})
     if coverage.get("mode") == "enabled" and not coverage.get("complete"):
         problems.append("coverage incomplete: uncovered dimensions: " + ", ".join(coverage.get("uncovered_dimensions", [])))
-    result = {"valid": not problems, "problems": problems, "run_id": run.get("run_id"), "coverage": coverage, "complete": requirements["complete"]}
+    result = {"valid": not problems, "problems": problems, "run_id": run.get("run_id"), "coverage": coverage, "complete": requirements["complete"], "retry_summary": run.get("artifacts", {}).get("retry_summary", "retry-summary.json")}
     print(json.dumps(result, ensure_ascii=False))
     return 0 if not problems else 2
 

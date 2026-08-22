@@ -102,6 +102,7 @@ The extractor:
 - records title, cleaned post body, top comments, query provenance, explainable quality components, separate human-review metadata, readiness metadata, and outbound links;
 - rejects shell/error pages and empty or too-short posts with stable readiness reasons;
 - appends sanitized failures to `errors.jsonl`;
+- records bounded per-query and per-thread `attempt_history` entries and derives `retry-summary.json` with final status, retry classification, attempt count, and elapsed time;
 - writes `outbound-references.json` and an explicit `follow-up.json` ledger.
 
 Re-run the same command to resume. A timeout is a recorded state, not permission to remove the URL from the denominator. If a selected source must be excluded, create an explicit durable skip:
@@ -144,7 +145,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py validate \
   --require-target
 ```
 
-Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness and review metadata, outbound verification states, whether the source target or saturation rule is satisfied, and (when enabled) whether every planned coverage dimension has at least one completed query. The result reports `covered_dimensions` and `uncovered_dimensions`; a target count alone cannot pass an enabled coverage plan.
+Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness and review metadata, outbound verification states, retry-history/summary consistency, whether the source target or saturation rule is satisfied, and (when enabled) whether every planned coverage dimension has at least one completed query. The result reports `covered_dimensions` and `uncovered_dimensions`; a target count alone cannot pass an enabled coverage plan.
 
 Resolve or explicitly report remaining `pending` and `error` records before describing the research as complete.
 

@@ -58,6 +58,7 @@ def render_corpus(run_dir: Path, run: dict[str, Any], output: Path) -> None:
         f"- Selected threads: `{len(selected)}`",
         f"- Captured threads: `{len(captured)}`",
         f"- Saturation reached: `{str(run['saturation']['reached']).lower()}`",
+        f"- Retry summary: `{run_dir.as_posix()}/retry-summary.json`",
         f"- Run manifest: `{run_dir.as_posix()}/run.json`",
         f"- Query manifest: `{run_dir.as_posix()}/queries.json`",
         f"- Thread manifest: `{run_dir.as_posix()}/threads.json`",
