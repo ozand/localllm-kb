@@ -84,6 +84,7 @@ def render_corpus(run_dir: Path, run: dict[str, Any], output: Path) -> None:
             f"- Capture file: `{run_dir.as_posix()}/{item['capture_file']}`",
             f"- Quality score: `{capture['quality']['score']}` (`{capture['quality']['method']}`)",
             f"- Captured comments: `{len(capture.get('comments', []))}`",
+            f"- Ranked comments: `{capture.get('comment_ranking', {}).get('comment_count', 0)}`",
             f"- Outbound references: `{len(capture.get('outbound_references', []))}`",
             "",
             (capture.get("post_body") or "_No post body captured._")[:1500],

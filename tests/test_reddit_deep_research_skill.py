@@ -240,6 +240,37 @@ def test_shell_and_empty_captures_return_stable_not_ready_reasons():
     assert module.capture_readiness_reason({**base, "title": "A thread", "post_body": "useful post body", "has_post_element": False}) == "missing-post-element"
 
 
+def test_comment_ranking_is_dimension_specific_deterministic_and_provenanced():
+    module = load_script("reddit_research.py")
+    source = "https://www.reddit.com/r/LocalLLaMA/comments/abc123/fixture/"
+    comments = [
+        {"author": "bench", "score": "5", "text": "50 tok/s at 300W on Qwen with --n-gpu-layers 40."},
+        {"author": "counter", "score": "-1", "text": "However, this failed with OOM and was slower."},
+        {"author": "empty", "score": "n/a", "text": ""},
+    ]
+    first = module.rank_comments(comments, source)
+    second = module.rank_comments(comments, source)
+    assert first == second
+    assert first["ranking_version"] == "comment-evidence-v1"
+    assert first["comment_count"] == 3
+    assert first["by_dimension"]["measurements"][0]["comment_index"] == 0
+    assert first["by_dimension"]["commands"][0]["comment_index"] == 0
+    assert first["by_dimension"]["model_names"][0]["comment_index"] == 0
+    assert first["by_dimension"]["counter_evidence"][0]["comment_index"] == 1
+    assert first["by_dimension"]["counter_evidence"][2]["status"] == "empty-text"
+    assert all(item["source_url"] == source for item in first["by_dimension"]["measurements"])
+
+
+def test_comment_ranking_handles_empty_and_malformed_inputs():
+    module = load_script("reddit_research.py")
+    empty = module.rank_comments(None, "")
+    assert empty["status"] == "empty-comments"
+    assert empty["comment_count"] == 0
+    malformed = module.rank_comments([None, {"score": "bad"}], "source")
+    assert malformed["comment_count"] == 2
+    assert malformed["by_dimension"]["measurements"][0]["status"] == "empty-text"
+
+
 def test_quality_score_is_deterministic_explainable_and_bounded():
     module = load_script("reddit_research.py")
     capture = {

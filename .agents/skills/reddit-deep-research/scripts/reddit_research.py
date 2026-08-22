@@ -628,6 +628,71 @@ def extract_evidence_fields(capture: dict[str, Any]) -> dict[str, bool]:
     }
 
 
+COMMENT_RANKING_VERSION = "comment-evidence-v1"
+COMMENT_DIMENSIONS = ("measurements", "commands", "model_names", "counter_evidence")
+COMMENT_SIGNAL_PATTERNS = {
+    "measurements": r"\b(?:\d+(?:[.,]\d+)?\s*(?:tok(?:ens)?/s|t/s|gb|mb|w|°c|c|k|khz|mhz|%)|benchmark|throughput|latency|speed|temperature|power)\b",
+    "commands": r"(?:--[a-z0-9][a-z0-9-]*|\b(?:command|flag|run|launch|invoke|llama-server|llama\.cpp|vllm)\b|```)",
+    "model_names": r"\b(?:qwen|llama|mistral|gemma|phi|deepseek|mixtral|command-r|model|gguf|gptq|awq)\b",
+    "counter_evidence": r"\b(?:but|however|instead|failed|failure|doesn['’]?t|does not|cannot|can['’]?t|worse|slower|oom|out of memory|contrary|unlike|not true|no)\b",
+}
+
+
+def rank_comment(comment: Any, source_url: str, comment_index: int, dimensions: Iterable[str] = COMMENT_DIMENSIONS) -> dict[str, Any]:
+    comment = comment if isinstance(comment, dict) else {}
+    text = str(comment.get("text") or "")[:4000]
+    author = str(comment.get("author") or "anonymous")[:200]
+    raw_score = comment.get("score")
+    try:
+        community_score = int(float(raw_score))
+    except (TypeError, ValueError):
+        community_score = None
+    scores = {}
+    for dimension in dimensions:
+        if dimension not in COMMENT_SIGNAL_PATTERNS:
+            continue
+        matches = re.findall(COMMENT_SIGNAL_PATTERNS[dimension], text, re.IGNORECASE)
+        signal_count = len(matches)
+        score = round(min(signal_count / 3, 1.0), 3)
+        scores[dimension] = {
+            "score": score,
+            "signal_count": signal_count,
+            "matched_signals": sorted({str(value).lower() for value in matches})[:12],
+            "status": "scored" if text.strip() else "empty-text",
+            "reason": "matched deterministic technical evidence signals" if text.strip() and signal_count else ("no matching evidence signals" if text.strip() else "comment text missing"),
+        }
+    ranked_dimensions = {dimension: score for dimension, score in ((name, data["score"]) for name, data in scores.items())}
+    return {
+        "comment_index": comment_index,
+        "source_url": source_url,
+        "author": author,
+        "community_score": community_score,
+        "text": text,
+        "ranking_version": COMMENT_RANKING_VERSION,
+        "dimensions": scores,
+        "overall_score": round(sum(ranked_dimensions.values()) / max(len(ranked_dimensions), 1), 3),
+        "status": "scored" if text.strip() else "empty-text",
+    }
+
+
+def rank_comments(comments: Any, source_url: str, dimensions: Iterable[str] = COMMENT_DIMENSIONS) -> dict[str, Any]:
+    if not isinstance(comments, list):
+        comments = []
+    ranked = [rank_comment(comment, source_url, index, dimensions) for index, comment in enumerate(comments)]
+    by_dimension = {}
+    for dimension in dimensions:
+        if dimension not in COMMENT_DIMENSIONS:
+            continue
+        by_dimension[dimension] = sorted(ranked, key=lambda item: (-item["dimensions"].get(dimension, {}).get("score", 0), item["comment_index"]))
+    return {
+        "ranking_version": COMMENT_RANKING_VERSION,
+        "source_url": source_url,
+        "comment_count": len(ranked),
+        "status": "scored" if ranked else "empty-comments",
+        "by_dimension": by_dimension,
+    }
+
+
 def score_capture(capture: dict[str, Any], keywords: list[str]) -> dict[str, Any]:
     source_type = classify_source_type(capture)
     evidence_fields = extract_evidence_fields(capture)
@@ -830,6 +895,7 @@ def extract(args: argparse.Namespace) -> int:
                 "discovered_by_query_ids": item["discovered_by_query_ids"],
             })
             capture["quality"] = score_capture(capture, keywords)
+            capture["comment_ranking"] = rank_comments(capture.get("comments"), capture.get("canonical_url", ""))
             capture["review"] = default_review()
             capture["outbound_references"] = [
                 {"url": url, "verification_state": "unverified", "verified_at": None, "final_url": None, "note": "captured from Reddit DOM; filtering and verification are separate stages"}
@@ -1045,7 +1111,7 @@ def validate(args: argparse.Namespace) -> int:
                 problems.append(f"capture is not kebab-case: {capture_path.name}")
             else:
                 capture = json_load(capture_path)
-                for field in ("canonical_url", "captured_at", "quality", "review", "discovered_by_query_ids"):
+                for field in ("canonical_url", "captured_at", "quality", "review", "discovered_by_query_ids", "comment_ranking"):
                     if field not in capture:
                         problems.append(f"capture {capture_file} lacks {field}")
                 quality = capture.get("quality", {})
@@ -1057,6 +1123,11 @@ def validate(args: argparse.Namespace) -> int:
                 for reference in capture.get("outbound_references", []):
                     if reference.get("verification_state") not in VERIFICATION_STATES:
                         problems.append(f"capture {capture_file} has invalid outbound verification state")
+                ranking = capture.get("comment_ranking", {})
+                if ranking.get("ranking_version") != COMMENT_RANKING_VERSION:
+                    problems.append(f"capture {capture_file} lacks supported comment ranking")
+                if ranking.get("comment_count") != len(capture.get("comments", [])):
+                    problems.append(f"capture {capture_file} comment ranking count mismatch")
     selected = [item for item in run.get("threads", []) if item.get("selected")]
     incomplete = [item for item in selected if item.get("status") not in TERMINAL_STATUSES]
     if incomplete:
