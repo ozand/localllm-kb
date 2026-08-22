@@ -25,7 +25,32 @@
       "attempts": 1,
       "discovered_count": 1,
       "new_unique_count": 1,
-      "error": null
+      "error": null,
+      "attempt_history": [
+        {
+          "schema_version": "attempt-history-v1",
+          "attempt": 1,
+          "operation": "discovery",
+          "query_id": "query-1",
+          "thread_id": null,
+          "started_at": "2026-08-22T00:00:00Z",
+          "elapsed_ms": 1,
+          "outcome": "success",
+          "retry_classification": "success",
+          "reason": null
+        }
+      ],
+      "retry_summary": {
+        "operation_id": "query-1",
+        "attempts": 1,
+        "retry_count": 0,
+        "successful_attempts": 1,
+        "retryable_failures": 0,
+        "non_retryable_failures": 0,
+        "final_outcome": "success",
+        "final_status": "completed",
+        "elapsed_ms": 1
+      }
     }
   ],
   "threads": [
@@ -47,7 +72,32 @@
         "method": "fixture"
       },
       "outbound_reference_count": 1,
-      "last_error": null
+      "last_error": null,
+      "attempt_history": [
+        {
+          "schema_version": "attempt-history-v1",
+          "attempt": 1,
+          "operation": "extraction",
+          "query_id": null,
+          "thread_id": "abc123",
+          "started_at": "2026-08-22T00:00:00Z",
+          "elapsed_ms": 1,
+          "outcome": "success",
+          "retry_classification": "success",
+          "reason": null
+        }
+      ],
+      "retry_summary": {
+        "operation_id": "abc123",
+        "attempts": 1,
+        "retry_count": 0,
+        "successful_attempts": 1,
+        "retryable_failures": 0,
+        "non_retryable_failures": 0,
+        "final_outcome": "success",
+        "final_status": "captured",
+        "elapsed_ms": 1
+      }
     }
   ],
   "counts": {
@@ -71,6 +121,7 @@
     "run_manifest": "run.json",
     "query_manifest": "queries.json",
     "thread_manifest": "threads.json",
+    "retry_summary": "retry-summary.json",
     "errors": "errors.jsonl",
     "outbound_references": "outbound-references.json",
     "follow_up": "follow-up.json"

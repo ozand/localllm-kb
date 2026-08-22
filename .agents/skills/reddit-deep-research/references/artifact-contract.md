@@ -11,6 +11,7 @@ kb/raw/research/runs/<run-id>/
 ├── run.json
 ├── queries.json
 ├── threads.json
+├── retry-summary.json
 ├── errors.jsonl
 ├── outbound-references.json
 ├── follow-up.json
@@ -20,6 +21,10 @@ kb/raw/research/runs/<run-id>/
 ```
 
 Never use `C:/Temp`, `/tmp`, a browser profile directory, or an agent session directory as the only copy of executable code or research state.
+
+## Retry history and summaries
+
+Every attempted discovery query and selected-thread extraction appends an ordered `attempt_history` entry to its query or thread record. Each entry contains stable operation provenance, sanitized reason, retry classification, outcome, and elapsed time. `retry-summary.json` is a derived manifest containing one summary for every query and thread; it does not change retry limits or policy.
 
 ## `run.json`
 
@@ -55,7 +60,28 @@ Every discovery attempt must preserve:
   "attempts": 1,
   "discovered_count": 12,
   "new_unique_count": 7,
-  "error": null
+  "error": null,
+  "attempt_history": [
+    {
+      "attempt": 1,
+      "operation": "discovery",
+      "query_id": "stable-hash",
+      "outcome": "success",
+      "retry_classification": "success",
+      "reason": null,
+      "elapsed_ms": 1200
+    }
+  ],
+  "retry_summary": {
+    "operation_id": "stable-hash",
+    "attempts": 1,
+    "retry_count": 0,
+    "final_outcome": "success",
+    "final_status": "completed",
+    "retryable_failures": 0,
+    "non_retryable_failures": 0,
+    "elapsed_ms": 1200
+  }
 }
 ```
 
