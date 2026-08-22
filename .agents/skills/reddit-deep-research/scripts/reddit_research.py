@@ -18,13 +18,33 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import quote, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 
 SCHEMA_VERSION = 1
 DEFAULT_SUBREDDIT = "LocalLLaMA"
 DEFAULT_SORTS = ("relevance", "top", "new")
 TERMINAL_STATUSES = {"captured", "skipped"}
-VERIFICATION_STATES = {"verified", "redirected", "unreachable", "unverified"}
+VERIFICATION_STATES = {"verified", "redirected", "unreachable", "failed", "skipped", "unverified"}
+OUTBOUND_EXCLUDED_HOSTS = {
+    "about:blank",
+    "doubleclick.net",
+    "google.com",
+    "googletagmanager.com",
+    "reddit.com",
+    "redditstatic.com",
+    "redditinc.com",
+    "redd.it",
+}
+OUTBOUND_TRACKING_QUERY_KEYS = {"fbclid", "gclid", "ref", "ref_source", "source", "utm_campaign", "utm_content", "utm_medium", "utm_source", "utm_term"}
+OUTBOUND_ASSET_SUFFIXES = (".css", ".gif", ".ico", ".jpeg", ".jpg", ".js", ".png", ".svg", ".webp", ".woff", ".woff2")
+PRIMARY_OUTBOUND_HOSTS = {
+    "github.com": 100,
+    "gitlab.com": 95,
+    "huggingface.co": 100,
+    "huggingface.com": 100,
+    "nvidia.com": 95,
+    "developer.nvidia.com": 100,
+}
 SHELL_PAGE_TITLES = {"reddit - the heart of the internet", "reddit"}
 CHROME_ONLY_LINES = {
     "advertise on reddit",
@@ -423,21 +443,122 @@ def score_capture(capture: dict[str, Any], keywords: list[str]) -> dict[str, Any
     return {"score": total, "evidence": round(evidence, 3), "relevance": round(relevance, 3), "community_scrutiny": round(scrutiny, 3), "method": "deterministic-keyword-v1"}
 
 
+def normalize_outbound_url(value: str) -> tuple[str | None, str | None]:
+    original = str(value or "").strip()
+    try:
+        parts = urlsplit(original)
+    except ValueError:
+        return None, "invalid-url"
+    if parts.scheme.lower() not in {"http", "https"}:
+        return None, "invalid-scheme"
+    if not parts.hostname or parts.username or parts.password:
+        return None, "private-or-missing-host"
+    host = parts.hostname.lower().rstrip(".")
+    if host in OUTBOUND_EXCLUDED_HOSTS or any(host.endswith("." + suffix) for suffix in OUTBOUND_EXCLUDED_HOSTS if "." in suffix):
+        return None, "excluded-domain"
+    if parts.path.lower().endswith(OUTBOUND_ASSET_SUFFIXES):
+        return None, "static-asset"
+    try:
+        query = [(key, val) for key, val in parse_qsl(parts.query, keep_blank_values=True) if key.lower() not in OUTBOUND_TRACKING_QUERY_KEYS]
+    except ValueError:
+        return None, "invalid-query"
+    port = parts.port
+    netloc = host
+    if port and not ((parts.scheme.lower() == "http" and port == 80) or (parts.scheme.lower() == "https" and port == 443)):
+        netloc = f"{host}:{port}"
+    normalized = urlunsplit((parts.scheme.lower(), netloc, parts.path or "/", urlencode(sorted(query)), ""))
+    return normalized, None
+
+
+def score_outbound_url(normalized_url: str) -> tuple[int, str]:
+    parts = urlsplit(normalized_url)
+    host = parts.hostname or ""
+    for primary_host, score in PRIMARY_OUTBOUND_HOSTS.items():
+        if host == primary_host or host.endswith("." + primary_host):
+            return score, "primary"
+    if host.startswith("docs.") or host.startswith("developer.") or "/docs" in parts.path.lower() or "/issues" in parts.path.lower() or "/releases" in parts.path.lower():
+        return 80, "technical-documentation"
+    if any(token in normalized_url.lower() for token in ("llama.cpp", "llamacpp", "vllm", "unsloth", "gguf", "quant")):
+        return 70, "llm-technical"
+    return 40, "other-public"
+
+
+def prepare_outbound_reference(url: str, thread_id_value: str, capture_file: str | None) -> dict[str, Any]:
+    normalized, reason = normalize_outbound_url(url)
+    if reason:
+        return {
+            "original_urls": [url],
+            "normalized_url": None,
+            "source_thread_ids": [thread_id_value],
+            "source_capture_files": [capture_file] if capture_file else [],
+            "included": False,
+            "filter_reason": reason,
+            "priority_score": 0,
+            "priority_class": "excluded",
+            "verification_state": "skipped",
+            "verified_at": None,
+            "final_url": None,
+            "note": None,
+        }
+    priority_score, priority_class = score_outbound_url(normalized)
+    return {
+        "original_urls": [url],
+        "normalized_url": normalized,
+        "source_thread_ids": [thread_id_value],
+        "source_capture_files": [capture_file] if capture_file else [],
+        "included": True,
+        "filter_reason": None,
+        "priority_score": priority_score,
+        "priority_class": priority_class,
+        "verification_state": "unverified",
+        "verified_at": None,
+        "final_url": None,
+        "note": None,
+    }
+
+
 def build_outbound_ledger(run_dir: Path, run: dict[str, Any]) -> dict[str, Any]:
     ledger_path = run_dir / "outbound-references.json"
-    existing: dict[str, dict[str, Any]] = {}
+    existing_by_url: dict[str, dict[str, Any]] = {}
     if ledger_path.exists():
         for reference in json_load(ledger_path).get("references", []):
-            existing[reference.get("reference_id", "")] = reference
-    references = []
+            if reference.get("normalized_url"):
+                existing_by_url[reference["normalized_url"]] = reference
+    merged: dict[str, dict[str, Any]] = {}
+    excluded: list[dict[str, Any]] = []
     for item in run["threads"]:
         if not item.get("capture_file"):
             continue
         capture = json_load(run_dir / item["capture_file"])
-        for index, reference in enumerate(capture.get("outbound_references", [])):
-            reference_id = f"{item['thread_id']}:{index}"
-            references.append(existing.get(reference_id, {"reference_id": reference_id, "thread_id": item["thread_id"], **reference}))
-    return {"schema_version": SCHEMA_VERSION, "run_id": run["run_id"], "references": references}
+        for raw_reference in capture.get("outbound_references", []):
+            url = raw_reference.get("url") or raw_reference.get("original_url")
+            prepared = prepare_outbound_reference(url, item["thread_id"], item["capture_file"])
+            normalized = prepared["normalized_url"]
+            if not normalized:
+                prepared["reference_id"] = f"excluded-{hashlib.sha256(str(url).encode('utf-8')).hexdigest()[:12]}"
+                excluded.append(prepared)
+                continue
+            if normalized not in merged:
+                prior = existing_by_url.get(normalized, {})
+                merged[normalized] = {
+                    **prepared,
+                    **{key: prior[key] for key in ("verification_state", "verified_at", "final_url", "note") if key in prior},
+                    "original_urls": list(prior.get("original_urls", [])),
+                    "source_thread_ids": list(prior.get("source_thread_ids", [])),
+                    "source_capture_files": list(prior.get("source_capture_files", [])),
+                }
+            current = merged[normalized]
+            for key, value in (("original_urls", url), ("source_thread_ids", item["thread_id"]), ("source_capture_files", item["capture_file"])):
+                if value and value not in current[key]:
+                    current[key].append(value)
+    included = []
+    for normalized, reference in merged.items():
+        reference["reference_id"] = "outbound-" + hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:12]
+        reference["source_count"] = len(reference["source_thread_ids"])
+        included.append(reference)
+    included.sort(key=lambda value: (-value["priority_score"], value["normalized_url"]))
+    excluded.sort(key=lambda value: (value["filter_reason"], value["reference_id"]))
+    return {"schema_version": SCHEMA_VERSION, "run_id": run["run_id"], "references": included + excluded}
 
 
 def extract(args: argparse.Namespace) -> int:
@@ -470,7 +591,7 @@ def extract(args: argparse.Namespace) -> int:
             })
             capture["quality"] = score_capture(capture, keywords)
             capture["outbound_references"] = [
-                {"url": url, "verification_state": "unverified", "verified_at": None, "final_url": None, "note": "captured from Reddit DOM; verification is a separate stage"}
+                {"url": url, "verification_state": "unverified", "verified_at": None, "final_url": None, "note": "captured from Reddit DOM; filtering and verification are separate stages"}
                 for url in capture.pop("external_links", [])
             ]
             filename = f"{item['thread_id']}-{slugify(capture.get('title', item['title']))}.json"
@@ -548,12 +669,12 @@ def verify_outbound(args: argparse.Namespace) -> int:
     json_dump(ledger_path, ledger)
     checked = 0
     for reference in ledger["references"]:
-        if reference.get("verification_state") != "unverified":
+        if not reference.get("included") or reference.get("verification_state") != "unverified":
             continue
         if args.limit and checked >= args.limit:
             break
         checked += 1
-        original = reference["url"]
+        original = reference["normalized_url"]
         try:
             run_surf(args.tab, ["go", original], timeout=args.timeout)
             run_surf(args.tab, ["wait", str(args.wait_seconds)], timeout=args.timeout)
@@ -570,14 +691,14 @@ def verify_outbound(args: argparse.Namespace) -> int:
             })
         except Exception as exc:  # noqa: BLE001
             reference.update({
-                "verification_state": "unreachable",
+                "verification_state": "failed",
                 "accessed_at": utc_now(),
                 "final_url": None,
                 "note": f"Sanitized access failure: {type(exc).__name__}",
             })
             append_error(run_dir, "outbound-verification", reference.get("reference_id", reference.get("thread_id", "unknown")), type(exc).__name__, str(exc), True)
         json_dump(ledger_path, ledger)
-    counts = {state: sum(ref.get("verification_state") == state for ref in ledger["references"]) for state in sorted(VERIFICATION_STATES)}
+    counts = {state: sum(ref.get("verification_state") == state for ref in ledger["references"] if ref.get("included")) for state in sorted(VERIFICATION_STATES)}
     print(json.dumps({"run_id": run["run_id"], "checked": checked, "verification_counts": counts}, ensure_ascii=False))
     return 0
 
@@ -587,7 +708,7 @@ def mark_outbound(args: argparse.Namespace) -> int:
     run = json_load(run_dir / "run.json")
     ledger_path = run_dir / "outbound-references.json"
     ledger = build_outbound_ledger(run_dir, run)
-    matches = [item for item in ledger["references"] if item.get("reference_id") == args.reference_id]
+    matches = [item for item in ledger["references"] if item.get("reference_id") == args.reference_id and item.get("included")]
     if not matches:
         print(json.dumps({"error": "reference-not-found", "reference_id": args.reference_id}), file=sys.stderr)
         return 2
@@ -595,7 +716,7 @@ def mark_outbound(args: argparse.Namespace) -> int:
     reference.update({
         "verification_state": args.state,
         "verified_at": utc_now(),
-        "final_url": args.final_url or reference.get("final_url") or reference["url"],
+        "final_url": args.final_url or reference.get("final_url") or reference["normalized_url"],
         "note": args.note,
     })
     json_dump(ledger_path, ledger)
@@ -609,7 +730,7 @@ def write_receipt(args: argparse.Namespace) -> int:
     update_counts(run)
     ledger_path = run_dir / "outbound-references.json"
     ledger = json_load(ledger_path) if ledger_path.exists() else {"references": []}
-    verification_counts = {state: sum(ref.get("verification_state") == state for ref in ledger["references"]) for state in sorted(VERIFICATION_STATES)}
+    verification_counts = {state: sum(ref.get("verification_state") == state for ref in ledger["references"] if ref.get("included")) for state in sorted(VERIFICATION_STATES)}
     receipt = {
         "schema_version": SCHEMA_VERSION,
         "skill_used": "reddit-deep-research",
@@ -729,7 +850,7 @@ def build_parser() -> argparse.ArgumentParser:
     mark_parser = subparsers.add_parser("mark-outbound", help="Record a manually inspected outbound reference state and evidence note.")
     mark_parser.add_argument("--run-dir", required=True)
     mark_parser.add_argument("--reference-id", required=True)
-    mark_parser.add_argument("--state", required=True, choices=("verified", "redirected", "unreachable"))
+    mark_parser.add_argument("--state", required=True, choices=("verified", "redirected", "failed", "skipped"))
     mark_parser.add_argument("--note", required=True)
     mark_parser.add_argument("--final-url", default="")
     mark_parser.set_defaults(func=mark_outbound)

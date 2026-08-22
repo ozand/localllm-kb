@@ -104,10 +104,13 @@ def render_synthesis(run_dir: Path, run: dict[str, Any], output: Path, minimum_s
         for query_id in capture.get("discovered_by_query_ids", []):
             query_support[query_id].add(item["thread_id"])
         for reference in capture.get("outbound_references", []):
-            host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", reference["url"]).split("/")[0])
-            domains[host] += 1
+            raw_url = reference.get("url") or reference.get("normalized_url") or ""
+            host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", raw_url).split("/")[0])
+            if host:
+                domains[host] += 1
     for reference in ledger.get("references", []):
-        verification[reference.get("verification_state", "unverified")] += 1
+        if reference.get("included", True):
+            verification[reference.get("verification_state", "unverified")] += 1
     follow_up_path = run_dir / "follow-up.json"
     follow_up = load_json(follow_up_path) if follow_up_path.exists() else {}
     lines = [
