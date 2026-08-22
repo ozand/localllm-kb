@@ -59,6 +59,21 @@ def test_audit_cli_reports_counts_without_raw_matches(tmp_path):
     assert '"path": "mixed.txt"' in result.stdout
 
 
+def test_escaped_json_paths_preserve_json_and_are_idempotent():
+    module = load_module()
+    source = (ROOT / "tests" / "fixtures" / "reddit-sanitizer" / "escaped-json.json").read_text(encoding="utf-8")
+    first, counts = module.sanitize_text(source)
+    parsed = json.loads(first)
+    second, second_counts = module.sanitize_text(first)
+    assert parsed["command"] == 'llama-server -m "<windows-path>" --ctx-size 65536'
+    assert parsed["unix"] == '--model "<unix-path>"'
+    assert parsed["keep"] == "https://github.com/org/repo"
+    assert counts["windows-path"] == 1
+    assert counts["unix-path"] == 1
+    assert second == first
+    assert second_counts == {}
+
+
 def test_sanitize_cli_writes_copy_and_never_changes_source(tmp_path):
     output = tmp_path / "sanitized"
     before = FIXTURE.read_bytes()
