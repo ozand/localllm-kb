@@ -81,7 +81,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py discover \
   --sorts relevance,top,new
 ```
 
-Discovery writes `run.json`, `queries.json`, and `threads.json` after each query. It deduplicates by canonical Reddit thread URL while preserving every query that found the thread.
+Discovery writes `run.json`, `queries.json`, and `threads.json` after each query. It deduplicates by canonical Reddit thread URL while preserving every query that found the thread. For hypothesis coverage, pass `--coverage-mode enabled --coverage-plan <path>` with a JSON object containing `dimensions`, where each dimension has a stable `id` and a non-empty `queries` list. Every assigned query must exist in the query file; the run records covered and uncovered dimensions. Omit the flags, or pass `--coverage-mode disabled`, for documented count-only backward compatibility.
 
 Inspect counts and selection diversity before extraction. Expand the query matrix if a hypothesis dimension is absent. Do not select only positive or highly upvoted reports.
 
@@ -144,7 +144,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py validate \
   --require-target
 ```
 
-Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness and review metadata, outbound verification states, and whether the source target or saturation rule is satisfied.
+Validation checks URL deduplication, query provenance, capture existence, kebab-case names, required capture fields including readiness and review metadata, outbound verification states, whether the source target or saturation rule is satisfied, and (when enabled) whether every planned coverage dimension has at least one completed query. The result reports `covered_dimensions` and `uncovered_dimensions`; a target count alone cannot pass an enabled coverage plan.
 
 Resolve or explicitly report remaining `pending` and `error` records before describing the research as complete.
 
