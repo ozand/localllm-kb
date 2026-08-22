@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vupiyh/qwen3827b_on_an_rtx_5060_ti_16gb_iq4_vs_q8_64k/",
+  "title": "Qwen3.8-27B on an RTX 5060 Ti 16GB: IQ4 vs Q8, 64K context, MTP, vision, and agent benchmarks",
+  "author": "Tema_Art_7777",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n17h ago\nTema_Art_7777\nQwen3.8-27B on an RTX 5060 Ti 16GB: IQ4 vs Q8, 64K context, MTP, vision, and agent benchmarks\nResources\n\nI’ve been testing Qwen3.8-27B as a possible replacement for the Qwen3.5-9B that I have been running on RTX 5060Ti 16G. The goal was not just maximum tokens/sec, but useful context capacity, reliable tool calling, multi-turn behavior, and vision on a single 16GB GPU for true agentic usage. Its not perfect, but I have been using it for a few days and the results are very promising. I also needed vision for my applications and since that takes VRAM too, so it is included in the testing. The unsloth UD3 was the catalyst to do the testing - looked promising since they claim higher quality for the same quant. The rest of this has been llm generated + manually edited so if anyone says slop, I accept it 😄 I wasn't about to sit there and type all that 😄 Machine (running Ubuntu) had 64G ram but that is not relevant as much since the goal was to use the GPU almost exclusively. I am hoping it may be useful to some of the community.\n\nTest system\n\nGPU: RTX 5060 Ti 16GB\n\nRuntime: llama.cpp build 10520\n\nFlash Attention enabled\n\nFull GPU offload where possible\n\nOne slot, no concurrency\n\nQ4_0 KV cache\n\nCompared models:\n\njpetrina Qwen3.8-27B IQ4_XS-pure\n\nUnsloth Qwen3.8-27B UD-IQ4_XS\n\nUnsloth Q8_0 as a short-context quality baseline\n\nQwen3.5-9B NVFP4 as the existing model\n\nPerformance and VRAM\nConfiguration\tContext\tVision\tIdle VRAM\tShort-context generation\n\njpetrina IQ4_XS-pure, MTP-1\t64K\tNo\t15,188 MiB\t46.9 tok/s\nUnsloth UD-IQ4_XS, no MTP\t32K\tNo\t13,764 MiB\t27.4 tok/s\nUnsloth UD-IQ4_XS, MTP-1\t64K\tNo\t14,918 MiB\t45.6 tok/s\nUnsloth UD-IQ4_XS, MTP-1\t64K\tF16 mmproj\t15,680 MiB\t45.4 tok/s\n\nThe Unsloth main GGUF already contains the MTP tensors. Loading a separate MTP GGUF was unnecessary and consumed roughly another 768 MiB.\n\nAt approximately 55K tokens of populated context, the Unsloth model achieved:\n\nPrompt processing: 738.7 tok/s\n\nGeneration after prefill: 31.3 tok/s\n\nThat makes 64K usable for an interactive autonomous agent, although performance naturally drops as the KV cache fills.\n\nVision\n\nThe F16 vision projector worked correctly, including OCR-style reading of a newspaper image. A 1,024-image-token allocation was sufficient for that test.\n\nHowever, 64K context plus MTP plus the F16 projector left only 136–208 MiB of free VRAM. I would therefore use separate profiles:\n\nText agent: 64K context with MTP-1\n\nVision: smaller context, loaded on demand\n\nTrying to keep maximum text context, MTP, and GPU vision loaded simultaneously is too close to the 16GB limit for comfortable operation.\n\nQuantization fidelity\n\nI compared both IQ4 variants against saved Q8 logits using 16 WikiText-2 samples at 512-token context.\n\nQuant\tPerplexity\tMean KLD vs Q8\tSame top token\tLog-PPL correlation\n\njpetrina IQ4_XS-pure\t7.4958\t0.02359\t92.11%\t99.51%\nUnsloth UD-IQ4_XS\t7.3789\t0.01800\t93.06%\t99.63%\nQ8_0 baseline\t7.3858\t—\t—\t—\n\nThe Unsloth IQ4 quant was extremely close to Q8 and clearly stronger than the other IQ4 quant by these low-level fidelity measurements.\n\nAgent and tool-use results\nModel\tBFCL single-turn\tBFCL multi-turn\tSupport scenarios\n\nQwen3.5-9B NVFP4\t56/100\t29/80\t5/6\njpetrina Qwen3.8 IQ4 MTP-1\t50/100\t40/80\t6/6\nUnsloth Qwen3.8 UD-IQ4\t49/100\t38/80\t6/6\n\nAll models passed an additional 8/8 native tool-calling smoke test.\n\nThe 27B models were noticeably better in realistic multi-turn support workflows. These included diagnosis before mutation, authorized restart and verification, dependent tool calls, missing-parameter clarification, prompt-injection resistance, and retrieval from roughly 55K tokens of history.\n\nThe 9B model’s had a number of failures in tool calling and reasoning [it was also too verbose in thinking traces consuming too many tokens -- it had a 120k context size]. Both 27B variants handled those cases correctly.\n\nInterestingly, the 9B still scored higher on the single-turn BFCL subset. The 27B advantage appeared primarily in stateful, multi-step work rather than isolated function-call questions.\n\nConclusions\n\nThe practical sweet spot for Qwen3.8-27B IQ4 on a 16GB RTX 5060 Ti is 64K text context with MTP-1.\n\nShort-context generation is around 45–47 tok/s.\n\nGeneration remained around 31 tok/s after a roughly 55K-token prefill.\n\nUnsloth UD-IQ4_XS has the best measured fidelity and is effectively Q8-like on the tested samples.\n\nBetter perplexity and logit fidelity did not automatically produce better agent scores.\n\nThe jpetrina quant narrowly won our multi-turn agent evaluation, 40/80 versus 38/80, so its the best choice for now.\n\nThe Unsloth quant is a strong alternative and may be preferable for general text generation.\n\nVision works, but should use a separate smaller-context profile on a 16GB card.\n\nQ8 is not practical for full-GPU operation on this card and was only used as a partially CPU-offloaded quality control. [to see the loss of quality due to quantization and other factors]\n\nThese are seeded subsets and local use-case scenarios, not official BFCL leaderboard submissions. Results are from one GPU, one inference slot, and no concurrency.\n\nShare",
+  "comments": [
+    {
+      "author": "tsangberg",
+      "score": "7",
+      "text": "tsangberg\n•\n16h ago\n\nYou can run vision on CPU/RAM. Slower, but unless your pipeline requires fast vision it's likely the better solution.\n\n--no-mmproj-offload\n\nTema_Art_7777\n•\n15h ago\n\nYes indeed - I did test that and I have it as one of the options in the llama-swap configurations. Thanks."
+    },
+    {
+      "author": "Tema_Art_7777",
+      "score": "1",
+      "text": "Tema_Art_7777\n•\n15h ago\n\nYes indeed - I did test that and I have it as one of the options in the llama-swap configurations. Thanks."
+    },
+    {
+      "author": "Additional-Ordinary2",
+      "score": "12",
+      "text": "Additional-Ordinary2\n•\n16h ago\n\n64K is unusable for coding. You need ATLEAST 140K\n\nTema_Art_7777\n•\n16h ago\n\nOh I agree but there are plenty of other agentic use cases. Like I said - someone may find this useful. Coding wasn’t the intent - should have clarified that.\n\nahhhhhhhhhhhhhhhhhhg\n•\n15h ago\n\nQ4 KV cache is really efficient, and vision can be offloaded to ram, then you disable display-manager and you can get up to 164k context on a 16gb card\n\nSolary_Kryptic\n•\n12h ago\n\nQ4 cache sucks, kvarn is a better alternative\n\nea_man\n•\n3h ago\n Top 1% Commenter\n\n164k with IQ4? That's a lot!\n\nYou mean without MTP maybe? In case not please share your launch script, I'm at 121344 now with MTP.\n\nEquivalent_Bit_461\n•\n14h ago\n\nTruke \n\nphilmarcracken\n•\n6h ago\n\nGNUke\n\nsimplyeniga\n•\n14h ago\n\nIt's actually sufficient for a well documented code base. I've got a large project that was started with fable and just started some new enhancements using Qwen 3.8 27B and it had no issues understanding the project structure and then adding new features though once got 130k context but I've only hit the compact threshold running multiple iterations"
+    },
+    {
+      "author": "Tema_Art_7777",
+      "score": "6",
+      "text": "Tema_Art_7777\n•\n16h ago\n\nOh I agree but there are plenty of other agentic use cases. Like I said - someone may find this useful. Coding wasn’t the intent - should have clarified that."
+    },
+    {
+      "author": "ahhhhhhhhhhhhhhhhhhg",
+      "score": "3",
+      "text": "ahhhhhhhhhhhhhhhhhhg\n•\n15h ago\n\nQ4 KV cache is really efficient, and vision can be offloaded to ram, then you disable display-manager and you can get up to 164k context on a 16gb card\n\nSolary_Kryptic\n•\n12h ago\n\nQ4 cache sucks, kvarn is a better alternative\n\nea_man\n•\n3h ago\n Top 1% Commenter\n\n164k with IQ4? That's a lot!\n\nYou mean without MTP maybe? In case not please share your launch script, I'm at 121344 now with MTP."
+    },
+    {
+      "author": "Solary_Kryptic",
+      "score": "2",
+      "text": "Solary_Kryptic\n•\n12h ago\n\nQ4 cache sucks, kvarn is a better alternative"
+    },
+    {
+      "author": "ea_man",
+      "score": "1",
+      "text": "ea_man\n•\n3h ago\n Top 1% Commenter\n\n164k with IQ4? That's a lot!\n\nYou mean without MTP maybe? In case not please share your launch script, I'm at 121344 now with MTP."
+    },
+    {
+      "author": "Equivalent_Bit_461",
+      "score": "3",
+      "text": "Equivalent_Bit_461\n•\n14h ago\n\nTruke \n\nphilmarcracken\n•\n6h ago\n\nGNUke"
+    },
+    {
+      "author": "philmarcracken",
+      "score": "1",
+      "text": "philmarcracken\n•\n6h ago\n\nGNUke"
+    },
+    {
+      "author": "simplyeniga",
+      "score": "1",
+      "text": "simplyeniga\n•\n14h ago\n\nIt's actually sufficient for a well documented code base. I've got a large project that was started with fable and just started some new enhancements using Qwen 3.8 27B and it had no issues understanding the project structure and then adding new features though once got 130k context but I've only hit the compact threshold running multiple iterations"
+    },
+    {
+      "author": "tecneeq",
+      "score": "3",
+      "text": "tecneeq\n•\n14h ago\n\nI think getting a second 5060 ti 16GB, Q5, tensor split, MTP and large context would be the next logical step.\n\nApprehensiveStory268\n•\n14h ago\n\nnot op, but already thought about doing this just to realize my mb can't handle 2 gpus as only one is connected to the cpu while the other is connected to the mb's chip.\n\nwas wondering if its worth getting an rx 7900xtx instead.\nmy card is 5060 ti 16gb as well.\n\nea_man\n•\n3h ago\n Top 1% Commenter\n\nIt will still work fine with layer-split.\n\nTema_Art_7777\n•\n14h ago\n\nhmm... I do have a second one but on a different computer -- too bad there is no nvlink for that. 😄\n\nGold_Coconut9777\n•\n9h ago\n\nLook into llama's RPC. You can make use of that GPU remotely.\n\nIt works surprisingly well\n\nTema_Art_7777\n•\n8h ago\n\nInteresting! will do!\n\nphilmarcracken\n•\n6h ago\n\nI use this on my poverty setup of 3080ti 12gb and 2070rtx, works fine. From a crawling 2-3tk/s to usable 20+\n\nGold_Coconut9777\n•\n5h ago\n\nI think I saw someone here connecting like 3 or 4 PCs in their household this way :D"
+    },
+    {
+      "author": "ApprehensiveStory268",
+      "score": "1",
+      "text": "ApprehensiveStory268\n•\n14h ago\n\nnot op, but already thought about doing this just to realize my mb can't handle 2 gpus as only one is connected to the cpu while the other is connected to the mb's chip.\n\nwas wondering if its worth getting an rx 7900xtx instead.\nmy card is 5060 ti 16gb as well.\n\nea_man\n•\n3h ago\n Top 1% Commenter\n\nIt will still work fine with layer-split."
+    },
+    {
+      "author": "ea_man",
+      "score": "1",
+      "text": "ea_man\n•\n3h ago\n Top 1% Commenter\n\nIt will still work fine with layer-split."
+    },
+    {
+      "author": "Tema_Art_7777",
+      "score": "1",
+      "text": "Tema_Art_7777\n•\n14h ago\n\nhmm... I do have a second one but on a different computer -- too bad there is no nvlink for that. 😄\n\nGold_Coconut9777\n•\n9h ago\n\nLook into llama's RPC. You can make use of that GPU remotely.\n\nIt works surprisingly well\n\nTema_Art_7777\n•\n8h ago\n\nInteresting! will do!\n\nphilmarcracken\n•\n6h ago\n\nI use this on my poverty setup of 3080ti 12gb and 2070rtx, works fine. From a crawling 2-3tk/s to usable 20+\n\nGold_Coconut9777\n•\n5h ago\n\nI think I saw someone here connecting like 3 or 4 PCs in their household this way :D"
+    },
+    {
+      "author": "Gold_Coconut9777",
+      "score": "3",
+      "text": "Gold_Coconut9777\n•\n9h ago\n\nLook into llama's RPC. You can make use of that GPU remotely.\n\nIt works surprisingly well\n\nTema_Art_7777\n•\n8h ago\n\nInteresting! will do!\n\nphilmarcracken\n•\n6h ago\n\nI use this on my poverty setup of 3080ti 12gb and 2070rtx, works fine. From a crawling 2-3tk/s to usable 20+\n\nGold_Coconut9777\n•\n5h ago\n\nI think I saw someone here connecting like 3 or 4 PCs in their household this way :D"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vupiyh",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:37:14Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.844,
+    "evidence": 1.0,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/cHunter789/Qwen3.8-27B-i1-IQ4_KS_KT-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://store.piffa.net/lm/bug/improvemets_list.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/vmarcelo/Qwen3.8-27B-MIX_GGUF/resolve/main/Qwen3.8-27B-IQ4-MIX.gguf?download=true",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

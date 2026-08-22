@@ -1,0 +1,124 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1spwk7h/5070_ti_new_vs_3090_used_to_pair_with_4070_for/",
+  "title": "5070 Ti (New) vs 3090 (Used) to pair with 4070 for local LLMs?",
+  "author": "TheFunSlayingKing",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nTheFunSlayingKing\n5070 Ti (New) vs 3090 (Used) to pair with 4070 for local LLMs?\nQuestion | Help\n\nI'm upgrading my setup to run larger models and need a second GPU to pair with my current RTX 4070 (12GB).\n\nMy Workloads:\n\nLLMs: Up to 32B dense (Gemma 4 31B) and ~120B MoE (Qwen 122B10A). I mostly run Q4/IQ4/UD MXFP4 quants.\n\nImage diffusion model: FireRed 1.1 (Q4).\n\nTarget: 30+ tps at large contexts (up to 256k). Currently hitting a memory ceiling around 131k context (yesterday using Qwen 3.6 35B3A).\n\nThe Options & Market Constraints:\n\nRTX 5070 Ti 16GB (New): ~1.2k USD.\n\nRTX 3090 24GB (Used only): ~1k USD. (Pricing is rather complicated, finding it is even more complicated, might go for above 1k)\n\n5060 TI 16 GB (New): ~600 USD\n\nI strictly prefer buying new. There is no proper way to verify how \"old\" or \"used\" the GPU is.\n\nMy Hardware Limits:\n\nCPU/RAM: Ryzen 9 9950X, 80GB DDR5 (pairing 24gb pairs and 16gb).\n\nMobo/PSU: X870E, MSI MAG A1000GLS PCIE5 1000W.\n\nClearance: GC-801 Case with a front-mounted 360 AIO inside. Long cards like the ASUS TUF won't clear the radiator (probably, i'm guessing). I am limited to shorter tri-fan models (ASUS Prime, MSI Ventus 3X, Zotac Trinity).\n\nLayout: New card in top PCI_E1 (x16), 4070 (2.55 slots) dropped to bottom PCI_E3 (x4).\n\ntl;dr:\n\nWill the combined 28GB of the 5070 Ti + 4070 comfortably handle 32B dense models at 200k+ context and 120B MoEs at 30+ tps? Or is the 36GB combined capacity of the 3090 path a hard requirement for this? I want to know if the extra 8GB VRAM is worth buying a 5-year-old used card and giving up Blackwell's FP8/FP4 perks.\n\nI know they're approximately the same speed, but there's a vram difference, a size difference, a PSU requirement difference, and well, it's old, and used can mean bitcoin miner or can mean a former gamer who grew up.\n\nBecause i feel like 28 gb vs 36, there isn't much \"unlocked\" exactly, and that the true jump is more between 24, 48 and 96, i could be wrong, but i feel running things at Q4 is very much enough and there are no 70b+ models to justify the jump?\n\nShare",
+  "comments": [
+    {
+      "author": "FoxiPanda",
+      "score": "7",
+      "text": "FoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nIf you can find a 3090 for $1000 it's a pretty clear winner, but with your penchant for buying new, I think you'll find it virtually impossible to find a 3090 new.\n\n3090 --> 24GB --> 936.2GB/s\n\n5070 Ti --> 16GB --> 896GB/s\n\n5060 Ti --> 16GB --> 448GB/s\n\nThose are the numbers that matter (other than power consumption and perhaps some mildly new tensor core features you might be able to take advantage of between generations).\n\nNew only and only those choices? 5070 ti. Used feasible? 3090 no question.\n\nTheFunSlayingKing\n•\n4mo ago\n\nEven with things like NVFP4 only being viable on a Blackwell card?\n\nThe 24 gb is very tempting for me but as I keep reading, I feel like 36 gb is like an awkwardly positioned number, I can't think of things that would fit on 36 that can't fit on 28, but I sure can think of things that fit on a 48 but don't on a 36.\n\nThere's also the fact of size, I think that 3090 wouldn't allow for a dual GPU which would skew things in the 5070 ti direction\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nSo I will fully admit that I haven't messed with NVFP4 that much at this point, but I feel like it's overblown - in general, RTX 30 series+ have enough compute that these small models (<50B by my definition) are running faster than you'll be able to use them generally anyway...and you're pairing with a 4070, so you instantly kick yourself out of being able to use NVFP4 anyway since it's not viable on 40 series afaik.\n\nIf you can't fit the 3090, then you can't fit it though, why even have it as a choice? /shrug\n\nIMO, you already made up your mind and you want a 5070 Ti, but the numbers say the 3090 is better. No one in the history of AI has said \"gosh, I wish I had less VRAM today.\"\n\nTheFunSlayingKing\n•\n4mo ago\n\nYeah that's true, and I haven't completely made up my mind yet, I guess that's why I even shoved the 5060 ti in there, because money wise it is the cheapest 16gb option available but it's really slow in comparison to the other two, I don't mind \"speed\", like I don't want to run a model at 500 tps, 40-50 tps is perfect, that's why I tend to go q4 even if I can go higher sometimes.\n\nIt's just that I don't have a way to check if a 3090 had exploded previously and the current owner just properly washed it or it is a \"lightly used\" one, can't tell the difference until I buy and use them\n\nI guess it makes sense, extra VRAM is extra vram, and it is very tempting\n\nMy only issues are the size but the fact that it's a 5 year old card, makes me think that maybe it will go out of fashion? (Might be too paranoid ig) And the whole \"used\" thing.\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nPeople are still using Volta V100 - 2018 vintage - and Pascal P100 cards - launched in mid-2016 - for AI today. A V100 32GB is now \"legacy\" by NVIDIA's definition and won't be getting a lot of updates, but is still a great bang for the buck card for what it is (32GB @ 900GB/s)\n\nP100 is genuinely starting to show its age (really, really old tensor core designs at this point and only 16GB and 700GB/s) but still is semi-on par with consumer hardware.\n\nTheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "TheFunSlayingKing",
+      "score": "0",
+      "text": "TheFunSlayingKing\n•\n4mo ago\n\nEven with things like NVFP4 only being viable on a Blackwell card?\n\nThe 24 gb is very tempting for me but as I keep reading, I feel like 36 gb is like an awkwardly positioned number, I can't think of things that would fit on 36 that can't fit on 28, but I sure can think of things that fit on a 48 but don't on a 36.\n\nThere's also the fact of size, I think that 3090 wouldn't allow for a dual GPU which would skew things in the 5070 ti direction\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nSo I will fully admit that I haven't messed with NVFP4 that much at this point, but I feel like it's overblown - in general, RTX 30 series+ have enough compute that these small models (<50B by my definition) are running faster than you'll be able to use them generally anyway...and you're pairing with a 4070, so you instantly kick yourself out of being able to use NVFP4 anyway since it's not viable on 40 series afaik.\n\nIf you can't fit the 3090, then you can't fit it though, why even have it as a choice? /shrug\n\nIMO, you already made up your mind and you want a 5070 Ti, but the numbers say the 3090 is better. No one in the history of AI has said \"gosh, I wish I had less VRAM today.\"\n\nTheFunSlayingKing\n•\n4mo ago\n\nYeah that's true, and I haven't completely made up my mind yet, I guess that's why I even shoved the 5060 ti in there, because money wise it is the cheapest 16gb option available but it's really slow in comparison to the other two, I don't mind \"speed\", like I don't want to run a model at 500 tps, 40-50 tps is perfect, that's why I tend to go q4 even if I can go higher sometimes.\n\nIt's just that I don't have a way to check if a 3090 had exploded previously and the current owner just properly washed it or it is a \"lightly used\" one, can't tell the difference until I buy and use them\n\nI guess it makes sense, extra VRAM is extra vram, and it is very tempting\n\nMy only issues are the size but the fact that it's a 5 year old card, makes me think that maybe it will go out of fashion? (Might be too paranoid ig) And the whole \"used\" thing.\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nPeople are still using Volta V100 - 2018 vintage - and Pascal P100 cards - launched in mid-2016 - for AI today. A V100 32GB is now \"legacy\" by NVIDIA's definition and won't be getting a lot of updates, but is still a great bang for the buck card for what it is (32GB @ 900GB/s)\n\nP100 is genuinely starting to show its age (really, really old tensor core designs at this point and only 16GB and 700GB/s) but still is semi-on par with consumer hardware.\n\nTheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "FoxiPanda",
+      "score": "3",
+      "text": "FoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nSo I will fully admit that I haven't messed with NVFP4 that much at this point, but I feel like it's overblown - in general, RTX 30 series+ have enough compute that these small models (<50B by my definition) are running faster than you'll be able to use them generally anyway...and you're pairing with a 4070, so you instantly kick yourself out of being able to use NVFP4 anyway since it's not viable on 40 series afaik.\n\nIf you can't fit the 3090, then you can't fit it though, why even have it as a choice? /shrug\n\nIMO, you already made up your mind and you want a 5070 Ti, but the numbers say the 3090 is better. No one in the history of AI has said \"gosh, I wish I had less VRAM today.\"\n\nTheFunSlayingKing\n•\n4mo ago\n\nYeah that's true, and I haven't completely made up my mind yet, I guess that's why I even shoved the 5060 ti in there, because money wise it is the cheapest 16gb option available but it's really slow in comparison to the other two, I don't mind \"speed\", like I don't want to run a model at 500 tps, 40-50 tps is perfect, that's why I tend to go q4 even if I can go higher sometimes.\n\nIt's just that I don't have a way to check if a 3090 had exploded previously and the current owner just properly washed it or it is a \"lightly used\" one, can't tell the difference until I buy and use them\n\nI guess it makes sense, extra VRAM is extra vram, and it is very tempting\n\nMy only issues are the size but the fact that it's a 5 year old card, makes me think that maybe it will go out of fashion? (Might be too paranoid ig) And the whole \"used\" thing.\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nPeople are still using Volta V100 - 2018 vintage - and Pascal P100 cards - launched in mid-2016 - for AI today. A V100 32GB is now \"legacy\" by NVIDIA's definition and won't be getting a lot of updates, but is still a great bang for the buck card for what it is (32GB @ 900GB/s)\n\nP100 is genuinely starting to show its age (really, really old tensor core designs at this point and only 16GB and 700GB/s) but still is semi-on par with consumer hardware.\n\nTheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "TheFunSlayingKing",
+      "score": "1",
+      "text": "TheFunSlayingKing\n•\n4mo ago\n\nYeah that's true, and I haven't completely made up my mind yet, I guess that's why I even shoved the 5060 ti in there, because money wise it is the cheapest 16gb option available but it's really slow in comparison to the other two, I don't mind \"speed\", like I don't want to run a model at 500 tps, 40-50 tps is perfect, that's why I tend to go q4 even if I can go higher sometimes.\n\nIt's just that I don't have a way to check if a 3090 had exploded previously and the current owner just properly washed it or it is a \"lightly used\" one, can't tell the difference until I buy and use them\n\nI guess it makes sense, extra VRAM is extra vram, and it is very tempting\n\nMy only issues are the size but the fact that it's a 5 year old card, makes me think that maybe it will go out of fashion? (Might be too paranoid ig) And the whole \"used\" thing.\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nPeople are still using Volta V100 - 2018 vintage - and Pascal P100 cards - launched in mid-2016 - for AI today. A V100 32GB is now \"legacy\" by NVIDIA's definition and won't be getting a lot of updates, but is still a great bang for the buck card for what it is (32GB @ 900GB/s)\n\nP100 is genuinely starting to show its age (really, really old tensor core designs at this point and only 16GB and 700GB/s) but still is semi-on par with consumer hardware.\n\nTheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "FoxiPanda",
+      "score": "1",
+      "text": "FoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nPeople are still using Volta V100 - 2018 vintage - and Pascal P100 cards - launched in mid-2016 - for AI today. A V100 32GB is now \"legacy\" by NVIDIA's definition and won't be getting a lot of updates, but is still a great bang for the buck card for what it is (32GB @ 900GB/s)\n\nP100 is genuinely starting to show its age (really, really old tensor core designs at this point and only 16GB and 700GB/s) but still is semi-on par with consumer hardware.\n\nTheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "TheFunSlayingKing",
+      "score": "1",
+      "text": "TheFunSlayingKing\n•\n4mo ago\n\nYes but those are enterprise/pro tier cards, I expect them to always outperform the \"normie\" GPU for a while\n\nI mean shit, if I managed to get my hands on an H200 I'm sure it's good enough to compete with consumer cards a decade from now\n\nUnfortunately as much as I wish, the professional cards are things I'm completely priced out of and they're basically non existent to me anyway so it's not like I could afford them or buy them if I could afford them\n\nFoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "FoxiPanda",
+      "score": "1",
+      "text": "FoxiPanda\n•\n4mo ago\n Top 1% Commenter\n\nAh I was just comparing on age. A P100 is a decade old and V100s are 8 years old. 5 year old silicon isn't exactly decrepit at this point (the 3090).\n\nI still use my 3080s (though I have retired my 1070 lol)"
+    },
+    {
+      "author": "r-amp",
+      "score": "5",
+      "text": "r-amp\n•\n4mo ago\n\nVRAM is king."
+    },
+    {
+      "author": "ThePixelHunter",
+      "score": "3",
+      "text": "ThePixelHunter\n•\n4mo ago\n\nThere are no new 3090's anymore. Even if you found one new in box, it wouldn't have a warranty. Any problems it had would be unknown and you'd be screwed.\n\nBetter to buy one used with a known service life. A card that's ran faithfully for 5 years will continue to run well, assuming it's kept cool and treated well."
+    },
+    {
+      "author": "b1231227",
+      "score": "1",
+      "text": "b1231227\n•\n4mo ago\n\nVRAM size is the most important factor!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1spwk7h",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:49Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.716,
+    "evidence": 0.8,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

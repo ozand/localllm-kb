@@ -1,0 +1,206 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsr67c/introducing_qwen3827b_dynamic_v3_unsloth_ggufs/",
+  "title": "Introducing Qwen3.8-27B Dynamic v3 Unsloth GGUFs",
+  "author": "danielhanchen",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3d ago\ndanielhanchen\nIntroducing Qwen3.8-27B Dynamic v3 Unsloth GGUFs\nNews\n\nHey everyone! We’re releasing new Qwen3.8-27B GGUFs with 10% higher accuracy for the same size. This uses a new version of Dynamic v3.0\n\nUnsloth Dynamic V3 outperforms others by >10% on Div-300, KLD & more benchmarks.\n\nWe also release 1-bit quants that retain 77% accuracy. Run on 8GB RAM.\n\nSome of you already saw we updated our quants a few hours ago. No, nothing was broken, nothing needed fixes (I don't know why people even said this since it's a complete fabricated story). This was purely an update to make them EVEN BETTER.\n\nWe do not train on the imatrix calibration dataset, and we do NOT use QAT or QAD. Everything is done through post-training quantization. Our imatrix file used is available for the community to test, evaluate, and use. We encourage researchers and developers to create variations and fine-tunes of Qwen3.8 using our Unsloth quants/imatrix. You can read our over fitting analysis as well.\n\nBlog with all details and more benchmarks: https://unsloth.ai/docs/basics/dynamic-3.0-ggufs\n\nGGUF: https://huggingface.co/unsloth/Qwen3.8-27B-GGUF\n\nEnjoy! We also will be doing a new Unsloth Desktop update today: https://github.com/unslothai/unsloth\n\nWe had A LOT of updates and will be introducing auto compaction, allowing external APIs to do tool calling and more.\n\nShare",
+  "comments": [
+    {
+      "author": "Jorlen",
+      "score": "424",
+      "text": "Jorlen\n•\n3d ago\nllama.cpp\n\nJust want to say, thank you Unsloth team for these great quants. Your hard work is appreciated!\n\nyoracale\n•\n3d ago\nllama.cpp\n\nThank you! 🦥💚\n\nMaleficent-Ad5999\n•\n3d ago\n\nQwen + Unsloth for the win\n\nOrnery_Hall\n•\n3d ago\n\nYeah very appreciated Unsloth teams for all dedicated works so far, you guys are the beacon of LLM."
+    },
+    {
+      "author": "yoracale",
+      "score": "118",
+      "text": "yoracale\n•\n3d ago\nllama.cpp\n\nThank you! 🦥💚"
+    },
+    {
+      "author": "Maleficent-Ad5999",
+      "score": "44",
+      "text": "Maleficent-Ad5999\n•\n3d ago\n\nQwen + Unsloth for the win\n\nOrnery_Hall\n•\n3d ago\n\nYeah very appreciated Unsloth teams for all dedicated works so far, you guys are the beacon of LLM."
+    },
+    {
+      "author": "Ornery_Hall",
+      "score": "21",
+      "text": "Ornery_Hall\n•\n3d ago\n\nYeah very appreciated Unsloth teams for all dedicated works so far, you guys are the beacon of LLM."
+    },
+    {
+      "author": "Chromix_",
+      "score": "160",
+      "text": "Chromix_\n•\n3d ago\n Top 1% Commenter\n\nThat's very nice. Can you also add a line for the previous Qwen 3.8 27B UD 2.0 quants to the graph, so that it's easier (or possible at all) to see how what most of us now have on disk compares to the latest and greatest? KLD and/or top-1 would probably be sufficient, I assume you still have that data from the previous quants.\n\nyoracale\n•\n3d ago\n•\nEdited 3d ago\nllama.cpp\n\nWe can add a graph in our blog regarding the previous versions!\n\nwadeAlexC\n•\n3d ago\n•\nEdited 3d ago\nllama.cpp\n\nCan I request at least a few of the other quants are named? All the UD quants have names, but it's very hard to tell what they're being compared against when just looking at the other lines.\n\nE.g. so we can compare UD_Q4_K_XL against At_Q4_K_L, etc\n\nBS_BlackScout\n•\n3d ago\n\nAt....\n\nAtomicChat? 😹\n\nFun-Meaning-6474\n•\n3d ago\n\nwaiting atomic chat dynamic quants 2.0 ;) btw we are cooking it rn\n\nbankinu\n•\n3d ago\n\nThat will be really helpful!\n\nI wonder how much the model I can fit (UD_Q5_X_L) changed in KLD, since it is now a few hundred MiB's bigger. If the change for this model is not large, then I can gain some previous VRAM back and run the previous model.\n\n1 more reply"
+    },
+    {
+      "author": "yoracale",
+      "score": "60",
+      "text": "yoracale\n•\n3d ago\n•\nEdited 3d ago\nllama.cpp\n\nWe can add a graph in our blog regarding the previous versions!\n\nwadeAlexC\n•\n3d ago\n•\nEdited 3d ago\nllama.cpp\n\nCan I request at least a few of the other quants are named? All the UD quants have names, but it's very hard to tell what they're being compared against when just looking at the other lines.\n\nE.g. so we can compare UD_Q4_K_XL against At_Q4_K_L, etc\n\nBS_BlackScout\n•\n3d ago\n\nAt....\n\nAtomicChat? 😹\n\nFun-Meaning-6474\n•\n3d ago\n\nwaiting atomic chat dynamic quants 2.0 ;) btw we are cooking it rn\n\nbankinu\n•\n3d ago\n\nThat will be really helpful!\n\nI wonder how much the model I can fit (UD_Q5_X_L) changed in KLD, since it is now a few hundred MiB's bigger. If the change for this model is not large, then I can gain some previous VRAM back and run the previous model.\n\n1 more reply"
+    },
+    {
+      "author": "wadeAlexC",
+      "score": "8",
+      "text": "wadeAlexC\n•\n3d ago\n•\nEdited 3d ago\nllama.cpp\n\nCan I request at least a few of the other quants are named? All the UD quants have names, but it's very hard to tell what they're being compared against when just looking at the other lines.\n\nE.g. so we can compare UD_Q4_K_XL against At_Q4_K_L, etc"
+    },
+    {
+      "author": "BS_BlackScout",
+      "score": "14",
+      "text": "BS_BlackScout\n•\n3d ago\n\nAt....\n\nAtomicChat? 😹\n\nFun-Meaning-6474\n•\n3d ago\n\nwaiting atomic chat dynamic quants 2.0 ;) btw we are cooking it rn"
+    },
+    {
+      "author": "Fun-Meaning-6474",
+      "score": "8",
+      "text": "Fun-Meaning-6474\n•\n3d ago\n\nwaiting atomic chat dynamic quants 2.0 ;) btw we are cooking it rn"
+    },
+    {
+      "author": "bankinu",
+      "score": "3",
+      "text": "bankinu\n•\n3d ago\n\nThat will be really helpful!\n\nI wonder how much the model I can fit (UD_Q5_X_L) changed in KLD, since it is now a few hundred MiB's bigger. If the change for this model is not large, then I can gain some previous VRAM back and run the previous model."
+    },
+    {
+      "author": "Adventurous-Gold6413",
+      "score": "67",
+      "text": "Adventurous-Gold6413\n•\n3d ago\n\nSo we can now run IQ4XS on 16gb vram without mtp\n\nyoracale\n•\n3d ago\n•\nEdited 2d ago\nllama.cpp\n\nEdit: Yes we removed MTP for the small ones under UD-Q2-K_XL after some feedback from folks. All big ones UD-Q3_K_XL, Q4_K_XL etc all have inbuilt MTP still. It doesn't always work anyways edit: we still uploaded MTP but as a SEPARATE component so you can still use it!!\n\nNovaXeros\n•\n3d ago\n\nI'm a bit confused now then - are you saying the UD quants no longer have MTP even though the HF page still makes mention of MTP training?\n\n3 more replies\nBigPoppaK78\n•\n3d ago\n•\nEdited 3d ago\n\nSo, if MTP was removed, why am I still seeing draft acceptance rates in the llama.cpp logs? Tested with Q4 and Q5 quants.\n\nEdit: Also, comparing Q5_K_XL old and new, the new one is around 650 MB larger. Unless the bit rates used across all the other layers are significantly larger, MTP is definitely still in there.\n\nJcsq6\n•\n3d ago\n\nThe MTP was only removed for quants under UD-Q2_K_XL according to the ud3 description.\n\ndanielhanchen\n•\n3d ago\n\nOh so we removed MTP for models smaller than UD-Q2_K_XL since even 500mb is needed for lower end GPUs\n\nklop2031\n•\n2d ago\n\nI feel like this should be in the model card?\n\nAnonLlamaThrowaway\n•\n2d ago\n\nYou really should be making this explicitly clear somewhere since this info cannot be found anywhere on your HF pages\n\n1 more reply\noctagonaldrop6\n•\n3d ago\n•\nEdited 3d ago\n\nI thought the documentation below suggests that IQ4XS would still have MTP. If that is not the case, how do we still use MTP for Q4 models if we still want it?\n\n\"We also removed the MTP module from smaller quants under UD-Q2_K_XL (8.37GB and lower) to converse around 500MB of disk space - you can use the Q4_0 MTP separate module if needed\"\n\nhttps://unsloth.ai/docs/basics/dynamic-3.0-ggufs\n\nEdit: Judging by your edit and other reply, you are saying the answer is that MTP has been removed from ALL quants? If that is the case, does anyone know how to use the separate MTP module with llama.cpp?\n\ndanielhanchen\n•\n3d ago\n\nYes yes all have MTP just any small ones under 2bit got removed\n\nlood9phee2Ri\n•\n3d ago\n•\nEdited 3d ago\n\nThe newest UD-Q4_K_XL I just downloaded still embedded MTP as far as I can see (and I think that's fine!)\n\nIt's still in some larger ones (which again I think is fine! please don't complicate launch), I think there's some confusion because the blog post is saying it's gone from only some of the really small ones, but unsloth keeps saying here it's gone from all of them.\n\nnote you can tell without actual download e.g. look for the \"nextn\" block 64 in the hf web ui inline viewer for the ggufs I think. Even those without it can still use the detached separate MTP layer now in the MTP subdir of the repo per unsloth comments:\n\ncontrast e.g.:\n\nhttps://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-IQ1_M.gguf (no MTP)\n\nvs\n\nhttps://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-Q4_K_XL.gguf (with embedded MTP / nextn block 64 data)\n\nqiinemarr\n•\n3d ago\n\nMany thanks!\n\nThis stuff is confusing...\n\ndanielhanchen\n•\n3d ago\n\nOops we'll try it make it clearter - MTP is always there just the small ones it's gone (under 2bit)\n\ndurden111111\n•\n3d ago\n\n\" -md \" sets the Dflash model can this be used for MTP ggufs?\n\n1 more reply\n4 more replies\nrngesius\n•\n3d ago\n\nReally strange decision. LLama.cpp won't load MTP layers if not asked for draft-mtp.\n\ncoder543\n•\n3d ago\n Top 1% Commenter\n\n99% sure the main GGUFs still have the nextn/mtp layers in them... might need to upload again. u/danielhanchen\n\ndanielhanchen\n•\n3d ago\n\nYes just under 2bit they're gone\n\n1 more reply\nbankinu\n•\n3d ago\n\nInteresting. I'm curious about the decision.\n\nPure curiosity, not that I was using MTP. If it's in the blog I'll find it and read.\n\n3 more replies\n2 more replies"
+    },
+    {
+      "author": "yoracale",
+      "score": "72",
+      "text": "yoracale\n•\n3d ago\n•\nEdited 2d ago\nllama.cpp\n\nEdit: Yes we removed MTP for the small ones under UD-Q2-K_XL after some feedback from folks. All big ones UD-Q3_K_XL, Q4_K_XL etc all have inbuilt MTP still. It doesn't always work anyways edit: we still uploaded MTP but as a SEPARATE component so you can still use it!!\n\nNovaXeros\n•\n3d ago\n\nI'm a bit confused now then - are you saying the UD quants no longer have MTP even though the HF page still makes mention of MTP training?\n\n3 more replies\nBigPoppaK78\n•\n3d ago\n•\nEdited 3d ago\n\nSo, if MTP was removed, why am I still seeing draft acceptance rates in the llama.cpp logs? Tested with Q4 and Q5 quants.\n\nEdit: Also, comparing Q5_K_XL old and new, the new one is around 650 MB larger. Unless the bit rates used across all the other layers are significantly larger, MTP is definitely still in there.\n\nJcsq6\n•\n3d ago\n\nThe MTP was only removed for quants under UD-Q2_K_XL according to the ud3 description.\n\ndanielhanchen\n•\n3d ago\n\nOh so we removed MTP for models smaller than UD-Q2_K_XL since even 500mb is needed for lower end GPUs\n\nklop2031\n•\n2d ago\n\nI feel like this should be in the model card?\n\nAnonLlamaThrowaway\n•\n2d ago\n\nYou really should be making this explicitly clear somewhere since this info cannot be found anywhere on your HF pages\n\n1 more reply\noctagonaldrop6\n•\n3d ago\n•\nEdited 3d ago\n\nI thought the documentation below suggests that IQ4XS would still have MTP. If that is not the case, how do we still use MTP for Q4 models if we still want it?\n\n\"We also removed the MTP module from smaller quants under UD-Q2_K_XL (8.37GB and lower) to converse around 500MB of disk space - you can use the Q4_0 MTP separate module if needed\"\n\nhttps://unsloth.ai/docs/basics/dynamic-3.0-ggufs\n\nEdit: Judging by your edit and other reply, you are saying the answer is that MTP has been removed from ALL quants? If that is the case, does anyone know how to use the separate MTP module with llama.cpp?\n\ndanielhanchen\n•\n3d ago\n\nYes yes all have MTP just any small ones under 2bit got removed\n\nlood9phee2Ri\n•\n3d ago\n•\nEdited 3d ago\n\nThe newest UD-Q4_K_XL I just downloaded still embedded MTP as far as I can see (and I think that's fine!)\n\nIt's still in some larger ones (which again I think is fine! please don't complicate launch), I think there's some confusion because the blog post is saying it's gone from only some of the really small ones, but unsloth keeps saying here it's gone from all of them.\n\nnote you can tell without actual download e.g. look for the \"nextn\" block 64 in the hf web ui inline viewer for the ggufs I think. Even those without it can still use the detached separate MTP layer now in the MTP subdir of the repo per unsloth comments:\n\ncontrast e.g.:\n\nhttps://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-IQ1_M.gguf (no MTP)\n\nvs\n\nhttps://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-Q4_K_XL.gguf (with embedded MTP / nextn block 64 data)\n\nqiinemarr\n•\n3d ago\n\nMany thanks!\n\nThis stuff is confusing...\n\ndanielhanchen\n•\n3d ago\n\nOops we'll try it make it clearter - MTP is always there just the small ones it's gone (under 2bit)\n\ndurden111111\n•\n3d ago\n\n\" -md \" sets the Dflash model can this be used for MTP ggufs?\n\n1 more reply\n4 more replies\nrngesius\n•\n3d ago\n\nReally strange decision. LLama.cpp won't load MTP layers if not asked for draft-mtp.\n\ncoder543\n•\n3d ago\n Top 1% Commenter\n\n99% sure the main GGUFs still have the nextn/mtp layers in them... might need to upload again. u/danielhanchen\n\ndanielhanchen\n•\n3d ago\n\nYes just under 2bit they're gone\n\n1 more reply\nbankinu\n•\n3d ago\n\nInteresting. I'm curious about the decision.\n\nPure curiosity, not that I was using MTP. If it's in the blog I'll find it and read.\n\n3 more replies"
+    },
+    {
+      "author": "NovaXeros",
+      "score": "15",
+      "text": "NovaXeros\n•\n3d ago\n\nI'm a bit confused now then - are you saying the UD quants no longer have MTP even though the HF page still makes mention of MTP training?\n\n3 more replies"
+    },
+    {
+      "author": "BigPoppaK78",
+      "score": "21",
+      "text": "BigPoppaK78\n•\n3d ago\n•\nEdited 3d ago\n\nSo, if MTP was removed, why am I still seeing draft acceptance rates in the llama.cpp logs? Tested with Q4 and Q5 quants.\n\nEdit: Also, comparing Q5_K_XL old and new, the new one is around 650 MB larger. Unless the bit rates used across all the other layers are significantly larger, MTP is definitely still in there.\n\nJcsq6\n•\n3d ago\n\nThe MTP was only removed for quants under UD-Q2_K_XL according to the ud3 description.\n\ndanielhanchen\n•\n3d ago\n\nOh so we removed MTP for models smaller than UD-Q2_K_XL since even 500mb is needed for lower end GPUs\n\nklop2031\n•\n2d ago\n\nI feel like this should be in the model card?\n\nAnonLlamaThrowaway\n•\n2d ago\n\nYou really should be making this explicitly clear somewhere since this info cannot be found anywhere on your HF pages\n\n1 more reply"
+    },
+    {
+      "author": "Jcsq6",
+      "score": "26",
+      "text": "Jcsq6\n•\n3d ago\n\nThe MTP was only removed for quants under UD-Q2_K_XL according to the ud3 description."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vsr67c",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T12:00:48Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.507,
+    "evidence": 0.4,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/unslothai/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/tree/main/MTP",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-IQ1_M.gguf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/blob/main/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://localbench.substack.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

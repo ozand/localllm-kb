@@ -1,0 +1,5208 @@
+{
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "references": [
+    {
+      "reference_id": "1vm2j42:0",
+      "thread_id": "1vm2j42",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:1",
+      "thread_id": "1vm2j42",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:2",
+      "thread_id": "1vm2j42",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:3",
+      "thread_id": "1vm2j42",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:4",
+      "thread_id": "1vm2j42",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:5",
+      "thread_id": "1vm2j42",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:6",
+      "thread_id": "1vm2j42",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vm2j42:7",
+      "thread_id": "1vm2j42",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:0",
+      "thread_id": "1vu7yce",
+      "url": "https://definedrr.medium.com/qwen3-8-27b-9-tokens-per-second-to-153-ee3781f4a3f5?sharedUserId=definedrr",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:1",
+      "thread_id": "1vu7yce",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:2",
+      "thread_id": "1vu7yce",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:3",
+      "thread_id": "1vu7yce",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:4",
+      "thread_id": "1vu7yce",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:5",
+      "thread_id": "1vu7yce",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:6",
+      "thread_id": "1vu7yce",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:7",
+      "thread_id": "1vu7yce",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu7yce:8",
+      "thread_id": "1vu7yce",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:0",
+      "thread_id": "1s916kt",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:1",
+      "thread_id": "1s916kt",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:2",
+      "thread_id": "1s916kt",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:3",
+      "thread_id": "1s916kt",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:4",
+      "thread_id": "1s916kt",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:5",
+      "thread_id": "1s916kt",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:6",
+      "thread_id": "1s916kt",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s916kt:7",
+      "thread_id": "1s916kt",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:0",
+      "thread_id": "1t0jd95",
+      "url": "https://github.com/cubebecu/writeups/tree/main/gpu-service",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:1",
+      "thread_id": "1t0jd95",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:2",
+      "thread_id": "1t0jd95",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:3",
+      "thread_id": "1t0jd95",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:4",
+      "thread_id": "1t0jd95",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:5",
+      "thread_id": "1t0jd95",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:6",
+      "thread_id": "1t0jd95",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:7",
+      "thread_id": "1t0jd95",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0jd95:8",
+      "thread_id": "1t0jd95",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:0",
+      "thread_id": "1ucx2xj",
+      "url": "https://gigagpu.com/intel-arc-pro-b60-vs-rtx-3090/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:1",
+      "thread_id": "1ucx2xj",
+      "url": "https://localmaxxing.com/en/models/Qwen/Qwen3.5-122B-A10B?run=cmojycegm0005jo04bvjn0bs6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:2",
+      "thread_id": "1ucx2xj",
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:3",
+      "thread_id": "1ucx2xj",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:4",
+      "thread_id": "1ucx2xj",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:5",
+      "thread_id": "1ucx2xj",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:6",
+      "thread_id": "1ucx2xj",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:7",
+      "thread_id": "1ucx2xj",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:8",
+      "thread_id": "1ucx2xj",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ucx2xj:9",
+      "thread_id": "1ucx2xj",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:0",
+      "thread_id": "1s0p28x",
+      "url": "https://c-payne.com/products/pcie-gen4-switch-5x-x16-microchip-switchtec-pm40100",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:1",
+      "thread_id": "1s0p28x",
+      "url": "https://wheels.vllm.ai/nightly/vllm/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:2",
+      "thread_id": "1s0p28x",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:3",
+      "thread_id": "1s0p28x",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:4",
+      "thread_id": "1s0p28x",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:5",
+      "thread_id": "1s0p28x",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:6",
+      "thread_id": "1s0p28x",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:7",
+      "thread_id": "1s0p28x",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s0p28x:8",
+      "thread_id": "1s0p28x",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:0",
+      "thread_id": "1tx9tf2",
+      "url": "https://www.thingiverse.com/thing:2804306",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:1",
+      "thread_id": "1tx9tf2",
+      "url": "http://memory.net/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:2",
+      "thread_id": "1tx9tf2",
+      "url": "https://www.youtube.com/watch?v=cFi2hFDY9w0",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:3",
+      "thread_id": "1tx9tf2",
+      "url": "https://www.amazon.com/dp/B0DZG8JVG2?th=1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:4",
+      "thread_id": "1tx9tf2",
+      "url": "https://a.co/d/04lmMRjO",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:5",
+      "thread_id": "1tx9tf2",
+      "url": "https://c-payne.com/products/mcio-pcie-gen5-device-adapter-x8-x16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:6",
+      "thread_id": "1tx9tf2",
+      "url": "https://github.com/huawei-csl/KVarN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:7",
+      "thread_id": "1tx9tf2",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:8",
+      "thread_id": "1tx9tf2",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:9",
+      "thread_id": "1tx9tf2",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:10",
+      "thread_id": "1tx9tf2",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:11",
+      "thread_id": "1tx9tf2",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:12",
+      "thread_id": "1tx9tf2",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:13",
+      "thread_id": "1tx9tf2",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tx9tf2:14",
+      "thread_id": "1tx9tf2",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:0",
+      "thread_id": "1vr56r1",
+      "url": "https://huggingface.co/lued/Qwen3.8-27B-INT8-W8A16-MTP",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:1",
+      "thread_id": "1vr56r1",
+      "url": "https://huggingface.co/SergiioB/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:2",
+      "thread_id": "1vr56r1",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:3",
+      "thread_id": "1vr56r1",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:4",
+      "thread_id": "1vr56r1",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:5",
+      "thread_id": "1vr56r1",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:6",
+      "thread_id": "1vr56r1",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:7",
+      "thread_id": "1vr56r1",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vr56r1:8",
+      "thread_id": "1vr56r1",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:0",
+      "thread_id": "1spwk7h",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:1",
+      "thread_id": "1spwk7h",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:2",
+      "thread_id": "1spwk7h",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:3",
+      "thread_id": "1spwk7h",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:4",
+      "thread_id": "1spwk7h",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:5",
+      "thread_id": "1spwk7h",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1spwk7h:6",
+      "thread_id": "1spwk7h",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:0",
+      "thread_id": "1ronpwd",
+      "url": "https://huggingface.co/cyankiwi/Qwen3.5-27B-AWQ-4bit",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:1",
+      "thread_id": "1ronpwd",
+      "url": "https://gskpro.com/content/dam/global/hcpportal/en_US/Prescribing_Information/Apretude/pdf/APRETUDE-PI-PIL-IFU.PDF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:2",
+      "thread_id": "1ronpwd",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:3",
+      "thread_id": "1ronpwd",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:4",
+      "thread_id": "1ronpwd",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:5",
+      "thread_id": "1ronpwd",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:6",
+      "thread_id": "1ronpwd",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:7",
+      "thread_id": "1ronpwd",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:8",
+      "thread_id": "1ronpwd",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ronpwd:9",
+      "thread_id": "1ronpwd",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:0",
+      "thread_id": "1t2hejy",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:1",
+      "thread_id": "1t2hejy",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:2",
+      "thread_id": "1t2hejy",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:3",
+      "thread_id": "1t2hejy",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:4",
+      "thread_id": "1t2hejy",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:5",
+      "thread_id": "1t2hejy",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:6",
+      "thread_id": "1t2hejy",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t2hejy:7",
+      "thread_id": "1t2hejy",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:0",
+      "thread_id": "1sl3ztq",
+      "url": "https://www.glukhov.org/ai-devtools/opencode/llms-comparison/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:1",
+      "thread_id": "1sl3ztq",
+      "url": "https://www.glukhov.org/llm-performance/benchmarks/best-llm-on-16gb-vram-gpu/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:2",
+      "thread_id": "1sl3ztq",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:3",
+      "thread_id": "1sl3ztq",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:4",
+      "thread_id": "1sl3ztq",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:5",
+      "thread_id": "1sl3ztq",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:6",
+      "thread_id": "1sl3ztq",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:7",
+      "thread_id": "1sl3ztq",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:8",
+      "thread_id": "1sl3ztq",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sl3ztq:9",
+      "thread_id": "1sl3ztq",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:0",
+      "thread_id": "1shhmjg",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:1",
+      "thread_id": "1shhmjg",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:2",
+      "thread_id": "1shhmjg",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:3",
+      "thread_id": "1shhmjg",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:4",
+      "thread_id": "1shhmjg",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:5",
+      "thread_id": "1shhmjg",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:6",
+      "thread_id": "1shhmjg",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1shhmjg:7",
+      "thread_id": "1shhmjg",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:0",
+      "thread_id": "1r020dz",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:1",
+      "thread_id": "1r020dz",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:2",
+      "thread_id": "1r020dz",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:3",
+      "thread_id": "1r020dz",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:4",
+      "thread_id": "1r020dz",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:5",
+      "thread_id": "1r020dz",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:6",
+      "thread_id": "1r020dz",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1r020dz:7",
+      "thread_id": "1r020dz",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:0",
+      "thread_id": "1rdxfdu",
+      "url": "http://kodu.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:1",
+      "thread_id": "1rdxfdu",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:2",
+      "thread_id": "1rdxfdu",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/llama-bench/README.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:3",
+      "thread_id": "1rdxfdu",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-35B-A3B-GGUF/discussions/1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:4",
+      "thread_id": "1rdxfdu",
+      "url": "https://lmstudio.ai/models/qwen/qwen3.5-35b-a3b",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:5",
+      "thread_id": "1rdxfdu",
+      "url": "https://images2.imgbox.com/ff/14/mxBYW899_o.png",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:6",
+      "thread_id": "1rdxfdu",
+      "url": "https://images2.imgbox.com/b1/1f/X1tbcsPV_o.png",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:7",
+      "thread_id": "1rdxfdu",
+      "url": "https://opencode.ai/config.json",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:8",
+      "thread_id": "1rdxfdu",
+      "url": "http://<private-endpoint>/v1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:9",
+      "thread_id": "1rdxfdu",
+      "url": "https://github.com/anomalyco/opencode",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:10",
+      "thread_id": "1rdxfdu",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:11",
+      "thread_id": "1rdxfdu",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:12",
+      "thread_id": "1rdxfdu",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:13",
+      "thread_id": "1rdxfdu",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:14",
+      "thread_id": "1rdxfdu",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:15",
+      "thread_id": "1rdxfdu",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1rdxfdu:16",
+      "thread_id": "1rdxfdu",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:0",
+      "thread_id": "1vqrt86",
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:1",
+      "thread_id": "1vqrt86",
+      "url": "https://store.piffa.net/lm/bug/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:2",
+      "thread_id": "1vqrt86",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:3",
+      "thread_id": "1vqrt86",
+      "url": "https://x.com/ggerganov/status/2088312671196082312",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:4",
+      "thread_id": "1vqrt86",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:5",
+      "thread_id": "1vqrt86",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:6",
+      "thread_id": "1vqrt86",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:7",
+      "thread_id": "1vqrt86",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:8",
+      "thread_id": "1vqrt86",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:9",
+      "thread_id": "1vqrt86",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqrt86:10",
+      "thread_id": "1vqrt86",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:0",
+      "thread_id": "1udkxde",
+      "url": "https://x.com/superalesha/status/2069415581237813437",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:1",
+      "thread_id": "1udkxde",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:2",
+      "thread_id": "1udkxde",
+      "url": "https://www.bis.gov/media/1575",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:3",
+      "thread_id": "1udkxde",
+      "url": "https://www.chinatalk.media/p/will-china-hit-the-hbm-wall",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:4",
+      "thread_id": "1udkxde",
+      "url": "https://www.koreaherald.com/article/10668779",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:5",
+      "thread_id": "1udkxde",
+      "url": "https://xcancel.com/i/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:6",
+      "thread_id": "1udkxde",
+      "url": "https://x.com/superalesha/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:7",
+      "thread_id": "1udkxde",
+      "url": "https://nitter.poast.org/i/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:8",
+      "thread_id": "1udkxde",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:9",
+      "thread_id": "1udkxde",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:10",
+      "thread_id": "1udkxde",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:11",
+      "thread_id": "1udkxde",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:12",
+      "thread_id": "1udkxde",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:13",
+      "thread_id": "1udkxde",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:14",
+      "thread_id": "1udkxde",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1udkxde:15",
+      "thread_id": "1udkxde",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:0",
+      "thread_id": "1taeg8h",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:1",
+      "thread_id": "1taeg8h",
+      "url": "https://github.com/nihilistau/shannon-prime-burnhard",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:2",
+      "thread_id": "1taeg8h",
+      "url": "https://github.com/nihilistau/shannon-prime-bernhard",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:3",
+      "thread_id": "1taeg8h",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/enthusiast-runs-1-trillion-parameter-llm-from-768gb-of-intel-optane-dimm-memory-sticks-local-kimi-k2-5-install-achieved-roughly-4-tokens-per-second",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:4",
+      "thread_id": "1taeg8h",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:5",
+      "thread_id": "1taeg8h",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:6",
+      "thread_id": "1taeg8h",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:7",
+      "thread_id": "1taeg8h",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:8",
+      "thread_id": "1taeg8h",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:9",
+      "thread_id": "1taeg8h",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1taeg8h:10",
+      "thread_id": "1taeg8h",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:0",
+      "thread_id": "1usniqh",
+      "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:1",
+      "thread_id": "1usniqh",
+      "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-NVFP4-Fast",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:2",
+      "thread_id": "1usniqh",
+      "url": "https://huggingface.co/unsloth/Qwen3.6-27B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:3",
+      "thread_id": "1usniqh",
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:4",
+      "thread_id": "1usniqh",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:5",
+      "thread_id": "1usniqh",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25336",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:6",
+      "thread_id": "1usniqh",
+      "url": "https://cdn.hzrd149.com/3d7522a9413a84b2c99fe86909de60cbe2c05c24af42740d4b7d000a4263cc9f.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:7",
+      "thread_id": "1usniqh",
+      "url": "https://cdn.hzrd149.com/4947a36159dfc4a505228ecbac6939a7ecedfbffdf06ca4a37c95b31a9bfde63.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:8",
+      "thread_id": "1usniqh",
+      "url": "https://cdn.hzrd149.com/97ec60c8b035f67949fd3db00b9ca3efb6902b5a70bd2293da5e77029aebad4a.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:9",
+      "thread_id": "1usniqh",
+      "url": "https://huggingface.co/RedHatAI/Qwen3.6-35B-A3B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:10",
+      "thread_id": "1usniqh",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19769",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:11",
+      "thread_id": "1usniqh",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22196",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:12",
+      "thread_id": "1usniqh",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:13",
+      "thread_id": "1usniqh",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:14",
+      "thread_id": "1usniqh",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:15",
+      "thread_id": "1usniqh",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:16",
+      "thread_id": "1usniqh",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:17",
+      "thread_id": "1usniqh",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:18",
+      "thread_id": "1usniqh",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1usniqh:19",
+      "thread_id": "1usniqh",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:0",
+      "thread_id": "1s9ig5r",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:1",
+      "thread_id": "1s9ig5r",
+      "url": "https://www.layla-network.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:2",
+      "thread_id": "1s9ig5r",
+      "url": "https://huggingface.co/sokann/Qwen3.5-27B-GGUF-4.165bpw",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:3",
+      "thread_id": "1s9ig5r",
+      "url": "https://huggingface.co/YTan2000/Qwopus3.5-27B-v3-TQ3_4S",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:4",
+      "thread_id": "1s9ig5r",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/21038",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:5",
+      "thread_id": "1s9ig5r",
+      "url": "https://huggingface.co/YTan2000/Qwen3.5-27B-TQ3_1S",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:6",
+      "thread_id": "1s9ig5r",
+      "url": "https://github.com/turbo-tan/llama.cpp-tq3",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:7",
+      "thread_id": "1s9ig5r",
+      "url": "https://x.com/coffeecup2020/status/2042719160950456497?s=20",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:8",
+      "thread_id": "1s9ig5r",
+      "url": "https://huggingface.co/sokann/Qwen3.5-27B-GGUF-4.165bpw/tree/main",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:9",
+      "thread_id": "1s9ig5r",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:10",
+      "thread_id": "1s9ig5r",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:11",
+      "thread_id": "1s9ig5r",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:12",
+      "thread_id": "1s9ig5r",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:13",
+      "thread_id": "1s9ig5r",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:14",
+      "thread_id": "1s9ig5r",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1s9ig5r:15",
+      "thread_id": "1s9ig5r",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:0",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.datocms-assets.com/104802/1781805778-baseten-research-sft.pdf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:1",
+      "thread_id": "1ugg1dm",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:2",
+      "thread_id": "1ugg1dm",
+      "url": "https://ai.google.dev/gemma/docs/core/huggingface_text_full_finetune",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:3",
+      "thread_id": "1ugg1dm",
+      "url": "https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:4",
+      "thread_id": "1ugg1dm",
+      "url": "https://github.com/jscott3201/ghostwriter-rs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:5",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.kalzumeus.com/greatest-hits/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:6",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.johndcook.com/blog/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:7",
+      "thread_id": "1ugg1dm",
+      "url": "https://youtube.com/@mrdbourke?si=hSCm277aPzUSMDAs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:8",
+      "thread_id": "1ugg1dm",
+      "url": "https://rlhfbook.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:9",
+      "thread_id": "1ugg1dm",
+      "url": "https://huggingface.co/collections/meta-llama/llama-32",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:10",
+      "thread_id": "1ugg1dm",
+      "url": "https://huggingface.co/docs/trl/en/index",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:11",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.fs.com/products/158399.html?now_cid=5575",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:12",
+      "thread_id": "1ugg1dm",
+      "url": "http://fs.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:13",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.qnap.com/en-us/product/qsw-m7308r-4x",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:14",
+      "thread_id": "1ugg1dm",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:15",
+      "thread_id": "1ugg1dm",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:16",
+      "thread_id": "1ugg1dm",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:17",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:18",
+      "thread_id": "1ugg1dm",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:19",
+      "thread_id": "1ugg1dm",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:20",
+      "thread_id": "1ugg1dm",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ugg1dm:21",
+      "thread_id": "1ugg1dm",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:0",
+      "thread_id": "1p6k0h2",
+      "url": "https://github.com/unslothai/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:1",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/new/fp8-reinforcement-learning",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:2",
+      "thread_id": "1p6k0h2",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:3",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/get-started/install-and-update/amd",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:4",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/get-started/reinforcement-learning-rl-guide/advanced-rl-documentation",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:5",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/get-started/reinforcement-learning-rl-guide",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:6",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/new/vision-reinforcement-learning-vlm-rl",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:7",
+      "thread_id": "1p6k0h2",
+      "url": "https://hub.docker.com/r/unsloth/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:8",
+      "thread_id": "1p6k0h2",
+      "url": "https://docs.unsloth.ai/get-started/unsloth-notebooks",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:9",
+      "thread_id": "1p6k0h2",
+      "url": "https://dev.to/lewis_won/implementing-deekseek-r1-grpo-in-apple-mlx-framework-3n97",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:10",
+      "thread_id": "1p6k0h2",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:11",
+      "thread_id": "1p6k0h2",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:12",
+      "thread_id": "1p6k0h2",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:13",
+      "thread_id": "1p6k0h2",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:14",
+      "thread_id": "1p6k0h2",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:15",
+      "thread_id": "1p6k0h2",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1p6k0h2:16",
+      "thread_id": "1p6k0h2",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:0",
+      "thread_id": "1ortopy",
+      "url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/discussions/12",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:1",
+      "thread_id": "1ortopy",
+      "url": "https://docs.unsloth.ai/basics/unsloth-dynamic-2.0-ggufs/unsloth-dynamic-ggufs-on-aider-polyglot",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:2",
+      "thread_id": "1ortopy",
+      "url": "https://huggingface.co/unsloth/Kimi-K2-Thinking-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:3",
+      "thread_id": "1ortopy",
+      "url": "https://docs.unsloth.ai/models/kimi-k2-thinking-how-to-run-locally",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:4",
+      "thread_id": "1ortopy",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:5",
+      "thread_id": "1ortopy",
+      "url": "https://huggingface.co/unsloth/GLM-4.6-REAP-268B-A32B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:6",
+      "thread_id": "1ortopy",
+      "url": "https://huggingface.co/unsloth/Qwen3-Coder-REAP-363B-A35B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:7",
+      "thread_id": "1ortopy",
+      "url": "https://arxiv.org/abs/2403.17887",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:8",
+      "thread_id": "1ortopy",
+      "url": "https://github.com/arcee-ai/PruneMe",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:9",
+      "thread_id": "1ortopy",
+      "url": "https://docs.unsloth.ai/new/unsloth-dynamic-ggufs-on-aider-polyglot",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:10",
+      "thread_id": "1ortopy",
+      "url": "https://docs.unsloth.ai/basics/unsloth-dynamic-2.0-ggufs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:11",
+      "thread_id": "1ortopy",
+      "url": "https://huggingface.co/mlx-community/LongCat-Flash-Chat-4bit",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:12",
+      "thread_id": "1ortopy",
+      "url": "https://www.youtube.com/watch?v=0cIcth224hk",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:13",
+      "thread_id": "1ortopy",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:14",
+      "thread_id": "1ortopy",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:15",
+      "thread_id": "1ortopy",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:16",
+      "thread_id": "1ortopy",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:17",
+      "thread_id": "1ortopy",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:18",
+      "thread_id": "1ortopy",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1ortopy:19",
+      "thread_id": "1ortopy",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:0",
+      "thread_id": "1t82zxv",
+      "url": "https://gist.githubusercontent.com/am17an/228edfb84ed082aa88e3865d6fa27090/raw/7a2cee40ee1e2ca5365f4cef93632193d7ad852a/mtp-bench.py",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:1",
+      "thread_id": "1t82zxv",
+      "url": "https://huggingface.co/havenoammo/Qwen3.6-35B-A3B-MTP-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:2",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/antirez/ds4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:3",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/alexziskind1/codeneedle",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:4",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/jmpangilinan/llama-cpp-turboquant.git",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:5",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/STRUCTURED_COT.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:6",
+      "thread_id": "1t82zxv",
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:7",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/22867",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:8",
+      "thread_id": "1t82zxv",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22673",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:9",
+      "thread_id": "1t82zxv",
+      "url": "https://pastebin.com/dSkkKX60",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:10",
+      "thread_id": "1t82zxv",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:11",
+      "thread_id": "1t82zxv",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:12",
+      "thread_id": "1t82zxv",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:13",
+      "thread_id": "1t82zxv",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:14",
+      "thread_id": "1t82zxv",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:15",
+      "thread_id": "1t82zxv",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t82zxv:16",
+      "thread_id": "1t82zxv",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:0",
+      "thread_id": "1sx8uok",
+      "url": "https://github.com/Luce-Org/lucebox-hub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:1",
+      "thread_id": "1sx8uok",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:2",
+      "thread_id": "1sx8uok",
+      "url": "https://taalas.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:3",
+      "thread_id": "1sx8uok",
+      "url": "https://taalas.com/the-path-to-ubiquitous-ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:4",
+      "thread_id": "1sx8uok",
+      "url": "https://chatjimmy.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:5",
+      "thread_id": "1sx8uok",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:6",
+      "thread_id": "1sx8uok",
+      "url": "https://www.localmaxxing.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:7",
+      "thread_id": "1sx8uok",
+      "url": "https://github.com/noonghunna/qwen36-27b-single-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:8",
+      "thread_id": "1sx8uok",
+      "url": "https://github.com/Kaden-Schutt/hipfire",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:9",
+      "thread_id": "1sx8uok",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:10",
+      "thread_id": "1sx8uok",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:11",
+      "thread_id": "1sx8uok",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:12",
+      "thread_id": "1sx8uok",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:13",
+      "thread_id": "1sx8uok",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:14",
+      "thread_id": "1sx8uok",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sx8uok:15",
+      "thread_id": "1sx8uok",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:0",
+      "thread_id": "1plwgun",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:1",
+      "thread_id": "1plwgun",
+      "url": "https://www.newegg.com/p/14G-061B-00044",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:2",
+      "thread_id": "1plwgun",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:3",
+      "thread_id": "1plwgun",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:4",
+      "thread_id": "1plwgun",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:5",
+      "thread_id": "1plwgun",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:6",
+      "thread_id": "1plwgun",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:7",
+      "thread_id": "1plwgun",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:8",
+      "thread_id": "1plwgun",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1plwgun:9",
+      "thread_id": "1plwgun",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:0",
+      "thread_id": "1sor55y",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:1",
+      "thread_id": "1sor55y",
+      "url": "https://github.com/Danmoreng/local-qwen3-coder-env",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:2",
+      "thread_id": "1sor55y",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:3",
+      "thread_id": "1sor55y",
+      "url": "https://gist.github.com/DocShotgun/a02a4c0c0a57e43ff4f038b46ca66ae0",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:4",
+      "thread_id": "1sor55y",
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:5",
+      "thread_id": "1sor55y",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:6",
+      "thread_id": "1sor55y",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:7",
+      "thread_id": "1sor55y",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:8",
+      "thread_id": "1sor55y",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:9",
+      "thread_id": "1sor55y",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:10",
+      "thread_id": "1sor55y",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1sor55y:11",
+      "thread_id": "1sor55y",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:0",
+      "thread_id": "1o7gpr8",
+      "url": "https://drive.mfoi.dev/s/pDZm9F3axRnoGca",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:1",
+      "thread_id": "1o7gpr8",
+      "url": "https://drive.mfoi.dev/s/LdwLdzQddjiQBKe",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:2",
+      "thread_id": "1o7gpr8",
+      "url": "https://drive.mfoi.dev/s/643GLEgsN5sBiiS",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:3",
+      "thread_id": "1o7gpr8",
+      "url": "https://drive.mfoi.dev/s/rWe9yxReqHxB9Py",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:4",
+      "thread_id": "1o7gpr8",
+      "url": "https://drive.mfoi.dev/s/eGcxiMXZL3NXQYT",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:5",
+      "thread_id": "1o7gpr8",
+      "url": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:6",
+      "thread_id": "1o7gpr8",
+      "url": "https://build.nvidia.com/spark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:7",
+      "thread_id": "1o7gpr8",
+      "url": "https://www.storagereview.com/review/nvidia-dgx-spark-review-the-ai-appliance-bringing-datacenter-capabilities-to-desktops",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:8",
+      "thread_id": "1o7gpr8",
+      "url": "https://build.nvidia.com/spark/nvfp4-quantization/instructions",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:9",
+      "thread_id": "1o7gpr8",
+      "url": "https://mfoi.dev/nvfp4.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:10",
+      "thread_id": "1o7gpr8",
+      "url": "https://mfoi.dev/fp4qm.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:11",
+      "thread_id": "1o7gpr8",
+      "url": "https://github.com/karpathy/nanoGPT",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:12",
+      "thread_id": "1o7gpr8",
+      "url": "https://docs.unsloth.ai/new/fine-tuning-llms-with-nvidia-dgx-spark-and-unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:13",
+      "thread_id": "1o7gpr8",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:14",
+      "thread_id": "1o7gpr8",
+      "url": "http://flux.dev/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:15",
+      "thread_id": "1o7gpr8",
+      "url": "https://www.youtube.com/watch?v=md6a4ENM9pg",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:16",
+      "thread_id": "1o7gpr8",
+      "url": "https://github.com/ggerganov",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:17",
+      "thread_id": "1o7gpr8",
+      "url": "https://github.com/karpathy/nanochat",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:18",
+      "thread_id": "1o7gpr8",
+      "url": "https://youtu.be/6iVftb0cbnc",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:19",
+      "thread_id": "1o7gpr8",
+      "url": "https://lmstudio.ai/blog/dgx-spark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:20",
+      "thread_id": "1o7gpr8",
+      "url": "https://huggingface.co/NVFP4/Qwen3-Coder-30B-A3B-Instruct-FP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:21",
+      "thread_id": "1o7gpr8",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:22",
+      "thread_id": "1o7gpr8",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:23",
+      "thread_id": "1o7gpr8",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:24",
+      "thread_id": "1o7gpr8",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:25",
+      "thread_id": "1o7gpr8",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:26",
+      "thread_id": "1o7gpr8",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:27",
+      "thread_id": "1o7gpr8",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1o7gpr8:28",
+      "thread_id": "1o7gpr8",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:0",
+      "thread_id": "1vupiyh",
+      "url": "https://huggingface.co/cHunter789/Qwen3.8-27B-i1-IQ4_KS_KT-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:1",
+      "thread_id": "1vupiyh",
+      "url": "https://store.piffa.net/lm/bug/improvemets_list.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:2",
+      "thread_id": "1vupiyh",
+      "url": "https://huggingface.co/vmarcelo/Qwen3.8-27B-MIX_GGUF/resolve/main/Qwen3.8-27B-IQ4-MIX.gguf?download=true",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:3",
+      "thread_id": "1vupiyh",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:4",
+      "thread_id": "1vupiyh",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:5",
+      "thread_id": "1vupiyh",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:6",
+      "thread_id": "1vupiyh",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:7",
+      "thread_id": "1vupiyh",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:8",
+      "thread_id": "1vupiyh",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vupiyh:9",
+      "thread_id": "1vupiyh",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:0",
+      "thread_id": "1vu8atq",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:1",
+      "thread_id": "1vu8atq",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:2",
+      "thread_id": "1vu8atq",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:3",
+      "thread_id": "1vu8atq",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:4",
+      "thread_id": "1vu8atq",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:5",
+      "thread_id": "1vu8atq",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:6",
+      "thread_id": "1vu8atq",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu8atq:7",
+      "thread_id": "1vu8atq",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:0",
+      "thread_id": "1vu856v",
+      "url": "https://github.com/mr-september/ninfer-2080ti-22g",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:1",
+      "thread_id": "1vu856v",
+      "url": "https://github.com/Neroued/ninfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:2",
+      "thread_id": "1vu856v",
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:3",
+      "thread_id": "1vu856v",
+      "url": "https://huggingface.co/cometkim/Qwen3.8-27B-nvfp4full-NInfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:4",
+      "thread_id": "1vu856v",
+      "url": "https://github.com/Neroued/ninfer/issues/70",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:5",
+      "thread_id": "1vu856v",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:6",
+      "thread_id": "1vu856v",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:7",
+      "thread_id": "1vu856v",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:8",
+      "thread_id": "1vu856v",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:9",
+      "thread_id": "1vu856v",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:10",
+      "thread_id": "1vu856v",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu856v:11",
+      "thread_id": "1vu856v",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:0",
+      "thread_id": "1vu5q6j",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:1",
+      "thread_id": "1vu5q6j",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:2",
+      "thread_id": "1vu5q6j",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:3",
+      "thread_id": "1vu5q6j",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:4",
+      "thread_id": "1vu5q6j",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:5",
+      "thread_id": "1vu5q6j",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:6",
+      "thread_id": "1vu5q6j",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vu5q6j:7",
+      "thread_id": "1vu5q6j",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:0",
+      "thread_id": "1vtup5s",
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:1",
+      "thread_id": "1vtup5s",
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090/issues/19",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:2",
+      "thread_id": "1vtup5s",
+      "url": "https://github.com/mjungnickel18/qwen38-27b-rtx3090/tree/kvarn-v2-240k",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:3",
+      "thread_id": "1vtup5s",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:4",
+      "thread_id": "1vtup5s",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:5",
+      "thread_id": "1vtup5s",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:6",
+      "thread_id": "1vtup5s",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:7",
+      "thread_id": "1vtup5s",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:8",
+      "thread_id": "1vtup5s",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtup5s:9",
+      "thread_id": "1vtup5s",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:0",
+      "thread_id": "1vtu779",
+      "url": "https://github.com/vllm-project/vllm/pull/52645",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:1",
+      "thread_id": "1vtu779",
+      "url": "https://github.com/local-inference-lab/rtx6kpro/blob/master/models/ds4dspark-infernal-invocation-r18.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:2",
+      "thread_id": "1vtu779",
+      "url": "https://github.com/local-inference-lab/rtx6kpro/blob/master/models/ds4dspark-v20-r33.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:3",
+      "thread_id": "1vtu779",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:4",
+      "thread_id": "1vtu779",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:5",
+      "thread_id": "1vtu779",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:6",
+      "thread_id": "1vtu779",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:7",
+      "thread_id": "1vtu779",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:8",
+      "thread_id": "1vtu779",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:9",
+      "thread_id": "1vtu779",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtu779:10",
+      "thread_id": "1vtu779",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:0",
+      "thread_id": "1vtlmtx",
+      "url": "https://huggingface.co/SupraLabs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:1",
+      "thread_id": "1vtlmtx",
+      "url": "https://huggingface.co/SupraLabs/Supra2-Medium-Base",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:2",
+      "thread_id": "1vtlmtx",
+      "url": "https://huggingface.co/SupraLabs/Supra2-Medium-Instruct",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:3",
+      "thread_id": "1vtlmtx",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:4",
+      "thread_id": "1vtlmtx",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:5",
+      "thread_id": "1vtlmtx",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:6",
+      "thread_id": "1vtlmtx",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:7",
+      "thread_id": "1vtlmtx",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:8",
+      "thread_id": "1vtlmtx",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:9",
+      "thread_id": "1vtlmtx",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtlmtx:10",
+      "thread_id": "1vtlmtx",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:0",
+      "thread_id": "1vtfzjc",
+      "url": "https://github.com/lyogavin/airllm",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:1",
+      "thread_id": "1vtfzjc",
+      "url": "https://news.ycombinator.com/item?id=49154228",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:2",
+      "thread_id": "1vtfzjc",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:3",
+      "thread_id": "1vtfzjc",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:4",
+      "thread_id": "1vtfzjc",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:5",
+      "thread_id": "1vtfzjc",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:6",
+      "thread_id": "1vtfzjc",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:7",
+      "thread_id": "1vtfzjc",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:8",
+      "thread_id": "1vtfzjc",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtfzjc:9",
+      "thread_id": "1vtfzjc",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:0",
+      "thread_id": "1vtc0z7",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/27428",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:1",
+      "thread_id": "1vtc0z7",
+      "url": "https://github.com/kylebakerio/LLM-Tuner",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:2",
+      "thread_id": "1vtc0z7",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:3",
+      "thread_id": "1vtc0z7",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:4",
+      "thread_id": "1vtc0z7",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:5",
+      "thread_id": "1vtc0z7",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:6",
+      "thread_id": "1vtc0z7",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:7",
+      "thread_id": "1vtc0z7",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vtc0z7:8",
+      "thread_id": "1vtc0z7",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:0",
+      "thread_id": "1vt80nk",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:1",
+      "thread_id": "1vt80nk",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:2",
+      "thread_id": "1vt80nk",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:3",
+      "thread_id": "1vt80nk",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:4",
+      "thread_id": "1vt80nk",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:5",
+      "thread_id": "1vt80nk",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:6",
+      "thread_id": "1vt80nk",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vt80nk:7",
+      "thread_id": "1vt80nk",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:0",
+      "thread_id": "1vszebu",
+      "url": "https://www.youtube.com/watch?v=bLac7-toF68",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:1",
+      "thread_id": "1vszebu",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:2",
+      "thread_id": "1vszebu",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:3",
+      "thread_id": "1vszebu",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:4",
+      "thread_id": "1vszebu",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:5",
+      "thread_id": "1vszebu",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:6",
+      "thread_id": "1vszebu",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:7",
+      "thread_id": "1vszebu",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vszebu:8",
+      "thread_id": "1vszebu",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:0",
+      "thread_id": "1vsy4l2",
+      "url": "http://verify.sh/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:1",
+      "thread_id": "1vsy4l2",
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:2",
+      "thread_id": "1vsy4l2",
+      "url": "https://huggingface.co/syvai/Qwen3.8-27B-DFlash2-W4A16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:3",
+      "thread_id": "1vsy4l2",
+      "url": "https://huggingface.co/syvai/qwen3.8-27b-3090-fast-variant",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:4",
+      "thread_id": "1vsy4l2",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:5",
+      "thread_id": "1vsy4l2",
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:6",
+      "thread_id": "1vsy4l2",
+      "url": "https://docs.vllm.ai/en/stable/serving/integrations/claude_code/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:7",
+      "thread_id": "1vsy4l2",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:8",
+      "thread_id": "1vsy4l2",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:9",
+      "thread_id": "1vsy4l2",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:10",
+      "thread_id": "1vsy4l2",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:11",
+      "thread_id": "1vsy4l2",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:12",
+      "thread_id": "1vsy4l2",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:13",
+      "thread_id": "1vsy4l2",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsy4l2:14",
+      "thread_id": "1vsy4l2",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:0",
+      "thread_id": "1vsq3zg",
+      "url": "https://github.com/dnv2003/v100-skinny",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:1",
+      "thread_id": "1vsq3zg",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:2",
+      "thread_id": "1vsq3zg",
+      "url": "https://github.com/blader/humanizer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:3",
+      "thread_id": "1vsq3zg",
+      "url": "https://huggingface.co/collections/leoncca/v100-validated-quantizations",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:4",
+      "thread_id": "1vsq3zg",
+      "url": "https://github.com/haohervchb/sglang-V100",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:5",
+      "thread_id": "1vsq3zg",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:6",
+      "thread_id": "1vsq3zg",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:7",
+      "thread_id": "1vsq3zg",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:8",
+      "thread_id": "1vsq3zg",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:9",
+      "thread_id": "1vsq3zg",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:10",
+      "thread_id": "1vsq3zg",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vsq3zg:11",
+      "thread_id": "1vsq3zg",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:0",
+      "thread_id": "1vpuhov",
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:1",
+      "thread_id": "1vpuhov",
+      "url": "https://github.com/Don-Chad/ninfer-3090/tree/release/v0.6.0-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:2",
+      "thread_id": "1vpuhov",
+      "url": "https://huggingface.co/turboderp/Qwen3.8-27B-exl3",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:3",
+      "thread_id": "1vpuhov",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:4",
+      "thread_id": "1vpuhov",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:5",
+      "thread_id": "1vpuhov",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:6",
+      "thread_id": "1vpuhov",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:7",
+      "thread_id": "1vpuhov",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:8",
+      "thread_id": "1vpuhov",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:9",
+      "thread_id": "1vpuhov",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vpuhov:10",
+      "thread_id": "1vpuhov",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:0",
+      "thread_id": "1vqlkb0",
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:1",
+      "thread_id": "1vqlkb0",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:2",
+      "thread_id": "1vqlkb0",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:3",
+      "thread_id": "1vqlkb0",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:4",
+      "thread_id": "1vqlkb0",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:5",
+      "thread_id": "1vqlkb0",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:6",
+      "thread_id": "1vqlkb0",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vqlkb0:7",
+      "thread_id": "1vqlkb0",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:0",
+      "thread_id": "1u7qam0",
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/DUAL_CARD.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:1",
+      "thread_id": "1u7qam0",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:2",
+      "thread_id": "1u7qam0",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:3",
+      "thread_id": "1u7qam0",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:4",
+      "thread_id": "1u7qam0",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:5",
+      "thread_id": "1u7qam0",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:6",
+      "thread_id": "1u7qam0",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1u7qam0:7",
+      "thread_id": "1u7qam0",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:0",
+      "thread_id": "1svlnyk",
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:1",
+      "thread_id": "1svlnyk",
+      "url": "https://github.com/noonghunna/club-3090/blob/master/models/qwen3.6-27b/llama-cpp/compose/single/unsloth-q4km/mtp.yml",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:2",
+      "thread_id": "1svlnyk",
+      "url": "https://www.youtube.com/watch?v=5jkAlqbk66A",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:3",
+      "thread_id": "1svlnyk",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:4",
+      "thread_id": "1svlnyk",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:5",
+      "thread_id": "1svlnyk",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:6",
+      "thread_id": "1svlnyk",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:7",
+      "thread_id": "1svlnyk",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:8",
+      "thread_id": "1svlnyk",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1svlnyk:9",
+      "thread_id": "1svlnyk",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:0",
+      "thread_id": "1t0vp3w",
+      "url": "https://github.com/Luce-Org/lucebox-hub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:1",
+      "thread_id": "1t0vp3w",
+      "url": "https://arxiv.org/abs/2502.02789",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:2",
+      "thread_id": "1t0vp3w",
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:3",
+      "thread_id": "1t0vp3w",
+      "url": "https://github.com/Luce-Org/lucebox-hub/issues/102",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:4",
+      "thread_id": "1t0vp3w",
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:5",
+      "thread_id": "1t0vp3w",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:6",
+      "thread_id": "1t0vp3w",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:7",
+      "thread_id": "1t0vp3w",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:8",
+      "thread_id": "1t0vp3w",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:9",
+      "thread_id": "1t0vp3w",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:10",
+      "thread_id": "1t0vp3w",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:11",
+      "thread_id": "1t0vp3w",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1t0vp3w:12",
+      "thread_id": "1t0vp3w",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:0",
+      "thread_id": "1vhkln6",
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/DUAL_CARD.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:1",
+      "thread_id": "1vhkln6",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26177",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:2",
+      "thread_id": "1vhkln6",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:3",
+      "thread_id": "1vhkln6",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:4",
+      "thread_id": "1vhkln6",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:5",
+      "thread_id": "1vhkln6",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:6",
+      "thread_id": "1vhkln6",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:7",
+      "thread_id": "1vhkln6",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:8",
+      "thread_id": "1vhkln6",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vhkln6:9",
+      "thread_id": "1vhkln6",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:0",
+      "thread_id": "1tysbyj",
+      "url": "https://www.alibaba.com/product-detail/RTX3080-20GB-Gaming-GPU-High-Performance_1601592777067.html?spm=a2756.trade-list-buyer.0.0.389976e9SUQJF5",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:1",
+      "thread_id": "1tysbyj",
+      "url": "https://www.youtube.com/watch?v=Nuqq8tSEodI&t=660s",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:2",
+      "thread_id": "1tysbyj",
+      "url": "https://www.newegg.com/asus-dual-rtx3050-o6g-geforce-rtx-3050-6gb-graphics-card-double-fans/p/N82E16814126708",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:3",
+      "thread_id": "1tysbyj",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:4",
+      "thread_id": "1tysbyj",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:5",
+      "thread_id": "1tysbyj",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:6",
+      "thread_id": "1tysbyj",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:7",
+      "thread_id": "1tysbyj",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:8",
+      "thread_id": "1tysbyj",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1tysbyj:9",
+      "thread_id": "1tysbyj",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:0",
+      "thread_id": "1vof310",
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:1",
+      "thread_id": "1vof310",
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:2",
+      "thread_id": "1vof310",
+      "url": "https://github.com/Don-Chad/ninfer-3090/releases/tag/v0.5.0-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:3",
+      "thread_id": "1vof310",
+      "url": "https://github.com/jram4/ninfer-4090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:4",
+      "thread_id": "1vof310",
+      "url": "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:5",
+      "thread_id": "1vof310",
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:6",
+      "thread_id": "1vof310",
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:7",
+      "thread_id": "1vof310",
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:8",
+      "thread_id": "1vof310",
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:9",
+      "thread_id": "1vof310",
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:10",
+      "thread_id": "1vof310",
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:11",
+      "thread_id": "1vof310",
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "reference_id": "1vof310:12",
+      "thread_id": "1vof310",
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

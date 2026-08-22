@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vurjwc/i_feel_like_i_finally_graduated/",
+  "title": "I feel like I finally graduated.",
+  "author": "Bpthewise",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n16h ago\nBpthewise\nI feel like I finally graduated.\nOther\n\nI finally made the move from LM Studio to vLLM thanks to this post https://www.reddit.com/r/LocalLLaMA/s/NmS9CgHvqz. I may not know what it all means yet but I’m going to start diving into the docs to learn as much as I can.\n\nI’m running an endpoint on each of my 3090s one for chat and one for subagents. This has made qwen3.8’s reasoning bearable because of the increase to 143tok/s. Thank you to Syv-ai. His repo is here https://github.com/syv-ai/qwen38-27b-rtx3090.\n\nvLLM feels like I’m finally using my hardware to its full potential, but the craziest thing is my waterblocked GPUs don’t go above 35°C before they were hitting 70°C on hard workflows.\n\nSorry I didn’t have time to ask qwen to write or edit this post for me.\n\ntl;dr vLLm it feels good man\n\nShare",
+  "comments": [
+    {
+      "author": "Toothpasteweiner",
+      "score": "13",
+      "text": "Toothpasteweiner\n•\n14h ago\n\nReally wish more people here seriously invested time into vLLM or even sglang. llama.cpp is good for situations with cpu spillover or special compatibility concerns given the hardware, but it's really night and day for supported platforms within vram budget. Really enables agentic coding and tool use non-toy use cases. Prefill matters a ton when you're pulling web pages, docs, reading many code files, etc.\n\nBitGreen1270\n•\n11h ago\n\nI was able to get vllm up and running. But with only 32gb vram I find it hard to justify. I can run Qwen 27B at Q8 with q8, q8 kv on llama.cpp. vllm I'm restricted to nvfp4. Having multiple agents running in parallel would be awesome but I don't think it will work on my machine. I'd love to learn more vllm since that's what enterprises are using. But it's harder. \n\nRetumbo77\n•\n8h ago\n\nI've heard SGlang described as a bit of halfway between llama.Cpp and vllm (specifically that it handles CPU overflow better if you don't have enough vram). Thoughts? Have you used all 3?\n\nToothpasteweiner\n•\n8h ago\n\nI have; if you have nvidia hardware, or more specifically Blackwell (only tested on a 5090, my current setup is 2x r9700) then sglang is probably a better choice for agentic work. It edges out vLLM for single user scenarios with low concurrency (e.g. sub agents) for agentic stuff due to the radix prefix caching, though I don't remember what decode I was getting. It's been a while, I don't have more useful knowledge than that. I'd probably use it over vLLM if rdna4 were properly supported."
+    },
+    {
+      "author": "BitGreen1270",
+      "score": "3",
+      "text": "BitGreen1270\n•\n11h ago\n\nI was able to get vllm up and running. But with only 32gb vram I find it hard to justify. I can run Qwen 27B at Q8 with q8, q8 kv on llama.cpp. vllm I'm restricted to nvfp4. Having multiple agents running in parallel would be awesome but I don't think it will work on my machine. I'd love to learn more vllm since that's what enterprises are using. But it's harder."
+    },
+    {
+      "author": "Retumbo77",
+      "score": "1",
+      "text": "Retumbo77\n•\n8h ago\n\nI've heard SGlang described as a bit of halfway between llama.Cpp and vllm (specifically that it handles CPU overflow better if you don't have enough vram). Thoughts? Have you used all 3?\n\nToothpasteweiner\n•\n8h ago\n\nI have; if you have nvidia hardware, or more specifically Blackwell (only tested on a 5090, my current setup is 2x r9700) then sglang is probably a better choice for agentic work. It edges out vLLM for single user scenarios with low concurrency (e.g. sub agents) for agentic stuff due to the radix prefix caching, though I don't remember what decode I was getting. It's been a while, I don't have more useful knowledge than that. I'd probably use it over vLLM if rdna4 were properly supported."
+    },
+    {
+      "author": "Toothpasteweiner",
+      "score": "2",
+      "text": "Toothpasteweiner\n•\n8h ago\n\nI have; if you have nvidia hardware, or more specifically Blackwell (only tested on a 5090, my current setup is 2x r9700) then sglang is probably a better choice for agentic work. It edges out vLLM for single user scenarios with low concurrency (e.g. sub agents) for agentic stuff due to the radix prefix caching, though I don't remember what decode I was getting. It's been a while, I don't have more useful knowledge than that. I'd probably use it over vLLM if rdna4 were properly supported."
+    },
+    {
+      "author": "TillDramatic1",
+      "score": "4",
+      "text": "TillDramatic1\n•\n15h ago\n\nThe bigger win on the subagent card is continuous batching, so raise --max-num-seqs and fire several subagent calls at once, aggregate tokens/s climbs well past what a single chat stream shows. Keep an eye on --gpu-memory-utilization when you do, since the KV cache is preallocated up front and that's what actually caps how many sequences fit before requests start queueing.\n\nBpthewise\n•\n15h ago\n\nThanks for the heads up. Right now it’s set to 2 for max concurrent for a bigger context window."
+    },
+    {
+      "author": "Bpthewise",
+      "score": "2",
+      "text": "Bpthewise\n•\n15h ago\n\nThanks for the heads up. Right now it’s set to 2 for max concurrent for a bigger context window."
+    },
+    {
+      "author": "No_Run8812",
+      "score": "3",
+      "text": "No_Run8812\n•\n15h ago\n\nWhy would you use lm studio if you had nvidia card?\n\nAlso make sure kv cache is enabled, try MTP, also look for kv chache quant.\n\nBpthewise\n•\n15h ago\n\nEasy plug and play. Didn’t realize the trade off at the time though.\n\ntracagnotto\n•\n15h ago\n\nWym? What one should use if he has Nvidia?\n\nNo_Run8812\n•\n15h ago\n\nthere are better solutions as OP suggested vllm.\n\nFar-Classic-9963\n•\n14h ago\n Top 1% Commenter\n\nWhat about SgLang?"
+    },
+    {
+      "author": "Bpthewise",
+      "score": "4",
+      "text": "Bpthewise\n•\n15h ago\n\nEasy plug and play. Didn’t realize the trade off at the time though."
+    },
+    {
+      "author": "tracagnotto",
+      "score": "2",
+      "text": "tracagnotto\n•\n15h ago\n\nWym? What one should use if he has Nvidia?\n\nNo_Run8812\n•\n15h ago\n\nthere are better solutions as OP suggested vllm.\n\nFar-Classic-9963\n•\n14h ago\n Top 1% Commenter\n\nWhat about SgLang?"
+    },
+    {
+      "author": "No_Run8812",
+      "score": "1",
+      "text": "No_Run8812\n•\n15h ago\n\nthere are better solutions as OP suggested vllm.\n\nFar-Classic-9963\n•\n14h ago\n Top 1% Commenter\n\nWhat about SgLang?"
+    },
+    {
+      "author": "Far-Classic-9963",
+      "score": "1",
+      "text": "Far-Classic-9963\n•\n14h ago\n Top 1% Commenter\n\nWhat about SgLang?"
+    },
+    {
+      "author": "throwaway0204055",
+      "score": "1",
+      "text": "throwaway0204055\n•\n15h ago\n\nHow easy is it to save different system prompt profiles with vLLM?\n\nBpthewise\n•\n15h ago\n\nNot sure. Currently I’m using omp to hit the endpoints I don’t use any specific system prompts in any of my work flows."
+    },
+    {
+      "author": "Bpthewise",
+      "score": "1",
+      "text": "Bpthewise\n•\n15h ago\n\nNot sure. Currently I’m using omp to hit the endpoints I don’t use any specific system prompts in any of my work flows."
+    },
+    {
+      "author": "sugarfreecaffeine",
+      "score": "1",
+      "text": "sugarfreecaffeine\n•\n15h ago\n\nI have dual 3090s do you recommend splitting them instead? I’m running unsloth q6 131k context and f16 cache - uses about 40/48 vram\n\nI’m new to this\n\nnassereddit\n•\n12h ago\n\nYou should be able to fit q8_0 with 262k context with flash_attention enabled\n\ninfectiousstupidity\n•\n4h ago\n\nUse the vllm/qwen38-27b-dual-max slug from club-3090 repo\n\nExtremely satiafied with this one.\n\nEDIT: I'm using it with pi.dev harness!"
+    },
+    {
+      "author": "nassereddit",
+      "score": "1",
+      "text": "nassereddit\n•\n12h ago\n\nYou should be able to fit q8_0 with 262k context with flash_attention enabled"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vurjwc",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:59Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e"
+  ],
+  "quality": {
+    "score": 0.841,
+    "evidence": 1.0,
+    "relevance": 0.545,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/DUAL_CARD.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

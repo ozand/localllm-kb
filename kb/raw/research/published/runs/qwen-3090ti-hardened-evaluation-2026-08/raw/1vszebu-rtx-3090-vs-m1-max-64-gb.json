@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vszebu/rtx_3090_vs_m1_max_64_gb/",
+  "title": "RTX 3090 vs M1 Max 64 GB",
+  "author": "Vladowski",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3d ago\nVladowski\nRTX 3090 vs M1 Max 64 GB\nDiscussion\nCloses in 4 days • 735 total votes\nPC with RTX 3090 24 GB VRAM, 128 GB DDR4\nMac Studio M1 Max 64 GB unified\nVote\n\nIf you had a choice, which one would you take for local inference?\n\nShare",
+  "comments": [
+    {
+      "author": "KingCpzombie",
+      "score": "46",
+      "text": "KingCpzombie\n•\n3d ago\n\nPC can be upgraded with a second 3090 later; mac is stuck with peasant speeds forever\n\nQueasy-Contract9753\n•\n3d ago\n\nThe big one is prompt processing speed IMHO. You might be able to live with slower output speed sure,but it's really annoying if it takes a lunch break to get even read your prompt.\n\nAlso like you said PC can be upgraded and repaired. Does other normal PC stuff too.\n\nanitamaxwynnn69\n•\n3d ago\n\npeasant speeds XD true but still funny\n\noodelay\n•\n3d ago\n\nIf the poll was what is the funniest to buy? May I would answer like you but that's not the question.\n\n853350\n•\n3d ago\n\nMacs hold value well. everything you said is true, but the Mac “upgrade” path is to sell what you have and buy what you want. if you bought a 128GB+ unified RAM Mac in early 2026, you’d be able to sell it for as much or more used"
+    },
+    {
+      "author": "Queasy-Contract9753",
+      "score": "10",
+      "text": "Queasy-Contract9753\n•\n3d ago\n\nThe big one is prompt processing speed IMHO. You might be able to live with slower output speed sure,but it's really annoying if it takes a lunch break to get even read your prompt.\n\nAlso like you said PC can be upgraded and repaired. Does other normal PC stuff too."
+    },
+    {
+      "author": "anitamaxwynnn69",
+      "score": "5",
+      "text": "anitamaxwynnn69\n•\n3d ago\n\npeasant speeds XD true but still funny\n\noodelay\n•\n3d ago\n\nIf the poll was what is the funniest to buy? May I would answer like you but that's not the question."
+    },
+    {
+      "author": "oodelay",
+      "score": "1",
+      "text": "oodelay\n•\n3d ago\n\nIf the poll was what is the funniest to buy? May I would answer like you but that's not the question."
+    },
+    {
+      "author": "853350",
+      "score": "2",
+      "text": "853350\n•\n3d ago\n\nMacs hold value well. everything you said is true, but the Mac “upgrade” path is to sell what you have and buy what you want. if you bought a 128GB+ unified RAM Mac in early 2026, you’d be able to sell it for as much or more used"
+    },
+    {
+      "author": "misterflyer",
+      "score": "5",
+      "text": "misterflyer\n•\n3d ago\n•\nEdited 3d ago\n\nA lot of this depends on which models you're wanting to use and the context size you're planning to use. If you simply plan on maxing out on Qwen 3.8 27B (or Gemma 4) then you can still run Q8 pretty comfortably with plenty of context left over within 64GB unified. And you might have somewhat of a speed advantage compared to what I use...\n\nI have a laptop 5090 (24GB VRAM) + 128GB RAM\n\nI can run Unsloth and Bartowski IQ2 and IQ3 quants of 200-300B models (albeit slowly bc I don't care about speed like everyone else around here) with pretty decent results at modest context lengths. Almost everything else I use runs at q5_k_m or above. Not sure all of that's possible on 64GB unified."
+    },
+    {
+      "author": "palinurosec",
+      "score": "3",
+      "text": "palinurosec\n•\n3d ago\n\nwhatever capable of running linux headless"
+    },
+    {
+      "author": "Any_Mine_6368",
+      "score": "12",
+      "text": "Any_Mine_6368\n•\n3d ago\n\nScam studio will put you in that obnoxious category of redditors bragging about being able to self host the latest hot model, while their prefill speed is 3 tokens per second and their decoding 5.\n\nIf you want to have a daily driver you need a gpu"
+    },
+    {
+      "author": "frankentriple",
+      "score": "2",
+      "text": "frankentriple\n•\n3d ago\n\nAm i using it myself? If so the 3090, Am I setting it up for a customer to use? Mac, all day long."
+    },
+    {
+      "author": "Economy_Cabinet_7719",
+      "score": "2",
+      "text": "Economy_Cabinet_7719\n•\n3d ago\n\nI got a MacBook with an M4 Pro 48 GB. I don't regret it because I wanted a laptop anyways and this is about as far as laptops go (especially at this price point), but if I wasn't constrained by this I would be regretting my choice. I can run a lot, but not at the speeds I would consider acceptable."
+    },
+    {
+      "author": "redditnosedive",
+      "score": "3",
+      "text": "redditnosedive\n•\n3d ago\n\ni am literally building a 3090 based pc as of speaking, after my extensive research, i recommend server grade cpus like threadripper or xeon gold on motherboards with lots of memory channels and many pcie x16 in case you want dual 3090 or 3x of them"
+    },
+    {
+      "author": "05032-MendicantBias",
+      "score": "1",
+      "text": "05032-MendicantBias\n•\n2d ago\n\nConsider the 7900XTX. RTX3090 are getting really old."
+    },
+    {
+      "author": "Laybhari137",
+      "score": "1",
+      "text": "Laybhari137\n•\n2d ago\n\nvram bandwisth more than 1.5tb/s is better with good ram else its trap"
+    },
+    {
+      "author": "spammmmmmmmy",
+      "score": "1",
+      "text": "spammmmmmmmy\n•\n2d ago\n\nMore VRAM, always"
+    },
+    {
+      "author": "asertym",
+      "score": "1",
+      "text": "asertym\n•\n22h ago\n\nHow is this even a comparison lol"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vszebu",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:39:27Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.587,
+    "evidence": 0.6,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.youtube.com/watch?v=bLac7-toF68",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

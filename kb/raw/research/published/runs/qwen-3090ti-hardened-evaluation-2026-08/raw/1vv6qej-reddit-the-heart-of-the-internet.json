@@ -1,0 +1,26 @@
+{
+  "canonical_url": "https://www.reddit.com/r/SwordAndSupperGame/comments/1vv6qej/",
+  "title": "Reddit - The heart of the internet",
+  "author": null,
+  "post_body": "",
+  "comments": [],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vv6qej",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:32:24Z",
+  "discovered_by_query_ids": [
+    "8011324fedef",
+    "f3da52993800",
+    "13213738e1bb",
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.0,
+    "evidence": 0.0,
+    "relevance": 0.0,
+    "community_scrutiny": 0.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": []
+}

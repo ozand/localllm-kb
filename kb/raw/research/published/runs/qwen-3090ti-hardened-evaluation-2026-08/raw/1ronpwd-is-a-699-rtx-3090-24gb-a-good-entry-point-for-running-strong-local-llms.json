@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ronpwd/is_a_699_rtx_3090_24gb_a_good_entry_point_for/",
+  "title": "Is a $699 RTX 3090 (24GB) a good entry point for running strong local LLMs?",
+  "author": "undevmas",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6mo ago\nundevmas\nIs a $699 RTX 3090 (24GB) a good entry point for running strong local LLMs?\nQuestion | Help\n\nI found a used RTX 3090 with 24 GB of VRAM for $699, and I'm considering buying it to run an LLM locally instead of relying entirely on commercial chatbots and agents (ChatGPT, Gemini, Claude, etc.).\n\nI'm a programmer, but I'm new to the local LLM ecosystem and not very familiar with the practical capabilities and limitations of running open-source models on a single GPU like this. So far I've only run models on CPU/RAM, and while they were decent, performance and speed were awful compared to commercial services.\n\nWould a 3090 be a reasonable purchase if my goal is to run a strong local model — something like a “pseudo-Claude” setup (for example, Qwen-class 9B models) — while being realistic about its limitations?\n\nThis would be purely a personal project. I enjoy using Claude, but I also like the idea of managing my own local system and experimenting with open-source models.\n\nHere's my full server setup:\n- ASRock B450M Pro4\n- Ryzen 5 3600\n- 24 GB of DDR4 RAM\n- 500 GB NVMe M.2 SSD\n- No GPU (unless I buy that 3090)\n\nI don’t really know much about LLM model ecosystems or terminology yet — I’ve mostly just been downloading open-source models and testing them locally. So, feel free to correct me\n\nShare",
+  "comments": [
+    {
+      "author": "Signal_Ad657",
+      "score": "27",
+      "text": "Signal_Ad657\n•\n6mo ago\n\n24GB for $700 is no joke.\n\nundevmas\n•\n6mo ago\n•\nEdited 6mo ago\n\nI've seen that it's a very low price, which actually worries me. Is it worth the risk of it being a scam?\n\nFor context, I'm from Latin America, so prices here are usually much higher due to import taxes, VAT, and limited availability. Because of that, $699 is actually a pretty good price — but it's still low enough that it makes me a bit suspicious.\n\nmustafar0111\n•\n6mo ago\n\nIf this is off eBay check how much feedback the seller has. But yes unusually low prices can be a warning sign.\n\nIf this is a local used card, test it before you pay."
+    },
+    {
+      "author": "undevmas",
+      "score": "3",
+      "text": "undevmas\n•\n6mo ago\n•\nEdited 6mo ago\n\nI've seen that it's a very low price, which actually worries me. Is it worth the risk of it being a scam?\n\nFor context, I'm from Latin America, so prices here are usually much higher due to import taxes, VAT, and limited availability. Because of that, $699 is actually a pretty good price — but it's still low enough that it makes me a bit suspicious.\n\nmustafar0111\n•\n6mo ago\n\nIf this is off eBay check how much feedback the seller has. But yes unusually low prices can be a warning sign.\n\nIf this is a local used card, test it before you pay."
+    },
+    {
+      "author": "mustafar0111",
+      "score": "11",
+      "text": "mustafar0111\n•\n6mo ago\n\nIf this is off eBay check how much feedback the seller has. But yes unusually low prices can be a warning sign.\n\nIf this is a local used card, test it before you pay."
+    },
+    {
+      "author": "kidflashonnikes",
+      "score": "7",
+      "text": "kidflashonnikes\n•\n6mo ago\n\nI usually buy \"for parts\" RTX 3090s and end up fixing more than 70% of them. It's usually an easy fix, since most people dont have the hardware background. Repadding ect, these are common, a cheap way to get compute, if you learn how to do it. I make around 10k every 2 months repairing and selling the cards. At this rate, my kids know how to do it, and I jsut tell them to do, and its free labour lol and in return they learn new skills\n\nmicnaches\n•\n4mo ago\n\nthat is cool! where can someone learn is this something you can find out on youtube?\n\nbrendenderp\n•\n2mo ago\n\nDo you have board diagrams or is it mostly just people that bused capacitors off boards.\n\nkidflashonnikes\n•\n2mo ago\n\nI work heavily with hardware everyday / it’s just experience and doing it many times - it’s not that hard tbh. If you enjoy it like me and have autism / I consider it peaceful and something that calms me. The money is a just a by product. Many 3090s on the market are busted - easy fixes like reballing ect"
+    },
+    {
+      "author": "micnaches",
+      "score": "1",
+      "text": "micnaches\n•\n4mo ago\n\nthat is cool! where can someone learn is this something you can find out on youtube?"
+    },
+    {
+      "author": "brendenderp",
+      "score": "1",
+      "text": "brendenderp\n•\n2mo ago\n\nDo you have board diagrams or is it mostly just people that bused capacitors off boards.\n\nkidflashonnikes\n•\n2mo ago\n\nI work heavily with hardware everyday / it’s just experience and doing it many times - it’s not that hard tbh. If you enjoy it like me and have autism / I consider it peaceful and something that calms me. The money is a just a by product. Many 3090s on the market are busted - easy fixes like reballing ect"
+    },
+    {
+      "author": "kidflashonnikes",
+      "score": "1",
+      "text": "kidflashonnikes\n•\n2mo ago\n\nI work heavily with hardware everyday / it’s just experience and doing it many times - it’s not that hard tbh. If you enjoy it like me and have autism / I consider it peaceful and something that calms me. The money is a just a by product. Many 3090s on the market are busted - easy fixes like reballing ect"
+    },
+    {
+      "author": "trejj",
+      "score": "5",
+      "text": "trejj\n•\n6mo ago\n\nI enjoy using Claude\n\nFrom that to\n\nIs [...] 24GB a good entry point for running strong local LLMs?\n\nyou will be guaranteed to be disappointed.\n\nI am not sure that even 2x RTX 6000 Pros with 192GB total will amount to a strong local LLM, when the comparison is being made against online Claude.\n\nalchamest3\n•\n5mo ago\n\nIt really is simple, just use the frontier models."
+    },
+    {
+      "author": "alchamest3",
+      "score": "2",
+      "text": "alchamest3\n•\n5mo ago\n\nIt really is simple, just use the frontier models."
+    },
+    {
+      "author": "mustafar0111",
+      "score": "4",
+      "text": "mustafar0111\n•\n6mo ago\n•\nEdited 6mo ago\n\nThe card is fine. I can't really comment on the used price since that is subjective.\n\nRight now anything with lots of VRAM is going to be expensive new or used.\n\nI personally went with new myself because, fuck the scalpers. But I recognize that is a me issue."
+    },
+    {
+      "author": "ryanp102694",
+      "score": "4",
+      "text": "ryanp102694\n•\n6mo ago\n\nI've got 4 3090s, $700 is a great deal, and about the cheapest I ever got one for."
+    },
+    {
+      "author": "catplusplusok",
+      "score": "3",
+      "text": "catplusplusok\n•\n6mo ago\n\nSomething like this in vLLM should be a useful coding assistant that fits into your config: https://huggingface.co/cyankiwi/Qwen3.5-27B-AWQ-4bit\n\nBut keep in mind that it will not be *quite* like Anthropic models (you can point actual Claude code at your local LLM) and also Anthropic and other models will keep improving while ability of your setup to improve without spending more money is limited. If you looked at this from purely financial point of view, it might make more sense to get a GLM coding plan or pay an inexpensive inference provider per token for GLM/Kimi/Deepseek/large QWEN and then any new models that come out.\n\nIf it's for love of tech, and tinkering, absolutely!\n\nAlso if you want fast on CPU, try BitNet, power will be limited obviously."
+    },
+    {
+      "author": "c64z86",
+      "score": "3",
+      "text": "c64z86\n•\n6mo ago\n•\nEdited 6mo ago\n\nThat's actually a pretty great card and should be able to run most models at higher quants no trouble. I can load Qwen 35B A3B at UD Q6 on my 12GB laptop GPU, or even the 122B A10B at UD Q3, just about!(Both Unsloth)\n\nSo, You should be able to run both of those in the higher quants. Your RAM amount would limit you a bit though with the higher models, but the VRAM might make up for it.\n\nSure, if you want the absolute highest quality from all medium and high models, something more powerful is needed... but for medium/high quality with the big models, a 3090\n is pretty darn good.\n\nJust be sure to use UD quants."
+    },
+    {
+      "author": "grabber4321",
+      "score": "3",
+      "text": "grabber4321\n•\n6mo ago\n\nyes"
+    },
+    {
+      "author": "megadonkeyx",
+      "score": "3",
+      "text": "megadonkeyx\n•\n6mo ago\n\nEnsure your desktop PSU is strong enough, about 800w, with the latest qwen models it's totally usable.\n\nI use this exact workflow, 3090\n with qwen 3.5 35b a3b q4 to do the bulk of my stuff then my work codex sub to polish.\n\nFor cli I've found mistral vibe is good, open code also but I think vibe is cleaner.\n\nI tend to find Claude code can be a bit quirky with local models. It says it will do something then just stops.\n\nI'm shocked at all the people on this sub buying multiple rtx 6000 pro and 512gb mac studios, maybe I'm just poor lol\n\nhikerone\n•\n1mo ago\n\nNot poor just everyone else has a lot of disposable income"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1ronpwd",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:56Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.626,
+    "evidence": 0.6,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/cyankiwi/Qwen3.5-27B-AWQ-4bit",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://gskpro.com/content/dam/global/hcpportal/en_US/Prescribing_Information/Apretude/pdf/APRETUDE-PI-PIL-IFU.PDF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

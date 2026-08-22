@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s3e8bd/intel_will_sell_a_cheap_gpu_with_32gb_vram_next/",
+  "title": "Intel will sell a cheap GPU with 32GB VRAM next week",
+  "author": "happybydefault",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\nhappybydefault\nIntel will sell a cheap GPU with 32GB VRAM next week\nNews\n\nIt seems Intel will release a GPU with 32 GB of VRAM on March 31, which they would sell directly for $949.\n\nBandwidth would be 608 GB/s (a little less than an NVIDIA 5070), and wattage would be 290W.\n\nProbably/hopefully very good for local AI and models like Qwen 3.5 27B at 4 bit quantization.\n\nI'm definitely rooting for Intel, as I have a big percentage of my investment in their stock.\n\nhttps://www.pcmag.com/news/intel-targets-ai-workstations-with-memory-stuffed-arc-pro-b70-and-b65-gpus\n\nShare",
+  "comments": [
+    {
+      "author": "Clayrone",
+      "score": "248",
+      "text": "Clayrone\n•\n5mo ago\n\nHats off for the people who want to experiment with this. I got the R9700 AI PRO with 32GB VRAM for my SFF server build and I am pretty satisfied with 640 GB/s. The speed is acceptable for my needs and llama.cpp built for vulkan works flawlessly plus it takes 300W max, so I believe Intel will be it's direct competitor and I am curious how the comparison will turn out.\n\nhappybydefault\n•\n5mo ago\n\nThat's an interestingly similar GPU, then.\n\nHave you tried vLLM or SGlang with your GPU? I imagine thet would be much faster than llama.cpp but I'm not really sure.\n\nClayrone\n•\n5mo ago\n\nI have not tried those yet, but they are on my list!\n\nUltraSPARC\n•\n5mo ago\n\nvLLM was a lot faster than llama.cpp for me.\n\nOk-Ad-8976\n•\n5mo ago\n\nHow was it faster on R9700? Did you actually get it running properly? Because VLM is on a R9700 is a pain in the ass.\nI'm actually right now trying to get the QWEN 3.5 27b running properly on R9700 and trust me it's not pleasant.\n\nguywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply\ncolin_colout\n•\n5mo ago\n\nI had nothing but issues with vllm with my Strix Halo (gfx1151).\n\nIs RDNA4 more compatible? Which gfx target is that board?\n\n1 more reply\nletsgoiowa\n•\n5mo ago\n\nMy friend got WAYYYYYYYYY better results with ROCm like 8x the TPS on Qwen 3.5 9b.\n\nClayrone\n•\n5mo ago\n•\nEdited 5mo ago\n\nThe reason I went with vulkan was that there was constant power drain on idle with ROCm. Might check if this got fixed though.\n\nElementNumber6\n•\n5mo ago\n•\nEdited 5mo ago\n\nThat's just the crypto coin miner. Don't pay it any mind.\n\n6jarjar6\n•\n5mo ago\n\nThey are working on a fix https://github.com/ggml-org/llama.cpp/issues/20482#issuecomment-4122628483\n\nletsgoiowa\n•\n5mo ago\n\nAh fair. That's pretty weird.\n\n3 more replies\nfindingsubtext\n•\n5mo ago\n\nFor what it’s worth, my Arc A380\n can run LLMs flawlessly aside from the fact it only has 6GB of VRAM. Excited to see what Intel has up their sleeve here.\n\nbcell4u\n•\n5mo ago\n\nI second this. My motherboard doesn't even support resizable bar and CPU is an old Celeron. Works great at 16-17tps\n\n2 more replies\na201905\n•\n5mo ago\n\nI just picked up 2 of these and got it delivered yesterday. Any tips/suggestions? It's my first time switching from cuda\n\n14 more replies"
+    },
+    {
+      "author": "happybydefault",
+      "score": "39",
+      "text": "happybydefault\n•\n5mo ago\n\nThat's an interestingly similar GPU, then.\n\nHave you tried vLLM or SGlang with your GPU? I imagine thet would be much faster than llama.cpp but I'm not really sure.\n\nClayrone\n•\n5mo ago\n\nI have not tried those yet, but they are on my list!\n\nUltraSPARC\n•\n5mo ago\n\nvLLM was a lot faster than llama.cpp for me.\n\nOk-Ad-8976\n•\n5mo ago\n\nHow was it faster on R9700? Did you actually get it running properly? Because VLM is on a R9700 is a pain in the ass.\nI'm actually right now trying to get the QWEN 3.5 27b running properly on R9700 and trust me it's not pleasant.\n\nguywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply\ncolin_colout\n•\n5mo ago\n\nI had nothing but issues with vllm with my Strix Halo (gfx1151).\n\nIs RDNA4 more compatible? Which gfx target is that board?\n\n1 more reply"
+    },
+    {
+      "author": "Clayrone",
+      "score": "9",
+      "text": "Clayrone\n•\n5mo ago\n\nI have not tried those yet, but they are on my list!\n\nUltraSPARC\n•\n5mo ago\n\nvLLM was a lot faster than llama.cpp for me.\n\nOk-Ad-8976\n•\n5mo ago\n\nHow was it faster on R9700? Did you actually get it running properly? Because VLM is on a R9700 is a pain in the ass.\nI'm actually right now trying to get the QWEN 3.5 27b running properly on R9700 and trust me it's not pleasant.\n\nguywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply"
+    },
+    {
+      "author": "UltraSPARC",
+      "score": "11",
+      "text": "UltraSPARC\n•\n5mo ago\n\nvLLM was a lot faster than llama.cpp for me.\n\nOk-Ad-8976\n•\n5mo ago\n\nHow was it faster on R9700? Did you actually get it running properly? Because VLM is on a R9700 is a pain in the ass.\nI'm actually right now trying to get the QWEN 3.5 27b running properly on R9700 and trust me it's not pleasant.\n\nguywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply"
+    },
+    {
+      "author": "Ok-Ad-8976",
+      "score": "9",
+      "text": "Ok-Ad-8976\n•\n5mo ago\n\nHow was it faster on R9700? Did you actually get it running properly? Because VLM is on a R9700 is a pain in the ass.\nI'm actually right now trying to get the QWEN 3.5 27b running properly on R9700 and trust me it's not pleasant.\n\nguywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply"
+    },
+    {
+      "author": "guywhocode",
+      "score": "7",
+      "text": "guywhocode\n•\n5mo ago\n\nI'm 20 compiles into getting qwen 3.5 quants to work, took 10 to break pp512 35t/s. Now it is at 1440, tg was 58t/s since first try tho.\n\nOk-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready\n\ngdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply"
+    },
+    {
+      "author": "Ok-Ad-8976",
+      "score": "7",
+      "text": "Ok-Ad-8976\n•\n5mo ago\n\nYeah, I've been struggling with it. It doesn't work that well. I have a dual R9700 and I can get token generation to be best case scenario 35 tokens per second if I'm using MTP3. But that's a very optimistic number if I use\nhttps://github.com/eugr/llama-benchy\nThat gives me much lower numbers. I get only 11.5 tokens per second. At depths of 16k, I get 4 tokens per second.\nIt's still somewhat usable, it looks better in a chat interface than what the number says because pp is almost 1600 t/s, but it's nowhere near as good as for example, I can get from TP=2 clustered sparks for a 397B that gives me steady, 30 t/s tg128, and 1650 t/s pp2048.\n\nI tried the stock VLLM image we can pull from Docker and that one was quite a bit worse. I ended up having to do my hybrid build where I use, well not me, Claude takes Kuyz's image and then it heavily patches in a way that it uses the newest VLLM, but it keeps Triton kernels fixed at 3.6 or something so that they don't crash and there's some other patches that Kuyz has. Bottom line, it's not worth the trouble. Tokens per second just running on single R9700 at q4\n\nby the way, above is all trying to run FP8. I have not been able to get any sort of GPTQ or AWQ quants running on R9700 successfully with vLLM\n\nsixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready"
+    },
+    {
+      "author": "sixcommissioner",
+      "score": "4",
+      "text": "sixcommissioner\n•\n5mo ago\n\nthe part where claude has to take a custom docker image and heavily patch it with pinned triton kernels just to get vllm running is not exactly a sign the ecosystem is ready"
+    },
+    {
+      "author": "gdeyoung",
+      "score": "2",
+      "text": "gdeyoung\n•\n5mo ago\n\nWould love to know more your recipe for this I have up on Qwen3.5 on my 9700 for now\n\n1 more reply"
+    },
+    {
+      "author": "colin_colout",
+      "score": "5",
+      "text": "colin_colout\n•\n5mo ago\n\nI had nothing but issues with vllm with my Strix Halo (gfx1151).\n\nIs RDNA4 more compatible? Which gfx target is that board?\n\n1 more reply"
+    },
+    {
+      "author": "letsgoiowa",
+      "score": "13",
+      "text": "letsgoiowa\n•\n5mo ago\n\nMy friend got WAYYYYYYYYY better results with ROCm like 8x the TPS on Qwen 3.5 9b.\n\nClayrone\n•\n5mo ago\n•\nEdited 5mo ago\n\nThe reason I went with vulkan was that there was constant power drain on idle with ROCm. Might check if this got fixed though.\n\nElementNumber6\n•\n5mo ago\n•\nEdited 5mo ago\n\nThat's just the crypto coin miner. Don't pay it any mind.\n\n6jarjar6\n•\n5mo ago\n\nThey are working on a fix https://github.com/ggml-org/llama.cpp/issues/20482#issuecomment-4122628483\n\nletsgoiowa\n•\n5mo ago\n\nAh fair. That's pretty weird.\n\n3 more replies"
+    },
+    {
+      "author": "Clayrone",
+      "score": "7",
+      "text": "Clayrone\n•\n5mo ago\n•\nEdited 5mo ago\n\nThe reason I went with vulkan was that there was constant power drain on idle with ROCm. Might check if this got fixed though.\n\nElementNumber6\n•\n5mo ago\n•\nEdited 5mo ago\n\nThat's just the crypto coin miner. Don't pay it any mind.\n\n6jarjar6\n•\n5mo ago\n\nThey are working on a fix https://github.com/ggml-org/llama.cpp/issues/20482#issuecomment-4122628483\n\nletsgoiowa\n•\n5mo ago\n\nAh fair. That's pretty weird."
+    },
+    {
+      "author": "ElementNumber6",
+      "score": "26",
+      "text": "ElementNumber6\n•\n5mo ago\n•\nEdited 5mo ago\n\nThat's just the crypto coin miner. Don't pay it any mind."
+    },
+    {
+      "author": "6jarjar6",
+      "score": "4",
+      "text": "6jarjar6\n•\n5mo ago\n\nThey are working on a fix https://github.com/ggml-org/llama.cpp/issues/20482#issuecomment-4122628483"
+    },
+    {
+      "author": "letsgoiowa",
+      "score": "3",
+      "text": "letsgoiowa\n•\n5mo ago\n\nAh fair. That's pretty weird."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1s3e8bd",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:57:56Z",
+  "discovered_by_query_ids": [
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.597,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.pcmag.com/news/intel-targets-ai-workstations-with-memory-stuffed-arc-pro-b70-and-b65-gpus",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/eugr/llama-benchy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/issues/20482",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/intel/AI-Playground",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.vllm.ai/en/stable/getting_started/installation/gpu",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.npr.org/2024/11/29/nx-s1-5210800/6-million-banana-art-piece-eaten",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/intel-arc-pro-b70-and-arc-pro-b65-gpus-bring-32gb-of-ram-to-ai-and-pro-apps-bigger-battlemage-finally-arrives-but-its-not-for-gaming",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://cdn.wccftech.com/wp-content/uploads/2024/06/2024-06-04_8-52-09-1456x819.jpg",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://wccftech.com/intel-xe2-gpus-50-percent-uplift-new-ray-tracing-cores-lunar-lake-arc-battlemage-discrete",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.newegg.com/intel-arc-pro-b70-32gb-graphics-card/p/N82E16814883008",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

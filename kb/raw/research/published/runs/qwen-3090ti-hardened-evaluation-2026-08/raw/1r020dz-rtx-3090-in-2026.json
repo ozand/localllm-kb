@@ -1,0 +1,126 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1r020dz/rtx_3090_in_2026/",
+  "title": "RTX 3090 in 2026",
+  "author": "Zine47X",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6mo ago\nZine47X\nRTX 3090 in 2026\nQuestion | Help\n\nso im looking to buy a new rig for some local LLM tweaking and 1440p gaming, budget friendly (prices are crazy in my country) i was thinking of getting a 5060ti 16gb which was a month go about 530$ new, currently it went up to 730$ in all local stores, i dont want to go for a 4070 super, im not interested in maxing fps in gaming, i found a guy seeling rtx 3090 24gn dell alienware for 670$, which seems sketchy to me the guy said it is in a good state and i can test it, im hearing lots of bad stuff in dell alienware tho so im not so sure, help please.\n\nNB: havent got anything else besides a 32gb ddr5 ram, for cpu im thinking of a ryzen 5 7600x\n\nShare",
+  "comments": [
+    {
+      "author": "jwpbe",
+      "score": "14",
+      "text": "jwpbe\n•\n6mo ago\n\na lot of people prefer the dell 3090 because it's the smallest version you can get, most of the others are huge beefy coolers 2.5 / 3 slot behemoths, the dell is two slots\n\nTheSpicyBoi123\n•\n6mo ago"
+    },
+    {
+      "author": "TheSpicyBoi123",
+      "score": "-12",
+      "text": "TheSpicyBoi123\n•\n6mo ago"
+    },
+    {
+      "author": "k8-bit",
+      "score": "4",
+      "text": "k8-bit\n•\n6mo ago\n\n2x Palit 3090's in my server. Total fluke I stumbled onto these. I bought one used with 5 year warranty, trading in a 12gb 3060 for it without considering the size of the GPU, but it fit quite comfortably in the case, so I decided to match it with another one later, buying a second one. Only after did I realise that these ones are quite compact, which allowed me to fit both - just - in the case. I use a an anti-sag arm to ensure a gap exists between the cards to allow airflow, and power-restrict both to 285watts. I was very lucky embarking on a homelab discovery journey in the spring last year, and was able to outfit everything pretty reasonably.\n\nZine47X\n•\n6mo ago\n\ni see, can i ask what mobo and cpu you got with those?\n\nk8-bit\n•\n6mo ago\n\nAsus B550 TUF Gaming Wifi-plus II, Ryzen 3950x, 128gb DDR4. Note I only get 4x on the 2nd PCIe, as I have both M2 slots also populated, but in actual use I dont find performance particularly decreased using that card, and tend to use it for non-video related tasks.\n\nZine47X\n•\n6mo ago\n\ndoesnt the gpu plugged on 4x PCIe bottleneck performance? im considering multi gpu setup in future but with double x16 slots mobo, also dont mind if i ask what is the use of 128gb of ram if you have double GPUs? , i got 32gb is it not enough?\n\ncrxssrazr93\n•\n6mo ago\n\nI would like to know about the ram situation too.\n\nk8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense\n\nk8-bit\n•\n6mo ago\n\n720p 16 second LTX-2 video gen:\n\nPCIe 16x: 280s\n\nPCIe 4x: 374s\n\nSo I tend to do audio, image, and Ollama stuff 4x GPU, and video on the 16x. I had been considering shifting to an X99 motherboard with dual Xeons, but the CPU performance would drop compared to the 3950x, and much greater power draw needlessly for the other tasks running 24/7 on the machine. Threadripper was also a consideration, but £excessive for my needs tbh."
+    },
+    {
+      "author": "Zine47X",
+      "score": "1",
+      "text": "Zine47X\n•\n6mo ago\n\ni see, can i ask what mobo and cpu you got with those?\n\nk8-bit\n•\n6mo ago\n\nAsus B550 TUF Gaming Wifi-plus II, Ryzen 3950x, 128gb DDR4. Note I only get 4x on the 2nd PCIe, as I have both M2 slots also populated, but in actual use I dont find performance particularly decreased using that card, and tend to use it for non-video related tasks.\n\nZine47X\n•\n6mo ago\n\ndoesnt the gpu plugged on 4x PCIe bottleneck performance? im considering multi gpu setup in future but with double x16 slots mobo, also dont mind if i ask what is the use of 128gb of ram if you have double GPUs? , i got 32gb is it not enough?\n\ncrxssrazr93\n•\n6mo ago\n\nI would like to know about the ram situation too.\n\nk8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense\n\nk8-bit\n•\n6mo ago\n\n720p 16 second LTX-2 video gen:\n\nPCIe 16x: 280s\n\nPCIe 4x: 374s\n\nSo I tend to do audio, image, and Ollama stuff 4x GPU, and video on the 16x. I had been considering shifting to an X99 motherboard with dual Xeons, but the CPU performance would drop compared to the 3950x, and much greater power draw needlessly for the other tasks running 24/7 on the machine. Threadripper was also a consideration, but £excessive for my needs tbh."
+    },
+    {
+      "author": "k8-bit",
+      "score": "2",
+      "text": "k8-bit\n•\n6mo ago\n\nAsus B550 TUF Gaming Wifi-plus II, Ryzen 3950x, 128gb DDR4. Note I only get 4x on the 2nd PCIe, as I have both M2 slots also populated, but in actual use I dont find performance particularly decreased using that card, and tend to use it for non-video related tasks.\n\nZine47X\n•\n6mo ago\n\ndoesnt the gpu plugged on 4x PCIe bottleneck performance? im considering multi gpu setup in future but with double x16 slots mobo, also dont mind if i ask what is the use of 128gb of ram if you have double GPUs? , i got 32gb is it not enough?\n\ncrxssrazr93\n•\n6mo ago\n\nI would like to know about the ram situation too.\n\nk8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense\n\nk8-bit\n•\n6mo ago\n\n720p 16 second LTX-2 video gen:\n\nPCIe 16x: 280s\n\nPCIe 4x: 374s\n\nSo I tend to do audio, image, and Ollama stuff 4x GPU, and video on the 16x. I had been considering shifting to an X99 motherboard with dual Xeons, but the CPU performance would drop compared to the 3950x, and much greater power draw needlessly for the other tasks running 24/7 on the machine. Threadripper was also a consideration, but £excessive for my needs tbh."
+    },
+    {
+      "author": "Zine47X",
+      "score": "1",
+      "text": "Zine47X\n•\n6mo ago\n\ndoesnt the gpu plugged on 4x PCIe bottleneck performance? im considering multi gpu setup in future but with double x16 slots mobo, also dont mind if i ask what is the use of 128gb of ram if you have double GPUs? , i got 32gb is it not enough?\n\ncrxssrazr93\n•\n6mo ago\n\nI would like to know about the ram situation too.\n\nk8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense\n\nk8-bit\n•\n6mo ago\n\n720p 16 second LTX-2 video gen:\n\nPCIe 16x: 280s\n\nPCIe 4x: 374s\n\nSo I tend to do audio, image, and Ollama stuff 4x GPU, and video on the 16x. I had been considering shifting to an X99 motherboard with dual Xeons, but the CPU performance would drop compared to the 3950x, and much greater power draw needlessly for the other tasks running 24/7 on the machine. Threadripper was also a consideration, but £excessive for my needs tbh."
+    },
+    {
+      "author": "crxssrazr93",
+      "score": "1",
+      "text": "crxssrazr93\n•\n6mo ago\n\nI would like to know about the ram situation too.\n\nk8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense"
+    },
+    {
+      "author": "k8-bit",
+      "score": "3",
+      "text": "k8-bit\n•\n6mo ago\n\nCrucially the 2x 24gb are not available as a single contiguous body of VRAM. You can use multi-GPU nodes to separate tasks to make best use of them, but I prefer assigning different instances of ComfyUI to each card for different tasks, or run other LLM tasks (e.g. Ollama, or TTS servers, WanGP, or Pinokio) this all in addition to the background processes I run 24/7 on the server (Unraid, NAS, docker containers, 2x VMs) - consequently I occasionally run out of RAM if I'm running LTX-2 video generation if I'm not careful. To offset this I ended up building a 2nd machine using a mini-PC and an externally mounted 5060ti 16gb, so I can balance tasks between the two servers.\n\ncrxssrazr93\n•\n6mo ago\n\nMakes sense"
+    },
+    {
+      "author": "crxssrazr93",
+      "score": "1",
+      "text": "crxssrazr93\n•\n6mo ago\n\nMakes sense"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1r020dz",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:32:18Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.567,
+    "evidence": 0.6,
+    "relevance": 0.333,
+    "community_scrutiny": 0.9,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

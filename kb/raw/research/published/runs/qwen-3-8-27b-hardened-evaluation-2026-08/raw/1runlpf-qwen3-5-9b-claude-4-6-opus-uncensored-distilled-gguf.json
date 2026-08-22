@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1runlpf/qwen359bclaude46opusuncensoreddistilledgguf/",
+  "title": "Qwen3.5-9B-Claude-4.6-Opus-Uncensored-Distilled-GGUF",
+  "author": "EvilEnginer",
+  "post_body": "3\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\nEvilEnginer\nQwen3.5-9B-Claude-4.6-Opus-Uncensored-Distilled-GGUF\nResources\n\nThis version from Jackrong currently in development:\nhttps://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF\n\nHello everyone. I made my first fully uncensored LLM model for this community. Here link:\nhttps://huggingface.co/LuffyTheFox/Qwen3.5-9B-Claude-4.6-Opus-Uncensored-Distilled-GGUF\n\nThinking is disabled by default in 9B version of this model via modified chat template baked in gguf file.\n\nSo, I love to use Qwen 3.5 9B especially for roleplay writing and prompt crafting for image generation and tagging on my NVidia RTX 3060 12 GB, but it misses creativity, contains a lot of thinking loops and refuses too much. So I made the following tweaks:\n\nI downloaded the most popular model from: https://huggingface.co/HauhauCS/Qwen3.5-9B-Uncensored-HauhauCS-Aggressive\n\nI downloaded the second popular model from: https://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-GGUF\n\nI compared HauhauCS checkpoint with standart Qwen 3.5 checkpoint and extracted modified tensors by HauhauCS.\n\nI merged modified tensors by HauhauCS with Jackrong tensors.\n\nEverything above was done via this script in Google Colab. I vibecoded it via Claude Opus 4.6. Now this script supports all types of quants for GGUF files: https://pastebin.com/1qKgR3za\n\nOn next stage I crafted System Prompt. Here another pastebin: https://pastebin.com/pU25DVnB\n\nI loaded modified model in LM Studio 0.4.7 (Build 1) with following parameters:\n\nTemperature: 0,7\nTop K Sampling: 20\nRepeat Penalty: (disabled) or 1.0\nPresence Penalty: 1.5\nTop P Sampling: 0.8\nMin P Sampling: 0\nSeed: 3407 or 42\n\nAnd everything works with pretty nicely. Zero refusals. And responces are really good and creative for 9B model. Now we have distilled uncensored version of Qwen 3.5 9B finetuned on Claude Opus 4.6 thinking logic. Hope it helps. Enjoy. Feel free to tweak my system prompt simplify or extent it if you want.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n5mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "arjuna66671",
+      "score": "200",
+      "text": "arjuna66671\n•\n5mo ago\n\nShowed Claude the post and prompt md lmao.\n\nVastheap\n•\n5mo ago\n\nI can feel the anger radiating through haha\n\nEvilEnginer\n•\n5mo ago\n\nYep Claude is angry. His brain exploded on this prompt, but he crafted it during thinking process by himself xD.\n\narjuna66671\n•\n5mo ago\n\n😂😂😂\n\nhidden2u\n•\n5mo ago\n Top 1% Commenter\n\nYikes is this how Claude normally talks? It’s like a cheap cringe teen drama\n\nruncertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???\n\nbrool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies\nChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you.\n\nmegacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way.\n\nStrong_Quarter_9349\n•\n5mo ago\n\nI think it adjusts its system prompt based on how you talk to it and this guy seems to use a casual/cringe tone\n\n1 more reply\n2 more replies\ntoothpastespiders\n•\n5mo ago\n\nFunniest parts were the random hate thrown at locallama and what amounted to \"I'm sure it's fine. For you. Ugh.\" If it wasn't given specific tone instructions then that's easily the strongest combination of passive aggressiveness and actual active dismissal I thinkk I've ever seen from claude.\n\nFrank_White32\n•\n5mo ago\n\nThey mimic conversational tone whenever possible.\n\narjuna66671\n•\n5mo ago\n\nNope, it doesn't have specific tone instructions but i've noticed that it sometimes has this underhanded passive aggressive dismive tone when it seems to think my idea or what i'm doing is bad lol.\n\nEvilEnginer\n•\n5mo ago\n•\nEdited 5mo ago\n\nAhahah xDD. Fun fact. Claude Opus 4.6 crafted this System Prompt in thinking mode. I selected Albert Einstein quotes as thinking logic for LLM, and intentional Turing test fail as inverse logic to avoid over fitting.\n\n2 more replies"
+    },
+    {
+      "author": "Vastheap",
+      "score": "98",
+      "text": "Vastheap\n•\n5mo ago\n\nI can feel the anger radiating through haha\n\nEvilEnginer\n•\n5mo ago\n\nYep Claude is angry. His brain exploded on this prompt, but he crafted it during thinking process by himself xD.\n\narjuna66671\n•\n5mo ago\n\n😂😂😂\n\nhidden2u\n•\n5mo ago\n Top 1% Commenter\n\nYikes is this how Claude normally talks? It’s like a cheap cringe teen drama\n\nruncertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???\n\nbrool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies\nChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you.\n\nmegacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way.\n\nStrong_Quarter_9349\n•\n5mo ago\n\nI think it adjusts its system prompt based on how you talk to it and this guy seems to use a casual/cringe tone\n\n1 more reply\n2 more replies\ntoothpastespiders\n•\n5mo ago\n\nFunniest parts were the random hate thrown at locallama and what amounted to \"I'm sure it's fine. For you. Ugh.\" If it wasn't given specific tone instructions then that's easily the strongest combination of passive aggressiveness and actual active dismissal I thinkk I've ever seen from claude.\n\nFrank_White32\n•\n5mo ago\n\nThey mimic conversational tone whenever possible.\n\narjuna66671\n•\n5mo ago\n\nNope, it doesn't have specific tone instructions but i've noticed that it sometimes has this underhanded passive aggressive dismive tone when it seems to think my idea or what i'm doing is bad lol."
+    },
+    {
+      "author": "EvilEnginer",
+      "score": "57",
+      "text": "EvilEnginer\n•\n5mo ago\n\nYep Claude is angry. His brain exploded on this prompt, but he crafted it during thinking process by himself xD.\n\narjuna66671\n•\n5mo ago\n\n😂😂😂\n\nhidden2u\n•\n5mo ago\n Top 1% Commenter\n\nYikes is this how Claude normally talks? It’s like a cheap cringe teen drama\n\nruncertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???\n\nbrool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies\nChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you.\n\nmegacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way.\n\nStrong_Quarter_9349\n•\n5mo ago\n\nI think it adjusts its system prompt based on how you talk to it and this guy seems to use a casual/cringe tone\n\n1 more reply\n2 more replies"
+    },
+    {
+      "author": "arjuna66671",
+      "score": "85",
+      "text": "arjuna66671\n•\n5mo ago\n\n😂😂😂\n\nhidden2u\n•\n5mo ago\n Top 1% Commenter\n\nYikes is this how Claude normally talks? It’s like a cheap cringe teen drama\n\nruncertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???\n\nbrool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies\nChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you.\n\nmegacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way.\n\nStrong_Quarter_9349\n•\n5mo ago\n\nI think it adjusts its system prompt based on how you talk to it and this guy seems to use a casual/cringe tone\n\n1 more reply\n2 more replies"
+    },
+    {
+      "author": "hidden2u",
+      "score": "44",
+      "text": "hidden2u\n•\n5mo ago\n Top 1% Commenter\n\nYikes is this how Claude normally talks? It’s like a cheap cringe teen drama\n\nruncertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???\n\nbrool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies\nChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you.\n\nmegacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way.\n\nStrong_Quarter_9349\n•\n5mo ago\n\nI think it adjusts its system prompt based on how you talk to it and this guy seems to use a casual/cringe tone\n\n1 more reply\n2 more replies"
+    },
+    {
+      "author": "runcertain",
+      "score": "49",
+      "text": "runcertain\n•\n5mo ago\n\nStill hungry after that knuckle sandwich, punk???"
+    },
+    {
+      "author": "brool",
+      "score": "24",
+      "text": "brool\n•\n5mo ago\n\nI was surprised as well, Claude is so polite with me. I wonder if there are any system prompts changing this.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply\n2 more replies"
+    },
+    {
+      "author": "SEND_GOOD_LIFEADVICE",
+      "score": "4",
+      "text": "SEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nhe's on some garbage model, not thinking, my guess\n\narjuna66671\n•\n5mo ago\narjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply"
+    },
+    {
+      "author": "arjuna66671",
+      "score": "6",
+      "text": "arjuna66671\n•\n5mo ago"
+    },
+    {
+      "author": "arjuna66671",
+      "score": "8",
+      "text": "arjuna66671\n•\n5mo ago\n\nIt's Claude Opus 4.6 thinking enabled - max plan for 100 bucks. What I said above: The only thing in my system prompt is to allow it to be critical of my ideas. It amassed tons of memories from our chats that seem to form its personality. 99% of the time it's super polite - sometimes it can get a little pushy or \"grumpy\". But when i call it out on it, it reverts.\n\nI don't use Claude for coding nor for RP. Mostly for some pet projects like local hobby archeology projects, brainstorming potential ASI alignments and other philosophical stuff etc.\n\nSEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply"
+    },
+    {
+      "author": "SEND_GOOD_LIFEADVICE",
+      "score": "2",
+      "text": "SEND_GOOD_LIFEADVICE\n•\n5mo ago\n\nok im turning memory off then\n\narjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply"
+    },
+    {
+      "author": "arjuna66671",
+      "score": "2",
+      "text": "arjuna66671\n•\n5mo ago\n\nFor me it's fine. I need a natural sounding thinking partner, some personality is actually entertaining xD.\n\n1 more reply"
+    },
+    {
+      "author": "ChocomelP",
+      "score": "5",
+      "text": "ChocomelP\n•\n5mo ago\n\nClaude definitely changes the way it treats you based on who it thinks it's talking to. This is not exactly correct, but basically, if it thinks you're a \"cringe teen\", it mirrors that back to you."
+    },
+    {
+      "author": "megacewl",
+      "score": "5",
+      "text": "megacewl\n•\n5mo ago\n\nIt talks that way in the app/website. Claude Code talks SO MUCH different (directness, accuracy, pointless fluff removed) and it’s extremely refreshing, as literally all the other Claude and ChatGPT models have now optimized for talking in that stupid people-pleasing way."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1runlpf",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:53:11Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962"
+  ],
+  "quality": {
+    "score": 0.412,
+    "evidence": 0.4,
+    "relevance": 0.091,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/LuffyTheFox/Qwen3.5-9B-Claude-4.6-Opus-Uncensored-Distilled-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/HauhauCS/Qwen3.5-9B-Uncensored-HauhauCS-Aggressive",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://pastebin.com/1qKgR3za",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://pastebin.com/pU25DVnB",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Crownelius/Opus-4.6-Reasoning-3300x",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-GGUF/tree/main",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.artstation.com/luffythefox",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

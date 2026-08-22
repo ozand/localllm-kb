@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/",
+  "title": "I pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090",
+  "author": "iamMess",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\niamMess\nI pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090\nResources\n\nFour days ago I released a hyper-optimized Qwen3.8-27B inference engine for an RTX 3090 (82 tps single request, 672 peak). Since then it went to ~114, then ~138 tps single-user with DFlash2 drafting and lookup-augmented drafting.\n\nToday it's ~133 tps on real chat prompts, 382 tps when the model reproduces its own context, and the number I care about most this time: a document-quoting workload now runs at 15 of 16 tokens accepted per verify step.\n\nWhat we had:\n\n- fp8 KV cache, lm_head + embed_tokens int8, fp16 recurrent state, int8 activations, DFlash2 block drafting (W4A16-requantized), lookup-augmented drafting, prefix caching for the hybrid, split-KV verify attention, sampler patch, KVarN for 262k context\n\nNow added:\n\n- Longer verify blocks. DFlash2 only drafts 7 tokens and I'd assumed the verify block had to match. It doesnt. The lookup drafter fills the extra slots from the request's own context for free. DFLASH_TOKENS=15 verifies 16 tokens per step: 260 to 382 tps reproducing a 25k-token document, +9% on ordinary chat. Costs half the request slots and 8k of context, so it's opt-in.\n\n- DFlash2 past 64k. bf16 KV is 64 KB/token and teh pinned pool is 5.2 GiB, which is what capped it. An int8 cache roughly doubles it, 138,696 tokens instead of 69,758. Two fixes were needed: vLLM equalises KV page sizes by an integer block ratio, and the drafter's 5 sliding-window layers were wasting 5.2 GiB at 1.88% utilisation until I rounded their block size from 16 to 864.\n\n- Honest result: +53% where the model reproduces its context, about 2:1 behind plain MTP everywhere else, with twice the TTFT. So it's a mode for RAG front-ends and coding assistants applying edits, not a default.\n\n- A correction. Someone opened an issue saying our long-context numbers didn't reproduce. They were right. The tables were measured in the batch config, which runs no speculative decoding, and nothing said so. The KVarN decode tax we documented as ~20% is 2.13x single-user at 112k. Most of that is step time, the rest is MTP acceptance falling from 2.56 to 2.38 tokens per step, becuase the quantised cache moves the target's logits enough that the draft head agrees less often. Quality-neutral doesn't mean speed-neutral once you're speculating.\n\nQuality unchanged throughout, GSM8K 96.5%. int8 KV costs 2x the prefill, so it's for loading a document once and asking many quesitons about it. All of it is one env var apart.\n\nQuality unchanged throughout (GSM8K 96.5%), and speculative decoding is exact by construction.\n\nCaveats worth stating: the long verify block is worth it when your output quotes the prompt and roughly neutral when it doesn't, and int8 KV costs 2× the prefill of bf16, so it's for workloads that load a document once and then ask many questions about it. All of it is one env var apart.\n\nRepo: https://github.com/syv-ai/qwen38-27b-rtx3090\n\nI've said \"probably the last update\" twice now. Since then two people sent PRs, one of them answered a question I'd assumed was a dead end, and a third found a number I'd got wrong. Turns out publishing what didn't work gets you better bug reports than publishing what did.\n\nAlso, I have been considering doing this for 4090's and 5090's too, since they have a few options that 3090's dont. So if anyone has a spare 4090 or 5090 or wants to rent me one on runpod/vast, let me know.\n\nShare",
+  "comments": [
+    {
+      "author": "StrikeOner",
+      "score": "88",
+      "text": "StrikeOner\n•\n2d ago\n\nclaude is that you? how you doing pal?\n\nKlutzy-Snow8016\n•\n2d ago\n\nTired from load-bearing all of you humans on my back.\n\nCivil_Fee_7862\n•\n2d ago\n\nDef a claude formatted post, but I don't care anymore, if it means I can get 200+ tps, I'll hear claude out.\n\nStardockEngineer\n•\n1d ago\nvllm\n\nThe code works. Claude post or not.\n\nSad_Temperature6721\n•\n2d ago\n\nwell probably chatgpt, i think they nerfed claude for ai development"
+    },
+    {
+      "author": "Klutzy-Snow8016",
+      "score": "42",
+      "text": "Klutzy-Snow8016\n•\n2d ago\n\nTired from load-bearing all of you humans on my back."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "17",
+      "text": "Civil_Fee_7862\n•\n2d ago\n\nDef a claude formatted post, but I don't care anymore, if it means I can get 200+ tps, I'll hear claude out."
+    },
+    {
+      "author": "StardockEngineer",
+      "score": "5",
+      "text": "StardockEngineer\n•\n1d ago\nvllm\n\nThe code works. Claude post or not."
+    },
+    {
+      "author": "Sad_Temperature6721",
+      "score": "2",
+      "text": "Sad_Temperature6721\n•\n2d ago\n\nwell probably chatgpt, i think they nerfed claude for ai development"
+    },
+    {
+      "author": "ZealousidealBat9687",
+      "score": "9",
+      "text": "ZealousidealBat9687\n•\n2d ago\n\nThis repo really works great, did some tweaking for my 4090 and quanted a different qwen3.8 model (uncensored). I also enabled vision since i literally only use it for lora captioning but the speed is simply amazing.\n\nAnnual-Night-1136\n•\n1d ago\n\nWoah. Can you share your setup? I have a vision based use case where speed (and accuracy) are important and I have a 4090.\n\nZealousidealBat9687\n•\n3h ago\n\nsure, if I remember when I get home from work I will post the changes to start_qwen.sh to GitHub and drop the link here\n\nMuted-Celebration-47\n•\n1d ago\n\nWhat is your context window? I tried enabling vision too but I need to limit context < 64k\n\nZealousidealBat9687\n•\n3h ago\n\nmy context is 32k just because of dflash2, could use 64k if mtp. my use case is just image captioning without context so its not that important for me."
+    },
+    {
+      "author": "Annual-Night-1136",
+      "score": "3",
+      "text": "Annual-Night-1136\n•\n1d ago\n\nWoah. Can you share your setup? I have a vision based use case where speed (and accuracy) are important and I have a 4090.\n\nZealousidealBat9687\n•\n3h ago\n\nsure, if I remember when I get home from work I will post the changes to start_qwen.sh to GitHub and drop the link here"
+    },
+    {
+      "author": "ZealousidealBat9687",
+      "score": "1",
+      "text": "ZealousidealBat9687\n•\n3h ago\n\nsure, if I remember when I get home from work I will post the changes to start_qwen.sh to GitHub and drop the link here"
+    },
+    {
+      "author": "Muted-Celebration-47",
+      "score": "1",
+      "text": "Muted-Celebration-47\n•\n1d ago\n\nWhat is your context window? I tried enabling vision too but I need to limit context < 64k\n\nZealousidealBat9687\n•\n3h ago\n\nmy context is 32k just because of dflash2, could use 64k if mtp. my use case is just image captioning without context so its not that important for me."
+    },
+    {
+      "author": "ZealousidealBat9687",
+      "score": "1",
+      "text": "ZealousidealBat9687\n•\n3h ago\n\nmy context is 32k just because of dflash2, could use 64k if mtp. my use case is just image captioning without context so its not that important for me."
+    },
+    {
+      "author": "sugarfreecaffeine",
+      "score": "8",
+      "text": "sugarfreecaffeine\n•\n2d ago\n\nCan this work with dual 3090s?\n\nshifty21\n•\n1d ago\n\nIt looks like this is built upon vllm, so it should support multiple GPUs. You'd have to call the GPUs with the export gpu=0,1 and the the rest of the commands and parameter to split among the GPUs.\n\ncatch23\n•\n15h ago\n\nI have this working on dual 5060Ti's, it's faster than the recipes on club-5060. Getting around 90-120tps, prob the best value gpu ever\n\nmisanthrophiccunt\n•\n14h ago\n\nSingle or multiple request numbers ?"
+    },
+    {
+      "author": "shifty21",
+      "score": "5",
+      "text": "shifty21\n•\n1d ago\n\nIt looks like this is built upon vllm, so it should support multiple GPUs. You'd have to call the GPUs with the export gpu=0,1 and the the rest of the commands and parameter to split among the GPUs."
+    },
+    {
+      "author": "catch23",
+      "score": "2",
+      "text": "catch23\n•\n15h ago\n\nI have this working on dual 5060Ti's, it's faster than the recipes on club-5060. Getting around 90-120tps, prob the best value gpu ever\n\nmisanthrophiccunt\n•\n14h ago\n\nSingle or multiple request numbers ?"
+    },
+    {
+      "author": "misanthrophiccunt",
+      "score": "1",
+      "text": "misanthrophiccunt\n•\n14h ago\n\nSingle or multiple request numbers ?"
+    },
+    {
+      "author": "StardockEngineer",
+      "score": "6",
+      "text": "StardockEngineer\n•\n1d ago\nvllm\n\nHey. I was about to swap out my A6000 for a 5090 when I saw your post. So I tried your repo on my ampere gen A6000 (same compute as 3090 for those that don't know).\n\nI got a pretty consistent 150+ tok/s overall. Killer!\n\nI did the swap. No changes, same machine, etc. 336 tok/s on the 5090. Gotdang!\n\nI'll test more in real coding work flows later. Might transfer it over to a Spark, see what it can do there.\n\niamMess\n•\n1d ago\n\nI think it’s possible to hit 500 tps on the 5090\n\nStardockEngineer\n•\n22h ago\nvllm\n\nYeah just might be. I’ve done no optimizations for the arch at all."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vtup5s",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:47:53Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.687,
+    "evidence": 0.8,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090/issues/19",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/mjungnickel18/qwen38-27b-rtx3090/tree/kvarn-v2-240k",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

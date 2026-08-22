@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sdnw7l/i_technically_got_an_llm_running_locally_on_a/",
+  "title": "I technically got an LLM running locally on a 1998 iMac G3 with 32 MB of RAM",
+  "author": "maddiedreese",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\nmaddiedreese\nI technically got an LLM running locally on a 1998 iMac G3 with 32 MB of RAM\nDiscussion\n\nHardware:\n\n• Stock iMac G3 Rev B (October 1998). 233 MHz PowerPC 750, 32 MB RAM, Mac OS 8.5. No upgrades.\n\n• Model: Andrej Karpathy’s 260K TinyStories (Llama 2 architecture). ~1 MB checkpoint.\n\nToolchain:\n\n• Cross-compiled from a Mac mini using Retro68 (GCC for classic Mac OS → PEF binaries)\n\n• Endian-swapped model + tokenizer from little-endian to big-endian for PowerPC\n\n• Files transferred via FTP to the iMac over Ethernet\n\nChallenges:\n\n• Mac OS 8.5 gives apps a tiny memory partition by default. Had to use MaxApplZone() + NewPtr() from the Mac Memory Manager to get enough heap\n\n• RetroConsole crashes on this hardware, so all output writes to a text file you open in SimpleText\n\n• The original llama2.c weight layout assumes n_kv_heads == n_heads. The 260K model uses grouped-query attention (kv_heads=4, heads=8), which shifted every pointer after wk and produced NaN. Fixed by using n_kv_heads * head_size for wk/wv sizing\n\n• Static buffers for the KV cache and run state to avoid malloc failures on 32 MB\n\nIt reads a prompt from prompt.txt, tokenizes with BPE, runs inference, and writes the continuation to output.txt.\n\nObviously the output is very short, but this is definitely meant to just be a fun experiment/demo!\n\nHere’s the repo link: https://github.com/maddiedreese/imac-llm\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n5mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "Momo--Sama",
+      "score": "247",
+      "text": "Momo--Sama\n•\n5mo ago\n\nI feel like most of the time I’m reading about someone’s model tinkering project I’m like “did all of this setup actually help you accomplish anything you couldn’t do with a stock configuration or did you just do it for the sake of doing it?”\n\nBut in this case hell yeah dude keep on doin’ stuff for the sake of doing it\n\nIrisColt\n•\n5mo ago\n\nWhen you know the architecture like the back of your hand, this kind of thing is admittedly low-hanging fruit... I've been guilty of it myself, heh... but it's no less fun and satisfying for it.\n\nsecunder73\n•\n5mo ago\n\nIts like running doom on everything - for fun and to prove a point that its possible, not to actually play it\n\ntaftastic\n•\n5mo ago\n\nLike a dog playing a piano. More the fact it can do it than how well it can be done.\n\nsmuckola\n•\n5mo ago\n\nYou said it. Also let's just imagine ... what if the Delorean pulls up with this, in 1998? Would people think it's infinitely insane that a lusciously lickable $1300 beginner's iMac can start writing its own children's stories? lol Wow, yes.\n\nNervous-Locksmith484\n•\n5mo ago\n\nThis- it is cool but I need applicable use cases, too. Not to say don't stop doing it- because it is neat.\n\nIllllIIlIllIllllIIIl\n•\n5mo ago\n\nI take the opposite approach. I only choose to take up a personal project if it isn't useful. I do enough useful things at work.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nit takes a lot of dedication to be completely useless\n\nTheAndyGeorge\n•\n5mo ago\n\nWell, you don't need a million dollars to do nothing, man. Take a look at my cousin: he's broke, don't do shit.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer\n\nSmoothCCriminal\n•\n5mo ago\n\ni really needed this in this burned-out phase of my career where im drained of motivation. thank you bud. glad i opened reddit today\n\nFatheredPuma81\n•\n5mo ago\n\nI've been tinkering/screwing around with Local LLM's for about 1.5 years now. Some months ago I FINALLY found a use for them and that only lasted for approximately 2 weeks.\n\nOh but man I can't believe how well my GPU handles running 4x Qwen3.5 35B using -parallel like wow didn't know I'd get 58t/s with 80,000 on each of them that's kind of insane I can finally do nothing 4 times as much.\n\nEducationalCod7514\n•\n4mo ago\n\nThat's by definition how art works.\n\nlayer4down\n•\n5mo ago\n\nAs adults we too often lose the habit of lofty ambitions for the sake of play and exploration. Such a critical component of growth in our youth that we believe we’re too good for in our adulthood without remembering how we got here to begin with.\n\nJazzlikeLeave5530\n•\n5mo ago\n\nNot everything needs to have a use or be productive. Work being such a huge part of our lives has made people's minds so weird lol\n\nEnlightened-Zeno\n•\n4mo ago\n\nSometimes, most times actually, it's for the challenge of accomplishing it. I've built seemingly useless things myself and to be honest most of the times it brings me 2 things. The fundamental understanding, or the enhancement of my understanding of the \"thing\", whatever it is and a bizarre feeling of satisfaction. The process is an enjoyable one."
+    },
+    {
+      "author": "IrisColt",
+      "score": "30",
+      "text": "IrisColt\n•\n5mo ago\n\nWhen you know the architecture like the back of your hand, this kind of thing is admittedly low-hanging fruit... I've been guilty of it myself, heh... but it's no less fun and satisfying for it."
+    },
+    {
+      "author": "secunder73",
+      "score": "14",
+      "text": "secunder73\n•\n5mo ago\n\nIts like running doom on everything - for fun and to prove a point that its possible, not to actually play it\n\ntaftastic\n•\n5mo ago\n\nLike a dog playing a piano. More the fact it can do it than how well it can be done."
+    },
+    {
+      "author": "taftastic",
+      "score": "6",
+      "text": "taftastic\n•\n5mo ago\n\nLike a dog playing a piano. More the fact it can do it than how well it can be done."
+    },
+    {
+      "author": "smuckola",
+      "score": "3",
+      "text": "smuckola\n•\n5mo ago\n\nYou said it. Also let's just imagine ... what if the Delorean pulls up with this, in 1998? Would people think it's infinitely insane that a lusciously lickable $1300 beginner's iMac can start writing its own children's stories? lol Wow, yes."
+    },
+    {
+      "author": "Nervous-Locksmith484",
+      "score": "6",
+      "text": "Nervous-Locksmith484\n•\n5mo ago\n\nThis- it is cool but I need applicable use cases, too. Not to say don't stop doing it- because it is neat.\n\nIllllIIlIllIllllIIIl\n•\n5mo ago\n\nI take the opposite approach. I only choose to take up a personal project if it isn't useful. I do enough useful things at work.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nit takes a lot of dedication to be completely useless\n\nTheAndyGeorge\n•\n5mo ago\n\nWell, you don't need a million dollars to do nothing, man. Take a look at my cousin: he's broke, don't do shit.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer\n\nSmoothCCriminal\n•\n5mo ago\n\ni really needed this in this burned-out phase of my career where im drained of motivation. thank you bud. glad i opened reddit today\n\nFatheredPuma81\n•\n5mo ago\n\nI've been tinkering/screwing around with Local LLM's for about 1.5 years now. Some months ago I FINALLY found a use for them and that only lasted for approximately 2 weeks.\n\nOh but man I can't believe how well my GPU handles running 4x Qwen3.5 35B using -parallel like wow didn't know I'd get 58t/s with 80,000 on each of them that's kind of insane I can finally do nothing 4 times as much.\n\nEducationalCod7514\n•\n4mo ago\n\nThat's by definition how art works.\n\nlayer4down\n•\n5mo ago\n\nAs adults we too often lose the habit of lofty ambitions for the sake of play and exploration. Such a critical component of growth in our youth that we believe we’re too good for in our adulthood without remembering how we got here to begin with.\n\nJazzlikeLeave5530\n•\n5mo ago\n\nNot everything needs to have a use or be productive. Work being such a huge part of our lives has made people's minds so weird lol"
+    },
+    {
+      "author": "IllllIIlIllIllllIIIl",
+      "score": "28",
+      "text": "IllllIIlIllIllllIIIl\n•\n5mo ago\n\nI take the opposite approach. I only choose to take up a personal project if it isn't useful. I do enough useful things at work.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nit takes a lot of dedication to be completely useless\n\nTheAndyGeorge\n•\n5mo ago\n\nWell, you don't need a million dollars to do nothing, man. Take a look at my cousin: he's broke, don't do shit.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer\n\nSmoothCCriminal\n•\n5mo ago\n\ni really needed this in this burned-out phase of my career where im drained of motivation. thank you bud. glad i opened reddit today\n\nFatheredPuma81\n•\n5mo ago\n\nI've been tinkering/screwing around with Local LLM's for about 1.5 years now. Some months ago I FINALLY found a use for them and that only lasted for approximately 2 weeks.\n\nOh but man I can't believe how well my GPU handles running 4x Qwen3.5 35B using -parallel like wow didn't know I'd get 58t/s with 80,000 on each of them that's kind of insane I can finally do nothing 4 times as much.\n\nEducationalCod7514\n•\n4mo ago\n\nThat's by definition how art works."
+    },
+    {
+      "author": "-dysangel-",
+      "score": "12",
+      "text": "-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nit takes a lot of dedication to be completely useless\n\nTheAndyGeorge\n•\n5mo ago\n\nWell, you don't need a million dollars to do nothing, man. Take a look at my cousin: he's broke, don't do shit.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer"
+    },
+    {
+      "author": "TheAndyGeorge",
+      "score": "6",
+      "text": "TheAndyGeorge\n•\n5mo ago\n\nWell, you don't need a million dollars to do nothing, man. Take a look at my cousin: he's broke, don't do shit.\n\n-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer"
+    },
+    {
+      "author": "-dysangel-",
+      "score": "4",
+      "text": "-dysangel-\n•\n5mo ago\n Top 1% Commenter\n\nHe's one dedicated mfer"
+    },
+    {
+      "author": "SmoothCCriminal",
+      "score": "7",
+      "text": "SmoothCCriminal\n•\n5mo ago\n\ni really needed this in this burned-out phase of my career where im drained of motivation. thank you bud. glad i opened reddit today"
+    },
+    {
+      "author": "FatheredPuma81",
+      "score": "5",
+      "text": "FatheredPuma81\n•\n5mo ago\n\nI've been tinkering/screwing around with Local LLM's for about 1.5 years now. Some months ago I FINALLY found a use for them and that only lasted for approximately 2 weeks.\n\nOh but man I can't believe how well my GPU handles running 4x Qwen3.5 35B using -parallel like wow didn't know I'd get 58t/s with 80,000 on each of them that's kind of insane I can finally do nothing 4 times as much."
+    },
+    {
+      "author": "EducationalCod7514",
+      "score": "2",
+      "text": "EducationalCod7514\n•\n4mo ago\n\nThat's by definition how art works."
+    },
+    {
+      "author": "layer4down",
+      "score": "2",
+      "text": "layer4down\n•\n5mo ago\n\nAs adults we too often lose the habit of lofty ambitions for the sake of play and exploration. Such a critical component of growth in our youth that we believe we’re too good for in our adulthood without remembering how we got here to begin with."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1sdnw7l",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:51:54Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962"
+  ],
+  "quality": {
+    "score": 0.354,
+    "evidence": 0.2,
+    "relevance": 0.182,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/maddiedreese/imac-llm",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1UMdlEACAX8",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/HarryR/z80ai",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.raptorcs.com/TALOSII/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/callbacked/psvita-llm",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/erodola/bigram-nes",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://thoughts.jock.pl/p/local-llm-35b-mac-mini-gemma-swap-production-2026",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/exo-explore/llama98.c",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://blog.exolabs.net/day-4/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

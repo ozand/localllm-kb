@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vpdrxl/which_harness_for_local_coding_qwen_38_27b_do_you/",
+  "title": "Which Harness for Local Coding (Qwen 3.8 27b) do you Recommend?",
+  "author": "DifficultParts",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n7d ago\nDifficultParts\nWhich Harness for Local Coding (Qwen 3.8 27b) do you Recommend?\nQuestion | Help\nPoll closed\n4.3K votes\nPi\n1.8K\nOpenCode\n1.5K\nAider\n47\nCline\n131\nRooCode\n92\nContinue\n764\nCore contributors\nWho are core contributors?\nAll\n\nI know there are many posts about this, but I would explicitly like to know the harness names instead of having a general discussion. Let's see what the community actually uses!\n\nFor others, please comment below. Feel free to say why you prefer yours. Thanks\n\nEdited: Some people are asking why i didn't write \"others,\" i couldn't add any more, so I couldn't write 'others' either i just listed the most popular ones. I definitely should have added 'others' as the last option in the survey :) But that's what the comment section is for the: others\n\nI've read all the comments, they're all super helpful! I'll look into all of them. My question was actually more about the fact that each harness can make models perform different better or worse depending on which one you use. i'm planning to test all the ones that seem interesting in that regard. Thanks communtiy!\n\nShare",
+  "comments": [
+    {
+      "author": "carl2187",
+      "score": "140",
+      "text": "carl2187\n•\n7d ago\n\nFyi. Continue was discontinued.\n\ndumuzid-sumerian\n•\n7d ago\n\nI'll wait under this reply for the jokes.\n\nCautious_Chicken_604\n•\n6d ago\n\nGo on...\n\nCautious_Chicken_604\n•\n6d ago\n\nHey man... don't diss Continue.\n\nsome_user_2021\n•\n6d ago\n•\nEdited 6d ago\n\n*This Continue\n\nSofakingwetoddead\n•\n6d ago\n\nAs was Roo\n\nOsmanthusBloom\n•\n6d ago\n\nBut forked and now lives on as Zoo Code!\n\nSofakingwetoddead\n•\n6d ago\n\nThanks for the heads up. I didn't know.\n\nStill-Wafer1384\n•\n6d ago\n\nSoon there'll be a Noo Code\n\nTheGamerForeverGFE\n•\n6d ago\n\nSay that again \n\ndododragon\n•\n7d ago\n\nI wish people would discontinue mentioning Continue..\n\nWait what did I just do.. I'll see myself out...\n\nSureEnd9430\n•\n6d ago\n\nBut it continued on dis other platform ...\n\n4 more replies"
+    },
+    {
+      "author": "dumuzid-sumerian",
+      "score": "41",
+      "text": "dumuzid-sumerian\n•\n7d ago\n\nI'll wait under this reply for the jokes.\n\nCautious_Chicken_604\n•\n6d ago\n\nGo on...\n\nCautious_Chicken_604\n•\n6d ago\n\nHey man... don't diss Continue.\n\nsome_user_2021\n•\n6d ago\n•\nEdited 6d ago\n\n*This Continue"
+    },
+    {
+      "author": "Cautious_Chicken_604",
+      "score": "6",
+      "text": "Cautious_Chicken_604\n•\n6d ago\n\nGo on..."
+    },
+    {
+      "author": "Cautious_Chicken_604",
+      "score": "6",
+      "text": "Cautious_Chicken_604\n•\n6d ago\n\nHey man... don't diss Continue."
+    },
+    {
+      "author": "some_user_2021",
+      "score": "10",
+      "text": "some_user_2021\n•\n6d ago\n•\nEdited 6d ago\n\n*This Continue"
+    },
+    {
+      "author": "Sofakingwetoddead",
+      "score": "13",
+      "text": "Sofakingwetoddead\n•\n6d ago\n\nAs was Roo\n\nOsmanthusBloom\n•\n6d ago\n\nBut forked and now lives on as Zoo Code!\n\nSofakingwetoddead\n•\n6d ago\n\nThanks for the heads up. I didn't know.\n\nStill-Wafer1384\n•\n6d ago\n\nSoon there'll be a Noo Code"
+    },
+    {
+      "author": "OsmanthusBloom",
+      "score": "8",
+      "text": "OsmanthusBloom\n•\n6d ago\n\nBut forked and now lives on as Zoo Code!\n\nSofakingwetoddead\n•\n6d ago\n\nThanks for the heads up. I didn't know.\n\nStill-Wafer1384\n•\n6d ago\n\nSoon there'll be a Noo Code"
+    },
+    {
+      "author": "Sofakingwetoddead",
+      "score": "2",
+      "text": "Sofakingwetoddead\n•\n6d ago\n\nThanks for the heads up. I didn't know."
+    },
+    {
+      "author": "Still-Wafer1384",
+      "score": "2",
+      "text": "Still-Wafer1384\n•\n6d ago\n\nSoon there'll be a Noo Code"
+    },
+    {
+      "author": "TheGamerForeverGFE",
+      "score": "5",
+      "text": "TheGamerForeverGFE\n•\n6d ago\n\nSay that again"
+    },
+    {
+      "author": "dododragon",
+      "score": "6",
+      "text": "dododragon\n•\n7d ago\n\nI wish people would discontinue mentioning Continue..\n\nWait what did I just do.. I'll see myself out...\n\nSureEnd9430\n•\n6d ago\n\nBut it continued on dis other platform ..."
+    },
+    {
+      "author": "SureEnd9430",
+      "score": "2",
+      "text": "SureEnd9430\n•\n6d ago\n\nBut it continued on dis other platform ..."
+    },
+    {
+      "author": "PawlsToTheWall",
+      "score": "116",
+      "text": "PawlsToTheWall\n•\n7d ago\n\nShould have added \"other\". I haven't tried any of these. I have used Hermes and also my own custom harness.\n\nEnvironmental_Form14\n•\n6d ago\n\nI chose continue thinking it was “continue to results”.\n\nsdnnvs\n•\n6d ago\n\nI chose Continue only to view result.\n\nDeProgrammer99\n•\n7d ago\n\nTo be fair, most people voting in polls like this probably have only tried 1-2 of the options, so their opinions aren't that meaningful anyway.\n\njakegh\n•\n6d ago\n\nHeck 30 people voted for roocode which was shutdown months ago.\n\nxeeff\n•\n6d ago\n\nactive members, even.\n\nhassan789_\n•\n6d ago\n\npost is obviously AI generated since tool like AIDER are 2yrs old...\n\nIrisColt\n•\n6d ago\n\nYou beat me to it. Hermes.\n\nDue-Memory-6957\n•\n5d ago\n Top 1% Commenter\n\nEven the Hermes people recommend you just tell Hermes to use OpenCode\n\nFirefighterSmooth961\n•\n4d ago\n\nI use in Minimax code app\n\n2 more replies"
+    },
+    {
+      "author": "Environmental_Form14",
+      "score": "49",
+      "text": "Environmental_Form14\n•\n6d ago\n\nI chose continue thinking it was “continue to results”.\n\nsdnnvs\n•\n6d ago\n\nI chose Continue only to view result."
+    },
+    {
+      "author": "sdnnvs",
+      "score": "25",
+      "text": "sdnnvs\n•\n6d ago\n\nI chose Continue only to view result."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vpdrxl",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:48:00Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.264,
+    "evidence": 0.0,
+    "relevance": 0.182,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/qwenLM/qwen-code",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://pi.dev/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://nanocollective.org/nanocoder",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vlj87v/introducing_unsloth_desktop_app/",
+  "title": "Introducing Unsloth Desktop app",
+  "author": "danielhanchen",
+  "post_body": "3\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n11d ago\ndanielhanchen\nIntroducing Unsloth Desktop app\nNews\n\nHi LocalLlama, we're super excited to release Unsloth Desktop today! 🦥\nIt's the first desktop app that enables you to run and train models locally.\n\nOpen-source. Available on Mac, Windows, and Linux\n\nSupports MLX, diffusion image/video models, audio models, and GGUF\n\nYou can run MiniMax-H3, Muse Glimmer, soon Qwen 3.8 etc\n\nConnect Claude Code and Codex to local LLMs\n\n50% more accurate with self-healing tool calls and sandboxed code execution\n\nSupports CPU and multi-GPU setups across NVIDIA, AMD, Intel, and Mac\n\nTrain models 2× faster while using 70% less VRAM\n\nIncludes private web search, deep research, RAG, MCP, and exports (NVFP4, GGUF)\n\nUse Unsloth’s OpenAI-compatible API with OpenAI and Anthropic cloud models\n\nSecurely deploy LLMs remotely and access them anywhere via Cloudflare HTTPS\n\nWe do not collect any telemetry or data.\n\nUnsloth Desktop is now available on unsloth.ai and GitHub.\n\nGitHub: https://github.com/unslothai/unsloth\n\nBlog & Guide: https://unsloth.ai/docs/desktop\n\nThanks for the support as always and we're here to answer any questions! 💗\n\nShare",
+  "comments": [
+    {
+      "author": "LewisTheScot",
+      "score": "158",
+      "text": "LewisTheScot\n•\n11d ago\n\nDo you guys ever sleep?\n\ndanielhanchen\n•\n11d ago\n\nHaha no :(\n\nImpressiveSuperfluit\n•\n11d ago\n\nQuantized sleep when?\n\narekkushisu\n•\n10d ago\n\nLatent space sleep\n\nCacheMoneyMillionair\n•\n11d ago\n\nThank you for not sleeping 🫡\n\n1 more reply"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "175",
+      "text": "danielhanchen\n•\n11d ago\n\nHaha no :(\n\nImpressiveSuperfluit\n•\n11d ago\n\nQuantized sleep when?\n\narekkushisu\n•\n10d ago\n\nLatent space sleep\n\nCacheMoneyMillionair\n•\n11d ago\n\nThank you for not sleeping 🫡\n\n1 more reply"
+    },
+    {
+      "author": "ImpressiveSuperfluit",
+      "score": "101",
+      "text": "ImpressiveSuperfluit\n•\n11d ago\n\nQuantized sleep when?\n\narekkushisu\n•\n10d ago\n\nLatent space sleep"
+    },
+    {
+      "author": "arekkushisu",
+      "score": "19",
+      "text": "arekkushisu\n•\n10d ago\n\nLatent space sleep"
+    },
+    {
+      "author": "CacheMoneyMillionair",
+      "score": "5",
+      "text": "CacheMoneyMillionair\n•\n11d ago\n\nThank you for not sleeping 🫡\n\n1 more reply"
+    },
+    {
+      "author": "Zestyclose-Ad-6147",
+      "score": "206",
+      "text": "Zestyclose-Ad-6147\n•\n11d ago\n\nWauw cool! And it is on linux on day one! 🫶\n\nyoracale\n•\n11d ago\nllama.cpp\n\nYes it is!\n\nShoulon\n•\n11d ago\n•\nEdited 11d ago\n\nPrecisely how things should be!\n\nwh33t\n•\n11d ago\n\nSo weird how so much of shit is built and relies on Linux yet it's not a first class citizen in many cases lol. Claude only just released a beta version of their desktop client for Linux\n\n7 more replies\nMissZiggie\n•\n11d ago\n\nCame here to find that tyvm\n\nsquirrelscrush\n•\n10d ago\n\nLLM related stuff is Linux native so we enjoy off it"
+    },
+    {
+      "author": "yoracale",
+      "score": "52",
+      "text": "yoracale\n•\n11d ago\nllama.cpp\n\nYes it is!"
+    },
+    {
+      "author": "Shoulon",
+      "score": "49",
+      "text": "Shoulon\n•\n11d ago\n•\nEdited 11d ago\n\nPrecisely how things should be!"
+    },
+    {
+      "author": "wh33t",
+      "score": "31",
+      "text": "wh33t\n•\n11d ago\n\nSo weird how so much of shit is built and relies on Linux yet it's not a first class citizen in many cases lol. Claude only just released a beta version of their desktop client for Linux\n\n7 more replies"
+    },
+    {
+      "author": "MissZiggie",
+      "score": "6",
+      "text": "MissZiggie\n•\n11d ago\n\nCame here to find that tyvm"
+    },
+    {
+      "author": "squirrelscrush",
+      "score": "3",
+      "text": "squirrelscrush\n•\n10d ago\n\nLLM related stuff is Linux native so we enjoy off it"
+    },
+    {
+      "author": "Potential_Top_4669",
+      "score": "55",
+      "text": "Potential_Top_4669\n•\n11d ago\n\nCan I run this without a GPU? Maybe if I have a lot of pure CPU RAM? I don't mind it being slow.\n\ndanielhanchen\n•\n11d ago\n\nYes of course. It works on any setup\n\nLegacyRemaster\n•\n11d ago\n Top 1% Commenter\n\namazing man! will test soon\n\nBorkato\n•\n11d ago\n\nIs it really no telemetry or data? 😮\n\nyoracale\n•\n11d ago\nllama.cpp\n\nYes, there isn't any. However we might add in an opt-in option like in a month or so as we don't want to build this opensource product blind. :)\n\nBorkato\n•\n11d ago\n\nOpt in is absolutely fine as long as there’s no way it ever becomes opt out! Thank you so much.\n\nyoracale\n•\n11d ago\nllama.cpp\n\nThank you appreciate it!\n\nSadPhilosophy9202\n•\n11d ago\n Top 1% Commenter\n\nMy raspberry pi?\n\nDeathByPain\n•\n10d ago\n\n80s/t\n\n80s/t\n\n2 more replies"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "48",
+      "text": "danielhanchen\n•\n11d ago\n\nYes of course. It works on any setup\n\nLegacyRemaster\n•\n11d ago\n Top 1% Commenter\n\namazing man! will test soon\n\nBorkato\n•\n11d ago\n\nIs it really no telemetry or data? 😮\n\nyoracale\n•\n11d ago\nllama.cpp\n\nYes, there isn't any. However we might add in an opt-in option like in a month or so as we don't want to build this opensource product blind. :)\n\nBorkato\n•\n11d ago\n\nOpt in is absolutely fine as long as there’s no way it ever becomes opt out! Thank you so much.\n\nyoracale\n•\n11d ago\nllama.cpp\n\nThank you appreciate it!\n\nSadPhilosophy9202\n•\n11d ago\n Top 1% Commenter\n\nMy raspberry pi?\n\nDeathByPain\n•\n10d ago\n\n80s/t\n\n80s/t"
+    },
+    {
+      "author": "LegacyRemaster",
+      "score": "13",
+      "text": "LegacyRemaster\n•\n11d ago\n Top 1% Commenter\n\namazing man! will test soon"
+    },
+    {
+      "author": "Borkato",
+      "score": "10",
+      "text": "Borkato\n•\n11d ago\n\nIs it really no telemetry or data? 😮\n\nyoracale\n•\n11d ago\nllama.cpp\n\nYes, there isn't any. However we might add in an opt-in option like in a month or so as we don't want to build this opensource product blind. :)\n\nBorkato\n•\n11d ago\n\nOpt in is absolutely fine as long as there’s no way it ever becomes opt out! Thank you so much.\n\nyoracale\n•\n11d ago\nllama.cpp\n\nThank you appreciate it!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vlj87v",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T12:00:56Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.385,
+    "evidence": 0.2,
+    "relevance": 0.273,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://unsloth.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/unslothai/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/desktop",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/basics/how-to-serve-local-llms-anywhere-secure-remote-access-with-cloudflare-and-unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/get-started/install/intel",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/new/3x-faster-training-packing",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1p6k0h2/you_can_now_do_fp8_reinforcement_learning_locally/",
+  "title": "You can now do FP8 reinforcement learning locally! (<5GB VRAM)",
+  "author": "danielhanchen",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n9mo ago\ndanielhanchen\nYou can now do FP8 reinforcement learning locally! (<5GB VRAM)\nResources\n\nHey r/LocalLlama! We're getting close to our last release of 2025! Thanks so much for all the support this year. The DeepSeek team back in Jan showcased how powerful FP8 RL can be with GRPO. Well, you can now try it on your local hardware using only 5GB VRAM! RTX 50x, 40x series all work! Unsloth GitHub: https://github.com/unslothai/unsloth\n\nWhy should you do FP8 training?\nNVIDIA's research finds FP8 training can match BF16 accuracy whilst getting 1.6x faster inference time. We collabed with TorchAO from PyTorch to introduce FP8 RL training, making FP8 GRPO possible on home GPUs with no accuracy loss!\n\nQwen3-4B FP8 GRPO works on just 6GB VRAM. Qwen3-1.7B on 5GB\n\n1.4x faster RL training and 2× longer context vs BF16/FP16\n\n60% less VRAM and 10× longer context than other FP8 RL implementations\n\nUnsloth is the only framework that makes FP8 RL LoRA work on consumer GPUs (e.g. NVIDIA RTX 40 & 50 Series). Also runs on H100, H200, B200.\n\nYou may notice Unsloth now uses much less VRAM than before, enabling even longer context. We’re also implementing faster training soon. Blog coming soon\n\nOur notebooks use 24GB L4s which fit Qwen3-14B as Tesla T4s don’t support FP8.\n\nOur FP8 RL incorporates Unsloth’s weight sharing, Standby, Flex Attention + more.\n\nWorks on any NVIDIA RTX 40, 50 series and H100, B200 etc. GPUs\n\nUse load_in_fp8 = True within FastLanguageModel to enable FP8 RL.\n\nYou can read our blogpost for our findings and more: https://docs.unsloth.ai/new/fp8-reinforcement-learning\n\nLlama 3.2 1B FP8 Colab Notebook: https://colab.research.google.com/github/unslothai/notebooks/blob/main/nb/Llama_FP8_GRPO.ipynb\n\nIn the notebook, you can plug in any of our previous reward functions or RL environment examples, including our auto kernel creation and our 2048 game notebooks. To enable fp8:\n\nimport os; os.environ['UNSLOTH_VLLM_STANDBY'] = \"1\" # Saves 30% VRAM\nfrom unsloth import FastLanguageModel\nmodel, tokenizer = FastLanguageModel.from_pretrained(\n    model_name = \"unsloth/Qwen3-8B\",\n    max_seq_length = 2048,\n    load_in_4bit = False, # False for LoRA 16bit\n    fast_inference = True, # Enable vLLM fast inference\n    max_lora_rank = 32,\n    load_in_fp8 = True, # Float8 RL / GRPO!\n)\n\nHope you all have a lovely Thanksgiving, a lovely rest of the week and I'll be here to answer any and all questions! =)\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n9mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "MrRandom04",
+      "score": "66",
+      "text": "MrRandom04\n•\n9mo ago\n\nHoly moly, an RL-finetuned 4B Qwen could actually be useful for real tasks. Being able to do that on my lowly laptop GPU would be amazing.\n\nSlowFail2433\n•\n9mo ago\n\nYe theres already models on huggingface that are that e.g Jan ai ones\n\nTraining_Pudding9338\n•\n9mo ago\n\nfor example?\n\nSlowFail2433\n•\n9mo ago\n\nTheir search agent"
+    },
+    {
+      "author": "SlowFail2433",
+      "score": "16",
+      "text": "SlowFail2433\n•\n9mo ago\n\nYe theres already models on huggingface that are that e.g Jan ai ones\n\nTraining_Pudding9338\n•\n9mo ago\n\nfor example?\n\nSlowFail2433\n•\n9mo ago\n\nTheir search agent"
+    },
+    {
+      "author": "Training_Pudding9338",
+      "score": "3",
+      "text": "Training_Pudding9338\n•\n9mo ago\n\nfor example?\n\nSlowFail2433\n•\n9mo ago\n\nTheir search agent"
+    },
+    {
+      "author": "SlowFail2433",
+      "score": "2",
+      "text": "SlowFail2433\n•\n9mo ago\n\nTheir search agent"
+    },
+    {
+      "author": "exaknight21",
+      "score": "26",
+      "text": "exaknight21\n•\n9mo ago\n\nAs someone who is a complete fan on unsloth, qwen3:4b (specifically), AND a proud owner of my twins (2x3060 @ 12 GB)... I am looking forward to playing with this and actually contributing to the community. I have about 200 GB of construction data that I plan on using for Fine Tuning using LIMA approach.\n\nyoracale\n•\n9mo ago\nllama.cpp\n\nAmazing to hear! Even if not contributing just showing your support is enough! 🥰♥️\n\ndanielhanchen\n•\n9mo ago\n\nOO that's a lot of data!! Hope it works well! Although sadly FP8 won't work on 3060 :( that well - I actually should launch a 3090 and check - I might be able to still make FP8 work :)\n\nmister2d\n•\n9mo ago\n\nThat would be great to know for my dual 3060 rig as well. But I'm not suggesting you go out of your way.\n\nANR2ME\n•\n9mo ago\n\nI wondered why did they didn't mentioned RTX 30 series 🤔\n\nWorks on any NVIDIA RTX 40, 50 series and H100, B200 etc. GPUs\n\nItsAMeUsernamio\n•\n9mo ago\n\nHardware FP8 support was added with the 40 series.\n\nSimilarly Hardware FP4 was added with the 50 series and will give a big leap in performance with Pytorch 2.10.\n\nmartinerous\n•\n9mo ago\n\nWondering how low we can go? Will we see FP2 on 60 series? (Just kidding... or not. No idea.)\n\nItsAMeUsernamio\n•\n9mo ago\n\nI remember when the 5090 was announced Nvidia had a benchmark chart showing it as 2x the 4090 and everyone were calling them frauds because the 5090 was running FP4 and the 4090 FP8 and hence the quality would be much worse. But it’s since been revealed their NVFP4 implementation is supposed to give close to BF16 accuracy.\n\nWe haven’t even seen the full capability of the 50 series yet so that’s probably years off even if the 60 series in 2027 support FP2. AMD has FP8 on their 2025 GPUs.\n\nexaknight21\n•\n9mo ago\n\nIt’s the slow bandwidth and lack of NVLink. AI Researchers are not going to use a 3060 to work with the insane requirements of a model. 3090s have higher bandwidth and NVLink hence why it is worth a shot for them to at least try, which I think is what daniel is trying to do.\n\nIn any event. Probably a cause for povertyAI.\n\nI was able to fine tune a model, I dont know what model, as a test on my 3060 set up - so it is not “impossible”, i used QLoRA at the time from unsloth. I’m working on a RAG App right now, but as I learn, I will share my approaches. It was a dataset of 10 “items”, and it took about 2 mins to fine tune… not to scale my memory is essentially Q1.5 right now.\n\nmarkovianmind\n•\n9mo ago\n\nmind sharing what you kind of data is and what you plan on doing with it\n\nexaknight21\n•\n9mo ago\n\nAll in due time friend. It’s raw and confidential data, but construction related. Immediate project is a complete self hosted RAG app, currently in a non-LocalLLaMA state."
+    },
+    {
+      "author": "yoracale",
+      "score": "11",
+      "text": "yoracale\n•\n9mo ago\nllama.cpp\n\nAmazing to hear! Even if not contributing just showing your support is enough! 🥰♥️"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "8",
+      "text": "danielhanchen\n•\n9mo ago\n\nOO that's a lot of data!! Hope it works well! Although sadly FP8 won't work on 3060 :( that well - I actually should launch a 3090 and check - I might be able to still make FP8 work :)\n\nmister2d\n•\n9mo ago\n\nThat would be great to know for my dual 3060 rig as well. But I'm not suggesting you go out of your way."
+    },
+    {
+      "author": "mister2d",
+      "score": "4",
+      "text": "mister2d\n•\n9mo ago\n\nThat would be great to know for my dual 3060 rig as well. But I'm not suggesting you go out of your way."
+    },
+    {
+      "author": "ANR2ME",
+      "score": "3",
+      "text": "ANR2ME\n•\n9mo ago\n\nI wondered why did they didn't mentioned RTX 30 series 🤔\n\nWorks on any NVIDIA RTX 40, 50 series and H100, B200 etc. GPUs\n\nItsAMeUsernamio\n•\n9mo ago\n\nHardware FP8 support was added with the 40 series.\n\nSimilarly Hardware FP4 was added with the 50 series and will give a big leap in performance with Pytorch 2.10.\n\nmartinerous\n•\n9mo ago\n\nWondering how low we can go? Will we see FP2 on 60 series? (Just kidding... or not. No idea.)\n\nItsAMeUsernamio\n•\n9mo ago\n\nI remember when the 5090 was announced Nvidia had a benchmark chart showing it as 2x the 4090 and everyone were calling them frauds because the 5090 was running FP4 and the 4090 FP8 and hence the quality would be much worse. But it’s since been revealed their NVFP4 implementation is supposed to give close to BF16 accuracy.\n\nWe haven’t even seen the full capability of the 50 series yet so that’s probably years off even if the 60 series in 2027 support FP2. AMD has FP8 on their 2025 GPUs.\n\nexaknight21\n•\n9mo ago\n\nIt’s the slow bandwidth and lack of NVLink. AI Researchers are not going to use a 3060 to work with the insane requirements of a model. 3090s have higher bandwidth and NVLink hence why it is worth a shot for them to at least try, which I think is what daniel is trying to do.\n\nIn any event. Probably a cause for povertyAI.\n\nI was able to fine tune a model, I dont know what model, as a test on my 3060 set up - so it is not “impossible”, i used QLoRA at the time from unsloth. I’m working on a RAG App right now, but as I learn, I will share my approaches. It was a dataset of 10 “items”, and it took about 2 mins to fine tune… not to scale my memory is essentially Q1.5 right now."
+    },
+    {
+      "author": "ItsAMeUsernamio",
+      "score": "5",
+      "text": "ItsAMeUsernamio\n•\n9mo ago\n\nHardware FP8 support was added with the 40 series.\n\nSimilarly Hardware FP4 was added with the 50 series and will give a big leap in performance with Pytorch 2.10.\n\nmartinerous\n•\n9mo ago\n\nWondering how low we can go? Will we see FP2 on 60 series? (Just kidding... or not. No idea.)\n\nItsAMeUsernamio\n•\n9mo ago\n\nI remember when the 5090 was announced Nvidia had a benchmark chart showing it as 2x the 4090 and everyone were calling them frauds because the 5090 was running FP4 and the 4090 FP8 and hence the quality would be much worse. But it’s since been revealed their NVFP4 implementation is supposed to give close to BF16 accuracy.\n\nWe haven’t even seen the full capability of the 50 series yet so that’s probably years off even if the 60 series in 2027 support FP2. AMD has FP8 on their 2025 GPUs."
+    },
+    {
+      "author": "martinerous",
+      "score": "1",
+      "text": "martinerous\n•\n9mo ago\n\nWondering how low we can go? Will we see FP2 on 60 series? (Just kidding... or not. No idea.)\n\nItsAMeUsernamio\n•\n9mo ago\n\nI remember when the 5090 was announced Nvidia had a benchmark chart showing it as 2x the 4090 and everyone were calling them frauds because the 5090 was running FP4 and the 4090 FP8 and hence the quality would be much worse. But it’s since been revealed their NVFP4 implementation is supposed to give close to BF16 accuracy.\n\nWe haven’t even seen the full capability of the 50 series yet so that’s probably years off even if the 60 series in 2027 support FP2. AMD has FP8 on their 2025 GPUs."
+    },
+    {
+      "author": "ItsAMeUsernamio",
+      "score": "1",
+      "text": "ItsAMeUsernamio\n•\n9mo ago\n\nI remember when the 5090 was announced Nvidia had a benchmark chart showing it as 2x the 4090 and everyone were calling them frauds because the 5090 was running FP4 and the 4090 FP8 and hence the quality would be much worse. But it’s since been revealed their NVFP4 implementation is supposed to give close to BF16 accuracy.\n\nWe haven’t even seen the full capability of the 50 series yet so that’s probably years off even if the 60 series in 2027 support FP2. AMD has FP8 on their 2025 GPUs."
+    },
+    {
+      "author": "exaknight21",
+      "score": "3",
+      "text": "exaknight21\n•\n9mo ago\n\nIt’s the slow bandwidth and lack of NVLink. AI Researchers are not going to use a 3060 to work with the insane requirements of a model. 3090s have higher bandwidth and NVLink hence why it is worth a shot for them to at least try, which I think is what daniel is trying to do.\n\nIn any event. Probably a cause for povertyAI.\n\nI was able to fine tune a model, I dont know what model, as a test on my 3060 set up - so it is not “impossible”, i used QLoRA at the time from unsloth. I’m working on a RAG App right now, but as I learn, I will share my approaches. It was a dataset of 10 “items”, and it took about 2 mins to fine tune… not to scale my memory is essentially Q1.5 right now."
+    },
+    {
+      "author": "markovianmind",
+      "score": "1",
+      "text": "markovianmind\n•\n9mo ago\n\nmind sharing what you kind of data is and what you plan on doing with it\n\nexaknight21\n•\n9mo ago\n\nAll in due time friend. It’s raw and confidential data, but construction related. Immediate project is a complete self hosted RAG app, currently in a non-LocalLLaMA state."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1p6k0h2",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:34:28Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.664,
+    "evidence": 0.6,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/unslothai/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/new/fp8-reinforcement-learning",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/get-started/install-and-update/amd",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/get-started/reinforcement-learning-rl-guide/advanced-rl-documentation",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/get-started/reinforcement-learning-rl-guide",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/new/vision-reinforcement-learning-vlm-rl",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://hub.docker.com/r/unsloth/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/get-started/unsloth-notebooks",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://dev.to/lewis_won/implementing-deekseek-r1-grpo-in-apple-mlx-framework-3n97",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

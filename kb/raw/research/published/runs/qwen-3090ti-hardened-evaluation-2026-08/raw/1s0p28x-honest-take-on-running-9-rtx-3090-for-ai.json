@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s0p28x/honest_take_on_running_9_rtx_3090_for_ai/",
+  "title": "Honest take on running 9× RTX 3090 for AI",
+  "author": "Outside_Dance_2799",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\nOutside_Dance_2799\nHonest take on running 9× RTX 3090 for AI\nResources\nmy home server\n3090 4way\n\nI bought 9 RTX 3090s.\n\nThey’re still one of the best price-to-VRAM GPUs available.\n\nHere’s the conclusion first: 1. I don’t recommend going beyond 6 GPUs 2. If your goal is simply to use AI, just pay for a cloud LLM subscription 3. Proxmox is, in my experience, one of the best OS setups for experimenting with LLMs\n\nTo be honest, I had a specific expectation:\n\nIf I could build around 200GB of VRAM, I thought I’d be able to run something comparable to Claude-level models locally.\n\nThat didn’t happen.\n\nReality check\n\nEven finding a motherboard that properly supports 4 GPUs is not trivial.\n\nOnce you go beyond that: • PCIe lane limitations become real • Stability starts to degrade • Power and thermal management get complicated\n\nThe most unexpected part was performance.\n\nToken generation actually became slower when scaling beyond a certain number of GPUs.\n\nMore GPUs does not automatically mean better performance, especially without a well-optimized setup.\n\nWhat I’m actually using it for\n\nInstead of trying to replicate large proprietary models, I shifted toward experimentation.\n\nFor example: • Exploring the idea of building AI systems with “emotional” behavior • Running simulations inspired by C. elegans inside a virtual environment • Experimenting with digitally modeled chemical-like interactions\n\nIs the RTX 3090 still worth it?\n\nYes.\n\nAt around $750, 24GB VRAM is still very compelling.\n\nIn my case, running 4 GPUs as a main AI server feels like a practical balance between performance, stability, and efficiency. (wake up 4way warriors!)\n\nFinal thoughts\n\nIf your goal is to use AI efficiently, cloud services are the better option.\n\nIf your goal is to experiment, break things, and explore new ideas, local setups are still very valuable.\n\nJust be careful about scaling hardware without fully understanding the trade-offs.\n\nShare",
+  "comments": [
+    {
+      "author": "a_beautiful_rhind",
+      "score": "41",
+      "text": "a_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nIf you didn't use the P2P driver, all your PCIE had to go through the CPU and thus it slows down.\n\nOutside_Dance_2799\n•\n5mo ago\n\nI'm just curious about this, but are you talking about NVLink?\nI'm asking because I believe it only supports a maximum of two.\n\na_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nNo. Aside from nvlink there is P2P over standard PCIE.\n\nFishChillylly\n•\n5mo ago\n\nyou can get a pcie switch board based on plx chips like pex8748 or pex8796, they are pcie3.0 models but i think when using p2p it would be enough for 3090s. or you can go for pcie4.0 models like pex88048 or pex88096 but that would be much more expensive. basically pcie switch let the cards communicate only through it when using p2p, without having to pass through cpu, which’s much slower.\n\nheliosythic\n•\n5mo ago\n\nJust looking into this as well, seems not supported on my 2 P100s but you could check on yours with command: nvidia-smi topo -m\n\nMine:\n\nnvidia-smi topo -m\n\tGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\nGPU0\tX \tPHB\t0-27\t0\t\tN/A\nGPU1\tPHB\tX \t0-27\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n\nBelieve you want to see PIX or PXB instead of the PHB that I have.\n\nTo get PIX/PXB you'd typically need a server motherboard with a PLX PCIe switch chip, or both GPUs behind the same PCIe root complex. Consumer boards almost always route everything through the CPU, giving you PHB."
+    },
+    {
+      "author": "Outside_Dance_2799",
+      "score": "4",
+      "text": "Outside_Dance_2799\n•\n5mo ago\n\nI'm just curious about this, but are you talking about NVLink?\nI'm asking because I believe it only supports a maximum of two.\n\na_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nNo. Aside from nvlink there is P2P over standard PCIE.\n\nFishChillylly\n•\n5mo ago\n\nyou can get a pcie switch board based on plx chips like pex8748 or pex8796, they are pcie3.0 models but i think when using p2p it would be enough for 3090s. or you can go for pcie4.0 models like pex88048 or pex88096 but that would be much more expensive. basically pcie switch let the cards communicate only through it when using p2p, without having to pass through cpu, which’s much slower.\n\nheliosythic\n•\n5mo ago\n\nJust looking into this as well, seems not supported on my 2 P100s but you could check on yours with command: nvidia-smi topo -m\n\nMine:\n\nnvidia-smi topo -m\n\tGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\nGPU0\tX \tPHB\t0-27\t0\t\tN/A\nGPU1\tPHB\tX \t0-27\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n\nBelieve you want to see PIX or PXB instead of the PHB that I have.\n\nTo get PIX/PXB you'd typically need a server motherboard with a PLX PCIe switch chip, or both GPUs behind the same PCIe root complex. Consumer boards almost always route everything through the CPU, giving you PHB."
+    },
+    {
+      "author": "a_beautiful_rhind",
+      "score": "27",
+      "text": "a_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nNo. Aside from nvlink there is P2P over standard PCIE."
+    },
+    {
+      "author": "FishChillylly",
+      "score": "6",
+      "text": "FishChillylly\n•\n5mo ago\n\nyou can get a pcie switch board based on plx chips like pex8748 or pex8796, they are pcie3.0 models but i think when using p2p it would be enough for 3090s. or you can go for pcie4.0 models like pex88048 or pex88096 but that would be much more expensive. basically pcie switch let the cards communicate only through it when using p2p, without having to pass through cpu, which’s much slower."
+    },
+    {
+      "author": "heliosythic",
+      "score": "5",
+      "text": "heliosythic\n•\n5mo ago\n\nJust looking into this as well, seems not supported on my 2 P100s but you could check on yours with command: nvidia-smi topo -m\n\nMine:\n\nnvidia-smi topo -m\n\tGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\nGPU0\tX \tPHB\t0-27\t0\t\tN/A\nGPU1\tPHB\tX \t0-27\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n\nBelieve you want to see PIX or PXB instead of the PHB that I have.\n\nTo get PIX/PXB you'd typically need a server motherboard with a PLX PCIe switch chip, or both GPUs behind the same PCIe root complex. Consumer boards almost always route everything through the CPU, giving you PHB."
+    },
+    {
+      "author": "Myarmhasteeth",
+      "score": "44",
+      "text": "Myarmhasteeth\n•\n5mo ago\n\nWhere are y’all getting 3090’s at $750??\n\nortegaalfredo\n•\n5mo ago\n\nA lot of used 3090s in deplorable state. I bought one that was literally rusted, I don't know how, they were using next to the sea or something. Anyway its running 24/7 since 2023, zero downtime. Those things are tanks.\n\nOutside_Dance_2799\n•\n5mo ago\n\nI heard that the 1080ti still runs.\n\nI like this story.\n\nSolinK3\n•\n5mo ago\n\nCan confirm my 1080ti is still running.\n\nMakers7886\n•\n5mo ago\n\n1080ti still working like new in the machine Im typing from - the goat.\n\n1 more reply\nshaunlmason\n•\n5mo ago\n\nI got one for $625 last weekend. Facebook marketplace is a hell of a place. 😆\n\njeffwadsworth\n•\n5mo ago\n\nGood question haha\n\nApprehensive-Boss-55\n•\n2mo ago\n\noxe no paraguai\n\n3 more replies"
+    },
+    {
+      "author": "ortegaalfredo",
+      "score": "9",
+      "text": "ortegaalfredo\n•\n5mo ago\n\nA lot of used 3090s in deplorable state. I bought one that was literally rusted, I don't know how, they were using next to the sea or something. Anyway its running 24/7 since 2023, zero downtime. Those things are tanks.\n\nOutside_Dance_2799\n•\n5mo ago\n\nI heard that the 1080ti still runs.\n\nI like this story.\n\nSolinK3\n•\n5mo ago\n\nCan confirm my 1080ti is still running.\n\nMakers7886\n•\n5mo ago\n\n1080ti still working like new in the machine Im typing from - the goat.\n\n1 more reply"
+    },
+    {
+      "author": "Outside_Dance_2799",
+      "score": "1",
+      "text": "Outside_Dance_2799\n•\n5mo ago\n\nI heard that the 1080ti still runs.\n\nI like this story.\n\nSolinK3\n•\n5mo ago\n\nCan confirm my 1080ti is still running.\n\nMakers7886\n•\n5mo ago\n\n1080ti still working like new in the machine Im typing from - the goat.\n\n1 more reply"
+    },
+    {
+      "author": "SolinK3",
+      "score": "1",
+      "text": "SolinK3\n•\n5mo ago\n\nCan confirm my 1080ti is still running.\n\nMakers7886\n•\n5mo ago\n\n1080ti still working like new in the machine Im typing from - the goat.\n\n1 more reply"
+    },
+    {
+      "author": "Makers7886",
+      "score": "1",
+      "text": "Makers7886\n•\n5mo ago\n\n1080ti still working like new in the machine Im typing from - the goat."
+    },
+    {
+      "author": "shaunlmason",
+      "score": "13",
+      "text": "shaunlmason\n•\n5mo ago\n\nI got one for $625 last weekend. Facebook marketplace is a hell of a place. 😆"
+    },
+    {
+      "author": "jeffwadsworth",
+      "score": "3",
+      "text": "jeffwadsworth\n•\n5mo ago\n\nGood question haha"
+    },
+    {
+      "author": "Apprehensive-Boss-55",
+      "score": "1",
+      "text": "Apprehensive-Boss-55\n•\n2mo ago\n\noxe no paraguai"
+    },
+    {
+      "author": "__JockY__",
+      "score": "79",
+      "text": "__JockY__\n•\n5mo ago\n Top 1% Commenter\n\nFirst: yyyaaaaassssss this is the shit we love in localllama!\n\nYour experience reflects my experience at 5x 3090s. Nine? Dang.\n\nAt this point x16 is no longer possible, so you're at x8 or more likely x4, which makes tensor parallel kinda pointless because PCIe latency and lack of bandwidth starts to slow inference down instead of speeding it up. You might actually be better off with pure pipeline parallel.\n\nYou can make it work by dropping a 3090 and adding a pair of dedicated 100-lane PCIe 4.0 switches and then pooling two lots of 4x 3090s on their own dedicated switch with each GPU @ PCIe 4.0 x16, each doing 4-way tensor parallel in vLLM with the two groups in pipeline parallel. It'd be much faster, but eye-wateringly expensive for 3090s.\n\nThe best way I've found to scale effectively with multi-GPU is to:\n\nUse matching GPUs like you already did\n\nGo to PCIe 5.0 on EPYC\n\nStay at x16 (which means 4 GPUs max, realistically)\n\nMax out the VRAM per GPU (e.g. 5090 or RTX 6000 PRO 96GB)\n\nRun vLLM with P2P patched Nvidia drivers\n\nThis gets you ridiculous performance at ridiculous prices.\n\nOutside_Dance_2799\n•\n5mo ago\n\nIf I had more money,\nI think I would have configured it like this.\n\nRunning it on PCIe 5.0 would be fun.\nI'll have to try it later when I make a lot of money.\n\nThanks!\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\nWorth noting that there’s no point having 3090s on PCIe 5.0 due to them being PCIe 4.0.\n\nOutside_Dance_2799\n•\n5mo ago\n\nYeah, I guess I'll have to spend about $100,000 by then, too.\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\nPricing is insane right now. The Samsung 12x 64 GB DDR5 6400 MT/s RDIMMs I bought for $4k in mid-2025 are now $24,000, I shit you not.\n\nstoppableDissolution\n•\n5mo ago\n Top 1% Commenter\n\nI mean... Sell em and get 3x6000pro instead? :p\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\n😁 I need it all! My only regret is not buying 96GB modules - I literally run out of RAM today and ended up swapping to NVMe, which made me sad.\n\n3 more replies\nfiery_prometheus\n•\n5mo ago\n\nIf you buy an active PCIe controller (forgot what they are called, but cost a lot) it can actually use one PCIe 5 and make it two PCIe 4 connections\n\npulsar080\n•\n5mo ago\n\nI'm using four graphics cards, and I'm also running into the PCI-E bus bandwidth. They're on PCI-E X1, though.\n\nEven with this configuration, it runs much faster than before. I'm currently looking for a PCI-E switch that I can use with my four single-slot graphics card setup that will fit in my case. Currently, I have the option of upgrading from PCI-E X1 to PCI-E X4. However, I don't yet know how to fit a PCI-E X16 card into my case. I simply can't find any compact adapters for four single-slot graphics cards.\n\nortegaalfredo\n•\n5mo ago\n\nPeople here are claiming they NEED X16, while the reality is that even PCIE 3.0 X1 is enough and very fast on Pipeline Parallel mode and even in Tensor-Parallel if you only have 2 GPUS.\n\nI even went as low as PCIE 2.0 X1 (an old motherboard I had) and just then it became too slow.\n\n2 more replies\nrbit4\n•\n5mo ago\n\nGot 8 5090s on epyc 9654 with 128 pcie5 lanes. Last gpu is x8 others are x16 pcie5. Only 1 mobo had this config from asrock. 768gb ddr5 ram. Yes fine-tuning and training is what is great on it\n\nmj3815\n•\n5mo ago\n\nWow, thanks for that\n\nPrudent-Ad4509\n•\n5mo ago\n•\nEdited 5mo ago\n\nI had a plan like this, except for using PCIe 4.0 instead of 5.0 (it is hard to find a scenario where 5.0 pays of). But like I've commented elsewhere, looking into internal workings of Qwen3.5 (for instance), marlin kernel, and internal optimizations of vllm and sglang paints a pretty colorful picture, doubly so if you intend to use MTP prediction. It can be made to run fast, but you need to become hardcore vllm/sglang specialist. Or just slap llama-server on it with a lipstick and call it a day.\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\n...but you need to become hardcore vllm/sglang specialist\n\nA month ago I'd have agreed. Now y"
+    },
+    {
+      "author": "Outside_Dance_2799",
+      "score": "17",
+      "text": "Outside_Dance_2799\n•\n5mo ago\n\nIf I had more money,\nI think I would have configured it like this.\n\nRunning it on PCIe 5.0 would be fun.\nI'll have to try it later when I make a lot of money.\n\nThanks!\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\nWorth noting that there’s no point having 3090s on PCIe 5.0 due to them being PCIe 4.0.\n\nOutside_Dance_2799\n•\n5mo ago\n\nYeah, I guess I'll have to spend about $100,000 by then, too.\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\nPricing is insane right now. The Samsung 12x 64 GB DDR5 6400 MT/s RDIMMs I bought for $4k in mid-2025 are now $24,000, I shit you not.\n\nstoppableDissolution\n•\n5mo ago\n Top 1% Commenter\n\nI mean... Sell em and get 3x6000pro instead? :p\n\n__JockY__\n•\n5mo ago\n Top 1% Commenter\n\n😁 I need it all! My only regret is not buying 96GB modules - I literally run out of RAM today and ended up swapping to NVMe, which made me sad.\n\n3 more replies\nfiery_prometheus\n•\n5mo ago\n\nIf you buy an active PCIe controller (forgot what they are called, but cost a lot) it can actually use one PCIe 5 and make it two PCIe 4 connections"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1s0p28x",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:25Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.587,
+    "evidence": 0.6,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://c-payne.com/products/pcie-gen4-switch-5x-x16-microchip-switchtec-pm40100",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://wheels.vllm.ai/nightly/vllm/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

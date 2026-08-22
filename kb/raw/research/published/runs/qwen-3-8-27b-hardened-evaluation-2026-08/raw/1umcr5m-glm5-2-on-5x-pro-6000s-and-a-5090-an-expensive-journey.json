@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1umcr5m/glm52_on_5x_pro_6000s_and_a_5090_an_expensive/",
+  "title": "GLM5.2 on 5x Pro 6000s and a 5090, an expensive journey",
+  "author": "yeah_likerage",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2mo ago\nyeah_likerage\nGLM5.2 on 5x Pro 6000s and a 5090, an expensive journey\nDiscussion\n\nThis started as something I thought was reasonable. I already had a 5090 for my gaming machine, and I thought a second 5090 would make me happy. Instead, it sent me down a rabbit hole that got completely out of control.\n\nI wanted something that would have full PCIe 5.0 x16 speed across all slots, which started a chain of events that had me spending good money after bad. It was a bit of a nightmare, as every decision I made led to me needing to make even tougher decisions. Couple that with what was actually available, and my hand was forced in a few spots.\n\nI started with the motherboard and worked my way backwards, eventually ending up with this setup. I wanted something close to endgame, but I still made a few concessions:\n\nThreadripper Pro 9975WX\nWRX90 Sage SE\n4×48 GB DDR5-6400 RDIMM\nAntec 900 case — ended up in the bin\n\nThe system started with two 5090s. The Antec 900 is well built, with huge space, smart connections, and refined edges, but ultimately it did nothing at all to support the GPUs. In a case this large and at this price point, that is a huge failure on their part, and for that reason I recommend avoiding it. If they had put $1 worth of bracketry in the machine to support GPUs, I’d give it a 10/10. With the lack of support, it is nearly useless unless you deal with it yourself, which I did, as you can see in the images. It’s like buying a Ferrari and having it delivered without any petrol.\n\nWith the two 5090s, I was working with smaller Qwen models, which seemed great, but it was clear that with the limited VRAM and my desire for additional sidecars like VL, I needed something more. I had huge plans, and the models were just too small to deal with the complexity.\n\nSo I got my first Pro 6000. I coupled it with a 5090, which made for weird tensor splits, but llama.cpp did a good job of divvying it all out. But now I was working with 120B-parameter models with almost no space for context. So it was smarter, but also a goldfish.\n\nThen I went to 2× Pro 6000 + 5090. Now I had the space for context. But in reality, the jump from 27B to 120B did not knock my socks off. I could get a bit farther now. I was at about 90% with the 27–35B models, and with the 120B models I was at about 95%. But 95% is about as useful as 90% if I can’t close the loop. If I can’t actually finish the task, it’s all for nothing.\n\nIn came 3× Pro 6000. Now I was in the MiniMax range, and finally I was getting somewhere. It was like I got concierge service at a ball game. My needs were being met, and I got answers for everything. Many of them were completely wrong answers, though. I had tons of code that was poorly made and led to dead ends and rewrites.\n\n4× Pro 6000 created an issue that I knew would come. I had been seeing several folks claim that they were able to deal with the thermal issues that came with side-by-side Pro 6000 cards. I knew they were likely not telling the truth, but I also knew a rebuild was probably in order anyway.\n\nSo, as you can see in the image, I placed four side by side and had thermal issues, even with the additional fans in the image and a 27-inch box fan sitting on top, which is not shown. I clocked things down a bit and still had a few system freezes. I gave up immediately and went to the high-rise.\n\nI got a couple of open-case designs and connected them together, thinking every two or three GPUs would get their own floor. It was overly complicated dealing with risers and cooling, so I dumped it pretty quickly.\n\nBut now, with GLM and Kimi, I was actually accomplishing things. The quants were tight, though, and my context was low again.\n\n5× Pro 6000 + 5090, along with the release of GLM 5.2, was an absolute game changer. I’m talking 98–99% now. I have plenty of room for context and sidecars, all running on the 5090 at blazing speeds. But blazing is legit: it is producing so much heat now that it’s a problem, and it’s summertime to boot. I had to get a second PSU, which I suppose, in all of this, is not the most ridiculous bit.\n\nAt full tilt, with 100% GPU usage for 30 minutes in this custom extruded aluminium design, with an outrageous number of fans in a ~20°C basement, the GPUs top out at about 70–75°C, which I’m very happy with.\n\nI finally do not desire another GPU, as all my needs seem to be met. Was it worth it? LOL, no. Absolutely not. This was a terrible idea. DO NOT DO THIS. I figure that at the rate I’m generating tokens, it will take over 10 years to break even at today’s prices, and that’s not accounting for electricity bills.\n\nI’ve never used the frontier models before, but I’ve seen the reviews and the speeds, and I’ll never match those with open weights. But it was a fun journey.\n\nI deleted the electricity company’s app from my phone so they’d forget about me for now.\n\nWish me luck.\n\nShare",
+  "comments": [
+    {
+      "author": "HeDo88TH",
+      "score": "377",
+      "text": "HeDo88TH\n•\n2mo ago\n•\nEdited 2mo ago\n\nGPUs StreetBets\n\nBitXorBit\n•\n2mo ago\n\nDefinitely feel the same\n\nkovake\n•\n2mo ago\n\nFeels like when people posted their gpu builds back when people mined Bitcoin.\n\nsatireplusplus\n•\n2mo ago\n\nProbably still a less expensive hobby than the original...\n\n1 more reply"
+    },
+    {
+      "author": "BitXorBit",
+      "score": "34",
+      "text": "BitXorBit\n•\n2mo ago\n\nDefinitely feel the same\n\nkovake\n•\n2mo ago\n\nFeels like when people posted their gpu builds back when people mined Bitcoin.\n\nsatireplusplus\n•\n2mo ago\n\nProbably still a less expensive hobby than the original...\n\n1 more reply"
+    },
+    {
+      "author": "kovake",
+      "score": "20",
+      "text": "kovake\n•\n2mo ago\n\nFeels like when people posted their gpu builds back when people mined Bitcoin."
+    },
+    {
+      "author": "satireplusplus",
+      "score": "7",
+      "text": "satireplusplus\n•\n2mo ago\n\nProbably still a less expensive hobby than the original...\n\n1 more reply"
+    },
+    {
+      "author": "ProfBootyPhD",
+      "score": "377",
+      "text": "ProfBootyPhD\n•\n2mo ago\n\n“I figure that at the rate I’m generating tokens, it will take over 10 years to break even at today’s prices”\n\njdzndj\n•\n2mo ago\n\nsame problem hyperscalers are facing\n\nSuch_Knee_8804\n•\n2mo ago\n\nThey are undercharging for tokens, for now\n\nTurdPlayingPeekaboo\n•\n2mo ago\n•\nEdited 2mo ago\n\nThey won't be able to charge more. The market simply won't pay more. I say this as a SWE who is using AI to write > 99% of my code. People like me started buying cheap ass P100s to run simple shit simply because we aren't willing to pay more for tokens. I use Opus 4.8 for coding and my P100s for the rest of my agentic shit, like managing my kanban boards. Anthropic can't raise their prices. Big enterprise is already putting strict caps on token spending. It's crazy how token prices are reverse scaling but they are. Combine all of it together and Anthropic better pray Elon Musk can really put data centers in space and really make Terrafab a reality... Because if he's talking out of his ass then they're screwed.\n\nuniqueusername649\n•\n2mo ago\n\nIts like shrinkflation. You cant increase the price for a pack of chips, but you can slightly decrease the contents. Same with AI: newer models just burn through vastly more tokens, often enough with similar results. That is how they get you. They cant increase the price and they know it, so they make their models think more. A lot more. If only that also made them a lot smarter.\n\nOctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply\n3 more replies\nLimp-Firefighter1054\n•\n2mo ago\n4 more replies\nDasteroid_909\n•\n2mo ago\n\nI did similar math for my 2x. I need 20 tok/s throughput for 5 straight years to break even... which means every idle second increases my per-token cost. Right now I'm pushing $260+/1M toks...\n\nGlittering-Call8746\n•\n2mo ago\n\n2x rtx 6000 ?\n\n1 more reply\n2 more replies\n__IHateEverything__\n•\n2mo ago\n\nYou can rent out GPU compute\n\nProfBootyPhD\n•\n2mo ago\n\nSure, if “you” are Meta or AWS. What kind of a price break does Joe-Bob’s Backwoods GPUs have to offer to compete with them?\n\novrlrd1377\n•\n2mo ago\n\nit's about US$6.8/hr on vast.ai for on-demand, if you are not actually getting anything yourself might as well rent out here and there. though it might be more sensible to sell the entire setup a couple months from now, may even make a buck doing so\n\nTastesLikeOwlbear\n•\n2mo ago\n\nWhoever pays you for the hardware on vast.ai is going to pound it far harder than you would. It is most likely going to sit at 100% usage the whole time it's rented out. This guy would need to include the cost of the AC to deal with 4kW+ of heat and any needed noise suppression in your calculations. Probably also backup power. Which, a UPS that can run a 4kW system starts at ~$5k.\n\nNorwood_Reaper_\n•\n2mo ago\n\nCan confirm. I am renting mine atm and they get hammered. Also you are likely to get ~$1USD/h per GPU and utilisation will never be 100%.\n\novrlrd1377\n•\n2mo ago\n\nall fair and totally valid points but hey, I'm not the one who built it haha I would not gamble this as a profitable and risk free endeavour\n\n5 more replies\n2 more replies\n1 more reply\n5 more replies"
+    },
+    {
+      "author": "jdzndj",
+      "score": "143",
+      "text": "jdzndj\n•\n2mo ago\n\nsame problem hyperscalers are facing\n\nSuch_Knee_8804\n•\n2mo ago\n\nThey are undercharging for tokens, for now\n\nTurdPlayingPeekaboo\n•\n2mo ago\n•\nEdited 2mo ago\n\nThey won't be able to charge more. The market simply won't pay more. I say this as a SWE who is using AI to write > 99% of my code. People like me started buying cheap ass P100s to run simple shit simply because we aren't willing to pay more for tokens. I use Opus 4.8 for coding and my P100s for the rest of my agentic shit, like managing my kanban boards. Anthropic can't raise their prices. Big enterprise is already putting strict caps on token spending. It's crazy how token prices are reverse scaling but they are. Combine all of it together and Anthropic better pray Elon Musk can really put data centers in space and really make Terrafab a reality... Because if he's talking out of his ass then they're screwed.\n\nuniqueusername649\n•\n2mo ago\n\nIts like shrinkflation. You cant increase the price for a pack of chips, but you can slightly decrease the contents. Same with AI: newer models just burn through vastly more tokens, often enough with similar results. That is how they get you. They cant increase the price and they know it, so they make their models think more. A lot more. If only that also made them a lot smarter.\n\nOctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply\n3 more replies\nLimp-Firefighter1054\n•\n2mo ago\n4 more replies"
+    },
+    {
+      "author": "Such_Knee_8804",
+      "score": "43",
+      "text": "Such_Knee_8804\n•\n2mo ago\n\nThey are undercharging for tokens, for now\n\nTurdPlayingPeekaboo\n•\n2mo ago\n•\nEdited 2mo ago\n\nThey won't be able to charge more. The market simply won't pay more. I say this as a SWE who is using AI to write > 99% of my code. People like me started buying cheap ass P100s to run simple shit simply because we aren't willing to pay more for tokens. I use Opus 4.8 for coding and my P100s for the rest of my agentic shit, like managing my kanban boards. Anthropic can't raise their prices. Big enterprise is already putting strict caps on token spending. It's crazy how token prices are reverse scaling but they are. Combine all of it together and Anthropic better pray Elon Musk can really put data centers in space and really make Terrafab a reality... Because if he's talking out of his ass then they're screwed.\n\nuniqueusername649\n•\n2mo ago\n\nIts like shrinkflation. You cant increase the price for a pack of chips, but you can slightly decrease the contents. Same with AI: newer models just burn through vastly more tokens, often enough with similar results. That is how they get you. They cant increase the price and they know it, so they make their models think more. A lot more. If only that also made them a lot smarter.\n\nOctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply\n3 more replies\nLimp-Firefighter1054\n•\n2mo ago"
+    },
+    {
+      "author": "TurdPlayingPeekaboo",
+      "score": "57",
+      "text": "TurdPlayingPeekaboo\n•\n2mo ago\n•\nEdited 2mo ago\n\nThey won't be able to charge more. The market simply won't pay more. I say this as a SWE who is using AI to write > 99% of my code. People like me started buying cheap ass P100s to run simple shit simply because we aren't willing to pay more for tokens. I use Opus 4.8 for coding and my P100s for the rest of my agentic shit, like managing my kanban boards. Anthropic can't raise their prices. Big enterprise is already putting strict caps on token spending. It's crazy how token prices are reverse scaling but they are. Combine all of it together and Anthropic better pray Elon Musk can really put data centers in space and really make Terrafab a reality... Because if he's talking out of his ass then they're screwed.\n\nuniqueusername649\n•\n2mo ago\n\nIts like shrinkflation. You cant increase the price for a pack of chips, but you can slightly decrease the contents. Same with AI: newer models just burn through vastly more tokens, often enough with similar results. That is how they get you. They cant increase the price and they know it, so they make their models think more. A lot more. If only that also made them a lot smarter.\n\nOctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply\n3 more replies"
+    },
+    {
+      "author": "uniqueusername649",
+      "score": "21",
+      "text": "uniqueusername649\n•\n2mo ago\n\nIts like shrinkflation. You cant increase the price for a pack of chips, but you can slightly decrease the contents. Same with AI: newer models just burn through vastly more tokens, often enough with similar results. That is how they get you. They cant increase the price and they know it, so they make their models think more. A lot more. If only that also made them a lot smarter.\n\nOctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply"
+    },
+    {
+      "author": "OctopusDude388",
+      "score": "16",
+      "text": "OctopusDude388\n•\n2mo ago\n\nyeah but you totally can use less capable models for coding and it being still usefull as a swe especially since more capables small models are seeing the day\n\nuniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply"
+    },
+    {
+      "author": "uniqueusername649",
+      "score": "6",
+      "text": "uniqueusername649\n•\n2mo ago\n\nAbsolutely, people think they always need Opus or Fable, when most tasks are easily handled by Sonnet.\n\nAnd thats why a local model like Qwen 3.6 27b gets you surprisingly far.\n\nGlittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies\n1 more reply"
+    },
+    {
+      "author": "Glittering-Call8746",
+      "score": "6",
+      "text": "Glittering-Call8746\n•\n2mo ago\n\nNo sonnet 5 is expensive. Go with glm 5.2\n\n6 more replies"
+    },
+    {
+      "author": "Limp-Firefighter1054",
+      "score": "9",
+      "text": "Limp-Firefighter1054\n•\n2mo ago"
+    },
+    {
+      "author": "Dasteroid_909",
+      "score": "13",
+      "text": "Dasteroid_909\n•\n2mo ago\n\nI did similar math for my 2x. I need 20 tok/s throughput for 5 straight years to break even... which means every idle second increases my per-token cost. Right now I'm pushing $260+/1M toks...\n\nGlittering-Call8746\n•\n2mo ago\n\n2x rtx 6000 ?\n\n1 more reply\n2 more replies"
+    },
+    {
+      "author": "Glittering-Call8746",
+      "score": "5",
+      "text": "Glittering-Call8746\n•\n2mo ago\n\n2x rtx 6000 ?\n\n1 more reply"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1umcr5m",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T12:01:04Z",
+  "discovered_by_query_ids": [
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.719,
+    "evidence": 0.8,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://vast.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/local-inference-lab/rtx6kpro/blob/master/models/glm5.2_v13.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

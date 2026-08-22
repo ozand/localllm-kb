@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vrjk4m/qwen_38_27b_saved_me_650_in_api_costs_this_evening/",
+  "title": "Qwen 3.8 27b saved me $650+ in API costs this evening",
+  "author": "illgettheownerforyou",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4d ago\nillgettheownerforyou\nQwen 3.8 27b saved me $650+ in API costs this evening\nDiscussion\n\nI've been experimenting with Qwen3.8-27B using DeepSeek Harness. It's a monster at long-horizon tasks, and the results were pretty wild.\n\nDeepSeek Harness ran on my Windows PC and connected over LAN to NInfer on a separate RTX PRO 6000 box. The model was Qwen3.8-27B with a 262K context window. All shell commands and file operations stayed on the client PC. The server did nothing except inference.\n\nThe quant was NInfer's groupwise-int artifact, which uses a mixed Q4/Q5/Q6 allocation. I plan to try the NVFP4 profile that NInfer supports next.\n\nThe 8+ hour run\n\n966 model calls\n\n130.2M task input tokens and 812.5K output tokens\n\n131.2M input and 853.3K output after including compaction\n\n972 model-facing tool calls\n\n1,421 actual local tool operations\n\n31 automatic compaction attempts\n\n104.83 output tok/s weighted decode speed\n\nZero model-generation failures\n\nThe context sizes got huge. The median root request was 136.6K tokens, p95 was 205.9K, and the largest was 231.2K. The harness pushed about 160 input tokens for every output token. No surprise that repeated context became the main workload.\n\nThe fun part is that generation itself was fast. Dividing the logical input by total time to first token gives about 12.4K prompt tok/s for the root and 8.5K across the root plus subagent. That is not raw GPU PP/s because it includes queue time and possibly reused prefixes, but it is still useful as a client-side number.\n\nRoot time to first token had a median of 0.8 seconds but a p95 of 136 seconds. The subagent's median was 151 seconds, while its median decode phase was only 5.3 seconds. Once NInfer got a request onto the GPU, it absolutely flew. Running two agents against one endpoint mostly added queueing and prefill contention.\n\nThe 1,421 local operations included 576 PowerShell calls, 259 reads, 221 edits, 161 writes, and 114 searches. Only 30 failed, giving the local tool layer a 2.11% error rate. The file tools were mostly finishing in milliseconds.\n\nWhat would this have cost through APIs?\n\nThe local run had no token bill, but I priced the full 131.2M input and 853.3K output workload using current API rates without cache discounts.\n\nModel\tEstimated API cost\n\nDeepSeek V4 Flash\t$18.61\nGPT-5.6 Luna\t$27.26\nClaude Sonnet 5\t$270.93\nClaude Opus 4.6\t$677.32\n\nPricing references: DeepSeek, OpenAI, Sonnet 5, and Opus 4.6.\n\nThis is crazy. I know the costs aren't perfect with DS V4 Flash 0731 hitting cahce a lot and such, but still. It was cranking out roughly 105 tok/s. The problems were repeated six-figure prompts, prefill, and two agents competing over one inference endpoint.\n\nIt feels like I made money today.\n\nCrazy that it reached the end goal without a single model-generation failure.\n\nShare",
+  "comments": [
+    {
+      "author": "ea_man",
+      "score": "150",
+      "text": "ea_man\n•\n4d ago\n Top 1% Commenter\n\nYou did the clickbait title on purpose, you did know from the start that it could have been $18.61 instead of ~600$.\n\nCheatCodesOfLife\n•\n4d ago\n\nHe's trying to justify his hardware cost.\n\nParty-Special-5177\n•\n4d ago\n\nHe doesn’t need to - the appreciation in value of modern gpus makes simply owning one its own justification.\n\nRunning private local inference is just a sweet bonus.\n\nRuin-Capable\n•\n4d ago\n\nNo kidding... I could have bought an RTX PRO 6000 when it was $8500 and probably doubled my money.\n\nParty-Special-5177\n•\n4d ago\n\nEven if you got in when they were 11000, you will double up before next year at this rate.\n\nI’m personally expecting they will be $24k sometime mid next year, after which I could dump and finally make the jump to h200s. The datacenter hardware isn’t appreciating as quickly.\n\nRisko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies\nanderspitman\n•\n4d ago\n\nUnrealized gains\n\nAlwaysLateToThaParty\n•\n4d ago\n\nMy rtx 6000 pro is 3x what I paid for it. I was thinking \"how can that not go up in price?\" Not that I'd sell it. It's worth far more in my hands.\n\nParty-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh.\n\ngavr123456789\n•\n3d ago\n\nhmm, but what about electricity bill for 8 hour work of gpu\n\nParty-Special-5177\n•\n3d ago\n\nFree for me and the other die hard AI guys I know. We’re all on solar out here.\n\ngavr123456789\n•\n3d ago\n\nwow\n\nBrilliant_Bobcat_209\n•\n3h ago\n\nThis. I have 3x RTX 4500 and 2x Pro 6000. It’s been a good investment. Especially as a small business.\n\nrorowhat\n•\n4d ago\n\nNot to mention that V4 would have probably consumed less tokens due to less repetition, so even a bit cheaper probably.\n\nsarhoshamiral\n•\n4d ago\n\nI also wonder if OP accounted for cached tokens. 95% of tokens are cached usually so much cheaper.\n\nillgettheownerforyou\n•\n4d ago\n\nYes, you are right- I am still new to a lot of this and didn’t consider cached tokens.\n\nfatihmtlm\n•\n3d ago\n\nAlso dont forget the cache hits\n\njohnzadok\n•\n4d ago\n\nWhat about your hardware and electricity cost?\n\npo_stulate\n•\n3d ago\n\nAlso the paid models may not require that many tokens to complete the same task with the same quality.\n\nsonaj9657\n•\n3d ago\n\nYeah, that is fair criticism."
+    },
+    {
+      "author": "CheatCodesOfLife",
+      "score": "103",
+      "text": "CheatCodesOfLife\n•\n4d ago\n\nHe's trying to justify his hardware cost.\n\nParty-Special-5177\n•\n4d ago\n\nHe doesn’t need to - the appreciation in value of modern gpus makes simply owning one its own justification.\n\nRunning private local inference is just a sweet bonus.\n\nRuin-Capable\n•\n4d ago\n\nNo kidding... I could have bought an RTX PRO 6000 when it was $8500 and probably doubled my money.\n\nParty-Special-5177\n•\n4d ago\n\nEven if you got in when they were 11000, you will double up before next year at this rate.\n\nI’m personally expecting they will be $24k sometime mid next year, after which I could dump and finally make the jump to h200s. The datacenter hardware isn’t appreciating as quickly.\n\nRisko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies\nanderspitman\n•\n4d ago\n\nUnrealized gains\n\nAlwaysLateToThaParty\n•\n4d ago\n\nMy rtx 6000 pro is 3x what I paid for it. I was thinking \"how can that not go up in price?\" Not that I'd sell it. It's worth far more in my hands.\n\nParty-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh.\n\ngavr123456789\n•\n3d ago\n\nhmm, but what about electricity bill for 8 hour work of gpu\n\nParty-Special-5177\n•\n3d ago\n\nFree for me and the other die hard AI guys I know. We’re all on solar out here.\n\ngavr123456789\n•\n3d ago\n\nwow\n\nBrilliant_Bobcat_209\n•\n3h ago\n\nThis. I have 3x RTX 4500 and 2x Pro 6000. It’s been a good investment. Especially as a small business."
+    },
+    {
+      "author": "Party-Special-5177",
+      "score": "20",
+      "text": "Party-Special-5177\n•\n4d ago\n\nHe doesn’t need to - the appreciation in value of modern gpus makes simply owning one its own justification.\n\nRunning private local inference is just a sweet bonus.\n\nRuin-Capable\n•\n4d ago\n\nNo kidding... I could have bought an RTX PRO 6000 when it was $8500 and probably doubled my money.\n\nParty-Special-5177\n•\n4d ago\n\nEven if you got in when they were 11000, you will double up before next year at this rate.\n\nI’m personally expecting they will be $24k sometime mid next year, after which I could dump and finally make the jump to h200s. The datacenter hardware isn’t appreciating as quickly.\n\nRisko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies\nanderspitman\n•\n4d ago\n\nUnrealized gains\n\nAlwaysLateToThaParty\n•\n4d ago\n\nMy rtx 6000 pro is 3x what I paid for it. I was thinking \"how can that not go up in price?\" Not that I'd sell it. It's worth far more in my hands.\n\nParty-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh.\n\ngavr123456789\n•\n3d ago\n\nhmm, but what about electricity bill for 8 hour work of gpu\n\nParty-Special-5177\n•\n3d ago\n\nFree for me and the other die hard AI guys I know. We’re all on solar out here.\n\ngavr123456789\n•\n3d ago\n\nwow\n\nBrilliant_Bobcat_209\n•\n3h ago\n\nThis. I have 3x RTX 4500 and 2x Pro 6000. It’s been a good investment. Especially as a small business."
+    },
+    {
+      "author": "Ruin-Capable",
+      "score": "7",
+      "text": "Ruin-Capable\n•\n4d ago\n\nNo kidding... I could have bought an RTX PRO 6000 when it was $8500 and probably doubled my money.\n\nParty-Special-5177\n•\n4d ago\n\nEven if you got in when they were 11000, you will double up before next year at this rate.\n\nI’m personally expecting they will be $24k sometime mid next year, after which I could dump and finally make the jump to h200s. The datacenter hardware isn’t appreciating as quickly.\n\nRisko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies\nanderspitman\n•\n4d ago\n\nUnrealized gains\n\nAlwaysLateToThaParty\n•\n4d ago\n\nMy rtx 6000 pro is 3x what I paid for it. I was thinking \"how can that not go up in price?\" Not that I'd sell it. It's worth far more in my hands.\n\nParty-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh."
+    },
+    {
+      "author": "Party-Special-5177",
+      "score": "5",
+      "text": "Party-Special-5177\n•\n4d ago\n\nEven if you got in when they were 11000, you will double up before next year at this rate.\n\nI’m personally expecting they will be $24k sometime mid next year, after which I could dump and finally make the jump to h200s. The datacenter hardware isn’t appreciating as quickly.\n\nRisko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies"
+    },
+    {
+      "author": "Risko4",
+      "score": "3",
+      "text": "Risko4\n•\n3d ago\n\nEh debatable, you're basically paying for a $3000 chip with $8000 of memory at 11k.\n\nThe 5090 and 6000 pro are both the same GB202 Blackwell die, 5090 is just 170 SMs vs 188 SMs 6000 on the Pro of the 192 SMs on the die.\n\nThe only reason a 6000 pro (Basically a 5090 Ti) costs 3 times a 5090 is cause it has 3 times the memory due to a different double sided PCB design and 3GB chips instead of 2GB chips. Otherwise the 5090 would have 48GB.\n\nThose chips are 60 dollars (were 20 dollars a year ago) to manually mod and solder onto the 5090.\n\nThe card doesn't even have NVlink which is unacceptable for the price to be honest.\n\n2 more replies"
+    },
+    {
+      "author": "anderspitman",
+      "score": "2",
+      "text": "anderspitman\n•\n4d ago\n\nUnrealized gains"
+    },
+    {
+      "author": "AlwaysLateToThaParty",
+      "score": "1",
+      "text": "AlwaysLateToThaParty\n•\n4d ago\n\nMy rtx 6000 pro is 3x what I paid for it. I was thinking \"how can that not go up in price?\" Not that I'd sell it. It's worth far more in my hands.\n\nParty-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh."
+    },
+    {
+      "author": "Party-Special-5177",
+      "score": "2",
+      "text": "Party-Special-5177\n•\n4d ago\n\nJust hold until it makes sense to consolidate to h200s or similar.\n\nI already rented the whole datacenter lineup to compare ‘real world’ conditions (training, not inference, in my case) - the h100 is just a hair over the performance (+~12ish % on my pipeline) of the 6000 pro with less vram, but supports nvlink. The 6000 pro is pcie 5 which actually is plenty good enough for the ‘consumer’ use case of inference where part of the pipeline is in ram and the traffic is low, etc. It absolutely hurts it for training uses though.\n\nExcepting niche or edge cases, it actually makes it where the next ‘meaningful’ jump is the h200.\n\nAlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh."
+    },
+    {
+      "author": "AlwaysLateToThaParty",
+      "score": "2",
+      "text": "AlwaysLateToThaParty\n•\n4d ago\n\nYeah, i had planned to upgrade the rest of the system as well, but got too busy at work. By the time I started looking at RAM, motherboards, chips and lanes, the RAMpocalypse had occurred. So I'm still on my 128GB of DDR4 3200mhz RAM on a tenth gen Intel, and an RTX 6000 Pro. And the RAM in that seven year old system is worth more today than what I paid seven years ago.\n\nRuns bg3 pretty schweet tho.\n\nillgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh."
+    },
+    {
+      "author": "illgettheownerforyou",
+      "score": "2",
+      "text": "illgettheownerforyou\n•\n4d ago\n\nSometimes I daydream about what if I had bought 2 or 4 RTX 6000s- I could almost retire with the increase. Sigh."
+    },
+    {
+      "author": "gavr123456789",
+      "score": "2",
+      "text": "gavr123456789\n•\n3d ago\n\nhmm, but what about electricity bill for 8 hour work of gpu\n\nParty-Special-5177\n•\n3d ago\n\nFree for me and the other die hard AI guys I know. We’re all on solar out here.\n\ngavr123456789\n•\n3d ago\n\nwow"
+    },
+    {
+      "author": "Party-Special-5177",
+      "score": "2",
+      "text": "Party-Special-5177\n•\n3d ago\n\nFree for me and the other die hard AI guys I know. We’re all on solar out here.\n\ngavr123456789\n•\n3d ago\n\nwow"
+    },
+    {
+      "author": "gavr123456789",
+      "score": "1",
+      "text": "gavr123456789\n•\n3d ago\n\nwow"
+    },
+    {
+      "author": "Brilliant_Bobcat_209",
+      "score": "1",
+      "text": "Brilliant_Bobcat_209\n•\n3h ago\n\nThis. I have 3x RTX 4500 and 2x Pro 6000. It’s been a good investment. Especially as a small business."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vrjk4m",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:47:27Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.809,
+    "evidence": 1.0,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/?article_id=article_1779470751466_8",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-sonnet-5",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

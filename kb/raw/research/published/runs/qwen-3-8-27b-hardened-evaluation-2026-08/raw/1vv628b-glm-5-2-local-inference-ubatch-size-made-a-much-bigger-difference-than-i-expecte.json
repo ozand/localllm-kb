@@ -1,0 +1,91 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv628b/glm52_local_inference_ubatch_size_made_a_much/",
+  "title": "GLM-5.2 local inference: ubatch size made a much bigger difference than I expected",
+  "author": "fuzhongkai",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4h ago\nfuzhongkai\nGLM-5.2 local inference: ubatch size made a much bigger difference than I expected\nDiscussion\ngithub.com\nOpen\n\nHas anyone else experimented with ubatch size when running GLM-5.2 locally?\n\nI was testing the 226 GiB GLM-5.2-UD-IQ2\\_XXS GGUF on 3x RTX PRO 6000 Blackwell GPUs and got a pretty interesting result.\n\nWith llama.cpp vs my TensorSharp implementation:\n\n\tllama.cpp\tTS ubatch 1024\tTS ubatch 2048\n\npp128\t276.5\t254.8\t264.4\npp512\t695.4\t666.9\t659.6\npp2048\t763.1\t918.9\t1145.8\npp4096\t715.8\t864.7\t1048.7\ntg64\t42.2\t43.7\t43.9\n\nAll numbers are tokens/sec and were measured back-to-back on the same machine.\n\nWhat surprised me was that a larger ubatch doesn't help much on short prompts, but makes a huge difference once the prompt gets longer.\n\nMy guess is that this is related to GLM-5.2's 256-expert / top-8 MoE architecture. With smaller batches, each expert gets relatively few rows, so the expert GEMMs don't utilize the GPU particularly well. Increasing the microbatch gives each expert more work and seems to improve utilization substantially.\n\nI also tried TP=3 on the same GPUs, but it was actually much slower than simply splitting the layers:\n\npp2048: 896.8 t/s layer split vs 502.8 t/s TP\ntg64: 43.9 t/s layer split vs 16.2 t/s TP\n\nThese cards are connected over PCIe without NVLink, so communication seems to dominate.\n\nI'm curious what other people running GLM-5/5.2 locally are seeing.\n\nHas anyone tried it on an NVLink/NVSwitch system? And what ubatch are you using?\n\nDisclosure: TensorSharp is my own open-source inference project.\n\nShare",
+  "comments": [
+    {
+      "author": "satnl",
+      "score": "3",
+      "text": "satnl\n•\n3h ago\n\nwell, if the context fit in the 1024 and 2048, it will not do difference since it's one batch for both cases (if the gpu can handle that batch size) \n\nif context is greater than 1024, so it needs more batchs than 2048 will need. \n\nsorry, but do you have a inference project and cannot do this \"inference\" itself? lol"
+    },
+    {
+      "author": "gpuz_dev",
+      "score": "1",
+      "text": "gpuz_dev\n•\n2h ago\n\nthe pp2048 jump from ~919 to ~1146 t/s is pretty huge while decode basically doesn't move. do you happen to have the VRAM delta between ubatch 1024 and 2048? would be interesting to know what that extra prefill throughput costs in memory"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vv628b",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:54:59Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e"
+  ],
+  "quality": {
+    "score": 0.437,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 0.2,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/zhongkaifu/TensorSharp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

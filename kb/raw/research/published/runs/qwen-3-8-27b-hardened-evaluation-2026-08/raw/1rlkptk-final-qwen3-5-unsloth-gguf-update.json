@@ -1,0 +1,240 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rlkptk/final_qwen35_unsloth_gguf_update/",
+  "title": "Final Qwen3.5 Unsloth GGUF Update!",
+  "author": "danielhanchen",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6mo ago\ndanielhanchen\nFinal Qwen3.5 Unsloth GGUF Update!\nResources\n\nHey r/LocalLLaMA this week we worked on further improving the best size/KLD tradeoff for Qwen3.5, and we’re excited to share new GGUF benchmarks for Qwen3.5-122B-A10B and Qwen3.5-35B-A3B (99.9% KL divergence). This will likely be our final GGUF update.\n\nWe’re also deeply saddened by the news around the Qwen team, and incredibly grateful for everything they’ve done for the open source community! For a lot of model releases, they had to stay up all night and not sleep.\n\nAll GGUFs now use our new imatrix calibration dataset so you might see small improvements in chat, coding, long context, and tool-calling use-cases. We are always manually improving this dataset and it will change often.\n\nThis is a follow up to https://www.reddit.com/r/LocalLLaMA/comments/1rgel19/new_qwen3535ba3b_unsloth_dynamic_ggufs_benchmarks/\n\nWe further enhanced our quantization method for Qwen3.5 MoEs to reduce Maximum KLD directly. 99.9% is what is generally used, but for massive outliers, Maximum KLD can be useful. Our New method generally pushes the Maximum KLD quite a much down vs the pre March 5th update. UD-Q4_K_XL is 8% bigger, but reduces maximum KLD by 51%!\n\nQuant\tOld GB\tNew GB\tMax KLD Old\tMax KLD New\n\nUD-Q2_K_XL\t12.0\t11.3 (-6%)\t8.237\t8.155 (-1%)\nUD-Q3_K_XL\t16.1\t15.5 (-4%)\t5.505\t5.146 (-6.5%)\nUD-Q4_K_XL\t19.2\t20.7 (+8%)\t5.894\t2.877 (-51%)\nUD-Q5_K_XL\t23.2\t24.6 (+6%)\t5.536\t3.210 (-42%)\n\nRe-download Qwen3.5-35B-A3B, 27B, and 122B-A10B as they're now all updated. Re-download 397B-A17B after today’s update (still uploading!)\n\nQwen3.5-27B and 122B-A10B include the earlier chat template fixes for better tool-calling/coding output. 397B-A17B will also be updated today to include this.\n\nLM Studio now supports toggling “thinking” for our GGUFs. Read our guide or run lms get unsloth/qwen3.5-4b. This process will be easier very soon.\n\nBenchmarks were conducted using the latest versions for every GGUF provider.\n\nReplaced BF16 layers with F16 for faster inference on unsupported devices.\n\nQwen3.5-35B-A3B now has all variants (Q4_K_M, Q8_0, BF16, etc.) uploaded.\n\nA reminder KLD and perplexity benchmarks does not exactly reflect real-world use-cases.\n\nLinks to new GGUFs: Qwen3.5-35B-A3B-GGUF, Qwen3.5-122B-A10B-GGUF, Qwen3.5-397B-A17B-GGUF (397B still uploading!)\n\nYou can also now Fine-tune Qwen3.5 in Unsloth via our free notebooks! Thanks a lot everyone!\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n6mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "spaceman_",
+      "score": "249",
+      "text": "spaceman_\n•\n6mo ago\n\nThanks for all your hard work, and I appreciate the fixes.\n\nBut claiming this is the \"final\" update has got qwen3.5_gguf_final_final_v2 vibes, don't jinx it!\n\ndanielhanchen\n•\n6mo ago\n\nHahaha sorry - agreed it might not be the true \"final\" final\n\n_murb\n•\n6mo ago\n\nFinal-v4_final (like my peers do at work)\n\ndanielhanchen\n•\n6mo ago\n\nHaha\n\n1 more reply\nAdOne8437\n•\n6mo ago\n\nFinal-v4_final_revised\n\nMaverickPT\n•\n6mo ago\n\nAh yes, gives Terraria \"final update\" vibes\n\nMaruluVR\n•\n6mo ago\n Top 1% Commenter\n\nReminds me of Attack on Titan final season part 3 final chapter"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "90",
+      "text": "danielhanchen\n•\n6mo ago\n\nHahaha sorry - agreed it might not be the true \"final\" final\n\n_murb\n•\n6mo ago\n\nFinal-v4_final (like my peers do at work)\n\ndanielhanchen\n•\n6mo ago\n\nHaha\n\n1 more reply\nAdOne8437\n•\n6mo ago\n\nFinal-v4_final_revised"
+    },
+    {
+      "author": "_murb",
+      "score": "47",
+      "text": "_murb\n•\n6mo ago\n\nFinal-v4_final (like my peers do at work)\n\ndanielhanchen\n•\n6mo ago\n\nHaha\n\n1 more reply\nAdOne8437\n•\n6mo ago\n\nFinal-v4_final_revised"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "12",
+      "text": "danielhanchen\n•\n6mo ago\n\nHaha\n\n1 more reply"
+    },
+    {
+      "author": "AdOne8437",
+      "score": "6",
+      "text": "AdOne8437\n•\n6mo ago\n\nFinal-v4_final_revised"
+    },
+    {
+      "author": "MaverickPT",
+      "score": "14",
+      "text": "MaverickPT\n•\n6mo ago\n\nAh yes, gives Terraria \"final update\" vibes\n\nMaruluVR\n•\n6mo ago\n Top 1% Commenter\n\nReminds me of Attack on Titan final season part 3 final chapter"
+    },
+    {
+      "author": "MaruluVR",
+      "score": "6",
+      "text": "MaruluVR\n•\n6mo ago\n Top 1% Commenter\n\nReminds me of Attack on Titan final season part 3 final chapter"
+    },
+    {
+      "author": "Lyuseefur",
+      "score": "32",
+      "text": "Lyuseefur\n•\n6mo ago\n\nAny thoughts on https://github.com/tanishqkumar/ssd ?\n\ndanielhanchen\n•\n6mo ago\n\nSSD is pretty cool! Saw it on Twitter haha but was trying to get this release out - will check it out more today!\n\nParthProLegend\n•\n6mo ago\n\nso, how was it?\n\n1 more reply"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "28",
+      "text": "danielhanchen\n•\n6mo ago\n\nSSD is pretty cool! Saw it on Twitter haha but was trying to get this release out - will check it out more today!\n\nParthProLegend\n•\n6mo ago\n\nso, how was it?"
+    },
+    {
+      "author": "ParthProLegend",
+      "score": "2",
+      "text": "ParthProLegend\n•\n6mo ago\n\nso, how was it?"
+    },
+    {
+      "author": "Small-Fall-6500",
+      "score": "32",
+      "text": "Small-Fall-6500\n•\n6mo ago\n\nThank you for your work and for the comparison data.\n\nAre all the GGUFs for the smaller Qwen3.5 models, 9b and below, also updated?\n\ndanielhanchen\n•\n6mo ago\n\nThank you! Oh the old ones generally are ok for now - however we do plan to improve them over the weekend!\n\niadanos\n•\n6mo ago\n\nDoes that mean that Qwen 3.5 {0.8, 2, 4, 9}B GGUFs are already in final state, and it will not be better?)"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "27",
+      "text": "danielhanchen\n•\n6mo ago\n\nThank you! Oh the old ones generally are ok for now - however we do plan to improve them over the weekend!\n\niadanos\n•\n6mo ago\n\nDoes that mean that Qwen 3.5 {0.8, 2, 4, 9}B GGUFs are already in final state, and it will not be better?)"
+    },
+    {
+      "author": "iadanos",
+      "score": "3",
+      "text": "iadanos\n•\n6mo ago\n\nDoes that mean that Qwen 3.5 {0.8, 2, 4, 9}B GGUFs are already in final state, and it will not be better?)"
+    },
+    {
+      "author": "GlobalLadder9461",
+      "score": "52",
+      "text": "GlobalLadder9461\n•\n6mo ago\n\nYey. Can you also update Qwen3-Coder-Next-GGUFs\n\ndanielhanchen\n•\n6mo ago\n\nYes! It's in the pipeline! 395B sadly is still bottlenecked on uploading :(\n\nmycall\n•\n6mo ago\n\nin your option, Qwen3-Coder-Next Q8_0 84.8 GB > Qwen3.5-122B-A10B UD-Q5_K_XL 91.9 GB for coding?\n\nBeneficial-Shame-483\n•\n6mo ago\n\nAsking for a friend with a Strix.\n\nmycall\n•\n6mo ago\n\nGB10\n\n1 more reply"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1rlkptk",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T12:01:12Z",
+  "discovered_by_query_ids": [
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.444,
+    "evidence": 0.4,
+    "relevance": 0.182,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://unsloth.ai/docs/models/qwen3.5",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-35B-A3B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-122B-A10B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-397B-A17B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/tanishqkumar/ssd",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/ubergarm/Qwen3-Coder-Next-GGUF/discussions",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/ubergarm/Qwen3-Coder-Next-GGUF/discussions/6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-122B-A10B-GGUF/blob/main/imatrix_unsloth.gguf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19139",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://lmstudio.ai/unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://arxiv.org/html/2601.14277v1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-122B-A10B-GGUF?show_file_info=UD-Q4_K_XL%2FQwen3.5-122B-A10B-UD-Q4_K_XL-00001-of-00003.gguf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

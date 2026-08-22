@@ -1,0 +1,191 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vof310/qwen_38_27b_i_get_34_tps_on_rtx_3090_llamaccp/",
+  "title": "Qwen 3.8 27B i get 34 tp/s on rtx 3090 llama.ccp",
+  "author": "cviperr33",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n8d ago\ncviperr33\nQwen 3.8 27B i get 34 tp/s on rtx 3090 llama.ccp\nDiscussion\n\nWhat kind of speeds are you guys getting ? Ive tried Unsloth studio on win11 and then switched to my linux os and trying llama.ccp right now , its about 34 - 36 tokens a second , seems rather slow as i remember i was getting 50-60 on 3.6 27b.\nI have not tried any speculative decoding yet , and the quant im using is IQ4 NL , KV at Q8\n\nBut yeah that thing is amazing so far , very impressed so far and it truly feels next gen not just a improvement\n\nShare",
+  "comments": [
+    {
+      "author": "coolnq",
+      "score": "8",
+      "text": "coolnq\n•\n8d ago\n\nI wonder why the new version is worse if the architecture is the same?\n\nchris_0611\n•\n8d ago\n\n1100T/s PP and 50T/s TG on Q5_K_XL on a 3090 + 3060Ti, with 131k context. Basically the exact same speed that I get on 3.6 27B Q5_K_XL.\n\nEmPips\n•\n5d ago\n\nWas this with drafting?\n\nizzmedia\n•\n8d ago\n\ngood question"
+    },
+    {
+      "author": "chris_0611",
+      "score": "3",
+      "text": "chris_0611\n•\n8d ago\n\n1100T/s PP and 50T/s TG on Q5_K_XL on a 3090 + 3060Ti, with 131k context. Basically the exact same speed that I get on 3.6 27B Q5_K_XL.\n\nEmPips\n•\n5d ago\n\nWas this with drafting?"
+    },
+    {
+      "author": "EmPips",
+      "score": "1",
+      "text": "EmPips\n•\n5d ago\n\nWas this with drafting?"
+    },
+    {
+      "author": "izzmedia",
+      "score": "1",
+      "text": "izzmedia\n•\n8d ago\n\ngood question"
+    },
+    {
+      "author": "marcos8015",
+      "score": "6",
+      "text": "marcos8015\n•\n8d ago\n\nHey, about the same 35-40 tok/s. Also running it on a 3090 on lama.cpp. With MTP it goes all the way up to 70-80 tok/s!\n\ncviperr33\n•\n8d ago\n\ncan you share with me your launch command or launch script ? I havent started llama.ccp in 3 months\n\nanderspitman\n•\n8d ago\n\nThis is the way\n\neversincemay\n•\n8d ago\n\ncan you tell me how you got mtp to work? maybe link a tutorial? really need help on this."
+    },
+    {
+      "author": "cviperr33",
+      "score": "3",
+      "text": "cviperr33\n•\n8d ago\n\ncan you share with me your launch command or launch script ? I havent started llama.ccp in 3 months"
+    },
+    {
+      "author": "anderspitman",
+      "score": "2",
+      "text": "anderspitman\n•\n8d ago\n\nThis is the way"
+    },
+    {
+      "author": "eversincemay",
+      "score": "2",
+      "text": "eversincemay\n•\n8d ago\n\ncan you tell me how you got mtp to work? maybe link a tutorial? really need help on this."
+    },
+    {
+      "author": "nickm_27",
+      "score": "3",
+      "text": "nickm_27\n•\n8d ago\nllama.cpp\n\nQ5_K_S I get 30-35 with mtp on Intel B70(SYCL)"
+    },
+    {
+      "author": "oathcunt",
+      "score": "3",
+      "text": "oathcunt\n•\n8d ago\n\nI’m running the model on a Tesla V100 32gb PCIe-x16 (this card has about 8% less bandwidth than the 3090, and an older architecture). The card is averaging around 42 tok/s decode speeds, these are my llama.cpp flags:\n\n-m Qwen3.8-27B-UD-Q4_K_XL.gguf\n--mmproj mmproj-BF16.gguf\n--alias qwen-dense-extreme\n\n-ngl 99\n--device CUDA0\n--split-mode layer\n--tensor-split 1\n--main-gpu 0\n\n-c 131072\n-fa on\n--cache-type-k f16\n--cache-type-v f16\n--jinja\n--no-mmproj-offload\n--cache-prompt\n--cache-ram 4096\n\n--reasoning on\n--reasoning-budget 16384\n--reasoning-format deepseek\n\n--spec-type draft-mtp\n--spec-draft-n-max 2\n--spec-draft-n-min 0\n\n--host <private-endpoint>\n--port 8096\n-np 1\n--threads 22\n--threads-batch 22\n--batch-size 4096\n--ubatch-size 2048\n--timeout 3600"
+    },
+    {
+      "author": "SensitiveVariety",
+      "score": "2",
+      "text": "SensitiveVariety\n•\n8d ago\n\nDefinitely seems slow for a 3090 + you've had faster speeds on the previous version. Dual 3060s I'm getting 38~ for token gen."
+    },
+    {
+      "author": "kepardi99",
+      "score": "2",
+      "text": "kepardi99\n•\n8d ago\n\nUsing Qwen3.8-27B-UD-Q4_K_XL.gguf with 2x P100 on Epyc getting 11tokens/sec\n\nUnorderedPizza\n•\n8d ago\n\nAre you using split tensors on llama.cpp?\n\nkepardi99\n•\n8d ago\n\nsplit tensor does not seem to work with Qwen3.8 27b with 2x P100, I was using tensor split with Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf  as it did help with more tokens. My current spell below. MTP helped 10->12tokens per sec. Also for some reason 'flash-attn off' is needed, was able to keep it on: Qwen3.8-2.4T-A95B-UD-Q1_0-00001-of-00010.gguf\n\nGGML_CUDA_P2P=1 ./llama-server \\\n\n--model /data2/Qwen3.8-27B-UD-Q4_K_XL.gguf \\\n\n--split-mode layer \\\n\n--tensor-split 1,1 \\\n\n-ngl 99 \\\n\n-c 22000 \\\n\n-t 12 \\\n\n-tb 16 \\\n\n--flash-attn off \\\n\n--kv-unified \\\n\n--batch-size 128 \\\n\n--ubatch-size 32 \\\n\n--parallel 1 \\\n\n--spec-type draft-mtp \\\n\n--spec-draft-ngl all \\\n\n--spec-draft-cpu-moe \\\n\n--no-mmap \\\n\n--temp 1.0 \\\n\n--top-p 0.95 \\\n\n--top-k 20 \\\n\n--min-p 0.0 \\\n\n--port 8080 --host 0.0.0.0 \\\n\n-lv 3"
+    },
+    {
+      "author": "UnorderedPizza",
+      "score": "1",
+      "text": "UnorderedPizza\n•\n8d ago\n\nAre you using split tensors on llama.cpp?\n\nkepardi99\n•\n8d ago\n\nsplit tensor does not seem to work with Qwen3.8 27b with 2x P100, I was using tensor split with Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf  as it did help with more tokens. My current spell below. MTP helped 10->12tokens per sec. Also for some reason 'flash-attn off' is needed, was able to keep it on: Qwen3.8-2.4T-A95B-UD-Q1_0-00001-of-00010.gguf\n\nGGML_CUDA_P2P=1 ./llama-server \\\n\n--model /data2/Qwen3.8-27B-UD-Q4_K_XL.gguf \\\n\n--split-mode layer \\\n\n--tensor-split 1,1 \\\n\n-ngl 99 \\\n\n-c 22000 \\\n\n-t 12 \\\n\n-tb 16 \\\n\n--flash-attn off \\\n\n--kv-unified \\\n\n--batch-size 128 \\\n\n--ubatch-size 32 \\\n\n--parallel 1 \\\n\n--spec-type draft-mtp \\\n\n--spec-draft-ngl all \\\n\n--spec-draft-cpu-moe \\\n\n--no-mmap \\\n\n--temp 1.0 \\\n\n--top-p 0.95 \\\n\n--top-k 20 \\\n\n--min-p 0.0 \\\n\n--port 8080 --host 0.0.0.0 \\\n\n-lv 3"
+    },
+    {
+      "author": "kepardi99",
+      "score": "1",
+      "text": "kepardi99\n•\n8d ago\n\nsplit tensor does not seem to work with Qwen3.8 27b with 2x P100, I was using tensor split with Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf  as it did help with more tokens. My current spell below. MTP helped 10->12tokens per sec. Also for some reason 'flash-attn off' is needed, was able to keep it on: Qwen3.8-2.4T-A95B-UD-Q1_0-00001-of-00010.gguf\n\nGGML_CUDA_P2P=1 ./llama-server \\\n\n--model /data2/Qwen3.8-27B-UD-Q4_K_XL.gguf \\\n\n--split-mode layer \\\n\n--tensor-split 1,1 \\\n\n-ngl 99 \\\n\n-c 22000 \\\n\n-t 12 \\\n\n-tb 16 \\\n\n--flash-attn off \\\n\n--kv-unified \\\n\n--batch-size 128 \\\n\n--ubatch-size 32 \\\n\n--parallel 1 \\\n\n--spec-type draft-mtp \\\n\n--spec-draft-ngl all \\\n\n--spec-draft-cpu-moe \\\n\n--no-mmap \\\n\n--temp 1.0 \\\n\n--top-p 0.95 \\\n\n--top-k 20 \\\n\n--min-p 0.0 \\\n\n--port 8080 --host 0.0.0.0 \\\n\n-lv 3"
+    },
+    {
+      "author": "verdooft",
+      "score": "2",
+      "text": "verdooft\n•\n8d ago\n\n[ Prompt: 2,1 t/s | Generation: 1,4 t/s ] with Q4_K_XL and 0 VRAM, but Youtube is running, without it it will be faster, 1,7 t/s perhaps."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vof310",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:41:40Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.806,
+    "evidence": 1.0,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Don-Chad/ninfer-3090/releases/tag/v0.5.0-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/jram4/ninfer-4090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

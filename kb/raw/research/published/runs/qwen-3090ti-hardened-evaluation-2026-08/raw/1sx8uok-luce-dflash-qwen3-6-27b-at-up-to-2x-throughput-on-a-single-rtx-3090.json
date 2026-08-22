@@ -1,0 +1,212 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sx8uok/luce_dflash_qwen3627b_at_up_to_2x_throughput_on_a/",
+  "title": "Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090",
+  "author": "sandropuppo",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nsandropuppo\nLuce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090\nResources\n\nHey fellow Llamas, your time is precious, so I'll keep it short.\n\nWe built a GGUF port of DFlash speculative decoding. Standalone C++/CUDA stack on top of ggml, runs on a single 24 GB RTX 3090, hosts the new Qwen3.6-27B.\n\nWe call it Luce DFlash (https://github.com/Luce-Org/lucebox-hub; MIT)\n\n~1.98x mean over autoregressive on Qwen3.6 across HumanEval / GSM8K / Math500, with zero retraining (z-lab published a matched Qwen3.6-DFlash draft on 2026-04-26, still under training, so AL should keep climbing).\n\nIf you have CUDA 12+ and an NVIDIA GPU (RTX 3090 / 4090 / 5090, DGX Spark, other Blackwell, or Jetson AGX Thor with CUDA 13+), all you need is\n\n# After cloning the repo (link in the first comment):\n\ncd lucebox-hub/dflash\n\ncmake -B build -S . -DCMAKE_BUILD_TYPE=Release\n\ncmake --build build --target test_dflash -j\n\n# Fetch target (~16 GB)\n\nhuggingface-cli download unsloth/Qwen3.6-27B-GGUF Qwen3.6-27B-Q4_K_M.gguf --local-dir models/\n\n# Matched 3.6 draft is gated: accept terms + set HF_TOKEN first\n\nhuggingface-cli download z-lab/Qwen3.6-27B-DFlash --local-dir models/draft/\n\n# Run\n\nDFLASH_TARGET=models/Qwen3.6-27B-Q4_K_M.gguf python3 scripts/run.py --prompt \"def fibonacci(n):\"\n\nThat's it. No Python runtime in the engine, no llama.cpp install, no vLLM, no SGLang. The binary links libggml*.a and never libllama.\n\nLuce DFlash will\n\nLoad Qwen3.6-27B Q4_K_M target weights (~16 GB) plus the matched DFlash bf16 draft (~3.46 GB) and run DDTree tree-verify speculative decoding (block size 16, default budget 22, greedy verify).\n\nCompress the KV cache to TQ3_0 (3.5 bpv, ~9.7x vs F16) and roll a 4096-slot target_feat ring so 256K context fits in 24 GB. Q4_0 is the legacy path and tops out near 128K.\n\nAuto-bump the prefill ubatch from 16 to 192 for prompts past 2048 tokens (~913 tok/s prefill on 13K prompts).\n\nApply sliding-window flash attention at decode (default 2048-token window, 100% speculative acceptance retained) so 60K context still decodes at 89.7 tok/s instead of 25.8 tok/s.\n\nServe over an OpenAI-compatible HTTP endpoint or a local chat REPL.\n\nRunning on RTX 3090, Qwen3.6-27B UD-Q4_K_XL (unsloth Dynamic 2.0) target, 10 prompts/dataset, n_gen=256:\n\nBench AR tok/s DFlash tok/s AL Speedup\n\nHumanEval 34.90 78.16 5.94 2.24x\n\nMath500 35.13 69.77 5.15 1.99x\n\nGSM8K 34.89 59.65 4.43 1.71x\n\nMean 34.97 69.19 5.17 1.98x\n\nAs you can see, the speedup is real on consumer hardware, not a paper number. Target graph produces bit-identical output to autoregressive in AR mode; the draft graph matches the z-lab PyTorch reference at cos sim 0.999812. Q4_0 KV costs ~3% AL at short context (8.56 to 8.33) and wins at long context where F16 won't fit anyway.\n\nConstraints: CUDA only, greedy verify only (temperature/top_p on the OpenAI server are accepted and ignored), no Metal / ROCm / multi-GPU. Repo started single-3090, recent community PRs added support for RTX 5090, DGX Spark / GB10, other Blackwell cards, and Jetson AGX Thor (sm_110 + CUDA 13).\n\nFeedback more than welcome!\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n4mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "Thrumpwart",
+      "score": "136",
+      "text": "Thrumpwart\n•\n4mo ago\nllama.cpp\n\nAwesome. This really is the golden age of Local AI Inference and innovation.\n\nsandropuppo\n•\n4mo ago\n\nTrue, and the Local AI community is awesome\n\nfasti-au\n•\n3mo ago\n\nAnd now equipped. This ai milking has to stop. They know they not using right or their patterweavers suck\n\nThatCrankyGuy\n•\n4mo ago\n\nYup love the innovations. But what I am TRULY waiting for is chip-based inference.\n\nYou have no idea how big of a hardon I have for this: https://taalas.com/\n\npointer_to_null\n•\n4mo ago\n•\nEdited 4mo ago\n\nYou should probably temper your expectations a bit.\n\nNot to say I'm a complete skeptic- I remember (fondly) how introduction of ASICs completely wrecked the GPU bubble in most cryptocurrencies. I have zero doubts that tensor ops used in inference can't also see a similar improvements in throughput and efficiency for niche applications, and I don't believe Taalas is lying whatsoever about their token throughput claims.\n\nHowever, here's some reality:\n\nTurnaround time for new chip, from design to mass production, is excruciatingly slow. Even the biggest players (Nvidia, Intel, Apple, Qualcomm, Intel, etc) typically take upwards of a year- sometimes more- from design, validation, tapeout to even getting the first engineering samples packaged and sent to internal driver teams and ISV partners. Taala's HC1 demonstrator unveiled in Feb 2026 is a hardware implementation of an LLM that was considered obsolete for at least a year- Llama 3.1 8B (June 2024). These these weights are frozen in silicon- forever- not even with a finetune using the exact same architecture. Perhaps if these were FPGAs that you can maybe reflash/reprogram after fabrication, but those are size-limited (which is a serious problem- see point #4), slower and MUCH more expensive.\n\nGoing back to crypto- their algorithms are mostly static where the algorithm rarely changes over time, just the difficulty (or volume of effort for given result). While there are some exceptions to this, this is the norm. The same exact SHA256 work being computed for Bitcoin's blockchain 15 years ago is happening today- just at much, much greater scale. This is why ASICs dominate most crypto. LLMs are seeing radical improvements- good for us, but bad if you're investing millions into R&D that'll almost certainly get obsoleted a year before production.\n\n2. Their claims of a 2 month turnaround is unrealistic and ignores the realities of semi foundry demand. In other words, Taalas is joining the same the wafer queue for the given node as other customers, many of whom have deeper pockets and more sway. For 6nm it's not terrible, but for smaller, newer nodes the competition is much worse- with Apple usually getting first dibs on the newest processes, usually followed by Nvidia, AMD, Qualcomm.\n\n3. Memory is still a concern. While storing the weights on chip greatly helps capacity requirements, you will still need some form of volatile memory like DRAM to store context. And for the 17k tokens/sec speeds it advertises, I imagine channels need to be suitably wide and fast- otherwise it becomes a bottleneck.\n\n4. Most importantly (and analysts rarely discussed): these ASICs don't seem to scale well with model sizes and hit an upper cap due to transistor budgets, yield rates and wafer prices. Look at their HC1 demonstrator- 815mm2 on 6 nm TCSM with 53B transistors- that's a huge chip (check out the picture of their card if you don't believe me). That's just to house and run a pre-baked LLM with only 8B parameters quantized down to 3-bits.\n\nFor comparison, the GB202 (RTX 5090) is already ~750mm2. Sure HC1 is fabbed on TSMC 6nm, it could shrink somewhat on a newer 4N or smaller process (which requires longer turnaround, higher wafer costs, lower yields and longer backlog- see point #2). However that doesn't fix physics- HC1's 53B transistors is till 7B more than GB203 (chip used in RTX 5080) so I'm not holding out for a miracle unless their first gen is horrendously bloated archite"
+    },
+    {
+      "author": "sandropuppo",
+      "score": "42",
+      "text": "sandropuppo\n•\n4mo ago\n\nTrue, and the Local AI community is awesome\n\nfasti-au\n•\n3mo ago\n\nAnd now equipped. This ai milking has to stop. They know they not using right or their patterweavers suck"
+    },
+    {
+      "author": "fasti-au",
+      "score": "1",
+      "text": "fasti-au\n•\n3mo ago\n\nAnd now equipped. This ai milking has to stop. They know they not using right or their patterweavers suck"
+    },
+    {
+      "author": "ThatCrankyGuy",
+      "score": "26",
+      "text": "ThatCrankyGuy\n•\n4mo ago\n\nYup love the innovations. But what I am TRULY waiting for is chip-based inference.\n\nYou have no idea how big of a hardon I have for this: https://taalas.com/\n\npointer_to_null\n•\n4mo ago\n•\nEdited 4mo ago\n\nYou should probably temper your expectations a bit.\n\nNot to say I'm a complete skeptic- I remember (fondly) how introduction of ASICs completely wrecked the GPU bubble in most cryptocurrencies. I have zero doubts that tensor ops used in inference can't also see a similar improvements in throughput and efficiency for niche applications, and I don't believe Taalas is lying whatsoever about their token throughput claims.\n\nHowever, here's some reality:\n\nTurnaround time for new chip, from design to mass production, is excruciatingly slow. Even the biggest players (Nvidia, Intel, Apple, Qualcomm, Intel, etc) typically take upwards of a year- sometimes more- from design, validation, tapeout to even getting the first engineering samples packaged and sent to internal driver teams and ISV partners. Taala's HC1 demonstrator unveiled in Feb 2026 is a hardware implementation of an LLM that was considered obsolete for at least a year- Llama 3.1 8B (June 2024). These these weights are frozen in silicon- forever- not even with a finetune using the exact same architecture. Perhaps if these were FPGAs that you can maybe reflash/reprogram after fabrication, but those are size-limited (which is a serious problem- see point #4), slower and MUCH more expensive.\n\nGoing back to crypto- their algorithms are mostly static where the algorithm rarely changes over time, just the difficulty (or volume of effort for given result). While there are some exceptions to this, this is the norm. The same exact SHA256 work being computed for Bitcoin's blockchain 15 years ago is happening today- just at much, much greater scale. This is why ASICs dominate most crypto. LLMs are seeing radical improvements- good for us, but bad if you're investing millions into R&D that'll almost certainly get obsoleted a year before production.\n\n2. Their claims of a 2 month turnaround is unrealistic and ignores the realities of semi foundry demand. In other words, Taalas is joining the same the wafer queue for the given node as other customers, many of whom have deeper pockets and more sway. For 6nm it's not terrible, but for smaller, newer nodes the competition is much worse- with Apple usually getting first dibs on the newest processes, usually followed by Nvidia, AMD, Qualcomm.\n\n3. Memory is still a concern. While storing the weights on chip greatly helps capacity requirements, you will still need some form of volatile memory like DRAM to store context. And for the 17k tokens/sec speeds it advertises, I imagine channels need to be suitably wide and fast- otherwise it becomes a bottleneck.\n\n4. Most importantly (and analysts rarely discussed): these ASICs don't seem to scale well with model sizes and hit an upper cap due to transistor budgets, yield rates and wafer prices. Look at their HC1 demonstrator- 815mm2 on 6 nm TCSM with 53B transistors- that's a huge chip (check out the picture of their card if you don't believe me). That's just to house and run a pre-baked LLM with only 8B parameters quantized down to 3-bits.\n\nFor comparison, the GB202 (RTX 5090) is already ~750mm2. Sure HC1 is fabbed on TSMC 6nm, it could shrink somewhat on a newer 4N or smaller process (which requires longer turnaround, higher wafer costs, lower yields and longer backlog- see point #2). However that doesn't fix physics- HC1's 53B transistors is till 7B more than GB203 (chip used in RTX 5080) so I'm not holding out for a miracle unless their first gen is horrendously bloated architecturally.\n\nI think they're promising for niche use cases- high-volume production for a stable (older) model with a high volume of users- but it won't do much for anyone wanting anymore more cutting edge than a year old at best.\n\nBut these aren't the GPU killers we're looking for.\n\nAtom_101\n•\n4mo ago\n\nThe"
+    },
+    {
+      "author": "pointer_to_null",
+      "score": "30",
+      "text": "pointer_to_null\n•\n4mo ago\n•\nEdited 4mo ago\n\nYou should probably temper your expectations a bit.\n\nNot to say I'm a complete skeptic- I remember (fondly) how introduction of ASICs completely wrecked the GPU bubble in most cryptocurrencies. I have zero doubts that tensor ops used in inference can't also see a similar improvements in throughput and efficiency for niche applications, and I don't believe Taalas is lying whatsoever about their token throughput claims.\n\nHowever, here's some reality:\n\nTurnaround time for new chip, from design to mass production, is excruciatingly slow. Even the biggest players (Nvidia, Intel, Apple, Qualcomm, Intel, etc) typically take upwards of a year- sometimes more- from design, validation, tapeout to even getting the first engineering samples packaged and sent to internal driver teams and ISV partners. Taala's HC1 demonstrator unveiled in Feb 2026 is a hardware implementation of an LLM that was considered obsolete for at least a year- Llama 3.1 8B (June 2024). These these weights are frozen in silicon- forever- not even with a finetune using the exact same architecture. Perhaps if these were FPGAs that you can maybe reflash/reprogram after fabrication, but those are size-limited (which is a serious problem- see point #4), slower and MUCH more expensive.\n\nGoing back to crypto- their algorithms are mostly static where the algorithm rarely changes over time, just the difficulty (or volume of effort for given result). While there are some exceptions to this, this is the norm. The same exact SHA256 work being computed for Bitcoin's blockchain 15 years ago is happening today- just at much, much greater scale. This is why ASICs dominate most crypto. LLMs are seeing radical improvements- good for us, but bad if you're investing millions into R&D that'll almost certainly get obsoleted a year before production.\n\n2. Their claims of a 2 month turnaround is unrealistic and ignores the realities of semi foundry demand. In other words, Taalas is joining the same the wafer queue for the given node as other customers, many of whom have deeper pockets and more sway. For 6nm it's not terrible, but for smaller, newer nodes the competition is much worse- with Apple usually getting first dibs on the newest processes, usually followed by Nvidia, AMD, Qualcomm.\n\n3. Memory is still a concern. While storing the weights on chip greatly helps capacity requirements, you will still need some form of volatile memory like DRAM to store context. And for the 17k tokens/sec speeds it advertises, I imagine channels need to be suitably wide and fast- otherwise it becomes a bottleneck.\n\n4. Most importantly (and analysts rarely discussed): these ASICs don't seem to scale well with model sizes and hit an upper cap due to transistor budgets, yield rates and wafer prices. Look at their HC1 demonstrator- 815mm2 on 6 nm TCSM with 53B transistors- that's a huge chip (check out the picture of their card if you don't believe me). That's just to house and run a pre-baked LLM with only 8B parameters quantized down to 3-bits.\n\nFor comparison, the GB202 (RTX 5090) is already ~750mm2. Sure HC1 is fabbed on TSMC 6nm, it could shrink somewhat on a newer 4N or smaller process (which requires longer turnaround, higher wafer costs, lower yields and longer backlog- see point #2). However that doesn't fix physics- HC1's 53B transistors is till 7B more than GB203 (chip used in RTX 5080) so I'm not holding out for a miracle unless their first gen is horrendously bloated architecturally.\n\nI think they're promising for niche use cases- high-volume production for a stable (older) model with a high volume of users- but it won't do much for anyone wanting anymore more cutting edge than a year old at best.\n\nBut these aren't the GPU killers we're looking for.\n\nAtom_101\n•\n4mo ago\n\nThe density is the main problem. Masked rom densities have diminishing returns below 6nm that they use. They say they can do 20B @4bit in a chip for their next version. Their stated goal "
+    },
+    {
+      "author": "Atom_101",
+      "score": "8",
+      "text": "Atom_101\n•\n4mo ago\n\nThe density is the main problem. Masked rom densities have diminishing returns below 6nm that they use. They say they can do 20B @4bit in a chip for their next version. Their stated goal is to do a Deepseek grade 670B model with 30+ tapeouts and have connectors in between. But the moment you put interconnect your 17k tps world disappears. Infiniband doesn't have enough bandwidth. They could do chip to chip interconnect at package level but I don't know if that can support 30 massive dies in sequence withing a single package.\n\nSecond they don't use dram or hbm as neither are fast enough for 17k tps. They use on die sram. So the same silicon area is now fighting for weights and kv cache (their current chip has only an 8k context iirc for llama 3 8B). More weights = less context length. Oh and sram also has very diminishing returns with node sizes so simply raising money and going to a bleeding edge 1.8nm or something wont help.\n\nThey will have to invent new higher density sram and masked rom macros to scale this.\n\n1 more reply"
+    },
+    {
+      "author": "ThatCrankyGuy",
+      "score": "3",
+      "text": "ThatCrankyGuy\n•\n4mo ago\n\nAll fair points. But I think the cost savings from an on-site bank of chips would be enormous. And to lend even more credibility Intel and Tesla have created that chip fab and they're going straight from signals to inference for Tesla's new vision chips. General purpose chips wont cut it.\n\nHaving even 1 year old model in a chip is not bad. Imagine costs eventually dropping to a point where ordinary appliances can start showing limited \"intelligence'. The commercial and defense applications would be a boon! You don't always need the latest and greatest for most applications. Good-enough is good-enough.\n\nNot to mention democratizing intelligence into local devices and not need datacenters would be bloody nice. And that is worth reenergizing and refocusing our research into hardware-based intelligence.\n\n1 more reply"
+    },
+    {
+      "author": "Objective-Picture-72",
+      "score": "3",
+      "text": "Objective-Picture-72\n•\n4mo ago\n\nI can't even comprehend Qwen 3.6 27B at 10,000 tk/s. It's kind of scary tbh. Managing context window will be damn near impossible though."
+    },
+    {
+      "author": "dyeusyt",
+      "score": "3",
+      "text": "dyeusyt\n•\n4mo ago\n\nbeen following these Taalas guys too; would’ve been great for local AI if someone after 3-4 years came out with brain organelles/cells and combined it with what these Taalas people are doing"
+    },
+    {
+      "author": "bitflip",
+      "score": "1",
+      "text": "bitflip\n•\n4mo ago\n\nHave you tried out https://chatjimmy.ai/ ?\n\nIt's not a big model (Llama 3.1 8B, if I recall correctly), but wow is it fast."
+    },
+    {
+      "author": "drrck82",
+      "score": "36",
+      "text": "drrck82\n•\n4mo ago\n\nAs a 2x3090 owner, I'm very interested in this setup. I'm running Q6_K_XL for a bit more smarts, but 2x the speed is very compelling\n\nbonobomaster\n•\n4mo ago\n•\nEdited 4mo ago\n\nMay I interest you in a free lunch, at least if you are coding and debugging?\n\nllama-server [...] --spec-type ngram-simple --draft-max 64\n\nEDIT: 1 day later and --draft-max is obsolete... --spec-ngram-mod-n-max is the replacement – just for any random finder of this comment in the future.\n\ndrrck82\n•\n4mo ago\n\nI will try it out, I'm doing mostly Python so it seems like that should work great! This is why I love the internet, someone always knows more than I do and is usually willing to share it!\n\nbonobomaster\n•\n4mo ago\n\n😊\n\nSpeculative decoding needs the second run in the same code base to really shine.\n\nNormal inference gets a very moderate speed up, 1-2 tk/s in my case at about 29 tk/s baseline with a Qwen3.6 27B quant.\n\nBut the second run, if you ask the LLM to debug something... holy shamoly... up to 200 tk/s but usually at least 60 tk/s, if a bunch of old code is recycled, in my case HTML and CSS.\n\nHere is the documentation. There are different modes but the one I posted, worked best for me.\n\nhttps://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md\n\ndrrck82\n•\n4mo ago\n\nMy results agree with what you saw, when iterating over the same codebase I doubled or tripled my tk/s on patches/rework. Thank you!\n\nbonobomaster\n•\n4mo ago\n\nYou are most welcome!\n\n[deleted]\n•\n4mo ago\nDany0\n•\n4mo ago\n Top 1% Commenter\n\nIndeed ngram self-spec is a beauty. Hope someone is working on combining both lol\n\nisukennedy\n•\n4mo ago\n\nI just grabbed a second 3090 without a plan for incorporating into my machine. Couldn't pass up the price. What kind of motherboard are you running?\n\ndrrck82\n•\n4mo ago\n\nNothing fancy, just a B550 Asus Gaming, I don't think having 2x16 is manditory for this.\n\nMindRuin\n•\n4mo ago\n\nif you're on am4, aorus x570 elite for bifurcation of lanes.\n\nisukennedy\n•\n4mo ago\n\nThanks. I found a ASUS Prime Z690-P D4 that should do the trick.\n\nHaggardSummaries\n•\n4mo ago\n•\nEdited 4mo ago\n\nSame setup, running Unsloth's Q8_0 with full context at ~22 t/s with the cards set to 75% power limit\n\nedit: nearly 50% increase after updating llama.cpp and adding the above speculative decoding flags, now seeing ~33 t/s average."
+    },
+    {
+      "author": "bonobomaster",
+      "score": "26",
+      "text": "bonobomaster\n•\n4mo ago\n•\nEdited 4mo ago\n\nMay I interest you in a free lunch, at least if you are coding and debugging?\n\nllama-server [...] --spec-type ngram-simple --draft-max 64\n\nEDIT: 1 day later and --draft-max is obsolete... --spec-ngram-mod-n-max is the replacement – just for any random finder of this comment in the future.\n\ndrrck82\n•\n4mo ago\n\nI will try it out, I'm doing mostly Python so it seems like that should work great! This is why I love the internet, someone always knows more than I do and is usually willing to share it!\n\nbonobomaster\n•\n4mo ago\n\n😊\n\nSpeculative decoding needs the second run in the same code base to really shine.\n\nNormal inference gets a very moderate speed up, 1-2 tk/s in my case at about 29 tk/s baseline with a Qwen3.6 27B quant.\n\nBut the second run, if you ask the LLM to debug something... holy shamoly... up to 200 tk/s but usually at least 60 tk/s, if a bunch of old code is recycled, in my case HTML and CSS.\n\nHere is the documentation. There are different modes but the one I posted, worked best for me.\n\nhttps://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md\n\ndrrck82\n•\n4mo ago\n\nMy results agree with what you saw, when iterating over the same codebase I doubled or tripled my tk/s on patches/rework. Thank you!\n\nbonobomaster\n•\n4mo ago\n\nYou are most welcome!\n\n[deleted]\n•\n4mo ago\nDany0\n•\n4mo ago\n Top 1% Commenter\n\nIndeed ngram self-spec is a beauty. Hope someone is working on combining both lol"
+    },
+    {
+      "author": "drrck82",
+      "score": "15",
+      "text": "drrck82\n•\n4mo ago\n\nI will try it out, I'm doing mostly Python so it seems like that should work great! This is why I love the internet, someone always knows more than I do and is usually willing to share it!\n\nbonobomaster\n•\n4mo ago\n\n😊\n\nSpeculative decoding needs the second run in the same code base to really shine.\n\nNormal inference gets a very moderate speed up, 1-2 tk/s in my case at about 29 tk/s baseline with a Qwen3.6 27B quant.\n\nBut the second run, if you ask the LLM to debug something... holy shamoly... up to 200 tk/s but usually at least 60 tk/s, if a bunch of old code is recycled, in my case HTML and CSS.\n\nHere is the documentation. There are different modes but the one I posted, worked best for me.\n\nhttps://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md\n\ndrrck82\n•\n4mo ago\n\nMy results agree with what you saw, when iterating over the same codebase I doubled or tripled my tk/s on patches/rework. Thank you!\n\nbonobomaster\n•\n4mo ago\n\nYou are most welcome!\n\n[deleted]\n•\n4mo ago\nDany0\n•\n4mo ago\n Top 1% Commenter\n\nIndeed ngram self-spec is a beauty. Hope someone is working on combining both lol"
+    },
+    {
+      "author": "bonobomaster",
+      "score": "13",
+      "text": "bonobomaster\n•\n4mo ago\n\n😊\n\nSpeculative decoding needs the second run in the same code base to really shine.\n\nNormal inference gets a very moderate speed up, 1-2 tk/s in my case at about 29 tk/s baseline with a Qwen3.6 27B quant.\n\nBut the second run, if you ask the LLM to debug something... holy shamoly... up to 200 tk/s but usually at least 60 tk/s, if a bunch of old code is recycled, in my case HTML and CSS.\n\nHere is the documentation. There are different modes but the one I posted, worked best for me.\n\nhttps://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md\n\ndrrck82\n•\n4mo ago\n\nMy results agree with what you saw, when iterating over the same codebase I doubled or tripled my tk/s on patches/rework. Thank you!\n\nbonobomaster\n•\n4mo ago\n\nYou are most welcome!\n\n[deleted]\n•\n4mo ago\nDany0\n•\n4mo ago\n Top 1% Commenter\n\nIndeed ngram self-spec is a beauty. Hope someone is working on combining both lol"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1sx8uok",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:35:48Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.883,
+    "evidence": 1.0,
+    "relevance": 0.667,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/Luce-Org/lucebox-hub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://taalas.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://taalas.com/the-path-to-ubiquitous-ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://chatjimmy.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.localmaxxing.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/qwen36-27b-single-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Kaden-Schutt/hipfire",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

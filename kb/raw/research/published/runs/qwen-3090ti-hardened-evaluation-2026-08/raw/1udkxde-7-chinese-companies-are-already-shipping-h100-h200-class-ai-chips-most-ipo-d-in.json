@@ -1,0 +1,212 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1udkxde/7_chinese_companies_are_already_shipping/",
+  "title": "7 Chinese companies are already shipping H100/H200-class AI chips, most IPO'd in the last 6 months. I mapped all of them.",
+  "author": "awfulalexey",
+  "post_body": "4\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2mo ago\nawfulalexey\n7 Chinese companies are already shipping H100/H200-class AI chips, most IPO'd in the last 6 months. I mapped all of them.\nDiscussion\n\nThree dragons, four snakes, and the silicon nobody outside China can name.\n\nFor the past few months, many peoples in my timeline has been arguing about the same thing: NVIDIA export controls, H20 quotas, and whether Jensen gets to sell to China at all.\n\nAlmost nobody is asking the question that actually matters. What is China going to run instead?\n\nHere's the part the Western AI crowd has mostly missed. At least seven Chinese companies are already shipping AI accelerators today. Current-generation parts land around NVIDIA H100, and next-gen is targeting H200. Most of them IPO'd in the last six months. In many cases the people who designed them are the same engineers who designed the chips at NVIDIA, AMD, and Intel that they're now competing with.\n\nI run open-weight Chinese models (Qwen, DeepSeek, GLM) on a 4×3090 rig in my apartment every day. So when the hardware those models are being tuned for starts moving this fast, I pay attention. This is the map I wish someone had drawn for me.\n\nSource note: most of the specifics below come from a talk by Dmitry Shilov, CTO of CHITEX and the accompanying deck. Where a claim is spicy or unverified, I flag it as his claim, not gospel. Specs, revenue, and IPO dates are from the deck. Treat performance comparisons as vendor or analyst figures, not independent benchmarks.\n\nThe Chinese frame for this market is wonderfully Chinese: \"three dragons and four snakes.\" Three Big Tech giants that also make silicon, and four pure-play chip companies that just went public.\n\nThe three dragons: big tech silicon\n\nThese are companies worth $100B or more that also build full-stack GPUs: chips, servers, clusters, and the software to run them. In Chinese terms a \"cluster\" starts at 10,000 cards. At roughly 8 cards per server, do that math. All three have their own answers to NVLink and NVSwitch.\n\nHuawei Ascend, number one in China\n\n- Revenue (Huawei, 2024): ¥862B, about .\n- Market position: number one Chinese AI-chip vendor at 812K cards, 49% of the 1.65M domestic supply and about 20% of the full ~4M-card market. 42% of national AI-accelerator supply.\n- Ascend 910C: mass production in 2025 (~300K units), with a plan for 600K in 2026.\n- Ascend 910D: 5nm, 4-die package, FP8 support, mass production Q2 to Q3 2026, positioned against the H100.\n- Ascend 950PR and 950DT: next gen, rolling out across 2026, with Huawei's own HBM (HiZQ 2.0, 4 TB/s), so independence from SK Hynix.\n- Target: 4 ZFLOPS of FP4 by 2028.\n\nHuawei is the one vendor here whose hardware is deliberately not CUDA-compatible. They built their own stack with global expansion in mind. The one Ascend headline that does leak into Western media is that the 950PR reportedly beats the H200 outright, well past the H20. (That's the vendor and talk claim. I haven't seen independent numbers.)\n\nAlibaba T-Head, number two, and the box that should scare you\n\n- Revenue (Alibaba, FY2025): about .\n- Market position: number two Chinese vendor at ~265K cards, 16% of domestic supply.\n- PPU: 96GB HBM2e, 400W TDP, positioned against the H20.\n- IPO: T-Head spin-off and listing process started January 2026.\n\nThe detail that stopped me is the Alibaba PG1 server. Sixteen PG1_810E cards at 96GB each is 1,536 GB of VRAM in a single box, with two Intel Xeon 8558P and 2TB of system RAM. That's enough to hold GLM 5.x in BF16: a private, on-prem, full-fat frontier-model box, your own Claude Code in a chassis, no cloud and no telemetry. Backed by Alibaba Cloud, the number one CSP in China.\n\nBaidu Kunlunxin, number three, inference-first\n\n- Revenue (Baidu, 2025): $18.5B, market cap about .\n- Market position: number three at ~116K cards (7%), neck-and-neck with Cambricon.\n- Kunlun M100: inference-optimized, already shipping (Q1 2026).\n- Kunlun M300: training plus multimodal inference, 2027.\n- Tianchi Super Nodes 256/512: up to 1 trillion parameters, available 2026.\n- IPO: Baidu is weighing a Kunlunxin spin-off and listing (Dec 2026).\n\nThe four snakes: the pure-plays that just IPO'd\n\nThese companies went public on the Hong Kong and Shanghai STAR exchanges starting December 2025. Their previous gen is roughly A100, current gen roughly H100, all in OAM form factor (the open-standard analog of NVIDIA's SXM). One thread runs through all of them: they were founded by ex-NVIDIA and ex-AMD people, frequently the literal architects of the chips they're now cloning.\n\nMetaX (曦云), the one that tells the whole story\n\n- Revenue (2025): ¥1.64B (~$230M), up 121% year over year, net loss ¥830M.\n- IPO: Shanghai STAR (688802.SS), Dec 17 2025, up 693% on day one, about ¥332B (~$47B) market cap at debut.\n- C600: 144GB HBM3e, MXMACA architecture, positioned against the H200, mass production Q3 2026.\n- C700: next gen, fully Chinese production from 2027.\n- The number: revenue went from ¥426K in 2022 to ¥1.6B in 2025, roughly 3,800x in three years.\n\nNow look at who built it. The founding team:\n\n- Chen Weiliang (CEO): 22+ years in GPU design, global chief GPU architect and global chief SoC architect at AMD.\n- Peng Li (Hardware): 19+ years, first female engineer at AMD China.\n- Yang Jian (Software): 24+ years, first research fellow at AMD China.\n\nMoore Threads, gaming and AI\n\n- Revenue (2025): ¥1.505B (~$219M), up 243% year over year, net loss narrowing.\n- IPO: Shanghai STAR (688795.SS), Dec 5 2025, up 400% on day one, raised about .\n- MTT S5000: flagship, 80GB, 1 PFLOPS AI compute, 1.6 TB/s bandwidth, FP8 to FP64, and it explicitly supports GLM-5.x and Qwen3.5+.\n- Differentiator: the only Chinese vendor doing gaming and AI on one architecture, with DX12 Ultimate, the only Chinese graphics API at that level.\n\nBiren Technology, outspending its own revenue\n\n- Revenue (2025): ¥1.03B (~$150M), up 207% year over year, gross margin 53.8%.\n- IPO: Hong Kong (06082.HK), Jan 2026, the year's first major listing, raised about $624M, cash position over .\n- BR20X: next gen, 2026, FP8/FP4, inference-optimized.\n- The tell: Biren spent more on R&D (¥1.48B) than it earned (¥1.03B), R&D at 144% of revenue. That's not a company milking a product. That's a company sprinting.\n\nIluvatar CoreX, the edge play\n\n- Revenue (2025): ¥1.03B (~$149M), up 92% year over year, GPU business at 89% of revenue and up 150% year over year.\n- IPO: Hong Kong, Jan 8 2026, about $4.5B valuation, raised ~$475M, 340+ customers across finance, healthcare, and transport.\n- Data-center line: BiV100 (32GB), BiV150 (64GB), BiV200 (80GB), B300 (144GB).\n- Edge line (the sleeper): the TY-series, tiny boxes from 130 to 300 TOPS, Orin-class, plug-and-play, drop-in replacements for NVIDIA's edge modules at a fraction of the price. Iluvatar built it because its backers are retail companies that need cheap edge inference for robots and IoT.\n\nFounder Li Yunpeng is ex-Oracle R&D. The roadmap openly states the goal: beat NVIDIA Rubin within two years.\n\nThe shift nobody's pricing in\n\nThree things are happening at once, and together they're a regime change.\n\nProduction moved home. All the new parts (Ascend 950, MetaX C600, Iluvatar's 300-series) are shifting from TSMC to SMIC. Officially \"12nm.\" (In the talk Shilov claims the real node is well below that and nobody admits it on paper. Take that as his read, not a fact.)\n\nNVIDIA's China share is collapsing. Per IDC, about 2.2M GPUs shipped to China in 2025, likely one of the last big NVIDIA waves. NVIDIA's share fell from 95% to 55% in two years, a 40-point drop. When the US floated easing sanctions in June, the Chinese answer was reportedly: thanks, no longer needed. Datacenter utilization for Chinese cards is near 100%, with a roughly 3-month queue for new servers.\n\n3. The models are following the metal. This is the part that matters most for anyone running open weights. Chinese open-source models are increasingly optimized for Chinese silicon first. DeepSeek-V4 is the canary: part of why it slipped is that it's being tuned for domestic GPUs. Qwen will follow (it's Alibaba). The rest will too. And right now, essentially every good open-weight model is Chinese.\n\nPut those together and you get a line I think will age well. Within about two years, the talk argues, China flips from importing AI chips to exporting them.\n\nWhy I care, and why you should\n\nI'm not a geopolitics account. I care because of a very concrete thing sitting under my desk.\n\nToday I run Chinese open models on Western silicon: 4×3090, 96GB, llama.cpp, vLLM, SGLang. That setup is the bridge. But the models I'm running are being tuned for hardware that isn't NVIDIA, by teams that used to be NVIDIA and AMD, shipping into a market that's already 45 points less NVIDIA than it was two years ago.\n\nThe Chinese GPU story isn't a sanctions footnote. It's a parallel hardware ecosystem with its own form factor, interconnect, HBM, and fabs, and its own models being co-designed with the metal. The West is busy debating who gets to sell H20s. The question for the rest of us is quietly becoming simpler: in two years, what's actually in the box?\n\nI run Chinese open models on NVIDIA today. My next box might not be NVIDIA at all. That's the shift I'm watching, even if the West isn't.\n\nEdit: rewrote the full article, a few of you (fairly) didn't want to leave for Twitter. All 7 vendors and sources are above.\n\nAnyway, I'll be glad to see you at that very place: https://x.com/superalesha/status/2069415581237813437\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n2mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically.\n\n1 more reply"
+    },
+    {
+      "author": "cafedude",
+      "score": "206",
+      "text": "cafedude\n•\n2mo ago\n\nAlibaba is shipping a server with 16×96GB = 1.5TB of VRAM in one box, enough to hold a frontier model in BF16 fully on-prem.\n\nCan I get this on Aliexpress?\n\nawfulalexey\n•\n2mo ago\n\nYes. Along with a hundred socks and a new power bank\n\npilibitti\n•\n2mo ago\n\nwith a cute note with broken english to leave a review\n\nrkoy1234\n•\n2mo ago\n\nI'm finding these hand-translated(?) notes much more touching these days.\n\nI'm so used to seeing claude-perfected paragraphs of corporate rambling filled with gpt-isms, that when I see\n\n\"best health, many thanks, please review for good product\"\n\nit warms my heart.\n\npilibitti\n•\n2mo ago\n\nyeah I find them cute and charming as well!\n\nTheLordAstaroth\n•\n2mo ago\n\nYou forgot the 2 dollars off coupon with your next purchase\n\nNo_Afternoon_4260\n•\n2mo ago\n•\nEdited 2mo ago\nllama.cpp\n\nLink? Specs? Something?\nEdit: probably Alibaba T head pg1\n\n1 more reply\nRKlehm\n•\n2mo ago\n\nDo you have a link? Search phrase?\n\n2 more replies\n1 more reply\nMerePotato\n•\n2mo ago\n\nNo, Alibaba T-Head units are in-house\n\nGKN777\n•\n2mo ago\n\nU gonna end up like der8auer\n\nDorkits\n•\n2mo ago\n\nI HAVE A DREAM!\n\nburritoresearch\n•\n2mo ago\n\nYes, you can also get some dildos and crack pipes and $2 plastic shower sandals"
+    },
+    {
+      "author": "awfulalexey",
+      "score": "174",
+      "text": "awfulalexey\n•\n2mo ago\n\nYes. Along with a hundred socks and a new power bank\n\npilibitti\n•\n2mo ago\n\nwith a cute note with broken english to leave a review\n\nrkoy1234\n•\n2mo ago\n\nI'm finding these hand-translated(?) notes much more touching these days.\n\nI'm so used to seeing claude-perfected paragraphs of corporate rambling filled with gpt-isms, that when I see\n\n\"best health, many thanks, please review for good product\"\n\nit warms my heart.\n\npilibitti\n•\n2mo ago\n\nyeah I find them cute and charming as well!\n\nTheLordAstaroth\n•\n2mo ago\n\nYou forgot the 2 dollars off coupon with your next purchase\n\nNo_Afternoon_4260\n•\n2mo ago\n•\nEdited 2mo ago\nllama.cpp\n\nLink? Specs? Something?\nEdit: probably Alibaba T head pg1\n\n1 more reply\nRKlehm\n•\n2mo ago\n\nDo you have a link? Search phrase?\n\n2 more replies\n1 more reply"
+    },
+    {
+      "author": "pilibitti",
+      "score": "109",
+      "text": "pilibitti\n•\n2mo ago\n\nwith a cute note with broken english to leave a review\n\nrkoy1234\n•\n2mo ago\n\nI'm finding these hand-translated(?) notes much more touching these days.\n\nI'm so used to seeing claude-perfected paragraphs of corporate rambling filled with gpt-isms, that when I see\n\n\"best health, many thanks, please review for good product\"\n\nit warms my heart.\n\npilibitti\n•\n2mo ago\n\nyeah I find them cute and charming as well!\n\nTheLordAstaroth\n•\n2mo ago\n\nYou forgot the 2 dollars off coupon with your next purchase"
+    },
+    {
+      "author": "rkoy1234",
+      "score": "94",
+      "text": "rkoy1234\n•\n2mo ago\n\nI'm finding these hand-translated(?) notes much more touching these days.\n\nI'm so used to seeing claude-perfected paragraphs of corporate rambling filled with gpt-isms, that when I see\n\n\"best health, many thanks, please review for good product\"\n\nit warms my heart.\n\npilibitti\n•\n2mo ago\n\nyeah I find them cute and charming as well!"
+    },
+    {
+      "author": "pilibitti",
+      "score": "27",
+      "text": "pilibitti\n•\n2mo ago\n\nyeah I find them cute and charming as well!"
+    },
+    {
+      "author": "TheLordAstaroth",
+      "score": "11",
+      "text": "TheLordAstaroth\n•\n2mo ago\n\nYou forgot the 2 dollars off coupon with your next purchase"
+    },
+    {
+      "author": "No_Afternoon_4260",
+      "score": "33",
+      "text": "No_Afternoon_4260\n•\n2mo ago\n•\nEdited 2mo ago\nllama.cpp\n\nLink? Specs? Something?\nEdit: probably Alibaba T head pg1\n\n1 more reply"
+    },
+    {
+      "author": "RKlehm",
+      "score": "8",
+      "text": "RKlehm\n•\n2mo ago\n\nDo you have a link? Search phrase?\n\n2 more replies"
+    },
+    {
+      "author": "MerePotato",
+      "score": "12",
+      "text": "MerePotato\n•\n2mo ago\n\nNo, Alibaba T-Head units are in-house"
+    },
+    {
+      "author": "GKN777",
+      "score": "6",
+      "text": "GKN777\n•\n2mo ago\n\nU gonna end up like der8auer"
+    },
+    {
+      "author": "Dorkits",
+      "score": "4",
+      "text": "Dorkits\n•\n2mo ago\n\nI HAVE A DREAM!"
+    },
+    {
+      "author": "burritoresearch",
+      "score": "2",
+      "text": "burritoresearch\n•\n2mo ago\n\nYes, you can also get some dildos and crack pipes and $2 plastic shower sandals"
+    },
+    {
+      "author": "WhiskyAKM",
+      "score": "265",
+      "text": "WhiskyAKM\n•\n2mo ago\n\nIf only those were available in europe...\n\nkaliku\n•\n2mo ago\n\nWhy are they not? Is there a hard block somehow or we just don't bother to import them?\n\nkitanokikori\n•\n2mo ago\n\nYou can buy them, but all of the documentation is in Chinese and afaik the download links might only work in China. The ecosystem around them is also ofc extremely small compared to ROCm or even SYCL\n\nchebum\n•\n2mo ago\n\nWhy ecosystem is underdeveloped if AI industry is huge in China and they obviously have to use domestic chips?\n\nYYM7\n•\n2mo ago\n\nThe same reason the \"ecosystem\" does not exist for Google's tensor chips or Amazon's AI card. There is enough \"internal\" need in data centers so they don't care selling to consumers/enthusiastist --> no point to write open and versatile drivers and release them to the public.  As long as the card run a certain model in a highly specialized environment , they all good. \n\nchebum\n•\n2mo ago\n\nI always thought that tensor chips are integrated in Pytorch like CUDA:\n\npip install torch torch_xla[tpu]\nmodel.to(torch.device(\"tpu\"))\n\nSo, if you happen to have suitable hardware access, that's all you need is to perform calculation on Google's TPUs.\n\ngautamdiwan3\n•\n2mo ago\n\nPytorch covers a lot of the GPUs but is not the best way of extracting performance. You would ideally use separate training and infererence engines, often tailored to your architecture.\n\nGoogle TPUs, for example, are better suited to run the whole suite of JAX libraries. It's because Google TPUs have a lot of interconnects for multi GPU workloads, which is supported by JAX.\n\nAt a local level, you'll generally use infererence engines for quantization.\n\nAs long as you have compatible libraries or CUDA mimicking, you'll be good to go\n\nkitanokikori\n•\n2mo ago\n\nBecause we are not the AI industry? When I say \"ecosystem\" I mean the open-source tools that people in r/LocalLLaMA use, not the production-level (often custom) inference software that a frontier lab would use\n\nfaizkhairi\n•\n2mo ago\n\nThe software stack fragmentation is the harder barrier than the hardware specs. Even if llama.cpp or vLLM added backend support, you'd need working drivers outside China (most chips assume a CUDA-like proprietary driver stack), memory bandwidth benchmarks that translate to real tok/s on inference workloads (H100-class FLOPS don't always match on attention-heavy decode), and quantization support that matches the GGUF pipeline people actually use here.\n\nThe irony is that the Chinese domestic inference ecosystem (TensorRT-LLM equivalents, custom GGML forks) is probably more sophisticated than we can see from outside. It just doesn't surface on GitHub in English. The moment one of these chips gets a clean llama.cpp backend with working quantization, this community will adopt it fast. Until then it's datacenter-only by necessity, not by design.\n\n1 more reply\n14 more replies\nWhiskyAKM\n•\n2mo ago\n\nThere isnt hard block per se but no one is importing them and chinese manufacturers seem to not care about market expansion and only sell to Asia\n\ntechdevjp\n•\n2mo ago\n\nEffectively only selling domestically right now, because the domestic market is huge and the Chinese makers still have more to learn. But they'll dump vast amounts of money & manpower into R&D and will iterate at speeds that would make a western CEO's head spin.\n\nfallingdowndizzyvr\n•\n2mo ago\n\nThere isnt hard block per se\n\nFor the leader, Huawei, it's most definitely a hard block for the US. Rock hard.\n\n\"This guidance alerts industry to the risks of using PRC advanced-computing ICs, including specific Huawei Ascend chips. These chips were likely developed or produced in violation of U.S. export controls. BIS is warning that, pursuant to GP10, the use of such PRC advanced- computing ICs risks violating U.S. export controls and may subject companies to BIS enforcement action.\"\n\nhttps://www.bis.gov/media/1575\n\nstarkruzr\n•\n2mo ago\n\nit's two way -- we are also under the impression that letting China have all the Nvi"
+    },
+    {
+      "author": "kaliku",
+      "score": "28",
+      "text": "kaliku\n•\n2mo ago\n\nWhy are they not? Is there a hard block somehow or we just don't bother to import them?\n\nkitanokikori\n•\n2mo ago\n\nYou can buy them, but all of the documentation is in Chinese and afaik the download links might only work in China. The ecosystem around them is also ofc extremely small compared to ROCm or even SYCL\n\nchebum\n•\n2mo ago\n\nWhy ecosystem is underdeveloped if AI industry is huge in China and they obviously have to use domestic chips?\n\nYYM7\n•\n2mo ago\n\nThe same reason the \"ecosystem\" does not exist for Google's tensor chips or Amazon's AI card. There is enough \"internal\" need in data centers so they don't care selling to consumers/enthusiastist --> no point to write open and versatile drivers and release them to the public.  As long as the card run a certain model in a highly specialized environment , they all good. \n\nchebum\n•\n2mo ago\n\nI always thought that tensor chips are integrated in Pytorch like CUDA:\n\npip install torch torch_xla[tpu]\nmodel.to(torch.device(\"tpu\"))\n\nSo, if you happen to have suitable hardware access, that's all you need is to perform calculation on Google's TPUs.\n\ngautamdiwan3\n•\n2mo ago\n\nPytorch covers a lot of the GPUs but is not the best way of extracting performance. You would ideally use separate training and infererence engines, often tailored to your architecture.\n\nGoogle TPUs, for example, are better suited to run the whole suite of JAX libraries. It's because Google TPUs have a lot of interconnects for multi GPU workloads, which is supported by JAX.\n\nAt a local level, you'll generally use infererence engines for quantization.\n\nAs long as you have compatible libraries or CUDA mimicking, you'll be good to go\n\nkitanokikori\n•\n2mo ago\n\nBecause we are not the AI industry? When I say \"ecosystem\" I mean the open-source tools that people in r/LocalLLaMA use, not the production-level (often custom) inference software that a frontier lab would use\n\nfaizkhairi\n•\n2mo ago\n\nThe software stack fragmentation is the harder barrier than the hardware specs. Even if llama.cpp or vLLM added backend support, you'd need working drivers outside China (most chips assume a CUDA-like proprietary driver stack), memory bandwidth benchmarks that translate to real tok/s on inference workloads (H100-class FLOPS don't always match on attention-heavy decode), and quantization support that matches the GGUF pipeline people actually use here.\n\nThe irony is that the Chinese domestic inference ecosystem (TensorRT-LLM equivalents, custom GGML forks) is probably more sophisticated than we can see from outside. It just doesn't surface on GitHub in English. The moment one of these chips gets a clean llama.cpp backend with working quantization, this community will adopt it fast. Until then it's datacenter-only by necessity, not by design.\n\n1 more reply\n14 more replies\nWhiskyAKM\n•\n2mo ago\n\nThere isnt hard block per se but no one is importing them and chinese manufacturers seem to not care about market expansion and only sell to Asia\n\ntechdevjp\n•\n2mo ago\n\nEffectively only selling domestically right now, because the domestic market is huge and the Chinese makers still have more to learn. But they'll dump vast amounts of money & manpower into R&D and will iterate at speeds that would make a western CEO's head spin.\n\nfallingdowndizzyvr\n•\n2mo ago\n\nThere isnt hard block per se\n\nFor the leader, Huawei, it's most definitely a hard block for the US. Rock hard.\n\n\"This guidance alerts industry to the risks of using PRC advanced-computing ICs, including specific Huawei Ascend chips. These chips were likely developed or produced in violation of U.S. export controls. BIS is warning that, pursuant to GP10, the use of such PRC advanced- computing ICs risks violating U.S. export controls and may subject companies to BIS enforcement action.\"\n\nhttps://www.bis.gov/media/1575\n\nstarkruzr\n•\n2mo ago\n\nit's two way -- we are also under the impression that letting China have all the Nvidia cards they want would be a national security threat\n\n(person"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1udkxde",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:42:14Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.677,
+    "evidence": 0.8,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/superalesha/status/2069415581237813437",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.bis.gov/media/1575",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.chinatalk.media/p/will-china-hit-the-hbm-wall",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.koreaherald.com/article/10668779",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://xcancel.com/i/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/superalesha/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://nitter.poast.org/i/article/2069415447779246440",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

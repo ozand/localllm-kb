@@ -1,0 +1,164 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vevsv9/more_qwen_38_sizes_coming/",
+  "title": "More Qwen 3.8 sizes coming",
+  "author": "appakaradi",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n18d ago\nappakaradi\nMore Qwen 3.8 sizes coming\nDiscussion\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n18d ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "laterbreh",
+      "score": "268",
+      "text": "laterbreh\n•\n18d ago\n\nThey should have led with this.\n\nboomerang473\n•\n18d ago\n\nHaha\n\nBorkato\n•\n18d ago\n\nRemember when everyone said they’d never do it? Idiots\n\nScadrianWillshaper\n•\n18d ago\n\nI remember like it was yesterday!\n\nOh wait\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nI remember arguing with people who were saying China was going closed source and we shouldn’t expect more open models lol\n\nNo_Conversation9561\n•\n18d ago\n\nThey were about to go closed.. but then Xi Jinping stepped in and said “Y’all better not, or else..”\n\nDistanceSolar1449\n•\n18d ago\n\nQwen has literally never open sourced a Max tier model before.\n\nAfter Xi Jinping’s speech ordering all Chinese AI companies to open source their models, all of a sudden Qwen swapped positions from “not open sourcing any 3.7 models” to “releasing the weights for ALL 3.8 models”.\n\nPeople in the USA don’t realize how much power Xi Jinping’s policy decisions have, and how drastically he changed history there.\n\n-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply\nSudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies\n14 more replies\ncibernox\n•\n18d ago\n\nChina’s plan here is clear as day to me here. Software has been the west’s MOAT for decades. China quietly became the manufacturing center of the planet.\n\nIf China can make the next big thing so much cheaper that the US companies that swallowed all that money can’t break even, the software MOAT disappears but china keeps the manufacturing throne, and manufacturing is not something that we can regain quickly.\n\nBorkato\n•\n18d ago\n\nThere’s a guy on here who STILL refuses to admit it 😂 I forgot who it was but it was hilarious\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nIt’s funny because China has been very vocal about their strategy, but people just don’t believe it or don’t care to read about it lol\n\ntoothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies\n4 more replies\n1 more reply\nbiscuitmachine\n•\n18d ago\n\nWell we still don't know if they'll make a 122B. That's all I really care about, and I pray for it every day.\n\ntechdevjp\n•\n18d ago\n\nIt wasn't an unreasonable conclusion, and I think it was probably the way Qwen was heading.\n\nEvery version Qwen released up to Qwen3.5 came with a number of different open weights. Both 3 and 3.5 had a whole bunch of different models. Then 3.6 came with just two. 27b and 35b a3b. They were great, but again just two. No 70b, 120b, or 400b models which had all come out for 3.5.\n\nThen 3.7 arrived and....crickets. Nothing. So there was an obvious patte"
+    },
+    {
+      "author": "boomerang473",
+      "score": "26",
+      "text": "boomerang473\n•\n18d ago\n\nHaha"
+    },
+    {
+      "author": "Borkato",
+      "score": "81",
+      "text": "Borkato\n•\n18d ago\n\nRemember when everyone said they’d never do it? Idiots\n\nScadrianWillshaper\n•\n18d ago\n\nI remember like it was yesterday!\n\nOh wait\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nI remember arguing with people who were saying China was going closed source and we shouldn’t expect more open models lol\n\nNo_Conversation9561\n•\n18d ago\n\nThey were about to go closed.. but then Xi Jinping stepped in and said “Y’all better not, or else..”\n\nDistanceSolar1449\n•\n18d ago\n\nQwen has literally never open sourced a Max tier model before.\n\nAfter Xi Jinping’s speech ordering all Chinese AI companies to open source their models, all of a sudden Qwen swapped positions from “not open sourcing any 3.7 models” to “releasing the weights for ALL 3.8 models”.\n\nPeople in the USA don’t realize how much power Xi Jinping’s policy decisions have, and how drastically he changed history there.\n\n-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply\nSudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies\n14 more replies\ncibernox\n•\n18d ago\n\nChina’s plan here is clear as day to me here. Software has been the west’s MOAT for decades. China quietly became the manufacturing center of the planet.\n\nIf China can make the next big thing so much cheaper that the US companies that swallowed all that money can’t break even, the software MOAT disappears but china keeps the manufacturing throne, and manufacturing is not something that we can regain quickly.\n\nBorkato\n•\n18d ago\n\nThere’s a guy on here who STILL refuses to admit it 😂 I forgot who it was but it was hilarious\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nIt’s funny because China has been very vocal about their strategy, but people just don’t believe it or don’t care to read about it lol\n\ntoothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies\n4 more replies\n1 more reply\nbiscuitmachine\n•\n18d ago\n\nWell we still don't know if they'll make a 122B. That's all I really care about, and I pray for it every day.\n\ntechdevjp\n•\n18d ago\n\nIt wasn't an unreasonable conclusion, and I think it was probably the way Qwen was heading.\n\nEvery version Qwen released up to Qwen3.5 came with a number of different open weights. Both 3 and 3.5 had a whole bunch of different models. Then 3.6 came with just two. 27b and 35b a3b. They were great, but again just two. No 70b, 120b, or 400b models which had all come out for 3.5.\n\nThen 3.7 arrived and....crickets. Nothing. So there was an obvious pattern down from 3.5->3.6->3.7.\n\nI think had the CCP not stepped in and \"reminded\" the l"
+    },
+    {
+      "author": "ScadrianWillshaper",
+      "score": "50",
+      "text": "ScadrianWillshaper\n•\n18d ago\n\nI remember like it was yesterday!\n\nOh wait"
+    },
+    {
+      "author": "Admirable_Market2759",
+      "score": "65",
+      "text": "Admirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nI remember arguing with people who were saying China was going closed source and we shouldn’t expect more open models lol\n\nNo_Conversation9561\n•\n18d ago\n\nThey were about to go closed.. but then Xi Jinping stepped in and said “Y’all better not, or else..”\n\nDistanceSolar1449\n•\n18d ago\n\nQwen has literally never open sourced a Max tier model before.\n\nAfter Xi Jinping’s speech ordering all Chinese AI companies to open source their models, all of a sudden Qwen swapped positions from “not open sourcing any 3.7 models” to “releasing the weights for ALL 3.8 models”.\n\nPeople in the USA don’t realize how much power Xi Jinping’s policy decisions have, and how drastically he changed history there.\n\n-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply\nSudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies\n14 more replies\ncibernox\n•\n18d ago\n\nChina’s plan here is clear as day to me here. Software has been the west’s MOAT for decades. China quietly became the manufacturing center of the planet.\n\nIf China can make the next big thing so much cheaper that the US companies that swallowed all that money can’t break even, the software MOAT disappears but china keeps the manufacturing throne, and manufacturing is not something that we can regain quickly.\n\nBorkato\n•\n18d ago\n\nThere’s a guy on here who STILL refuses to admit it 😂 I forgot who it was but it was hilarious\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nIt’s funny because China has been very vocal about their strategy, but people just don’t believe it or don’t care to read about it lol\n\ntoothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies\n4 more replies\n1 more reply"
+    },
+    {
+      "author": "No_Conversation9561",
+      "score": "37",
+      "text": "No_Conversation9561\n•\n18d ago\n\nThey were about to go closed.. but then Xi Jinping stepped in and said “Y’all better not, or else..”\n\nDistanceSolar1449\n•\n18d ago\n\nQwen has literally never open sourced a Max tier model before.\n\nAfter Xi Jinping’s speech ordering all Chinese AI companies to open source their models, all of a sudden Qwen swapped positions from “not open sourcing any 3.7 models” to “releasing the weights for ALL 3.8 models”.\n\nPeople in the USA don’t realize how much power Xi Jinping’s policy decisions have, and how drastically he changed history there.\n\n-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply\nSudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies\n14 more replies\ncibernox\n•\n18d ago\n\nChina’s plan here is clear as day to me here. Software has been the west’s MOAT for decades. China quietly became the manufacturing center of the planet.\n\nIf China can make the next big thing so much cheaper that the US companies that swallowed all that money can’t break even, the software MOAT disappears but china keeps the manufacturing throne, and manufacturing is not something that we can regain quickly."
+    },
+    {
+      "author": "DistanceSolar1449",
+      "score": "68",
+      "text": "DistanceSolar1449\n•\n18d ago\n\nQwen has literally never open sourced a Max tier model before.\n\nAfter Xi Jinping’s speech ordering all Chinese AI companies to open source their models, all of a sudden Qwen swapped positions from “not open sourcing any 3.7 models” to “releasing the weights for ALL 3.8 models”.\n\nPeople in the USA don’t realize how much power Xi Jinping’s policy decisions have, and how drastically he changed history there.\n\n-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply\nSudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies\n14 more replies"
+    },
+    {
+      "author": "-p-e-w-",
+      "score": "22",
+      "text": "-p-e-w-\n•\n18d ago\n Top 1% Commenter\n\nXi announced that decision. I’d be surprised if he was the one who made it. And I’d be even more surprised if the decision was made without consulting with the labs.\n\nTinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies\n1 more reply"
+    },
+    {
+      "author": "TinyZoro",
+      "score": "7",
+      "text": "TinyZoro\n•\n18d ago\n\nIt’s a really interesting question. China seems to be leading technocratic governance at the moment. Is it because of its wider system or due to its current leader. I hope it’s the former. Normally what happens is corporations and capital become more powerful than the state because the petty officials who represent the government are eyeing those nice private sector jobs. I really hope China has a way to keep its industry on a tight leash serving a twenty year view not what will push up the stock price this quarter.\n\n13 more replies"
+    },
+    {
+      "author": "Sudden-Echo-8976",
+      "score": "6",
+      "text": "Sudden-Echo-8976\n•\n18d ago\n\nBoth are not mutually exclusive. They may simply have decided to skip 3.7 because they already had something better lined up for 3.8.\n\n3 more replies"
+    },
+    {
+      "author": "cibernox",
+      "score": "3",
+      "text": "cibernox\n•\n18d ago\n\nChina’s plan here is clear as day to me here. Software has been the west’s MOAT for decades. China quietly became the manufacturing center of the planet.\n\nIf China can make the next big thing so much cheaper that the US companies that swallowed all that money can’t break even, the software MOAT disappears but china keeps the manufacturing throne, and manufacturing is not something that we can regain quickly."
+    },
+    {
+      "author": "Borkato",
+      "score": "18",
+      "text": "Borkato\n•\n18d ago\n\nThere’s a guy on here who STILL refuses to admit it 😂 I forgot who it was but it was hilarious\n\nAdmirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nIt’s funny because China has been very vocal about their strategy, but people just don’t believe it or don’t care to read about it lol\n\ntoothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies\n4 more replies"
+    },
+    {
+      "author": "Admirable_Market2759",
+      "score": "19",
+      "text": "Admirable_Market2759\n•\n18d ago\n Top 1% Commenter\n\nIt’s funny because China has been very vocal about their strategy, but people just don’t believe it or don’t care to read about it lol\n\ntoothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies\n4 more replies"
+    },
+    {
+      "author": "toothpastespiders",
+      "score": "16",
+      "text": "toothpastespiders\n•\n18d ago\n\nI think it's prudent to have some degree of skepticism about anything said by politicians or corporate PR. Even more so when there's a language barrier.\n\nMore-Curious816\n•\n18d ago\n Top 1% Commenter\n\nwhile what you said is true, but I believe China current strategy is to curbstomp American AI and especially preventing American AI monopoly, we saw the movements by these leaders of USA AI frontier labs trying to regulation capture on global scale by introducing global legislation and legal framework on how to work with AI. we did not see that only, but they tried to make a AI committee and the USA as the leader of the committee.\n\n5 more replies"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vevsv9",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:53:20Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.295,
+    "evidence": 0.0,
+    "relevance": 0.273,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

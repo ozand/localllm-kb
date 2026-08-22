@@ -1,0 +1,205 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsy4l2/i_pushed_qwen3827b_limits_again_dflash2_134_tps/",
+  "title": "I pushed Qwen3.8-27B limits again... Dflash2 - 134 tps on a RTX 3090",
+  "author": "iamMess",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3d ago\niamMess\nI pushed Qwen3.8-27B limits again... Dflash2 - 134 tps on a RTX 3090\nResources\nreddit.com\nOpen\n\n**EDIT: ANOTHER UPDATE - 381 TPS SINGLE REQUEST - https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/ **\n\nThree days ago I released a hyper-optimized Qwen3.8-27B inference engine for an RTX 3090 (82 tps single request, 672 peak), and yesterday's update took it to ~114 tps single-user / ~1,000 tps at 64 concurrent.\n\nToday it's ~138 tps at default sampling on real chat prompts (up from ~124), 942 tps at 64 concurrent (re-measured today on the current stack), and the thing I'm actually happy about: a follow-up turn in a long chat now costs ~1 second instead of ~23.\n\nWhat we had:\n\n- fp8 KV cache, lm_head + embed_tokens int8, fp16 recurrent state, int8 activations, MTP-4 drafts with an own-output 40k draft head, GPTQ-int4 lm_head/MTP, split-KV verify attention, sampler patch, KVarN for 262k context\n\nNow added:\n\n- DFlash2 drafting. Inco published a block drafter for this exact model (5 layers, predicts 7 tokens in one non-autoregressive pass + a path selector). vLLM support is an unmerged PR on main, so I backported it to 0.27.1 and fixed what it silently relies on - including one real bug: 0.27.1 caches temperature-applied draft logits while main caches raw ones, so at 0<T≠1 the verify would have used the wrong proposal distribution. 2.8 → 3.3 tokens per step.\n\n- The drafter requantized to W4A16. It's 3.85 GB in bf16, which on a 24 GB card is a net loss (106 tps). GPTQ int4 with Hessians captured from the drafter's own inputs on real traffic: 1.19 GB, no greedy acceptance loss, and that's what turns it into a win. Ships as python fetch_dflash2.py.\n\n- Lookup-augmented drafting (my own idea - really happy about this one). A block drafter sees a 2,048-token window, but a long-context assistant spends much of its output reproducing what it was given... quoting a doc, repeating commands, rewriting a paragraph while keeping the code. Those tokens sit verbatim in the prompt, 20k tokens beyond what the drafter can see. So: one Triton kernel scans the request's own token history for the most recent occurrence of the last 6-12 generated tokens and proposes what followed. +29% tokens/step and 105 → 131 tps on \"reproduce every command\" work, +5% on ordinary chat, 0.075 ms per step. Stays exact and greedy never reads the draft distribution, and sampled positions get a point-mass q, which is a legal proposal for the rejection sampler.\n\n- Prefix caching for a hybrid model. vLLM keeps it opt-in for mamba/GDN hybrids, so by default every chat turn re-prefills the whole conversation. Turned on with --mamba-cache-mode align (the recurrent state resumes from the last cached block boundary): 24k-token document, turn 2+ goes 23 s → 0.85-1.35 s, same answers token for token. In batch mode it's just as big: 64 requests sharing a 5,820-token system prompt take 222 s → 16.9 s (median latency 95 s → 8 s). Costs ~14-16% of the KV pool.\n\n- 64k context with DFlash2, which needed an allocator fix: vLLM sizes a hybrid model's KV groups by the smallest layer bucket, so the drafter's 5 sliding-window layers made it pad the target's 16 attention layers to 20 and its 48 GDN layers to 50... 25% more memory per token, to pad the layers that weren't the problem. Padding the window group instead: 105 → 78 KB per token. Also made the V2 runner's CUDA-graph memory explicit; upstream it returns 0, so ~1.2 GB lands on top of whatever --gpu-memory-utilization you asked for.\n\n- Docker. docker compose --profile single up -d - image pins vLLM 0.27.1 + all patches, a prepare step downloads and requantizes the model, and verify.sh runs at build.\n\nQuality unchanged throughout (perplexity 8.09, GSM8K 96.5%) and speculative decoding is exact by construction and the state resume is exact too.\n\nCaveats worth stating: DFlash2 is best for 1-4 concurrent users (each request reserves 8 recurrent-state slots, so MTP wins again at 8+ concurrent), and its 2,048-token window means MTP is still slightly ahead on long-context free-form prose. Both modes are one env var apart.\n\nRepo: https://github.com/syv-ai/qwen38-27b-rtx3090\n\nW4A16 DFlash2 drafter: https://huggingface.co/syvai/Qwen3.8-27B-DFlash2-W4A16\n\nFast-variant tensors: https://huggingface.co/syvai/qwen3.8-27b-3090-fast-variant\n\nI said last time that was probably the last update. Then someone released a better drafter and I found two features that were switched off by default, so here we are. Lets see what happens next...\n\nShare",
+  "comments": [
+    {
+      "author": "the-jawn",
+      "score": "21",
+      "text": "the-jawn\n•\n3d ago\n\nYou’re a madman. This is sick and looking forward to spinning this up and comparing it to NInfer."
+    },
+    {
+      "author": "cviperr33",
+      "score": "21",
+      "text": "cviperr33\n•\n3d ago\n\nWTF!!!!!!!!\n\nWhat the hell LOL , we got 35B a3b moe now :D This was the speed i was running my 3.6 moe on llama.ccp about 150 tk/s on first burst code prompts\n\nKillerX629\n•\n2d ago\n\nWhich ui is that??\n\ncviperr33\n•\n2d ago\n\ndeepseek harness and the cmd window is just vllm log tail , its windows 11\n\nmitirki\n•\n2d ago\n\nIs it WSL2?\n\ncviperr33\n•\n2d ago\n\nyes , took a day to get it to work lol but worth it , WSL was kinda tricky because the repo is for linux but just use gemini flash 3.7 to help you set it up\n\nApolloPS2\n•\n2d ago\n\nHow do you find deepseek harness?\n\nPinEnvironmental6395\n•\n2d ago\n\nIt's literally named deepseek harness \n\nApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task\n\nIceTrAiN\n•\n2d ago\n\nYes, but he must find it!\n\ncosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "KillerX629",
+      "score": "1",
+      "text": "KillerX629\n•\n2d ago\n\nWhich ui is that??\n\ncviperr33\n•\n2d ago\n\ndeepseek harness and the cmd window is just vllm log tail , its windows 11\n\nmitirki\n•\n2d ago\n\nIs it WSL2?\n\ncviperr33\n•\n2d ago\n\nyes , took a day to get it to work lol but worth it , WSL was kinda tricky because the repo is for linux but just use gemini flash 3.7 to help you set it up\n\nApolloPS2\n•\n2d ago\n\nHow do you find deepseek harness?\n\nPinEnvironmental6395\n•\n2d ago\n\nIt's literally named deepseek harness \n\nApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task\n\nIceTrAiN\n•\n2d ago\n\nYes, but he must find it!\n\ncosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "cviperr33",
+      "score": "7",
+      "text": "cviperr33\n•\n2d ago\n\ndeepseek harness and the cmd window is just vllm log tail , its windows 11\n\nmitirki\n•\n2d ago\n\nIs it WSL2?\n\ncviperr33\n•\n2d ago\n\nyes , took a day to get it to work lol but worth it , WSL was kinda tricky because the repo is for linux but just use gemini flash 3.7 to help you set it up\n\nApolloPS2\n•\n2d ago\n\nHow do you find deepseek harness?\n\nPinEnvironmental6395\n•\n2d ago\n\nIt's literally named deepseek harness \n\nApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task\n\nIceTrAiN\n•\n2d ago\n\nYes, but he must find it!\n\ncosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "mitirki",
+      "score": "2",
+      "text": "mitirki\n•\n2d ago\n\nIs it WSL2?\n\ncviperr33\n•\n2d ago\n\nyes , took a day to get it to work lol but worth it , WSL was kinda tricky because the repo is for linux but just use gemini flash 3.7 to help you set it up"
+    },
+    {
+      "author": "cviperr33",
+      "score": "2",
+      "text": "cviperr33\n•\n2d ago\n\nyes , took a day to get it to work lol but worth it , WSL was kinda tricky because the repo is for linux but just use gemini flash 3.7 to help you set it up"
+    },
+    {
+      "author": "ApolloPS2",
+      "score": "1",
+      "text": "ApolloPS2\n•\n2d ago\n\nHow do you find deepseek harness?\n\nPinEnvironmental6395\n•\n2d ago\n\nIt's literally named deepseek harness \n\nApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task\n\nIceTrAiN\n•\n2d ago\n\nYes, but he must find it!\n\ncosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "PinEnvironmental6395",
+      "score": "1",
+      "text": "PinEnvironmental6395\n•\n2d ago\n\nIt's literally named deepseek harness \n\nApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task\n\nIceTrAiN\n•\n2d ago\n\nYes, but he must find it!\n\ncosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "ApolloPS2",
+      "score": "5",
+      "text": "ApolloPS2\n•\n2d ago\n\nSorry, English phrasing convention. I mean \"how do you find?\" as in \"how do you like or dislike it so far?\"\n\nconockrad\n•\n1d ago\n\nIt’s great!\n\ncviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task"
+    },
+    {
+      "author": "conockrad",
+      "score": "1",
+      "text": "conockrad\n•\n1d ago\n\nIt’s great!"
+    },
+    {
+      "author": "cviperr33",
+      "score": "1",
+      "text": "cviperr33\n•\n1d ago\n\nwell like magic so far , no other harness could work on a goal without loosing track after 10 compactions , most i had it was 50 compaction in single sessio and it still completed the goal task"
+    },
+    {
+      "author": "IceTrAiN",
+      "score": "4",
+      "text": "IceTrAiN\n•\n2d ago\n\nYes, but he must find it!"
+    },
+    {
+      "author": "cosmicr",
+      "score": "4",
+      "text": "cosmicr\n•\n2d ago\n\nlmao, not sure if serious\n\nNIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "NIELS_ON",
+      "score": "2",
+      "text": "NIELS_ON\n•\n19h ago\n\nBoth, English and German are Germanic languages and many words like find and finden (german) share the same roots, but changed or added meaning over the centuries. In German \"finden\" can be used in different ways. \"Wir finden den Weg nicht\" translates to \"we don't find the way\" but \"Wir finden das Essen nicht gut\" translates to \"We don't like the food\". As someone who uses both languages on a daily bases this is the kind of mistakes that happens very quickly, especially on a word that looks identical or almost identical in both languages with the catch that the meaning only sometimes is similar and sometimes not, purely based on the context."
+    },
+    {
+      "author": "iKy1e",
+      "score": "17",
+      "text": "iKy1e\n•\n3d ago\nollama\n\nLookup augmented drafting seems like such an obvious idea as soon as I read the description! Genius! It amazes me no one thought to build that in before now!\n\niamMess\n•\n3d ago\n\nhaha yeah. I don't think I have seen it anywhere else, but when I needed to find optimizations outside of the model itself it kind of came to me :)\n\nEDIT: It's also easily transferable to any other model, so a speedup all around.\n\nn4pst3r3r\n•\n2d ago\n\nI don't get it, are you being sarcastic? https://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md#differences-between-ngram-simple-ngram-map-and-ngram-mod\n\niKy1e\n•\n2d ago\nollama\n\nNo, I had genuinely never heard of it before! Though I think it’s really cool to see it exists in other things. I’ll have to read up on that feature and see if it can work alongside other MTP/DFlash models at the same time. Thanks\n\n_qeternity_\n•\n2d ago\n\nIt's really strange that you wouldn't go and read up on all speculative methods before doing this. I presume you have just been throwing tokens at something to build this.\n\niamMess\n•\n2d ago\n\nExcept it's not the same, and iKy1e wasn't the one to build it.\n\nThe difference lies in that vllm normally uses the speculative decoding ngram as a replacement drafter. We don't do that, we substitute the drafter if there is no match.\n\nSo for us, both the drafters run and the kernel picks per position.\n\nAlso our verifier block is decoupled from the drafter's block. So we get the benefits of the very fast ngram on \"known\" tokens, but without the drawback of it.\n\nPhilippeEiffel\n•\n2d ago\n\nThis is not OP!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vsy4l2",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:39:37Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.844,
+    "evidence": 1.0,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://verify.sh/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/syvai/Qwen3.8-27B-DFlash2-W4A16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/syvai/qwen3.8-27b-3090-fast-variant",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/speculative.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.vllm.ai/en/stable/serving/integrations/claude_code/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

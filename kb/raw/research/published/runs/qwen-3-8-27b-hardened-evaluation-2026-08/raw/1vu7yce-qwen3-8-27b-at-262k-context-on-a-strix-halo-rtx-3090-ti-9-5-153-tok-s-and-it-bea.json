@@ -1,0 +1,156 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7yce/qwen3827b_at_262k_context_on_a_strix_halo_rtx/",
+  "title": "Qwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval",
+  "author": "TrifleHopeful5418",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\nTrifleHopeful5418\nQwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval\nTutorial | Guide\n\nSpent a while treating layer placement, KV format and llama.cpp itself as experimental variables. 159 logged experiments. Numbers first, caveats after.\n\nHardware: AMD Ryzen AI MAX+ 395 (Strix Halo, 128 GB unified) + RTX 3090 Ti on an eGPU link. One llama.cpp process, AMD on Vulkan, NVIDIA on CUDA, one 27B model split across both.\n\nBaseline: 9.474 tok/s. Target-only, no speculation, AMD side alone.\n\nNow, code-shaped generation:\n\n32K context: 153.32 tok/s\n\n200K context: 87.74 tok/s\n\nHumanEval, 164 problems, driven by a real coding agent (pi-agent), graded by executing the official tests:\n\nLocal: 159/164 in 29.7 min\n\nRemote 2x RTX 3090 running vLLM TP2: 157/164 in 42.4 min\n\nLong-context retrieval suite: 15/15, 352 s local vs 551 s on the remote.\n\nThings that actually moved the needle, roughly in order of surprise:\n\nThe chat template. Swapping to a terser template (Qwen-Sharp) cut wall time 44% and output tokens 51%, with no accuracy change. Bigger than several weeks of GPU work. It just stops the model narrating.\n\nKV cache format as a placement lever. Going q8_0 -> q4_0 on both K and V freed exactly 2,176 MiB, which was enough to move every full-attention layer onto the fast card at full 262K. +28% prefill, +20% generation. Qwen3.8 is 3:1 Gated DeltaNet to full attention, so only 16 of 64 layers have KV at all, and those are the only ones whose cost scales with context. Which layer sits on which GPU matters enormously.\n\n--spec-type draft-mtp,ngram-mod**.** The flag accumulates. n-gram on top of MTP is worth +72 to +140% on code-shaped output, about -1% on prose, and costs nothing in VRAM. Free win if you generate code.\n\nA one-line llama.cpp patch: --spec-draft-ubatch. The speculative context was inheriting the target's 512 micro-batch and reserving a 2.2 GiB compute buffer to draft 4 tokens. Setting it to 64 freed 1,039 MiB for a 1.78% prefill cost, which bought another layer of placement.\n\nMTMD_BACKEND_DEVICE=Vulkan1 to put the vision encoder on the idle iGPU. Undocumented as far as I can tell. Default puts it on the first GPU-type device, which is the already-full 3090 Ti, and it dies allocating 884 MiB.\n\nThings that did NOT work, so you don't have to try them:\n\nExternal draft models (0.8B, 4B): 5.06-5.77 tok/s, worse than no speculation. Sequential drafting latency across PCIe dominates.\n\nMulti-lane parallel drafting: down to 1.62 tok/s. The 27B verification pass is the bottleneck; anything that widens the verification graph loses.\n\nQ6_K: 2.3x the wall time, marginally lower accuracy (because if hit the 64K output limit wall twice). Only 15.6 of its 20.5 GiB fits on the card, so 4 attention layers get pushed to the iGPU instead of 1.\n\nCaveats, because this is r/LocalLLaMA and you'd find them anyway:\n\n153 tok/s is code-shaped generation at 32K where n-gram does heavy lifting. Same config on prose at 200K is 35.8. Different workloads, kept separate on purpose.\n\nThe remote comparison is deployed-stack vs deployed-stack, not hardware isolated: it serves an AWQ-MTP fine-tune, local serves Q4_K_M of the base.\n\nI asked for standalone functions rather than the canonical prompt+completion format, so 3 of the 5 HumanEval failures are NameErrors on helper functions that the official harness would have kept in scope. 159/164 is probably a slight undercount. Same undercount applies to every arm.\n\nq4_0 keys are a real quality change. Passed my 15/15 gate; validate on your own workload before trusting it.\n\nFull writeup with every flag, patch and failed branch: https://definedrr.medium.com/qwen3-8-27b-9-tokens-per-second-to-153-ee3781f4a3f5?sharedUserId=definedrr\n\nShare",
+  "comments": [
+    {
+      "author": "Significant_Bar_460",
+      "score": "25",
+      "text": "Significant_Bar_460\n•\n1d ago\n\nIs q4 kv actually useful? It must degrade like crazy at 200k ctx.\n\nhurrdurrmeh\n•\n1d ago\n\nSo more quantization disproportionately degrade longer prompts? Does that mean shorter prompts are OK with more quantitative then longer ones?\n\nnasone32\n•\n1d ago\n\nyes.\n\nHyperWinX\n•\n1d ago\n Top 1% Commenter\n\nCorrect\n\nCommander_Skilgannon\n•\n1d ago\n\nI wonder if you could get away with keeping only a subset (say the last 10k) as q8 and leave the rest as q4.\n\nPhysicalIncrease3\n•\n1d ago\n\nIn my personal experience you need to use f16 above 128k. Q8 isn't too bad until then.\n\nFee_Sharp\n•\n18h ago\n\nIt is not how it works, weights are not different for different segments of the context. Each token is processed by same weights, it doesn't matter it is first token or 9999th token, it will get modified by same numbers/matrices. It is the whole point of transformer tbh. This is why model size does not depend on context size at all, they are different parameters, different blobs of memory\n\nCommander_Skilgannon\n•\n11h ago\n\nI was talking about the kv cache quants not the weights quants."
+    },
+    {
+      "author": "hurrdurrmeh",
+      "score": "4",
+      "text": "hurrdurrmeh\n•\n1d ago\n\nSo more quantization disproportionately degrade longer prompts? Does that mean shorter prompts are OK with more quantitative then longer ones?\n\nnasone32\n•\n1d ago\n\nyes.\n\nHyperWinX\n•\n1d ago\n Top 1% Commenter\n\nCorrect\n\nCommander_Skilgannon\n•\n1d ago\n\nI wonder if you could get away with keeping only a subset (say the last 10k) as q8 and leave the rest as q4.\n\nPhysicalIncrease3\n•\n1d ago\n\nIn my personal experience you need to use f16 above 128k. Q8 isn't too bad until then.\n\nFee_Sharp\n•\n18h ago\n\nIt is not how it works, weights are not different for different segments of the context. Each token is processed by same weights, it doesn't matter it is first token or 9999th token, it will get modified by same numbers/matrices. It is the whole point of transformer tbh. This is why model size does not depend on context size at all, they are different parameters, different blobs of memory\n\nCommander_Skilgannon\n•\n11h ago\n\nI was talking about the kv cache quants not the weights quants."
+    },
+    {
+      "author": "nasone32",
+      "score": "7",
+      "text": "nasone32\n•\n1d ago\n\nyes."
+    },
+    {
+      "author": "HyperWinX",
+      "score": "3",
+      "text": "HyperWinX\n•\n1d ago\n Top 1% Commenter\n\nCorrect"
+    },
+    {
+      "author": "Commander_Skilgannon",
+      "score": "1",
+      "text": "Commander_Skilgannon\n•\n1d ago\n\nI wonder if you could get away with keeping only a subset (say the last 10k) as q8 and leave the rest as q4.\n\nPhysicalIncrease3\n•\n1d ago\n\nIn my personal experience you need to use f16 above 128k. Q8 isn't too bad until then.\n\nFee_Sharp\n•\n18h ago\n\nIt is not how it works, weights are not different for different segments of the context. Each token is processed by same weights, it doesn't matter it is first token or 9999th token, it will get modified by same numbers/matrices. It is the whole point of transformer tbh. This is why model size does not depend on context size at all, they are different parameters, different blobs of memory\n\nCommander_Skilgannon\n•\n11h ago\n\nI was talking about the kv cache quants not the weights quants."
+    },
+    {
+      "author": "PhysicalIncrease3",
+      "score": "2",
+      "text": "PhysicalIncrease3\n•\n1d ago\n\nIn my personal experience you need to use f16 above 128k. Q8 isn't too bad until then."
+    },
+    {
+      "author": "Fee_Sharp",
+      "score": "2",
+      "text": "Fee_Sharp\n•\n18h ago\n\nIt is not how it works, weights are not different for different segments of the context. Each token is processed by same weights, it doesn't matter it is first token or 9999th token, it will get modified by same numbers/matrices. It is the whole point of transformer tbh. This is why model size does not depend on context size at all, they are different parameters, different blobs of memory\n\nCommander_Skilgannon\n•\n11h ago\n\nI was talking about the kv cache quants not the weights quants."
+    },
+    {
+      "author": "Commander_Skilgannon",
+      "score": "1",
+      "text": "Commander_Skilgannon\n•\n11h ago\n\nI was talking about the kv cache quants not the weights quants."
+    },
+    {
+      "author": "Sadge404",
+      "score": "27",
+      "text": "Sadge404\n•\n1d ago\n\nI smell the claude in this one.\n\nTrifleHopeful5418\n•\n1d ago\n\nYes, Claude researched and proposed solutions, ChatGPT-sol wrote the c++ code and ran the 159 experiments benchmarking everything and Pi-agent ran the humanEval. I was just there for the ride, giving it some ideas to research and holding the line on what I wanted and the compromises I won’t accept.\n\nNo_War_8891\n•\n1d ago\n\nit really is the belt-and-suspensers version of it\n\nthomas2385\n•\n1d ago\n\nHaa, I can see why you would say that. There are definitely a few phrases in there that give off that very polished AI vibe. Sometimes you can almost tell which model wrote something just from the wording."
+    },
+    {
+      "author": "TrifleHopeful5418",
+      "score": "11",
+      "text": "TrifleHopeful5418\n•\n1d ago\n\nYes, Claude researched and proposed solutions, ChatGPT-sol wrote the c++ code and ran the 159 experiments benchmarking everything and Pi-agent ran the humanEval. I was just there for the ride, giving it some ideas to research and holding the line on what I wanted and the compromises I won’t accept."
+    },
+    {
+      "author": "No_War_8891",
+      "score": "5",
+      "text": "No_War_8891\n•\n1d ago\n\nit really is the belt-and-suspensers version of it"
+    },
+    {
+      "author": "thomas2385",
+      "score": "2",
+      "text": "thomas2385\n•\n1d ago\n\nHaa, I can see why you would say that. There are definitely a few phrases in there that give off that very polished AI vibe. Sometimes you can almost tell which model wrote something just from the wording."
+    },
+    {
+      "author": "Kaljuuntuva_Teppo",
+      "score": "10",
+      "text": "Kaljuuntuva_Teppo\n•\n1d ago\n\nq4 KV cache.. Why sacrifice long context quality?\n\nTrifleHopeful5418\n•\n1d ago\n\nI didn’t just take q4 kv, on humaneval it scored same as q8 and it scored 15/15 for long context retrieval at 200k input context\n\nDany0\n•\n1d ago\n Top 1% Commenter\n\nHumaneval is trash. Well it's not trash for small models and old models, but it's trash for modern models. It's also a clanker smell: clankers love humaneval like they love qwen3 for some reason. Don't trust the clanker and run better benchies\n\nTrifleHopeful5418\n•\n18h ago\n\nI see you are top 1% commentator, Other than insulting, do you have anything useful to add or does go against your nature?\n\nDarex2094\n•\n15h ago\n\nI'd call speaking the truth a pretty useful thing to add. It's just a shame you seem to be content with your ignorance.\n\nDany0\n•\n17h ago\n Top 1% Commenter\n\nYou hate me because I speak the truth"
+    },
+    {
+      "author": "TrifleHopeful5418",
+      "score": "-1",
+      "text": "TrifleHopeful5418\n•\n1d ago\n\nI didn’t just take q4 kv, on humaneval it scored same as q8 and it scored 15/15 for long context retrieval at 200k input context\n\nDany0\n•\n1d ago\n Top 1% Commenter\n\nHumaneval is trash. Well it's not trash for small models and old models, but it's trash for modern models. It's also a clanker smell: clankers love humaneval like they love qwen3 for some reason. Don't trust the clanker and run better benchies\n\nTrifleHopeful5418\n•\n18h ago\n\nI see you are top 1% commentator, Other than insulting, do you have anything useful to add or does go against your nature?\n\nDarex2094\n•\n15h ago\n\nI'd call speaking the truth a pretty useful thing to add. It's just a shame you seem to be content with your ignorance.\n\nDany0\n•\n17h ago\n Top 1% Commenter\n\nYou hate me because I speak the truth"
+    },
+    {
+      "author": "Dany0",
+      "score": "5",
+      "text": "Dany0\n•\n1d ago\n Top 1% Commenter\n\nHumaneval is trash. Well it's not trash for small models and old models, but it's trash for modern models. It's also a clanker smell: clankers love humaneval like they love qwen3 for some reason. Don't trust the clanker and run better benchies\n\nTrifleHopeful5418\n•\n18h ago\n\nI see you are top 1% commentator, Other than insulting, do you have anything useful to add or does go against your nature?\n\nDarex2094\n•\n15h ago\n\nI'd call speaking the truth a pretty useful thing to add. It's just a shame you seem to be content with your ignorance.\n\nDany0\n•\n17h ago\n Top 1% Commenter\n\nYou hate me because I speak the truth"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vu7yce",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:48:14Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.841,
+    "evidence": 1.0,
+    "relevance": 0.545,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://definedrr.medium.com/qwen3-8-27b-9-tokens-per-second-to-153-ee3781f4a3f5?sharedUserId=definedrr",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

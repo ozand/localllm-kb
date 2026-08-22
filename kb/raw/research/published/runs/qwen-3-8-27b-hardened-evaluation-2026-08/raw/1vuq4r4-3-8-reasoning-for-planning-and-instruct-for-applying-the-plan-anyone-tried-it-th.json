@@ -1,0 +1,120 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuq4r4/38_reasoning_for_planning_and_instruct_for/",
+  "title": "3.8 reasoning for planning and instruct for applying the plan? Anyone tried it this way?",
+  "author": "soyalemujica",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n16h ago\nsoyalemujica\n3.8 reasoning for planning and instruct for applying the plan? Anyone tried it this way?\nDiscussion\n\nBasically use Qwen 27B 3.8 in reasoning mode for a plan, and with reasoning off as instruct to apply the plan\n\nShare",
+  "comments": [
+    {
+      "author": "Monad_Maya",
+      "score": "4",
+      "text": "Monad_Maya\n•\n16h ago\nllama.cpp\n\nNever tried it, I like the model for its thinking process since that's a major reason for its quality of output.\n\nFor \"planning\" I ask it to review the things and get it verified from a larger model.\n\nAnd then it starts the implementation. Takes longer but it's pretty good."
+    },
+    {
+      "author": "DoggoProfessor959",
+      "score": "3",
+      "text": "DoggoProfessor959\n•\n16h ago\n\nguys are really overthinking with planning/building. Just use the same, even the best models like opus5/gpt-sol do go off the rails themselves during the plan. Best to keep the tabs on yourself"
+    },
+    {
+      "author": "exaknight21",
+      "score": "3",
+      "text": "exaknight21\n•\n16h ago\n\nI use Q5_KXL for executing.\n\nKimi K2.5/3 for Planning.\n\nReviewed that plan by MiMo V2.5 Pro, send reviewed plan back to K2.5/3\n\nGLM 5.3 as Supervisor\n\nQwen3.8-27B-Q5_K_XL as executor (running with 131k context q8, single Mi50 32GB) with thinking off but MTP on.\n\nEll2509\n•\n14h ago\n\nHow much vram do you have!?\n\nexaknight21\n•\n14h ago\n\n32 GB on that Mi50.\n\nEll2509\n•\n13h ago\n\nAnd you can run Kimi K3!?\n\nI can run glm 5.2 in q3, deepseek v4 in q4, but kimi is way too big!\n\nHow do you do it?\n\nexaknight21\n•\n13h ago\n\nOh hell no. I use their free chats on their websites to finalize the plans lol. I do my extensive research/deep research with qwen3.8 max and grok. Then go to these guys for planning.\n\nCommon misconception, you don’t need to “have” everything. Being resourceful is the key in this game fam"
+    },
+    {
+      "author": "Ell2509",
+      "score": "1",
+      "text": "Ell2509\n•\n14h ago\n\nHow much vram do you have!?\n\nexaknight21\n•\n14h ago\n\n32 GB on that Mi50.\n\nEll2509\n•\n13h ago\n\nAnd you can run Kimi K3!?\n\nI can run glm 5.2 in q3, deepseek v4 in q4, but kimi is way too big!\n\nHow do you do it?\n\nexaknight21\n•\n13h ago\n\nOh hell no. I use their free chats on their websites to finalize the plans lol. I do my extensive research/deep research with qwen3.8 max and grok. Then go to these guys for planning.\n\nCommon misconception, you don’t need to “have” everything. Being resourceful is the key in this game fam"
+    },
+    {
+      "author": "exaknight21",
+      "score": "1",
+      "text": "exaknight21\n•\n14h ago\n\n32 GB on that Mi50.\n\nEll2509\n•\n13h ago\n\nAnd you can run Kimi K3!?\n\nI can run glm 5.2 in q3, deepseek v4 in q4, but kimi is way too big!\n\nHow do you do it?\n\nexaknight21\n•\n13h ago\n\nOh hell no. I use their free chats on their websites to finalize the plans lol. I do my extensive research/deep research with qwen3.8 max and grok. Then go to these guys for planning.\n\nCommon misconception, you don’t need to “have” everything. Being resourceful is the key in this game fam"
+    },
+    {
+      "author": "Ell2509",
+      "score": "1",
+      "text": "Ell2509\n•\n13h ago\n\nAnd you can run Kimi K3!?\n\nI can run glm 5.2 in q3, deepseek v4 in q4, but kimi is way too big!\n\nHow do you do it?\n\nexaknight21\n•\n13h ago\n\nOh hell no. I use their free chats on their websites to finalize the plans lol. I do my extensive research/deep research with qwen3.8 max and grok. Then go to these guys for planning.\n\nCommon misconception, you don’t need to “have” everything. Being resourceful is the key in this game fam"
+    },
+    {
+      "author": "exaknight21",
+      "score": "1",
+      "text": "exaknight21\n•\n13h ago\n\nOh hell no. I use their free chats on their websites to finalize the plans lol. I do my extensive research/deep research with qwen3.8 max and grok. Then go to these guys for planning.\n\nCommon misconception, you don’t need to “have” everything. Being resourceful is the key in this game fam"
+    },
+    {
+      "author": "Septerium",
+      "score": "1",
+      "text": "Septerium\n•\n15h ago\n\nNot good. You need a reasoning loop for the model to properly fix its mistakes in the verification phase"
+    },
+    {
+      "author": "Equivalent_Bit_461",
+      "score": "1",
+      "text": "Equivalent_Bit_461\n•\n14h ago\n\nIt's risky honestly and depends on the workload"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuq4r4",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:56:13Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.577,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 0.9,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

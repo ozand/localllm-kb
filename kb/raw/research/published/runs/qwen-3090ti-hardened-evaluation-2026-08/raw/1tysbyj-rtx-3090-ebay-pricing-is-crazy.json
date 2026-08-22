@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1tysbyj/rtx_3090_ebay_pricing_is_crazy/",
+  "title": "RTX 3090 EBay Pricing is Crazy!!",
+  "author": "TrifleHopeful5418",
+  "post_body": "3\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3mo ago\nTrifleHopeful5418\nRTX 3090 EBay Pricing is Crazy!!\nDiscussion\n\nCouple of years ago, before Local LLMs were in vogue, I bought 8 RTX 3090 @ $700 each to build a AI rig, it been working great and I was looking to build another to increase my capacity but looking at EBay those are now selling for 1,300 -1,500 range!\n\nThat price seems totally crazy because on my main machine I have 3090 Ti that I bought new 5 years ago for about 1,400.\n\nNeedless to say, I was in shock and started looking for other GPUs. Then I went to Amazon and can buy a brand spanking new 3090 for 1,550!\n\nPlease tell me if you can buy a new GPU with great thermals why are people buying 5 years old used GPUs with degraded thermals for 1,400+ and keeping the EBay prices so high. What am I missing here?\n\nShare",
+  "comments": [
+    {
+      "author": "vick2djax",
+      "score": "105",
+      "text": "vick2djax\n•\n3mo ago\n\nOP just woke up from a 6 month coma.\n\nTrifleHopeful5418\n•\n3mo ago\n\nHaha kind of true :)\n\n8 more replies"
+    },
+    {
+      "author": "TrifleHopeful5418",
+      "score": "14",
+      "text": "TrifleHopeful5418\n•\n3mo ago\n\nHaha kind of true :)"
+    },
+    {
+      "author": "Icaruszin",
+      "score": "114",
+      "text": "Icaruszin\n•\n3mo ago\n\nIt's still the cheapest single NVIDIA card with 24gb if you don't want to go the dual route. But yeah, $1400 for one is crazy.\n\nNo-Refrigerator-1672\n•\n3mo ago\n\n3090 is the cheapest 24 gb sure; buy if you're willing to give up just a few GBs, then Alibaba has 3080 20GB at roughly $450, and 2080\n 22GB at roughly $350, excluding shipping and import tax. Those two options are the actual kings of budget builds right now.\n\nScrapEngineer_\n•\n3mo ago\n\nDo you got a link or search terms?\n\nNo-Refrigerator-1672\n•\n3mo ago\n\nI can give you a link to this product. I have personally purchased 2x 3080 20gb, and 2x Mi50 32gb from this exact seller, half a year and a year ago. I have also published a review of my pair of 3080 here.\n\n1 more reply\nLong_comment_san\n•\n3mo ago\n\nThey are horrendous with power efficiency, meaning you need a more expensive power supply and it pushes a lot more heat and noise. Not to mention the lack of native FP4 which is slowly but surely becoming a major deal if you run larger models. Also not to mention that these cards have more owners than Toyota Prius nowadays, they lived through the mining era and they are very close to dying and in need of a maintenance.\n\nIf the question is 2x half dead 3090 versus 3x brand new 5060ti, it's 5060ti win hands down.\n\n8 more replies\n2 more replies\ncornucopea\n•\n3mo ago\n\nStill remember last Oct. on this sub we're speculating by black friday how the new 5080\n will push the 3090 price down, then score a couple, lol.\n\nMathmoKiwi\n•\n3mo ago\n\n5080\n is only 16GB 😞\n\nmastercoder123\n•\n3mo ago\n\nThe v100 is cheaper and you get 32gb of vram\n\nBorkato\n•\n3mo ago\n\nPeople really need to remember that PP speed exists.\n\nstarkruzr\n•\n3mo ago\n\nyeah, but it isn't that bad on V100. and if you can put two in tensor parallel you're doing even better.\n\nMomsbestboy\n•\n3mo ago\n\nAnd people also should think twice before buying a 3090 at 1400 USD. You can get a brand new R9700 32GB for the money. Yes, AMD, no CUDA, but also 12GB more VRAM which comes handy as soon as you use a model which requires more than 24GB, and you don't risk buying a used 3090 which has been boiling for years in a miner rig, and which will fall apart as soon as the microscopic cracks caused by this widen just a bit\n\nsqungy\n•\n3mo ago\n Top 1% Commenter\n\nI don't disagree with your main point, but \"boiling for years in a miner rig\" doesn't cause cracks. They are mostly caused by heating up and then cooling down over and over. Staying consistently hot is not a problem in that regard.\n\nThe fans will probably be cooked though.\n\n2 more replies\nmichaelsoft__binbows\n•\n3mo ago\n\nyou did your math wrong, 32 is only 8 more than 24\n\n1 more reply\ndevino21\n•\n3mo ago\n\n*8GB more\n\nMomsbestboy\n•\n3mo ago\n\nSorry, I am either a bad AI or didnt have enough coffee/beer\n\n1 more reply\n8 more replies\n2 more replies\n5 more replies"
+    },
+    {
+      "author": "No-Refrigerator-1672",
+      "score": "23",
+      "text": "No-Refrigerator-1672\n•\n3mo ago\n\n3090 is the cheapest 24 gb sure; buy if you're willing to give up just a few GBs, then Alibaba has 3080 20GB at roughly $450, and 2080\n 22GB at roughly $350, excluding shipping and import tax. Those two options are the actual kings of budget builds right now.\n\nScrapEngineer_\n•\n3mo ago\n\nDo you got a link or search terms?\n\nNo-Refrigerator-1672\n•\n3mo ago\n\nI can give you a link to this product. I have personally purchased 2x 3080 20gb, and 2x Mi50 32gb from this exact seller, half a year and a year ago. I have also published a review of my pair of 3080 here.\n\n1 more reply\nLong_comment_san\n•\n3mo ago\n\nThey are horrendous with power efficiency, meaning you need a more expensive power supply and it pushes a lot more heat and noise. Not to mention the lack of native FP4 which is slowly but surely becoming a major deal if you run larger models. Also not to mention that these cards have more owners than Toyota Prius nowadays, they lived through the mining era and they are very close to dying and in need of a maintenance.\n\nIf the question is 2x half dead 3090 versus 3x brand new 5060ti, it's 5060ti win hands down.\n\n8 more replies\n2 more replies"
+    },
+    {
+      "author": "ScrapEngineer_",
+      "score": "2",
+      "text": "ScrapEngineer_\n•\n3mo ago\n\nDo you got a link or search terms?\n\nNo-Refrigerator-1672\n•\n3mo ago\n\nI can give you a link to this product. I have personally purchased 2x 3080 20gb, and 2x Mi50 32gb from this exact seller, half a year and a year ago. I have also published a review of my pair of 3080 here.\n\n1 more reply"
+    },
+    {
+      "author": "No-Refrigerator-1672",
+      "score": "8",
+      "text": "No-Refrigerator-1672\n•\n3mo ago\n\nI can give you a link to this product. I have personally purchased 2x 3080 20gb, and 2x Mi50 32gb from this exact seller, half a year and a year ago. I have also published a review of my pair of 3080 here.\n\n1 more reply"
+    },
+    {
+      "author": "Long_comment_san",
+      "score": "2",
+      "text": "Long_comment_san\n•\n3mo ago\n\nThey are horrendous with power efficiency, meaning you need a more expensive power supply and it pushes a lot more heat and noise. Not to mention the lack of native FP4 which is slowly but surely becoming a major deal if you run larger models. Also not to mention that these cards have more owners than Toyota Prius nowadays, they lived through the mining era and they are very close to dying and in need of a maintenance.\n\nIf the question is 2x half dead 3090 versus 3x brand new 5060ti, it's 5060ti win hands down.\n\n8 more replies"
+    },
+    {
+      "author": "cornucopea",
+      "score": "18",
+      "text": "cornucopea\n•\n3mo ago\n\nStill remember last Oct. on this sub we're speculating by black friday how the new 5080\n will push the 3090 price down, then score a couple, lol.\n\nMathmoKiwi\n•\n3mo ago\n\n5080\n is only 16GB 😞"
+    },
+    {
+      "author": "MathmoKiwi",
+      "score": "5",
+      "text": "MathmoKiwi\n•\n3mo ago\n\n5080\n is only 16GB 😞"
+    },
+    {
+      "author": "mastercoder123",
+      "score": "20",
+      "text": "mastercoder123\n•\n3mo ago\n\nThe v100 is cheaper and you get 32gb of vram\n\nBorkato\n•\n3mo ago\n\nPeople really need to remember that PP speed exists.\n\nstarkruzr\n•\n3mo ago\n\nyeah, but it isn't that bad on V100. and if you can put two in tensor parallel you're doing even better.\n\nMomsbestboy\n•\n3mo ago\n\nAnd people also should think twice before buying a 3090 at 1400 USD. You can get a brand new R9700 32GB for the money. Yes, AMD, no CUDA, but also 12GB more VRAM which comes handy as soon as you use a model which requires more than 24GB, and you don't risk buying a used 3090 which has been boiling for years in a miner rig, and which will fall apart as soon as the microscopic cracks caused by this widen just a bit\n\nsqungy\n•\n3mo ago\n Top 1% Commenter\n\nI don't disagree with your main point, but \"boiling for years in a miner rig\" doesn't cause cracks. They are mostly caused by heating up and then cooling down over and over. Staying consistently hot is not a problem in that regard.\n\nThe fans will probably be cooked though.\n\n2 more replies\nmichaelsoft__binbows\n•\n3mo ago\n\nyou did your math wrong, 32 is only 8 more than 24\n\n1 more reply\ndevino21\n•\n3mo ago\n\n*8GB more\n\nMomsbestboy\n•\n3mo ago\n\nSorry, I am either a bad AI or didnt have enough coffee/beer\n\n1 more reply\n8 more replies\n2 more replies"
+    },
+    {
+      "author": "Borkato",
+      "score": "22",
+      "text": "Borkato\n•\n3mo ago\n\nPeople really need to remember that PP speed exists.\n\nstarkruzr\n•\n3mo ago\n\nyeah, but it isn't that bad on V100. and if you can put two in tensor parallel you're doing even better.\n\nMomsbestboy\n•\n3mo ago\n\nAnd people also should think twice before buying a 3090 at 1400 USD. You can get a brand new R9700 32GB for the money. Yes, AMD, no CUDA, but also 12GB more VRAM which comes handy as soon as you use a model which requires more than 24GB, and you don't risk buying a used 3090 which has been boiling for years in a miner rig, and which will fall apart as soon as the microscopic cracks caused by this widen just a bit\n\nsqungy\n•\n3mo ago\n Top 1% Commenter\n\nI don't disagree with your main point, but \"boiling for years in a miner rig\" doesn't cause cracks. They are mostly caused by heating up and then cooling down over and over. Staying consistently hot is not a problem in that regard.\n\nThe fans will probably be cooked though.\n\n2 more replies\nmichaelsoft__binbows\n•\n3mo ago\n\nyou did your math wrong, 32 is only 8 more than 24\n\n1 more reply\ndevino21\n•\n3mo ago\n\n*8GB more\n\nMomsbestboy\n•\n3mo ago\n\nSorry, I am either a bad AI or didnt have enough coffee/beer\n\n1 more reply\n8 more replies"
+    },
+    {
+      "author": "starkruzr",
+      "score": "5",
+      "text": "starkruzr\n•\n3mo ago\n\nyeah, but it isn't that bad on V100. and if you can put two in tensor parallel you're doing even better."
+    },
+    {
+      "author": "Momsbestboy",
+      "score": "7",
+      "text": "Momsbestboy\n•\n3mo ago\n\nAnd people also should think twice before buying a 3090 at 1400 USD. You can get a brand new R9700 32GB for the money. Yes, AMD, no CUDA, but also 12GB more VRAM which comes handy as soon as you use a model which requires more than 24GB, and you don't risk buying a used 3090 which has been boiling for years in a miner rig, and which will fall apart as soon as the microscopic cracks caused by this widen just a bit\n\nsqungy\n•\n3mo ago\n Top 1% Commenter\n\nI don't disagree with your main point, but \"boiling for years in a miner rig\" doesn't cause cracks. They are mostly caused by heating up and then cooling down over and over. Staying consistently hot is not a problem in that regard.\n\nThe fans will probably be cooked though.\n\n2 more replies\nmichaelsoft__binbows\n•\n3mo ago\n\nyou did your math wrong, 32 is only 8 more than 24\n\n1 more reply\ndevino21\n•\n3mo ago\n\n*8GB more\n\nMomsbestboy\n•\n3mo ago\n\nSorry, I am either a bad AI or didnt have enough coffee/beer\n\n1 more reply"
+    },
+    {
+      "author": "squngy",
+      "score": "18",
+      "text": "squngy\n•\n3mo ago\n Top 1% Commenter\n\nI don't disagree with your main point, but \"boiling for years in a miner rig\" doesn't cause cracks. They are mostly caused by heating up and then cooling down over and over. Staying consistently hot is not a problem in that regard.\n\nThe fans will probably be cooked though.\n\n2 more replies"
+    },
+    {
+      "author": "michaelsoft__binbows",
+      "score": "13",
+      "text": "michaelsoft__binbows\n•\n3mo ago\n\nyou did your math wrong, 32 is only 8 more than 24\n\n1 more reply"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1tysbyj",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:41:33Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.497,
+    "evidence": 0.4,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.alibaba.com/product-detail/RTX3080-20GB-Gaming-GPU-High-Performance_1601592777067.html?spm=a2756.trade-list-buyer.0.0.389976e9SUQJF5",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Nuqq8tSEodI&t=660s",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.newegg.com/asus-dual-rtx3050-o6g-geforce-rtx-3050-6gb-graphics-card-double-fans/p/N82E16814126708",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

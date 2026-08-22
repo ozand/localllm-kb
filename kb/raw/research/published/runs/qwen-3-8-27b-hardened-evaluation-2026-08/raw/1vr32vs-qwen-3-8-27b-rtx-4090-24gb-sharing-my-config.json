@@ -1,0 +1,103 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vr32vs/qwen_38_27b_rtx_4090_24gb_sharing_my_config/",
+  "title": "Qwen 3.8 27B - RTX 4090 24Gb - Sharing my Config",
+  "author": "gavwhittaker",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5d ago\ngavwhittaker\nQwen 3.8 27B - RTX 4090 24Gb - Sharing my Config\nDiscussion\n\nOn my 7800x3D with 128Gb RAM using Qwen3.8-27B-UD-Q4_K_XL.gguf, I am getting max tps of 134 and min of 44. It's taken a lot to dial this in and there's a lot of clever people on here who certainly can tune this better or suggest alternatives, but I share this because I couldn't find a RTX 4090 consistent config and on my rig this is blistering fast, no spilling into RAM.\n\nIf it even helps 1 person, I'll be glad I shared it.\n\nllama-server.exe ^\n-m \"Qwen3.8-27B-UD-Q4_K_XL.gguf\" ^\n--mmproj \"mmproj-BF16.gguf\" ^\n--no-mmproj-offload ^\n-ngl 99 ^\n-c 92160 ^\n--cache-type-k q8_0 ^\n--cache-type-v q8_0 ^\n-fa on ^\n-b 2048 ^\n-ub 1024 ^\n--temp 0.6 ^\n--top-p 0.95 ^\n--top-k 20 ^\n--min-p 0.0 ^\n--jinja ^\n--chat-template-file \"chat_template.jinja\" ^\n--reasoning-preserve ^\n--reasoning-format deepseek ^\n--presence-penalty 0.0 ^\n-t 4 ^\n-tb 4 ^\n--prio 3 ^\n--parallel 1 ^\n--spec-type draft-mtp ^\n--spec-draft-n-max 6 ^\n--spec-draft-p-min 0.82 ^\n-np 1 ^\n--no-webui ^\n--host <private-endpoint> ^\n--port 8080\nShare",
+  "comments": [
+    {
+      "author": "Pyros-SD-Models",
+      "score": "3",
+      "text": "Pyros-SD-Models\n•\n5d ago\n\nI'm very happy with the 4090 ninfer port of UDPSendToFailed\n\nhttps://github.com/UDPSendToFailed/ninfer-4090\n\nusing mostly the \"2. High-Precision Coding & Complex Reasoning (200k Tokens)\" preset with basically >100 tk/s at all times. Unfortunately, you have no room for vision in this case, but you simply switch to the vision preset once you need it and all is fine"
+    },
+    {
+      "author": "Chromix_",
+      "score": "2",
+      "text": "Chromix_\n•\n5d ago\n Top 1% Commenter\n\nYou could get the same context size with a Q5 instead of a Q4 - here's the 3090 discussion started shortly before your posting. You'd need to check how much that quality trade-off impacts your speed though."
+    },
+    {
+      "author": "vkha",
+      "score": "1",
+      "text": "vkha\n•\n3d ago\n\nt/s speed is very much depending on what we feed into the model. If it is well predictable then we hit 110 t/s else it drops to ~50 t/s. We'd need to agree how (on what feed) we measure the t/s speed.\n\n...and also the context window size."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vr32vs",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:49:38Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.457,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 0.3,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/UDPSendToFailed/ninfer-4090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

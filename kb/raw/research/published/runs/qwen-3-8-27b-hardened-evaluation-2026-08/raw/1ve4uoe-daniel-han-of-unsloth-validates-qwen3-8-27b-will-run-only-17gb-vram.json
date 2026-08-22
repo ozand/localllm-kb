@@ -1,0 +1,175 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ve4uoe/daniel_han_of_unsloth_validates_qwen3827b_will/",
+  "title": "Daniel Han of Unsloth validates Qwen3.8-27B will run only 17GB VRAM",
+  "author": "quantier",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n19d ago\nquantier\nDaniel Han of Unsloth validates Qwen3.8-27B will run only 17GB VRAM\nNew Model\n\nSuper excited about this release for the new 27B. Who else is with me. Only 17GB VRAM needed 😍😍\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n19d ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "HollowVoices",
+      "score": "416",
+      "text": "HollowVoices\n•\n19d ago\n\nMe at 16gb VRAM:\n\nmr_christer\n•\n19d ago\n\nI run 3.6 27b on 16gb. It is text only to make it fit so I'm sure people will find a way\n\nTrivikrama_0\n•\n19d ago\n\nYes I also run it, but it's just for chat, it doesn't have a good context window for something good. If you offload 30% of the weights to RAM then you can have VRAM free for context window, it will be slow but you vnanhave agentic flow.\n\n[deleted]\n•\n18d ago\nroworu\n•\n18d ago\n\nHow did you remove vision from model? Is there some text-only checkpoint? Or llama.cpp flag ?\n\nTerrible-Detail-1364\n•\n18d ago\n\n—no-mmproj\n\nroworu\n•\n18d ago\n\nThank you! ❤️\n\nTerrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu\n\n1 more reply\nsine120\n•\n19d ago\n Top 1% Commenter\n\nI've had decent performace with the IQ3 quants in my 9070 XT\n. Don't load vision, keep context small, it'll work.\n\nlaser50\n•\n19d ago\n\nYou can offload vision to RAM too, if you do have some RAM to spare, I have a hybrid Q_8 F16 mmproj which is only like 700MB and still works really well!\n\nTrivikrama_0\n•\n19d ago\n\nYes that's a good idea, but I saw some performance benchmarks videos, it seems that any one of the parameters, like the models are benchmarked against coding, thinking, reasoning and so on , so at Q3 any one not sure which depends on the model the performance dipa significantly. Q4 is generally where we have really good output without seeing much effects due quantization loss.\n\nHence I prefer using Q4, Q3 can work directly.\n\nsine120\n•\n19d ago\n Top 1% Commenter\n\nI can't fit any Q4 with a decent amount of context. I'm sure larger quants perform better, but 16GB is 16GB. Without the slowdown of CPU offloading, the IQ3 is the best model I've been able to squeeze in my GPU.\n\nI'm interested in upgrading to get more VRAM, but my machine pulls double-duty as a gaming rig and my main PC, so I don't really want to downgrade to an old dedicated workstation card in my one full size PCIe slot.\n\nTrivikrama_0\n•\n19d ago\n\nYes if you want speed then Q3 is the best, i generally use for coding tasks so I'm fine if it's slow. That's why said about Q4. But I really hope qwen 3.8 27b will great with q3.\n\nTrivikrama_0\n•\n19d ago\n\nUse CPU offloading\n\nEffective_Head_5020\n•\n19d ago\n\nCould you please point me on how to exactly do that? I tried a few config on llamacpp but it never seems to work\n\nI have 6gb VRAM and 128 RAM\n\nLuCiAnO241\n•\n19d ago\n\nohh lemme make your day. Try this one. it's not the 27B but I think its the best you can do with your current hardware. You can also probably get the Laguna S 2.1 running, this dude also has a video on that but you'd get way worse Tok/s than he does. Basically anything MoE can work wonders with low vram under his setup.\n\nEffective_Head_5020\n•\n19d ago\n\nThank you! I have been doing exactly this, with a smaller context I can get up to 22 t/s\n\nThis video is very valuable, it explains very well, thanks for sharing\n\n3 more replies\n12 more replies\n3 more replies"
+    },
+    {
+      "author": "mr_christer",
+      "score": "53",
+      "text": "mr_christer\n•\n19d ago\n\nI run 3.6 27b on 16gb. It is text only to make it fit so I'm sure people will find a way\n\nTrivikrama_0\n•\n19d ago\n\nYes I also run it, but it's just for chat, it doesn't have a good context window for something good. If you offload 30% of the weights to RAM then you can have VRAM free for context window, it will be slow but you vnanhave agentic flow.\n\n[deleted]\n•\n18d ago\nroworu\n•\n18d ago\n\nHow did you remove vision from model? Is there some text-only checkpoint? Or llama.cpp flag ?\n\nTerrible-Detail-1364\n•\n18d ago\n\n—no-mmproj\n\nroworu\n•\n18d ago\n\nThank you! ❤️\n\nTerrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu\n\n1 more reply"
+    },
+    {
+      "author": "Trivikrama_0",
+      "score": "15",
+      "text": "Trivikrama_0\n•\n19d ago\n\nYes I also run it, but it's just for chat, it doesn't have a good context window for something good. If you offload 30% of the weights to RAM then you can have VRAM free for context window, it will be slow but you vnanhave agentic flow.\n\n[deleted]\n•\n18d ago"
+    },
+    {
+      "author": "roworu",
+      "score": "3",
+      "text": "roworu\n•\n18d ago\n\nHow did you remove vision from model? Is there some text-only checkpoint? Or llama.cpp flag ?\n\nTerrible-Detail-1364\n•\n18d ago\n\n—no-mmproj\n\nroworu\n•\n18d ago\n\nThank you! ❤️\n\nTerrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu\n\n1 more reply"
+    },
+    {
+      "author": "Terrible-Detail-1364",
+      "score": "11",
+      "text": "Terrible-Detail-1364\n•\n18d ago\n\n—no-mmproj\n\nroworu\n•\n18d ago\n\nThank you! ❤️\n\nTerrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu"
+    },
+    {
+      "author": "roworu",
+      "score": "2",
+      "text": "roworu\n•\n18d ago\n\nThank you! ❤️\n\nTerrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu"
+    },
+    {
+      "author": "Terrible-Detail-1364",
+      "score": "6",
+      "text": "Terrible-Detail-1364\n•\n18d ago\n\nnp, theres also --no-mmproj-offload\nto use your cpu instead of gpu"
+    },
+    {
+      "author": "sine120",
+      "score": "11",
+      "text": "sine120\n•\n19d ago\n Top 1% Commenter\n\nI've had decent performace with the IQ3 quants in my 9070 XT\n. Don't load vision, keep context small, it'll work.\n\nlaser50\n•\n19d ago\n\nYou can offload vision to RAM too, if you do have some RAM to spare, I have a hybrid Q_8 F16 mmproj which is only like 700MB and still works really well!\n\nTrivikrama_0\n•\n19d ago\n\nYes that's a good idea, but I saw some performance benchmarks videos, it seems that any one of the parameters, like the models are benchmarked against coding, thinking, reasoning and so on , so at Q3 any one not sure which depends on the model the performance dipa significantly. Q4 is generally where we have really good output without seeing much effects due quantization loss.\n\nHence I prefer using Q4, Q3 can work directly.\n\nsine120\n•\n19d ago\n Top 1% Commenter\n\nI can't fit any Q4 with a decent amount of context. I'm sure larger quants perform better, but 16GB is 16GB. Without the slowdown of CPU offloading, the IQ3 is the best model I've been able to squeeze in my GPU.\n\nI'm interested in upgrading to get more VRAM, but my machine pulls double-duty as a gaming rig and my main PC, so I don't really want to downgrade to an old dedicated workstation card in my one full size PCIe slot.\n\nTrivikrama_0\n•\n19d ago\n\nYes if you want speed then Q3 is the best, i generally use for coding tasks so I'm fine if it's slow. That's why said about Q4. But I really hope qwen 3.8 27b will great with q3."
+    },
+    {
+      "author": "laser50",
+      "score": "6",
+      "text": "laser50\n•\n19d ago\n\nYou can offload vision to RAM too, if you do have some RAM to spare, I have a hybrid Q_8 F16 mmproj which is only like 700MB and still works really well!"
+    },
+    {
+      "author": "Trivikrama_0",
+      "score": "2",
+      "text": "Trivikrama_0\n•\n19d ago\n\nYes that's a good idea, but I saw some performance benchmarks videos, it seems that any one of the parameters, like the models are benchmarked against coding, thinking, reasoning and so on , so at Q3 any one not sure which depends on the model the performance dipa significantly. Q4 is generally where we have really good output without seeing much effects due quantization loss.\n\nHence I prefer using Q4, Q3 can work directly.\n\nsine120\n•\n19d ago\n Top 1% Commenter\n\nI can't fit any Q4 with a decent amount of context. I'm sure larger quants perform better, but 16GB is 16GB. Without the slowdown of CPU offloading, the IQ3 is the best model I've been able to squeeze in my GPU.\n\nI'm interested in upgrading to get more VRAM, but my machine pulls double-duty as a gaming rig and my main PC, so I don't really want to downgrade to an old dedicated workstation card in my one full size PCIe slot.\n\nTrivikrama_0\n•\n19d ago\n\nYes if you want speed then Q3 is the best, i generally use for coding tasks so I'm fine if it's slow. That's why said about Q4. But I really hope qwen 3.8 27b will great with q3."
+    },
+    {
+      "author": "sine120",
+      "score": "5",
+      "text": "sine120\n•\n19d ago\n Top 1% Commenter\n\nI can't fit any Q4 with a decent amount of context. I'm sure larger quants perform better, but 16GB is 16GB. Without the slowdown of CPU offloading, the IQ3 is the best model I've been able to squeeze in my GPU.\n\nI'm interested in upgrading to get more VRAM, but my machine pulls double-duty as a gaming rig and my main PC, so I don't really want to downgrade to an old dedicated workstation card in my one full size PCIe slot.\n\nTrivikrama_0\n•\n19d ago\n\nYes if you want speed then Q3 is the best, i generally use for coding tasks so I'm fine if it's slow. That's why said about Q4. But I really hope qwen 3.8 27b will great with q3."
+    },
+    {
+      "author": "Trivikrama_0",
+      "score": "2",
+      "text": "Trivikrama_0\n•\n19d ago\n\nYes if you want speed then Q3 is the best, i generally use for coding tasks so I'm fine if it's slow. That's why said about Q4. But I really hope qwen 3.8 27b will great with q3."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1ve4uoe",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:51:32Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.809,
+    "evidence": 1.0,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8F_5pdcD3HY&t=102s",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://quesma.com/blog/qwen-quantization-quality/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/GianniDPC/Qwen3.6-27B-IQ4_XS-pure-with-MTP-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

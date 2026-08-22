@@ -1,0 +1,254 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ugg1dm/what_should_i_do_consider_posttraining/",
+  "title": "\"What should I do?\" - consider post-training",
+  "author": "entsnack",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2mo ago\nentsnack\n\"What should I do?\" - consider post-training\nDiscussion\n\nThis is in response to the common post where OP has acquired some cool hardware and is wondering what to do with it. The standard response is always (1) download model X, (2) benchmark it on tps, (3) share screenshots. I argue this is boring and intellectually lazy, and propose an alternative: post-training.\n\nFor background: I have been \"post-training-as-a-service\" for 4 years now. I started out with simply SFTing (supervised fine-tuning) BERT-style models for my clients' tasks on a 4090 server. These are not chat use cases, they're for things like (a) identifying if a chat is a malicious consumer trying to get a refund, (b) tagging a sequence of mouse movements and keypresses for potential corporate espionage, (c) helping salespeople profile consumer traits and needs in real-time. These are all real project by the way, that I earned quite a lot from (and continue to do so today).\n\nUnlike what inference monkeys do, post-training is non-trivial. For starters, quality and speed both matter; you're not going to get away with a false positive rate of 80% at 1,000 tokens per second. In fact, the TPS is not very important because a lot of post-training use cases are not real-time (though some of them are). Second, post-training recipes are a dark art: you will not find tutorials or guides, Claude/Codex cannot vibe it for you (I've tried), and it's still incredibly in demand (check out this recent paper to get a sense of how much of a dark art it is). Third, the data mix is key: your client will give you some data, you will ask for more, eventually you'll need to do some clever data synthesis and transformation to unlock performance. Fourth, different data + model combinations perform differently. The Qwens for example are difficult to post-train, they're crammed with knowledge (i.e., benchmaxxxed). The stupid Llamas are amazing to post-train, they absorb knowledge because they have so little (but the lack of base knowledge is also bad). Fifth, the faster you can iterate, the faster you can find the best post-trained model and deliver results. This is where engineering and deployment skill comes in: if you understand and purchase the right hardware, you can set up a low-power massively-parallel post-training stack that lets you iterate at speed (hint in the picture).\n\nThis is just SFT, the next level is RFT: reinforcement fine-tuning. This is a different ballgame and is the wild west right now. In RFT, you need a model doing inference/rollouts quickly (ideally on a fast token generation machine), that is then given a reward (this may involve spawning Docker containers to build and test code), and finally its weights are updated using PPO/GRPO/RLOO/whatever-it-is-nowadays. It's a cool mix of inference and weight-updates that require a special build-out, and no one knows what the ideal build-out is. Post-training shops like Prime RL run in datacenters, AFAIK no one is doing this solo yet (I am only starting to).\n\nOverall, I hope this post unlocks an interesting new journey for your new hardware. This is all only possible thanks to local LLMs. OpenAI is shutting down its SFT API, and its RFT API is obscenely expensive. So custom post-trains are one of the few projects that are completely in the realm of open models. I see a good opportunity to make money, though a bit competitive and hardware dependent. Enjoy!\n\nWritten with zero LLM-assistance, please excuse typos and rambling.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n2mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "xrothgarx",
+      "score": "62",
+      "text": "xrothgarx\n•\n2mo ago\n\nYou say there aren’t many tutorials about post training so where would you suggest someone get started learning how to do it?\n\nI’m also curious how post training is similar and different to small language models (SLM).\n\nAzazelionide\n•\n2mo ago\n•\nEdited 2mo ago\n\nUnfortunately, a lot of it is still tribal knowledge. I used to work in the industry and train large language models.\n\nRegardless of the approach you choose (fine-tuning, PEFT, DPO, etc), here are a few good tricks to ALWAYS do regardless of the type of training. These will speed up your training a lot\n\nif precision matters (which 99% of the time it does) always do amp\n\nmake sure to kernelize everything and not rely on the default torch kernels. There are many fused kernels (multiple operations grouped in one kernel call). Especially if you can fuse your deembedding and loss function. These will save you A TON on memory and quite a bit on time\n\nmake sure to collate your data to be without padding and one flattened tensor with position ids properly reset (and use fa2/fa3 for this)\n\n8 bit adam optimizer is good enough. Optimizer states are 2-3x your model states (depending on optimizer. For Adam/adamw it's 2x). This will save a lot\n\ntensor/context parallelism beats pipeline parallelism unless you can deal with the bubbles\n\nAnd obviously - microbatch, microbatch, microbatch. You will never have enough memory to not microbatch\n\nCatConfuser2022\n•\n2mo ago\n\nNowadays you are not in training business anymore? Just curious about why someone with deep knowledge about training would leave that industry. \n\nordosays\n•\n2mo ago\n\nGet paid. Live life.\n\nAzazelionide\n•\n2mo ago\n\nDon't like it\n\n1 more reply\nNineThreeTilNow\n•\n2mo ago\n Top 1% Commenter\n\n4) 8 bit adam optimizer is good enough. Optimizer states are 2-3x your model states\n\nThis one always cracks me up. A lot of modern LLMs will try and provide numbers for 32 bit optimizer states or 16 bit optimizer states and I'm like \"Woah bro, we're in 2026. We go 8 bit now. No one has that kind of memory \"spare\".\n\nAzazelionide\n•\n2mo ago\n\nIt's good they provide it like that because it's free to quantize ;)\n\nentsnack\n•\n2mo ago\n\namazing info\n\nop8040\n•\n2mo ago\n\nThis was very helpful, thank you!\n\nwaxbolt\n•\n2mo ago\n\nschedulefree adamw hello!\n\nentsnack\n•\n2mo ago\n•\nEdited 2mo ago\n\nGetting started is very easy. Here is a nice tutorial for Gemma: https://ai.google.dev/gemma/docs/core/huggingface_text_full_finetune. The problems start to appear when you want good performance and training speed. Then you'll start sweeping over learning rates, batch sizes, weight decay, and learn the dark arts of data synthesization and mixing.\n\nEdit: Unsloth is great too – https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide\n\nEasy-Ad9050\n•\n2mo ago\n\nVery resourceful\n\nHVACcontrolsGuru\n•\n2mo ago\n\nI’ll add some resources I’ve learned and been testing and evaluating. Mostly focused on Gemma models:\n\nTraceGen Tool\n\nI’ve been playing around with distilling some of the bigger models down into Gemma around some non code domain stuff. Good bit of headroom in those models to push around. E4B is good enough to learn and practice on as well."
+    },
+    {
+      "author": "Azazelionide",
+      "score": "92",
+      "text": "Azazelionide\n•\n2mo ago\n•\nEdited 2mo ago\n\nUnfortunately, a lot of it is still tribal knowledge. I used to work in the industry and train large language models.\n\nRegardless of the approach you choose (fine-tuning, PEFT, DPO, etc), here are a few good tricks to ALWAYS do regardless of the type of training. These will speed up your training a lot\n\nif precision matters (which 99% of the time it does) always do amp\n\nmake sure to kernelize everything and not rely on the default torch kernels. There are many fused kernels (multiple operations grouped in one kernel call). Especially if you can fuse your deembedding and loss function. These will save you A TON on memory and quite a bit on time\n\nmake sure to collate your data to be without padding and one flattened tensor with position ids properly reset (and use fa2/fa3 for this)\n\n8 bit adam optimizer is good enough. Optimizer states are 2-3x your model states (depending on optimizer. For Adam/adamw it's 2x). This will save a lot\n\ntensor/context parallelism beats pipeline parallelism unless you can deal with the bubbles\n\nAnd obviously - microbatch, microbatch, microbatch. You will never have enough memory to not microbatch\n\nCatConfuser2022\n•\n2mo ago\n\nNowadays you are not in training business anymore? Just curious about why someone with deep knowledge about training would leave that industry. \n\nordosays\n•\n2mo ago\n\nGet paid. Live life.\n\nAzazelionide\n•\n2mo ago\n\nDon't like it\n\n1 more reply\nNineThreeTilNow\n•\n2mo ago\n Top 1% Commenter\n\n4) 8 bit adam optimizer is good enough. Optimizer states are 2-3x your model states\n\nThis one always cracks me up. A lot of modern LLMs will try and provide numbers for 32 bit optimizer states or 16 bit optimizer states and I'm like \"Woah bro, we're in 2026. We go 8 bit now. No one has that kind of memory \"spare\".\n\nAzazelionide\n•\n2mo ago\n\nIt's good they provide it like that because it's free to quantize ;)\n\nentsnack\n•\n2mo ago\n\namazing info\n\nop8040\n•\n2mo ago\n\nThis was very helpful, thank you!\n\nwaxbolt\n•\n2mo ago\n\nschedulefree adamw hello!"
+    },
+    {
+      "author": "CatConfuser2022",
+      "score": "18",
+      "text": "CatConfuser2022\n•\n2mo ago\n\nNowadays you are not in training business anymore? Just curious about why someone with deep knowledge about training would leave that industry. \n\nordosays\n•\n2mo ago\n\nGet paid. Live life.\n\nAzazelionide\n•\n2mo ago\n\nDon't like it\n\n1 more reply"
+    },
+    {
+      "author": "ordosays",
+      "score": "16",
+      "text": "ordosays\n•\n2mo ago\n\nGet paid. Live life."
+    },
+    {
+      "author": "Azazelionide",
+      "score": "8",
+      "text": "Azazelionide\n•\n2mo ago\n\nDon't like it\n\n1 more reply"
+    },
+    {
+      "author": "NineThreeTilNow",
+      "score": "17",
+      "text": "NineThreeTilNow\n•\n2mo ago\n Top 1% Commenter\n\n4) 8 bit adam optimizer is good enough. Optimizer states are 2-3x your model states\n\nThis one always cracks me up. A lot of modern LLMs will try and provide numbers for 32 bit optimizer states or 16 bit optimizer states and I'm like \"Woah bro, we're in 2026. We go 8 bit now. No one has that kind of memory \"spare\".\n\nAzazelionide\n•\n2mo ago\n\nIt's good they provide it like that because it's free to quantize ;)"
+    },
+    {
+      "author": "Azazelionide",
+      "score": "3",
+      "text": "Azazelionide\n•\n2mo ago\n\nIt's good they provide it like that because it's free to quantize ;)"
+    },
+    {
+      "author": "entsnack",
+      "score": "4",
+      "text": "entsnack\n•\n2mo ago\n\namazing info"
+    },
+    {
+      "author": "op8040",
+      "score": "2",
+      "text": "op8040\n•\n2mo ago\n\nThis was very helpful, thank you!"
+    },
+    {
+      "author": "waxbolt",
+      "score": "2",
+      "text": "waxbolt\n•\n2mo ago\n\nschedulefree adamw hello!"
+    },
+    {
+      "author": "entsnack",
+      "score": "50",
+      "text": "entsnack\n•\n2mo ago\n•\nEdited 2mo ago\n\nGetting started is very easy. Here is a nice tutorial for Gemma: https://ai.google.dev/gemma/docs/core/huggingface_text_full_finetune. The problems start to appear when you want good performance and training speed. Then you'll start sweeping over learning rates, batch sizes, weight decay, and learn the dark arts of data synthesization and mixing.\n\nEdit: Unsloth is great too – https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide\n\nEasy-Ad9050\n•\n2mo ago\n\nVery resourceful"
+    },
+    {
+      "author": "Easy-Ad9050",
+      "score": "2",
+      "text": "Easy-Ad9050\n•\n2mo ago\n\nVery resourceful"
+    },
+    {
+      "author": "HVACcontrolsGuru",
+      "score": "9",
+      "text": "HVACcontrolsGuru\n•\n2mo ago\n\nI’ll add some resources I’ve learned and been testing and evaluating. Mostly focused on Gemma models:\n\nTraceGen Tool\n\nI’ve been playing around with distilling some of the bigger models down into Gemma around some non code domain stuff. Good bit of headroom in those models to push around. E4B is good enough to learn and practice on as well."
+    },
+    {
+      "author": "kershawbobblehead",
+      "score": "63",
+      "text": "kershawbobblehead\n•\n2mo ago\n\nupvoted & agree. I think if smaller/local LLMs are an important part of the future, their use will be bespoke... . The local crowd seems hyped on \"harness\" design and but laptop/consumer hardware can be used for useful work on the model side, too. I see more of this in the non-CS/non-LLM \"labs,\" e.g., academic biology/chemistry/geosciences research. Many of them have access to HPC typically used for other stuff but able to handle many of the benefits of doing Local LM work, ie data retention/privacy, abiding by non-commercial licensing, etc.\n\nentsnack\n•\n2mo ago\n\nYes Cursor's model is a post-trained Kimi K2. I truly believe a small local LLM with post-training can perform on par with a big proprietary one without, because the proprietary ones cater to the masses and not your special use case. But the recipes for post-training are often closely-guarded secrets."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1ugg1dm",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:34:20Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.368,
+    "evidence": 0.2,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.datocms-assets.com/104802/1781805778-baseten-research-sft.pdf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://ai.google.dev/gemma/docs/core/huggingface_text_full_finetune",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/jscott3201/ghostwriter-rs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.kalzumeus.com/greatest-hits/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.johndcook.com/blog/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://youtube.com/@mrdbourke?si=hSCm277aPzUSMDAs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://rlhfbook.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/collections/meta-llama/llama-32",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/docs/trl/en/index",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.fs.com/products/158399.html?now_cid=5575",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://fs.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.qnap.com/en-us/product/qsw-m7308r-4x",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

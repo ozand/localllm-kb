@@ -1,0 +1,138 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vulsom/qwen_38_vs_36_27b_low_reasoning_loops_way_less_now/",
+  "title": "Qwen 3.8 vs 3.6 27b low reasoning loops way less now",
+  "author": "Lair98",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n19h ago\nLair98\nQwen 3.8 vs 3.6 27b low reasoning loops way less now\nDiscussion\n\nHave seen some people say Qwen 3.8 still overthinks even when reasoning is set to low. Which on my case has been way better compared to 3.6, eveb on a 3 bit quant.\n\nI think it's worth mentioning that the default is actually xhigh, so first make sure to specify it if not already.\n\nAlso, Qwen 3.8 has an additional parameter preserve_thinking. It allows to keep/discard the reasoning after every turn.\n\nSo make sure its activated, otherwise the model may end up reasoning through the same stuff again.\n\nMy personal experience is low loops way less than 3.6 Still not perfect but a significant improvement.\n\nTLDR: Qwen 3.8 on \"low\" loops less than 3.6. Check \"preserve_thinking\" and make sure you're not still on the default \"xhigh\".\n\nShare",
+  "comments": [
+    {
+      "author": "egnegn1",
+      "score": "5",
+      "text": "egnegn1\n•\n18h ago\n•\nEdited 16h ago\n\nExperiments have shown that with short and less complex prompts low and medium are similar in token generation. But with more complex prompts low uses more tokens than medium, because low causes more errors than medium, because more iterations are necessary.\n\nPreserve Thinking has the advantage of providing more context to the next step. But on the other side it increases context rapidly and this causes also rapid prompt processing slow down.\n\nFor me the best combine medium without preserve, to make better use of available context size. This avoids constant frequent move to new chat.\n\nBut of course, an even better solution would be faster hardware to avoid this tinkering with parameters.\n\nFancy-Snow7\n•\n16h ago\n\nI have a feeling you watched this but for the benefit of OP: https://www.youtube.com/watch?v=z64J6bC16iQ\n\nThis youtuber explains it nicely how and why low consumes more tokens than medium for certain prompts.\n\negnegn1\n•\n16h ago\n\nYou nailed it! Thank you for providing the link!"
+    },
+    {
+      "author": "Fancy-Snow7",
+      "score": "3",
+      "text": "Fancy-Snow7\n•\n16h ago\n\nI have a feeling you watched this but for the benefit of OP: https://www.youtube.com/watch?v=z64J6bC16iQ\n\nThis youtuber explains it nicely how and why low consumes more tokens than medium for certain prompts.\n\negnegn1\n•\n16h ago\n\nYou nailed it! Thank you for providing the link!"
+    },
+    {
+      "author": "egnegn1",
+      "score": "1",
+      "text": "egnegn1\n•\n16h ago\n\nYou nailed it! Thank you for providing the link!"
+    },
+    {
+      "author": "CapsAdmin",
+      "score": "3",
+      "text": "CapsAdmin\n•\n19h ago\n\nin 3.8, preserve_thinking is on by default\n\nreasoning modes prepends the system prompt:\n\nnone:\n\nlow:\n\nReasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration.\n\n\nmedium:\n\nxhigh:\n\nReasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.\n\n\nSo medium none are blank. I've observed low doing more thinking than medium in some cases. If your system prompt hints at thinking carefully, it might trigger longer reasoning."
+    },
+    {
+      "author": "pepedombo",
+      "score": "3",
+      "text": "pepedombo\n•\n17h ago\n\nI don't benchmark these models excessively (i just use them) but at some point 3.6-27b used to turn itself into loops, sometimes I feel like it came with frequent llama.cpp runtime updates or with pi agent updates.\n\nFor 3.8 (Q6_K/Q8), I haven't detected that behavior yet. If I do, then it means the harness might interfere as well. I used it mostly with medium reasoning as xhigh goes even more crazy with token output."
+    },
+    {
+      "author": "noprompt",
+      "score": "2",
+      "text": "noprompt\n•\n15h ago\n\nThis model is a huge upgrade from 3.6 IMO. I'm actually fine with the overthinking because the end results have been good. Less struggling, more winning.\n\nWishfulAgenda\n•\n10h ago\n\nThat's what I've found. Haven't had a single loop in over 30 hours or running solid."
+    },
+    {
+      "author": "WishfulAgenda",
+      "score": "1",
+      "text": "WishfulAgenda\n•\n10h ago\n\nThat's what I've found. Haven't had a single loop in over 30 hours or running solid."
+    },
+    {
+      "author": "manishiitg",
+      "score": "1",
+      "text": "manishiitg\n•\n14h ago\n\nthe \"harness might interfere\" comment is probably the thing to test first. if preserve_thinking leaves stale reasoning around, a config change can look like a model improvement depending on the chat history."
+    },
+    {
+      "author": "Square_Light1441",
+      "score": "1",
+      "text": "Square_Light1441\n•\n13h ago\n\nyall just use 0.7 temp the model hasn't looped once, even on iq3"
+    },
+    {
+      "author": "tomByrer",
+      "score": "1",
+      "text": "tomByrer\n•\n10h ago\n\nYou'll likely will get better speed AND fewer errors if you switch to Medium reasoning."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vulsom",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:59:19Z",
+  "discovered_by_query_ids": [
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.417,
+    "evidence": 0.2,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.youtube.com/watch?v=z64J6bC16iQ",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

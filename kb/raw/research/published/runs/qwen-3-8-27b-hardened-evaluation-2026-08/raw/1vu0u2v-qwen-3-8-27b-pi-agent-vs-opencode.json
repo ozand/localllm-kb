@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu0u2v/qwen_38_27b_pi_agent_vs_opencode/",
+  "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE",
+  "author": "Healthy-Nebula-3603",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\nHealthy-Nebula-3603\n Top 1% Commenter\nQwen 3.8 27b - PI AGENT vs OPENCODE\nDiscussion\n\nhttps://www.reddit.com/r/LocalLLaMA/comments/1j7r47l/i_just_made_an_animation_of_a_ball_bouncing/\n\nThis post inspired me to make that test after a year ;)\n\nThat is one of my many tests I make comparing output quality.\n\nWhat is more interesting using a PI Agent results are much better than an Opencode using a Qwen 3.8 27b ?!\n\nSeems PI Agent is much better in the agent environment somehow... Not counting uses less tokens , do not have a hard limit of 32k output tokens, is faster, do not freezing, compressing context far less than Opencode. For instance if you have context in the Opencode output 32k and all context 100k then the compression is starting at 67k context ... PI is starting at 90k context even if you have set output context 64k or more.\n\nMy config for RTX 3090\n\nllama-server with ini config -> which is exposing API to Opencode and PI agent.\n\nllama-server.exe --models-preset 1_preset.ini --models-max 1 --direct-io\n\nconfig ini\n\n[Qwen3.8-27B_dense_c-100k]\nmodel = models/Qwen3.8-27B-Q4_K_M.gguf\nmmproj = models/mmproj-BF16-Qwen3.8-27B-UD-Q4_K_XL.gguf\nreasoning-format = deepseek\nflash-attn = on\nn-gpu-layers = 99\nreasoning = on\nctx-size = 100000\ntemperature=1.0\ntop-p=0.95\ntop-k=20\nmin-p=0.0\npresence-penalty=0.0\nrepeat-penalty=1.0\nmmproj-offload = false\n\nONE MORE IMPORTANT THING:\n\nAlways use a VISION module as the model is using vision to asses the output quality!\n\nI am offloading it to a RAM as we do not need an extremely fast vision for a code.\n\nA screenshot processing on a GPU 0.3s vs a RAM 3s do not make a big difference on a few screenshots during a code generation / debugging ;)\n\nShare",
+  "comments": [
+    {
+      "author": "SOC_FreeDiver",
+      "score": "55",
+      "text": "SOC_FreeDiver\n•\n1d ago\n\nI tested opencode, then tried pi, and pi was significantly better.\n\nLast night I had a dual between local qwen3.8-27b/pi and claudecode.\n\nMy seat-of-the-pants analysis: it felt like they both took the same time.\n\nWhen they both finished I had each one compare the two. They both agreed claude's was better, but it was close. I had pi upgrade upgrade its version, making it slightly better than claudes because I liked qwen's presentation better.\n\nIt was an aurora predictor app. It's pretty nuts that we can use an AI to write a complicated aurora prediction app that's better than anything else online in about an hour, and it's hooked up to all the satellite instruments. I get 30-60 minute warning if I'm watching the display.\n\ncmdr-William-Riker\n•\n1d ago\n Top 1% Commenter\n\nPi is great! I just wish the interface was better, also sometimes I actually do want to use an MCP and skills and such. I know you can do all that with Pi through plugins and self modification, but I do like that OpenCode out of the box has a nice interface that makes it easy to keep track on of token usage and such. I should probably mess with Pi more though\n\nLuCiAnO241\n•\n1d ago\n\nI'm literally trying to get into PI, and found Oh-my-PI, and it seems way more usable out of the box with not much negatives. Maybe check it out?\n\n3 more replies\nLegacyRemaster\n•\n1d ago\n Top 1% Commenter\n\nPI is better. The reason it's simple: every new \"sota\" model = harness inside the model itself. With Pi the model has more freedom to go.\n\nHealthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nYep I also learned lately PI agent is better. Actually I am shocked how much better.\n\nFaster, more efficient, stable, much less compaction , somehow generating better code ...\n\nImpressiveRelief37\n•\n1d ago\n\nThe compaction thing is customizable in pi…\n\nIn settings.json you can set the compaction threshold you want. I use the same as max_tokens so it doesn’t compact right at the limit and fail.\n\nHealthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nI noticed auto is completely enough from my 2 days tests. Starting around 90% and do a good job.\n\nImpressiveRelief37\n•\n1d ago\n\nYou are right. 16k tokens is usually enough to compact (write a summary of what compaction removes, basically).\n\nI’ve had some issues before but I think it was on older pi versions. Sometimes it wouldn’t trigger soon enough and would overflow the token window and make it impossible to compact / resume the session \n\nHealthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies\nFancy-Snow7\n•\n1d ago\n\nI have been trying out Opencode and I cant get it to work right. It does all the thinking but almost never writes the output files. Then I have to tell it please write the files. Sometimes that will work other times it won't. But when I tell it to write files it first things for agens with a 30% change of actually writing them.\n\nFor now, I have given up on opencode, but I wanted to compare it to pi.\n\nSufficient-Ninja541\n•\n14h ago\n\nPlan mode ?\n\nKitchen_Ad_996\n•\n1d ago\n\nThanks for the recommendation you two. I've been using opencode and been annoyed with several things.\n\nSong-Historical\n•\n1d ago\n\nHow do you check if the Aurora is actually there? Are you up north somewhere?\n\npablopicasso1414\n•\n1d ago\n\nHow did you build it?\n\nal404\n•\n23h ago\n\nqwen3.8-27b was quantify?\n\nfragment_me\n•\n18h ago\n Top 1% Commenter\n\nYou need to set a seed value for the comparison to be closer. It won't be example the same but it will be better than just trying both.\n\nllagerlof\n•\n17h ago\n\nInteresting insights, because in my own tests, pi always underperform comparing to opencode in coding tasks."
+    },
+    {
+      "author": "cmdr-William-Riker",
+      "score": "16",
+      "text": "cmdr-William-Riker\n•\n1d ago\n Top 1% Commenter\n\nPi is great! I just wish the interface was better, also sometimes I actually do want to use an MCP and skills and such. I know you can do all that with Pi through plugins and self modification, but I do like that OpenCode out of the box has a nice interface that makes it easy to keep track on of token usage and such. I should probably mess with Pi more though\n\nLuCiAnO241\n•\n1d ago\n\nI'm literally trying to get into PI, and found Oh-my-PI, and it seems way more usable out of the box with not much negatives. Maybe check it out?\n\n3 more replies"
+    },
+    {
+      "author": "LuCiAnO241",
+      "score": "17",
+      "text": "LuCiAnO241\n•\n1d ago\n\nI'm literally trying to get into PI, and found Oh-my-PI, and it seems way more usable out of the box with not much negatives. Maybe check it out?"
+    },
+    {
+      "author": "LegacyRemaster",
+      "score": "10",
+      "text": "LegacyRemaster\n•\n1d ago\n Top 1% Commenter\n\nPI is better. The reason it's simple: every new \"sota\" model = harness inside the model itself. With Pi the model has more freedom to go."
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "10",
+      "text": "Healthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nYep I also learned lately PI agent is better. Actually I am shocked how much better.\n\nFaster, more efficient, stable, much less compaction , somehow generating better code ...\n\nImpressiveRelief37\n•\n1d ago\n\nThe compaction thing is customizable in pi…\n\nIn settings.json you can set the compaction threshold you want. I use the same as max_tokens so it doesn’t compact right at the limit and fail.\n\nHealthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nI noticed auto is completely enough from my 2 days tests. Starting around 90% and do a good job.\n\nImpressiveRelief37\n•\n1d ago\n\nYou are right. 16k tokens is usually enough to compact (write a summary of what compaction removes, basically).\n\nI’ve had some issues before but I think it was on older pi versions. Sometimes it wouldn’t trigger soon enough and would overflow the token window and make it impossible to compact / resume the session \n\nHealthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies"
+    },
+    {
+      "author": "ImpressiveRelief37",
+      "score": "5",
+      "text": "ImpressiveRelief37\n•\n1d ago\n\nThe compaction thing is customizable in pi…\n\nIn settings.json you can set the compaction threshold you want. I use the same as max_tokens so it doesn’t compact right at the limit and fail.\n\nHealthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nI noticed auto is completely enough from my 2 days tests. Starting around 90% and do a good job.\n\nImpressiveRelief37\n•\n1d ago\n\nYou are right. 16k tokens is usually enough to compact (write a summary of what compaction removes, basically).\n\nI’ve had some issues before but I think it was on older pi versions. Sometimes it wouldn’t trigger soon enough and would overflow the token window and make it impossible to compact / resume the session \n\nHealthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies"
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "1",
+      "text": "Healthy-Nebula-3603\n•\n1d ago\n Top 1% Commenter\n\nI noticed auto is completely enough from my 2 days tests. Starting around 90% and do a good job.\n\nImpressiveRelief37\n•\n1d ago\n\nYou are right. 16k tokens is usually enough to compact (write a summary of what compaction removes, basically).\n\nI’ve had some issues before but I think it was on older pi versions. Sometimes it wouldn’t trigger soon enough and would overflow the token window and make it impossible to compact / resume the session \n\nHealthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies"
+    },
+    {
+      "author": "ImpressiveRelief37",
+      "score": "3",
+      "text": "ImpressiveRelief37\n•\n1d ago\n\nYou are right. 16k tokens is usually enough to compact (write a summary of what compaction removes, basically).\n\nI’ve had some issues before but I think it was on older pi versions. Sometimes it wouldn’t trigger soon enough and would overflow the token window and make it impossible to compact / resume the session \n\nHealthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies"
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "1",
+      "text": "Healthy-Nebula-3603\n•\n21h ago\n Top 1% Commenter\n\nIs not only compact in the 16k context but also leaving the last 20k tokens in auto mode\n\n2 more replies"
+    },
+    {
+      "author": "Fancy-Snow7",
+      "score": "3",
+      "text": "Fancy-Snow7\n•\n1d ago\n\nI have been trying out Opencode and I cant get it to work right. It does all the thinking but almost never writes the output files. Then I have to tell it please write the files. Sometimes that will work other times it won't. But when I tell it to write files it first things for agens with a 30% change of actually writing them.\n\nFor now, I have given up on opencode, but I wanted to compare it to pi.\n\nSufficient-Ninja541\n•\n14h ago\n\nPlan mode ?"
+    },
+    {
+      "author": "Sufficient-Ninja541",
+      "score": "1",
+      "text": "Sufficient-Ninja541\n•\n14h ago\n\nPlan mode ?"
+    },
+    {
+      "author": "Kitchen_Ad_996",
+      "score": "3",
+      "text": "Kitchen_Ad_996\n•\n1d ago\n\nThanks for the recommendation you two. I've been using opencode and been annoyed with several things."
+    },
+    {
+      "author": "Song-Historical",
+      "score": "1",
+      "text": "Song-Historical\n•\n1d ago\n\nHow do you check if the Aurora is actually there? Are you up north somewhere?"
+    },
+    {
+      "author": "pablopicasso1414",
+      "score": "1",
+      "text": "pablopicasso1414\n•\n1d ago\n\nHow did you build it?"
+    },
+    {
+      "author": "al404",
+      "score": "1",
+      "text": "al404\n•\n23h ago\n\nqwen3.8-27b was quantify?"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vu0u2v",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:48:07Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.597,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/obra/superpowers",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "confirmed_facts": [],
+  "identified_bottlenecks": [
+    "One selected Reddit source remained inaccessible after three resumable Surf timeout attempts and was explicitly skipped.",
+    "567 outbound references were discovered but none were manually verified in this evaluation run.",
+    "The extractor captures navigation/repost chrome in post_body on some pages and captured one Reddit error page with an empty body.",
+    "The keyword quality score is triage-only and under-scores announcement, poll, and harness threads that may still be relevant to the hypothesis."
+  ],
+  "new_hypotheses": [
+    "A selector or page-readiness check that rejects Reddit shell/error pages will improve capture validity.",
+    "Separating Reddit post content from navigation/repost chrome will improve synthesis quality and quality scoring.",
+    "A bounded outbound-verification queue should prioritize primary GitHub/Hugging Face/vendor links rather than attempting hundreds of sidebar links."
+  ],
+  "targeted_follow_up_queries": [
+    "Reddit shreddit-post post-text selector repost chrome extraction",
+    "Surf CLI Reddit page readiness error page detection",
+    "Qwen 3.8 27B RTX 3090 Ti verified benchmark",
+    "Qwen 3.8 27B llama.cpp configuration GitHub"
+  ]
+}

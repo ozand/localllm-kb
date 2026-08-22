@@ -1,0 +1,156 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu08f3/while_everyone_is_excited_about_qwen_38_27b_heres/",
+  "title": "While Everyone Is Excited About Qwen 3.8 27B, Here’s the Reality for a 16GB AMD GPU User",
+  "author": "CrowKing63",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\nCrowKing63\nWhile Everyone Is Excited About Qwen 3.8 27B, Here’s the Reality for a 16GB AMD GPU User\nOther\n\nQwen 3.8 27B has been getting a lot of attention in the local LLM community lately, so I gave it a try as well. However, after running it for extended coding agent tasks on my 16GB AMD GPU (RX 9060 XT), I found it quite frustratingly slow.\n\nLuckily, Ornith had just released version 1.5, so I decided to try the 9B model with Q6_K, a 256K context window, and Q8 KV cache.\n\n./llama-server -hf ornith-ai/Ornith-1.5-9B-GGUF:Q6_K `\n  -ngl 99 `\n  -np 1 `\n  -c 262144 `\n  -fa on `\n  -ctk q8_0 `\n  -ctv q8_0 `\n  --load-mode mlock `\n  --temp 0.6 `\n  --top-p 0.95 `\n  --top-k 20\n\nIn my setup, I get up to around 950 tok/s prompt eval and 36 tok/s generation. I also tested it on a real coding agent task, and it kept working continuously for almost three and a half hours without stopping. The speed does drop during long tasks, sometimes down to around 500/25 tok/s.\n\nWhile everyone else is getting excited about 27B models, I find it kind of amusing that I'm going in the opposite direction and optimizing a 9B model instead.\n\nShare",
+  "comments": [
+    {
+      "author": "ttkciar",
+      "score": "5",
+      "text": "ttkciar\n•\n1d ago\nllama.cpp\n Top 1% Commenter\n\nHave you tried Gemma-4-12b-it yet? It's replaced Phi-4 as my go-to for inferring with the 16GB V340.\n\nUnfortunately it has fat K and V caches, and does not tolerate quantized K/V caches, so I have to sharply limit its context. Within that limit, though, it works really well for me on a wide variety of tasks.\n\nI am hoping Qwen will come out with a Qwen3.8-9B, which not only leaves more VRAM for K/V caches, but also has comparatively lean K/V caches, so should give me a much longer context allowance. Qwen3.5-9B just doesn't cut it for me, alas, but maybe 3.8 will.\n\nCrowKing63\n•\n1d ago\n\nI gave up on gemma4 because it didn't have as much staying power as qwen in Hermes Agent. I don't know how it is these days."
+    },
+    {
+      "author": "CrowKing63",
+      "score": "1",
+      "text": "CrowKing63\n•\n1d ago\n\nI gave up on gemma4 because it didn't have as much staying power as qwen in Hermes Agent. I don't know how it is these days."
+    },
+    {
+      "author": "Atretador",
+      "score": "6",
+      "text": "Atretador\n•\n1d ago\n\nwhy are you trying 9B model? just use a MOE model\n\nif you have the memory for 9B you can run 35B A3B with RAM offload\n\nCrowKing63\n•\n1d ago\n\nI tried that too, but the speed didn't get significantly faster.\n\nsuprjami\n•\n1d ago\n\nThe point is that partial-offload 35B Q6 will give better results than any 9B.\n\nAtretador\n•\n1d ago\n\nwith what parameters? my 35B runs about the same speed as 9B for me\n\nCrowKing63\n•\n1d ago\n\n--n-cpu-moe 20 `\n\n-c 32768 `\n\n-np 1 `\n\n-fa on `\n\n--cache-type-k q8_0 `\n\n--cache-type-v q8_0\n\nMax 70/25 tok/s\n\nAtretador\n•\n1d ago\n\nhow is that not better than running 9B which is much much weaker? with n-cpu-moe 20 you should have plenty of space in VRAM at Q4 for at least 200K context as well\n\nCrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "CrowKing63",
+      "score": "1",
+      "text": "CrowKing63\n•\n1d ago\n\nI tried that too, but the speed didn't get significantly faster.\n\nsuprjami\n•\n1d ago\n\nThe point is that partial-offload 35B Q6 will give better results than any 9B.\n\nAtretador\n•\n1d ago\n\nwith what parameters? my 35B runs about the same speed as 9B for me\n\nCrowKing63\n•\n1d ago\n\n--n-cpu-moe 20 `\n\n-c 32768 `\n\n-np 1 `\n\n-fa on `\n\n--cache-type-k q8_0 `\n\n--cache-type-v q8_0\n\nMax 70/25 tok/s\n\nAtretador\n•\n1d ago\n\nhow is that not better than running 9B which is much much weaker? with n-cpu-moe 20 you should have plenty of space in VRAM at Q4 for at least 200K context as well\n\nCrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "suprjami",
+      "score": "4",
+      "text": "suprjami\n•\n1d ago\n\nThe point is that partial-offload 35B Q6 will give better results than any 9B."
+    },
+    {
+      "author": "Atretador",
+      "score": "1",
+      "text": "Atretador\n•\n1d ago\n\nwith what parameters? my 35B runs about the same speed as 9B for me\n\nCrowKing63\n•\n1d ago\n\n--n-cpu-moe 20 `\n\n-c 32768 `\n\n-np 1 `\n\n-fa on `\n\n--cache-type-k q8_0 `\n\n--cache-type-v q8_0\n\nMax 70/25 tok/s\n\nAtretador\n•\n1d ago\n\nhow is that not better than running 9B which is much much weaker? with n-cpu-moe 20 you should have plenty of space in VRAM at Q4 for at least 200K context as well\n\nCrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "CrowKing63",
+      "score": "1",
+      "text": "CrowKing63\n•\n1d ago\n\n--n-cpu-moe 20 `\n\n-c 32768 `\n\n-np 1 `\n\n-fa on `\n\n--cache-type-k q8_0 `\n\n--cache-type-v q8_0\n\nMax 70/25 tok/s\n\nAtretador\n•\n1d ago\n\nhow is that not better than running 9B which is much much weaker? with n-cpu-moe 20 you should have plenty of space in VRAM at Q4 for at least 200K context as well\n\nCrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "Atretador",
+      "score": "4",
+      "text": "Atretador\n•\n1d ago\n\nhow is that not better than running 9B which is much much weaker? with n-cpu-moe 20 you should have plenty of space in VRAM at Q4 for at least 200K context as well\n\nCrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "CrowKing63",
+      "score": "1",
+      "text": "CrowKing63\n•\n1d ago\n\nMaybe so. Okay, I'll try again. thank you."
+    },
+    {
+      "author": "Ok-Golf-6333",
+      "score": "3",
+      "text": "Ok-Golf-6333\n•\n1d ago\n\nI had to slap a 2080 Ti in with my 9070 XT for the extra VRAM for Q4_K_M because I was stubborn and didn't trust the lighter quants.\n\n_hchc\n•\n1d ago\n\nwait you can mix nvidia with amd? How to setup?\n\nhashms0a\n•\n1d ago\n\nIs it possible to combine AMD and Nvidia GPUs? Utilizing Vulkan?"
+    },
+    {
+      "author": "_hchc",
+      "score": "2",
+      "text": "_hchc\n•\n1d ago\n\nwait you can mix nvidia with amd? How to setup?"
+    },
+    {
+      "author": "hashms0a",
+      "score": "1",
+      "text": "hashms0a\n•\n1d ago\n\nIs it possible to combine AMD and Nvidia GPUs? Utilizing Vulkan?"
+    },
+    {
+      "author": "mourningwitch",
+      "score": "3",
+      "text": "mourningwitch\n•\n1d ago\n\nQwen 3.6 35b A3b is the way. I run it with decent success on an 8gb card. (hopefully they drop a 3.8 version soon)\n\nCautious_Chicken_604\n•\n1d ago\n\nOrnith 1.5 appears to a superior fine-tune of this from the looks of things.\n\nCrowKing63\n•\n13h ago\n\nI'm trying out the unsloth version of MTP."
+    },
+    {
+      "author": "Cautious_Chicken_604",
+      "score": "1",
+      "text": "Cautious_Chicken_604\n•\n1d ago\n\nOrnith 1.5 appears to a superior fine-tune of this from the looks of things.\n\nCrowKing63\n•\n13h ago\n\nI'm trying out the unsloth version of MTP."
+    },
+    {
+      "author": "CrowKing63",
+      "score": "1",
+      "text": "CrowKing63\n•\n13h ago\n\nI'm trying out the unsloth version of MTP."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vu08f3",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:49:22Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.873,
+    "evidence": 1.0,
+    "relevance": 0.636,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/empero-ai/Qwen3.8-9B-Distill-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

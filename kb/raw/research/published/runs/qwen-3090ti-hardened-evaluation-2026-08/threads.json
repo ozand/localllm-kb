@@ -1,0 +1,1161 @@
+{
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "threads": [
+    {
+      "thread_id": "1vm2j42",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vm2j42/i_need_some_realistic_expectations_about_1x_3090/",
+      "title": "I need some realistic expectations about 1x 3090",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vm2j42-i-need-some-realistic-expectations-about-1x-3090.json",
+      "quality": {
+        "score": 0.229,
+        "evidence": 0.2,
+        "relevance": 0.111,
+        "community_scrutiny": 0.5,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu7yce",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7yce/qwen3827b_at_262k_context_on_a_strix_halo_rtx/",
+      "title": "Qwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval",
+      "discovered_by_query_ids": [
+        "8011324fedef",
+        "13213738e1bb",
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vu7yce-qwen3-8-27b-at-262k-context-on-a-strix-halo-rtx-3090-ti-9-5-153-tok-s-and-it-bea.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1s916kt",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s916kt/which_gpu_for_local_llm_inference_3090_or_5070_ti/",
+      "title": "Which GPU for local LLM inference? 3090 or 5070 Ti",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1s916kt-which-gpu-for-local-llm-inference-3090-or-5070-ti.json",
+      "quality": {
+        "score": 0.644,
+        "evidence": 0.6,
+        "relevance": 0.556,
+        "community_scrutiny": 0.9,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1t0jd95",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t0jd95/poor_mans_guide_to_servicing_a_used_rtx_3090_for/",
+      "title": "Poor man's guide to servicing a used RTX 3090 for local LLM inference",
+      "discovered_by_query_ids": [
+        "8011324fedef",
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1t0jd95-poor-man-s-guide-to-servicing-a-used-rtx-3090-for-local-llm-inference.json",
+      "quality": {
+        "score": 0.536,
+        "evidence": 0.4,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1ucx2xj",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ucx2xj/what_should_i_build_my_local_llm_machine_around/",
+      "title": "What should I build my local LLM machine around? RTX 3090s or Arc Pro B60s?",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1ucx2xj-what-should-i-build-my-local-llm-machine-around-rtx-3090s-or-arc-pro-b60s.json",
+      "quality": {
+        "score": 0.458,
+        "evidence": 0.4,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1s0p28x",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s0p28x/honest_take_on_running_9_rtx_3090_for_ai/",
+      "title": "Honest take on running 9× RTX 3090 for AI",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1s0p28x-honest-take-on-running-9-rtx-3090-for-ai.json",
+      "quality": {
+        "score": 0.587,
+        "evidence": 0.6,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1tx9tf2",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1tx9tf2/finally_finished_my_llm_server_epyc_9575f_4_rtx/",
+      "title": "Finally finished my LLM server: EPYC 9575F, 4× RTX 3090 (96GB VRAM), 768GB ECC RAM",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1tx9tf2-finally-finished-my-llm-server-epyc-9575f-4-rtx-3090-96gb-vram-768gb-ecc-ram.json",
+      "quality": {
+        "score": 0.587,
+        "evidence": 0.6,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 15,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vr56r1",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vr56r1/benchmarked_qwen3827b_on_4x_rtx_3090/",
+      "title": "Benchmarked Qwen3.8-27B on 4x RTX 3090",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vr56r1-benchmarked-qwen3-8-27b-on-4x-rtx-3090.json",
+      "quality": {
+        "score": 0.728,
+        "evidence": 1.0,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1spwk7h",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1spwk7h/5070_ti_new_vs_3090_used_to_pair_with_4070_for/",
+      "title": "5070 Ti (New) vs 3090 (Used) to pair with 4070 for local LLMs?",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1spwk7h-5070-ti-new-vs-3090-used-to-pair-with-4070-for-local-llms.json",
+      "quality": {
+        "score": 0.716,
+        "evidence": 0.8,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 7,
+      "last_error": null
+    },
+    {
+      "thread_id": "1ronpwd",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ronpwd/is_a_699_rtx_3090_24gb_a_good_entry_point_for/",
+      "title": "Is a $699 RTX 3090 (24GB) a good entry point for running strong local LLMs?",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1ronpwd-is-a-699-rtx-3090-24gb-a-good-entry-point-for-running-strong-local-llms.json",
+      "quality": {
+        "score": 0.626,
+        "evidence": 0.6,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1t2hejy",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t2hejy/anyone_running_huananzhi_h12d8d_bmc_with_4x_rtx/",
+      "title": "Anyone running HUANANZHI H12D-8D + BMC with 4x RTX 3090 for LLM inference?",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1t2hejy-anyone-running-huananzhi-h12d-8d-bmc-with-4x-rtx-3090-for-llm-inference.json",
+      "quality": {
+        "score": 0.368,
+        "evidence": 0.2,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1sl3ztq",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sl3ztq/can_you_run_actually_useful_llms_on_anything_less/",
+      "title": "Can you run actually useful LLMs on anything less than 3090 ?",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1sl3ztq-can-you-run-actually-useful-llms-on-anything-less-than-3090.json",
+      "quality": {
+        "score": 0.883,
+        "evidence": 1.0,
+        "relevance": 0.667,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1shhmjg",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1shhmjg/dual_xeon_e52696v4_512gb_ram_rtx_3090_ti_local/",
+      "title": "Dual Xeon E5-2696v4 + 512GB RAM + RTX 3090 Ti local LLM for ISP sysadmin work — benchmarks + questions",
+      "discovered_by_query_ids": [
+        "8011324fedef",
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1shhmjg-dual-xeon-e5-2696v4-512gb-ram-rtx-3090-ti-local-llm-for-isp-sysadmin-work-benchm.json",
+      "quality": {
+        "score": 0.754,
+        "evidence": 0.8,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1r020dz",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1r020dz/rtx_3090_in_2026/",
+      "title": "RTX 3090 in 2026",
+      "discovered_by_query_ids": [
+        "8011324fedef"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1r020dz-rtx-3090-in-2026.json",
+      "quality": {
+        "score": 0.567,
+        "evidence": 0.6,
+        "relevance": 0.333,
+        "community_scrutiny": 0.9,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv6qej",
+      "canonical_url": "https://www.reddit.com/r/SwordAndSupperGame/comments/1vv6qej/",
+      "title": "Sword & Supper\n\nFroggy auto-RPG!\n\n107K monthly players",
+      "discovered_by_query_ids": [
+        "8011324fedef",
+        "f3da52993800",
+        "13213738e1bb",
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv6qej-reddit-the-heart-of-the-internet.json",
+      "quality": {
+        "score": 0.0,
+        "evidence": 0.0,
+        "relevance": 0.0,
+        "community_scrutiny": 0.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 0,
+      "last_error": null
+    },
+    {
+      "thread_id": "1rdxfdu",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rdxfdu/qwen3535ba3b_is_a_gamechanger_for_agentic_coding/",
+      "title": "Qwen3.5-35B-A3B is a gamechanger for agentic coding.",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1rdxfdu-qwen3-5-35b-a3b-is-a-gamechanger-for-agentic-coding.json",
+      "quality": {
+        "score": 0.677,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vqrt86",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqrt86/after_pushing_1m_tokens_through_qwen_38_27b_here/",
+      "title": "After pushing 1M+ tokens through Qwen 3.8 27B, here is my optimal llama.cpp config for 16GB VRAM (73k Context, Agentic Coding)",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vqrt86-after-pushing-1m-tokens-through-qwen-3-8-27b-here-is-my-optimal-llama-cpp-config.json",
+      "quality": {
+        "score": 0.883,
+        "evidence": 1.0,
+        "relevance": 0.667,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1udkxde",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1udkxde/7_chinese_companies_are_already_shipping/",
+      "title": "7 Chinese companies are already shipping H100/H200-class AI chips, most IPO'd in the last 6 months. I mapped all of them.",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1udkxde-7-chinese-companies-are-already-shipping-h100-h200-class-ai-chips-most-ipo-d-in.json",
+      "quality": {
+        "score": 0.677,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 16,
+      "last_error": null
+    },
+    {
+      "thread_id": "1taeg8h",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1taeg8h/computer_build_using_intel_optane_persistent/",
+      "title": "Computer build using Intel Optane Persistent Memory - Can run 1 trillion parameter model at over 4 tokens/sec",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1taeg8h-computer-build-using-intel-optane-persistent-memory-can-run-1-trillion-parameter.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1usniqh",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1usniqh/25x_faster_qwen36_nvfp4_unsloth_quants/",
+      "title": "2.5x faster Qwen3.6 NVFP4 Unsloth quants",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1usniqh-2-5x-faster-qwen3-6-nvfp4-unsloth-quants.json",
+      "quality": {
+        "score": 0.407,
+        "evidence": 0.2,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 20,
+      "last_error": null
+    },
+    {
+      "thread_id": "1s9ig5r",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s9ig5r/turboquant_isnt_just_for_kv_qwen3527b_at_nearq4_0/",
+      "title": "TurboQuant isn’t just for KV: Qwen3.5-27B at near-Q4_0 quality, about 10% smaller, and finally fitting on my 16GB 5060 Ti",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1s9ig5r-turboquant-isn-t-just-for-kv-qwen3-5-27b-at-near-q4-0-quality-about-10-smaller-a.json",
+      "quality": {
+        "score": 0.458,
+        "evidence": 0.4,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 16,
+      "last_error": null
+    },
+    {
+      "thread_id": "1ugg1dm",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ugg1dm/what_should_i_do_consider_posttraining/",
+      "title": "\"What should I do?\" - consider post-training",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1ugg1dm-what-should-i-do-consider-post-training.json",
+      "quality": {
+        "score": 0.368,
+        "evidence": 0.2,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 22,
+      "last_error": null
+    },
+    {
+      "thread_id": "1p6k0h2",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1p6k0h2/you_can_now_do_fp8_reinforcement_learning_locally/",
+      "title": "You can now do FP8 reinforcement learning locally! (<5GB VRAM)",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1p6k0h2-you-can-now-do-fp8-reinforcement-learning-locally-5gb-vram.json",
+      "quality": {
+        "score": 0.664,
+        "evidence": 0.6,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1ortopy",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ortopy/kimi_k2_thinking_1bit_unsloth_dynamic_ggufs/",
+      "title": "Kimi K2 Thinking 1-bit Unsloth Dynamic GGUFs",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1ortopy-kimi-k2-thinking-1-bit-unsloth-dynamic-ggufs.json",
+      "quality": {
+        "score": 0.677,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 20,
+      "last_error": null
+    },
+    {
+      "thread_id": "1t82zxv",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t82zxv/80_toksec_and_128k_context_on_12gb_vram_with/",
+      "title": "80 tok/sec and 128K context on 12GB VRAM with Qwen3.6 35B A3B and llama.cpp MTP",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1t82zxv-80-tok-sec-and-128k-context-on-12gb-vram-with-qwen3-6-35b-a3b-and-llama-cpp-mtp.json",
+      "quality": {
+        "score": 0.824,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 0.9,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1sx8uok",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sx8uok/luce_dflash_qwen3627b_at_up_to_2x_throughput_on_a/",
+      "title": "Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1sx8uok-luce-dflash-qwen3-6-27b-at-up-to-2x-throughput-on-a-single-rtx-3090.json",
+      "quality": {
+        "score": 0.883,
+        "evidence": 1.0,
+        "relevance": 0.667,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 16,
+      "last_error": null
+    },
+    {
+      "thread_id": "1plwgun",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1plwgun/8x_rtx_pro_6000_server_complete/",
+      "title": "8x RTX Pro 6000 server complete",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1plwgun-8x-rtx-pro-6000-server-complete.json",
+      "quality": {
+        "score": 0.638,
+        "evidence": 0.8,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1sor55y",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sor55y/rtx_5070_ti_9800x3d_running_qwen3635ba3b_at_79_ts/",
+      "title": "RTX 5070 Ti + 9800X3D running Qwen3.6-35B-A3B at 79 t/s with 128K context, the --n-cpu-moe flag is the most important part.",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1sor55y-rtx-5070-ti-9800x3d-running-qwen3-6-35b-a3b-at-79-t-s-with-128k-context-the-n-cp.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1o7gpr8",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1o7gpr8/got_the_dgx_spark_ask_me_anything/",
+      "title": "Got the DGX Spark - ask me anything",
+      "discovered_by_query_ids": [
+        "f3da52993800"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1o7gpr8-got-the-dgx-spark-ask-me-anything.json",
+      "quality": {
+        "score": 0.767,
+        "evidence": 1.0,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 29,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vupiyh",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vupiyh/qwen3827b_on_an_rtx_5060_ti_16gb_iq4_vs_q8_64k/",
+      "title": "Qwen3.8-27B on an RTX 5060 Ti 16GB: IQ4 vs Q8, 64K context, MTP, vision, and agent benchmarks",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vupiyh-qwen3-8-27b-on-an-rtx-5060-ti-16gb-iq4-vs-q8-64k-context-mtp-vision-and-agent-be.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu8atq",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu8atq/i_ran_those_benchmarks_we_all_see_on_youtube/",
+      "title": "I ran those benchmarks we all see on YouTube locally",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu8atq-i-ran-those-benchmarks-we-all-see-on-youtube-locally.json",
+      "quality": {
+        "score": 0.259,
+        "evidence": 0.4,
+        "relevance": 0.111,
+        "community_scrutiny": 0.2,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu856v",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu856v/45_toks_qwen3827b_mtp3_on_modded_rtx_2080_ti_22gb/",
+      "title": "45 tok/s Qwen3.8-27B MTP3 on modded RTX 2080 Ti 22GB with my NInfer port",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu856v-45-tok-s-qwen3-8-27b-mtp3-on-modded-rtx-2080-ti-22gb-with-my-ninfer-port.json",
+      "quality": {
+        "score": 0.806,
+        "evidence": 1.0,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu5q6j",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu5q6j/pc_upgrade_question/",
+      "title": "PC upgrade question",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu5q6j-pc-upgrade-question.json",
+      "quality": {
+        "score": 0.754,
+        "evidence": 0.8,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtup5s",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/",
+      "title": "I pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vtup5s-i-pushed-qwen3-8-27b-to-381-tps-for-a-single-request-on-a-rtx-3090.json",
+      "quality": {
+        "score": 0.677,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtu779",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtu779/i_really_want_deepseek_v4_to_work_as_a_local/",
+      "title": "I really want DeepSeek V4 to work as a local coding agent, but the tool calling keeps falling apart. Has anyone solved this?",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtu779-i-really-want-deepseek-v4-to-work-as-a-local-coding-agent-but-the-tool-calling-k.json",
+      "quality": {
+        "score": 0.716,
+        "evidence": 0.8,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtlmtx",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtlmtx/massive_tiny_release_supra2mediumbase_a_tiny_25m/",
+      "title": "[MASSIVE TINY RELEASE] - Supra2-Medium-Base - a tiny 25M parameters model competing heavily with our previous 50M model!",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtlmtx-massive-tiny-release-supra2-medium-base-a-tiny-25m-parameters-model-competing-he.json",
+      "quality": {
+        "score": 0.38,
+        "evidence": 0.4,
+        "relevance": 0.0,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtfzjc",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtfzjc/airllm_recent_updates_with_qwen3827b_kimik3_too/",
+      "title": "AirLLM - Recent Updates - with Qwen3.8-27B, Kimi-K3 too",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtfzjc-airllm-recent-updates-with-qwen3-8-27b-kimi-k3-too.json",
+      "quality": {
+        "score": 0.637,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 0.8,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtc0z7",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtc0z7/3_days_benchmarking_most_llamacpp_flags_on_my/",
+      "title": "3 days benchmarking most llama.cpp flags on my weird 40gb vram laptop + tb4 egpu setup. Got +70% generation, +40% prefill, 60k more context, and filed a bug in llama around MTP. What I learned.",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtc0z7-3-days-benchmarking-most-llama-cpp-flags-on-my-weird-40gb-vram-laptop-tb4-egpu-s.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vt80nk",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vt80nk/things_i_wish_i_knew_about_quantization_and/",
+      "title": "Things I wish I knew about quantization and hardware when I started",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vt80nk-things-i-wish-i-knew-about-quantization-and-hardware-when-i-started.json",
+      "quality": {
+        "score": 0.419,
+        "evidence": 0.4,
+        "relevance": 0.111,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vszebu",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vszebu/rtx_3090_vs_m1_max_64_gb/",
+      "title": "RTX 3090 vs M1 Max 64 GB",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vszebu-rtx-3090-vs-m1-max-64-gb.json",
+      "quality": {
+        "score": 0.587,
+        "evidence": 0.6,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vsy4l2",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsy4l2/i_pushed_qwen3827b_limits_again_dflash2_134_tps/",
+      "title": "I pushed Qwen3.8-27B limits again... Dflash2 - 134 tps on a RTX 3090",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vsy4l2-i-pushed-qwen3-8-27b-limits-again-dflash2-134-tps-on-a-rtx-3090.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 15,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vsq3zg",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsq3zg/nvfp4_on_volta_despite_being_built_for_blackwell/",
+      "title": "NVFP4 on VOLTA! Despite being built for Blackwell, I made four 2017 V100s run Qwen 3.8 NVFP4 natively and match my $6000 RTX 5090.",
+      "discovered_by_query_ids": [
+        "13213738e1bb"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vsq3zg-nvfp4-on-volta-despite-being-built-for-blackwell-i-made-four-2017-v100s-run-qwen.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vpuhov",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuhov/single_3090_homies_whats_your_config_for_qwen_38/",
+      "title": "Single 3090 homies, whats your config for Qwen 3.8 ?",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vpuhov-single-3090-homies-whats-your-config-for-qwen-3-8.json",
+      "quality": {
+        "score": 0.587,
+        "evidence": 0.6,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vqlkb0",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqlkb0/where_to_start_with_my_3090/",
+      "title": "Where to start with my 3090",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vqlkb0-where-to-start-with-my-3090.json",
+      "quality": {
+        "score": 0.626,
+        "evidence": 0.6,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1u7qam0",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1u7qam0/what_would_be_the_best_coding_setup_for_me_if_i/",
+      "title": "What would be the best coding setup for me if I have 2x RTX 3090s?",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1u7qam0-what-would-be-the-best-coding-setup-for-me-if-i-have-2x-rtx-3090s.json",
+      "quality": {
+        "score": 0.638,
+        "evidence": 0.8,
+        "relevance": 0.222,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1svlnyk",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1svlnyk/rtx_3090_27b_model_performance_issues_llamacpp/",
+      "title": "RTX 3090 + 27B model performance issues (llama.cpp) what am I doing wrong",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1svlnyk-rtx-3090-27b-model-performance-issues-llama-cpp-what-am-i-doing-wrong.json",
+      "quality": {
+        "score": 0.844,
+        "evidence": 1.0,
+        "relevance": 0.556,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1t0vp3w",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t0vp3w/pflash_10x_prefill_speedup_over_llamacpp_at_128k/",
+      "title": "PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1t0vp3w-pflash-10x-prefill-speedup-over-llama-cpp-at-128k-on-a-rtx-3090.json",
+      "quality": {
+        "score": 0.677,
+        "evidence": 0.8,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 13,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vhkln6",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vhkln6/dual_3090_setup_400_pp_ts_to_1600_pp_ts_on_qwen/",
+      "title": "Dual 3090 setup: 400 pp t/s to 1600 pp t/s on Qwen 3.6 27B... with slightly lower tps.",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vhkln6-dual-3090-setup-400-pp-t-s-to-1600-pp-t-s-on-qwen-3-6-27b-with-slightly-lower-tp.json",
+      "quality": {
+        "score": 0.806,
+        "evidence": 1.0,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1tysbyj",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1tysbyj/rtx_3090_ebay_pricing_is_crazy/",
+      "title": "RTX 3090 EBay Pricing is Crazy!!",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1tysbyj-rtx-3090-ebay-pricing-is-crazy.json",
+      "quality": {
+        "score": 0.497,
+        "evidence": 0.4,
+        "relevance": 0.333,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vof310",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vof310/qwen_38_27b_i_get_34_tps_on_rtx_3090_llamaccp/",
+      "title": "Qwen 3.8 27B i get 34 tp/s on rtx 3090 llama.ccp",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vof310-qwen-3-8-27b-i-get-34-tp-s-on-rtx-3090-llama-ccp.json",
+      "quality": {
+        "score": 0.806,
+        "evidence": 1.0,
+        "relevance": 0.444,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 13,
+      "last_error": null
+    },
+    {
+      "thread_id": "1sienfj",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sienfj/dual_3090_setup_performance_optimization/",
+      "title": "Dual 3090 setup - performance optimization",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": false,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "pending",
+      "attempts": 0,
+      "capture_file": null,
+      "quality": null,
+      "outbound_reference_count": 0,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vcz61x",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vcz61x/deepseekv4flash0731_udiq3_s_125_toks_on_rtx_3090/",
+      "title": "DeepSeek-V4-Flash-0731 UD-IQ3_S 12.5 tok/s on RTX 3090 +128GB DDR5",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": false,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "pending",
+      "attempts": 0,
+      "capture_file": null,
+      "quality": null,
+      "outbound_reference_count": 0,
+      "last_error": null
+    },
+    {
+      "thread_id": "1spennl",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1spennl/best_use_cases_for_a_mismatched_rtx_3090_24gb_rtx/",
+      "title": "Best use cases for a mismatched RTX 3090 (24GB) + RTX 3060 (12GB) setup?",
+      "discovered_by_query_ids": [
+        "9bf97b84adbc"
+      ],
+      "selected": false,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "pending",
+      "attempts": 0,
+      "capture_file": null,
+      "quality": null,
+      "outbound_reference_count": 0,
+      "last_error": null
+    }
+  ]
+}

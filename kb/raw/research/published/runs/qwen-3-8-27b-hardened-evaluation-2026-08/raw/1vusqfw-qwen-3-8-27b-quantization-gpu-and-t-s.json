@@ -1,0 +1,171 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vusqfw/qwen_38_27b_quantization_gpu_and_ts/",
+  "title": "Qwen 3.8 27b: quantization, GPU and t/s",
+  "author": "Effective_Head_5020",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n15h ago\nEffective_Head_5020\nQwen 3.8 27b: quantization, GPU and t/s\nQuestion | Help\n\nI am looking to buy a GPU to run Qwen 3.8 27b and I found an affordable 4060 16gb. I wonder if there's a compilation of GPU, quantization and t/s? I see this information spread in reddit, it would be good if we have a place to consult.\n\nCould you please comment your hardware configuration, t/s and quantization só I can ask Kimi to create a report out of the comments of this post?\n\nThanks!\n\nShare",
+  "comments": [
+    {
+      "author": "Clean_Material_5047",
+      "score": "8",
+      "text": "Clean_Material_5047\n•\n15h ago\n\nAMD R9700. It’s 32GB VRAM so you can run Q4 comfortably, or Q6 with about half context. Even Q8 if you accept small context.\n\nIf you can get two, then you can get fp8, full context, and vllm with great performance\n\nlood9phee2Ri\n•\n13h ago\n\nYeah, I have single R9700 for now.\n\nPractical t/s of real interactions is now rather variable and dependent on problem with mtp, ngram, etc. so e.g.\n\nThis not especially scientific, just example, and token generation not prompt parse numbers hopefully obviously, but tg t/s for responses (not themselves shown but they were fine) to sequence of prompts in a growing context. Using (vulkan compute llama.cpp build) on single 9700, unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL, 262144 context length, q8_0 kv cache (better bf16 of course but, well, space), --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3 good for conversational refinement of code type interactions.\n\nIn a html page, in a single svg element, draw the triforce. -> 52t/s\n\nokay... actually, make it green. -> 69t/s\n\nNo, back to yellow I think. -> 104t/s\n\nAdd a html header just saying \"TRIFORCE ME BABY\". -> 73t/s\n\nEh, change the header \"BABY\" to \"BABE\" -> 152t/s\n\n<paste in screenshot of rendered html+svg> Look right to you? -> 44t/s\n\nOkay let's just add a 1px matching color border around the whole thing. -> 50t/s\n\nYeah, but let's make it 2px -> 131t/s\n\nYou might well do better than that with more tuning, but point is it's fast enough to be quite fluent to use.\n\nThe basic llama-bench figure is only tg 30 t/s apparently, but again bear in mind that's now kind of a worst-case with mtp+ngram routinely if variably much faster as above.\n\n$ llama-bench --offline -hf unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL -fa on -ctk q8_0 -ctv q8_0 --mmap 0\nggml_vulkan: Found 1 Vulkan devices:\nggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1201) (radv) | uma: 0 | fp16: dot2 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 1 | matrix cores: KHR_coopmat\nDEPRECATED: -mmp and --mmap are deprecated in favour of --load-mode. Please use --load-mode mmap instead.\n| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |         lm |            test |                  t/s |\n| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | ---------: | --------------: | -------------------: |\n| qwen35 27B Q4_K - Medium       |  16.34 GiB |    27.32 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |       none |           pp512 |       1060.00 ± 0.66 |\n| qwen35 27B Q4_K - Medium       |  16.34 GiB |    27.32 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |       none |           tg128 |         30.03 ± 0.05 |\nwhichsideisup\n•\n13h ago\n\nWhere is this working FP8 in vLLM? Specific weights or project needed?\n\nClean_Material_5047\n•\n13h ago\n\nThere’s a discord group [here](https://discord.gg/launch80) with a channel dedicated to R9700 where a bunch of smart people are optimising the shit out of it\n\nfastheadcrab\n•\n13h ago\n Top 1% Commenter\n\nIt will run directly using a standard vLLM version and using the Qwen official version. 3.8 is nearly the same as 3.6/3.5 in terms of architecture so there is no changes. No fancy recipes needed unless you want speed\n\nsynth_mania\n•\n14h ago\n Top 1% Commenter\n\nThis is the best answer"
+    },
+    {
+      "author": "lood9phee2Ri",
+      "score": "2",
+      "text": "lood9phee2Ri\n•\n13h ago\n\nYeah, I have single R9700 for now.\n\nPractical t/s of real interactions is now rather variable and dependent on problem with mtp, ngram, etc. so e.g.\n\nThis not especially scientific, just example, and token generation not prompt parse numbers hopefully obviously, but tg t/s for responses (not themselves shown but they were fine) to sequence of prompts in a growing context. Using (vulkan compute llama.cpp build) on single 9700, unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL, 262144 context length, q8_0 kv cache (better bf16 of course but, well, space), --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3 good for conversational refinement of code type interactions.\n\nIn a html page, in a single svg element, draw the triforce. -> 52t/s\n\nokay... actually, make it green. -> 69t/s\n\nNo, back to yellow I think. -> 104t/s\n\nAdd a html header just saying \"TRIFORCE ME BABY\". -> 73t/s\n\nEh, change the header \"BABY\" to \"BABE\" -> 152t/s\n\n<paste in screenshot of rendered html+svg> Look right to you? -> 44t/s\n\nOkay let's just add a 1px matching color border around the whole thing. -> 50t/s\n\nYeah, but let's make it 2px -> 131t/s\n\nYou might well do better than that with more tuning, but point is it's fast enough to be quite fluent to use.\n\nThe basic llama-bench figure is only tg 30 t/s apparently, but again bear in mind that's now kind of a worst-case with mtp+ngram routinely if variably much faster as above.\n\n$ llama-bench --offline -hf unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL -fa on -ctk q8_0 -ctv q8_0 --mmap 0\nggml_vulkan: Found 1 Vulkan devices:\nggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1201) (radv) | uma: 0 | fp16: dot2 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 1 | matrix cores: KHR_coopmat\nDEPRECATED: -mmp and --mmap are deprecated in favour of --load-mode. Please use --load-mode mmap instead.\n| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |         lm |            test |                  t/s |\n| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | ---------: | --------------: | -------------------: |\n| qwen35 27B Q4_K - Medium       |  16.34 GiB |    27.32 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |       none |           pp512 |       1060.00 ± 0.66 |\n| qwen35 27B Q4_K - Medium       |  16.34 GiB |    27.32 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |       none |           tg128 |         30.03 ± 0.05 |"
+    },
+    {
+      "author": "whichsideisup",
+      "score": "2",
+      "text": "whichsideisup\n•\n13h ago\n\nWhere is this working FP8 in vLLM? Specific weights or project needed?\n\nClean_Material_5047\n•\n13h ago\n\nThere’s a discord group [here](https://discord.gg/launch80) with a channel dedicated to R9700 where a bunch of smart people are optimising the shit out of it\n\nfastheadcrab\n•\n13h ago\n Top 1% Commenter\n\nIt will run directly using a standard vLLM version and using the Qwen official version. 3.8 is nearly the same as 3.6/3.5 in terms of architecture so there is no changes. No fancy recipes needed unless you want speed"
+    },
+    {
+      "author": "Clean_Material_5047",
+      "score": "1",
+      "text": "Clean_Material_5047\n•\n13h ago\n\nThere’s a discord group [here](https://discord.gg/launch80) with a channel dedicated to R9700 where a bunch of smart people are optimising the shit out of it"
+    },
+    {
+      "author": "fastheadcrab",
+      "score": "1",
+      "text": "fastheadcrab\n•\n13h ago\n Top 1% Commenter\n\nIt will run directly using a standard vLLM version and using the Qwen official version. 3.8 is nearly the same as 3.6/3.5 in terms of architecture so there is no changes. No fancy recipes needed unless you want speed"
+    },
+    {
+      "author": "synth_mania",
+      "score": "1",
+      "text": "synth_mania\n•\n14h ago\n Top 1% Commenter\n\nThis is the best answer"
+    },
+    {
+      "author": "Max-_-Power",
+      "score": "5",
+      "text": "Max-_-Power\n•\n15h ago\n\nWhat is your use case? Just for chatbot usage it may be OK but certainly not for long coding tasks.\n\nI have 2 4060 Tis and I just spent 2 days fiddling with llama.cpp settings so I can run it with Q4, lossless K cache and full context window and 3 draft tokens. Only V cache is quantized down to Q8.\n\n1 4060 Ti is not going to cut it for this use case. Not with full context window I mean. If you cut your context down radically and without MTP then maybe\n\nBigPoppaK78\n•\n14h ago\n\nDid you notice much impact on your speed when you only quant the v cache? Every time I tested using different values between k and v, I always took a huge hit to prefill or generation.\n\nMax-_-Power\n•\n13h ago\n\nI did not, but I did not look specifically for that either. My goal was to make the model fit, not matter how fast or slow it runs. That's what I took care about afterwards\n\nEffective_Head_5020\n•\n14h ago\n\nMy use case is mostly chat bot, general questions and I like to plug tools. High context would be required only when I use browser use"
+    },
+    {
+      "author": "BigPoppaK78",
+      "score": "1",
+      "text": "BigPoppaK78\n•\n14h ago\n\nDid you notice much impact on your speed when you only quant the v cache? Every time I tested using different values between k and v, I always took a huge hit to prefill or generation.\n\nMax-_-Power\n•\n13h ago\n\nI did not, but I did not look specifically for that either. My goal was to make the model fit, not matter how fast or slow it runs. That's what I took care about afterwards"
+    },
+    {
+      "author": "Max-_-Power",
+      "score": "1",
+      "text": "Max-_-Power\n•\n13h ago\n\nI did not, but I did not look specifically for that either. My goal was to make the model fit, not matter how fast or slow it runs. That's what I took care about afterwards"
+    },
+    {
+      "author": "Effective_Head_5020",
+      "score": "1",
+      "text": "Effective_Head_5020\n•\n14h ago\n\nMy use case is mostly chat bot, general questions and I like to plug tools. High context would be required only when I use browser use"
+    },
+    {
+      "author": "synth_mania",
+      "score": "4",
+      "text": "synth_mania\n•\n15h ago\n Top 1% Commenter\n\n16gb is a little tight, but some have definitely done it\n\nEffective_Head_5020\n•\n15h ago\n\nDo you mean it with Q4_KM quant? I also wonder about context size before having oom\n\nPuzzleheaded-Drama-8\n•\n15h ago\n\nq4_k_m is 16.5GB just weights. You also need a headroom for runtime and KV cache, that's at least 20GB in total. To be honest, q4_k_m is what I'm running on 24GB if I need longer context (otherwise q4_k_xl)\n\nOn 16GB highest I'd go is q3_k_xl, but q3 is where we usually start getting noticeable quality loss.\n\nsynth_mania\n•\n14h ago\n Top 1% Commenter\n\nTo add to this OP, if you are gonna do a q3 quant, use Unsloth's \n\nsisyphus-cycle\n•\n15h ago\n\nYou cannot really do it with Q4_K_M quant on 16gb. The weight alone are around 15.5 (without MTP layer included). Try IQ4_XS and some of the 3 bit quants."
+    },
+    {
+      "author": "Effective_Head_5020",
+      "score": "1",
+      "text": "Effective_Head_5020\n•\n15h ago\n\nDo you mean it with Q4_KM quant? I also wonder about context size before having oom\n\nPuzzleheaded-Drama-8\n•\n15h ago\n\nq4_k_m is 16.5GB just weights. You also need a headroom for runtime and KV cache, that's at least 20GB in total. To be honest, q4_k_m is what I'm running on 24GB if I need longer context (otherwise q4_k_xl)\n\nOn 16GB highest I'd go is q3_k_xl, but q3 is where we usually start getting noticeable quality loss.\n\nsynth_mania\n•\n14h ago\n Top 1% Commenter\n\nTo add to this OP, if you are gonna do a q3 quant, use Unsloth's \n\nsisyphus-cycle\n•\n15h ago\n\nYou cannot really do it with Q4_K_M quant on 16gb. The weight alone are around 15.5 (without MTP layer included). Try IQ4_XS and some of the 3 bit quants."
+    },
+    {
+      "author": "Puzzleheaded-Drama-8",
+      "score": "5",
+      "text": "Puzzleheaded-Drama-8\n•\n15h ago\n\nq4_k_m is 16.5GB just weights. You also need a headroom for runtime and KV cache, that's at least 20GB in total. To be honest, q4_k_m is what I'm running on 24GB if I need longer context (otherwise q4_k_xl)\n\nOn 16GB highest I'd go is q3_k_xl, but q3 is where we usually start getting noticeable quality loss.\n\nsynth_mania\n•\n14h ago\n Top 1% Commenter\n\nTo add to this OP, if you are gonna do a q3 quant, use Unsloth's"
+    },
+    {
+      "author": "synth_mania",
+      "score": "3",
+      "text": "synth_mania\n•\n14h ago\n Top 1% Commenter\n\nTo add to this OP, if you are gonna do a q3 quant, use Unsloth's"
+    },
+    {
+      "author": "sisyphus-cycle",
+      "score": "2",
+      "text": "sisyphus-cycle\n•\n15h ago\n\nYou cannot really do it with Q4_K_M quant on 16gb. The weight alone are around 15.5 (without MTP layer included). Try IQ4_XS and some of the 3 bit quants."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vusqfw",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:50Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.815,
+    "evidence": 0.8,
+    "relevance": 0.727,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/launch80",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

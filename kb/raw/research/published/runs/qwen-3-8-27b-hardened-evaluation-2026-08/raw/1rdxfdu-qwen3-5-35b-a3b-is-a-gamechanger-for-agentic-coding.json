@@ -1,0 +1,226 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rdxfdu/qwen3535ba3b_is_a_gamechanger_for_agentic_coding/",
+  "title": "Qwen3.5-35B-A3B is a gamechanger for agentic coding.",
+  "author": "jslominski",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6mo ago\njslominski\nQwen3.5-35B-A3B is a gamechanger for agentic coding.\nDiscussion\nQwen3.5-35B-A3B with Opencode\n\nJust tested this badboy with Opencode cause frankly I couldn't believe those benchmarks. Running it on a single RTX 3090 on a headless Linux box. Freshly compiled Llama.cpp and those are my settings after some tweaking, still not fully tuned:\n\n./llama.cpp/llama-server \\\n\n-m /models/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n\n-a \"DrQwen\" \\\n\n-c 131072 \\\n\n-ngl all \\\n\n-ctk q8_0 \\\n\n-ctv q8_0 \\\n\n-sm none \\\n\n-mg 0 \\\n\n-np 1 \\\n\n-fa on\n\nAround 22 gigs of vram used.\n\nNow the fun part:\n\nI'm getting over 100t/s on it\n\nThis is the first open weights model I was able to utilise on my home hardware to successfully complete my own \"coding test\" I used for years for recruitment (mid lvl mobile dev, around 5h to complete \"pre AI\" ;)). It did it in around 10 minutes, strong pass. First agentic tool that I was able to \"crack\" it with was Kodu.AI with some early sonnet roughly 14 months ago.\n\nFor fun I wanted to recreate this dashboard OpenAI used during Cursor demo last summer, I did a recreation of it with Claude Code back then and posted it on Reddit: https://www.reddit.com/r/ClaudeAI/comments/1mk7plb/just_recreated_that_gpt5_cursor_demo_in_claude/ So... Qwen3.5 was able to do it in around 5 minutes.\n\nI think we got something special here...\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n6mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "[deleted]",
+      "score": "282",
+      "text": "[deleted]\n•\n6mo ago\n\nQwen3.5-35B-A3B-GGUF:UD-Q4_K_XL 180 t/s on 5090\n\njslominski\n•\n6mo ago\n\n🙀\n\n[deleted]\n•\n6mo ago\n\nJust broke 185 t/s lmao\n\nApart_Paramedic_7767\n•\n6mo ago\n\nbro came back to flex and ignore my question\n\nDeepOrangeSky\n•\n6mo ago\n\nI just measured my Qwen3.5-35B-A3B model and it has a 190 inch dick, and it stole my girlfriend.\n\nI felt too devastated to look at the settings too carefully, but when I looked them up, I think it said the --top-k was \"fuck\" and the --min-p was \"you\".\n\nI'm not sure if this will be helpful or not, but hopefully it helps!\n\n:p\n\n[deleted]\n•\n6mo ago\n\nDidn't see it. Posted settings \n\nApart_Paramedic_7767\n•\n6mo ago\n\nsettings ?\n\n[deleted]\n•\n6mo ago\n\nllama-server -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL\n  --temp 0.6\n  --top-p 0.95\n  --batch-size 512\n  --ubatch-size 128\n  --n-gpu-layers 99\n  --flash-attn\n  --port 8080\n\nOdd-Ordinary-5922\n•\n6mo ago\n\nhow did you figure out the best ubatch and batch size for your gpu?\n\nSubject-Tea-5253\n•\n6mo ago\n•\nEdited 6mo ago\nllama.cpp\n\nYou can use llama-bench to find the best parameters for your system.\n\nHere is an example that will test a combination of batch and ubatch sizes:\n\nllama-bench \\\n  --model path/to/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n  --n-prompt 1024 \\\n  --n-gen 0 \\\n  --batch-size 128,256,512,1024 \\\n  --ubatch-size 128,256,512 \\\n  --n-gpu-layers 99 \\\n  --n-cpu-moe 38 \\\n  --flash-attn 1\n\nNote: If you have enough VRAM to hold the entire model, then remove n-cpu-moe from the command.\n\nAt the end of the benchmark, you get a table like this:\n\nmodel\tsize\tparams\tbackend\tngl\tn_batch\tn_ubatch\tfa\ttest\tt/s\n\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t128\t1\tpp1024\t179.01 ± 1.43\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t256\t1\tpp1024\t176.52 ± 2.05\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t512\t1\tpp1024\t176.58 ± 2.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t128\t1\tpp1024\t175.62 ± 2.28\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t256\t1\tpp1024\t284.20 ± 4.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t512\t1\tpp1024\t284.57 ± 2.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t128\t1\tpp1024\t175.18 ± 1.56\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t256\t1\tpp1024\t281.88 ± 2.68\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t512\t1\tpp1024\t458.32 ± 3.89\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t128\t1\tpp1024\t177.94 ± 2.22\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t256\t1\tpp1024\t284.98 ± 3.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t512\t1\tpp1024\t460.05 ± 9.18\n\nI did the test on this build: 2b6dfe824 (8133)\n\nLooking at the results, you can clearly see that the speed in the t/s column changes a lot depending on n_ubatch.\n\nubatch = 128 > t/s = 175.\n\nubatch = 256 > t/s = 284.\n\nubatch = 512 > t/s = 460.\n\nNote: I set n-gen to 0 to not generate any token because I did not have time. This means that the speed you are seeing is prompt processing not generation speed.\n\nYou can also try changing other parameters like n-cpu-moe, cache-type-k, cache-type-v, etc.\n\niamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot\n\n9 more replies\nOakShortbow\n•\n6mo ago\n•\nEdited 6mo ago\n\nI have a 5090\n as well but i'm only able to get about 106 output tokens.. pullin"
+    },
+    {
+      "author": "jslominski",
+      "score": "47",
+      "text": "jslominski\n•\n6mo ago\n\n🙀\n\n[deleted]\n•\n6mo ago\n\nJust broke 185 t/s lmao\n\nApart_Paramedic_7767\n•\n6mo ago\n\nbro came back to flex and ignore my question\n\nDeepOrangeSky\n•\n6mo ago\n\nI just measured my Qwen3.5-35B-A3B model and it has a 190 inch dick, and it stole my girlfriend.\n\nI felt too devastated to look at the settings too carefully, but when I looked them up, I think it said the --top-k was \"fuck\" and the --min-p was \"you\".\n\nI'm not sure if this will be helpful or not, but hopefully it helps!\n\n:p\n\n[deleted]\n•\n6mo ago\n\nDidn't see it. Posted settings"
+    },
+    {
+      "author": "[deleted]",
+      "score": "58",
+      "text": "[deleted]\n•\n6mo ago\n\nJust broke 185 t/s lmao\n\nApart_Paramedic_7767\n•\n6mo ago\n\nbro came back to flex and ignore my question\n\nDeepOrangeSky\n•\n6mo ago\n\nI just measured my Qwen3.5-35B-A3B model and it has a 190 inch dick, and it stole my girlfriend.\n\nI felt too devastated to look at the settings too carefully, but when I looked them up, I think it said the --top-k was \"fuck\" and the --min-p was \"you\".\n\nI'm not sure if this will be helpful or not, but hopefully it helps!\n\n:p\n\n[deleted]\n•\n6mo ago\n\nDidn't see it. Posted settings"
+    },
+    {
+      "author": "Apart_Paramedic_7767",
+      "score": "50",
+      "text": "Apart_Paramedic_7767\n•\n6mo ago\n\nbro came back to flex and ignore my question\n\nDeepOrangeSky\n•\n6mo ago\n\nI just measured my Qwen3.5-35B-A3B model and it has a 190 inch dick, and it stole my girlfriend.\n\nI felt too devastated to look at the settings too carefully, but when I looked them up, I think it said the --top-k was \"fuck\" and the --min-p was \"you\".\n\nI'm not sure if this will be helpful or not, but hopefully it helps!\n\n:p\n\n[deleted]\n•\n6mo ago\n\nDidn't see it. Posted settings"
+    },
+    {
+      "author": "DeepOrangeSky",
+      "score": "47",
+      "text": "DeepOrangeSky\n•\n6mo ago\n\nI just measured my Qwen3.5-35B-A3B model and it has a 190 inch dick, and it stole my girlfriend.\n\nI felt too devastated to look at the settings too carefully, but when I looked them up, I think it said the --top-k was \"fuck\" and the --min-p was \"you\".\n\nI'm not sure if this will be helpful or not, but hopefully it helps!\n\n:p"
+    },
+    {
+      "author": "[deleted]",
+      "score": "8",
+      "text": "[deleted]\n•\n6mo ago\n\nDidn't see it. Posted settings"
+    },
+    {
+      "author": "Apart_Paramedic_7767",
+      "score": "27",
+      "text": "Apart_Paramedic_7767\n•\n6mo ago\n\nsettings ?\n\n[deleted]\n•\n6mo ago\n\nllama-server -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL\n  --temp 0.6\n  --top-p 0.95\n  --batch-size 512\n  --ubatch-size 128\n  --n-gpu-layers 99\n  --flash-attn\n  --port 8080\n\nOdd-Ordinary-5922\n•\n6mo ago\n\nhow did you figure out the best ubatch and batch size for your gpu?\n\nSubject-Tea-5253\n•\n6mo ago\n•\nEdited 6mo ago\nllama.cpp\n\nYou can use llama-bench to find the best parameters for your system.\n\nHere is an example that will test a combination of batch and ubatch sizes:\n\nllama-bench \\\n  --model path/to/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n  --n-prompt 1024 \\\n  --n-gen 0 \\\n  --batch-size 128,256,512,1024 \\\n  --ubatch-size 128,256,512 \\\n  --n-gpu-layers 99 \\\n  --n-cpu-moe 38 \\\n  --flash-attn 1\n\nNote: If you have enough VRAM to hold the entire model, then remove n-cpu-moe from the command.\n\nAt the end of the benchmark, you get a table like this:\n\nmodel\tsize\tparams\tbackend\tngl\tn_batch\tn_ubatch\tfa\ttest\tt/s\n\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t128\t1\tpp1024\t179.01 ± 1.43\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t256\t1\tpp1024\t176.52 ± 2.05\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t512\t1\tpp1024\t176.58 ± 2.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t128\t1\tpp1024\t175.62 ± 2.28\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t256\t1\tpp1024\t284.20 ± 4.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t512\t1\tpp1024\t284.57 ± 2.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t128\t1\tpp1024\t175.18 ± 1.56\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t256\t1\tpp1024\t281.88 ± 2.68\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t512\t1\tpp1024\t458.32 ± 3.89\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t128\t1\tpp1024\t177.94 ± 2.22\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t256\t1\tpp1024\t284.98 ± 3.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t512\t1\tpp1024\t460.05 ± 9.18\n\nI did the test on this build: 2b6dfe824 (8133)\n\nLooking at the results, you can clearly see that the speed in the t/s column changes a lot depending on n_ubatch.\n\nubatch = 128 > t/s = 175.\n\nubatch = 256 > t/s = 284.\n\nubatch = 512 > t/s = 460.\n\nNote: I set n-gen to 0 to not generate any token because I did not have time. This means that the speed you are seeing is prompt processing not generation speed.\n\nYou can also try changing other parameters like n-cpu-moe, cache-type-k, cache-type-v, etc.\n\niamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot\n\n9 more replies\nOakShortbow\n•\n6mo ago\n•\nEdited 6mo ago\n\nI have a 5090\n as well but i'm only able to get about 106 output tokens.. pulling latest llama.cpp nix flake with cuda enabled.\n\nedit: nevermind, forgot to update my flakes getting around 160 now without optimizations.\n\n3 more replies\n8 more replies"
+    },
+    {
+      "author": "[deleted]",
+      "score": "52",
+      "text": "[deleted]\n•\n6mo ago\n\nllama-server -hf unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL\n  --temp 0.6\n  --top-p 0.95\n  --batch-size 512\n  --ubatch-size 128\n  --n-gpu-layers 99\n  --flash-attn\n  --port 8080\n\nOdd-Ordinary-5922\n•\n6mo ago\n\nhow did you figure out the best ubatch and batch size for your gpu?\n\nSubject-Tea-5253\n•\n6mo ago\n•\nEdited 6mo ago\nllama.cpp\n\nYou can use llama-bench to find the best parameters for your system.\n\nHere is an example that will test a combination of batch and ubatch sizes:\n\nllama-bench \\\n  --model path/to/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n  --n-prompt 1024 \\\n  --n-gen 0 \\\n  --batch-size 128,256,512,1024 \\\n  --ubatch-size 128,256,512 \\\n  --n-gpu-layers 99 \\\n  --n-cpu-moe 38 \\\n  --flash-attn 1\n\nNote: If you have enough VRAM to hold the entire model, then remove n-cpu-moe from the command.\n\nAt the end of the benchmark, you get a table like this:\n\nmodel\tsize\tparams\tbackend\tngl\tn_batch\tn_ubatch\tfa\ttest\tt/s\n\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t128\t1\tpp1024\t179.01 ± 1.43\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t256\t1\tpp1024\t176.52 ± 2.05\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t512\t1\tpp1024\t176.58 ± 2.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t128\t1\tpp1024\t175.62 ± 2.28\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t256\t1\tpp1024\t284.20 ± 4.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t512\t1\tpp1024\t284.57 ± 2.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t128\t1\tpp1024\t175.18 ± 1.56\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t256\t1\tpp1024\t281.88 ± 2.68\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t512\t1\tpp1024\t458.32 ± 3.89\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t128\t1\tpp1024\t177.94 ± 2.22\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t256\t1\tpp1024\t284.98 ± 3.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t512\t1\tpp1024\t460.05 ± 9.18\n\nI did the test on this build: 2b6dfe824 (8133)\n\nLooking at the results, you can clearly see that the speed in the t/s column changes a lot depending on n_ubatch.\n\nubatch = 128 > t/s = 175.\n\nubatch = 256 > t/s = 284.\n\nubatch = 512 > t/s = 460.\n\nNote: I set n-gen to 0 to not generate any token because I did not have time. This means that the speed you are seeing is prompt processing not generation speed.\n\nYou can also try changing other parameters like n-cpu-moe, cache-type-k, cache-type-v, etc.\n\niamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot\n\n9 more replies\nOakShortbow\n•\n6mo ago\n•\nEdited 6mo ago\n\nI have a 5090\n as well but i'm only able to get about 106 output tokens.. pulling latest llama.cpp nix flake with cuda enabled.\n\nedit: nevermind, forgot to update my flakes getting around 160 now without optimizations.\n\n3 more replies\n8 more replies"
+    },
+    {
+      "author": "Odd-Ordinary-5922",
+      "score": "17",
+      "text": "Odd-Ordinary-5922\n•\n6mo ago\n\nhow did you figure out the best ubatch and batch size for your gpu?\n\nSubject-Tea-5253\n•\n6mo ago\n•\nEdited 6mo ago\nllama.cpp\n\nYou can use llama-bench to find the best parameters for your system.\n\nHere is an example that will test a combination of batch and ubatch sizes:\n\nllama-bench \\\n  --model path/to/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n  --n-prompt 1024 \\\n  --n-gen 0 \\\n  --batch-size 128,256,512,1024 \\\n  --ubatch-size 128,256,512 \\\n  --n-gpu-layers 99 \\\n  --n-cpu-moe 38 \\\n  --flash-attn 1\n\nNote: If you have enough VRAM to hold the entire model, then remove n-cpu-moe from the command.\n\nAt the end of the benchmark, you get a table like this:\n\nmodel\tsize\tparams\tbackend\tngl\tn_batch\tn_ubatch\tfa\ttest\tt/s\n\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t128\t1\tpp1024\t179.01 ± 1.43\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t256\t1\tpp1024\t176.52 ± 2.05\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t512\t1\tpp1024\t176.58 ± 2.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t128\t1\tpp1024\t175.62 ± 2.28\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t256\t1\tpp1024\t284.20 ± 4.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t512\t1\tpp1024\t284.57 ± 2.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t128\t1\tpp1024\t175.18 ± 1.56\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t256\t1\tpp1024\t281.88 ± 2.68\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t512\t1\tpp1024\t458.32 ± 3.89\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t128\t1\tpp1024\t177.94 ± 2.22\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t256\t1\tpp1024\t284.98 ± 3.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t512\t1\tpp1024\t460.05 ± 9.18\n\nI did the test on this build: 2b6dfe824 (8133)\n\nLooking at the results, you can clearly see that the speed in the t/s column changes a lot depending on n_ubatch.\n\nubatch = 128 > t/s = 175.\n\nubatch = 256 > t/s = 284.\n\nubatch = 512 > t/s = 460.\n\nNote: I set n-gen to 0 to not generate any token because I did not have time. This means that the speed you are seeing is prompt processing not generation speed.\n\nYou can also try changing other parameters like n-cpu-moe, cache-type-k, cache-type-v, etc.\n\niamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot\n\n9 more replies"
+    },
+    {
+      "author": "Subject-Tea-5253",
+      "score": "101",
+      "text": "Subject-Tea-5253\n•\n6mo ago\n•\nEdited 6mo ago\nllama.cpp\n\nYou can use llama-bench to find the best parameters for your system.\n\nHere is an example that will test a combination of batch and ubatch sizes:\n\nllama-bench \\\n  --model path/to/Qwen3.5-35B-A3B-MXFP4_MOE.gguf \\\n  --n-prompt 1024 \\\n  --n-gen 0 \\\n  --batch-size 128,256,512,1024 \\\n  --ubatch-size 128,256,512 \\\n  --n-gpu-layers 99 \\\n  --n-cpu-moe 38 \\\n  --flash-attn 1\n\nNote: If you have enough VRAM to hold the entire model, then remove n-cpu-moe from the command.\n\nAt the end of the benchmark, you get a table like this:\n\nmodel\tsize\tparams\tbackend\tngl\tn_batch\tn_ubatch\tfa\ttest\tt/s\n\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t128\t1\tpp1024\t179.01 ± 1.43\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t256\t1\tpp1024\t176.52 ± 2.05\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t128\t512\t1\tpp1024\t176.58 ± 2.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t128\t1\tpp1024\t175.62 ± 2.28\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t256\t1\tpp1024\t284.20 ± 4.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t256\t512\t1\tpp1024\t284.57 ± 2.81\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t128\t1\tpp1024\t175.18 ± 1.56\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t256\t1\tpp1024\t281.88 ± 2.68\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t512\t512\t1\tpp1024\t458.32 ± 3.89\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t128\t1\tpp1024\t177.94 ± 2.22\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t256\t1\tpp1024\t284.98 ± 3.07\nqwen35moe ?B MXFP4 MoE\t18.42 GiB\t34.66 B\tCUDA\t99\t1024\t512\t1\tpp1024\t460.05 ± 9.18\n\nI did the test on this build: 2b6dfe824 (8133)\n\nLooking at the results, you can clearly see that the speed in the t/s column changes a lot depending on n_ubatch.\n\nubatch = 128 > t/s = 175.\n\nubatch = 256 > t/s = 284.\n\nubatch = 512 > t/s = 460.\n\nNote: I set n-gen to 0 to not generate any token because I did not have time. This means that the speed you are seeing is prompt processing not generation speed.\n\nYou can also try changing other parameters like n-cpu-moe, cache-type-k, cache-type-v, etc.\n\niamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot\n\n9 more replies"
+    },
+    {
+      "author": "iamapizza",
+      "score": "23",
+      "text": "iamapizza\n•\n6mo ago\n\nThis is a useful bit of education thanks, I had no idea llama bench existed. I've just been faffing about with params barely even understanding them. I'll still barely understand them but at least there's a method to the madness.\n\nSubject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot"
+    },
+    {
+      "author": "Subject-Tea-5253",
+      "score": "15",
+      "text": "Subject-Tea-5253\n•\n6mo ago\nllama.cpp\n\nIt is a useful tool.\n\nI can share a method that helped me understand what parameters I need to use and why. Take the README, your hardware specs, and model name. Give that info to an LLM and ask it anything.\n\nYou can also use agentic apps like Gemini CLI or something else to let the model run llama-bench for you. Just tell it, I want to run the model at 32k context window or something and watch the model optimize the token generation for you.\n\nHope this helps.\n\nExcellent-Skirt8115\n•\n6mo ago\n\nThanks a lot"
+    },
+    {
+      "author": "Excellent-Skirt8115",
+      "score": "3",
+      "text": "Excellent-Skirt8115\n•\n6mo ago\n\nThanks a lot"
+    },
+    {
+      "author": "OakShortbow",
+      "score": "8",
+      "text": "OakShortbow\n•\n6mo ago\n•\nEdited 6mo ago\n\nI have a 5090\n as well but i'm only able to get about 106 output tokens.. pulling latest llama.cpp nix flake with cuda enabled.\n\nedit: nevermind, forgot to update my flakes getting around 160 now without optimizations.\n\n3 more replies"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1rdxfdu",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:57:46Z",
+  "discovered_by_query_ids": [
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.655,
+    "evidence": 0.8,
+    "relevance": 0.273,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://kodu.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/llama-bench/README.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.5-35B-A3B-GGUF/discussions/1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://lmstudio.ai/models/qwen/qwen3.5-35b-a3b",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://images2.imgbox.com/ff/14/mxBYW899_o.png",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://images2.imgbox.com/b1/1f/X1tbcsPV_o.png",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://opencode.ai/config.json",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://<private-endpoint>/v1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/anomalyco/opencode",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1svlnyk/rtx_3090_27b_model_performance_issues_llamacpp/",
+  "title": "RTX 3090 + 27B model performance issues (llama.cpp) what am I doing wrong",
+  "author": "Clean_Initial_9618",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nClean_Initial_9618\nRTX 3090 + 27B model performance issues (llama.cpp) what am I doing wrong\nQuestion | Help\n\nHey folks — looking for some advice on improving my local LLM setup (and also exploring agentic coding workflows).\n\nCurrent setup:\n\nGPU: RTX 3090 (24GB VRAM)\n\nRAM: 64GB\n\nUsing llama.cpp with a Qwen3.6 27B Q6 model (GGUF)\n\nRunning through OpenCode\n\nIssue:\nResponses are really slow, and sometimes it just starts producing errors or low-quality output. Feels like something’s not tuned right or I’m pushing the hardware too far.\n\nCurrent command:\n\nllama-server.exe -m \"C:models/Qwen3.6-27B-GGUF/Qwen3.6-27B-Q6_K.gguf\" -ngl 99 -c 65536 -np 1 -fa 1 -ctk q8_0 -ctv q8_0 -b 1024 -ub 256 -t 16 --no-mmap --temp 0.6 --top-p 0.95 --top-k 20 --reasoning on --host 0.0.0.0 --port 8080 --metrics --slots --props\n\nWhat I’m trying to figure out:\n\nAre any of these flags hurting performance?\n\nIs Q6 just too heavy for a 3090? Would Q4/Q5 be a better balance?\n\nBetter batching / threading / context settings I should try?\n\nAnything obvious I’m missing with llama.cpp tuning?\n\nAlso curious about:\nI’m trying to get into more agentic coding workflows locally (multi-step reasoning, tool use, etc.).\n\nAny good setups, frameworks, or patterns that work well with llama.cpp?\n\nHow are you guys structuring prompts / tools / memory for coding agents?\n\nAny lightweight harnesses or repos worth checking out?\n\nWould really appreciate any tips, configs, or examples from people running similar hardware. Thanks in advance for all your advice and help.\n\nShare",
+  "comments": [
+    {
+      "author": "Colie286",
+      "score": "8",
+      "text": "Colie286\n•\n4mo ago\n\ni am running UD Q4 with 100k context on my 3090. It consumes about 23GB VRAM. Q6 could be too large.\n\nClean_Initial_9618\n•\n4mo ago\n\nHow's Q4 performing for coding ??\n\nColie286\n•\n4mo ago\n\nPretty good in my opinion. I also can get up to 180k context with kv cache q8.\n\nI am getting about 37token/s\n\nGreat_Guidance_8448\n•\n4mo ago\n\n180k context fits into 24 gig VRAM?\n\nClean_Initial_9618\n•\n4mo ago\n\nWhat agentic harness are you using for coding how do you promot the local model to make code changes without too many errors\n\nColie286\n•\n4mo ago\n\nBasically, my setup looks like this:\n\nEverything runs in Docker: Qwen 3.6 27B UD Q4 with llama.cpp, Open WebUI, and other tools such as Whisper ASR, Docling, and ComfyUI. For coding tasks or anything that requires a larger context window, I have to disable some of the other services because otherwise there isn’t enough VRAM available.\n\nI primarily use OpenClaude in VS Code not as a plugin, but through the terminal and the results have been pretty good.\n\nAshthot\n•\n4mo ago\n\nWhat are your flag for llama.cpp ? Do you use also spiritual buuns fork with dflash ? I ve a 3090 and will be happy to see your conf . Thanks"
+    },
+    {
+      "author": "Clean_Initial_9618",
+      "score": "1",
+      "text": "Clean_Initial_9618\n•\n4mo ago\n\nHow's Q4 performing for coding ??\n\nColie286\n•\n4mo ago\n\nPretty good in my opinion. I also can get up to 180k context with kv cache q8.\n\nI am getting about 37token/s\n\nGreat_Guidance_8448\n•\n4mo ago\n\n180k context fits into 24 gig VRAM?\n\nClean_Initial_9618\n•\n4mo ago\n\nWhat agentic harness are you using for coding how do you promot the local model to make code changes without too many errors\n\nColie286\n•\n4mo ago\n\nBasically, my setup looks like this:\n\nEverything runs in Docker: Qwen 3.6 27B UD Q4 with llama.cpp, Open WebUI, and other tools such as Whisper ASR, Docling, and ComfyUI. For coding tasks or anything that requires a larger context window, I have to disable some of the other services because otherwise there isn’t enough VRAM available.\n\nI primarily use OpenClaude in VS Code not as a plugin, but through the terminal and the results have been pretty good."
+    },
+    {
+      "author": "Colie286",
+      "score": "3",
+      "text": "Colie286\n•\n4mo ago\n\nPretty good in my opinion. I also can get up to 180k context with kv cache q8.\n\nI am getting about 37token/s\n\nGreat_Guidance_8448\n•\n4mo ago\n\n180k context fits into 24 gig VRAM?\n\nClean_Initial_9618\n•\n4mo ago\n\nWhat agentic harness are you using for coding how do you promot the local model to make code changes without too many errors\n\nColie286\n•\n4mo ago\n\nBasically, my setup looks like this:\n\nEverything runs in Docker: Qwen 3.6 27B UD Q4 with llama.cpp, Open WebUI, and other tools such as Whisper ASR, Docling, and ComfyUI. For coding tasks or anything that requires a larger context window, I have to disable some of the other services because otherwise there isn’t enough VRAM available.\n\nI primarily use OpenClaude in VS Code not as a plugin, but through the terminal and the results have been pretty good."
+    },
+    {
+      "author": "Great_Guidance_8448",
+      "score": "2",
+      "text": "Great_Guidance_8448\n•\n4mo ago\n\n180k context fits into 24 gig VRAM?"
+    },
+    {
+      "author": "Clean_Initial_9618",
+      "score": "1",
+      "text": "Clean_Initial_9618\n•\n4mo ago\n\nWhat agentic harness are you using for coding how do you promot the local model to make code changes without too many errors\n\nColie286\n•\n4mo ago\n\nBasically, my setup looks like this:\n\nEverything runs in Docker: Qwen 3.6 27B UD Q4 with llama.cpp, Open WebUI, and other tools such as Whisper ASR, Docling, and ComfyUI. For coding tasks or anything that requires a larger context window, I have to disable some of the other services because otherwise there isn’t enough VRAM available.\n\nI primarily use OpenClaude in VS Code not as a plugin, but through the terminal and the results have been pretty good."
+    },
+    {
+      "author": "Colie286",
+      "score": "1",
+      "text": "Colie286\n•\n4mo ago\n\nBasically, my setup looks like this:\n\nEverything runs in Docker: Qwen 3.6 27B UD Q4 with llama.cpp, Open WebUI, and other tools such as Whisper ASR, Docling, and ComfyUI. For coding tasks or anything that requires a larger context window, I have to disable some of the other services because otherwise there isn’t enough VRAM available.\n\nI primarily use OpenClaude in VS Code not as a plugin, but through the terminal and the results have been pretty good."
+    },
+    {
+      "author": "Ashthot",
+      "score": "1",
+      "text": "Ashthot\n•\n4mo ago\n\nWhat are your flag for llama.cpp ? Do you use also spiritual buuns fork with dflash ? I ve a 3090 and will be happy to see your conf . Thanks"
+    },
+    {
+      "author": "Puzzleheaded-Drama-8",
+      "score": "3",
+      "text": "Puzzleheaded-Drama-8\n•\n4mo ago\n\n-np 1 reduces speed of 27B on my 7900xtx from 36tk/s to 25tk/s (I don't even do parallel requests). Could be just a vulkan bug, but you could try without it."
+    },
+    {
+      "author": "goofyahead",
+      "score": "2",
+      "text": "goofyahead\n•\n4mo ago\n\nHi there!\n\nDoing a lot of testing in my own hardware with qwen3.6 and Gemma4.\n\nA few things:\n\nQwen3.6Qwen3.6 Q6_K\n\nSeems too big to me to leave room for your K/V cache (your context) and still work on your GPU only, you have to calculate for both things, or it will start using your system RAM, much slower.\n\nthat model is ~22 GB of just weights, then you have very very little for context, which you set at 64k with Q8 (this is usually preferred since quant at cache seems to hurt a lot)\nhttps://unsloth.ai/docs/models/qwen3.6\n\nAlso I would recommend you to play with UD (unsloth dynamic) quants, they do the reduction at different layers to try to keep the model closer to the original. (not sure which model are you using specifically)\n\nJust as a reference to be able to keep everything in my 5090 I'm testing a Q5 :D\n\nI can go on about the parameters but this is part of the learning and the fun, I would recommend you to use llama.cpp and get to read this different quants, test them, ask your AI what each of this fields mean, etc.\n\nJust some heads up, always read the model card, they recommend some settings cause thats what they did in the learning/RL phase, in my case I learned the hard way the params for Qwen3.6 for top_k and temp are not what I expected and got into crazy loops.\n\nHave fun!"
+    },
+    {
+      "author": "pulse77",
+      "score": "2",
+      "text": "pulse77\n•\n4mo ago\n Top 1% Commenter\n\nIf you would like to run Qwen3.6-27B with --cache-type-k q8_0 and --cache-type-v q8_0 completely in 24GB VRAM:\n\n...with quantization Q6_K the maximum context is about 32K <--- and you have 64K\n\n...with quantization UD-Q5_K_XL the maximum context is about 96K\n\nSo you need to lower the context size to 32K or use 5-bit quantization to get 64K context...\n\nClean_Initial_9618\n•\n4mo ago\n\nWould UD-Q5_K_XL be decent at coding I thought Q6 is better so was trying to work with that\n\npulse77\n•\n4mo ago\n Top 1% Commenter\n\nIt is decent at coding!\n\nAnother decent coding option is Qwen3.6 35B A3B at UD-Q8_K_XL with 256K. It will have the same speed as Qwen3.6 27B at UD-Q5_K_XL as some work will be off-loaded to the CPU/RAM.\n\nPablo_the_brave\n•\n4mo ago\n\nFirst of all for such low ctx even q4_0 will be ok. I will go for lighter imatrix model and stay witch q8_0 at 128k context.\n\nGoodTip7897\n•\n4mo ago\nllama.cpp\n\nI have 130k context at q8_0 with Qwen 3.6 27B at UD-Q5_K_XL on a single 7900xtx (stable over full context prefill and has 37 t/sec tg128).\n\nSo you can definitely push a bit above 96K"
+    },
+    {
+      "author": "Clean_Initial_9618",
+      "score": "1",
+      "text": "Clean_Initial_9618\n•\n4mo ago\n\nWould UD-Q5_K_XL be decent at coding I thought Q6 is better so was trying to work with that\n\npulse77\n•\n4mo ago\n Top 1% Commenter\n\nIt is decent at coding!\n\nAnother decent coding option is Qwen3.6 35B A3B at UD-Q8_K_XL with 256K. It will have the same speed as Qwen3.6 27B at UD-Q5_K_XL as some work will be off-loaded to the CPU/RAM."
+    },
+    {
+      "author": "pulse77",
+      "score": "1",
+      "text": "pulse77\n•\n4mo ago\n Top 1% Commenter\n\nIt is decent at coding!\n\nAnother decent coding option is Qwen3.6 35B A3B at UD-Q8_K_XL with 256K. It will have the same speed as Qwen3.6 27B at UD-Q5_K_XL as some work will be off-loaded to the CPU/RAM."
+    },
+    {
+      "author": "Pablo_the_brave",
+      "score": "1",
+      "text": "Pablo_the_brave\n•\n4mo ago\n\nFirst of all for such low ctx even q4_0 will be ok. I will go for lighter imatrix model and stay witch q8_0 at 128k context."
+    },
+    {
+      "author": "GoodTip7897",
+      "score": "1",
+      "text": "GoodTip7897\n•\n4mo ago\nllama.cpp\n\nI have 130k context at q8_0 with Qwen 3.6 27B at UD-Q5_K_XL on a single 7900xtx (stable over full context prefill and has 37 t/sec tg128).\n\nSo you can definitely push a bit above 96K"
+    },
+    {
+      "author": "pepedombo",
+      "score": "2",
+      "text": "pepedombo\n•\n4mo ago\n\nI used to code on already structured data and it really takes time to find proper model, especially to find differences between quants. (5070+5060+4060)\n\nI started with 35b q8 and quickly changed to 27b, 35b is chaotic and pumps context quick :)\n\nHere's actual testing ground:\n// 35b\nllama-server.exe -m \"<windows-path>\" -ngl 999 -sm layer -ts 1,1,1 -c 200000 -np 2 --no-mmap -ctk f16 -ctv f16 -fa on -b 1024 -ub 256 -t 8 -tb 8\n// 27B q8\nllama-server.exe -m \"<windows-path>\" -ngl 999 -sm layer -ts 1,1,1 -c 100000 -np 1 --no-mmap -ctk f16 -ctv f16 -fa on -b 1024 -ub 512 -t 8 -tb 8\n// 27b q4 dual 80k each\nllama-server.exe -m \"<windows-path>\" -ngl 999 -sm layer -ts 1,0,1 -c 160000 -np 2 --no-mmap -ctk f16 -ctv f16 -fa on -b 1024 -ub 512 -t 8 -tb 8\n// 27b q5 xl\nllama-server.exe -m \"<windows-path>\" -ngl 999 -sm layer -ts 1,0,1 -c 100000 -np 1 --no-mmap -ctk f16 -ctv f16 -fa on -b 1024 -ub 512 -t 8 -tb 8\n\n27B Q8 is solid and seems to follow my intentions without much hassel, good reference. In my case the price is huge, because it gives ~12tps average or 2x10tps in parallel. Annoying. 4060 bottleneck.\n\n27B Q5 runs at ~27 t/s on a 5070 + 5060 setup and uses almost 31 GB VRAM at 100k context, so Q6 is likely not practical on 24 GB. Too early to judge, but in prompt comparisons with Q8, Q5 feels like it can lose some detail.\n\nAs you see you'll need to play around to find the best that suits you. With 27b I'm ok with ~20-25tps, time will show if that 25tps is worth 10tps difference to q8 which might not loose that one detail. With more limited vram you will probably play with q_8 variants. More variables = more testing = more time.\n\nI switched from opencode to qwen code fork because it handles tools better so it doesn't annoy me every time it needs to parse codebase. Used to play with code-wiki etc but it needs special care so for now i'm going brute force, looking for compromise between quality and speed.\n\nShort about ctx: i'm trying to finish any task in 50-100k context window, the bigger it gets the worse. As my project is already structured every area is encapsulated so i prefer modular approach."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1svlnyk",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:41:08Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.844,
+    "evidence": 1.0,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/club-3090/blob/master/models/qwen3.6-27b/llama-cpp/compose/single/unsloth-q4km/mtp.yml",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=5jkAlqbk66A",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

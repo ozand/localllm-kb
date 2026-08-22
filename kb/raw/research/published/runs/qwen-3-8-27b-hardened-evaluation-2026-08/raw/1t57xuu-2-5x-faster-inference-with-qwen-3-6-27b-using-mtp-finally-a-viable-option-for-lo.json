@@ -1,0 +1,255 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t57xuu/25x_faster_inference_with_qwen_36_27b_using_mtp/",
+  "title": "2.5x faster inference with Qwen 3.6 27B using MTP - Finally a viable option for local agentic coding - 262k context on 48GB - Fixed chat template - Drop-in OpenAI and Anthropic API endpoints",
+  "author": "ex-arman68",
+  "post_body": "3\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nex-arman68\n2.5x faster inference with Qwen 3.6 27B using MTP - Finally a viable option for local agentic coding - 262k context on 48GB - Fixed chat template - Drop-in OpenAI and Anthropic API endpoints\nResources\n\n2026-05-14: Major chat template update Thanks to many users who tested the template in many different conditions, in addition to my own manual tests and test suite, I believe the template has now reached a high level of stability, greatly improving the experience with the Qwen models, while preserving universal compatibility. You do not need to re-download the GGUF files (I have not updated them yet), but you should download the update chat template only from the HF repo, and manually specify it.\n\n2026-05-07 edit: I have updated the hardware based recommendations with more focus on quality. I do not recommend q4_0 KV cache anymore beyond 64k context. After multiple rounds of testing with the different size quants, it appears 3 is the optimal number for draft speculative decoding. The fastest and best quality quant is q8_0-mtp. F16, which I have also uploaded is actually better but ultra slow (6x slower than q8_0). Many keep saying 8bit is virtually lossless compared to 16bit, and 6bit almost as good as 8bit, but this is simply not true: time and time again I have noticed huge differences in quality and correctness between 8bit and 16bit versions of various models.\n\nThe recent PR to llama.cpp bring MTP support to Qwen 3.6 27B. This uses the built-in tensor layers for speculative decoding. None of the existing GGUF have it, as they need to be converted with this PR.\n\nI have tested it locally on my mac M2 Max 96GB, and the results are amazing: 2.5x speed increase, bringing it to 28 tok/s!\n\nI have converted the most useful quants and uploaded them to HF. Even if you are using apple silicon, you should use those instead of MLX. You can download them here:\n\nhttps://huggingface.co/froggeric/Qwen3.6-27B-MTP-GGUF\n\nThis also includes 7 fixes I made to the original jinja chat template, due to vLLM specificity which broke in other tools:\n\nhttps://huggingface.co/froggeric/Qwen-Fixed-Chat-Templates\n\nFor now, you will need to compile your own version of llama.cpp to use them. It is fairly simple to do:\n\ngit clone --depth 1 https://github.com/ggml-org/llama.cpp.git\ncd llama.cpp\ngit fetch origin pull/22673/head:mtp-pr && git checkout mtp-pr\n\ncmake -B build -DGGML_METAL=ON -DCMAKE_BUILD_TYPE=Release\ncmake --build build --target llama-cli llama-server\n\nThen to start serving with the API endpoint, use a command similar to:\n\nllama-server -m Qwen3.6-27B-Q5_K_M-mtp.gguf \\\n  --spec-type mtp --spec-draft-n-max 3 \\\n  --cache-type-k q8_0 --cache-type-v q8_0 \\\n  -np 1 -c 262144 --temp 0.7 --top-k 20 -ngl 99 --port 8081\n\nVision currently crashes llama.cpp when used alongside MTP. Reported 2026-05-06 in the current PR.\n\nThat's it. Three optimizations in one command:\n\nFlag\tWhat it does\tImpact\n\n--spec-type mtp --spec-draft-n-max 3\tMulti-Token Prediction (built into the model)\t2.5x faster generation\n--cache-type-k q8_0 --cache-type-v q8_0\t8-bit KV cache (instead of 16-bit)\tHalf the KV memory, negligible quality loss\n-c 262144\t262K context window\tFull native context on 48 GB Mac with q8_0 KV\n\nAdjust -m, -c, and --cache-type-k/v for your hardware, according to the tables below.\n\nHere are my recommendations based on your hardware:\n\nApple Silicon\n\nQwen3.6-27B is a hybrid model — only 16 of 65 layers use KV cache (verified). The other 48 are linear attention (fixed 898 MiB recurrent state). KV memory is ~4× less than a standard dense model. Runtimes that don't handle this (e.g. vllm) allocate KV for all 65 layers and show much higher memory usage.\n\nNumbers below are total memory used (model + KV cache + 0.9 GB recurrent state). Must leave ≥ 8 GB for macOS (16 GB Macs excepted).\n\nRAM\tQuant\tKV cache\tMax context\tTotal used\tVision\n\n16 GB\tIQ2_M\tq8_0\t42K\t12.0 GB\t✗\n24 GB\tIQ3_M\t\t46K\t16.0 GB\t✗\n24 GB\tIQ3_M\tq8_0\t91K\t16.0 GB\t✗\n32 GB\tQ5_K_M\t\t74K\t24.0 GB\t✗\n32 GB\tQ5_K_M\tq8_0\t147K\t24.0 GB\t✗\n32 GB\tQ4_K_M\t\t99K\t24.0 GB\t✓\n48 GB\tQ6_K\t\t262K\t39.7 GB\t✓\n48 GB\tQ8_0\t\t173K\t40.0 GB\t✓\n48 GB\tQ8_0\tq8_0\t262K\t37.3 GB\t✓\n64 GB\tQ8_0\t\t262K\t45.8 GB\t✓\n96 GB\tQ8_0\t\t262K\t45.8 GB\t✓\nNVIDIA GPU\n\nSame model memory as Apple Silicon, plus ~1 GB CUDA overhead.\n\nVRAM\tQuant\tKV cache\tMax context\tTotal VRAM used\tVision\n\n12 GB\tIQ2_M\tq8_0\t11K\t12.0 GB\t✗\n16 GB\tIQ3_M\t\t30K\t16.0 GB\t✗\n16 GB\tIQ3_M\tq8_0\t60K\t16.0 GB\t✗\n24 GB\tQ4_K_M\t\t83K\t24.0 GB\t✓\n24 GB\tQ4_K_M\tq8_0\t167K\t24.0 GB\t✓\n24 GB\tQ5_K_M\t\t58K\t24.0 GB\t✗\n48 GB\tQ6_K\t\t262K\t40.7 GB\t✓\n48 GB\tQ8_0\t\t262K\t46.8 GB\t✓\n80 GB\tQ8_0\t\t262K\t46.8 GB\t✓\n\n16 GB Mac: IQ2_M/q8_0 — 42K text-only. No vision.\n\n24 GB Mac: IQ3_M — 46K (f16 KV) or 91K (q8_0). Vision at 32–65K.\n\n32 GB Mac: Q5_K_M — 74K text-only (f16 KV), 147K (q8_0). Q4_K_M for vision at 99K.\n\n48 GB Mac: Q6_K/f16 KV — 262K with vision. Q8_0/q8_0 KV for 262K at higher model quality.\n\n64 GB+ Mac: Q8_0/f16 KV — 262K with vision. Maximum quality at practical speed.\n\n12 GB GPU: IQ2_M/q8_0 — 11K. Very limited, no vision.\n\n16 GB GPU: IQ3_M — 30K (f16 KV) or 60K (q8_0). No vision.\n\n24 GB GPU: Q4_K_M — 83K with vision (f16 KV). Q5_K_M — 58K text-only (f16 KV), 116K (q8_0).\n\n48 GB+ GPU: Q6_K/f16 KV — 262K with vision. Q8_0 for max quality.\n\nLeave KV cache at f16 (blank column) for best quality. Use q8_0 KV only when f16 doesn't give enough context. q4_0 KV should not exceed 64K context.\n\nVision adds ~0.9 GB for mmproj. macOS needs ≥ 8 GB for itself (16 GB Macs excepted — use ~4 GB). You can increase available memory by raising the wired memory limit, e.g. for a 96 GB Mac: sudo sysctl iogpu.wired_limit_mb=90112 (88 GB). NVIDIA reserves ~1 GB for CUDA.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n4mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "ResidentPositive4122",
+      "score": "257",
+      "text": "ResidentPositive4122\n•\n4mo ago\n Top 1% Commenter\n\nLegend.\n\nMan, these past 6 months have brought us more than the last 2 years combined. On the one hand we've seen really powerful open models (glms, kimis, deepseeks, minimaxs, mimos, etc) and more importantly for this community, really useful \"good enough\" truly local models in gemmas and qwens.\n\nNow we're seeing lots of inference improvements that can be ran on consumer hardware, and that's what we mostly care about. Insane progress in a very short timespan.\n\nSmartCustard9944\n•\n4mo ago\n•\nEdited 4mo ago\n\nBetter inference and intelligence\n\n-> Better and faster contributions\n\nGo to 1\n\nThis loop gets better and better with time. This feels like a self improving intelligence, just that it’s hybrid (AI + human in the loop) and highly distributed and parallel (many humans).\n\n12 more replies\nPrzemChuck\n•\n4mo ago\n\nThere are decades where nothing happens; and there are weeks where decades happen. Vladimir Ilyich Lenin\n\nEisenstein\n•\n4mo ago\n\nActual quote: \"There are years, centuries, in which nothing happens, and there are days, like yesterday, into which a whole lifetime is compressed.\" -Adriaan Schade van Westrum\n\nMisattributed to Lenin. He wasn't actually that witty and mostly just wrote about Communist ideology.\n\n1 more reply\nflorinandrei\n•\n4mo ago\n\n\"One job lost is a tragedy. Millions of jobs lost is a statistic.\" - AI Stalin\n\n1 more reply\nAlternative_Ad4267\n•\n4mo ago\n\nI’ve purchased one year and a half ago 4 Nvidia RTX A4000 (16 GB each consuming up to 140w, not beefy at all), but finally with Qwen 3.6 35B A3B Q8 I feel redeemed.\n\nIt runs at almost 80 tokens per second at full 262k tokens context. $800 each, and nowadays some sites sell these same cards up to $1,600 dollars (though there are other sites still at $800-$1,000 bucks).\n\nFor more than one year I was just doing SDXL, WAN (and basic), and some ML stuff to not feel like a waste of resources.\n\n2 more replies"
+    },
+    {
+      "author": "SmartCustard9944",
+      "score": "66",
+      "text": "SmartCustard9944\n•\n4mo ago\n•\nEdited 4mo ago\n\nBetter inference and intelligence\n\n-> Better and faster contributions\n\nGo to 1\n\nThis loop gets better and better with time. This feels like a self improving intelligence, just that it’s hybrid (AI + human in the loop) and highly distributed and parallel (many humans).\n\n12 more replies"
+    },
+    {
+      "author": "PrzemChuck",
+      "score": "32",
+      "text": "PrzemChuck\n•\n4mo ago\n\nThere are decades where nothing happens; and there are weeks where decades happen. Vladimir Ilyich Lenin\n\nEisenstein\n•\n4mo ago\n\nActual quote: \"There are years, centuries, in which nothing happens, and there are days, like yesterday, into which a whole lifetime is compressed.\" -Adriaan Schade van Westrum\n\nMisattributed to Lenin. He wasn't actually that witty and mostly just wrote about Communist ideology.\n\n1 more reply\nflorinandrei\n•\n4mo ago\n\n\"One job lost is a tragedy. Millions of jobs lost is a statistic.\" - AI Stalin\n\n1 more reply"
+    },
+    {
+      "author": "Eisenstein",
+      "score": "34",
+      "text": "Eisenstein\n•\n4mo ago\n\nActual quote: \"There are years, centuries, in which nothing happens, and there are days, like yesterday, into which a whole lifetime is compressed.\" -Adriaan Schade van Westrum\n\nMisattributed to Lenin. He wasn't actually that witty and mostly just wrote about Communist ideology.\n\n1 more reply"
+    },
+    {
+      "author": "florinandrei",
+      "score": "12",
+      "text": "florinandrei\n•\n4mo ago\n\n\"One job lost is a tragedy. Millions of jobs lost is a statistic.\" - AI Stalin"
+    },
+    {
+      "author": "Alternative_Ad4267",
+      "score": "4",
+      "text": "Alternative_Ad4267\n•\n4mo ago\n\nI’ve purchased one year and a half ago 4 Nvidia RTX A4000 (16 GB each consuming up to 140w, not beefy at all), but finally with Qwen 3.6 35B A3B Q8 I feel redeemed.\n\nIt runs at almost 80 tokens per second at full 262k tokens context. $800 each, and nowadays some sites sell these same cards up to $1,600 dollars (though there are other sites still at $800-$1,000 bucks).\n\nFor more than one year I was just doing SDXL, WAN (and basic), and some ML stuff to not feel like a waste of resources.\n\n2 more replies"
+    },
+    {
+      "author": "gordi555",
+      "score": "44",
+      "text": "gordi555\n•\n4mo ago\n\nOn RTX Pro 6000 MaxQ I got/get...\n\nqwen 3.6 2.7B Q8 = 36 tokens per second\nqwen 3.6 2.7B Q8 (mtp) = 78 tokens per second\n\nI've lost about 20% prompt processing but these generation speeds are massively worth it.\n\nOutput looks exactly the same in terms of quality.\n\nAmazing!\n\nswitchandplay\n•\n4mo ago\n\nI believe MTP, like other current speculative decoding techniques, will not reduce output quality- the ‘primary model’ is still in control of the final token emitted. Speculative decoding just speeds up generation when the speculator and the primary model are at a consensus. This happens often in coding environments, which is why we see a relatively higher speedup in this domain. In the case of MTP, the primary model is also the speculator, but the exact same verification flows ensue for tokens. In vLLM (and transformers I think), the model emits a token and the integrated MTP system suggests the next n (1-5 ish, based on config). Then the model verifies them.\n\n4 more replies"
+    },
+    {
+      "author": "switchandplay",
+      "score": "6",
+      "text": "switchandplay\n•\n4mo ago\n\nI believe MTP, like other current speculative decoding techniques, will not reduce output quality- the ‘primary model’ is still in control of the final token emitted. Speculative decoding just speeds up generation when the speculator and the primary model are at a consensus. This happens often in coding environments, which is why we see a relatively higher speedup in this domain. In the case of MTP, the primary model is also the speculator, but the exact same verification flows ensue for tokens. In vLLM (and transformers I think), the model emits a token and the integrated MTP system suggests the next n (1-5 ish, based on config). Then the model verifies them."
+    },
+    {
+      "author": "jacek2023",
+      "score": "46",
+      "text": "jacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nWhen was turbo3/turbo4 merged? Or is this part of MTP PR?\n\npmttyji\n•\n4mo ago\n Top 1% Poster\n\nWhen was turbo3/turbo4 merged?\n\nCustom fork probably.\n\nllama.cpp Links related to TurboQuant here to track progress.\n\nhttps://github.com/ggml-org/llama.cpp/issues/20977\n\nhttps://github.com/ggml-org/llama.cpp/pull/21089\n\nhttps://github.com/ggml-org/llama.cpp/discussions/20969\n\nrerri\n•\n4mo ago\n\nBut if you look at OP's compile instructions, it doesn't seem like TurboQuant PR is included.\n\nPineapple_King\n•\n4mo ago\n\nits not there... compiled as described. OP???\n\n1 more reply\n1 more reply\n1 more reply\n5 more replies"
+    },
+    {
+      "author": "pmttyji",
+      "score": "21",
+      "text": "pmttyji\n•\n4mo ago\n Top 1% Poster\n\nWhen was turbo3/turbo4 merged?\n\nCustom fork probably.\n\nllama.cpp Links related to TurboQuant here to track progress.\n\nhttps://github.com/ggml-org/llama.cpp/issues/20977\n\nhttps://github.com/ggml-org/llama.cpp/pull/21089\n\nhttps://github.com/ggml-org/llama.cpp/discussions/20969\n\nrerri\n•\n4mo ago\n\nBut if you look at OP's compile instructions, it doesn't seem like TurboQuant PR is included.\n\nPineapple_King\n•\n4mo ago\n\nits not there... compiled as described. OP???\n\n1 more reply\n1 more reply\n1 more reply"
+    },
+    {
+      "author": "rerri",
+      "score": "25",
+      "text": "rerri\n•\n4mo ago\n\nBut if you look at OP's compile instructions, it doesn't seem like TurboQuant PR is included.\n\nPineapple_King\n•\n4mo ago\n\nits not there... compiled as described. OP???\n\n1 more reply\n1 more reply"
+    },
+    {
+      "author": "Pineapple_King",
+      "score": "7",
+      "text": "Pineapple_King\n•\n4mo ago\n\nits not there... compiled as described. OP???\n\n1 more reply"
+    },
+    {
+      "author": "sagiroth",
+      "score": "37",
+      "text": "sagiroth\n•\n4mo ago\nllama.cpp\n\nIt's great and I appreciate all the work the community is doing, but its so draining to keep up with this! :D\n\nSeveral-Tax31\n•\n4mo ago\n Top 1% Commenter\n\nI think we need to do a better job in this community on tracking the llama.cpp optimizations and which one works with which model etc. All information is so fragmented among the posts. I have a hard time myself. \n\nclofresh\n•\n4mo ago\n\nIf only there were a magic technology that could take large quantities of text and turn it into smaller, more meaningful quantities of text!\n\nSeveral-Tax31\n•\n4mo ago\n Top 1% Commenter\n\nTime to make the agent work for its money! \n\nsagiroth\n•\n4mo ago\nllama.cpp\n\nExactly, personally I wish I had more time to fully dedicate to AI but at this moment I just take a step back for few days and see whats latest and stable.\n\nsuperdariom\n•\n4mo ago\n\nBy the time you come back this will be obsolete and we'll have something twice as good and also half working\n\nsagiroth\n•\n4mo ago\nllama.cpp\n\nThats really true\n\nsuperdariom\n•\n4mo ago\n\nBarely had time to play with the last miracle and now it's obsolete\n\n1 more reply\nEisenstein\n•\n4mo ago\n\nIf it was easy it wouldn't be special. Knowledge is something that needs to be actively pursued unless it is static. In this day with the internet any static knowledge can be found easily, so the only knowledge worth anything more than the baseline is moving. Keeping up with it is the whole point, and its why this community was created.\n\nAvidCyclist250\n•\n4mo ago\nllama.cpp\n\nThat's true. And a week here feels like a year in real world time. I have to check this out daily or it's like missing an episode of walking dead (the good early ones).\n\n1 more reply"
+    },
+    {
+      "author": "Several-Tax31",
+      "score": "33",
+      "text": "Several-Tax31\n•\n4mo ago\n Top 1% Commenter\n\nI think we need to do a better job in this community on tracking the llama.cpp optimizations and which one works with which model etc. All information is so fragmented among the posts. I have a hard time myself. \n\nclofresh\n•\n4mo ago\n\nIf only there were a magic technology that could take large quantities of text and turn it into smaller, more meaningful quantities of text!\n\nSeveral-Tax31\n•\n4mo ago\n Top 1% Commenter\n\nTime to make the agent work for its money! \n\nsagiroth\n•\n4mo ago\nllama.cpp\n\nExactly, personally I wish I had more time to fully dedicate to AI but at this moment I just take a step back for few days and see whats latest and stable.\n\nsuperdariom\n•\n4mo ago\n\nBy the time you come back this will be obsolete and we'll have something twice as good and also half working\n\nsagiroth\n•\n4mo ago\nllama.cpp\n\nThats really true"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1t57xuu",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:54:43Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.841,
+    "evidence": 1.0,
+    "relevance": 0.545,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/froggeric/Qwen-Fixed-Chat-Templates",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/froggeric/Qwen3.6-27B-MTP-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/issues/20977",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/21089",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/discussions/20969",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/localweights/Qwen3.6-27B-MTP-IQ4_XS-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/localweights/Qwen3.6-35B-A3B-MTP-IQ4_XS-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/eepos/Qwen3.6-27B-MTP-Q6_K-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/jundot/omlx/releases/tag/v0.3.9.dev1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/TheTom/llama-cpp-turboquant",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://gist.github.com/MrBIMC/e5113f51d28b63ca75eb56d2380d317d",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/brittlewis12/Qwen3.6-27B-MTP-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://mtplx.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/Youssofal/Qwen3.6-27B-MTPLX-Optimized-Speed",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

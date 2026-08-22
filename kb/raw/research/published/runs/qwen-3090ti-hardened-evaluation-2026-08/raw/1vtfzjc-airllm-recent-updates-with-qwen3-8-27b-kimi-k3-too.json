@@ -1,0 +1,135 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtfzjc/airllm_recent_updates_with_qwen3827b_kimik3_too/",
+  "title": "AirLLM - Recent Updates - with Qwen3.8-27B, Kimi-K3 too",
+  "author": "pmttyji",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\npmttyji\n Top 1% Poster\nAirLLM - Recent Updates - with Qwen3.8-27B, Kimi-K3 too\nDiscussion\ngithub.com\nOpen\n\nAirLLM dramatically reduces inference memory usage, letting 70B large language models run on a single 4GB GPU card — without quantization, distillation, or pruning. You can even run 405B Llama 3.1 on 8GB, DeepSeek-V3 (671B) on ~12GB, and Kimi K3 (2.8T) — the largest open-source model released to date — on under 4GB, because sparse MoE models stream one expert at a time rather than a whole layer.\n\nUpdates\n\n[2026/08] Qwen3.8-27B support: Qwen's new dense VL (Gated DeltaNet + Gated Attention, native vision) runs in 3.33GB of VRAM, measured end to end on one RTX 3090. Needs transformers 5.8+.\n\n[2026/07] Kimi K3 (2.8T) support: the largest open-source model runs on a single card in 3.72GB of VRAM, measured end to end on one RTX 6000 Ada. Per-expert streaming loads only the experts a token actually routes to. K3 brings three requirements of its own: pip install compressed-tensors flash-attn (its model code mandates flash attention regardless of what you request), a CUDA 12 build of torch, since no prebuilt flash-attn wheel exists for CUDA 13 yet, and transformers 4.56.x, as its remote code does not load on 5.x.\n\n[2026/06] v3.0: FP8 model support + the latest models. Run DeepSeek-V3 (671B) on ~12GB and Qwen3-235B on ~3GB, plus Qwen3, Llama 3.x/4, DeepSeek V2/V3, Phi-4, Gemma and more — all through a single AutoModel.\n\n[2024/08/20] v2.11.0: Support Qwen2.5\n\n.\n\n.\n\nLooks like Updates happened after 2 years. Sharing this for AirLLM fans.\n\nShare",
+  "comments": [
+    {
+      "author": "ApeGrower",
+      "score": "30",
+      "text": "ApeGrower\n•\n2d ago\n\nexpect s/t instead of t/s\n\nmildw4ve\n•\n2d ago\n\nNo kidding - 292s/tok (0.003 tok/s) for Kimi K3 on RTX6000.\n\nhttps://news.ycombinator.com/item?id=49154228\n\nkevinlch\n•\n2d ago\n\nlmao"
+    },
+    {
+      "author": "mildw4ve",
+      "score": "16",
+      "text": "mildw4ve\n•\n2d ago\n\nNo kidding - 292s/tok (0.003 tok/s) for Kimi K3 on RTX6000.\n\nhttps://news.ycombinator.com/item?id=49154228\n\nkevinlch\n•\n2d ago\n\nlmao"
+    },
+    {
+      "author": "kevinlch",
+      "score": "2",
+      "text": "kevinlch\n•\n2d ago\n\nlmao"
+    },
+    {
+      "author": "mentria-ai",
+      "score": "9",
+      "text": "mentria-ai\n•\n2d ago\n\nHow many t/s? Will it run on 3060 mobile gpu 6gb?\n\nAppealSame4367\n•\n2d ago\n\nI just discussed this with chatgpt: This is not a way to get speed. Only a way to run huge models _at any cost_\n\nYou will get multiple s per t even for qwen3.8 27b!\n\nBetter just use ornith 1.5 35b. I do that on a 2060 mobile gpu and it works well even with around 128k context (32gb ram, 6gb vram). around 300 tps pp at low context and 10-15 tps tg. Should be even faster on your 3060, so just use that. Benchmarks are on par with qwen3.8 27b (it was launched yesterday).\n\nUse ik_llama if you wanna try ornith 1.5 35b. I don't know why yet, but it tends to massively overthink on llama.cpp and doesn't do it on ik_llama.\n\nBS_BlackScout\n•\n21h ago\n\nDoes it in ik too but probably due to cache quant"
+    },
+    {
+      "author": "AppealSame4367",
+      "score": "5",
+      "text": "AppealSame4367\n•\n2d ago\n\nI just discussed this with chatgpt: This is not a way to get speed. Only a way to run huge models _at any cost_\n\nYou will get multiple s per t even for qwen3.8 27b!\n\nBetter just use ornith 1.5 35b. I do that on a 2060 mobile gpu and it works well even with around 128k context (32gb ram, 6gb vram). around 300 tps pp at low context and 10-15 tps tg. Should be even faster on your 3060, so just use that. Benchmarks are on par with qwen3.8 27b (it was launched yesterday).\n\nUse ik_llama if you wanna try ornith 1.5 35b. I don't know why yet, but it tends to massively overthink on llama.cpp and doesn't do it on ik_llama.\n\nBS_BlackScout\n•\n21h ago\n\nDoes it in ik too but probably due to cache quant"
+    },
+    {
+      "author": "BS_BlackScout",
+      "score": "1",
+      "text": "BS_BlackScout\n•\n21h ago\n\nDoes it in ik too but probably due to cache quant"
+    },
+    {
+      "author": "Foreign-Mango-801",
+      "score": "4",
+      "text": "Foreign-Mango-801\n•\n2d ago\n\nexpected T/s ?\n\nDrenlin\n•\n2d ago\n\nIt's measured in S/t apparently"
+    },
+    {
+      "author": "Drenlin",
+      "score": "2",
+      "text": "Drenlin\n•\n2d ago\n\nIt's measured in S/t apparently"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vtfzjc",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:39:02Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.637,
+    "evidence": 0.8,
+    "relevance": 0.333,
+    "community_scrutiny": 0.8,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/lyogavin/airllm",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=49154228",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

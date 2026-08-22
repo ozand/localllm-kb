@@ -1,0 +1,135 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv3b6o/sharp_template_to_ninfer_42_output_tokens_same/",
+  "title": "Sharp template to NInfer: -42% output tokens, same speed",
+  "author": "xrailgun",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n7h ago\nxrailgun\nSharp template to NInfer: -42% output tokens, same speed\nDiscussion\n\nSharp is u/peculiar-ragdoll's system prompt that makes Qwen answer way more tersely without losing correctness. It's built on top of froggeric's fixed chat templates for Qwen; several fixes now in the v22.x templates (error-escalation tiers, false retry-loop kills, multi-system merging, correct tool-arg serialization) originated in u/Chromix_'s improved Jinja template before being merged upstream.\n\nNInfer is a hyper-tailored inference engine that only runs certain Qwen models on 5090. NInfer doesn't support changing Jinja templates, so I overlaid the behavior in C++ instead in a fork: ninfer-sharp\n\n--chat-style sharp-v22.1 appends Sharp's terseness instruction to the system prompt\n\n--reasoning-effort with 7 levels, none = thinking off\n\nOfficial model artifact untouched (NInfer verifies templates by hash)\n\nPinned to Sharp v22.1 semantics — the overlay replicates the terse block and effort mapping, not the later v22.2/v22.3 tool-path changes (tool-call format stays NInfer's own)\n\nIn my tests, the output remained byte-identical to the actual Sharp Jinja template except the engine's internal thinking markers, which it depends on for parsing. Numbers (5090, Qwen3.8 27B, xhigh (default)):\n\ndefault\tsharp\n\ncompletion tokens\tbaseline\nwall time\tbaseline\ndecode speed\tbaseline\nShare",
+  "comments": [
+    {
+      "author": "RMK137",
+      "score": "8",
+      "text": "RMK137\n•\n6h ago\n\nThis is cool. I hope Neroued has the appetite to consider template swapping since it tends to have a significant effect on the model. I am testing a few things in my own windows port as well. It's crazy how fast these models run with this engine, the 35b absolutely flies.\n\nI'll be testing some long horizon work where the model resets right before reaching context limit, writes a handoff, clears its context and continue working, basically a one agent loop. Given how fast the model can run, I am not sure there is a need for more than one agent. Maybe a max of two would be enough. Can probably keep context at 92-132k and save room for (hopefully) dflash with the 3.8-27b."
+    },
+    {
+      "author": "Chromix_",
+      "score": "5",
+      "text": "Chromix_\n•\n5h ago\n Top 1% Commenter\n\nSo, this is based on froggeric's latest template (referenced there) with custom system prompts for the reasoning levels on top.\n\nFalse retry loops on code search killed. Grep hits containing throw new Error(...), console.error, logger.error no longer count as tool failures.\n\nMultiple leading system/developer messages merge into one system turn joined by blank lines, instead of only the first being treated as a system prompt.\n\nTool arguments serialize correctly. Booleans, nulls and numbers now go through tojson instead of | string (which emitted Python True/None); raw string args honour max_tool_arg_chars; JSON tool format no longer truncates tool responses.\n\nThe listed fixes come from my improved template without reference, likely as they were incorporated into froggeric's template without reference.\n\nxrailgun\n•\n3h ago\n\nNoted, I've updated the post to credit it properly: your improved Jinja template as the origin of several v22.x fixes. Thanks for your work and pointing this out!\n\nChromix_\n•\n3h ago\n Top 1% Commenter\n\nThanks. I shared it free of any license, like most of us here do - just something for others to benefit from. Linking or attributing is a nice thing to do, despite not being mandatory in any way."
+    },
+    {
+      "author": "xrailgun",
+      "score": "2",
+      "text": "xrailgun\n•\n3h ago\n\nNoted, I've updated the post to credit it properly: your improved Jinja template as the origin of several v22.x fixes. Thanks for your work and pointing this out!\n\nChromix_\n•\n3h ago\n Top 1% Commenter\n\nThanks. I shared it free of any license, like most of us here do - just something for others to benefit from. Linking or attributing is a nice thing to do, despite not being mandatory in any way."
+    },
+    {
+      "author": "Chromix_",
+      "score": "1",
+      "text": "Chromix_\n•\n3h ago\n Top 1% Commenter\n\nThanks. I shared it free of any license, like most of us here do - just something for others to benefit from. Linking or attributing is a nice thing to do, despite not being mandatory in any way."
+    },
+    {
+      "author": "luckyj",
+      "score": "1",
+      "text": "luckyj\n•\n1h ago\n\nI'm testing it. It looks very promising.\n\nHowever, I'm using it with Pi and I sometimes get a tool call in the text output.\n\n The exit code is 2 because src doesn't exist. The js directory is probably the code.                                                                                                                                                                    \n  response                                                                                                                                                                                                                                               \n                                                                                                                                                                                                                                                         \n <tool_call>                                                                                                                                                                                                                                             \n <function=bash>                                                                                                                                                                                                                                         \n <parameter=command>                                                                                                                                                                                                                                     \n ls -R \"<windows-path>\" \"<windows-path>\" | head -60                                                                                                                                              \n </parameter>                                                                                                                                                                                                                                            \n </function>                                                                                                                                                                                                                                             \n </tool_call>"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vv3b6o",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:06Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.434,
+    "evidence": 0.6,
+    "relevance": 0.182,
+    "community_scrutiny": 0.5,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/peculiar-ragdoll/Qwen-Sharp-Chat-Templates",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/froggeric/Qwen-Fixed-Chat-Templates",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Neroued/ninfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/mr-september/ninfer-sharp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

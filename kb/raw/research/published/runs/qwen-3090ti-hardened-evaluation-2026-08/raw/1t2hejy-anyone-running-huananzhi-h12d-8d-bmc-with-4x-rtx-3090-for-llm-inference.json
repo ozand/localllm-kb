@@ -1,0 +1,141 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t2hejy/anyone_running_huananzhi_h12d8d_bmc_with_4x_rtx/",
+  "title": "Anyone running HUANANZHI H12D-8D + BMC with 4x RTX 3090 for LLM inference?",
+  "author": "awfulalexey",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nawfulalexey\nAnyone running HUANANZHI H12D-8D + BMC with 4x RTX 3090 for LLM inference?\nQuestion | Help\n\nHi everyone,\n\nI'm considering building a home LLM inference rig around:\n\n- HUANANZHI H12D-8D + BMC\n\n- AMD EPYC 7002/7003\n\n- 4x RTX 3090 24GB\n\n- DDR4 ECC RDIMM, 8-channel\n\n- Linux + vLLM / SGLang / llama.cpp\n\n- Open frame, PCIe 4.0 x16 risers\n\nThe board looks very attractive for the price: EPYC SP3, 8-channel memory, BMC/IPMI, 4x PCIe 4.0 x16 physical slots, 3x M.2, etc. But documentation and real-world reports are a bit scattered, so I’d love to hear from actual owners.\n\nQuestions:\n\nDo all 4 PCIe slots run electrically at x16, or is one of them limited to x8?\n\nCould you share lspci -vv / nvidia-smi link width output if possible?\n\nDoes Above 4G Decoding work properly with 3-4 GPUs?\n\nDoes Resizable BAR work after the newer BIOS update?\n\nI saw that HUANANZHI has a BIOS note mentioning Resizable BAR / PCIe split optimization.\n\nAny issues booting with RTX 3090 specifically?\n\nI’ve seen some reports about GPU compatibility quirks on this board.\n\nHow stable is the BMC/IPMI module?\n\nDoes remote KVM work reliably? Any fan control or sensor weirdness?\n\nAny RAM/channel issues with 8 DIMMs?\n\nDid all 8 memory channels work out of the box?\n\nHow long is POST/boot time in your setup?\n\nAny problems with PCIe 4.0 risers?\n\nDid you have to force Gen3/Gen4 manually?\n\nIf you run vLLM/SGLang/llama.cpp on this board, how has stability been under long inference workloads?\n\nWould you buy this board again, or would you rather go with Supermicro H12SSL-i / ASRock Rack ROMED8-2T / TYAN S8030?\n\nMy main concern is not peak CPU performance, but stable 4-GPU operation for LLM inference. Even 3x PCIe 4.0 x16 + 1x PCIe 4.0 x8 would probably be acceptable, but I’d like to understand the real limitations before buying.\n\nThanks!\n\nShare",
+  "comments": [
+    {
+      "author": "Nepherpitu",
+      "score": "5",
+      "text": "Nepherpitu\n•\n4mo ago\n\nRunning 8 3090 on this board with 7702 CPU. All slots are x16 4.0 with bifurcation up to 4x4. Zero issues so far (since October 2025). Maybe when running 4x4 bifurcation with cheap $20 oculink splitter and $5 cables I see interference errors on gpu lanes, but it's still stable (disabled AER reporting in bios, LOL).\n\nawfulalexey\n•\n4mo ago\n\nThank u a lot!\n\nawfulalexey\n•\n4mo ago\n\nBro, could you please show a photo of your system? I'm trying to figure out what kind of case to build so that 8 cards will fit. I'm getting a bit lost with it all now.\n\nNepherpitu\n•\n4mo ago\n\nIts in progress now. Waiting for x8 splitters instead of 4x4 oculinks. Two cards on x16, two on x8 and four on x4. I'm bought server in pc case, so just made simple rack from aluminum profiles and rivets.\n\nawfulalexey\n•\n4mo ago\n\nwhy 4 on x4? Is it possible to have 8 x8 cards?\n\nNepherpitu\n•\n4mo ago\n\nOf course. Board has 4 x16 ports, all ports equal. It's just me waiting for shipping of 3 more x8 splitters. I didn't knew I will go for 8 cards, so I didn't had 4 x8 splitters in my drawer."
+    },
+    {
+      "author": "awfulalexey",
+      "score": "1",
+      "text": "awfulalexey\n•\n4mo ago\n\nThank u a lot!"
+    },
+    {
+      "author": "awfulalexey",
+      "score": "1",
+      "text": "awfulalexey\n•\n4mo ago\n\nBro, could you please show a photo of your system? I'm trying to figure out what kind of case to build so that 8 cards will fit. I'm getting a bit lost with it all now.\n\nNepherpitu\n•\n4mo ago\n\nIts in progress now. Waiting for x8 splitters instead of 4x4 oculinks. Two cards on x16, two on x8 and four on x4. I'm bought server in pc case, so just made simple rack from aluminum profiles and rivets.\n\nawfulalexey\n•\n4mo ago\n\nwhy 4 on x4? Is it possible to have 8 x8 cards?\n\nNepherpitu\n•\n4mo ago\n\nOf course. Board has 4 x16 ports, all ports equal. It's just me waiting for shipping of 3 more x8 splitters. I didn't knew I will go for 8 cards, so I didn't had 4 x8 splitters in my drawer."
+    },
+    {
+      "author": "Nepherpitu",
+      "score": "1",
+      "text": "Nepherpitu\n•\n4mo ago\n\nIts in progress now. Waiting for x8 splitters instead of 4x4 oculinks. Two cards on x16, two on x8 and four on x4. I'm bought server in pc case, so just made simple rack from aluminum profiles and rivets.\n\nawfulalexey\n•\n4mo ago\n\nwhy 4 on x4? Is it possible to have 8 x8 cards?\n\nNepherpitu\n•\n4mo ago\n\nOf course. Board has 4 x16 ports, all ports equal. It's just me waiting for shipping of 3 more x8 splitters. I didn't knew I will go for 8 cards, so I didn't had 4 x8 splitters in my drawer."
+    },
+    {
+      "author": "awfulalexey",
+      "score": "1",
+      "text": "awfulalexey\n•\n4mo ago\n\nwhy 4 on x4? Is it possible to have 8 x8 cards?\n\nNepherpitu\n•\n4mo ago\n\nOf course. Board has 4 x16 ports, all ports equal. It's just me waiting for shipping of 3 more x8 splitters. I didn't knew I will go for 8 cards, so I didn't had 4 x8 splitters in my drawer."
+    },
+    {
+      "author": "Nepherpitu",
+      "score": "2",
+      "text": "Nepherpitu\n•\n4mo ago\n\nOf course. Board has 4 x16 ports, all ports equal. It's just me waiting for shipping of 3 more x8 splitters. I didn't knew I will go for 8 cards, so I didn't had 4 x8 splitters in my drawer."
+    },
+    {
+      "author": "CalligrapherFar7833",
+      "score": "2",
+      "text": "CalligrapherFar7833\n•\n4mo ago\n\nI was planning on doing the same but most forums said the bios had massive issues with multi gpu and there were some russian bios files that fixed it but didnt want to risk testing it\n\ngogitossj3\n•\n4mo ago\n\nDo you have link to the forum?\n\nCalligrapherFar7833\n•\n4mo ago\n\nSorry no that was some time ago\n\n[deleted]\n•\n4mo ago"
+    },
+    {
+      "author": "gogitossj3",
+      "score": "2",
+      "text": "gogitossj3\n•\n4mo ago\n\nDo you have link to the forum?\n\nCalligrapherFar7833\n•\n4mo ago\n\nSorry no that was some time ago"
+    },
+    {
+      "author": "CalligrapherFar7833",
+      "score": "1",
+      "text": "CalligrapherFar7833\n•\n4mo ago\n\nSorry no that was some time ago"
+    },
+    {
+      "author": "xanduonc",
+      "score": "2",
+      "text": "xanduonc\n•\n4mo ago\n•\nEdited 4mo ago\n\nAll slots support x16 and bifurcations are available in bios, still i could not connect more than one gpu to pcie slot, both with mcio or oculink splitters.\n\ndid not test specifically, but no known problems here, up to 4 gpu do work fine, including 2x rtx6000\n\ndid not test specifically\n\nno issues\n\nseems stable, as in i can remotely connect always. KVM did work on new board, but now it does not. did not touch fan control at all\n\nall ram slots do work unless you short circuit a pin on the back (common issue)\n\n2-4 min with 1tb\n\ngen4 always does work for me\n\ndid not have issues with stability\n\nI got if for 1/5 price of any comparable board, no complaints here\n\nHopefulMaximum0\n•\n4mo ago\n\nSpeaking of fan control, did the fan monitoring work in your BMS interface? Mine is displaying 8 stopped fans even if my CPU fan is working and plugged in the motherboard header."
+    },
+    {
+      "author": "HopefulMaximum0",
+      "score": "1",
+      "text": "HopefulMaximum0\n•\n4mo ago\n\nSpeaking of fan control, did the fan monitoring work in your BMS interface? Mine is displaying 8 stopped fans even if my CPU fan is working and plugged in the motherboard header."
+    },
+    {
+      "author": "Glittering-Call8746",
+      "score": "1",
+      "text": "Glittering-Call8746\n•\n4mo ago\n\nDoes it has dual bios. A pity if it doesn't."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1t2hejy",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:31:03Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.368,
+    "evidence": 0.2,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

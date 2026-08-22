@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vs2tsn/dflash_2_available_for_qwen_38_27b_and_muse/",
+  "title": "DFlash 2 available for Qwen 3.8 27B and Muse Glimmer",
+  "author": "rerri",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4d ago\nrerri\nDFlash 2 available for Qwen 3.8 27B and Muse Glimmer\nResources\nhuggingface.co\nOpen\n\nApparently a second version of DFlash from the original authors of DFlash\n\nGGUF quants are already made available with an accompanying llama.cpp PR: https://github.com/ggml-org/llama.cpp/pull/27342\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n3d ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "rerri",
+      "score": "98",
+      "text": "rerri\n•\n4d ago\n•\nEdited 4d ago\n\nThey show figures for Qwen 3.8 27B in which DFlash 2 beats MTP by quite a big margin:\n\n-Cubie-\n•\n4d ago\n\nWhat the fuck, 3x is wild\n\nWarrenio\n•\n4d ago\n\nMaybe the prompt was \"output the letter 'a' 10,000 times\"\n\n-Cubie-\n•\n4d ago\n\nWell, the task is mentioned in the screenshot, so luckily I don't think so!\n\nWarrenio\n•\n4d ago\n\nOnly joking :)\n\nis-this-a-nick\n•\n3d ago\n\nI mean i noticed Deepseek4 Flash (at full precision) go from 50 t/s to 110-120 with dspark. And its really noticeable that code is boosted the most (just long text output is more like 70 t/s, pure long code is >140.\n\nrandom-tomato\n•\n4d ago\nllama.cpp\n\nHOW ARE THESE SPEEDS EVEN POSSIBLE LOL!?!?\n\nEcstatic-Wash-7667\n•\n4d ago\n\nMultiple h200s probably\n\nunjustifiably_angry\n•\n3d ago\n•\nEdited 3d ago\n\nA single 6000 Pro will run Q8_K_XL with 7-token dspark at >150 t/s, single-user\n\nOk-Mess-3317\n•\n3d ago\n\nProbably yeah, I mean it makes sense to test stuff like DSpark on very high end hardware to get the most out of it\n\nImpressiveRelief37\n•\n4d ago\n\nI get similar speed to the MTP profile on my 5090 using ninfer \n\nQuantum_Pigeon\n•\n4d ago\n\nCould you link the quant and provide your params?\n\nRathen121\n•\n3d ago\n•\nEdited 3d ago\n\nif on linux: https://github.com/Neroued/ninfer if on windows: https://github.com/natpate/ninfer-windows\n\nquant is specific to ninfer, somewhere around q5-q6 in size and quality\n\nMy params: .\\ninfer-serve.exe models\\qwen3_8_27b.ninfer --model-id qwen3.8-27b --max-context 200000 --default-max-tokens 200000 --spec mtp --draft-tokens 3 --lm-head-draft --host 0.0.0.0 --port 8080 --cors --preserve-thinking --webui --max-pending-requests 50 --pending-timeout-ms 3000000\n\nedit: currently working on dflash2 support for 3.8 27b in ninfer-windows to see if I can get even more speed, not ready yet though\n\nImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking wo"
+    },
+    {
+      "author": "-Cubie-",
+      "score": "12",
+      "text": "-Cubie-\n•\n4d ago\n\nWhat the fuck, 3x is wild\n\nWarrenio\n•\n4d ago\n\nMaybe the prompt was \"output the letter 'a' 10,000 times\"\n\n-Cubie-\n•\n4d ago\n\nWell, the task is mentioned in the screenshot, so luckily I don't think so!\n\nWarrenio\n•\n4d ago\n\nOnly joking :)\n\nis-this-a-nick\n•\n3d ago\n\nI mean i noticed Deepseek4 Flash (at full precision) go from 50 t/s to 110-120 with dspark. And its really noticeable that code is boosted the most (just long text output is more like 70 t/s, pure long code is >140."
+    },
+    {
+      "author": "Warrenio",
+      "score": "28",
+      "text": "Warrenio\n•\n4d ago\n\nMaybe the prompt was \"output the letter 'a' 10,000 times\"\n\n-Cubie-\n•\n4d ago\n\nWell, the task is mentioned in the screenshot, so luckily I don't think so!\n\nWarrenio\n•\n4d ago\n\nOnly joking :)\n\nis-this-a-nick\n•\n3d ago\n\nI mean i noticed Deepseek4 Flash (at full precision) go from 50 t/s to 110-120 with dspark. And its really noticeable that code is boosted the most (just long text output is more like 70 t/s, pure long code is >140."
+    },
+    {
+      "author": "-Cubie-",
+      "score": "18",
+      "text": "-Cubie-\n•\n4d ago\n\nWell, the task is mentioned in the screenshot, so luckily I don't think so!\n\nWarrenio\n•\n4d ago\n\nOnly joking :)"
+    },
+    {
+      "author": "Warrenio",
+      "score": "8",
+      "text": "Warrenio\n•\n4d ago\n\nOnly joking :)"
+    },
+    {
+      "author": "is-this-a-nick",
+      "score": "2",
+      "text": "is-this-a-nick\n•\n3d ago\n\nI mean i noticed Deepseek4 Flash (at full precision) go from 50 t/s to 110-120 with dspark. And its really noticeable that code is boosted the most (just long text output is more like 70 t/s, pure long code is >140."
+    },
+    {
+      "author": "random-tomato",
+      "score": "25",
+      "text": "random-tomato\n•\n4d ago\nllama.cpp\n\nHOW ARE THESE SPEEDS EVEN POSSIBLE LOL!?!?\n\nEcstatic-Wash-7667\n•\n4d ago\n\nMultiple h200s probably\n\nunjustifiably_angry\n•\n3d ago\n•\nEdited 3d ago\n\nA single 6000 Pro will run Q8_K_XL with 7-token dspark at >150 t/s, single-user\n\nOk-Mess-3317\n•\n3d ago\n\nProbably yeah, I mean it makes sense to test stuff like DSpark on very high end hardware to get the most out of it\n\nImpressiveRelief37\n•\n4d ago\n\nI get similar speed to the MTP profile on my 5090 using ninfer \n\nQuantum_Pigeon\n•\n4d ago\n\nCould you link the quant and provide your params?\n\nRathen121\n•\n3d ago\n•\nEdited 3d ago\n\nif on linux: https://github.com/Neroued/ninfer if on windows: https://github.com/natpate/ninfer-windows\n\nquant is specific to ninfer, somewhere around q5-q6 in size and quality\n\nMy params: .\\ninfer-serve.exe models\\qwen3_8_27b.ninfer --model-id qwen3.8-27b --max-context 200000 --default-max-tokens 200000 --spec mtp --draft-tokens 3 --lm-head-draft --host 0.0.0.0 --port 8080 --cors --preserve-thinking --webui --max-pending-requests 50 --pending-timeout-ms 3000000\n\nedit: currently working on dflash2 support for 3.8 27b in ninfer-windows to see if I can get even more speed, not ready yet though\n\nImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking works.\n\nIt’s completely another world now with THAT quality of a model. No need for telegram or whatever extension or third party. Just home cook your own solutions in half an hour!\n\nxmnstr\n•\n3d ago\n\nDoing gods work!\n\nLegitimate-Dog5690\n•\n3d ago\n\nTheir own quant is smaller than the nvfp4 version, is a stretch to guess it's q5 - q6 quality.\n\nRathen121\n•\n3d ago\n\nyeah, I haven't benchmarked it or anything, just going off feel. I was using the UD q5kxl quant for a couple days and switching to this didn't feel any worse. tool calls still are fine and no looping\n\nLegitimate-Dog5690\n•\n3d ago\n\nYeah, to be fair it see"
+    },
+    {
+      "author": "Ecstatic-Wash-7667",
+      "score": "19",
+      "text": "Ecstatic-Wash-7667\n•\n4d ago\n\nMultiple h200s probably\n\nunjustifiably_angry\n•\n3d ago\n•\nEdited 3d ago\n\nA single 6000 Pro will run Q8_K_XL with 7-token dspark at >150 t/s, single-user\n\nOk-Mess-3317\n•\n3d ago\n\nProbably yeah, I mean it makes sense to test stuff like DSpark on very high end hardware to get the most out of it"
+    },
+    {
+      "author": "unjustifiably_angry",
+      "score": "3",
+      "text": "unjustifiably_angry\n•\n3d ago\n•\nEdited 3d ago\n\nA single 6000 Pro will run Q8_K_XL with 7-token dspark at >150 t/s, single-user"
+    },
+    {
+      "author": "Ok-Mess-3317",
+      "score": "1",
+      "text": "Ok-Mess-3317\n•\n3d ago\n\nProbably yeah, I mean it makes sense to test stuff like DSpark on very high end hardware to get the most out of it"
+    },
+    {
+      "author": "ImpressiveRelief37",
+      "score": "10",
+      "text": "ImpressiveRelief37\n•\n4d ago\n\nI get similar speed to the MTP profile on my 5090 using ninfer \n\nQuantum_Pigeon\n•\n4d ago\n\nCould you link the quant and provide your params?\n\nRathen121\n•\n3d ago\n•\nEdited 3d ago\n\nif on linux: https://github.com/Neroued/ninfer if on windows: https://github.com/natpate/ninfer-windows\n\nquant is specific to ninfer, somewhere around q5-q6 in size and quality\n\nMy params: .\\ninfer-serve.exe models\\qwen3_8_27b.ninfer --model-id qwen3.8-27b --max-context 200000 --default-max-tokens 200000 --spec mtp --draft-tokens 3 --lm-head-draft --host 0.0.0.0 --port 8080 --cors --preserve-thinking --webui --max-pending-requests 50 --pending-timeout-ms 3000000\n\nedit: currently working on dflash2 support for 3.8 27b in ninfer-windows to see if I can get even more speed, not ready yet though\n\nImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking works.\n\nIt’s completely another world now with THAT quality of a model. No need for telegram or whatever extension or third party. Just home cook your own solutions in half an hour!\n\nxmnstr\n•\n3d ago\n\nDoing gods work!\n\nLegitimate-Dog5690\n•\n3d ago\n\nTheir own quant is smaller than the nvfp4 version, is a stretch to guess it's q5 - q6 quality.\n\nRathen121\n•\n3d ago\n\nyeah, I haven't benchmarked it or anything, just going off feel. I was using the UD q5kxl quant for a couple days and switching to this didn't feel any worse. tool calls still are fine and no looping\n\nLegitimate-Dog5690\n•\n3d ago\n\nYeah, to be fair it seems like a really solid model even at Q4."
+    },
+    {
+      "author": "Quantum_Pigeon",
+      "score": "2",
+      "text": "Quantum_Pigeon\n•\n4d ago\n\nCould you link the quant and provide your params?\n\nRathen121\n•\n3d ago\n•\nEdited 3d ago\n\nif on linux: https://github.com/Neroued/ninfer if on windows: https://github.com/natpate/ninfer-windows\n\nquant is specific to ninfer, somewhere around q5-q6 in size and quality\n\nMy params: .\\ninfer-serve.exe models\\qwen3_8_27b.ninfer --model-id qwen3.8-27b --max-context 200000 --default-max-tokens 200000 --spec mtp --draft-tokens 3 --lm-head-draft --host 0.0.0.0 --port 8080 --cors --preserve-thinking --webui --max-pending-requests 50 --pending-timeout-ms 3000000\n\nedit: currently working on dflash2 support for 3.8 27b in ninfer-windows to see if I can get even more speed, not ready yet though\n\nImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking works.\n\nIt’s completely another world now with THAT quality of a model. No need for telegram or whatever extension or third party. Just home cook your own solutions in half an hour!\n\nxmnstr\n•\n3d ago\n\nDoing gods work!\n\nLegitimate-Dog5690\n•\n3d ago\n\nTheir own quant is smaller than the nvfp4 version, is a stretch to guess it's q5 - q6 quality.\n\nRathen121\n•\n3d ago\n\nyeah, I haven't benchmarked it or anything, just going off feel. I was using the UD q5kxl quant for a couple days and switching to this didn't feel any worse. tool calls still are fine and no looping\n\nLegitimate-Dog5690\n•\n3d ago\n\nYeah, to be fair it seems like a really solid model even at Q4."
+    },
+    {
+      "author": "Rathen121",
+      "score": "16",
+      "text": "Rathen121\n•\n3d ago\n•\nEdited 3d ago\n\nif on linux: https://github.com/Neroued/ninfer if on windows: https://github.com/natpate/ninfer-windows\n\nquant is specific to ninfer, somewhere around q5-q6 in size and quality\n\nMy params: .\\ninfer-serve.exe models\\qwen3_8_27b.ninfer --model-id qwen3.8-27b --max-context 200000 --default-max-tokens 200000 --spec mtp --draft-tokens 3 --lm-head-draft --host 0.0.0.0 --port 8080 --cors --preserve-thinking --webui --max-pending-requests 50 --pending-timeout-ms 3000000\n\nedit: currently working on dflash2 support for 3.8 27b in ninfer-windows to see if I can get even more speed, not ready yet though\n\nImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking works.\n\nIt’s completely another world now with THAT quality of a model. No need for telegram or whatever extension or third party. Just home cook your own solutions in half an hour!\n\nxmnstr\n•\n3d ago\n\nDoing gods work!\n\nLegitimate-Dog5690\n•\n3d ago\n\nTheir own quant is smaller than the nvfp4 version, is a stretch to guess it's q5 - q6 quality.\n\nRathen121\n•\n3d ago\n\nyeah, I haven't benchmarked it or anything, just going off feel. I was using the UD q5kxl quant for a couple days and switching to this didn't feel any worse. tool calls still are fine and no looping\n\nLegitimate-Dog5690\n•\n3d ago\n\nYeah, to be fair it seems like a really solid model even at Q4."
+    },
+    {
+      "author": "ImpressiveRelief37",
+      "score": "2",
+      "text": "ImpressiveRelief37\n•\n3d ago\n\nThank you! Pretty much this!\n\nI use the official ninfer on wsl2 personally.\n\nAlso I use the Ostfralla nvfp4 model community artifact and not the « official » neroued nvfp4 model. I find its just smaller and has very similar quality, so I can fit 262144 context.\n\nFinally I use —max-concurrency 3 and have a custom ninfer watcher that exposes inference stats over another endpoint for my pi extensions to control context and concurrency dynamically…\n\nFor instance, if I have 2 tasks that use more than 131k running simultaneously then it’s going into prefix thrashing and everything will slow down due to prefill on every turn, which kills TTFT. So my extension detects this and reduces the max context size in pi (which triggers compaction), so that both sessions can then continue simultaneously super fast \n\nRathen121\n•\n3d ago\n\nI just made a custom groupwise-int .ninfer that has dflash2 embedded in it. I have dflash2 about half implemented on my local version of ninfer. once I get it working I might see about making an nvfp4 based on that ostfralla one that includes dflash2\n\nCurious to see your watcher, is it public anywhere?\n\nImpressiveRelief37\n•\n3d ago\n\nNo it’s stuff in a private repo, it’s tailor made for my use-case so not something I could really share.\n\nIt’s very simple tho. It’s exposes an api endpoint on the ninfer server with interesting metadata… like how many lanes are occupied, if any client is prefilling, if any session is queued in ninfer, stuff like this.\n\nMy pi agent running on ninfer 1-shot it in maybe 30 minutes, including the pi extension integration and end to end tests lol.\n\nIt’s just insane what these agents can do!\n\nOne thing I just had it do while I was on the road: I like to connect over ssh from my phone and tmux into sessions home (over tailscale). So I had it develop a pi extension to generate audio for every agent response (not the reasoning trace, just the final response). So I can use my terminal in STT while driving, then ask Siri to speak out the last response, and I hear pi’s response in my car while driving. It’s amazing lol. I literally did it all while away from home and it just fucking works.\n\nIt’s completely another world now with THAT quality of a model. No need for telegram or whatever extension or third party. Just home cook your own solutions in half an hour!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vs2tsn",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:49:47Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.507,
+    "evidence": 0.4,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/collections/z-lab/dflash-2",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27342",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Neroued/ninfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/natpate/ninfer-windows",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/collections/Qwen/qwen38",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://inco.ai/blog/dflash2/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/z-lab/Qwen3.8-27B-DFlash2",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/z-lab/Muse-Glimmer-30B-DFlash2",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/lemonade-sdk/llamacpp-rocm/issues/107",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

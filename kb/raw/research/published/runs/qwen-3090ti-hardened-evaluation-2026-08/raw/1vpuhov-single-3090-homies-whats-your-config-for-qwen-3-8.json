@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuhov/single_3090_homies_whats_your_config_for_qwen_38/",
+  "title": "Single 3090 homies, whats your config for Qwen 3.8 ?",
+  "author": "sagiroth",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6d ago\nsagiroth\nllama.cpp\nSingle 3090 homies, whats your config for Qwen 3.8 ?\nQuestion | Help\n\nI sadly was not able to follow as much as I wanted the new advancements. Care to share your optimised setups ? Vllm, llama.cpp or any other engine?\n\nShare",
+  "comments": [
+    {
+      "author": "Technical_Ad_6106",
+      "score": "9",
+      "text": "Technical_Ad_6106\n•\n6d ago\n•\nEdited 6d ago\n\n.\\llama-server.exe -m \"<windows-path>\" -ngl 99 -c 120000 -np 1 -fa on --cache-type-k q4_0 --cache-type-v q4_0 --spec-type draft-mtp --spec-draft-n-max 3 --jinja --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0\n\nor vllm:\n\nexport VLLM_USE_FLASHINFER_SAMPLER=0\n\nvllm serve shawnw3i/Qwen3.8-27B-AWQ-MTP \\\n\n--tensor-parallel-size 1 \\\n\n--max-model-len 100000 \\\n\n--gpu-memory-utilization 0.94 \\\n\n--kv-cache-dtype int4_per_token_head \\\n\n--max-num-batched-tokens 4096 \\\n\n--max-num-seqs 32 \\\n\n--enable-prefix-caching \\\n\n--reasoning-parser qwen3 \\\n\n--trust-remote-code \\\n\n--host 0.0.0.0 \\\n\n--port 8000\n\n35-60 token/sec on llama cpp\n\n200-300 token/sec in vllm with parellel requests (making summary's of legal law cases that have been published)\n\nMyarmhasteeth\n•\n6d ago\n\nIMO this is what people should share when talking about setups, big ups\n\nsagiroth\n•\n6d ago\nllama.cpp\n\nThank you\n\nElChupaNebrey\n•\n4d ago\n\nno q8_0 kv?\n\nTechnical_Ad_6106\n•\n3d ago\n\nnot sure how int4 compares to q8 qualitywise, but i needed some context :)\n\nElChupaNebrey\n•\n3d ago\n\ni mean\n--cache-type-k q4_0 --cache-type-v q4_0\ndoesn't that type heavily reducing output quality?\n\nTechnical_Ad_6106\n•\n3d ago\n\nwell, not sure how much the tradeoff in quality is but i think it does reduce the quality yes. if its \"heavily\" im not sure tbh.\n\negnegn1\n•\n2d ago\n\nWhat is the speed of vllm with single requests?"
+    },
+    {
+      "author": "Myarmhasteeth",
+      "score": "2",
+      "text": "Myarmhasteeth\n•\n6d ago\n\nIMO this is what people should share when talking about setups, big ups"
+    },
+    {
+      "author": "sagiroth",
+      "score": "1",
+      "text": "sagiroth\n•\n6d ago\nllama.cpp\n\nThank you"
+    },
+    {
+      "author": "ElChupaNebrey",
+      "score": "1",
+      "text": "ElChupaNebrey\n•\n4d ago\n\nno q8_0 kv?\n\nTechnical_Ad_6106\n•\n3d ago\n\nnot sure how int4 compares to q8 qualitywise, but i needed some context :)\n\nElChupaNebrey\n•\n3d ago\n\ni mean\n--cache-type-k q4_0 --cache-type-v q4_0\ndoesn't that type heavily reducing output quality?\n\nTechnical_Ad_6106\n•\n3d ago\n\nwell, not sure how much the tradeoff in quality is but i think it does reduce the quality yes. if its \"heavily\" im not sure tbh."
+    },
+    {
+      "author": "Technical_Ad_6106",
+      "score": "1",
+      "text": "Technical_Ad_6106\n•\n3d ago\n\nnot sure how int4 compares to q8 qualitywise, but i needed some context :)\n\nElChupaNebrey\n•\n3d ago\n\ni mean\n--cache-type-k q4_0 --cache-type-v q4_0\ndoesn't that type heavily reducing output quality?\n\nTechnical_Ad_6106\n•\n3d ago\n\nwell, not sure how much the tradeoff in quality is but i think it does reduce the quality yes. if its \"heavily\" im not sure tbh."
+    },
+    {
+      "author": "ElChupaNebrey",
+      "score": "1",
+      "text": "ElChupaNebrey\n•\n3d ago\n\ni mean\n--cache-type-k q4_0 --cache-type-v q4_0\ndoesn't that type heavily reducing output quality?\n\nTechnical_Ad_6106\n•\n3d ago\n\nwell, not sure how much the tradeoff in quality is but i think it does reduce the quality yes. if its \"heavily\" im not sure tbh."
+    },
+    {
+      "author": "Technical_Ad_6106",
+      "score": "1",
+      "text": "Technical_Ad_6106\n•\n3d ago\n\nwell, not sure how much the tradeoff in quality is but i think it does reduce the quality yes. if its \"heavily\" im not sure tbh."
+    },
+    {
+      "author": "egnegn1",
+      "score": "1",
+      "text": "egnegn1\n•\n2d ago\n\nWhat is the speed of vllm with single requests?"
+    },
+    {
+      "author": "Ysnsd",
+      "score": "8",
+      "text": "Ysnsd\n•\n6d ago\n\n128K context, Q4KM, Q8 KV, MTP draft=2\n\nvorwrath\n•\n6d ago\n\nHow are you getting 128k context at Q8 KV? At least for me in llama.cpp I can't allocate more than about 60k without running out of VRAM.\n\nsagiroth\n•\n6d ago\nllama.cpp\n\nCare to share config?\n\nHubba_Bubba_Lova\n•\n4d ago\n\nDid you get a config that worked for you?\n\nKitsuneMulder\n•\n5d ago\n\nConfig?"
+    },
+    {
+      "author": "vorwrath",
+      "score": "3",
+      "text": "vorwrath\n•\n6d ago\n\nHow are you getting 128k context at Q8 KV? At least for me in llama.cpp I can't allocate more than about 60k without running out of VRAM."
+    },
+    {
+      "author": "sagiroth",
+      "score": "3",
+      "text": "sagiroth\n•\n6d ago\nllama.cpp\n\nCare to share config?\n\nHubba_Bubba_Lova\n•\n4d ago\n\nDid you get a config that worked for you?"
+    },
+    {
+      "author": "Hubba_Bubba_Lova",
+      "score": "1",
+      "text": "Hubba_Bubba_Lova\n•\n4d ago\n\nDid you get a config that worked for you?"
+    },
+    {
+      "author": "KitsuneMulder",
+      "score": "1",
+      "text": "KitsuneMulder\n•\n5d ago\n\nConfig?"
+    },
+    {
+      "author": "matt4542",
+      "score": "12",
+      "text": "matt4542\n•\n6d ago\n\nNInfer-3090 fork has given me about 57tps with 125k context with shocking results. Writing me full on games.\n\nhttps://github.com/Don-Chad/ninfer-3090/tree/release/v0.6.0-rtx3090\n\nTheTerrasque\n•\n6d ago\n\nIs that with vision enabled?\n\nJovs_\n•\n6d ago\n\nIs the 3090 fork also good for 4090? Or should I look at something else?\n\nsagiroth\n•\n6d ago\nllama.cpp\n\nThats outstanding! Havent hward about this tool. Only been using Beellama annd Llamacpp with a bit of vllm from club 3090\n\nHubba_Bubba_Lova\n•\n6d ago\n\nI’m using same for 3.6 - beellama (prev llama.cpp). Beellama needs a flash gguf but don’t know where to find it.\n\nWhat config have you settled on so far?\n\nTiny-Assumption4263\n•\n6d ago\n\n125k? Is that q8 kv?"
+    },
+    {
+      "author": "TheTerrasque",
+      "score": "3",
+      "text": "TheTerrasque\n•\n6d ago\n\nIs that with vision enabled?"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vpuhov",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:40:46Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.587,
+    "evidence": 0.6,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Don-Chad/ninfer-3090/tree/release/v0.6.0-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/turboderp/Qwen3.8-27B-exl3",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vr56r1/benchmarked_qwen3827b_on_4x_rtx_3090/",
+  "title": "Benchmarked Qwen3.8-27B on 4x RTX 3090",
+  "author": "Mr_Moonsilver",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5d ago\nMr_Moonsilver\nBenchmarked Qwen3.8-27B on 4x RTX 3090\nTutorial | Guide\n\nA while back I made a post about my 4x3090 rig in a Silverstone RV-02. Check it out if you're a conoissuer of OG PC cases. With the incredible Qwen 3.8 27B release I ran benchmarks. So in case you are rocking 3090s you might be interested in this. Everything below is entirely LLM generated based on the benchmarks (which were also LLM driven, gotta love agentic harnesses):\n\nSetup\n\n4x RTX 3090 24GB, NVLink between pairs (GPU0↔2, GPU1↔3 = NV4), plain PCIe between pairs\n\nvLLM 0.20.1, --kv-cache-dtype fp8, gpu-mem-util 0.90\n\ncyankiwi/Qwen3.8-27B-AWQ-INT4\n\nvllm bench serve, random dataset, ignore-eos. Generation runs: 1k in / 512 out. PP runs: 16 out, single wave per concurrency level.\n\n1. TP=2 on one NVLink pair beats TP=4 on all four cards\n\nNot a typo. From concurrency 12 up, two GPUs outrun four by 33–41%, because TP=4 pays a cross-pair PCIe all-reduce on every layer of every step, and that tax scales with batch:\n\nConcurrency\t1\t2\t4\t8\t12\t16\t24\t32\n\nTP=4 gen tok/s\t77.6\t127.6\t208.8\t266.1\t319.9\t371.9\t399.4\t417.9\nTP=2 gen tok/s\t66.0\t111.7\t201.6\t252.9\t428.0\t495.1\t532.0\t587.4\nTP=4 TPOT ms\t11.3\t13.5\t15.6\t24.4\t31.0\t35.5\t50.8\t64.7\nTP=2 TPOT ms\t13.9\t16.3\t17.4\t25.6\t22.6\t25.8\t36.7\t44.2\n\nTP=4 only wins single-stream (77.6 vs 66 tok/s) and KV pool size. Run 2x TP=2 instances (one per NVLink pair) and you're at ~1,175 tok/s aggregate on hardware where a single TP=4 does 418. Same lesson likely applies to any mixed NVLink/PCIe topology — check nvidia-smi topo -m before you pick your TP.\n\n2. MTP speculative decoding: slower at every concurrency level\n\nThe model ships an MTP head and the acceptance rate was genuinely fine: 64% avg, 2.6–2.9 tokens accepted per step (spec tokens = 3). Still lost:\n\nConcurrency\t1\t2\t4\t8\t12\t16\t24\t32\n\nbaseline\t77.6\t127.6\t208.8\t266.1\t319.9\t371.9\t399.4\t417.9\n+ MTP\t56.3\t90.6\t121.1\t285.9\t288.8\t308.3\t308.0\t348.3\ndelta\t−27%\t−29%\t−42%\t+7%\t−10%\t−17%\t−23%\t−17%\n\nThe problem is step economics, not the draft head: baseline decode step is 11.3ms, spec step is 39ms (3.5x). On Ampere with AWQ, single-token decode already saturates memory bandwidth, so the 4-token verify GEMM isn't free like it is on Hopper — and each of the 3 sequential draft passes eats a TP all-reduce. 2.7 tokens per step at 3.5x step cost = 0.77x. Math checks out, unfortunately. On TP=2 MTP doesn't even boot: OOM during KV/cudagraph profiling on 24GB, even capped at 131k context.\n\nIf you're on 3090s/A-series: turn MTP off, it's not a tuning problem.\n\n3. Prompt processing is a serial pump — concurrency does literally nothing\n\nPP throughput at 16k prompts, concurrency 1 → 32P=4)**. Flat within 2%. Concurrent prompts don't process in parallel, they queue single-file: TTFrrent 16k prompts = 310s. Prefill saturates the GPUs at batch 1, end of story.\n\nPrompt size\t4k\t16k\t32k\t260k\n\nTP=4 PP tok/s\t1,596\t1,646\t1,604\t1,097\nTP=2 PP tok/s\t—\t2,158\t2,026\t1,017\nSingle-prompt prefill (TP=4)\t2.4s\t9.8s\t2\t\n\nYes, TP=2 prefill is also ~30% faster than TP=4 hybrid attention earns its keep at range: PP only drops ~35% from 4k to 260k, where a pure-trratic pain. A full 262k-context prompt = almost exactly 4 minutes of prefill.\n\n4. Context capacity (fp8 KV + 16-of-64 full-attention layers)\n\nKV pool: 1.45M tokens on TP=4 / 503k on TP=2. Max context per request: TP=4 holds the full 262k up to concurrency 5, still 121k at c12, 45k at c32. TP=2: 262k single c32. For a 27B on consumer cards that's absurd headroom — you can serve 5 simultaneous max-cont\n\nTL;DR: topology > core count (2 NVLinked GPU MTP is a net loss on Ampere despite healthy acceptance, prefill doesn't parallelize so budgend fp8 KV + hybrid attention gives you 1.45M KV tokens on 96GB of 2020-era silicon.\n\nShare",
+  "comments": [
+    {
+      "author": "mayo551",
+      "score": "24",
+      "text": "mayo551\n•\n5d ago\n\nStop giving bad advice.\n\nA) Use https://huggingface.co/lued/Qwen3.8-27B-INT8-W8A16-MTP for ampere hardware.\n\nB) Use FLASHINFER with MTP\n\nC) Use P2P drivers\n\nResult on 4x3090 with no NVLink: 80 gen T/S with 100k Context usage, 7500 T/S prompt processing.\n\nmayo551\n•\n5d ago\n\nAlso I throttle my GPU to 225W each out of 350W, so the performance could be even better!\n\nCivil_Fee_7862\n•\n5d ago\n\nAgreed on all those tweaks. I also have all those applied.\n\nI love the INT8 quant with INT8 activations. FAST prefill.\n\nMTP only made OP's computer crash between\n\nraul338\n•\n4d ago\n•\nEdited 4d ago\n\ncan you give a command example? I tried this model but it throws CUDA OOM errors (for now I settled with Freaksterz/Qwen3.8-27B-SmoothQuant-W8A8-INT8)\n\nedit: i could launch it using two 3090, but not using four\n\nOddUnderstanding2309\n•\n4d ago\n\nTHANK you. /me with my 4x 3090s Iove to read this. I run the full BF16 currently with about 1000pp and 40-50tg ... thats \"fine\" but not great\n\nShadyShroomz\n•\n4d ago\n\nFLASHINFER just made a hugggeee difference for me at longer ctx. thanks so much for that recommendation. went from 20tps at 200k ctx to 50tps.\n\nmayo551\n•\n4d ago\n\nGlad to be of help! :)\n\nzipperlein\n•\n4d ago\n\nhttps://huggingface.co/SergiioB/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16\n\nis also not bad if one wants bigger cache. It's not slower. Don't know if it's faster. It's anywhere between 80 and 130 t/s for a single request. Screen is for 2x3090 and fp8.\n\nZyj\n•\n4d ago\nvllm\n\nBut it's 4bit instead of 8bit.\n\nzipperlein\n•\n4d ago\n•\nEdited 4d ago\n\nYes, it's a trade-off. Everyone has to find their own sweetspot. I have a hermes agent manage multiple pi sessions over multipe projects around a git-based workflow. That's a lot of potential concurrency with a lot of context.\n\nZyj\n•\n3d ago\nvllm\n\nAnyway, MTP is outdated, hail the new king: Dflash 2!\n\nMr_Moonsilver\n•\n4d ago\n\nI'm not giving advice to anyone, just sharing my numbers and it seems you have a better approach. Happy to test it and thank you for the insight, it's much appreciated!\n\nfoureight84\n•\n2d ago\n\nThis is also what I have been running too. Not sure why anyone would run Int4 when you have 4 RTX 3090. I've been using it for actual engineering work and it's been great."
+    },
+    {
+      "author": "mayo551",
+      "score": "5",
+      "text": "mayo551\n•\n5d ago\n\nAlso I throttle my GPU to 225W each out of 350W, so the performance could be even better!"
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "3",
+      "text": "Civil_Fee_7862\n•\n5d ago\n\nAgreed on all those tweaks. I also have all those applied.\n\nI love the INT8 quant with INT8 activations. FAST prefill.\n\nMTP only made OP's computer crash between"
+    },
+    {
+      "author": "raul338",
+      "score": "1",
+      "text": "raul338\n•\n4d ago\n•\nEdited 4d ago\n\ncan you give a command example? I tried this model but it throws CUDA OOM errors (for now I settled with Freaksterz/Qwen3.8-27B-SmoothQuant-W8A8-INT8)\n\nedit: i could launch it using two 3090, but not using four"
+    },
+    {
+      "author": "OddUnderstanding2309",
+      "score": "1",
+      "text": "OddUnderstanding2309\n•\n4d ago\n\nTHANK you. /me with my 4x 3090s Iove to read this. I run the full BF16 currently with about 1000pp and 40-50tg ... thats \"fine\" but not great"
+    },
+    {
+      "author": "ShadyShroomz",
+      "score": "1",
+      "text": "ShadyShroomz\n•\n4d ago\n\nFLASHINFER just made a hugggeee difference for me at longer ctx. thanks so much for that recommendation. went from 20tps at 200k ctx to 50tps.\n\nmayo551\n•\n4d ago\n\nGlad to be of help! :)"
+    },
+    {
+      "author": "mayo551",
+      "score": "1",
+      "text": "mayo551\n•\n4d ago\n\nGlad to be of help! :)"
+    },
+    {
+      "author": "zipperlein",
+      "score": "1",
+      "text": "zipperlein\n•\n4d ago\n\nhttps://huggingface.co/SergiioB/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16\n\nis also not bad if one wants bigger cache. It's not slower. Don't know if it's faster. It's anywhere between 80 and 130 t/s for a single request. Screen is for 2x3090 and fp8.\n\nZyj\n•\n4d ago\nvllm\n\nBut it's 4bit instead of 8bit.\n\nzipperlein\n•\n4d ago\n•\nEdited 4d ago\n\nYes, it's a trade-off. Everyone has to find their own sweetspot. I have a hermes agent manage multiple pi sessions over multipe projects around a git-based workflow. That's a lot of potential concurrency with a lot of context.\n\nZyj\n•\n3d ago\nvllm\n\nAnyway, MTP is outdated, hail the new king: Dflash 2!"
+    },
+    {
+      "author": "Zyj",
+      "score": "1",
+      "text": "Zyj\n•\n4d ago\nvllm\n\nBut it's 4bit instead of 8bit.\n\nzipperlein\n•\n4d ago\n•\nEdited 4d ago\n\nYes, it's a trade-off. Everyone has to find their own sweetspot. I have a hermes agent manage multiple pi sessions over multipe projects around a git-based workflow. That's a lot of potential concurrency with a lot of context.\n\nZyj\n•\n3d ago\nvllm\n\nAnyway, MTP is outdated, hail the new king: Dflash 2!"
+    },
+    {
+      "author": "zipperlein",
+      "score": "1",
+      "text": "zipperlein\n•\n4d ago\n•\nEdited 4d ago\n\nYes, it's a trade-off. Everyone has to find their own sweetspot. I have a hermes agent manage multiple pi sessions over multipe projects around a git-based workflow. That's a lot of potential concurrency with a lot of context.\n\nZyj\n•\n3d ago\nvllm\n\nAnyway, MTP is outdated, hail the new king: Dflash 2!"
+    },
+    {
+      "author": "Zyj",
+      "score": "1",
+      "text": "Zyj\n•\n3d ago\nvllm\n\nAnyway, MTP is outdated, hail the new king: Dflash 2!"
+    },
+    {
+      "author": "Mr_Moonsilver",
+      "score": "1",
+      "text": "Mr_Moonsilver\n•\n4d ago\n\nI'm not giving advice to anyone, just sharing my numbers and it seems you have a better approach. Happy to test it and thank you for the insight, it's much appreciated!"
+    },
+    {
+      "author": "foureight84",
+      "score": "1",
+      "text": "foureight84\n•\n2d ago\n\nThis is also what I have been running too. Not sure why anyone would run Int4 when you have 4 RTX 3090. I've been using it for actual engineering work and it's been great."
+    },
+    {
+      "author": "cosmicr",
+      "score": "4",
+      "text": "cosmicr\n•\n4d ago\n\nWhy INT4????"
+    },
+    {
+      "author": "bryancr",
+      "score": "4",
+      "text": "bryancr\n•\n5d ago\n\nBenchmark the quality, not the speed. Have opus or codex orchestrate codebase testing, bug finding, spec development and then review its work. Then decide if you want the model in your code base.\n\nOkAstronaut4911\n•\n5d ago\n\nWe need both. There are plenty of quality benchmarks and rankings out there but almost no benchmarks which show you which consumer hardware makes sense and which not for more then one GPU.\n\nbryancr\n•\n5d ago\n\nIf you have 4x3090s (like OP) or 1x5090 (like me) you should be benchmarking quality. Who cares about the speed if the model doesnt produce the quality you need? Speed can come later when you decide if you renew your claude sub or not.\n\npepedombo\n•\n5d ago\n\nThese 3090 posts appear every few days. Months ago I was curious, until I discovered average int4 kld vs q4_k_m gguf and weights that stand behind that speed 👀\n\nMr_Moonsilver\n•\n5d ago\n\nAlso great point, thank you!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vr56r1",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:42Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.728,
+    "evidence": 1.0,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/lued/Qwen3.8-27B-INT8-W8A16-MTP",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/SergiioB/Qwen3.8-27B-GPTQ-Int4-sym-G128-MTP-BF16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

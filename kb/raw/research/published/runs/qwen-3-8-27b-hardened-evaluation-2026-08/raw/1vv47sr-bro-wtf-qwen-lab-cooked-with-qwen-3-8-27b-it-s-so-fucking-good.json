@@ -1,0 +1,115 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv47sr/bro_wtf_qwen_lab_cooked_with_qwen_38_27b_its_so/",
+  "title": "Bro wtf, Qwen Lab cooked with Qwen 3.8 27B, it's so fucking good",
+  "author": "9r4n4y",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n6h ago\n9r4n4y\nBro wtf, Qwen Lab cooked with Qwen 3.8 27B, it's so fucking good\nOther\n\nContext: Earlier, open-source large models like Mimo V2.5 Pro, DeepSeek V4 Pro (first version), and Kimi K2.5 used to struggle with this prompt, and Qwen 3.6 27B couldn't even render the globe properly. But now, Qwen 3.8 27B is so much better than the previous model.\n\nI hope qwen publishes some papers that may help other labs to create such good small models.\n\nSetup: fp8 + lmstudio + opencode. Idk what settings as my friend helped me to run this prompt on his setup.\n\nShare",
+  "comments": [
+    {
+      "author": "lamardoss",
+      "score": "60",
+      "text": "lamardoss\n•\n5h ago\n\nquant? local? server? settings?\n\ninfo would be appreciated.\n\nMean-Ad1493\n•\n5h ago\n\nYou're asking forbidden questions.\n\nJust look at my pretty globe and fuck off.\n\n9r4n4y\n•\n3h ago\n•\nEdited 3h ago\nmtojay\n•\n3h ago\n\nwhy isnt this a sub rule already. If you post generated examples post it with that info or it should be deleted\n\nbladezor\n•\n4h ago\n\nFr tired of asking on every thread"
+    },
+    {
+      "author": "Mean-Ad1493",
+      "score": "119",
+      "text": "Mean-Ad1493\n•\n5h ago\n\nYou're asking forbidden questions.\n\nJust look at my pretty globe and fuck off.\n\n9r4n4y\n•\n3h ago\n•\nEdited 3h ago"
+    },
+    {
+      "author": "9r4n4y",
+      "score": "-18",
+      "text": "9r4n4y\n•\n3h ago\n•\nEdited 3h ago"
+    },
+    {
+      "author": "mtojay",
+      "score": "10",
+      "text": "mtojay\n•\n3h ago\n\nwhy isnt this a sub rule already. If you post generated examples post it with that info or it should be deleted"
+    },
+    {
+      "author": "bladezor",
+      "score": "8",
+      "text": "bladezor\n•\n4h ago\n\nFr tired of asking on every thread"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vv47sr",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:47:36Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1",
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.285,
+    "evidence": 0.2,
+    "relevance": 0.273,
+    "community_scrutiny": 0.5,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.youtube.com/watch?v=iH3K2rkkU7g",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://imgpile.com/m/uQ3ZY9J",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

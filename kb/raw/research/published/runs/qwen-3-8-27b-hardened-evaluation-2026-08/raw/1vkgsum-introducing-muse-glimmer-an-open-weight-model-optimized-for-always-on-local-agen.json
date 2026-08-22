@@ -1,0 +1,191 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vkgsum/introducing_muse_glimmer_an_openweight_model/",
+  "title": "Introducing Muse Glimmer: an open-weight model optimized for always-on local agent workflows",
+  "author": "AIatMeta",
+  "post_body": "5\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n12d ago\nAIatMeta\nIntroducing Muse Glimmer: an open-weight model optimized for always-on local agent workflows\nResources\n\nHi r/LocalLLaMA 👋 \n\nToday we’re excited to release Muse Glimmer, a 30B open-weight model built specifically for local agent workflows. We’re releasing the weights to the community under a permissive Apache 2.0 license.\n\nA few specs\n\n30B params, dense\n\nMultimodal: interleaved text + images via a dedicated perception encoder\n\nTrained on 100+ languages\n\nControllable reasoning effort (quality/speed tradeoff)\n\nMemory footprint\nAt full precision, 30B needs 55+ GB, which is out of reach for consumer hardware. We quantize weights to ~4-bit, bringing the LM under 20 GB. That leaves headroom in a 24 GB or 32 GB envelope for the KV cache, the perception encoder, and the speculative decoding drafter running simultaneously. We validated minimal to no degradation on agentic tasks under compression.\n\nSpeculative decoding\nShips with a lightweight DFlash-based drafter that proposes blocks of tokens which the main model verifies in parallel. Significantly faster than token-by-token generation with identical output quality. We're also shipping quantized drafter versions so the memory overhead stays small.\n\nA few capabilities\nWe trained Muse Glimmer for agentic loop tasks, including:\n\nEnd-to-end task completion (strong performance on DeepSearch QA, MCP-Atlas, 𝛕3-Bench, SWE-Bench, and more)\n\nFunction calling with precise schemas across long workflows\n\nMulti-step reasoning over long horizons\n\nFailure recovery — when a tool call fails or returns something unexpected, it's trained to diagnose and retry instead of halting. This was a deliberate training target.\n\nWorks with OpenClaw and other agentic scaffolds\n\nMultimodal understanding and reasoning\n\nRunning it\nWeights are up on Hugging Face. Coming soon: Ollama, LM Studio, Unsloth and torchtitan, plus optimized integrations for llama.cpp, MLX, and ExecuTorch. vLLM and SGLang for serving. Get started quickly with Together AI, Fireworks AI, and OpenRouter. We're also working with AMD, Arm, Dell, Intel, and NVIDIA on per-device optimization.\n\nWe look forward to your feedback and seeing what the community builds with Muse Glimmer.\n\n🔗 Weights: https://huggingface.co/meta-models \n🔗 Research Blog: https://go.meta.me/museglimmer\n🔗 Resources: https://developer.meta.com/ai/models/muse-glimmer/\n\nShare",
+  "comments": [
+    {
+      "author": "Monad_Maya",
+      "score": "657",
+      "text": "Monad_Maya\n•\n12d ago\nllama.cpp\n\nNice to have Meta back, release more stuff please!!\n\nKthxBye\n\nAIatMeta\n•\n12d ago\n\nWe're happy to be back :)\n\nMonad_Maya\n•\n12d ago\nllama.cpp\n\nI know this is not a community feedback post but something around 60-70B dense might be great. A true successor to Llama 3.3 70B if you will.\n\nAIatMeta\n•\n12d ago\n\nWe're always looking for feedback! Thank you.\n\npmttyji\n•\n12d ago\n Top 1% Poster\n\nDon't forget MOE models. Release everything!\n\nBTW I still have Llama-3.1-8B-Instruct on my laptop somewhere. Hope your release collection has some for Poor GPU Club.\n\njnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs.\n\nJLeonsarmiento\n•\n12d ago\n Top 1% Commenter\n\n30-ish-MoE please.\n\ndampflokfreund\n•\n12d ago\n\nI wanted to ask, did you QAT on these gguf models? By the way, a MoE 30b model would be nice to see as well for the average PC. Those run speedy even if you have just 4-8 GB VRAM!\n\nNo_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants.\n\nMeretrixDominum\n•\n12d ago\n\n+1\n\nMake more 70Bs\n\n9 more replies\n5 more replies\nJentano\n•\n12d ago\n\nAre multi modal meta models allowed in the European union again, or still only text ones? Apache would suggest we are past the llama3+ problem? That would need great.\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nThe model is available under the standard Apache 2 license, which doesn't restrict access by geography.\n\nshapic\n•\n12d ago\n\nOh rly? Apache does not, meta does\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF.\n\ndampflokfreund\n•\n12d ago\n\nWe are happy you are back, too! Much love to you guys. <3\n\nSgtPeanut_Butt3r\n•\n12d ago\n\nThanks for contributing to the community. Good way for devs to be interested in Meta models again.\n\n14 more replies\nBoth_Opportunity5327\n•\n12d ago\n\nThey never left. Meta release other AI products to the community like Segment Anything.\n\nMonad_Maya\n•\n12d ago\nllama.cpp\n\nI know, I'm mostly referring to the gap post Llama4.\n\nBoth_Opportunity5327\n•\n12d ago\n\nYeah, I'm glad we have the 2 big true AI companies Meta/Alphabet releasing LLM's normal consumers can run at home.\n\nStrange_Test7665\n•\n12d ago\n\nSam3 with prompting- yeah that model is fire\n\n1 more reply"
+    },
+    {
+      "author": "AIatMeta",
+      "score": "596",
+      "text": "AIatMeta\n•\n12d ago\n\nWe're happy to be back :)\n\nMonad_Maya\n•\n12d ago\nllama.cpp\n\nI know this is not a community feedback post but something around 60-70B dense might be great. A true successor to Llama 3.3 70B if you will.\n\nAIatMeta\n•\n12d ago\n\nWe're always looking for feedback! Thank you.\n\npmttyji\n•\n12d ago\n Top 1% Poster\n\nDon't forget MOE models. Release everything!\n\nBTW I still have Llama-3.1-8B-Instruct on my laptop somewhere. Hope your release collection has some for Poor GPU Club.\n\njnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs.\n\nJLeonsarmiento\n•\n12d ago\n Top 1% Commenter\n\n30-ish-MoE please.\n\ndampflokfreund\n•\n12d ago\n\nI wanted to ask, did you QAT on these gguf models? By the way, a MoE 30b model would be nice to see as well for the average PC. Those run speedy even if you have just 4-8 GB VRAM!\n\nNo_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants.\n\nMeretrixDominum\n•\n12d ago\n\n+1\n\nMake more 70Bs\n\n9 more replies\n5 more replies\nJentano\n•\n12d ago\n\nAre multi modal meta models allowed in the European union again, or still only text ones? Apache would suggest we are past the llama3+ problem? That would need great.\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nThe model is available under the standard Apache 2 license, which doesn't restrict access by geography.\n\nshapic\n•\n12d ago\n\nOh rly? Apache does not, meta does\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF.\n\ndampflokfreund\n•\n12d ago\n\nWe are happy you are back, too! Much love to you guys. <3\n\nSgtPeanut_Butt3r\n•\n12d ago\n\nThanks for contributing to the community. Good way for devs to be interested in Meta models again.\n\n14 more replies"
+    },
+    {
+      "author": "Monad_Maya",
+      "score": "152",
+      "text": "Monad_Maya\n•\n12d ago\nllama.cpp\n\nI know this is not a community feedback post but something around 60-70B dense might be great. A true successor to Llama 3.3 70B if you will.\n\nAIatMeta\n•\n12d ago\n\nWe're always looking for feedback! Thank you.\n\npmttyji\n•\n12d ago\n Top 1% Poster\n\nDon't forget MOE models. Release everything!\n\nBTW I still have Llama-3.1-8B-Instruct on my laptop somewhere. Hope your release collection has some for Poor GPU Club.\n\njnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs.\n\nJLeonsarmiento\n•\n12d ago\n Top 1% Commenter\n\n30-ish-MoE please.\n\ndampflokfreund\n•\n12d ago\n\nI wanted to ask, did you QAT on these gguf models? By the way, a MoE 30b model would be nice to see as well for the average PC. Those run speedy even if you have just 4-8 GB VRAM!\n\nNo_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants.\n\nMeretrixDominum\n•\n12d ago\n\n+1\n\nMake more 70Bs\n\n9 more replies\n5 more replies"
+    },
+    {
+      "author": "AIatMeta",
+      "score": "157",
+      "text": "AIatMeta\n•\n12d ago\n\nWe're always looking for feedback! Thank you.\n\npmttyji\n•\n12d ago\n Top 1% Poster\n\nDon't forget MOE models. Release everything!\n\nBTW I still have Llama-3.1-8B-Instruct on my laptop somewhere. Hope your release collection has some for Poor GPU Club.\n\njnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs.\n\nJLeonsarmiento\n•\n12d ago\n Top 1% Commenter\n\n30-ish-MoE please.\n\ndampflokfreund\n•\n12d ago\n\nI wanted to ask, did you QAT on these gguf models? By the way, a MoE 30b model would be nice to see as well for the average PC. Those run speedy even if you have just 4-8 GB VRAM!\n\nNo_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants.\n\nMeretrixDominum\n•\n12d ago\n\n+1\n\nMake more 70Bs\n\n9 more replies"
+    },
+    {
+      "author": "pmttyji",
+      "score": "38",
+      "text": "pmttyji\n•\n12d ago\n Top 1% Poster\n\nDon't forget MOE models. Release everything!\n\nBTW I still have Llama-3.1-8B-Instruct on my laptop somewhere. Hope your release collection has some for Poor GPU Club.\n\njnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs."
+    },
+    {
+      "author": "jnd-cz",
+      "score": "5",
+      "text": "jnd-cz\n•\n12d ago\n\nYeah, I'm sitting here thinking I need something half the size to fit my budget A770\n with 16 gigs."
+    },
+    {
+      "author": "JLeonsarmiento",
+      "score": "40",
+      "text": "JLeonsarmiento\n•\n12d ago\n Top 1% Commenter\n\n30-ish-MoE please."
+    },
+    {
+      "author": "dampflokfreund",
+      "score": "31",
+      "text": "dampflokfreund\n•\n12d ago\n\nI wanted to ask, did you QAT on these gguf models? By the way, a MoE 30b model would be nice to see as well for the average PC. Those run speedy even if you have just 4-8 GB VRAM!\n\nNo_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants."
+    },
+    {
+      "author": "No_Algae1753",
+      "score": "13",
+      "text": "No_Algae1753\n•\n12d ago\n\nI dont think so. I feel like they would have stated that somewhere in the Readme but it just says that its been quantized to 4 bit. Also Unsloth seemed to have published higher q8 quants."
+    },
+    {
+      "author": "MeretrixDominum",
+      "score": "6",
+      "text": "MeretrixDominum\n•\n12d ago\n\n+1\n\nMake more 70Bs"
+    },
+    {
+      "author": "Jentano",
+      "score": "11",
+      "text": "Jentano\n•\n12d ago\n\nAre multi modal meta models allowed in the European union again, or still only text ones? Apache would suggest we are past the llama3+ problem? That would need great.\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nThe model is available under the standard Apache 2 license, which doesn't restrict access by geography.\n\nshapic\n•\n12d ago\n\nOh rly? Apache does not, meta does\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "16",
+      "text": "FullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nThe model is available under the standard Apache 2 license, which doesn't restrict access by geography.\n\nshapic\n•\n12d ago\n\nOh rly? Apache does not, meta does\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF."
+    },
+    {
+      "author": "shapic",
+      "score": "11",
+      "text": "shapic\n•\n12d ago\n\nOh rly? Apache does not, meta does\n\nFullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "12",
+      "text": "FullstackSensei\n•\n12d ago\nllama.cpp\n Top 1% Commenter\n\nI'm in Germany and don't see any consent restrictions to download, though I'm logged in to HF."
+    },
+    {
+      "author": "dampflokfreund",
+      "score": "11",
+      "text": "dampflokfreund\n•\n12d ago\n\nWe are happy you are back, too! Much love to you guys. <3"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vkgsum",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:51:42Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962"
+  ],
+  "quality": {
+    "score": 0.475,
+    "evidence": 0.4,
+    "relevance": 0.273,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/meta-models",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://go.meta.me/museglimmer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://developer.meta.com/ai/models/muse-glimmer/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/alexandr_wang/status/2086756152034066792",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://recipes.vllm.ai/meta-models/Muse-Glimmer-30B",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

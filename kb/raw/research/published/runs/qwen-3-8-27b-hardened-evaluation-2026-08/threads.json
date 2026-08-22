@@ -1,0 +1,1127 @@
+{
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "threads": [
+    {
+      "thread_id": "1vstyge",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vstyge/i_might_have_found_the_perfect_config_parameters/",
+      "title": "I might have found the perfect config parameters for qwen 3.8 27b",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vstyge-i-might-have-found-the-perfect-config-parameters-for-qwen-3-8-27b.json",
+      "quality": {
+        "score": 0.841,
+        "evidence": 1.0,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vsinej",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsinej/am_i_doing_something_wrong_qwen_38_27b_seems/",
+      "title": "Am I doing something wrong? Qwen 3.8 27B seems useless for agentic coding",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vsinej-am-i-doing-something-wrong-qwen-3-8-27b-seems-useless-for-agentic-coding.json",
+      "quality": {
+        "score": 0.571,
+        "evidence": 0.4,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vrjk4m",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vrjk4m/qwen_38_27b_saved_me_650_in_api_costs_this_evening/",
+      "title": "Qwen 3.8 27b saved me $650+ in API costs this evening",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vrjk4m-qwen-3-8-27b-saved-me-650-in-api-costs-this-evening.json",
+      "quality": {
+        "score": 0.809,
+        "evidence": 1.0,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv47sr",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv47sr/bro_wtf_qwen_lab_cooked_with_qwen_38_27b_its_so/",
+      "title": "Bro wtf, Qwen Lab cooked with Qwen 3.8 27B, it's so fucking good",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1",
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv47sr-bro-wtf-qwen-lab-cooked-with-qwen-3-8-27b-it-s-so-fucking-good.json",
+      "quality": {
+        "score": 0.285,
+        "evidence": 0.2,
+        "relevance": 0.273,
+        "community_scrutiny": 0.5,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vpuhov",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuhov/single_3090_homies_whats_your_config_for_qwen_38/",
+      "title": "Single 3090 homies, whats your config for Qwen 3.8 ?",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vpuhov-single-3090-homies-whats-your-config-for-qwen-3-8.json",
+      "quality": {
+        "score": 0.629,
+        "evidence": 0.6,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtup5s",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/",
+      "title": "I pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtup5s-i-pushed-qwen3-8-27b-to-381-tps-for-a-single-request-on-a-rtx-3090.json",
+      "quality": {
+        "score": 0.687,
+        "evidence": 0.8,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vpdrxl",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vpdrxl/which_harness_for_local_coding_qwen_38_27b_do_you/",
+      "title": "Which Harness for Local Coding (Qwen 3.8 27b) do you Recommend?",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vpdrxl-which-harness-for-local-coding-qwen-3-8-27b-do-you-recommend.json",
+      "quality": {
+        "score": 0.264,
+        "evidence": 0.0,
+        "relevance": 0.182,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 11,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu0u2v",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu0u2v/qwen_38_27b_pi_agent_vs_opencode/",
+      "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu0u2v-qwen-3-8-27b-pi-agent-vs-opencode.json",
+      "quality": {
+        "score": 0.597,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu7yce",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7yce/qwen3827b_at_262k_context_on_a_strix_halo_rtx/",
+      "title": "Qwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu7yce-qwen3-8-27b-at-262k-context-on-a-strix-halo-rtx-3090-ti-9-5-153-tok-s-and-it-bea.json",
+      "quality": {
+        "score": 0.841,
+        "evidence": 1.0,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vts6vb",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vts6vb/best_qwen_38_27b_quantoverall_setup_for_a_single/",
+      "title": "Best Qwen 3.8 27B quant/overall setup for a single RTX3090 PC.",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vts6vb-best-qwen-3-8-27b-quant-overall-setup-for-a-single-rtx3090-pc.json",
+      "quality": {
+        "score": 0.905,
+        "evidence": 1.0,
+        "relevance": 0.727,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vu08f3",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu08f3/while_everyone_is_excited_about_qwen_38_27b_heres/",
+      "title": "While Everyone Is Excited About Qwen 3.8 27B, Here’s the Reality for a 16GB AMD GPU User",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vu08f3-while-everyone-is-excited-about-qwen-3-8-27b-here-s-the-reality-for-a-16gb-amd-g.json",
+      "quality": {
+        "score": 0.873,
+        "evidence": 1.0,
+        "relevance": 0.636,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vugryn",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vugryn/qwen_38_27b_is_strong_even_at_q3_xxs/",
+      "title": "Qwen 3.8 27b is strong even at Q3_xxs",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vugryn-qwen-3-8-27b-is-strong-even-at-q3-xxs.json",
+      "quality": {
+        "score": 0.809,
+        "evidence": 1.0,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vr32vs",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vr32vs/qwen_38_27b_rtx_4090_24gb_sharing_my_config/",
+      "title": "Qwen 3.8 27B - RTX 4090 24Gb - Sharing my Config",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vr32vs-qwen-3-8-27b-rtx-4090-24gb-sharing-my-config.json",
+      "quality": {
+        "score": 0.457,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 0.3,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vs2tsn",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vs2tsn/dflash_2_available_for_qwen_38_27b_and_muse/",
+      "title": "DFlash 2 available for Qwen 3.8 27B and Muse Glimmer",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vs2tsn-dflash-2-available-for-qwen-3-8-27b-and-muse-glimmer.json",
+      "quality": {
+        "score": 0.507,
+        "evidence": 0.4,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv6qej",
+      "canonical_url": "https://www.reddit.com/r/SwordAndSupperGame/comments/1vv6qej/",
+      "title": "Sword & Supper\n\nFroggy auto-RPG!\n\n107K monthly players",
+      "discovered_by_query_ids": [
+        "c27c0519cdf1",
+        "75d3c078d962",
+        "9ed9c1b20f1e",
+        "d8a6923673f2",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv6qej-reddit-the-heart-of-the-internet.json",
+      "quality": {
+        "score": 0.0,
+        "evidence": 0.0,
+        "relevance": 0.0,
+        "community_scrutiny": 0.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 0,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vl8bpt",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vl8bpt/qwen_3827b_coming_this_week/",
+      "title": "Qwen 3.8-27b coming this week",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vl8bpt-qwen-3-8-27b-coming-this-week.json",
+      "quality": {
+        "score": 0.264,
+        "evidence": 0.0,
+        "relevance": 0.182,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 13,
+      "last_error": null
+    },
+    {
+      "thread_id": "1salgre",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1salgre/gemma_4_has_been_released/",
+      "title": "Gemma 4 has been released",
+      "discovered_by_query_ids": [
+        "75d3c078d962"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "skipped",
+      "attempts": 3,
+      "capture_file": null,
+      "quality": null,
+      "outbound_reference_count": 0,
+      "last_error": null,
+      "skip_reason": "Repeated Surf navigation timeout after three resumable extraction attempts",
+      "skipped_at": "2026-08-22T12:02:51Z"
+    },
+    {
+      "thread_id": "1sn3izh",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sn3izh/qwen3635ba3b_released/",
+      "title": "Qwen3.6-35B-A3B released!",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1sn3izh-qwen3-6-35b-a3b-released.json",
+      "quality": {
+        "score": 0.539,
+        "evidence": 0.4,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 16,
+      "last_error": null
+    },
+    {
+      "thread_id": "1rrisqn",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rrisqn/i_was_backend_lead_at_manus_after_building_agents/",
+      "title": "I was backend lead at Manus. After building agents for 2 years, I stopped using function calling entirely. Here's what I use instead.",
+      "discovered_by_query_ids": [
+        "75d3c078d962"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1rrisqn-i-was-backend-lead-at-manus-after-building-agents-for-2-years-i-stopped-using-fu.json",
+      "quality": {
+        "score": 0.534,
+        "evidence": 0.6,
+        "relevance": 0.182,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 21,
+      "last_error": null
+    },
+    {
+      "thread_id": "1ve4uoe",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ve4uoe/daniel_han_of_unsloth_validates_qwen3827b_will/",
+      "title": "Daniel Han of Unsloth validates Qwen3.8-27B will run only 17GB VRAM",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1ve4uoe-daniel-han-of-unsloth-validates-qwen3-8-27b-will-run-only-17gb-vram.json",
+      "quality": {
+        "score": 0.809,
+        "evidence": 1.0,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vkgsum",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vkgsum/introducing_muse_glimmer_an_openweight_model/",
+      "title": "Introducing Muse Glimmer: an open-weight model optimized for always-on local agent workflows",
+      "discovered_by_query_ids": [
+        "75d3c078d962"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vkgsum-introducing-muse-glimmer-an-open-weight-model-optimized-for-always-on-local-agen.json",
+      "quality": {
+        "score": 0.475,
+        "evidence": 0.4,
+        "relevance": 0.273,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 13,
+      "last_error": null
+    },
+    {
+      "thread_id": "1sdnw7l",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sdnw7l/i_technically_got_an_llm_running_locally_on_a/",
+      "title": "I technically got an LLM running locally on a 1998 iMac G3 with 32 MB of RAM",
+      "discovered_by_query_ids": [
+        "75d3c078d962"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1sdnw7l-i-technically-got-an-llm-running-locally-on-a-1998-imac-g3-with-32-mb-of-ram.json",
+      "quality": {
+        "score": 0.354,
+        "evidence": 0.2,
+        "relevance": 0.182,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vtr3h0",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtr3h0/ladies_and_gentlemen_i_present_to_you_qwen38_27b/",
+      "title": "Ladies and gentlemen I present to you Qwen3.8 27b 1bit brain damage quant",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vtr3h0-ladies-and-gentlemen-i-present-to-you-qwen3-8-27b-1bit-brain-damage-quant.json",
+      "quality": {
+        "score": 0.597,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vsr67c",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsr67c/introducing_qwen3827b_dynamic_v3_unsloth_ggufs/",
+      "title": "Introducing Qwen3.8-27B Dynamic v3 Unsloth GGUFs",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vsr67c-introducing-qwen3-8-27b-dynamic-v3-unsloth-ggufs.json",
+      "quality": {
+        "score": 0.507,
+        "evidence": 0.4,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 15,
+      "last_error": null
+    },
+    {
+      "thread_id": "1runlpf",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1runlpf/qwen359bclaude46opusuncensoreddistilledgguf/",
+      "title": "Qwen3.5-9B-Claude-4.6-Opus-Uncensored-Distilled-GGUF",
+      "discovered_by_query_ids": [
+        "75d3c078d962"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1runlpf-qwen3-5-9b-claude-4-6-opus-uncensored-distilled-gguf.json",
+      "quality": {
+        "score": 0.412,
+        "evidence": 0.4,
+        "relevance": 0.091,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vevsv9",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vevsv9/more_qwen_38_sizes_coming/",
+      "title": "More Qwen 3.8 sizes coming",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vevsv9-more-qwen-3-8-sizes-coming.json",
+      "quality": {
+        "score": 0.295,
+        "evidence": 0.0,
+        "relevance": 0.273,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vqgt0x",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqgt0x/and_im_not_afraid_of_losing_my_social_credits/",
+      "title": "…and I’m not afraid of losing my social credits.",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vqgt0x-and-i-m-not-afraid-of-losing-my-social-credits.json",
+      "quality": {
+        "score": 0.449,
+        "evidence": 0.2,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vlj87v",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vlj87v/introducing_unsloth_desktop_app/",
+      "title": "Introducing Unsloth Desktop app",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1vlj87v-introducing-unsloth-desktop-app.json",
+      "quality": {
+        "score": 0.385,
+        "evidence": 0.2,
+        "relevance": 0.273,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 15,
+      "last_error": null
+    },
+    {
+      "thread_id": "1t57xuu",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t57xuu/25x_faster_inference_with_qwen_36_27b_using_mtp/",
+      "title": "2.5x faster inference with Qwen 3.6 27B using MTP - Finally a viable option for local agentic coding - 262k context on 48GB - Fixed chat template - Drop-in OpenAI and Anthropic API endpoints",
+      "discovered_by_query_ids": [
+        "75d3c078d962",
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1t57xuu-2-5x-faster-inference-with-qwen-3-6-27b-using-mtp-finally-a-viable-option-for-lo.json",
+      "quality": {
+        "score": 0.841,
+        "evidence": 1.0,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 22,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv80xa",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv80xa/artificial_analysis_intelligence_a_meaningless/",
+      "title": "Artificial Analysis \"Intelligence\": A meaningless benchmark",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv80xa-artificial-analysis-intelligence-a-meaningless-benchmark.json",
+      "quality": {
+        "score": 0.327,
+        "evidence": 0.0,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv628b",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv628b/glm52_local_inference_ubatch_size_made_a_much/",
+      "title": "GLM-5.2 local inference: ubatch size made a much bigger difference than I expected",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv628b-glm-5-2-local-inference-ubatch-size-made-a-much-bigger-difference-than-i-expecte.json",
+      "quality": {
+        "score": 0.437,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 0.2,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vv3b6o",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv3b6o/sharp_template_to_ninfer_42_output_tokens_same/",
+      "title": "Sharp template to NInfer: -42% output tokens, same speed",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vv3b6o-sharp-template-to-ninfer-42-output-tokens-same-speed.json",
+      "quality": {
+        "score": 0.434,
+        "evidence": 0.6,
+        "relevance": 0.182,
+        "community_scrutiny": 0.5,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuwwww",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuwwww/qwen_38_27b_pi_agent_vs_opencode_another_smaple/",
+      "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE - another smaple",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuwwww-qwen-3-8-27b-pi-agent-vs-opencode-another-smaple.json",
+      "quality": {
+        "score": 0.597,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 12,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuvx0t",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuvx0t/i_tried_to_do_agenic_coding_with_qwen_38_27b_3bit/",
+      "title": "I tried to do agenic coding with Qwen 3.8 27B 3bit quant on a macbook air m2 24gb. It took 63 hours, but amazingly, the flight simulator worked.",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuvx0t-i-tried-to-do-agenic-coding-with-qwen-3-8-27b-3bit-quant-on-a-macbook-air-m2-24g.json",
+      "quality": {
+        "score": 0.661,
+        "evidence": 0.6,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 7,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuua1f",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuua1f/which_qwen_38_on_rtx_a2000/",
+      "title": "Which qwen 3.8 on rtx a2000?",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuua1f-which-qwen-3-8-on-rtx-a2000.json",
+      "quality": {
+        "score": 0.643,
+        "evidence": 0.8,
+        "relevance": 0.636,
+        "community_scrutiny": 0.3,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vutzeu",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vutzeu/im_really_hoping_were_in_2026s_2monthgap_between/",
+      "title": "I'm really hoping we're in 2026's 2-month-gap between QwQ and Qwen3 right now",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vutzeu-i-m-really-hoping-we-re-in-2026-s-2-month-gap-between-qwq-and-qwen3-right-now.json",
+      "quality": {
+        "score": 0.385,
+        "evidence": 0.2,
+        "relevance": 0.273,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 8,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vusqfw",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vusqfw/qwen_38_27b_quantization_gpu_and_ts/",
+      "title": "Qwen 3.8 27b: quantization, GPU and t/s",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vusqfw-qwen-3-8-27b-quantization-gpu-and-t-s.json",
+      "quality": {
+        "score": 0.815,
+        "evidence": 0.8,
+        "relevance": 0.727,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vurjwc",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vurjwc/i_feel_like_i_finally_graduated/",
+      "title": "I feel like I finally graduated.",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vurjwc-i-feel-like-i-finally-graduated.json",
+      "quality": {
+        "score": 0.841,
+        "evidence": 1.0,
+        "relevance": 0.545,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuqwd8",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuqwd8/strix_halo_8060s_gfx1151_qwen3827b_q8_and_q6_ud/",
+      "title": "Strix Halo (8060S / gfx1151), Qwen-3.8-27B @ Q8 and Q6 UD v3, up to 256K ctx, llama.cpp, DFlash2, vision, real workloads quality and steady performances, optimized recipes, ...",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuqwd8-strix-halo-8060s-gfx1151-qwen-3-8-27b-q8-and-q6-ud-v3-up-to-256k-ctx-llama-cpp-d.json",
+      "quality": {
+        "score": 0.557,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 0.8,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuq4r4",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuq4r4/38_reasoning_for_planning_and_instruct_for/",
+      "title": "3.8 reasoning for planning and instruct for applying the plan? Anyone tried it this way?",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuq4r4-3-8-reasoning-for-planning-and-instruct-for-applying-the-plan-anyone-tried-it-th.json",
+      "quality": {
+        "score": 0.577,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 0.9,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 7,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vupiyh",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vupiyh/qwen3827b_on_an_rtx_5060_ti_16gb_iq4_vs_q8_64k/",
+      "title": "Qwen3.8-27B on an RTX 5060 Ti 16GB: IQ4 vs Q8, 64K context, MTP, vision, and agent benchmarks",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vupiyh-qwen3-8-27b-on-an-rtx-5060-ti-16gb-iq4-vs-q8-64k-context-mtp-vision-and-agent-be.json",
+      "quality": {
+        "score": 0.873,
+        "evidence": 1.0,
+        "relevance": 0.636,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vupcv6",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vupcv6/what_can_i_do_with_my_extra_4090/",
+      "title": "What can I do with my extra 4090?",
+      "discovered_by_query_ids": [
+        "9ed9c1b20f1e",
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vupcv6-what-can-i-do-with-my-extra-4090.json",
+      "quality": {
+        "score": 0.539,
+        "evidence": 0.4,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 7,
+      "last_error": null
+    },
+    {
+      "thread_id": "1umcr5m",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1umcr5m/glm52_on_5x_pro_6000s_and_a_5090_an_expensive/",
+      "title": "GLM5.2 on 5x Pro 6000s and a 5090, an expensive journey",
+      "discovered_by_query_ids": [
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1umcr5m-glm5-2-on-5x-pro-6000s-and-a-5090-an-expensive-journey.json",
+      "quality": {
+        "score": 0.719,
+        "evidence": 0.8,
+        "relevance": 0.455,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vrdetw",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vrdetw/qwen_dev_says_not_to_wait_for_35ba3b/",
+      "title": "Qwen dev says not to wait for 35B-A3B",
+      "discovered_by_query_ids": [
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vrdetw-qwen-dev-says-not-to-wait-for-35b-a3b.json",
+      "quality": {
+        "score": 0.597,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    },
+    {
+      "thread_id": "1rdxfdu",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rdxfdu/qwen3535ba3b_is_a_gamechanger_for_agentic_coding/",
+      "title": "Qwen3.5-35B-A3B is a gamechanger for agentic coding.",
+      "discovered_by_query_ids": [
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1rdxfdu-qwen3-5-35b-a3b-is-a-gamechanger-for-agentic-coding.json",
+      "quality": {
+        "score": 0.655,
+        "evidence": 0.8,
+        "relevance": 0.273,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 18,
+      "last_error": null
+    },
+    {
+      "thread_id": "1s3e8bd",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s3e8bd/intel_will_sell_a_cheap_gpu_with_32gb_vram_next/",
+      "title": "Intel will sell a cheap GPU with 32GB VRAM next week",
+      "discovered_by_query_ids": [
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1s3e8bd-intel-will-sell-a-cheap-gpu-with-32gb-vram-next-week.json",
+      "quality": {
+        "score": 0.597,
+        "evidence": 0.6,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 17,
+      "last_error": null
+    },
+    {
+      "thread_id": "1rlkptk",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1rlkptk/final_qwen35_unsloth_gguf_update/",
+      "title": "Final Qwen3.5 Unsloth GGUF Update!",
+      "discovered_by_query_ids": [
+        "d8a6923673f2"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 2,
+      "capture_file": "raw/1rlkptk-final-qwen3-5-unsloth-gguf-update.json",
+      "quality": {
+        "score": 0.444,
+        "evidence": 0.4,
+        "relevance": 0.182,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 20,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vuotqr",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuotqr/qwen3827b_q6_is_a_beast_at_agentic_coding/",
+      "title": "Qwen3.8-27B Q6 is a beast at agentic coding",
+      "discovered_by_query_ids": [
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vuotqr-qwen3-8-27b-q6-is-a-beast-at-agentic-coding.json",
+      "quality": {
+        "score": 0.507,
+        "evidence": 0.4,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 14,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vunqoz",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vunqoz/llamacpp_dspark_pc_tree_fork_up_to_3295_faster/",
+      "title": "Llama.cpp DSpark PC Tree Fork (up to 3%-29.5% faster!)",
+      "discovered_by_query_ids": [
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vunqoz-llama-cpp-dspark-pc-tree-fork-up-to-3-29-5-faster.json",
+      "quality": {
+        "score": 0.669,
+        "evidence": 1.0,
+        "relevance": 0.455,
+        "community_scrutiny": 0.3,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 10,
+      "last_error": null
+    },
+    {
+      "thread_id": "1vulsom",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vulsom/qwen_38_vs_36_27b_low_reasoning_loops_way_less_now/",
+      "title": "Qwen 3.8 vs 3.6 27b low reasoning loops way less now",
+      "discovered_by_query_ids": [
+        "f27649a29daf"
+      ],
+      "selected": true,
+      "selection_reason": "first unique canonical URL in deterministic query order",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/1vulsom-qwen-3-8-vs-3-6-27b-low-reasoning-loops-way-less-now.json",
+      "quality": {
+        "score": 0.417,
+        "evidence": 0.2,
+        "relevance": 0.364,
+        "community_scrutiny": 1.0,
+        "method": "deterministic-keyword-v1"
+      },
+      "outbound_reference_count": 9,
+      "last_error": null
+    }
+  ]
+}

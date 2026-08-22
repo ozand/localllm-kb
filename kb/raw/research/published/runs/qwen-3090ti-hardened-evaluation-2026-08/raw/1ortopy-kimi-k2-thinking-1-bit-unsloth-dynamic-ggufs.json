@@ -1,0 +1,230 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ortopy/kimi_k2_thinking_1bit_unsloth_dynamic_ggufs/",
+  "title": "Kimi K2 Thinking 1-bit Unsloth Dynamic GGUFs",
+  "author": "danielhanchen",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n10mo ago\ndanielhanchen\nKimi K2 Thinking 1-bit Unsloth Dynamic GGUFs\nResources\n\nHi everyone! You can now run Kimi K2 Thinking locally with our Unsloth Dynamic 1bit GGUFs. We also collaborated with the Kimi team on a fix for K2 Thinking's chat template not prepending the default system prompt of You are Kimi, an AI assistant created by Moonshot AI. on the 1st turn.\n\nWe also we fixed llama.cpp custom jinja separators for tool calling - Kimi does {\"a\":\"1\",\"b\":\"2\"} and not with extra spaces like {\"a\": \"1\", \"b\": \"2\"}\n\nThe 1-bit GGUF will run on 247GB RAM. We shrank the 1T model to 245GB (-62%) & the accuracy recovery is comparable to our third-party DeepSeek-V3.1 Aider Polyglot benchmarks\n\nAll 1bit, 2bit and other bit width GGUFs are at https://huggingface.co/unsloth/Kimi-K2-Thinking-GGUF\n\nThe suggested temp is temperature = 1.0. We also suggest a min_p = 0.01. If you do not see <think>, use --special. The code for llama-cli is below which offloads MoE layers to CPU RAM, and leaves the rest of the model on GPU VRAM:\n\nexport LLAMA_CACHE=\"unsloth/Kimi-K2-Thinking-GGUF\"\n./llama.cpp/llama-cli \\\n    -hf unsloth/Kimi-K2-Thinking-GGUF:UD-TQ1_0 \\\n    --n-gpu-layers 99 \\\n    --temp 1.0 \\\n    --min-p 0.01 \\\n    --ctx-size 16384 \\\n    --seed 3407 \\\n    -ot \".ffn_.*_exps.=CPU\"\n\nStep-by-step Guide + fix details: https://docs.unsloth.ai/models/kimi-k2-thinking-how-to-run-locally and GGUFs are here.\n\nLet us know if you have any questions and hope you have a great weekend!\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n10mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "1ncehost",
+      "score": "277",
+      "text": "1ncehost\n•\n10mo ago\n\nWont be running this one, but I just wanted to say thanks for the tireless work you guys put into each model.\n\ndanielhanchen\n•\n10mo ago\n\nNo worries and super appreciate it! :)\n\nAccomplished_Bet_127\n•\n10mo ago\n\nWith the speed you answer everyone, even in random posts, I still believe you are a bot. No way someone can both work and communicate this much. What's your secret? What you eat? How much you sleep? Have you swam a pool of liquid adderal when you was younger?\n\ndanielhanchen\n•\n10mo ago\n\nHaha it's just me :) my brother helps on their own account but this one is me!\n\nWe do sleep! A bit nocturnal though so around 5am to 1pm. Nah never taken adderal, but I get that a lot lol\n\nlayer4down\n•\n10mo ago\n\n5AM-1AM 😌😴\n\nissarepost\n•\n10mo ago\n\nMaybe several people using one account?\n\ndanielhanchen\n•\n10mo ago\n\nNah it's just me! My brother does use his other account to answer questions if I'm not around though\n\n[deleted]\n•\n10mo ago"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "107",
+      "text": "danielhanchen\n•\n10mo ago\n\nNo worries and super appreciate it! :)\n\nAccomplished_Bet_127\n•\n10mo ago\n\nWith the speed you answer everyone, even in random posts, I still believe you are a bot. No way someone can both work and communicate this much. What's your secret? What you eat? How much you sleep? Have you swam a pool of liquid adderal when you was younger?\n\ndanielhanchen\n•\n10mo ago\n\nHaha it's just me :) my brother helps on their own account but this one is me!\n\nWe do sleep! A bit nocturnal though so around 5am to 1pm. Nah never taken adderal, but I get that a lot lol\n\nlayer4down\n•\n10mo ago\n\n5AM-1AM 😌😴\n\nissarepost\n•\n10mo ago\n\nMaybe several people using one account?\n\ndanielhanchen\n•\n10mo ago\n\nNah it's just me! My brother does use his other account to answer questions if I'm not around though\n\n[deleted]\n•\n10mo ago"
+    },
+    {
+      "author": "Accomplished_Bet_127",
+      "score": "22",
+      "text": "Accomplished_Bet_127\n•\n10mo ago\n\nWith the speed you answer everyone, even in random posts, I still believe you are a bot. No way someone can both work and communicate this much. What's your secret? What you eat? How much you sleep? Have you swam a pool of liquid adderal when you was younger?\n\ndanielhanchen\n•\n10mo ago\n\nHaha it's just me :) my brother helps on their own account but this one is me!\n\nWe do sleep! A bit nocturnal though so around 5am to 1pm. Nah never taken adderal, but I get that a lot lol\n\nlayer4down\n•\n10mo ago\n\n5AM-1AM 😌😴\n\nissarepost\n•\n10mo ago\n\nMaybe several people using one account?\n\ndanielhanchen\n•\n10mo ago\n\nNah it's just me! My brother does use his other account to answer questions if I'm not around though\n\n[deleted]\n•\n10mo ago"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "13",
+      "text": "danielhanchen\n•\n10mo ago\n\nHaha it's just me :) my brother helps on their own account but this one is me!\n\nWe do sleep! A bit nocturnal though so around 5am to 1pm. Nah never taken adderal, but I get that a lot lol\n\nlayer4down\n•\n10mo ago\n\n5AM-1AM 😌😴"
+    },
+    {
+      "author": "layer4down",
+      "score": "5",
+      "text": "layer4down\n•\n10mo ago\n\n5AM-1AM 😌😴"
+    },
+    {
+      "author": "issarepost",
+      "score": "7",
+      "text": "issarepost\n•\n10mo ago\n\nMaybe several people using one account?\n\ndanielhanchen\n•\n10mo ago\n\nNah it's just me! My brother does use his other account to answer questions if I'm not around though"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "10",
+      "text": "danielhanchen\n•\n10mo ago\n\nNah it's just me! My brother does use his other account to answer questions if I'm not around though"
+    },
+    {
+      "author": "FORLLM",
+      "score": "68",
+      "text": "FORLLM\n•\n10mo ago\n\nI aspire to someday be able to run monsters like this locally and I really appreciate your efforts to make them more accessible. I don't know that that's very encouraging for you, but I hope it is.\n\nyoracale\n•\n10mo ago\nllama.cpp\n\nThank you yes, any supportive comments like yours are amazing so thank you so much, we appreciate you 🥰"
+    },
+    {
+      "author": "yoracale",
+      "score": "19",
+      "text": "yoracale\n•\n10mo ago\nllama.cpp\n\nThank you yes, any supportive comments like yours are amazing so thank you so much, we appreciate you 🥰"
+    },
+    {
+      "author": "john0201",
+      "score": "29",
+      "text": "john0201\n•\n10mo ago\n\nThis is great. Do you have an idea of what tps would be expected with 2x5090 and 256GB system memory (9960X)? Not sure I will install if it is only 5tps it seems like much under 10 isn’t super usable. But awesome effort to be able to run a model this big locally at all!\n\ndanielhanchen\n•\n10mo ago\n\nYes probably 5 tokens ish but I didn't select all the best settings - it might be possible to push it to 10!"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "27",
+      "text": "danielhanchen\n•\n10mo ago\n\nYes probably 5 tokens ish but I didn't select all the best settings - it might be possible to push it to 10!"
+    },
+    {
+      "author": "Long_comment_san",
+      "score": "35",
+      "text": "Long_comment_san\n•\n10mo ago\n\nAmazing stuff. I wish I had so much hardware for 1 bit quant but hey, we'll get there eventually.\n\ndanielhanchen\n•\n10mo ago\n\nOne of the goals is to probably prune some layers away - say a 50% reduction which can definitely help on RAM and GPU savings!\n\nno_witty_username\n•\n10mo ago\n\nDo you mean how many layers are offloaded to gpu versus cpu or do you mean something else by this? I've always wondered if there's a procedure or method that we can implement on very large models that surgically could reduce the parameter size and still be able to run the model. Like take a 1 trillion parameter model and some process reduces it down to only 4 billion parameters, and while the model loses its intelligence somehow it would still run as if for example you ran 4b qwen model but its kimi 2. And I'm not talking distillation which requires retraining, this would be closer to model merger type of tech... Just wondering if we developed such tech yet or coming up on something around that capability..\n\ndanielhanchen\n•\n10mo ago\n\nOh I meant actually pruning like deleting unnecessary layers for eg like Cerebras REAP - we actually made some GGUFs for them for eg:\n\nGLM 4.6 25% pruned: https://huggingface.co/unsloth/GLM-4.6-REAP-268B-A32B-GGUF\n\nQwen 3 Coder 280B 25% pruned: https://huggingface.co/unsloth/Qwen3-Coder-REAP-363B-A35B-GGUF\n\nYes distillation is another option!\n\nNymbul\n•\n10mo ago\n\nHere is some literature I've seen regarding pruning and an open source implementation of it.\n\nEssentially, it's a process of determining the least relevant layers for a given dataset and then literally cutting them out of the model, typically with a \"healing\" training pass afterwards. The hope is that the tiny influence of those layers was largely irrelevant to the final answer.\n\nI tried a 33% reduction once and it became a labotamite. It's a lot of guesswork.\n\nno_witty_username\n•\n10mo ago\n\nThanks, ill check it out now.\n\ndanielhanchen\n•\n10mo ago\n\nOh yes those literature are nice!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1ortopy",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:42:21Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.677,
+    "evidence": 0.8,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/discussions/12",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/basics/unsloth-dynamic-2.0-ggufs/unsloth-dynamic-ggufs-on-aider-polyglot",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Kimi-K2-Thinking-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/models/kimi-k2-thinking-how-to-run-locally",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/GLM-4.6-REAP-268B-A32B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3-Coder-REAP-363B-A35B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://arxiv.org/abs/2403.17887",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/arcee-ai/PruneMe",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/new/unsloth-dynamic-ggufs-on-aider-polyglot",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/basics/unsloth-dynamic-2.0-ggufs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/mlx-community/LongCat-Flash-Chat-4bit",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0cIcth224hk",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

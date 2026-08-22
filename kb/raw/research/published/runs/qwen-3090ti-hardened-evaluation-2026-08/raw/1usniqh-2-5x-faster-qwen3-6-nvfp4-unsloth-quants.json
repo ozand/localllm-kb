@@ -1,0 +1,240 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1usniqh/25x_faster_qwen36_nvfp4_unsloth_quants/",
+  "title": "2.5x faster Qwen3.6 NVFP4 Unsloth quants",
+  "author": "danielhanchen",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1mo ago\ndanielhanchen\n2.5x faster Qwen3.6 NVFP4 Unsloth quants\nResources\n\nHey r/LocalLLaMA folks! We made NVFP4 quants 2.5x faster for Qwen3.6 27B and also 1.56x to 1.79x faster for 35B-A3B vs NVIDIA's NVFP4 quants without any accuracy degradation! We used W4A4 so actual 4bit tensor cores for matmuls, whilst NVIDIA's ones uses W4A16.\n\nFP8 KV Cache calibration is also provided, auto allowing 2x longer contexts. For accuracy we conducted MMLU-Pro, AIME 2025, GPQA for FP8, BF16, NVIDIA's NVFP4 and our NVFP4s. It also has MTP pre-embedded.\n\nWe also provided 2 35B versions NVFP4-Fast (1.79x faster) and NVFP4 (1.56x faster) where NVFP4-Fast fully uses W4A4 whilst NVFP4 normal uses a mixture to stay a little bit more accurate.\n\nNVFP4 links:\nQwen3.6-35B-A3B-NVFP4 (1.56x Faster)\nQwen3.6-35B-A3B-NVFP4-Fast (1.79x Faster)\nQwen3.6-27B-NVFP4 (2.5x Faster)\n\nQwen3.6-27B\n\nProvider\tMMLU-Pro\tGPQA\tAIME 2025\n\nUnsloth\t86.25\t86.34\t93.12\nNVIDIA\t85.96\t86.87\t93.12\nFP8\t86.11\t86.87\t93.75\nBF16\t85.96\t88.13\t93.33\n\nQwen3.6-35B-A3B\n\nProvider\tMMLU-Pro\tGPQA\tAIME 2025\n\nUnsloth\t85.85\t86.74\t92.29\nUnsloth Fast\t85.58\t87.75\t91.67\nNVIDIA\t85.60\t87.12\t91.88\nFP8\t85.75\t86.74\t93.12\nBF16\t85.75\t86.36\t92.50\n\nWe have more analysis and benchmarks in our NVFP4 Qwen3.6 blog: https://unsloth.ai/docs/models/qwen3.6#nvfp4\n\nHave a nice weekend folks!\n\nAlso for DGX Spark folks - use the flashinfer backend or you will get 2x slower inference! Our blog has more details\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n1mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "Objective-Stranger99",
+      "score": "210",
+      "text": "Objective-Stranger99\n•\n1mo ago\n\nBlackwell Users: 🥳🥳🥳\n\nPascal Users (like me): 😭😭😭\n\nAdvanced-Picture5016\n•\n1mo ago\n\nrocm gang...\n\nCold_Tree190\n•\n1mo ago\n\nI’ll keep you in my prayers…\n\nSmartCustard9944\n•\n1mo ago\n\nFor a moment I read “papers”, and I was hoping for some paper porting this to AMD… Oh well, no papers to hold onto today\n\n1 more reply\nThrumpwart\n•\n1mo ago\nllama.cpp\n\nI’ll check RDNA3 after work…\n\nThrumpwart\n•\n1mo ago\nllama.cpp\n\nCan't seem to get it running yet. Not well versed in vLLM on AMD so I'm struggling a bit. Will keep trying.\n\nSaw some 3rd party ggufs available...\n\nCiru-ai\n•\n1mo ago\n\nYou can run rocmfp4\n\n1 more reply\ndiffore\n•\n1mo ago\n\n5080 user here mad at himself for not going for 5090...\n\nroselan\n•\n1mo ago\n\nsame same.\n\nBut then I look at the price of \"cheap\" 5080s here, it's 1035.-, and the price of \"cheap\" 5090s is 3599.- (5779.- for the founder edition oO).\n\nSo there is that.\n\nKaokien\n•\n1mo ago\n\nLucked out and got a 5090 prebuilt for 3.8 before the hikes\n\n2 more replies\n7 more replies\nStrong_Chicken6838\n•\n1mo ago\n\nAMD MI50 users\n\npmp22\n•\n1mo ago\n\nP40 sisters. what's our response?\n\nFishChillylly\n•\n1mo ago\n\ngenerating responses at 7 tokens per second 🥵\n\nBatOk7254\n•\n1mo ago\n\n2xp40 here. 15-18 tps on dense 27b, 45-50 tps (with 1200-1800 tps prefill) on 35b MOE 😄\n\nFishChillylly\n•\n1mo ago\n\nwell for 27b it’s waiting worthy, and i believe 45-50 is very usable on 35b MOE! i’m currently using around 50 tps, too!\n\nBatOk7254\n•\n1mo ago\n\nThe difference 2nd gpu made is in prefill. It is insanely fast (for p40) - up to 1800 tokens. And it holds a full q8 context with 256K. Plus you can run q6 models.\n\n4 more replies\n3 more replies\n1 more reply\nmuxxington\n•\n1mo ago\n1 more reply\nmuxxington\n•\n1mo ago\nIwaku_Real\n•\n1mo ago\n Top 1% Commenter\n\nOr 3090s clearly\n\n9 more replies"
+    },
+    {
+      "author": "Advanced-Picture5016",
+      "score": "85",
+      "text": "Advanced-Picture5016\n•\n1mo ago\n\nrocm gang...\n\nCold_Tree190\n•\n1mo ago\n\nI’ll keep you in my prayers…\n\nSmartCustard9944\n•\n1mo ago\n\nFor a moment I read “papers”, and I was hoping for some paper porting this to AMD… Oh well, no papers to hold onto today\n\n1 more reply\nThrumpwart\n•\n1mo ago\nllama.cpp\n\nI’ll check RDNA3 after work…\n\nThrumpwart\n•\n1mo ago\nllama.cpp\n\nCan't seem to get it running yet. Not well versed in vLLM on AMD so I'm struggling a bit. Will keep trying.\n\nSaw some 3rd party ggufs available...\n\nCiru-ai\n•\n1mo ago\n\nYou can run rocmfp4\n\n1 more reply"
+    },
+    {
+      "author": "Cold_Tree190",
+      "score": "37",
+      "text": "Cold_Tree190\n•\n1mo ago\n\nI’ll keep you in my prayers…\n\nSmartCustard9944\n•\n1mo ago\n\nFor a moment I read “papers”, and I was hoping for some paper porting this to AMD… Oh well, no papers to hold onto today\n\n1 more reply"
+    },
+    {
+      "author": "SmartCustard9944",
+      "score": "13",
+      "text": "SmartCustard9944\n•\n1mo ago\n\nFor a moment I read “papers”, and I was hoping for some paper porting this to AMD… Oh well, no papers to hold onto today\n\n1 more reply"
+    },
+    {
+      "author": "Thrumpwart",
+      "score": "11",
+      "text": "Thrumpwart\n•\n1mo ago\nllama.cpp\n\nI’ll check RDNA3 after work…"
+    },
+    {
+      "author": "Thrumpwart",
+      "score": "2",
+      "text": "Thrumpwart\n•\n1mo ago\nllama.cpp\n\nCan't seem to get it running yet. Not well versed in vLLM on AMD so I'm struggling a bit. Will keep trying.\n\nSaw some 3rd party ggufs available..."
+    },
+    {
+      "author": "Ciru-ai",
+      "score": "2",
+      "text": "Ciru-ai\n•\n1mo ago\n\nYou can run rocmfp4"
+    },
+    {
+      "author": "diffore",
+      "score": "17",
+      "text": "diffore\n•\n1mo ago\n\n5080 user here mad at himself for not going for 5090...\n\nroselan\n•\n1mo ago\n\nsame same.\n\nBut then I look at the price of \"cheap\" 5080s here, it's 1035.-, and the price of \"cheap\" 5090s is 3599.- (5779.- for the founder edition oO).\n\nSo there is that.\n\nKaokien\n•\n1mo ago\n\nLucked out and got a 5090 prebuilt for 3.8 before the hikes\n\n2 more replies\n7 more replies"
+    },
+    {
+      "author": "roselan",
+      "score": "16",
+      "text": "roselan\n•\n1mo ago\n\nsame same.\n\nBut then I look at the price of \"cheap\" 5080s here, it's 1035.-, and the price of \"cheap\" 5090s is 3599.- (5779.- for the founder edition oO).\n\nSo there is that.\n\nKaokien\n•\n1mo ago\n\nLucked out and got a 5090 prebuilt for 3.8 before the hikes\n\n2 more replies"
+    },
+    {
+      "author": "Kaokien",
+      "score": "2",
+      "text": "Kaokien\n•\n1mo ago\n\nLucked out and got a 5090 prebuilt for 3.8 before the hikes"
+    },
+    {
+      "author": "Strong_Chicken6838",
+      "score": "27",
+      "text": "Strong_Chicken6838\n•\n1mo ago\n\nAMD MI50 users"
+    },
+    {
+      "author": "pmp22",
+      "score": "33",
+      "text": "pmp22\n•\n1mo ago\n\nP40 sisters. what's our response?\n\nFishChillylly\n•\n1mo ago\n\ngenerating responses at 7 tokens per second 🥵\n\nBatOk7254\n•\n1mo ago\n\n2xp40 here. 15-18 tps on dense 27b, 45-50 tps (with 1200-1800 tps prefill) on 35b MOE 😄\n\nFishChillylly\n•\n1mo ago\n\nwell for 27b it’s waiting worthy, and i believe 45-50 is very usable on 35b MOE! i’m currently using around 50 tps, too!\n\nBatOk7254\n•\n1mo ago\n\nThe difference 2nd gpu made is in prefill. It is insanely fast (for p40) - up to 1800 tokens. And it holds a full q8 context with 256K. Plus you can run q6 models.\n\n4 more replies\n3 more replies\n1 more reply\nmuxxington\n•\n1mo ago\n1 more reply"
+    },
+    {
+      "author": "FishChillylly",
+      "score": "52",
+      "text": "FishChillylly\n•\n1mo ago\n\ngenerating responses at 7 tokens per second 🥵\n\nBatOk7254\n•\n1mo ago\n\n2xp40 here. 15-18 tps on dense 27b, 45-50 tps (with 1200-1800 tps prefill) on 35b MOE 😄\n\nFishChillylly\n•\n1mo ago\n\nwell for 27b it’s waiting worthy, and i believe 45-50 is very usable on 35b MOE! i’m currently using around 50 tps, too!\n\nBatOk7254\n•\n1mo ago\n\nThe difference 2nd gpu made is in prefill. It is insanely fast (for p40) - up to 1800 tokens. And it holds a full q8 context with 256K. Plus you can run q6 models.\n\n4 more replies\n3 more replies\n1 more reply"
+    },
+    {
+      "author": "BatOk7254",
+      "score": "12",
+      "text": "BatOk7254\n•\n1mo ago\n\n2xp40 here. 15-18 tps on dense 27b, 45-50 tps (with 1200-1800 tps prefill) on 35b MOE 😄\n\nFishChillylly\n•\n1mo ago\n\nwell for 27b it’s waiting worthy, and i believe 45-50 is very usable on 35b MOE! i’m currently using around 50 tps, too!\n\nBatOk7254\n•\n1mo ago\n\nThe difference 2nd gpu made is in prefill. It is insanely fast (for p40) - up to 1800 tokens. And it holds a full q8 context with 256K. Plus you can run q6 models.\n\n4 more replies\n3 more replies"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1usniqh",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:33:59Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.407,
+    "evidence": 0.2,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-NVFP4-Fast",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.6-27B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25336",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://cdn.hzrd149.com/3d7522a9413a84b2c99fe86909de60cbe2c05c24af42740d4b7d000a4263cc9f.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://cdn.hzrd149.com/4947a36159dfc4a505228ecbac6939a7ecedfbffdf06ca4a37c95b31a9bfde63.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://cdn.hzrd149.com/97ec60c8b035f67949fd3db00b9ca3efb6902b5a70bd2293da5e77029aebad4a.torrent",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/RedHatAI/Qwen3.6-35B-A3B-NVFP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19769",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22196",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}
