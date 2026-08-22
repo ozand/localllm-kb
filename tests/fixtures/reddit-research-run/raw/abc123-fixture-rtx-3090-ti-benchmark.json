@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "run_id": "fixture-reddit-run",
+  "thread_id": "abc123",
+  "source_type": "reddit-thread",
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/abc123/fixture/",
+  "title": "Fixture RTX 3090 Ti benchmark",
+  "author": "fixture-author",
+  "has_post_element": true,
+  "post_body": "Fixture benchmark with VRAM, context, and tokens/s measurements.",
+  "readiness": {"ready": true, "reason": null, "method": "reddit-dom-content-v1"},
+  "comments": [
+    {"author": "reviewer", "score": "10", "text": "Fixture replication comment."}
+  ],
+  "captured_at": "2026-08-22T00:00:00Z",
+  "discovered_by_query_ids": ["query-1"],
+  "quality": {
+    "score": 0.8,
+    "evidence": 0.8,
+    "relevance": 0.8,
+    "community_scrutiny": 0.8,
+    "method": "fixture"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/ggerganov/llama.cpp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "fixture"
+    }
+  ]
+}
