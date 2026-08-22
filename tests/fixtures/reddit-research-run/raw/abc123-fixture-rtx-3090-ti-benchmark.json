@@ -12,6 +12,18 @@
   "comments": [
     {"author": "reviewer", "score": "10", "text": "Fixture replication comment."}
   ],
+  "comment_ranking": {
+    "ranking_version": "comment-evidence-v1",
+    "source_url": "https://www.reddit.com/r/LocalLLaMA/comments/abc123/fixture/",
+    "comment_count": 1,
+    "status": "scored",
+    "by_dimension": {
+      "measurements": [],
+      "commands": [],
+      "model_names": [],
+      "counter_evidence": []
+    }
+  },
   "captured_at": "2026-08-22T00:00:00Z",
   "discovered_by_query_ids": ["query-1"],
   "quality": {

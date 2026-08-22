@@ -99,11 +99,13 @@ The extractor:
 - processes only selected `pending` or `error` records;
 - skips successful immutable captures;
 - stores one JSON capture per Reddit thread under `raw/`;
-- records title, cleaned post body, top comments, query provenance, explainable quality components, separate human-review metadata, readiness metadata, and outbound links;
+- records title, cleaned post body, top comments, query provenance, deterministic comment-evidence rankings, explainable quality components, separate human-review metadata, readiness metadata, and outbound links;
 - rejects shell/error pages and empty or too-short posts with stable readiness reasons;
 - appends sanitized failures to `errors.jsonl`;
 - records bounded per-query and per-thread `attempt_history` entries and derives `retry-summary.json` with final status, retry classification, attempt count, and elapsed time;
 - writes `outbound-references.json` and an explicit `follow-up.json` ledger.
+
+Each captured comment receives deterministic dimension-specific prioritization for measurements, commands, model names, and counter-evidence. Scores, matched signals, missing-text status, exact source URL, author, and original comment index are retained in `comment_ranking`; rankings do not verify, summarize, or exclude comments.
 
 Re-run the same command to resume. A timeout is a recorded state, not permission to remove the URL from the denominator. If a selected source must be excluded, create an explicit durable skip:
 
