@@ -4,5 +4,6 @@
   "confirmed_facts": [],
   "identified_bottlenecks": ["Fixture bottleneck"],
   "new_hypotheses": ["Fixture hypothesis"],
-  "targeted_follow_up_queries": ["fixture follow-up query"]
+  "targeted_follow_up_queries": ["fixture follow-up query"],
+  "claims": []
 }

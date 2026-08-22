@@ -435,6 +435,7 @@ def new_run_manifest(args: argparse.Namespace, queries: list[str]) -> dict[str, 
             "query_manifest": "queries.json",
             "thread_manifest": "threads.json",
             "retry_summary": "retry-summary.json",
+            "claim_review": "claim-review.json",
             "errors": "errors.jsonl",
             "outbound_references": "outbound-references.json",
             "follow_up": "follow-up.json",
@@ -940,6 +941,7 @@ def extract(args: argparse.Namespace) -> int:
             "identified_bottlenecks": [],
             "new_hypotheses": [],
             "targeted_follow_up_queries": [],
+            "claims": [],
             "note": "Populate after synthesis; empty lists are intentional and auditable.",
         })
     run["updated_at"] = utc_now()

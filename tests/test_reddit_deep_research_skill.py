@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -44,12 +45,52 @@ def test_validator_accepts_auditable_fixture():
     assert json.loads(result.stdout)["valid"] is True
 
 
+def test_claim_review_clusters_and_gates_promotion(tmp_path):
+    renderer = load_script("render_research.py")
+    source_a = "https://www.reddit.com/r/LocalLLaMA/comments/a/claim/"
+    source_b = "https://github.com/org/repo"
+    claims = [
+        {"claim_id": "duplicate-a", "cluster_key": "duplicate", "text": "Qwen reaches 50 tok/s", "value": "50 tok/s", "source_urls": [source_a]},
+        {"claim_id": "duplicate-b", "cluster_key": "duplicate", "text": "Qwen reaches 50 tok/s", "value": "50 tok/s", "source_urls": [source_b]},
+        {"claim_id": "compatible-a", "cluster_key": "compatible", "text": "Qwen reaches 50 tok/s", "value": "50 tok/s", "source_urls": [source_b]},
+        {"claim_id": "compatible-b", "cluster_key": "compatible", "text": "Qwen reaches 60 tok/s", "value": "50 tok/s", "source_urls": [source_b]},
+        {"claim_id": "conflict-a", "cluster_key": "conflicting", "text": "Qwen reaches 60 tok/s", "value": "60 tok/s", "source_urls": [source_b]},
+        {"claim_id": "conflict-b", "cluster_key": "conflicting", "text": "Qwen reaches 60 tok/s", "value": "70 tok/s", "source_urls": [source_b]},
+        {"claim_id": "missing", "cluster_key": "missing", "text": "Context varies", "value": "unknown", "source_urls": []},
+        {"claim_id": "unresolved-a", "cluster_key": "unresolved", "text": "Context varies", "source_urls": [source_b]},
+        {"claim_id": "unresolved-b", "cluster_key": "unresolved", "text": "Context varies in another setup", "value": "unknown", "source_urls": [source_b]},
+    ]
+    review = renderer.analyze_claims(claims)
+    assert review["schema_version"] == "claim-review-v1"
+    assert review["relationship_counts"] == {"compatible": 1, "conflicting": 1, "duplicate": 1, "unresolved": 1}
+    assert review["cluster_count"] == 5
+    assert any(item["relationship"] == "duplicate" for item in review["relationships"])
+    assert any(item["relationship"] == "conflicting" for item in review["relationships"])
+    missing = next(item for item in review["claims"] if item["claim_id"] == "missing")
+    assert missing["promotion"]["eligible"] is False
+    assert "missing exact public source URL" in missing["promotion"]["reasons"]
+    assert review["promotion_ready"] is False
+
+
+def test_claim_review_handles_empty_and_private_sources():
+    renderer = load_script("render_research.py")
+    empty = renderer.analyze_claims([])
+    assert empty["review_status"] == "empty"
+    assert empty["promotion_ready"] is False
+    private = renderer.analyze_claims([{"claim_id": "private", "text": "x", "source_urls": ["http://127.0.0.1:8080/x"]}])
+    claim = private["claims"][0]
+    assert claim["promotion"]["eligible"] is False
+    assert claim["source_urls"] == []
+
+
 def test_renderer_outputs_okf_and_exact_urls(tmp_path):
     script = SKILL / "scripts" / "render_research.py"
+    run_dir = tmp_path / "fixture-reddit-run"
+    shutil.copytree(FIXTURE, run_dir)
     corpus = tmp_path / "fixture-reddit-run-corpus.md"
     synthesis = tmp_path / "fixture-reddit-run-synthesis.md"
-    subprocess.run([sys.executable, str(script), "corpus", "--run-dir", str(FIXTURE), "--output", str(corpus)], check=True)
-    subprocess.run([sys.executable, str(script), "synthesis", "--run-dir", str(FIXTURE), "--output", str(synthesis)], check=True)
+    subprocess.run([sys.executable, str(script), "corpus", "--run-dir", str(run_dir), "--output", str(corpus)], check=True)
+    subprocess.run([sys.executable, str(script), "synthesis", "--run-dir", str(run_dir), "--output", str(synthesis)], check=True)
     corpus_text = corpus.read_text(encoding="utf-8")
     synthesis_text = synthesis.read_text(encoding="utf-8")
     assert corpus_text.startswith("---\n")
@@ -57,6 +98,8 @@ def test_renderer_outputs_okf_and_exact_urls(tmp_path):
     assert "https://www.reddit.com/r/LocalLLaMA/search/" in corpus_text
     assert "https://www.reddit.com/r/LocalLLaMA/comments/abc123/fixture/" in corpus_text
     assert "community-synthesis-unverified" in synthesis_text
+    assert "## Claim review" in synthesis_text
+    assert (run_dir / "claim-review.json").exists()
     assert re.fullmatch(r"[a-z0-9-]+\.md", corpus.name)
 
 

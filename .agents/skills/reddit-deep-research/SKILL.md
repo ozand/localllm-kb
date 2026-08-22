@@ -105,6 +105,8 @@ The extractor:
 - records bounded per-query and per-thread `attempt_history` entries and derives `retry-summary.json` with final status, retry classification, attempt count, and elapsed time;
 - writes `outbound-references.json` and an explicit `follow-up.json` ledger.
 
+The follow-up ledger may contain bounded, reviewer-authored `claims` records. The synthesis renderer derives `claim-review.json`: deterministic cluster IDs, grouping reasons, duplicate/compatible/conflicting/unresolved relationships, exact public source URL checks, and machine-readable promotion eligibility. It never changes immutable captures or adjudicates truth.
+
 Each captured comment receives deterministic dimension-specific prioritization for measurements, commands, model names, and counter-evidence. Scores, matched signals, missing-text status, exact source URL, author, and original comment index are retained in `comment_ranking`; rankings do not verify, summarize, or exclude comments.
 
 Re-run the same command to resume. A timeout is a recorded state, not permission to remove the URL from the denominator. If a selected source must be excluded, create an explicit durable skip:
@@ -153,7 +155,7 @@ Resolve or explicitly report remaining `pending` and `error` records before desc
 
 ### Step 8 — Render separate OKF artifacts
 
-Use `render_research.py corpus` and `synthesis` as documented in the artifact contract. The corpus must list all exact search URLs and all selected Reddit URLs. The synthesis must report coverage and failures and must not invent consensus.
+Use `render_research.py corpus` and `synthesis` as documented in the artifact contract. The corpus must list all exact search URLs and all selected Reddit URLs. The synthesis must report coverage and failures and must not invent consensus. When claims are present in `follow-up.json`, it also emits `claim-review.json`; candidates without exact public source URLs or with conflicting/unresolved relationships remain blocked from promotion.
 
 ### Step 9 — Audit a publication candidate
 
