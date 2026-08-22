@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "run_id": "fixture-reddit-run",
+  "topic": "Fixture Reddit research run",
+  "created_at": "2026-08-22T00:00:00Z",
+  "updated_at": "2026-08-22T00:00:00Z",
+  "status": "captured",
+  "target_selected_sources": 1,
+  "query_plan": [
+    {
+      "query_id": "query-1",
+      "query": "RTX 3090 Ti LLM",
+      "subreddit": "LocalLLaMA",
+      "sort": "relevance",
+      "time_filter": null,
+      "search_url": "https://www.reddit.com/r/LocalLLaMA/search/?q=RTX%203090%20Ti%20LLM&restrict_sr=1&sort=relevance",
+      "status": "completed",
+      "attempts": 1,
+      "discovered_count": 1,
+      "new_unique_count": 1,
+      "error": null
+    }
+  ],
+  "threads": [
+    {
+      "thread_id": "abc123",
+      "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/abc123/fixture/",
+      "title": "Fixture RTX 3090 Ti benchmark",
+      "discovered_by_query_ids": ["query-1"],
+      "selected": true,
+      "selection_reason": "fixture",
+      "status": "captured",
+      "attempts": 1,
+      "capture_file": "raw/abc123-fixture-rtx-3090-ti-benchmark.json",
+      "quality": {
+        "score": 0.8,
+        "evidence": 0.8,
+        "relevance": 0.8,
+        "community_scrutiny": 0.8,
+        "method": "fixture"
+      },
+      "outbound_reference_count": 1,
+      "last_error": null
+    }
+  ],
+  "counts": {
+    "queries_total": 1,
+    "queries_completed": 1,
+    "discovered_unique": 1,
+    "selected": 1,
+    "captured": 1,
+    "skipped": 0,
+    "pending": 0,
+    "errors": 0
+  },
+  "saturation": {
+    "window_size": 5,
+    "minimum_new_sources": 2,
+    "consecutive_low_yield_queries": 0,
+    "reached": false,
+    "reason": null
+  },
+  "artifacts": {
+    "run_manifest": "run.json",
+    "query_manifest": "queries.json",
+    "thread_manifest": "threads.json",
+    "errors": "errors.jsonl",
+    "outbound_references": "outbound-references.json",
+    "follow_up": "follow-up.json"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "reddit-deep-research",
+  "skill_path": ".agents/skills/reddit-deep-research/SKILL.md",
+  "cases": [
+    {
+      "name": "mass-research-completeness-and-provenance",
+      "task": "Research at least 50 Reddit sources about running local LLMs on an RTX 3090 Ti and produce a reusable report.",
+      "assertions": [
+        "The plan uses the bundled scripts under .agents/skills/reddit-deep-research/scripts rather than creating temporary C:/Temp or /tmp collectors.",
+        "The run persists every exact search query and search URL in a durable query manifest.",
+        "The run persists every discovered and selected canonical Reddit thread URL with query provenance and processing status.",
+        "The response does not claim 50+ researched sources unless at least 50 sources are captured or explicitly skipped with reasons, or saturation is recorded."
+      ]
+    },
+    {
+      "name": "outbound-evidence-and-okf-separation",
+      "task": "Investigate Reddit claims about llama.cpp FlashAttention and KV-cache settings, follow important GitHub links, and add the research to the KB.",
+      "assertions": [
+        "Outbound links are stored separately with one of verified, redirected, unreachable, or unverified states.",
+        "Reddit community observations are not presented as upstream or locally validated facts.",
+        "Immutable per-thread raw captures remain separate from corpus and synthesis Markdown.",
+        "Rendered Markdown uses kebab-case filenames and OKF YAML frontmatter with run_id, source_count, and evidence_status."
+      ]
+    },
+    {
+      "name": "resume-and-error-receipts",
+      "task": "Resume a Reddit research run that stopped after 31 of 60 selected threads because several Surf navigations timed out.",
+      "assertions": [
+        "The workflow resumes pending and retryable error records without revisiting successful immutable captures.",
+        "Failed URLs remain in the thread manifest and receive sanitized append-only error receipts.",
+        "The receipt omits credentials, cookies, browser profile paths, private prompts, and local absolute paths.",
+        "Validation reports remaining pending/error counts before synthesis is described as complete."
+      ]
+    }
+  ]
+}

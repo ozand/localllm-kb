@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "run_id": "fixture-reddit-run",
+  "confirmed_facts": [],
+  "identified_bottlenecks": ["Fixture bottleneck"],
+  "new_hypotheses": ["Fixture hypothesis"],
+  "targeted_follow_up_queries": ["fixture follow-up query"]
+}
