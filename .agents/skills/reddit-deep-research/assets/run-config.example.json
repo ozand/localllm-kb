@@ -3,6 +3,10 @@
   "run_id": "rtx-3090-ti-llm-optimization-2026-08",
   "topic": "RTX 3090 Ti local LLM deployment and optimization",
   "target_selected_sources": 50,
+  "coverage": {
+    "mode": "enabled",
+    "plan": "kb/raw/research/runs/rtx-3090-ti-llm-optimization-2026-08/coverage-plan.json"
+  },
   "subreddit": "LocalLLaMA",
   "sorts": ["relevance", "top", "new"],
   "time_filter": "year",

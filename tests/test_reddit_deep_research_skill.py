@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".agents" / "skills" / "reddit-deep-research"
 FIXTURE = ROOT / "tests" / "fixtures" / "reddit-research-run"
@@ -88,6 +90,85 @@ def test_windows_cmd_invocation_quotes_ampersand_url(monkeypatch):
     command, use_shell = module.build_surf_invocation("366714952", ["go", "https://www.reddit.com/r/LocalLLaMA/search/?q=RTX%203090%20Ti&restrict_sr=1&sort=top"])
     assert use_shell is True
     assert '"https://www.reddit.com/r/LocalLLaMA/search/?q=RTX%203090%20Ti&restrict_sr=1&sort=top"' in command
+
+
+def test_coverage_plan_reports_all_dimensions_and_query_provenance(tmp_path):
+    module = load_script("reddit_research.py")
+    plan = tmp_path / "coverage.json"
+    plan.write_text(json.dumps({"dimensions": [
+        {"id": "capacity", "queries": ["VRAM fit"]},
+        {"id": "failures", "queries": ["OOM troubleshooting"]},
+    ]}), encoding="utf-8")
+    args = type("Args", (), {
+        "run_id": "coverage-fixture",
+        "topic": "coverage fixture",
+        "sorts": "relevance",
+        "time_filter": "year",
+        "subreddit": "LocalLLaMA",
+        "coverage_mode": "enabled",
+        "coverage_plan": str(plan),
+        "target": 50,
+        "saturation_window": 5,
+        "saturation_min_new": 2,
+    })()
+    run = module.new_run_manifest(args, ["VRAM fit", "OOM troubleshooting"])
+    assert run["coverage"]["uncovered_dimensions"] == ["capacity", "failures"]
+    run["query_plan"][0]["status"] = "completed"
+    module.update_counts(run)
+    assert run["coverage"]["covered_dimensions"] == ["capacity"]
+    assert run["coverage"]["uncovered_dimensions"] == ["failures"]
+    assert run["coverage"]["complete"] is False
+    run["query_plan"][1]["status"] = "completed"
+    module.update_counts(run)
+    assert run["coverage"]["complete"] is True
+
+
+def test_coverage_enabled_50_item_run_cannot_complete_on_target_only(tmp_path):
+    run = json.loads((FIXTURE / "run.json").read_text(encoding="utf-8"))
+    run["target_selected_sources"] = 50
+    run["threads"] = [
+        {"thread_id": f"fixture-{index}", "canonical_url": f"https://www.reddit.com/r/LocalLLaMA/comments/fixture{index}/item/", "title": f"Fixture item {index}", "selected": True, "status": "captured", "discovered_by_query_ids": ["query-1"], "capture_file": None}
+        for index in range(50)
+    ]
+    run["counts"] = {"queries_total": 1, "queries_completed": 1, "discovered_unique": 50, "selected": 50, "captured": 50, "skipped": 0, "pending": 0, "errors": 0}
+    run["coverage"] = {"mode": "enabled", "dimensions": [{"id": "uncovered", "queries": ["missing query"]}], "covered_dimensions": [], "uncovered_dimensions": ["uncovered"], "complete": False}
+    (tmp_path / "run.json").write_text(json.dumps(run), encoding="utf-8")
+    output = subprocess.run([sys.executable, str(SKILL / "scripts" / "reddit_research.py"), "validate", "--run-dir", str(tmp_path), "--require-target"], capture_output=True, text=True)
+    assert output.returncode != 0
+    assert "coverage incomplete" in output.stdout
+    assert "uncovered" in output.stdout
+
+
+def test_coverage_enabled_run_cannot_complete_on_target_only(tmp_path):
+    module = load_script("reddit_research.py")
+    run = json.loads((FIXTURE / "run.json").read_text(encoding="utf-8"))
+    run["target_selected_sources"] = 1
+    run["coverage"] = {
+        "mode": "enabled",
+        "dimensions": [{"id": "uncovered", "queries": ["missing query"]}],
+        "covered_dimensions": [],
+        "uncovered_dimensions": ["uncovered"],
+        "complete": False,
+    }
+    run["query_plan"][0]["status"] = "completed"
+    (tmp_path / "run.json").write_text(json.dumps(run), encoding="utf-8")
+    result = module.validate(type("Args", (), {"run_dir": str(tmp_path), "require_target": True})())
+    assert result != 0
+    output = subprocess.run([sys.executable, str(SKILL / "scripts" / "reddit_research.py"), "validate", "--run-dir", str(tmp_path), "--require-target"], capture_output=True, text=True)
+    assert "coverage incomplete" in output.stdout
+    assert "uncovered" in output.stdout
+
+
+def test_coverage_plan_rejects_empty_and_unknown_queries(tmp_path):
+    module = load_script("reddit_research.py")
+    empty = tmp_path / "empty.json"
+    empty.write_text(json.dumps({"dimensions": []}), encoding="utf-8")
+    with pytest.raises(module.CoveragePlanError):
+        module.load_coverage_plan(empty, "enabled", ["known"])
+    unknown = tmp_path / "unknown.json"
+    unknown.write_text(json.dumps({"dimensions": [{"id": "x", "queries": ["missing"]}]}), encoding="utf-8")
+    with pytest.raises(module.CoveragePlanError):
+        module.load_coverage_plan(unknown, "enabled", ["known"])
 
 
 def test_discovery_helpers_are_deterministic():

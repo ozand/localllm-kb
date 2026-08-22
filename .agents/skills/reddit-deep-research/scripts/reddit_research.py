@@ -67,6 +67,10 @@ class CaptureNotReadyError(RuntimeError):
         self.reason = reason
 
 
+class CoveragePlanError(ValueError):
+    pass
+
+
 def resolve_surf_executable() -> str:
     candidates = ["surf.cmd", "surf"] if os.name == "nt" else ["surf"]
     for candidate in candidates:
@@ -263,13 +267,74 @@ def query_record(subreddit: str, query: str, sort: str, time_filter: str | None)
     }
 
 
+def load_coverage_plan(path: Path | None, mode: str, queries: list[str]) -> dict[str, Any]:
+    if mode == "disabled":
+        return {"mode": "disabled", "dimensions": [], "covered_dimensions": [], "uncovered_dimensions": [], "complete": True}
+    if path is None:
+        raise CoveragePlanError("coverage mode enabled but --coverage-plan was not provided")
+    try:
+        raw = json_load(path)
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CoveragePlanError(f"invalid coverage plan: {exc}") from exc
+    dimensions = raw.get("dimensions") if isinstance(raw, dict) else None
+    if not isinstance(dimensions, list) or not dimensions:
+        raise CoveragePlanError("coverage plan must contain a non-empty dimensions list")
+    query_set = set(queries)
+    normalized = []
+    seen_ids = set()
+    for dimension in dimensions:
+        if not isinstance(dimension, dict) or not isinstance(dimension.get("id"), str):
+            raise CoveragePlanError("each coverage dimension must have a string id")
+        dimension_id = slugify(dimension["id"], max_length=80)
+        if not dimension_id or dimension_id in seen_ids:
+            raise CoveragePlanError("coverage dimension ids must be unique and non-empty")
+        dimension_queries = dimension.get("queries")
+        if not isinstance(dimension_queries, list) or not dimension_queries or any(not isinstance(item, str) or not item.strip() for item in dimension_queries):
+            raise CoveragePlanError(f"coverage dimension {dimension_id} must contain a non-empty queries list")
+        missing = sorted(set(dimension_queries) - query_set)
+        if missing:
+            raise CoveragePlanError(f"coverage dimension {dimension_id} references unknown queries: {missing}")
+        seen_ids.add(dimension_id)
+        normalized.append({"id": dimension_id, "queries": list(dict.fromkeys(dimension_queries))})
+    return {"mode": "enabled", "dimensions": normalized, "covered_dimensions": [], "uncovered_dimensions": [item["id"] for item in normalized], "complete": False}
+
+
+def update_coverage(run: dict[str, Any]) -> dict[str, Any]:
+    coverage = run.get("coverage") or {"mode": "disabled", "dimensions": []}
+    if coverage.get("mode", "disabled") == "disabled":
+        coverage.update({"mode": "disabled", "covered_dimensions": [], "uncovered_dimensions": [], "complete": True})
+        run["coverage"] = coverage
+        return coverage
+    dimensions = coverage.get("dimensions")
+    if not isinstance(dimensions, list) or not dimensions:
+        coverage.update({"covered_dimensions": [], "uncovered_dimensions": [], "complete": False, "error": "coverage plan is empty or malformed"})
+        run["coverage"] = coverage
+        return coverage
+    covered = []
+    for dimension in dimensions:
+        dimension_id = dimension.get("id") if isinstance(dimension, dict) else None
+        dimension_queries = set(dimension.get("queries", [])) if isinstance(dimension, dict) else set()
+        if dimension_id and any(query.get("status") == "completed" and query.get("query") in dimension_queries for query in run.get("query_plan", [])):
+            covered.append(dimension_id)
+    required = [item.get("id") for item in dimensions if isinstance(item, dict) and item.get("id")]
+    coverage.update({"covered_dimensions": covered, "uncovered_dimensions": [item for item in required if item not in covered], "complete": len(covered) == len(required) and bool(required)})
+    coverage.pop("error", None)
+    run["coverage"] = coverage
+    return coverage
+
+
 def new_run_manifest(args: argparse.Namespace, queries: list[str]) -> dict[str, Any]:
     if args.run_id != slugify(args.run_id, max_length=200):
         raise ValueError("--run-id must be lowercase kebab-case")
     created = utc_now()
     sorts = [item.strip() for item in args.sorts.split(",") if item.strip()]
+    coverage = load_coverage_plan(Path(args.coverage_plan) if args.coverage_plan else None, args.coverage_mode, queries)
+    dimension_by_query = {}
+    for dimension in coverage["dimensions"]:
+        for query in dimension["queries"]:
+            dimension_by_query.setdefault(query, []).append(dimension["id"])
     query_plan = [
-        query_record(args.subreddit, query, sort, args.time_filter)
+        {**query_record(args.subreddit, query, sort, args.time_filter), "coverage_dimensions": dimension_by_query.get(query, [])}
         for query in queries
         for sort in sorts
     ]
@@ -283,6 +348,7 @@ def new_run_manifest(args: argparse.Namespace, queries: list[str]) -> dict[str, 
         "target_selected_sources": args.target,
         "subreddits": [args.subreddit],
         "query_plan": query_plan,
+        "coverage": coverage,
         "selection_policy": {
             "deduplicate_by": "canonical_thread_url",
             "minimum_title_length": 8,
@@ -331,6 +397,7 @@ def sanitize_diagnostic(message: str) -> str:
 
 
 def update_counts(run: dict[str, Any]) -> None:
+    update_coverage(run)
     threads = run.get("threads", [])
     selected = [item for item in threads if item.get("selected")]
     run["counts"] = {
@@ -342,6 +409,19 @@ def update_counts(run: dict[str, Any]) -> None:
         "skipped": sum(item.get("status") == "skipped" for item in selected),
         "pending": sum(item.get("status") == "pending" for item in selected),
         "errors": sum(item.get("status") == "error" for item in selected),
+    }
+
+
+def completion_requirements(run: dict[str, Any]) -> dict[str, Any]:
+    update_counts(run)
+    target_met = run["counts"]["selected"] >= run.get("target_selected_sources", 0) or bool(run.get("saturation", {}).get("reached"))
+    extraction_complete = run["counts"]["pending"] == 0 and run["counts"]["errors"] == 0
+    coverage = update_coverage(run)
+    return {
+        "target_met": target_met,
+        "extraction_complete": extraction_complete,
+        "coverage_complete": bool(coverage.get("complete")),
+        "complete": extraction_complete and target_met and bool(coverage.get("complete")),
     }
 
 
@@ -375,7 +455,7 @@ def discover(args: argparse.Namespace) -> int:
     for query in run["query_plan"]:
         if query["status"] == "completed":
             continue
-        if len(run["threads"]) >= run["target_selected_sources"]:
+        if len(run["threads"]) >= run["target_selected_sources"] and (run.get("coverage", {}).get("mode", "disabled") == "disabled" or update_coverage(run).get("complete")):
             break
         try:
             query["attempts"] += 1
@@ -427,8 +507,10 @@ def discover(args: argparse.Namespace) -> int:
     run["updated_at"] = utc_now()
     update_counts(run)
     write_derived_manifests(run_dir, run)
-    print(json.dumps({"run_id": run["run_id"], "selected": run["counts"]["selected"], "discovered_unique": run["counts"]["discovered_unique"], "saturation": run["saturation"]}, ensure_ascii=False))
-    return 0 if run["counts"]["selected"] >= run["target_selected_sources"] or run["saturation"]["reached"] else 3
+    requirements = completion_requirements(run)
+    discovery_complete = requirements["target_met"] and requirements["coverage_complete"]
+    print(json.dumps({"run_id": run["run_id"], "selected": run["counts"]["selected"], "discovered_unique": run["counts"]["discovered_unique"], "saturation": run["saturation"], "coverage": run["coverage"], "complete": discovery_complete}, ensure_ascii=False))
+    return 0 if discovery_complete else 3
 
 
 SCORING_VERSION = "evidence-triage-v2"
@@ -699,7 +781,8 @@ def extract(args: argparse.Namespace) -> int:
         update_counts(run)
         write_derived_manifests(run_dir, run)
 
-    run["status"] = "captured" if all((not item.get("selected")) or item["status"] in TERMINAL_STATUSES for item in run["threads"]) else "partial"
+    extraction_complete = all((not item.get("selected")) or item["status"] in TERMINAL_STATUSES for item in run["threads"])
+    run["status"] = "captured" if extraction_complete and completion_requirements(run)["complete"] else "partial"
     json_dump(run_dir / "outbound-references.json", build_outbound_ledger(run_dir, run))
     follow_up_path = run_dir / "follow-up.json"
     if not follow_up_path.exists():
@@ -738,7 +821,7 @@ def skip_thread(args: argparse.Namespace) -> int:
     })
     run["updated_at"] = utc_now()
     update_counts(run)
-    run["status"] = "captured" if run["counts"]["pending"] == 0 and run["counts"]["errors"] == 0 else "partial"
+    run["status"] = "captured" if completion_requirements(run)["complete"] else "partial"
     write_derived_manifests(run_dir, run)
     print(json.dumps({"run_id": run["run_id"], "thread_id": args.thread_id, "status": "skipped", "reason": args.reason}, ensure_ascii=False))
     return 0
@@ -823,13 +906,14 @@ def write_receipt(args: argparse.Namespace) -> int:
         "counts": run["counts"],
         "target_selected_sources": run.get("target_selected_sources"),
         "saturation": run.get("saturation"),
+        "coverage": run.get("coverage", {"mode": "disabled", "complete": True, "covered_dimensions": [], "uncovered_dimensions": []}),
         "scripts": [
             ".agents/skills/reddit-deep-research/scripts/reddit_research.py",
             ".agents/skills/reddit-deep-research/scripts/render_research.py",
         ],
         "artifacts": run.get("artifacts", {}),
         "outbound_verification_counts": verification_counts,
-        "complete": run["counts"]["pending"] == 0 and run["counts"]["errors"] == 0 and (run["counts"]["selected"] >= run.get("target_selected_sources", 0) or bool(run.get("saturation", {}).get("reached"))),
+        "complete": completion_requirements(run)["complete"],
         "residual_risks": [
             "Reddit captures are community observations, not canonical facts.",
             "Outbound references marked unverified still require manual evidence inspection.",
@@ -883,9 +967,13 @@ def validate(args: argparse.Namespace) -> int:
     incomplete = [item for item in selected if item.get("status") not in TERMINAL_STATUSES]
     if incomplete:
         problems.append(f"selected extraction incomplete: {run['counts']['pending']} pending, {run['counts']['errors']} errors")
-    if args.require_target and len(selected) < run.get("target_selected_sources", 0) and not run.get("saturation", {}).get("reached"):
+    requirements = completion_requirements(run)
+    if args.require_target and not requirements["target_met"]:
         problems.append("selected source target not met and saturation not reached")
-    result = {"valid": not problems, "problems": problems, "run_id": run.get("run_id")}
+    coverage = run.get("coverage", {"mode": "disabled", "complete": True, "uncovered_dimensions": []})
+    if coverage.get("mode") == "enabled" and not coverage.get("complete"):
+        problems.append("coverage incomplete: uncovered dimensions: " + ", ".join(coverage.get("uncovered_dimensions", [])))
+    result = {"valid": not problems, "problems": problems, "run_id": run.get("run_id"), "coverage": coverage, "complete": requirements["complete"]}
     print(json.dumps(result, ensure_ascii=False))
     return 0 if not problems else 2
 
@@ -909,6 +997,8 @@ def build_parser() -> argparse.ArgumentParser:
     discover_parser.add_argument("--timeout", type=int, default=90)
     discover_parser.add_argument("--saturation-window", type=int, default=5)
     discover_parser.add_argument("--saturation-min-new", type=int, default=2)
+    discover_parser.add_argument("--coverage-mode", choices=("disabled", "enabled"), default="disabled")
+    discover_parser.add_argument("--coverage-plan", help="JSON file with dimensions and query assignments when coverage is enabled.")
     discover_parser.set_defaults(func=discover)
 
     extract_parser = subparsers.add_parser("extract", help="Resume extraction for selected pending/error threads and write immutable JSON captures.")
