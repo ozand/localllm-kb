@@ -160,6 +160,38 @@ def test_follow_up_ledger_is_not_overwritten_on_resume():
     assert 'if not follow_up_path.exists()' in script_text
 
 
+def test_outbound_normalization_filters_and_deduplicates():
+    module = load_script("reddit_research.py")
+    normalized, reason = module.normalize_outbound_url("https://GitHub.com/org/repo?utm_source=reddit&b=2&a=1#readme")
+    assert reason is None
+    assert normalized == "https://github.com/org/repo?a=1&b=2"
+    assert module.normalize_outbound_url("https://www.reddit.com/r/LocalLLaMA/comments/abc/")[1] == "excluded-domain"
+    assert module.score_outbound_url(normalized) == (100, "primary")
+
+
+def test_outbound_ledger_preserves_provenance_and_priority(tmp_path):
+    module = load_script("reddit_research.py")
+    run = json.loads((FIXTURE / "run.json").read_text(encoding="utf-8"))
+    capture_source = FIXTURE / run["threads"][0]["capture_file"]
+    capture = json.loads(capture_source.read_text(encoding="utf-8"))
+    capture["outbound_references"] = [
+        {"url": "https://github.com/org/repo?utm_source=reddit", "verification_state": "unverified"},
+        {"url": "https://github.com/org/repo", "verification_state": "unverified"},
+        {"url": "https://www.reddit.com/r/LocalLLaMA/comments/other/", "verification_state": "unverified"},
+    ]
+    target_capture = tmp_path / run["threads"][0]["capture_file"]
+    target_capture.parent.mkdir(parents=True)
+    target_capture.write_text(json.dumps(capture), encoding="utf-8")
+    ledger = module.build_outbound_ledger(tmp_path, run)
+    included = [r for r in ledger["references"] if r["included"]]
+    excluded = [r for r in ledger["references"] if not r["included"]]
+    assert len(included) == 1
+    assert included[0]["source_count"] == 1
+    assert included[0]["priority_class"] == "primary"
+    assert included[0]["original_urls"] == ["https://github.com/org/repo?utm_source=reddit", "https://github.com/org/repo"]
+    assert excluded[0]["filter_reason"] == "excluded-domain"
+
+
 def test_outbound_ledger_is_separate_from_immutable_capture(tmp_path):
     module = load_script("reddit_research.py")
     run = json.loads((FIXTURE / "run.json").read_text(encoding="utf-8"))

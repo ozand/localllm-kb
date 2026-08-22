@@ -122,7 +122,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py verify-out
   --limit 25
 ```
 
-This records reachability, redirects, and timestamps in the separate outbound ledger. A successful page load remains `unverified`. After manually inspecting the referenced evidence, promote it explicitly:
+This records bounded reachability, redirects, and timestamps in the separate outbound ledger. Filtering excludes irrelevant/static/private links as `skipped`; included references are ordered by deterministic priority. A successful page load remains `unverified`. Failed access is recorded as `failed`. After manually inspecting the referenced evidence, promote it explicitly:
 
 ```bash
 python .agents/skills/reddit-deep-research/scripts/reddit_research.py mark-outbound \
@@ -132,7 +132,7 @@ python .agents/skills/reddit-deep-research/scripts/reddit_research.py mark-outbo
   --note "Inspected upstream benchmark command and environment section."
 ```
 
-Do not conflate outbound verification counts with the number of Reddit sources. Outbound verification updates the ledger, never immutable per-thread raw captures.
+Do not conflate outbound verification counts with the number of Reddit sources. Outbound verification updates the bounded ledger, never immutable per-thread raw captures. The `--limit` flag applies only to included `unverified` references.
 
 ### Step 6 — Evaluate quality and saturation
 

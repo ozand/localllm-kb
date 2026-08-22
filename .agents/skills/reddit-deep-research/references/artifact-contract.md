@@ -105,10 +105,11 @@ Use these states only:
 
 - `verified` — the referenced evidence was manually inspected and an evidence note was recorded;
 - `redirected` — target loaded after redirect; preserve both original and final URL, but do not imply the claim was verified;
-- `unreachable` — attempted and failed with a sanitized reason;
-- `unverified` — discovered but not yet visited.
+- `failed` — automated access was attempted and failed with a sanitized reason;
+- `skipped` — excluded by the deterministic filter or intentionally not scheduled;
+- `unverified` — included and not yet visited.
 
-A Reddit comment mentioning a GitHub/Hugging Face URL does not make that external claim verified.
+A Reddit comment mentioning a GitHub/Hugging Face URL does not make that external claim verified. The outbound ledger must retain normalized URL, original URL variants, source thread IDs, source capture files, inclusion/filter reason, priority score/class, and verification state.
 
 ## Error receipts
 
