@@ -85,3 +85,15 @@ python -m pytest -q
 kb-bootstrap validate --dir kb
 qmd update
 ```
+
+<!-- kb-bootstrap:repository-governance:start -->
+## Repository routing and completion safety
+
+- Expected repository: `ozand/localllm-kb`.
+- Run `kb-bootstrap doctor --repo ozand/localllm-kb` before GitHub mutations.
+- Use explicit `--repo` for every mutating `gh` command.
+- Keep consumer-specific work in the consumer repository; use a separate verified checkout or worktree for upstream framework changes.
+- Before completion claims, run `kb-bootstrap check-completion --repo ozand/localllm-kb --commit <commit> [--pr <number>]`.
+- Fail closed on missing or mismatched repository, branch, pull request, or commit evidence.
+- Never include credentials, private payloads, runtime checkpoints, or unsanitized logs in receipts.
+<!-- kb-bootstrap:repository-governance:end -->
