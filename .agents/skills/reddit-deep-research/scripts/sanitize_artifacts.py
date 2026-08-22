@@ -12,8 +12,11 @@ from typing import Iterable, TextIO
 
 SCHEMA_VERSION = 1
 PATTERNS = (
-    ("windows-path", re.compile(r'(?<![A-Za-z0-9])(?:[A-Za-z]:[\\/]|\\\\)[^"\'<>\r\n]+'), "<windows-path>"),
-    ("unix-path", re.compile(r'(?<!:)\/(?:home|Users|tmp|var|opt|srv|mnt)\/[^"\'<>\r\n]+'), "<unix-path>"),
+    # Only drive-letter paths are treated as Windows paths. Requiring a drive
+    # letter avoids mistaking arbitrary JSON escape sequences (for example
+    # \\n or \\" ) for UNC paths or filesystem paths.
+    ("windows-path", re.compile(r'''(?<![A-Za-z0-9])[A-Za-z]:[\\/][^"'<>\r\n]+'''), "<windows-path>"),
+    ("unix-path", re.compile(r'''(?<!:)\/(?:home|Users|tmp|var|opt|srv|mnt)\/[^"'<>\r\n]+'''), "<unix-path>"),
     ("private-endpoint", re.compile(r"\b(?:(?:10|127)\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|172\.(?:1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3})(?::\d{1,5})?\b"), "<private-endpoint>"),
     ("api-key", re.compile(r"(?i)(?:api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=]\s*[^\s,;]+"), "<secret-assignment>"),
     ("bearer-token", re.compile(r"(?i)bearer\s+[A-Za-z0-9._~+\-/]+=*"), "Bearer <redacted>"),
@@ -26,11 +29,13 @@ def sanitize_text(text: str) -> tuple[str, dict[str, int]]:
     result = text
     for name, pattern, replacement in PATTERNS:
         def replace_match(match: re.Match[str]) -> str:
-            # In JSON source, a path's final backslash escapes the structural
-            # quote. Preserve that escape while replacing only the path.
+            # JSON source encodes a closing string quote as backslash+quote.
+            # The path regex consumes the backslash before that quote; restore
+            # the escape so the structural quote remains valid JSON.
             if name in {"windows-path", "unix-path"} and match.group().endswith(chr(92)):
                 return replacement + chr(92)
             return replacement
+
         result, count = pattern.subn(replace_match, result)
         counts[name] = count
     return result, {name: count for name, count in counts.items() if count}
@@ -76,7 +81,8 @@ def sanitize_path(input_path: Path, output_path: Path) -> dict:
         target.parent.mkdir(parents=True, exist_ok=True)
         sanitized, counts = sanitize_text(source.read_text(encoding="utf-8", errors="replace"))
         target.write_text(sanitized, encoding="utf-8", newline="\n")
-        for name, count in counts.items(): total_counts[name] = total_counts.get(name, 0) + count
+        for name, count in counts.items():
+            total_counts[name] = total_counts.get(name, 0) + count
         files.append({"input": relative.as_posix(), "output": relative.as_posix(), "categories": counts, "matched": sum(counts.values())})
     return {"schema_version": SCHEMA_VERSION, "mode": "sanitize", "input": "<input>", "output": "<output>", "file_count": len(files), "category_counts": total_counts, "files": files}
 
