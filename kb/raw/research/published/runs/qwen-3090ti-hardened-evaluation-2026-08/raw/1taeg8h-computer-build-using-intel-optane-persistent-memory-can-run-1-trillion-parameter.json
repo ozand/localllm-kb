@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1taeg8h/computer_build_using_intel_optane_persistent/",
+  "title": "Computer build using Intel Optane Persistent Memory - Can run 1 trillion parameter model at over 4 tokens/sec",
+  "author": "APFrisco",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3mo ago\nAPFrisco\nComputer build using Intel Optane Persistent Memory - Can run 1 trillion parameter model at over 4 tokens/sec\nTutorial | Guide\n\nAs the title states, my build is indeed able to run a 1 trillion parameter model (in this case Kimi K2.5) locally at ~4 tokens/second. I thought r/LocalLLaMA would be interested in the build due to that stat line, and also due to the inclusion of an unusual part, Intel Optane Persistent Memory, which I haven’t seen anyone use in an LLM inference build before. Optane PMem is a DIMM form factor memory unit that can function in a way that is somewhere between DRAM and an SSD. Intel has discontinued the line, and I found sticks on the secondhand market for much less than what the equivalent DRAM capacity would cost. It is this large PMem capacity (768GB) that allows me to host such large models on my system. For my build I used the PMem in Memory Mode, which is where the PMem is available to the computer as RAM, with the computer’s DRAM sticks functioning as a cache.\n\nKimi K2.5’s mixture-of-experts architecture is an ideal test model for my build. To get the results I did, I used hybrid GPU/CPU inference with llama.cpp. Kimi K2.5’s (Unsloth Q2_K_XL quant) attention weights, the dense layer, the shared expert in each MoE layer, and the routing components are actually able to fit on my 12GB GPU using llama.cpp’s “override-tensor” flag, although I also did pretty good results just using llama.cpp’s “ngl auto” and “cmoe” flags and letting llama.cpp decide tensor placement as it sees fit too. Regardless, the sparse experts’ weights (the bulk of the model size) generally live on PMem/DRAM and get processed as needed from there.\n\nThe end result from my testing with this setup is around 4 tokens per second for generation! Given the fact that this is a trillion parameter frontier-class model running on such a limited hardware budget, I would consider it to be a great success. It’s a shame Intel discontinued Optane Persistent Memory, because the current direction of some local inference innovation, including SSD offloading and broader memory tiering approaches, could have been really interesting with this specific kind of memory tier on modern hardware platforms. Overall I was pleased with this Optane PMem-centric build, it allows me to run very big models at surprisingly acceptable speeds, and the process was highly educational.\n\nParts:\n\n- Intel Xeon Gold 6246 CPU\n\n- TYAN S5630GMRE-CGN motherboard\n\n- ASUS Dual GeForce RTX 3060 OC 12GB GPU\n\n- 6x 32GB Samsung 2666MHz DDR4 ECC DRAM sticks\n\n- 6x 128GB Intel Optane DCPMM PC4-2666 NMA1XBD128GQS persistent memory modules\n\n- Western Digital WD SN850X 2TB M.2 2280 NVMe SSD\n\n- ASRock Steel Legend SL-850G 850W 80 PLUS GOLD & Cybenetics PLATINUM Full Modular Power Supply\n\n- Silverstone SST-GD08B (Black) Grandia Series Home Theater PC Case\n\nI hope you enjoyed this rundown. There is a lot more detail that I didn’t include here, so I’m happy to answer questions about the build, the configuration, or the reasoning behind any of the component choices in the comments. Also if anyone else has explored similarly unusual hardware/builds for LLM inference, I’d love to discuss!\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n3mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "407",
+      "text": "FullstackSensei\n•\n3mo ago\n•\nEdited 3mo ago\nllama.cpp\n Top 1% Commenter\n\nI suspect you'll get a good uplift in performance moving to a higher core count Cascade Lake. Might want to try QQ89, which is the ES of the 8260 (24 cores).\n\nWould also be interesting to see how many t/s you'd get if you used those optane sticks on storage mode and then mmap that. I have a hunch it might be a tad faster, but knowing how optane works in memory mode, it could also be a tad slower.\n\nFor everyone else reading this, there are a few things to know about Optane PMEM: LGA3647 (Skylake and Cascade Lake) use 1st Gen Optane (model starts with NMA) which runs at 2666. If you mix optane with RAM sticks on any channel with Cascade Lake, that channel runs at 2666 instead of 2933 (assuming you have 2933 sticks or you OC'ed yours). LGA4189 uses 2nd gen Optane (NMB). Those are still somewhat expensive and quite harder to come by. They run at at 2666 on Cooper Lake and 3200 on Ice Lake.\n\nThe DIMMs have three modes of operation: storage mode, memory mode, and app direct mode. In storage mode, it's presented to the OS just like an SSD. In memory mode, they appear as RAM, and App direct mode is a special mode that requires specific software support in the app. In memory mode, the allocated Optane memory appears as system RAM and the actual RAM is used as \"cache\". The memory controller swaps pages between the two transparently. The CPU still executes, loads, and stores from RAM, so a page needs to be swapped back to RAM before anything can be done with it. You can partition the Optane pool you have however you like between those three modes.\n\nA key limitation with most Xeons of the era is the limitation to 1TB max memory, which applies to the sum of RAM and Optane sticks. Say you six 128GB Optane sticks and six 64GB RAM sticks, you now have 1152GB total but can only access 1024 of that no matter how you slice it. I know this limitation was removed later, but not sure whether it was removed in Ice Lake (NMB) or Sapphire Rapids (NMC). You can also get a high memory SKU, but those tend to be quite more expensive and some have their own issues with motherboard compatibility due to power limits (there are workarounds, but those require reprogramming the VRM to allow higher currents).\n\nVicar_of_Wibbly\n•\n3mo ago\n\nDropping the knowledge. Love it.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nBeen trying to tell people in this sub about LGA3647 for well over a year. It might be 10 years old, but it's still a very solid platform and faster than anything you can get today on the consumer side for LLMs. And because it's 10 years old, it's quite cheap.\n\nI've been using LGA3647 in my homelab for almost five years now. I also have Epyc, but Cascade Lake is still my favorite. It doesn't trail Epyc Roma/Milan by much despite having two fewer memory channels, and Intel's memory controller will happily train and run on pretty much anything you throw at it, unlike Epyc which throws a tantrum and refuses to Post with more than half the memory on the market.\n\nonil34\n•\n3mo ago\n\nthat sounds very interesting i need to do some research\n\nl3aldo\n•\n3mo ago\n\nI'm running kimi k2.6 q4 on a dual xeon gold 6138 platform with shitty 2133 mhz ram and getting 7tps with 2 3090s and 2 3060s. Not a chatbot but does solid work\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhat are you using? Llama.cpp still doesn't support NUMA\n\nl3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies\nAPFrisco\n•\n3mo ago\n\nInteresting, I appreciate the CPU recommendation!\n\nFor the Optane PMem modes, I’m unfamiliar with “storage mode”, I’ve only seen Memory Mode and App Direct Mode. It sounds like it may be a configuration of App Direct mode? And yes I’ll definitely plan on testing out something similar, I am very curious as well and can let you "
+    },
+    {
+      "author": "Vicar_of_Wibbly",
+      "score": "62",
+      "text": "Vicar_of_Wibbly\n•\n3mo ago\n\nDropping the knowledge. Love it.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nBeen trying to tell people in this sub about LGA3647 for well over a year. It might be 10 years old, but it's still a very solid platform and faster than anything you can get today on the consumer side for LLMs. And because it's 10 years old, it's quite cheap.\n\nI've been using LGA3647 in my homelab for almost five years now. I also have Epyc, but Cascade Lake is still my favorite. It doesn't trail Epyc Roma/Milan by much despite having two fewer memory channels, and Intel's memory controller will happily train and run on pretty much anything you throw at it, unlike Epyc which throws a tantrum and refuses to Post with more than half the memory on the market.\n\nonil34\n•\n3mo ago\n\nthat sounds very interesting i need to do some research\n\nl3aldo\n•\n3mo ago\n\nI'm running kimi k2.6 q4 on a dual xeon gold 6138 platform with shitty 2133 mhz ram and getting 7tps with 2 3090s and 2 3060s. Not a chatbot but does solid work\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhat are you using? Llama.cpp still doesn't support NUMA\n\nl3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies"
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "59",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nBeen trying to tell people in this sub about LGA3647 for well over a year. It might be 10 years old, but it's still a very solid platform and faster than anything you can get today on the consumer side for LLMs. And because it's 10 years old, it's quite cheap.\n\nI've been using LGA3647 in my homelab for almost five years now. I also have Epyc, but Cascade Lake is still my favorite. It doesn't trail Epyc Roma/Milan by much despite having two fewer memory channels, and Intel's memory controller will happily train and run on pretty much anything you throw at it, unlike Epyc which throws a tantrum and refuses to Post with more than half the memory on the market.\n\nonil34\n•\n3mo ago\n\nthat sounds very interesting i need to do some research\n\nl3aldo\n•\n3mo ago\n\nI'm running kimi k2.6 q4 on a dual xeon gold 6138 platform with shitty 2133 mhz ram and getting 7tps with 2 3090s and 2 3060s. Not a chatbot but does solid work\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhat are you using? Llama.cpp still doesn't support NUMA\n\nl3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies"
+    },
+    {
+      "author": "onil34",
+      "score": "4",
+      "text": "onil34\n•\n3mo ago\n\nthat sounds very interesting i need to do some research"
+    },
+    {
+      "author": "l3aldo",
+      "score": "1",
+      "text": "l3aldo\n•\n3mo ago\n\nI'm running kimi k2.6 q4 on a dual xeon gold 6138 platform with shitty 2133 mhz ram and getting 7tps with 2 3090s and 2 3060s. Not a chatbot but does solid work\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhat are you using? Llama.cpp still doesn't support NUMA\n\nl3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies"
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "2",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhat are you using? Llama.cpp still doesn't support NUMA\n\nl3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies"
+    },
+    {
+      "author": "l3aldo",
+      "score": "3",
+      "text": "l3aldo\n•\n3mo ago\n\nik_llama.cpp all layers to gpu, moe-cpu offload, numactl --preferred (as much on single socket as possible and gpu's on that node pcie-root complex - since intel numa <> numa sh*t)\n\n2 more replies"
+    },
+    {
+      "author": "APFrisco",
+      "score": "21",
+      "text": "APFrisco\n•\n3mo ago\n\nInteresting, I appreciate the CPU recommendation!\n\nFor the Optane PMem modes, I’m unfamiliar with “storage mode”, I’ve only seen Memory Mode and App Direct Mode. It sounds like it may be a configuration of App Direct mode? And yes I’ll definitely plan on testing out something similar, I am very curious as well and can let you know results.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nRead the manual of the motherboard. It should detail how to set each mode. It's all a bit tricky.\n\nAPFrisco\n•\n3mo ago\n\nThanks, Intel’s PMem guide had a lot of good info too but yeah, the build process with these parts was indeed very finicky… I was very glad it when ended up finally working\n\nUltraFOV\n•\n3mo ago\n•\nEdited 3mo ago\n\nIf you were to install 2TB worth of Optane the. you could use them and App Direct Mode and run Deep Seek V4 pro which is 1.6T. But for your motherboard read 2TB worth of Optane you need the Cascade Lake Xeons with the (M) moniker that will allow 2TB, and with the (L) line the 8260L, 8280L you can install up to 4.5 TB of Optane."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "14",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nRead the manual of the motherboard. It should detail how to set each mode. It's all a bit tricky.\n\nAPFrisco\n•\n3mo ago\n\nThanks, Intel’s PMem guide had a lot of good info too but yeah, the build process with these parts was indeed very finicky… I was very glad it when ended up finally working"
+    },
+    {
+      "author": "APFrisco",
+      "score": "10",
+      "text": "APFrisco\n•\n3mo ago\n\nThanks, Intel’s PMem guide had a lot of good info too but yeah, the build process with these parts was indeed very finicky… I was very glad it when ended up finally working"
+    },
+    {
+      "author": "UltraFOV",
+      "score": "4",
+      "text": "UltraFOV\n•\n3mo ago\n•\nEdited 3mo ago\n\nIf you were to install 2TB worth of Optane the. you could use them and App Direct Mode and run Deep Seek V4 pro which is 1.6T. But for your motherboard read 2TB worth of Optane you need the Cascade Lake Xeons with the (M) moniker that will allow 2TB, and with the (L) line the 8260L, 8280L you can install up to 4.5 TB of Optane."
+    },
+    {
+      "author": "IrisColt",
+      "score": "19",
+      "text": "IrisColt\n•\n3mo ago\n\nLike everything that gets mentioned here, I can already see Optane persistent memory sticks starting to climb in price on the secondhand market, heh"
+    },
+    {
+      "author": "Macestudios32",
+      "score": "7",
+      "text": "Macestudios32\n•\n3mo ago\n•\nEdited 3mo ago\n\nThe name sensei suits you perfectly.  I'm one of those with intel CPUs, in this case 6240. I would be happy to have a performance comparison in llm between optane and normal RAM.  Right now I'm in a bad balance, complying with the rules of RAM slots I reach a balance of 1 to 1 with the optane, so I could only use it as a disk.  I have to choose between 640 of normal RAM to 2666 or the current mix (1:1) 512 optane as disk and 512 of RAM. \n\nTo have a good balance I would need 6 optanes more of 128...with a good cost and the data would encourage me to look yes or yes to buy or on the contrary only when they drop in price.\n\nWhat do you think about 8259CL ?\n\n If you open a thread, for God's sake I'd be delighted to read it.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nI have two builds I owe the community a post detailing them, and a third about (IMO) an unknown gem: the Jetson AGX Xavier.\n\nIMO, optane only makes sense if you absolutely must run 1T models. I personally don't think the hassle justifies the marginal benefit. Where a couple of optane sticks would really make a difference, IMO, is speeding up model load. Otherwise, I think people should really look at older data center GPUs like the P40, which have come down in price now to under $/€250. Four P40s in a system get you 96GB VRAM. Six 64GB sticks on a LGA3647 Xeon give you 384GB RAM. That's 480GB total, of which you can easily use 470GB for LLMs. Throw in my favorite QQ89 ES CPU, and you got yourself a pretty badass machine for less than the cost of a single 4090.\n\nOne thing many seem to ignore is balancing the system, such that no single component is bottlenecking it. The P40 and Mi50 (back when they were cheap) make perfect budget pairings for such a Xeon. A V100 might be a bit too fast, but with how cheap 16GB SXM2 cards seem to sell, I'd definitely put four or five of them with such a Xeon. LGA3647 has enough PCIe lanes (48, Gen 3) to keep up to five GPUs humming happily. And because Intel doesn't use PCIe lanes to communicate with the PCH, the 8 extra lanes you get from there for NVMe don't compete with the GPUs for bandwidth.\n\nLGA3647 was also used extensively in workstations by HP, Dell and Lenovo. You can buy single or even dual CPU barebones workstations for quite cheap, and upgrade the CPU to a QQ89 (again, it shares the same CPUID of the retail, so works with stock BIOS). They come with up to 1300W PSU and some have enough X16 slots for four dual-slot GPUs without risers. I limit my P40s and Mi50s to 170W and haven't noticed any measurable degradation in performance.\n\nMacestudios32\n•\n3mo ago\n\nI understand your point, I'm one of those who have a dual CPU HPE (dl380 gen 10)  The problem is that PCIE lanes are not that they have much to spare.\n\n My point of internal debate is that optane are at risk of extinction. And GPUs... They will come out. \n\nAt least my initial idea was to build a great memory base and improve GPUs over time (3080 and 3070)  It is obvious that for everyday life it is better to $600 in GPUs and speed than in optane, because you increase the memory but penalize the performance.  In short, how bad it is to be poor.  Thank you for your reply!\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nIf you don't absolutely need it to be rack mount, get an LGA3647 workstation. That will expose the lanes in a much more accessible way. 48-96GB VRAM in older GPUs will get you much better everything compared to optane.\n\nAlmost two years ago I got so much flack on this very sub when I said I bought four P40s to build a 96GB VRAM rig to run the OG llama 70B. This was when P40s were selling for $100 on ebay, and before llama.cpp had any proper support for them. Everyone told me I wasted $400 on paperweights. Well, it's been two years since, and I bought another four P40s about six months later, just before their prices skyrocketed after llama.cpp added proper support. They've been working beautifully an"
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "13",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nI have two builds I owe the community a post detailing them, and a third about (IMO) an unknown gem: the Jetson AGX Xavier.\n\nIMO, optane only makes sense if you absolutely must run 1T models. I personally don't think the hassle justifies the marginal benefit. Where a couple of optane sticks would really make a difference, IMO, is speeding up model load. Otherwise, I think people should really look at older data center GPUs like the P40, which have come down in price now to under $/€250. Four P40s in a system get you 96GB VRAM. Six 64GB sticks on a LGA3647 Xeon give you 384GB RAM. That's 480GB total, of which you can easily use 470GB for LLMs. Throw in my favorite QQ89 ES CPU, and you got yourself a pretty badass machine for less than the cost of a single 4090.\n\nOne thing many seem to ignore is balancing the system, such that no single component is bottlenecking it. The P40 and Mi50 (back when they were cheap) make perfect budget pairings for such a Xeon. A V100 might be a bit too fast, but with how cheap 16GB SXM2 cards seem to sell, I'd definitely put four or five of them with such a Xeon. LGA3647 has enough PCIe lanes (48, Gen 3) to keep up to five GPUs humming happily. And because Intel doesn't use PCIe lanes to communicate with the PCH, the 8 extra lanes you get from there for NVMe don't compete with the GPUs for bandwidth.\n\nLGA3647 was also used extensively in workstations by HP, Dell and Lenovo. You can buy single or even dual CPU barebones workstations for quite cheap, and upgrade the CPU to a QQ89 (again, it shares the same CPUID of the retail, so works with stock BIOS). They come with up to 1300W PSU and some have enough X16 slots for four dual-slot GPUs without risers. I limit my P40s and Mi50s to 170W and haven't noticed any measurable degradation in performance.\n\nMacestudios32\n•\n3mo ago\n\nI understand your point, I'm one of those who have a dual CPU HPE (dl380 gen 10)  The problem is that PCIE lanes are not that they have much to spare.\n\n My point of internal debate is that optane are at risk of extinction. And GPUs... They will come out. \n\nAt least my initial idea was to build a great memory base and improve GPUs over time (3080 and 3070)  It is obvious that for everyday life it is better to $600 in GPUs and speed than in optane, because you increase the memory but penalize the performance.  In short, how bad it is to be poor.  Thank you for your reply!\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nIf you don't absolutely need it to be rack mount, get an LGA3647 workstation. That will expose the lanes in a much more accessible way. 48-96GB VRAM in older GPUs will get you much better everything compared to optane.\n\nAlmost two years ago I got so much flack on this very sub when I said I bought four P40s to build a 96GB VRAM rig to run the OG llama 70B. This was when P40s were selling for $100 on ebay, and before llama.cpp had any proper support for them. Everyone told me I wasted $400 on paperweights. Well, it's been two years since, and I bought another four P40s about six months later, just before their prices skyrocketed after llama.cpp added proper support. They've been working beautifully and I'm pretty sure they'll keep going until the bubble pops or the turn of the decade, whichever comes first.\n\nGet P40s. You can probably get three for under $700, and put them in a LGA3647 workstation with 192GB RAM. You'll get so much done running larger models at >10t/s.\n\nNot everyone has a money printer.\n\nschaka\n•\n17d ago\n\nCan P40s even run modern models still - especially at 500k+ context? I've been looking into Mi50 vs V620 vs P40. Although I was mostly looking a EPYC Rome if I wanted to do a lot of CPUs and at Cascade Lake/Ice Lake for PMem CPU inference - not mixing both.\n\nFullstackSensei\n•\n17d ago\nllama.cpp\n Top 1% Commenter\n\nYes, if you have the VRAM. Don't listen to clueless redditors parroting things they don't understand.\n\nschaka\n•\n17d ago\n\nSeems 8x "
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1taeg8h",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:33:48Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.844,
+    "evidence": 1.0,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/nihilistau/shannon-prime-burnhard",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/nihilistau/shannon-prime-bernhard",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/enthusiast-runs-1-trillion-parameter-llm-from-768gb-of-intel-optane-dimm-memory-sticks-local-kimi-k2-5-install-achieved-roughly-4-tokens-per-second",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vutzeu/im_really_hoping_were_in_2026s_2monthgap_between/",
+  "title": "I'm really hoping we're in 2026's 2-month-gap between QwQ and Qwen3 right now",
+  "author": "ForsookComparison",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n14h ago\nForsookComparison\n Top 1% Commenter\nI'm really hoping we're in 2026's 2-month-gap between QwQ and Qwen3 right now\nDiscussion\n\nQwQ was genuine next-gen performance usable on local hardware, but the massive required context (it's reasoning style was akin to \"if I say every possible word, I'll notice the right one!\") kinda made it unusable for agentic coding.\n\nIt was ~2 months later that Qwen3-32B came out which delivered QwQ's peaks with usable amounts of reasoning.\n\nI know some people are having a great time with Qwen3.8-27B, and same, but I can't have a good sit-down session with it because the reasoning takes so damn long. Everything I do with it needs to be async or compromise on quality (it's still great when you limit reasoning but definitely loses that next-gen edge). I also have to watch context like a hawk.\n\nMaybe 3.8 is 2026's QwQ and a competitive model requiring less reasoning is just around the corner?\n\nShare",
+  "comments": [
+    {
+      "author": "FullstackSensei",
+      "score": "18",
+      "text": "FullstackSensei\n•\n13h ago\nllama.cpp\n Top 1% Commenter\n\nLower reasoning to medium\n\nCatEatsDogs\n•\n13h ago\n\nThis is the way"
+    },
+    {
+      "author": "CatEatsDogs",
+      "score": "1",
+      "text": "CatEatsDogs\n•\n13h ago\n\nThis is the way"
+    },
+    {
+      "author": "danigoncalves",
+      "score": "6",
+      "text": "danigoncalves\n•\n13h ago\nllama.cpp\n\nEvery single one that I know that is using Qwen 27B lowered the reasoning to medium and said that is more than enough for what they are doing (nobody is building a rocket to go to the moon). Its not worth it to think of problems that don’t exist or that have a very simple solution.\n\nttkciar\n•\n11h ago\nllama.cpp\n Top 1% Commenter\n\nYah, this. Qwen3.8 \"medium\" reasoning effort is roughly equivalent to Qwen3.5 reasoning effort.\n\nWhat we really need is something between \"medium\" and \"low\". Got other things on my plate right now, but will figure out how to hit that mid-zone later.\n\nThomasAger\n•\n10h ago\n\nYou can prompt it."
+    },
+    {
+      "author": "ttkciar",
+      "score": "1",
+      "text": "ttkciar\n•\n11h ago\nllama.cpp\n Top 1% Commenter\n\nYah, this. Qwen3.8 \"medium\" reasoning effort is roughly equivalent to Qwen3.5 reasoning effort.\n\nWhat we really need is something between \"medium\" and \"low\". Got other things on my plate right now, but will figure out how to hit that mid-zone later.\n\nThomasAger\n•\n10h ago\n\nYou can prompt it."
+    },
+    {
+      "author": "ThomasAger",
+      "score": "0",
+      "text": "ThomasAger\n•\n10h ago\n\nYou can prompt it."
+    },
+    {
+      "author": "Fun_Jaguar8231",
+      "score": "2",
+      "text": "Fun_Jaguar8231\n•\n13h ago\n\nUse a template like https://huggingface.co/peculiar-ragdoll/Qwen-Sharp-Chat-Templates that makes thes model be more efficient with its reasoning."
+    },
+    {
+      "author": "o0genesis0o",
+      "score": "2",
+      "text": "o0genesis0o\n•\n11h ago\n\nDrop reasoning to medium and ensure that it sticks (some harness might have problem and cannot pass the flag to llamacpp properly).\n\nI'm running Q3XXS, and it thinks appropriate amount to the complexity of the task. When I say hi, it just think \"user is being friendly\" and respond in the right persona immediately. When I ask for latest status update, it think a few sentences and start parallel tool calls to get all the necessary files, and think a bit more, and respond.\n\nSo far, only when I gave it some genuinely difficult things to answer (not just about coding, there are also some EQ stuffs in my tests), that's when it thinks for pages. But the answer is generally worth the wait.\n\nHoodfu\n•\n9h ago\n\nIt's interesting that you mention the harness, on the huihui abliterated versions with lm studio, reasoning is either on or off. Whenever I try to set the reasoning_effort, it says it doesn't support it. It totally does with other models, so maybe it's just a problem with their release?\n\no0genesis0o\n•\n8h ago\n\nI work with llama-swap and llamacpp directly. I just pass the template kwargs to llamacpp as unsloth instructed. I think there could be some risk of error that the flags set on llamacpp does not propagate properly to the underlying jinja template. So far, setting this up correctly is the surest way to get it to work. Also, I always turn on preserve thinking, based on some horror in my harness development day trying to support GPT OSS 20B.\n\nPersonally, for this 3.8 27B, I'll stay away from uncensored versions so that I can use the UD quants."
+    },
+    {
+      "author": "Hoodfu",
+      "score": "1",
+      "text": "Hoodfu\n•\n9h ago\n\nIt's interesting that you mention the harness, on the huihui abliterated versions with lm studio, reasoning is either on or off. Whenever I try to set the reasoning_effort, it says it doesn't support it. It totally does with other models, so maybe it's just a problem with their release?\n\no0genesis0o\n•\n8h ago\n\nI work with llama-swap and llamacpp directly. I just pass the template kwargs to llamacpp as unsloth instructed. I think there could be some risk of error that the flags set on llamacpp does not propagate properly to the underlying jinja template. So far, setting this up correctly is the surest way to get it to work. Also, I always turn on preserve thinking, based on some horror in my harness development day trying to support GPT OSS 20B.\n\nPersonally, for this 3.8 27B, I'll stay away from uncensored versions so that I can use the UD quants."
+    },
+    {
+      "author": "o0genesis0o",
+      "score": "2",
+      "text": "o0genesis0o\n•\n8h ago\n\nI work with llama-swap and llamacpp directly. I just pass the template kwargs to llamacpp as unsloth instructed. I think there could be some risk of error that the flags set on llamacpp does not propagate properly to the underlying jinja template. So far, setting this up correctly is the surest way to get it to work. Also, I always turn on preserve thinking, based on some horror in my harness development day trying to support GPT OSS 20B.\n\nPersonally, for this 3.8 27B, I'll stay away from uncensored versions so that I can use the UD quants."
+    },
+    {
+      "author": "Witty_Mycologist_995",
+      "score": "1",
+      "text": "Witty_Mycologist_995\n•\n13h ago\n\nSet reasoning to low or medium"
+    },
+    {
+      "author": "cosmicnag",
+      "score": "1",
+      "text": "cosmicnag\n•\n11h ago\n\nAA just started showing intelligence levels for reasoning levels and xhigh=52,medium=44,low=43 . You are basically last deepseek v4 pro territory at medium, pretty pretty good for 'good sit down session'\n\nForsookComparison\n•\n9h ago\n Top 1% Commenter\n\nThe bar chart and my vibes aren't quite in-line\n\ncosmicnag\n•\n6h ago\n\nMine are completely inline lol , I am quite happy with both medium and xhigh for what they are, and when they are useful."
+    },
+    {
+      "author": "ForsookComparison",
+      "score": "3",
+      "text": "ForsookComparison\n•\n9h ago\n Top 1% Commenter\n\nThe bar chart and my vibes aren't quite in-line\n\ncosmicnag\n•\n6h ago\n\nMine are completely inline lol , I am quite happy with both medium and xhigh for what they are, and when they are useful."
+    },
+    {
+      "author": "cosmicnag",
+      "score": "1",
+      "text": "cosmicnag\n•\n6h ago\n\nMine are completely inline lol , I am quite happy with both medium and xhigh for what they are, and when they are useful."
+    },
+    {
+      "author": "cosmicnag",
+      "score": "1",
+      "text": "cosmicnag\n•\n6h ago\n\nFound this in another subreddit\n\ncosmicnag\n•\n6h ago\n\nAnd this :"
+    },
+    {
+      "author": "cosmicnag",
+      "score": "1",
+      "text": "cosmicnag\n•\n6h ago\n\nAnd this :"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vutzeu",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:41Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e"
+  ],
+  "quality": {
+    "score": 0.385,
+    "evidence": 0.2,
+    "relevance": 0.273,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/peculiar-ragdoll/Qwen-Sharp-Chat-Templates",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

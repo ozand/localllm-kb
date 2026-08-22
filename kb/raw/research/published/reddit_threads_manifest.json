@@ -1,0 +1,302 @@
+[
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vsinej/am_i_doing_something_wrong_qwen_38_27b_seems/",
+    "title": "Am I doing something wrong? Qwen 3.8 27B seems useless for agentic coding"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrjk4m/qwen_38_27b_saved_me_650_in_api_costs_this_evening/",
+    "title": "Qwen 3.8 27b saved me $650+ in API costs this evening"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqrt86/after_pushing_1m_tokens_through_qwen_38_27b_here/",
+    "title": "After pushing 1M+ tokens through Qwen 3.8 27B, here is my optimal llama.cpp config for 16GB VRAM (73k Context, Agentic Coding)"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vixl0f/tesla_v100_qwen36_27b_performance/",
+    "title": "Tesla V100 Qwen3.6 27B Performance"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vprm64/if_you_are_at_the_lowest_budget_which_you_can/",
+    "title": "If you are at the lowest budget, which you can think of.Which hardware would you recommend to run? qwen 3.8 27b oWith like 50 tokens per second. I currently have a RTX 5070 Ti."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpdrxl/which_harness_for_local_coding_qwen_38_27b_do_you/",
+    "title": "Which Harness for Local Coding (Qwen 3.8 27b) do you Recommend?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vs6gof/unfortunately_qwen_38_27b_is_not_good_enough_for/",
+    "title": "Unfortunately Qwen 3.8 27b is not good enough for complex coding"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqnvfe/unpopular_opinion_qwen_38_27b_is_not_an/",
+    "title": "Unpopular opinion : Qwen 3.8 27b is not an overthinker"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vonuu0/qwen_38_27b_is_a_game_changer/",
+    "title": "Qwen 3.8 - 27B is a game changer"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vs2tsn/dflash_2_available_for_qwen_38_27b_and_muse/",
+    "title": "DFlash 2 available for Qwen 3.8 27B and Muse Glimmer"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqm51f/long_review_qwen_38_27b_is_very_good_at_tapping/",
+    "title": "Long Review: Qwen 3.8 27B is VERY good at tapping into it's real-world knowledge. It's \"overthinking\" brings it to Sonnet level performance with the potential for Opus level results."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vfr91l/any_coding_finetunes_better_than_davidaus_711/",
+    "title": "Any coding finetunes better than DavidAU’s 711 Qwen 27B?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1voix4o/local_uncensored_opus_46_at_home_qwen38_27b/",
+    "title": "Local uncensored Opus 4.6 at home - Qwen3.8 27B heretic"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrifat/qwen_38_27b_vs_deepseek_flash/",
+    "title": "Qwen 3.8 27b vs Deepseek Flash"
+  },
+  {
+    "href": "https://www.reddit.com/r/SwordAndSupperGame/comments/1vugrdb",
+    "title": "Sword & Supper\n\nFroggy auto-RPG!"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vuotqr/qwen3827b_q6_is_a_beast_at_agentic_coding/",
+    "title": "Qwen3.8-27B Q6 is a beast at agentic coding"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vstyge/i_might_have_found_the_perfect_config_parameters/",
+    "title": "I might have found the perfect config parameters for qwen 3.8 27b"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vugryn/qwen_38_27b_is_strong_even_at_q3_xxs/",
+    "title": "Qwen 3.8 27b is strong even at Q3_xxs"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vusqfw/qwen_38_27b_quantization_gpu_and_ts/",
+    "title": "Qwen 3.8 27b: quantization, GPU and t/s"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vu0u2v/qwen_38_27b_pi_agent_vs_opencode/",
+    "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vt7l3e/qwen3827b_took_a_serious_hit_to_knowledge_vs_36/",
+    "title": "Qwen3.8-27B took a serious hit to *knowledge* vs 3.6"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrt7hy/anyone_running_qwen_38_27b_on_5070ti_16gb/",
+    "title": "Anyone running qwen 3.8 27b on 5070ti (16GB)?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vu08f3/while_everyone_is_excited_about_qwen_38_27b_heres/",
+    "title": "While Everyone Is Excited About Qwen 3.8 27B, Here’s the Reality for a 16GB AMD GPU User"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vtr3h0/ladies_and_gentlemen_i_present_to_you_qwen38_27b/",
+    "title": "Ladies and gentlemen I present to you Qwen3.8 27b 1bit brain damage quant"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqmiu3/how_to_stop_qwen3827b_from_overthinking/",
+    "title": "How to stop Qwen3.8-27b from overthinking"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vtxj05/rtx_4090_qwen38_27b_udiq4_xs_llamacpp_90ts/",
+    "title": "RTX 4090 + Qwen3.8 27B UD-IQ4_XS + llama.cpp -> 90t/s"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7m53/fastest_qwen_38_27b_for_amd_gpu/",
+    "title": "Fastest qwen 3.8 27b for AMD gpu?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vt8pkz/people_that_use_qwen_38_27b_for_agent_use_or/",
+    "title": "People that use qwen 3.8 27B for agent use or coding. What harnesses are you using?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpwfpe/quick_psa_qwen3827b_reasoning_effort_vs_reasoning/",
+    "title": "Quick PSA: Qwen3.8-27B reasoning effort vs reasoning budget in llama.cpp"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vs3bru/qwen3827b_vram_on_16gb_with_50toks_85k_q8_context/",
+    "title": "Qwen3.8-27B VRAM on 16GB with 50tok/s, 85k q8 context"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vlc4wn/what_can_us_8_gb_vram_poors_do/",
+    "title": "What can us 8 GB VRAM poors do?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vlamks/12gb_vram_gang_whats_our_plan/",
+    "title": "12GB VRAM gang, what's our plan?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqjeub/how_many_tokenssecond_output_are_you_getting_with/",
+    "title": "How many tokens/second output are you getting with Qwen3.8-27B?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrchn9/optimizing_qwen36_qwen3827b_on_16gb_vram_complete/",
+    "title": "Optimizing Qwen3.6 / Qwen3.8-27B on 16GB VRAM: Complete Benchmark Results and Setup Guide (~30-50tps at 32k to 72k context)"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vodh0u/qwen3827b_only_5_tks_whats_the_best_config_for/",
+    "title": "Qwen3.8-27B only 5 tk/s - What's the best config for 8GB VRAM + 32GB RAM?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqpc0f/100_worth_of_gpu_runs_qwen_38_27b_at_739_ts/",
+    "title": "100$ worth of gpu runs qwen 3.8 27b at 7.39 t/s"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqea0n/qwen_38_27b_in_24gb_of_vram/",
+    "title": "Qwen 3.8 27b in 24gb of VRAM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tvluaj/how_much_vram_needed_for_qwen_36_27b_q8_with_262k/",
+    "title": "How much VRAM needed for Qwen 3.6 27B Q8 with 262K context?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1sgvt01/16_gb_vram_users_what_model_do_we_like_best_now/",
+    "title": "16 GB VRAM users, what model do we like best now?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vq881r/ninfer_rtx_4090_for_qwen_38_27b_update_up_to/",
+    "title": "NInfer RTX 4090 for Qwen 3.8 27B update - up to 250-350K tokens context in VRAM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vodz84/qwen3827b_running_on_a_12gb_rtx_5070_ti_laptop/",
+    "title": "Qwen3.8-27B running on a 12GB RTX 5070 Ti laptop — around 4.5 tok/s with 80% MTP acceptance"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrbqg2/good_results_with_qwen_38_27b_prismaaqua_55bit_on/",
+    "title": "Good results with Qwen 3.8 27B PrismaAqua 5.5-bit on 5090 vLLM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vtq8hc/qwen_38_27b_medium_is_insane_120th_the_thinking/",
+    "title": "Qwen 3.8 27b *MEDIUM* is insane: 1/20th the thinking time of xhigh for almost the same quality output??"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuh7m/qwen38_27b_reasoning_effort_lowmediumxhigh/",
+    "title": "Qwen3.8 27B reasoning effort low/medium/xhigh comparison"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vuhx4j/is_qwen_38_27b_actually_qwen_36_27b_who_thinks/",
+    "title": "Is qwen 3.8 27B actually qwen 3.6 27B who thinks (much) more?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrx3lz/ling_30_flash_vs_qwen_35_122ba10b_vs_qwen_38_27b/",
+    "title": "Ling 3.0 flash -vs- Qwen 3.5 122b-a10b -vs- Qwen 3.8 27b - any opinions on which is best for agentic coding?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr23lo/this_is_what_context_management_still_is_qwen_38/",
+    "title": "This is what context management still is, Qwen 3.8 27B?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vuwwww/qwen_38_27b_pi_agent_vs_opencode_another_smaple/",
+    "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE - another smaple"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vuvx0t/i_tried_to_do_agenic_coding_with_qwen_38_27b_3bit/",
+    "title": "I tried to do agenic coding with Qwen 3.8 27B 3bit quant on a macbook air m2 24gb. It took 63 hours, but amazingly, the flight simulator worked."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vssd63/qwen_38_27b_vs_gemini_37_flash_high_for_real/",
+    "title": "Qwen 3.8 27B vs Gemini 3.7 Flash (High) for real coding: open-source 27B model did a much better job"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vusds8/qwen3827b_different_thinking_levels/",
+    "title": "Qwen3.8-27B different thinking levels"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vus4ko/qwen_38_low_and_medium_are_goated/",
+    "title": "Qwen 3.8 Low and Medium are goated"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vulsom/qwen_38_vs_36_27b_low_reasoning_loops_way_less_now/",
+    "title": "Qwen 3.8 vs 3.6 27b low reasoning loops way less now"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t2sbop/qwen36_27b_possible_to_add_vision/",
+    "title": "Qwen3.6 27B - possible to add vision?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1ure84m/82_tps_on_qwen_36_27b_on_a_macbook_pro/",
+    "title": "82 TPS On Qwen 3.6 27b On A Macbook Pro | Introducing MTPLX V2: The Fastest Way To Run MLX Models."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tlhkts/removing_vision_from_model/",
+    "title": "Removing Vision from model"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpyr1d/the_best_setup_for_qwen_38_27b_on_mac_studio_64/",
+    "title": "The best setup for QWEN 3.8 27B on Mac Studio 64 GB RAM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vq50xf/having_all_those_qwen_38_27b_forks_which_one/",
+    "title": "Having all those Qwen 3.8 27B forks, which one would you use on M4 MAX 128 GB?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vokrcy/qwen3827b_is_now_up_to_3_faster_on_apple_silicon/",
+    "title": "Qwen3.8-27B is now up to ~3× faster on Apple Silicon with mlx-dspark"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1staqvk/difference_between_qwen_36_27b_quants_for_vllm/",
+    "title": "Difference between Qwen 3.6 27b quants for vLLM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vida0h/qwen_36_27b_flagssettings_in_llamacpp/",
+    "title": "Qwen 3.6 27B flags/settings in llama.cpp"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/",
+    "title": "I pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vti5kt/dual_rtx_3090_qwen3827b_help/",
+    "title": "Dual RTX 3090 Qwen3.8-27B Help"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vts6vb/best_qwen_38_27b_quantoverall_setup_for_a_single/",
+    "title": "Best Qwen 3.8 27B quant/overall setup for a single RTX3090 PC."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuhov/single_3090_homies_whats_your_config_for_qwen_38/",
+    "title": "Single 3090 homies, whats your config for Qwen 3.8 ?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u4ptv2/considering_buying_a_3080_20gb_to_pair_with_my/",
+    "title": "Considering buying a 3080 20GB to pair with my 3090 for Qwen 27B Q8. Have some questions."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7yce/qwen3827b_at_262k_context_on_a_strix_halo_rtx/",
+    "title": "Qwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr32vs/qwen_38_27b_rtx_4090_24gb_sharing_my_config/",
+    "title": "Qwen 3.8 27B - RTX 4090 24Gb - Sharing my Config"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vof310/qwen_38_27b_i_get_34_tps_on_rtx_3090_llamaccp/",
+    "title": "Qwen 3.8 27B i get 34 tp/s on rtx 3090 llama.ccp"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vrw4sz/i_pushed_qwen3827b_to_124_tps_on_a_single_request/",
+    "title": "I pushed Qwen3.8-27B to 124 tps on a single request on a RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr3cma/weirdly_no_one_talks_about_temperature_setting/",
+    "title": "Weirdly, no one talks about Temperature setting for the Qwen3.8 27b"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vq3gig/qwen_38_distillations/",
+    "title": "Qwen 3.8 distillations"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vs1099/qwen_38_default_temp_10_causes_garbage_output/",
+    "title": "Qwen 3.8 default temp (1.0) causes garbage output. Lowering to 0.1 fixes it, do I have something misconfigured?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqu91z/ninfer_qwen_38_27b_how_do_we_configure_temp_and/",
+    "title": "Ninfer + Qwen 3.8 27b = How do we configure temp, and do we need to?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vuvuk4/please_qwen_can_we_have_qwen38397b_please/",
+    "title": "Please Qwen, can we have Qwen3.8-397B please 🙏"
+  }
+]

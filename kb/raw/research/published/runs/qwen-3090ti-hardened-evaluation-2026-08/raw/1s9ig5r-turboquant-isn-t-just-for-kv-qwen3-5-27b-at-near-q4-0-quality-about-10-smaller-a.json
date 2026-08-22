@@ -1,0 +1,202 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s9ig5r/turboquant_isnt_just_for_kv_qwen3527b_at_nearq4_0/",
+  "title": "TurboQuant isn’t just for KV: Qwen3.5-27B at near-Q4_0 quality, about 10% smaller, and finally fitting on my 16GB 5060 Ti",
+  "author": "pmttyji",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\npmttyji\n Top 1% Poster\nTurboQuant isn’t just for KV: Qwen3.5-27B at near-Q4_0 quality, about 10% smaller, and finally fitting on my 16GB 5060 Ti\nDiscussion\n\nI bought an RTX 5060 Ti 16GB around Christmas and had one goal: get a strong model running locally on my card without paying api fees. I have been testing local ai with open claw.\n\nI did not come into this with a quantization background. I only learned about llama, lmstudio and ollama two months ago.\n\nI just wanted something better than the usual Q3-class compromise (see my first post for benchmark). Many times, I like to buy 24gb card but looking at the price, I quickly turned away.\n\nWhen the TurboQuant paper came out, and when some shows memory can be saved in KV, I started wondering whether the same style of idea could help on weights, not just KV/ cache.\nP/S. I was nearly got the KV done with cuda support but someone beat me on it.\n\nAfter many long nights (until 2am) after work, that turned into a llama.cpp fork with a 3.5-bit weight format I’m calling TQ3_1S:\n\nWalsh-Hadamard rotation\n\n8-centroid quantization\n\ndual half-block scales\n\nCUDA runtime support in llama.cpp\n\nThis work is inspired by the broader transform-based quantization line, especially RaBitQ-style Walsh-Hadamard rotation ideas and the recent TurboQuant result (Tom). The thing I wanted to test was whether that same geometry could help on weights, not just KV/cache.\n\nMain Result on Qwen3.5-27B\n\nQ4_0: 7.2431 +/- 0.04822\n\nTQ3_1S: 7.2570 +/- 0.04802\n\nThat is a gap of only +0.0139 PPL, about 0.19%, on the full wiki.test.raw pass (580 chunks, c=512).\n\nSize\n\nQ4_0: about 14.4 GB\n\nTQ3_1S: about 12.9 GB\n\nSo TQ3_1S is about 10% smaller while staying near Q4_0 quality.\n\nThe practical point for me is simple:\n\nTQ3_1S fits fully on my 16GB RTX 5060 Ti\n\nQ4_0 does not fit fully on GPU in the same setup\n\nSo I’m not claiming “better than Q4_0” in general. I’m claiming something narrower and, I think, useful:\n\nnear-Q4_0 quality\n\nmaterially smaller than Q4_0\n\nenough to make a 27B model practical on a 16GB card\n\nSpeed record during perplexity test:\n- prompt processing pp512: 130.87 tok/s\n\n- generation tg10: 15.55 tok/s\n\nCaveats\n\nthis is the strongest result on the 27B witness, not a blanket claim that plain TQ3 works equally well on every model size\n\nI am pretty new to this, so I may miss a lot of test. I only have one card to test :-)\n\nBe skeptical as I can't believe I publish my own model\n\nthe speed story here is mainly a deployment/fit win on this GPU class, not a blanket claim that native TQ3 kernels are always faster than native Q4_0\n\nLinks\n\nI will open source the quantization steps when I have enough feedback and test.\n\nUpdate: Since a few saying I only compare to q4_0. Here is update. TQ3_4S will be published with faster processing speed\n\nFormat\tbpw\tPPL (c=2048)\tSize\n\n\t\t\t\nTQ3_4S\t4.00\t6.7727\t12.9 GB\nQ3_K_S\t3.44\t6.7970\t11.4 GB\nIQ4_XS\t4.25\t6.8334\t13.9 GB\nTQ3_1S\t4.00\t6.9186\t12.9 GB\nUD-Q2_K_XL\t3.30\t7.5294\t11.0 GB\n\n- u/Imaginary-Anywhere23\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n5mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically.\n\n1 more reply"
+    },
+    {
+      "author": "grumd",
+      "score": "60",
+      "text": "grumd\n•\n5mo ago\n Top 1% Commenter\n\nYou should compare it to unsloth Q3_K_S quant of 27B in real benchmarks\n\n2 more replies"
+    },
+    {
+      "author": "Velocita84",
+      "score": "252",
+      "text": "Velocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nFirst of all near Q4_0 quality isn't the flex you think it is, it's a legacy quant that's been vastly outclassed by smarter Q4 techniques and is not used at all anymore.\n\nSecond of all using perplexity as a \"lower is better\" metric, especially for quantization loss, is completely wrong and means nothing. You should use KLD (or PPL ratio if you can't stomach the logit file, but it's still less accurate) against the full bf16 model baseline instead.\n\nshing3232\n•\n5mo ago\n\nTQ3_4S is better than IQ4XS so that's a good improvement\n\nVelocita84\n•\n5mo ago\n\nBetter at what? Perplexity score? Like i said, such a comparison means nothing.\n\nImaginary-Anywhere23\n•\n5mo ago\n\nHi, would like to know what comparison I should do to mean something. I am pretty new to this.\n\nVelocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nKLD is the most correct deterministic method to measure quantization loss. Past that running benchmarks (multiple times, averaged results) is the best way to see real world degradation. Perplexity is incorrect because it simply measures how well the model approximated the real token, which is irrelevant when testing for quantization loss because quantization can only ever remove information. Perplexity ratio (ln(ppl(q)/ppl(base)), closer to 0 is better) is a little better but still doesn't capture the nuance of the rest of the tokens in the distribution changing.\n\nYou can test KLD with llama-perplexity, the instructions are in the readme\n\nImaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!\n\nshing3232\n•\n5mo ago\n\nPPL score is pretty good for compare quant for the same model\n\na_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nRotations already used in exl3 and probably other formats. GGUF should pick it up. Dunno why it took turboquant hype to make people realize.\n\njtjstock\n•\n5mo ago\n Top 1% Commenter\n\nPeople were promised the moon, now they are scraping around to find a justification for the hype, instead they are finding things that are already known, but not implemented everywhere. I’ll gladly take the silver lining…\n\nPaceZealousideal6091\n•\n5mo ago\n\nThat way, q3_k_s is also doing a fantastic job. Plau around a bit with some more tensors, increase the precision, it will easily outperform.\n\ncuberhino\n•\n5mo ago\n\nWhat should I run on my 3090? I also have 64gb of ram\n\n[deleted]\n•\n5mo ago"
+    },
+    {
+      "author": "shing3232",
+      "score": "-1",
+      "text": "shing3232\n•\n5mo ago\n\nTQ3_4S is better than IQ4XS so that's a good improvement\n\nVelocita84\n•\n5mo ago\n\nBetter at what? Perplexity score? Like i said, such a comparison means nothing.\n\nImaginary-Anywhere23\n•\n5mo ago\n\nHi, would like to know what comparison I should do to mean something. I am pretty new to this.\n\nVelocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nKLD is the most correct deterministic method to measure quantization loss. Past that running benchmarks (multiple times, averaged results) is the best way to see real world degradation. Perplexity is incorrect because it simply measures how well the model approximated the real token, which is irrelevant when testing for quantization loss because quantization can only ever remove information. Perplexity ratio (ln(ppl(q)/ppl(base)), closer to 0 is better) is a little better but still doesn't capture the nuance of the rest of the tokens in the distribution changing.\n\nYou can test KLD with llama-perplexity, the instructions are in the readme\n\nImaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!\n\nshing3232\n•\n5mo ago\n\nPPL score is pretty good for compare quant for the same model\n\na_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nRotations already used in exl3 and probably other formats. GGUF should pick it up. Dunno why it took turboquant hype to make people realize.\n\njtjstock\n•\n5mo ago\n Top 1% Commenter\n\nPeople were promised the moon, now they are scraping around to find a justification for the hype, instead they are finding things that are already known, but not implemented everywhere. I’ll gladly take the silver lining…\n\nPaceZealousideal6091\n•\n5mo ago\n\nThat way, q3_k_s is also doing a fantastic job. Plau around a bit with some more tensors, increase the precision, it will easily outperform."
+    },
+    {
+      "author": "Velocita84",
+      "score": "33",
+      "text": "Velocita84\n•\n5mo ago\n\nBetter at what? Perplexity score? Like i said, such a comparison means nothing.\n\nImaginary-Anywhere23\n•\n5mo ago\n\nHi, would like to know what comparison I should do to mean something. I am pretty new to this.\n\nVelocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nKLD is the most correct deterministic method to measure quantization loss. Past that running benchmarks (multiple times, averaged results) is the best way to see real world degradation. Perplexity is incorrect because it simply measures how well the model approximated the real token, which is irrelevant when testing for quantization loss because quantization can only ever remove information. Perplexity ratio (ln(ppl(q)/ppl(base)), closer to 0 is better) is a little better but still doesn't capture the nuance of the rest of the tokens in the distribution changing.\n\nYou can test KLD with llama-perplexity, the instructions are in the readme\n\nImaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!\n\nshing3232\n•\n5mo ago\n\nPPL score is pretty good for compare quant for the same model"
+    },
+    {
+      "author": "Imaginary-Anywhere23",
+      "score": "2",
+      "text": "Imaginary-Anywhere23\n•\n5mo ago\n\nHi, would like to know what comparison I should do to mean something. I am pretty new to this.\n\nVelocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nKLD is the most correct deterministic method to measure quantization loss. Past that running benchmarks (multiple times, averaged results) is the best way to see real world degradation. Perplexity is incorrect because it simply measures how well the model approximated the real token, which is irrelevant when testing for quantization loss because quantization can only ever remove information. Perplexity ratio (ln(ppl(q)/ppl(base)), closer to 0 is better) is a little better but still doesn't capture the nuance of the rest of the tokens in the distribution changing.\n\nYou can test KLD with llama-perplexity, the instructions are in the readme\n\nImaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!"
+    },
+    {
+      "author": "Velocita84",
+      "score": "22",
+      "text": "Velocita84\n•\n5mo ago\n•\nEdited 5mo ago\n\nKLD is the most correct deterministic method to measure quantization loss. Past that running benchmarks (multiple times, averaged results) is the best way to see real world degradation. Perplexity is incorrect because it simply measures how well the model approximated the real token, which is irrelevant when testing for quantization loss because quantization can only ever remove information. Perplexity ratio (ln(ppl(q)/ppl(base)), closer to 0 is better) is a little better but still doesn't capture the nuance of the rest of the tokens in the distribution changing.\n\nYou can test KLD with llama-perplexity, the instructions are in the readme\n\nImaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!"
+    },
+    {
+      "author": "Imaginary-Anywhere23",
+      "score": "2",
+      "text": "Imaginary-Anywhere23\n•\n5mo ago\n\nThank you so much for pointing out. I will try the KLD. Still learning. Should have started this as I have seen people using perplexity. However I am go through some real questions/coding check and so far the model seems well behave. So now I can use kld to choose which layer to bump. Interesting!"
+    },
+    {
+      "author": "shing3232",
+      "score": "0",
+      "text": "shing3232\n•\n5mo ago\n\nPPL score is pretty good for compare quant for the same model"
+    },
+    {
+      "author": "a_beautiful_rhind",
+      "score": "7",
+      "text": "a_beautiful_rhind\n•\n5mo ago\n Top 1% Commenter\n\nRotations already used in exl3 and probably other formats. GGUF should pick it up. Dunno why it took turboquant hype to make people realize.\n\njtjstock\n•\n5mo ago\n Top 1% Commenter\n\nPeople were promised the moon, now they are scraping around to find a justification for the hype, instead they are finding things that are already known, but not implemented everywhere. I’ll gladly take the silver lining…"
+    },
+    {
+      "author": "jtjstock",
+      "score": "7",
+      "text": "jtjstock\n•\n5mo ago\n Top 1% Commenter\n\nPeople were promised the moon, now they are scraping around to find a justification for the hype, instead they are finding things that are already known, but not implemented everywhere. I’ll gladly take the silver lining…"
+    },
+    {
+      "author": "PaceZealousideal6091",
+      "score": "2",
+      "text": "PaceZealousideal6091\n•\n5mo ago\n\nThat way, q3_k_s is also doing a fantastic job. Plau around a bit with some more tensors, increase the precision, it will easily outperform."
+    },
+    {
+      "author": "cuberhino",
+      "score": "-1",
+      "text": "cuberhino\n•\n5mo ago\n\nWhat should I run on my 3090? I also have 64gb of ram"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1s9ig5r",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:34:09Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.458,
+    "evidence": 0.4,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.layla-network.ai/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/sokann/Qwen3.5-27B-GGUF-4.165bpw",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/YTan2000/Qwopus3.5-27B-v3-TQ3_4S",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/21038",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/YTan2000/Qwen3.5-27B-TQ3_1S",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/turbo-tan/llama.cpp-tq3",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/coffeecup2020/status/2042719160950456497?s=20",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/sokann/Qwen3.5-27B-GGUF-4.165bpw/tree/main",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

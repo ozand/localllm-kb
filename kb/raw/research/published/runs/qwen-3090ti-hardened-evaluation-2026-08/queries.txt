@@ -1,0 +1,13 @@
+# One discovery query per line. Preserve this file with the research run.
+RTX 3090 Ti LLM inference benchmark
+RTX 3090 Ti llama.cpp configuration
+RTX 3090 Ti 24GB context KV cache
+RTX 3090 Ti power limit LLM
+RTX 3090 Ti undervolt inference
+RTX 3090 Ti memory junction temperature AI
+RTX 3090 Ti FlashAttention llama.cpp
+RTX 3090 Ti vLLM performance
+RTX 3090 Ti model quantization 27B 32B 70B
+RTX 3090 Ti PCIe offload local LLM
+RTX 3090 Ti tokens per second
+RTX 3090 Ti LLM failure troubleshooting

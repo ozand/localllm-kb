@@ -1,0 +1,110 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vunqoz/llamacpp_dspark_pc_tree_fork_up_to_3295_faster/",
+  "title": "Llama.cpp DSpark PC Tree Fork (up to 3%-29.5% faster!)",
+  "author": "RapidRaid",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n18h ago\nRapidRaid\nLlama.cpp DSpark PC Tree Fork (up to 3%-29.5% faster!)\nResources\n\nHello gang, I made an implementation of DSpark PC Tree (Parent conditioned drafting tree).\nThis is an implementation of this research paper: https://arxiv.org/abs/2608.02123\nUnaffiliated, just found it and implemented it.\nAnd I have to preface: This is just a first shot, I have no feedback from anyone yet!\n\nThese are some stats im getting with Qwen 3.0:\n\nGPU: SM120 (RTX5090) llama-bench combined\n\n Configuration     tok/s    vs plain    vs DSpark n3    Acceptance\n  ━━━━━━━━━━━━━━━  ━━━━━━━━  ━━━━━━━━━━  ━━━━━━━━━━━━━━  ━━━━━━━━━━━━\n   Plain             94.27       1.00x         -39.43%           n/a\n  ───────────────  ────────  ──────────  ──────────────  ────────────\n   DSpark n2        138.83       1.47x         -10.80%        55.66%\n  ───────────────  ────────  ──────────  ──────────────  ────────────\n   DSpark n3        155.64       1.65x        baseline        47.19%\n  ───────────────  ────────  ──────────  ──────────────  ────────────\n   PCTree k2/n8     152.29       1.62x          -2.15%        58.83%\n  ───────────────  ────────  ──────────  ──────────────  ────────────\n   PCTree k3/n16    159.00       1.69x          +2.16%        67.87%\n  ───────────────  ────────  ──────────  ──────────────  ────────────\n   PCTree k4/n22    157.99       1.68x          +1.51%        72.16%\n \nk3/n16 beat linear DSpark in 9 of 11 categories. Its largest gain was summarization at +6.56%. Only RAG (-0.57%) and multilingual (-1.35%) slightly favored linear. k4/n22 accepted more but drafts but could not repay the larger verifier batch.\n\nBenchmark conditions: SPEED-Bench qualitative, all 11 categories, four samples per category, 44/44 completed with zero failures, 512 output tokens, temperature 0, 8K context, one slot, BF16 target and draft.\n\n  CPU-only llama-bench, 12 threads, three repetitions:\n\n   Model                   pp512                  tg128\n  ━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━\n   BF16     76.59 +/- 0.33 tok/s    3.82 +/- 0.02 tok/s\n  ───────  ──────────────────────  ─────────────────────\n   Q8_0     76.07 +/- 0.79 tok/s    7.12 +/- 0.01 tok/s\n\n\n\nThe PCTree launch parameters are:\n\n  --spec-type draft-dspark\n  --spec-draft-n-max 3\n  --spec-dspark-pctree\n  --spec-dspark-pctree-k 3\n  --spec-dspark-pctree-n 16\n\n  Example complete command:\n  llama-server.exe `\n    -m Qwen3-8B-BF16.gguf `\n    -md dspark-Qwen3-8B-BF16.gguf `\n    --spec-type draft-dspark `\n    --spec-draft-n-max 3 `\n    --spec-dspark-pctree `\n    --spec-dspark-pctree-k 3 `\n    --spec-dspark-pctree-n 16 `\n    -ngl all `\n    -ngld all `\n    -c 8192 `\n    --parallel 1 `\n    --temp 0 `\n    --jinja `\n    --host <private-endpoint> `\n    --port 8080\n\nIt would be cool if you could test it out with some models and tell me if it works or not.\nkinda hoped someone on llamacpp would look at it, but seemingly no one wanted to :P\n\nI tested Qwen 3.8 27B Q4, but that was sadly worse with k2-4.\nIm interested to see in how DS Flash would perform for example.\n\nYou can read a bit more below in the issue I created.\n\nRepo: https://github.com/getraid/llama.cpp-dspark-pctree\nRelated research issue: https://github.com/ggml-org/llama.cpp/issues/27499\nShare",
+  "comments": [
+    {
+      "author": "jacek2023",
+      "score": "3",
+      "text": "jacek2023\n•\n18h ago\nllama.cpp\n Top 1% Commenter\n\n\"kinda hoped someone on llamacpp would look at it, but seemingly no one wanted to\" I think you should post PR (not just an issue)\n\nRapidRaid\n•\n18h ago\n\nI mean I can do that, but I know they won’t accept it most likely because they like to split implementations into cpu then gpu. And on CPU it’s kinda not visible. I moreover would like for a review of functionality first before I “disrupt prod” 😅"
+    },
+    {
+      "author": "RapidRaid",
+      "score": "1",
+      "text": "RapidRaid\n•\n18h ago\n\nI mean I can do that, but I know they won’t accept it most likely because they like to split implementations into cpu then gpu. And on CPU it’s kinda not visible. I moreover would like for a review of functionality first before I “disrupt prod” 😅"
+    },
+    {
+      "author": "BirdForsaken6616",
+      "score": "1",
+      "text": "BirdForsaken6616\n•\n18h ago\n\nInteresting that higher acceptance didn’t translate to higher throughput.k3/n16 beating k4/n22 shows verifier cost matters as much as draft quality"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vunqoz",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:59:12Z",
+  "discovered_by_query_ids": [
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.669,
+    "evidence": 1.0,
+    "relevance": 0.455,
+    "community_scrutiny": 0.3,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://arxiv.org/abs/2608.02123",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/getraid/llama.cpp-dspark-pctree",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/issues/27499",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

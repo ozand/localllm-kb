@@ -1,0 +1,12 @@
+Qwen 3.8 27B RTX 3090 Ti local inference
+Qwen 3.8 27B 24GB VRAM llama.cpp
+Qwen 3.8 27B RTX 3090 tokens per second
+Qwen 3.8 27B context KV cache 3090
+Qwen 3.8 27B quantization Q4 Q6 RTX 3090
+Qwen 3.8 27B agentic coding local GPU
+Qwen 3.8 27B overthinking reasoning budget
+Qwen 3.8 27B llama.cpp configuration
+Qwen 3.8 27B vLLM RTX 3090
+Qwen 3.8 27B power temperature GPU
+Qwen 3.7 27B RTX 3090 local LLM
+Qwen 3.8 27B failure troubleshooting local

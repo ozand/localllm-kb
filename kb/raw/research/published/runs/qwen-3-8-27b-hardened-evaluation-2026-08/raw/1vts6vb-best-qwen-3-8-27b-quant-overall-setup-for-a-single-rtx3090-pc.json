@@ -1,0 +1,163 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vts6vb/best_qwen_38_27b_quantoverall_setup_for_a_single/",
+  "title": "Best Qwen 3.8 27B quant/overall setup for a single RTX3090 PC.",
+  "author": "Silent_Ad_1505",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\nSilent_Ad_1505\nBest Qwen 3.8 27B quant/overall setup for a single RTX3090 PC.\nQuestion | Help\n\nHere’s my treasure- RTX 3090 Turbo without thermal interface (it was a crappy old one so I had to disassemble it and invest about £40 into proper thermal pads+paste) and cooler. And it is day and night, totally worth every penny!\n\nSo the 1st question is what quant should I chose if I don’t need super-long context (no coding tasks at the moment). Also llama.cpp or vllm?\n2nd one is: should I invest £500 into buying 4070ti (second hand but with CEX warranty) adding +12Gb of vram into the pool?\nWhat would I be able to run after such upgrade?\n\nMy pc is 13700K z690 MB with proper pcie bifurcation x8/x8, 64Gb Ram\n\nShare",
+  "comments": [
+    {
+      "author": "abnormal_human",
+      "score": "7",
+      "text": "abnormal_human\n•\n2d ago\n Top 1% Commenter\n\nI no longer treat this as an up-front choice. I have this model running on three different machines all in different ways. Give a coding agent the GPU for a night and ask it to try several different quants, vllm configs, mtp/dflash options, etc against your use case, and use the one that benches best.\n\njbro1985\n•\n2d ago\n\nThis is the way."
+    },
+    {
+      "author": "jbro1985",
+      "score": "2",
+      "text": "jbro1985\n•\n2d ago\n\nThis is the way."
+    },
+    {
+      "author": "theaaronlockhart",
+      "score": "2",
+      "text": "theaaronlockhart\n•\n2d ago\n\nCheck out this repo, they give the best single 3090 performance I’ve seen. I have dual 3090s, but I still use all of the patches from this repo and W4A16 Autoround. vLLM is probably more performant than llama.cpp, though I think the gap is closer for single GPU? (For multi-gpu tensor parallel there is no comparison)\n\nNo-Marionberry-772\n•\n2d ago\n\nI can second this.  I tried ninfer-3090, unsloth studio, and the syv-ai setup.\n\nthe syv-ai setup seems to be the most complicated, but deepseek was actually able to get me setup after a little back and forth. been able to seamlessly get setup for parallel inference and have been building a vs code extension and claude code skill set to extend CC via my vs code extension and the skills which execute open code to that back end to get a comprehensive multi agent setup going.\n\nI haven't gotten to reap world use case testing just yet, still setting up this multi harness Frankenstein monster, but its looking quite good."
+    },
+    {
+      "author": "No-Marionberry-772",
+      "score": "2",
+      "text": "No-Marionberry-772\n•\n2d ago\n\nI can second this.  I tried ninfer-3090, unsloth studio, and the syv-ai setup.\n\nthe syv-ai setup seems to be the most complicated, but deepseek was actually able to get me setup after a little back and forth. been able to seamlessly get setup for parallel inference and have been building a vs code extension and claude code skill set to extend CC via my vs code extension and the skills which execute open code to that back end to get a comprehensive multi agent setup going.\n\nI haven't gotten to reap world use case testing just yet, still setting up this multi harness Frankenstein monster, but its looking quite good."
+    },
+    {
+      "author": "jbro1985",
+      "score": "2",
+      "text": "jbro1985\n•\n2d ago\n\nI haven’t seen a 3090 without its shell. Wtf is it 3 slots wide. I know you can get some that are two, but they are rare.\n\nI can squeeze another on my board if there’s a smart way of thinning them to two slots.\n\nSorry off topic.\n\nSilent_Ad_1505\n•\n2d ago\n\nIt is Gigabyte GeForce RTX 3090 Turbo 24GB and it is only 2 slots. Also it has unique blower-style cooler: single fan design, all the hot air blowing away through the backplate.\n\ntheaaronlockhart\n•\n2d ago\n\nI have two of the turbos and they’re great for server form factor, especially because LLM workloads don’t really need the extra cooling.\n\njbro1985\n•\n2d ago\n\nI have a 2 x 3090 both founders and one is hanging out of the box on an oculink and a prayer. Need one of these next."
+    },
+    {
+      "author": "Silent_Ad_1505",
+      "score": "2",
+      "text": "Silent_Ad_1505\n•\n2d ago\n\nIt is Gigabyte GeForce RTX 3090 Turbo 24GB and it is only 2 slots. Also it has unique blower-style cooler: single fan design, all the hot air blowing away through the backplate.\n\ntheaaronlockhart\n•\n2d ago\n\nI have two of the turbos and they’re great for server form factor, especially because LLM workloads don’t really need the extra cooling.\n\njbro1985\n•\n2d ago\n\nI have a 2 x 3090 both founders and one is hanging out of the box on an oculink and a prayer. Need one of these next."
+    },
+    {
+      "author": "theaaronlockhart",
+      "score": "2",
+      "text": "theaaronlockhart\n•\n2d ago\n\nI have two of the turbos and they’re great for server form factor, especially because LLM workloads don’t really need the extra cooling."
+    },
+    {
+      "author": "jbro1985",
+      "score": "1",
+      "text": "jbro1985\n•\n2d ago\n\nI have a 2 x 3090 both founders and one is hanging out of the box on an oculink and a prayer. Need one of these next."
+    },
+    {
+      "author": "Beginning-Raisin9723",
+      "score": "2",
+      "text": "Beginning-Raisin9723\n•\n2d ago\n\nFor a single 3090, go 4-bit or 5-bit quant. If you're not doing heavy coding, 4-bit is plenty and keeps things snappy. As for the 4070ti, adding 12GB is a decent bump, but make sure your PSU can handle the transient spikes. Llama.cpp is usually easier for mixed-GPU setups.\n\nSilent_Ad_1505\n•\n2d ago\n\nMy PSU is a decent one 1300w Seasonic, so it should be capable."
+    },
+    {
+      "author": "Silent_Ad_1505",
+      "score": "1",
+      "text": "Silent_Ad_1505\n•\n2d ago\n\nMy PSU is a decent one 1300w Seasonic, so it should be capable."
+    },
+    {
+      "author": "tatertots89",
+      "score": "2",
+      "text": "tatertots89\n•\n2d ago\n\nwith the new v3.0 from unsloth I run Qwen3.8-27B-UD-IQ4_XS.gguf only, I used to run q5 but the size has bloated a bit too much for my single 3090 (ctx <55k). Qwen3.8-27B-UD-IQ4_XS.gguf is incredible IMO.\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nWhat kind of speeds are you getting?\n\ntatertots89\n•\n2d ago\n\npower limited to 275W for stability I'm getting ~70 tokens/s for coding and ~45 tokens/s for english problems (100k ctx, spec draft 3) on llama.cpp.\n\nNovaXeros\n•\n2d ago\n\nDo you find 100k ctx is enough for coding tasks?\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nIt's generally fine for short horizon tasks. You'll just need to start new sessions more regularly\n\ntatertots89\n•\n2d ago\n\nMost of my AI work is non coding, I can get more q8 kv ctx out of it before I need to go to q4 kv. 131k is my max on q8, 215k max on q4 kv.\n\nI find most of my coding tasks that run out of ctx is mostly due to me being lazy and not inserting myself into the loop enough.\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nThat's fast! Do you mind sharing your llama configuration please?\n\ntatertots89\n•\n2d ago\n\nYou can fit more than 102k ctx, I lower it because I run a faster-whisper server on gpu simultaneously.\n\nu/echo off\n\nllama-server.exe ^\n\n--model \"Qwen3.8-27B-UD-IQ4_XS.gguf\" ^\n\n--mmproj \"mmproj-BF16.gguf\" ^\n\n--spec-draft-model \"mtp-Qwen3.8-27B-Q4_0.gguf\" ^\n\n--spec-type draft-mtp ^\n\n--spec-draft-n-max 3 ^\n\n--host xxx ^\n\n--port xxx ^\n\n--gpu-layers 99 ^\n\n--cache-type-k q8_0 ^\n\n--cache-type-v q8_0 ^\n\n--ctx-size 102400 ^\n\n--batch-size 4096 ^\n\n--ubatch-size 1024 ^\n\n--threads 16 ^\n\n--flash-attn on ^\n\n--reasoning-effort medium ^\n\n--reasoning-budget 32768 ^\n\n--parallel 1 ^\n\n--jinja ^\n\n--chat-template-file \"chat_template.jinja\" ^\n\n--alias \"3.8-27b q4 q8 102k\" ^\n\n--temp 0.7 ^\n\n--repeat-penalty 1.05 ^\n\n--top-p 0.95 ^\n\n--top-k 40 ^\n\n--min-p 0.02 ^\n\n--presence-penalty 0.05 ^\n\n--frequency-penalty 0.05\n\npause"
+    },
+    {
+      "author": "Blues520",
+      "score": "1",
+      "text": "Blues520\n•\n2d ago\n Top 1% Commenter\n\nWhat kind of speeds are you getting?\n\ntatertots89\n•\n2d ago\n\npower limited to 275W for stability I'm getting ~70 tokens/s for coding and ~45 tokens/s for english problems (100k ctx, spec draft 3) on llama.cpp.\n\nNovaXeros\n•\n2d ago\n\nDo you find 100k ctx is enough for coding tasks?\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nIt's generally fine for short horizon tasks. You'll just need to start new sessions more regularly\n\ntatertots89\n•\n2d ago\n\nMost of my AI work is non coding, I can get more q8 kv ctx out of it before I need to go to q4 kv. 131k is my max on q8, 215k max on q4 kv.\n\nI find most of my coding tasks that run out of ctx is mostly due to me being lazy and not inserting myself into the loop enough.\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nThat's fast! Do you mind sharing your llama configuration please?\n\ntatertots89\n•\n2d ago\n\nYou can fit more than 102k ctx, I lower it because I run a faster-whisper server on gpu simultaneously.\n\nu/echo off\n\nllama-server.exe ^\n\n--model \"Qwen3.8-27B-UD-IQ4_XS.gguf\" ^\n\n--mmproj \"mmproj-BF16.gguf\" ^\n\n--spec-draft-model \"mtp-Qwen3.8-27B-Q4_0.gguf\" ^\n\n--spec-type draft-mtp ^\n\n--spec-draft-n-max 3 ^\n\n--host xxx ^\n\n--port xxx ^\n\n--gpu-layers 99 ^\n\n--cache-type-k q8_0 ^\n\n--cache-type-v q8_0 ^\n\n--ctx-size 102400 ^\n\n--batch-size 4096 ^\n\n--ubatch-size 1024 ^\n\n--threads 16 ^\n\n--flash-attn on ^\n\n--reasoning-effort medium ^\n\n--reasoning-budget 32768 ^\n\n--parallel 1 ^\n\n--jinja ^\n\n--chat-template-file \"chat_template.jinja\" ^\n\n--alias \"3.8-27b q4 q8 102k\" ^\n\n--temp 0.7 ^\n\n--repeat-penalty 1.05 ^\n\n--top-p 0.95 ^\n\n--top-k 40 ^\n\n--min-p 0.02 ^\n\n--presence-penalty 0.05 ^\n\n--frequency-penalty 0.05\n\npause"
+    },
+    {
+      "author": "tatertots89",
+      "score": "1",
+      "text": "tatertots89\n•\n2d ago\n\npower limited to 275W for stability I'm getting ~70 tokens/s for coding and ~45 tokens/s for english problems (100k ctx, spec draft 3) on llama.cpp.\n\nNovaXeros\n•\n2d ago\n\nDo you find 100k ctx is enough for coding tasks?\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nIt's generally fine for short horizon tasks. You'll just need to start new sessions more regularly\n\ntatertots89\n•\n2d ago\n\nMost of my AI work is non coding, I can get more q8 kv ctx out of it before I need to go to q4 kv. 131k is my max on q8, 215k max on q4 kv.\n\nI find most of my coding tasks that run out of ctx is mostly due to me being lazy and not inserting myself into the loop enough.\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nThat's fast! Do you mind sharing your llama configuration please?\n\ntatertots89\n•\n2d ago\n\nYou can fit more than 102k ctx, I lower it because I run a faster-whisper server on gpu simultaneously.\n\nu/echo off\n\nllama-server.exe ^\n\n--model \"Qwen3.8-27B-UD-IQ4_XS.gguf\" ^\n\n--mmproj \"mmproj-BF16.gguf\" ^\n\n--spec-draft-model \"mtp-Qwen3.8-27B-Q4_0.gguf\" ^\n\n--spec-type draft-mtp ^\n\n--spec-draft-n-max 3 ^\n\n--host xxx ^\n\n--port xxx ^\n\n--gpu-layers 99 ^\n\n--cache-type-k q8_0 ^\n\n--cache-type-v q8_0 ^\n\n--ctx-size 102400 ^\n\n--batch-size 4096 ^\n\n--ubatch-size 1024 ^\n\n--threads 16 ^\n\n--flash-attn on ^\n\n--reasoning-effort medium ^\n\n--reasoning-budget 32768 ^\n\n--parallel 1 ^\n\n--jinja ^\n\n--chat-template-file \"chat_template.jinja\" ^\n\n--alias \"3.8-27b q4 q8 102k\" ^\n\n--temp 0.7 ^\n\n--repeat-penalty 1.05 ^\n\n--top-p 0.95 ^\n\n--top-k 40 ^\n\n--min-p 0.02 ^\n\n--presence-penalty 0.05 ^\n\n--frequency-penalty 0.05\n\npause"
+    },
+    {
+      "author": "NovaXeros",
+      "score": "1",
+      "text": "NovaXeros\n•\n2d ago\n\nDo you find 100k ctx is enough for coding tasks?\n\nBlues520\n•\n2d ago\n Top 1% Commenter\n\nIt's generally fine for short horizon tasks. You'll just need to start new sessions more regularly\n\ntatertots89\n•\n2d ago\n\nMost of my AI work is non coding, I can get more q8 kv ctx out of it before I need to go to q4 kv. 131k is my max on q8, 215k max on q4 kv.\n\nI find most of my coding tasks that run out of ctx is mostly due to me being lazy and not inserting myself into the loop enough."
+    },
+    {
+      "author": "Blues520",
+      "score": "2",
+      "text": "Blues520\n•\n2d ago\n Top 1% Commenter\n\nIt's generally fine for short horizon tasks. You'll just need to start new sessions more regularly"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vts6vb",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:59:39Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.905,
+    "evidence": 1.0,
+    "relevance": 0.727,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/syv-ai/qwen38-27b-rtx3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sl3ztq/can_you_run_actually_useful_llms_on_anything_less/",
+  "title": "Can you run actually useful LLMs on anything less than 3090 ?",
+  "author": "Relevant-Pie475",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nRelevant-Pie475\nCan you run actually useful LLMs on anything less than 3090 ?\nQuestion | Help\n\nI started my LLM self-hosting journey with a 1660 Ti (Bad Choice, I know)\n\nI wanted to get started a bit quickly, and this was the first GPU that I could buy without breaking much bank\n\nHowever, I soon realized that this is extremely under-powered. So I started looking for a GPU with more VRAM. I came across 3060, which seem to me a good balance between raw GPU performance & cost\n\nAfterwards, I reached out to a colleague who is also very active in self-hosting LLMs. I told him that I got a 3060, and his first response is that it sucks. He is running his setup on a 3090, and is planning to get another one\n\nHonestly, I don't consider myself a AI power-user. I'm mostly self-hosting it for my family, to provide them a more ethical choice to use AI as compared to commercial offerings, and also due to data & privacy concerns\n\nBut my main question is that for you LLM experts, is it possible to host a relatively useful LLM on a GPU with 12 GB VRAM ? I did some research before buying, and it seemed like a good balance for the cost-power ratio. But honestly hearing regarding the performance from the colleague, it affected my confidence in the setup & started questioning regarding if I'll be able to self-host LLMs without dropping 1000$ for the hardware\n\nI understand it doesn't matter much, but I plugged the GPU into an HP workstation with Intel Xeon & 32 GBs of DDR3 RAM. I didn't get a chance to run the benchmarks, but overall I thought the performance was good enough for the personal use case\n\nSo I wanted you all to share your experiences with hosting LLMs with anything under 3090 !\n\nShare",
+  "comments": [
+    {
+      "author": "Momsbestboy",
+      "score": "8",
+      "text": "Momsbestboy\n•\n4mo ago\n•\nEdited 4mo ago\n\n3060 is fine. You just need more time for waiting, until it has run a task. I am using Qwen3.5 35B A3B Q6, with offload to RAM, and while it really isn't fast, it gets the job done - for me: bash scripts, python scripts etc. I need them locally, and I am too lazy /too cautious to post them on ChatGPT, or filter privacy relevant data before uploading to GPT.\n\nWhy no 3090?\n\nI decided against it, because I don't want to spend 900 Euro on a used card I have to grab from Ebay, with no warranty and a good chance it spent the last 6 years running at 100% in a mining rig.\n\nslimdizzy\n•\n4mo ago\nllama.cpp\n\nFWIW GPU mining is effectively dead and when the 3000 series dropped Nvidia had them rate limited with only the founders edition getting BIOS hacks, if I recall directly as I used to mine ETH. Used 3090s should be fine less some crazy overclocking gamer.\n\nMakers7886\n•\n4mo ago\n\n3090 mining died about a year after it's release (I bought 12 during that time for mining) with some stragglers holding on for another year or so. I upgraded all thermal pads (they are bad quality almost across the board) and they have all been flawless minus having to replace 2-3 fans total. The good thing about mining \"wear\" is that you typically downclock the core but OC the vram and the temps are consistent and sustained - less thermal cycling. All 12 of my gpus are running strong to this day without any bad signs and now living a happy retirement life serving LLM's.\n\ntldr: The 3090s are workhorses - but they need thermal pad upgrades.\n\nslimdizzy\n•\n4mo ago\nllama.cpp\n\nYep just as I remember then. Glad your cards are doing other work now!\n\nchopticks\n•\n4mo ago\n\nWhat approx tokens/sec are you getting? I’m personally ok with around 10 so curious to see what you’re getting\n\nMomsbestboy\n•\n4mo ago\n•\nEdited 4mo ago\nllama-bench -m ./Qwen3.5-35B-A3B-UD-Q6_K_XL.gguf -ncmoe 28 -ngl 99 -b 512  -t 8 -fa 1                                                             \nggml_cuda_init: found 1 CUDA devices (Total VRAM: 12037 MiB):\nDevice 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 12037 MiB\n| model                          |       size |     params | backend    | ngl | n_batch | fa |            test |                  t/s |\n| ------------------------------ | ---------: | ---------: | ---------- | --: | ------: | -: | --------------: | -------------------: |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           pp512 |        343.22 ± 3.24 |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           tg128 |         35.30 ± 0.21 |\n\nbuild: d3936498a (8370)\n\nAnd my llm-models.ini\n\n[Qwen3.5_Q6_noReason-35B-A3B-Q6_K_XL no reason]\nmodel = <unix-path>'m just starting out on my LLM hosting journey, and don't want to spend a good 1000 bucks on a 3090\n\nBut thanks for providing the context. I think I might need to fine tune some parameters and I should be able to run some solid models at an acceptable performance\n\nRight now, I have ran Qwen 3.5 9B with acceptable performance"
+    },
+    {
+      "author": "slimdizzy",
+      "score": "2",
+      "text": "slimdizzy\n•\n4mo ago\nllama.cpp\n\nFWIW GPU mining is effectively dead and when the 3000 series dropped Nvidia had them rate limited with only the founders edition getting BIOS hacks, if I recall directly as I used to mine ETH. Used 3090s should be fine less some crazy overclocking gamer.\n\nMakers7886\n•\n4mo ago\n\n3090 mining died about a year after it's release (I bought 12 during that time for mining) with some stragglers holding on for another year or so. I upgraded all thermal pads (they are bad quality almost across the board) and they have all been flawless minus having to replace 2-3 fans total. The good thing about mining \"wear\" is that you typically downclock the core but OC the vram and the temps are consistent and sustained - less thermal cycling. All 12 of my gpus are running strong to this day without any bad signs and now living a happy retirement life serving LLM's.\n\ntldr: The 3090s are workhorses - but they need thermal pad upgrades.\n\nslimdizzy\n•\n4mo ago\nllama.cpp\n\nYep just as I remember then. Glad your cards are doing other work now!"
+    },
+    {
+      "author": "Makers7886",
+      "score": "3",
+      "text": "Makers7886\n•\n4mo ago\n\n3090 mining died about a year after it's release (I bought 12 during that time for mining) with some stragglers holding on for another year or so. I upgraded all thermal pads (they are bad quality almost across the board) and they have all been flawless minus having to replace 2-3 fans total. The good thing about mining \"wear\" is that you typically downclock the core but OC the vram and the temps are consistent and sustained - less thermal cycling. All 12 of my gpus are running strong to this day without any bad signs and now living a happy retirement life serving LLM's.\n\ntldr: The 3090s are workhorses - but they need thermal pad upgrades.\n\nslimdizzy\n•\n4mo ago\nllama.cpp\n\nYep just as I remember then. Glad your cards are doing other work now!"
+    },
+    {
+      "author": "slimdizzy",
+      "score": "2",
+      "text": "slimdizzy\n•\n4mo ago\nllama.cpp\n\nYep just as I remember then. Glad your cards are doing other work now!"
+    },
+    {
+      "author": "chopticks",
+      "score": "1",
+      "text": "chopticks\n•\n4mo ago\n\nWhat approx tokens/sec are you getting? I’m personally ok with around 10 so curious to see what you’re getting\n\nMomsbestboy\n•\n4mo ago\n•\nEdited 4mo ago\nllama-bench -m ./Qwen3.5-35B-A3B-UD-Q6_K_XL.gguf -ncmoe 28 -ngl 99 -b 512  -t 8 -fa 1                                                             \nggml_cuda_init: found 1 CUDA devices (Total VRAM: 12037 MiB):\nDevice 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 12037 MiB\n| model                          |       size |     params | backend    | ngl | n_batch | fa |            test |                  t/s |\n| ------------------------------ | ---------: | ---------: | ---------- | --: | ------: | -: | --------------: | -------------------: |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           pp512 |        343.22 ± 3.24 |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           tg128 |         35.30 ± 0.21 |\n\nbuild: d3936498a (8370)\n\nAnd my llm-models.ini\n\n[Qwen3.5_Q6_noReason-35B-A3B-Q6_K_XL no reason]\nmodel = <unix-path>"
+    },
+    {
+      "author": "Momsbestboy",
+      "score": "3",
+      "text": "Momsbestboy\n•\n4mo ago\n•\nEdited 4mo ago\nllama-bench -m ./Qwen3.5-35B-A3B-UD-Q6_K_XL.gguf -ncmoe 28 -ngl 99 -b 512  -t 8 -fa 1                                                             \nggml_cuda_init: found 1 CUDA devices (Total VRAM: 12037 MiB):\nDevice 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 12037 MiB\n| model                          |       size |     params | backend    | ngl | n_batch | fa |            test |                  t/s |\n| ------------------------------ | ---------: | ---------: | ---------- | --: | ------: | -: | --------------: | -------------------: |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           pp512 |        343.22 ± 3.24 |\n| qwen35moe 35B.A3B Q6_K         |  29.86 GiB |    34.66 B | CUDA       |  99 |     512 |  1 |           tg128 |         35.30 ± 0.21 |\n\nbuild: d3936498a (8370)\n\nAnd my llm-models.ini\n\n[Qwen3.5_Q6_noReason-35B-A3B-Q6_K_XL no reason]\nmodel = <unix-path>"
+    },
+    {
+      "author": "chopticks",
+      "score": "1",
+      "text": "chopticks\n•\n4mo ago\n\nThanks!"
+    },
+    {
+      "author": "Relevant-Pie475",
+      "score": "1",
+      "text": "Relevant-Pie475\n•\n4mo ago\n\nThats what I was concerned about. The price to performance ration does not make sense for my use case, especially because I'm just starting out on my LLM hosting journey, and don't want to spend a good 1000 bucks on a 3090\n\nBut thanks for providing the context. I think I might need to fine tune some parameters and I should be able to run some solid models at an acceptable performance\n\nRight now, I have ran Qwen 3.5 9B with acceptable performance"
+    },
+    {
+      "author": "NekoRobbie",
+      "score": "5",
+      "text": "NekoRobbie\n•\n4mo ago\n\nDepends on what you mean by useful.\nThe system RAM might actually be more helpful than you think, because it means that you can afford to use some larger MoEs. MoEs can let systems punch well above their weight, and they actually make good use of system RAM because you can put a surprising amount of the MoE into RAM while maintaining very good performance.\n\nI know that I can run Gemma 4 26B A4B at IQ4_XS with 64k context (at q8 kv cache) on my RX 9060 XT 16GB very comfortably while only offloading 8 or so MoE layers to RAM (using SWA, since Gemma 4 was kinda built around it). A MoE won't be quite as a good as a dense model of their total parameter count, but they're certainly far better than their active parameter count alone. I think you could probably get at *least* 32k context with the MoE yourself, and if you're willing to offload more of the layers to RAM than I currently am then you could probably get up to 64k+ yourself. Overall, from what I've heard, people are having pretty darn good success with using the model for (some) local AI-assisted coding.\n\nIf wanting to avoid MoE / wanting to keep things fully in VRAM, there's always Qwen 3.5 9B or Gemma 4 E4B (E4B is actually an 8B model, but it apparently is as performant as 4B. Hence the \"E\" for \"Effectively\"). Definitely adjust your expectations to their size, though.\n\nRelevant-Pie475\n•\n4mo ago\n\nYes thank you for the breakdown. I need to dive a bit more into the different type of Models, but I do have the understanding that MoE models are okay for day to day use, but for some specific application, such as coding, you will need a specific model to get stronger results (more accurate, less hallucinations) etc.\n\nRight now, I have tested the following models somewhat thoroughly\n\n-- Qwen 3.5B - 9B\n\n-- Ministral-3 - 8B\n\n-- Gemma3 - (8B & 12B)\n\nOverall I would say compared to the online models, the responses seem weaker (more hallucinations, less details) but thats expected, since the hardware is significantly weaker than cloud offerings\n\nBut the performance was okay for the most part"
+    },
+    {
+      "author": "Relevant-Pie475",
+      "score": "1",
+      "text": "Relevant-Pie475\n•\n4mo ago\n\nYes thank you for the breakdown. I need to dive a bit more into the different type of Models, but I do have the understanding that MoE models are okay for day to day use, but for some specific application, such as coding, you will need a specific model to get stronger results (more accurate, less hallucinations) etc.\n\nRight now, I have tested the following models somewhat thoroughly\n\n-- Qwen 3.5B - 9B\n\n-- Ministral-3 - 8B\n\n-- Gemma3 - (8B & 12B)\n\nOverall I would say compared to the online models, the responses seem weaker (more hallucinations, less details) but thats expected, since the hardware is significantly weaker than cloud offerings\n\nBut the performance was okay for the most part"
+    },
+    {
+      "author": "Long_comment_san",
+      "score": "4",
+      "text": "Long_comment_san\n•\n4mo ago\n\nI use 12gb 4070. Literally 2\\3 of the moe models work fine provided you have the ram. GLM 4.7 flash, Qwen 35ba3b and new Gemma 4 26b seem like your only choice. I recomend GLM and Gemma\n\nRelevant-Pie475\n•\n4mo ago\n\nHi Thanks for sharing ! I have heard of Gemma, but not GLM. I'll have a look !\n\nLong_comment_san\n•\n4mo ago\n\nGLM 4.7 flash is really not bad at all. Take a look at Melinoe. I hype them, they are absolutely amazing models. Whoever made them doesn't get the recognition he deserved. I absolutely loved Melinoe 80 (Next) and then flash came out which keeps me very happy.\n\nGemma 4, however, should be a tier above Melinoe in brainpower. Basically Melinoe is a lot more fun to talk to, but Gemma is a better workhorse."
+    },
+    {
+      "author": "Relevant-Pie475",
+      "score": "1",
+      "text": "Relevant-Pie475\n•\n4mo ago\n\nHi Thanks for sharing ! I have heard of Gemma, but not GLM. I'll have a look !\n\nLong_comment_san\n•\n4mo ago\n\nGLM 4.7 flash is really not bad at all. Take a look at Melinoe. I hype them, they are absolutely amazing models. Whoever made them doesn't get the recognition he deserved. I absolutely loved Melinoe 80 (Next) and then flash came out which keeps me very happy.\n\nGemma 4, however, should be a tier above Melinoe in brainpower. Basically Melinoe is a lot more fun to talk to, but Gemma is a better workhorse."
+    },
+    {
+      "author": "Long_comment_san",
+      "score": "1",
+      "text": "Long_comment_san\n•\n4mo ago\n\nGLM 4.7 flash is really not bad at all. Take a look at Melinoe. I hype them, they are absolutely amazing models. Whoever made them doesn't get the recognition he deserved. I absolutely loved Melinoe 80 (Next) and then flash came out which keeps me very happy.\n\nGemma 4, however, should be a tier above Melinoe in brainpower. Basically Melinoe is a lot more fun to talk to, but Gemma is a better workhorse."
+    },
+    {
+      "author": "Skyline34rGt",
+      "score": "3",
+      "text": "Skyline34rGt\n•\n4mo ago\n\nRtx3060 gives you MoE models like: Qwen3.5 35b-a3b (q4_k_m) and Gemma4 26-a4b (q4_k_m) with offload MoE layers to Cpu.\n\nYou can have ~40tok/s for Qwen and ~30tok/s for Gemma4 (of more with new updated quants maybe?)\n\nWhat can Rtx3090 better have? Dense models will run:\n\nQwen3.5 27b and Gemma 31b - they are a little better than MoE but they are slower even at 3090.\n\nSo a lot cheaper Gpu gives you very fast, almost as good models as Rtx3090.\n\nMany people have Rtx3090 and still prefer MoE model cause of speed.\n\nRelevant-Pie475\n•\n4mo ago\n\nAlright thanks for the input !"
+    },
+    {
+      "author": "Relevant-Pie475",
+      "score": "1",
+      "text": "Relevant-Pie475\n•\n4mo ago\n\nAlright thanks for the input !"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1sl3ztq",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:42:04Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.883,
+    "evidence": 1.0,
+    "relevance": 0.667,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.glukhov.org/ai-devtools/opencode/llms-comparison/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.glukhov.org/llm-performance/benchmarks/best-llm-on-16gb-vram-gpu/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqrt86/after_pushing_1m_tokens_through_qwen_38_27b_here/",
+  "title": "After pushing 1M+ tokens through Qwen 3.8 27B, here is my optimal llama.cpp config for 16GB VRAM (73k Context, Agentic Coding)",
+  "author": "chiribe",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5d ago\nchiribe\nAfter pushing 1M+ tokens through Qwen 3.8 27B, here is my optimal llama.cpp config for 16GB VRAM (73k Context, Agentic Coding)\nTutorial | Guide\n\nDando seguimiento a mi post anterior sobre cómo tengo montado mi servidor de presupuesto (Intel N100 + RTX 5060 Ti 16GB), varios me preguntaron por una mirada más profunda a mi configuración real de inferencia y al desempeño agentic en el mundo real.\n\nComo muchos de ustedes, estaba refrescando la página esperando descargar Qwen 3.8 27B apenas salió. Después de pasar todo el fin de semana estresándolo con flujos de trabajo de codificación agentic, logré correr un proyecto completo y grande casi todo de forma autónoma (más de 1M de tokens procesados en total, solo 3 prompts).\n\nAquí va un resumen rápido de la configuración base antes de meternos en los detalles del config y del workflow.\n\nSpecs y parámetros rápidos\n\nModelo: Qwen3.8-27B-UD-Q3_K_XL.gguf\n\nHardware: RTX 5060 Ti (16GB VRAM) + Intel N100 (4C/4T, 16GB RAM)\n\nVentana de contexto: 73,728 (73k de contexto) corriendo tranqui en 16GB de VRAM.\n\nCuantización de KV Cache: q4_1 para el contexto principal\n\nDecodificación especulativa: MTP nativa activada (spec-type = draft-mtp, n-max = 2)\n\nSampling: temp = 0.65, top_p = 0.95, top_k = 20, min_p = 0.05\n\nEl experimento: armar una API completa con 3 prompts\n\nEn vez de correr benchmarks sintéticos, metí esta configuración por una cadena real de ingeniería de software: construyendo una REST API no oficial y un servidor MCP para un foro vBulletin heredado.\n\nPrompt 1 (Arquitectura del sitio y análisis): Pedí al modelo que mapee el sitio objetivo. Generó una especificación en Markdown impecable de ~1,500 líneas que cubría análisis estructural, nodos HTML rescatables, payloads JSON esperados, selección de stack, lógica de paginación, autenticación de sesión y endpoints de búsqueda—mucho más a fondo de lo que yo habría escrito a mano.\n\nPrompt 2 (Arquitectura de desarrollo): Usando la spec como única fuente de verdad, diseñó un plan de implementación modular de NestJS dividido en 9 fases de ejecució<windows-path>\"fit\" para evitar que capas se carguen en la CPU por un error de cálculo automático\nfit                 = off\nctx-size            = 73728\ncontext-shift       = 1\n\n# MTP nativa del modelo (Decodificación especulativa)\nspec-type           = ngram-mod,draft-mtp\nspec-draft-n-max    = 2\n\n# Cuantización de KV (q4_1 nos permite meter contexto de 73k en 16GB de VRAM)\ncache-type-k        = q4_1\ncache-type-v        = q4_1\n\n# Parámetros de presupuesto de pensamiento / razonamiento\nchat-template-kwargs = {\"preserve_thinking\": true, \"reasoning_effort\":\"medium\"}\nreasoning-budget    = 5000\n\n# Batches más chicos para evitar picos de VRAM durante prefills masivos\nbatch-size          = 1024\nubatch-size         = 512\n\n# Ajustes oficiales / recomendados del sampler de cuantización\ntemp                = 0.65\ntop-p               = 0.95\ntop-k               = 15\nmin-p               = 0.05\n\nShare",
+  "comments": [
+    {
+      "author": "pmttyji",
+      "score": "347",
+      "text": "pmttyji\n•\n5d ago\n Top 1% Poster\n\nFolks, this is the type of thread I want to see after release of any new models. Thanks u/chiribe\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nu/chiribe Did you try with ngram together with MTP?\n\nspec-type = draft-mtp\nspec-draft-n-max = 2\nspec-ngram-mod-n-match = 24\nspec-ngram-mod-n-min = 48\nspec-ngram-mod-n-max = 64\nchiribe\n•\n5d ago\n\nI'm actually not super familiar with how n-gram works under the hood here, so I'll read up on it and test it out with your parameters. Thanks!\n\nwektor420\n•\n5d ago\n\nTldr speculates text continuations matching what you provided in prompt\n\nchiribe\n•\n5d ago\n\nThanks! I had Gemini (which I use to translate from my native language) explain n-gram to me. Is there any particular prompt you'd like me to test on this setup to see how it fares?\n\nmailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts.\n\nsimcop2387\n•\n5d ago\n\nAnd when used agentically, it should also help predict what came in from tool calls (i.e. file reads). It's one thing i keep meaning to try tuning on my setup to see how much i can get it to help\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nPlease update the results in your thread after trying that\n\nchiribe\n•\n5d ago\n\nDidn't notice much of an impact, to be honest—speeds are pretty much staying within the same range (maybe ±1 t/s at most). I built my llama.cpp binary this past Saturday. I'll leave it enabled in the config anyway in case future PRs optimize this further.\n\nlood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3\n\nchiribe\n•\n5d ago\n\nUpdate on this: I hadn't enabled ngram-mod properly earlier. With it running alongside MTP, speed jumped to ~46 t/s on JavaScript generation (+6-8 t/s gain). Appreciate the advice! I'll edit the main post shortly to reflect all the optimizations from the comments.\n\nqiinemarr\n•\n5d ago\n•\nEdited 5d ago\n\ndon't you need spec-type = ngram-mod,draft-mtp ?\n\nEDIT\n\nalso those are default values\n\nspec-ngram-mod-n-match = 24\nspec-ngram-mod-n-min = 48\nspec-ngram-mod-n-max = 64\nchiribe\n•\n5d ago\n\nYes, that's the correct syntax. I'm sorry I didn't see your comment in time.\n\n1 more reply\nLightBroom\n•\n5d ago\n\nUsing ngram seems to slow down generation on my R9700 by about 4t/s\n\nDepending on your card, try both with and without cause YMMV\n\n(It could be a temperature issue and may not happen at lower temperatures though)\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nThanks for mentioning this. Not aware of this.\n\n.... on my R9700 ....\n\nI got same card recently. I'll get rig by this weekend. Please share your extreme optimized full llama.cpp command. Thanks.\n\nLightBroom\n•\n5d ago\n•\nEdited 4d ago\n\nThere you go, this is my config. I've run a bunch of tests at different power limits and found 230W to be the sweet spot for my ASRock Creator R9700 card. If you get a different brand, you should run your own tests, I have no idea if they use a reference design or they have their own. If you're on Linux, this will work (or rocm-smi, or direct write to sysfs if you wish).\n\namd-smi set --gpu 0 --power-cap 230\n\nI found no diff in generation speed is the same between 300W and 230W, you get more prefill speed at higher wattage though, so run your own tests and see what you like.\n\nLlama.cpp arguments below. I use it in router mode with this command line. I run it in Kubernetes so just translate to your own setup. I also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support. You'll see below the default device is ROCm0 but I run Qwen on Vulkan1 (yeah, the numbers are different for the 2 devices). For Qwen, Vulkan yields better generation speed and also leaves 1GB extra of VRAM free. ROCm is faster by about 10% on prefill.\n\nIf you don't run your own local DNS, set the cors-origin to \"*\".\n\nllama-server\n--mo"
+    },
+    {
+      "author": "pmttyji",
+      "score": "39",
+      "text": "pmttyji\n•\n5d ago\n Top 1% Poster\n\nu/chiribe Did you try with ngram together with MTP?\n\nspec-type = draft-mtp\nspec-draft-n-max = 2\nspec-ngram-mod-n-match = 24\nspec-ngram-mod-n-min = 48\nspec-ngram-mod-n-max = 64\nchiribe\n•\n5d ago\n\nI'm actually not super familiar with how n-gram works under the hood here, so I'll read up on it and test it out with your parameters. Thanks!\n\nwektor420\n•\n5d ago\n\nTldr speculates text continuations matching what you provided in prompt\n\nchiribe\n•\n5d ago\n\nThanks! I had Gemini (which I use to translate from my native language) explain n-gram to me. Is there any particular prompt you'd like me to test on this setup to see how it fares?\n\nmailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts.\n\nsimcop2387\n•\n5d ago\n\nAnd when used agentically, it should also help predict what came in from tool calls (i.e. file reads). It's one thing i keep meaning to try tuning on my setup to see how much i can get it to help\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nPlease update the results in your thread after trying that\n\nchiribe\n•\n5d ago\n\nDidn't notice much of an impact, to be honest—speeds are pretty much staying within the same range (maybe ±1 t/s at most). I built my llama.cpp binary this past Saturday. I'll leave it enabled in the config anyway in case future PRs optimize this further.\n\nlood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3\n\nchiribe\n•\n5d ago\n\nUpdate on this: I hadn't enabled ngram-mod properly earlier. With it running alongside MTP, speed jumped to ~46 t/s on JavaScript generation (+6-8 t/s gain). Appreciate the advice! I'll edit the main post shortly to reflect all the optimizations from the comments.\n\nqiinemarr\n•\n5d ago\n•\nEdited 5d ago\n\ndon't you need spec-type = ngram-mod,draft-mtp ?\n\nEDIT\n\nalso those are default values\n\nspec-ngram-mod-n-match = 24\nspec-ngram-mod-n-min = 48\nspec-ngram-mod-n-max = 64\nchiribe\n•\n5d ago\n\nYes, that's the correct syntax. I'm sorry I didn't see your comment in time.\n\n1 more reply\nLightBroom\n•\n5d ago\n\nUsing ngram seems to slow down generation on my R9700 by about 4t/s\n\nDepending on your card, try both with and without cause YMMV\n\n(It could be a temperature issue and may not happen at lower temperatures though)\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nThanks for mentioning this. Not aware of this.\n\n.... on my R9700 ....\n\nI got same card recently. I'll get rig by this weekend. Please share your extreme optimized full llama.cpp command. Thanks.\n\nLightBroom\n•\n5d ago\n•\nEdited 4d ago\n\nThere you go, this is my config. I've run a bunch of tests at different power limits and found 230W to be the sweet spot for my ASRock Creator R9700 card. If you get a different brand, you should run your own tests, I have no idea if they use a reference design or they have their own. If you're on Linux, this will work (or rocm-smi, or direct write to sysfs if you wish).\n\namd-smi set --gpu 0 --power-cap 230\n\nI found no diff in generation speed is the same between 300W and 230W, you get more prefill speed at higher wattage though, so run your own tests and see what you like.\n\nLlama.cpp arguments below. I use it in router mode with this command line. I run it in Kubernetes so just translate to your own setup. I also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support. You'll see below the default device is ROCm0 but I run Qwen on Vulkan1 (yeah, the numbers are different for the 2 devices). For Qwen, Vulkan yields better generation speed and also leaves 1GB extra of VRAM free. ROCm is faster by about 10% on prefill.\n\nIf you don't run your own local DNS, set the cors-origin to \"*\".\n\nllama-server\n--models-preset /config/presets.ini\n--ui-mcp-proxy\n--ui-config-file /config/ui-config.json\n--api-key-file /secrets/api-keys.list\n--cors-"
+    },
+    {
+      "author": "chiribe",
+      "score": "27",
+      "text": "chiribe\n•\n5d ago\n\nI'm actually not super familiar with how n-gram works under the hood here, so I'll read up on it and test it out with your parameters. Thanks!\n\nwektor420\n•\n5d ago\n\nTldr speculates text continuations matching what you provided in prompt\n\nchiribe\n•\n5d ago\n\nThanks! I had Gemini (which I use to translate from my native language) explain n-gram to me. Is there any particular prompt you'd like me to test on this setup to see how it fares?\n\nmailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts.\n\nsimcop2387\n•\n5d ago\n\nAnd when used agentically, it should also help predict what came in from tool calls (i.e. file reads). It's one thing i keep meaning to try tuning on my setup to see how much i can get it to help\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nPlease update the results in your thread after trying that\n\nchiribe\n•\n5d ago\n\nDidn't notice much of an impact, to be honest—speeds are pretty much staying within the same range (maybe ±1 t/s at most). I built my llama.cpp binary this past Saturday. I'll leave it enabled in the config anyway in case future PRs optimize this further.\n\nlood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3"
+    },
+    {
+      "author": "wektor420",
+      "score": "7",
+      "text": "wektor420\n•\n5d ago\n\nTldr speculates text continuations matching what you provided in prompt\n\nchiribe\n•\n5d ago\n\nThanks! I had Gemini (which I use to translate from my native language) explain n-gram to me. Is there any particular prompt you'd like me to test on this setup to see how it fares?\n\nmailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts.\n\nsimcop2387\n•\n5d ago\n\nAnd when used agentically, it should also help predict what came in from tool calls (i.e. file reads). It's one thing i keep meaning to try tuning on my setup to see how much i can get it to help"
+    },
+    {
+      "author": "chiribe",
+      "score": "8",
+      "text": "chiribe\n•\n5d ago\n\nThanks! I had Gemini (which I use to translate from my native language) explain n-gram to me. Is there any particular prompt you'd like me to test on this setup to see how it fares?\n\nmailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts."
+    },
+    {
+      "author": "mailto_devnull",
+      "score": "3",
+      "text": "mailto_devnull\n•\n5d ago\n\nNo, because ngram builds its cache over time. So you need multiple prompts."
+    },
+    {
+      "author": "simcop2387",
+      "score": "2",
+      "text": "simcop2387\n•\n5d ago\n\nAnd when used agentically, it should also help predict what came in from tool calls (i.e. file reads). It's one thing i keep meaning to try tuning on my setup to see how much i can get it to help"
+    },
+    {
+      "author": "pmttyji",
+      "score": "3",
+      "text": "pmttyji\n•\n5d ago\n Top 1% Poster\n\nPlease update the results in your thread after trying that\n\nchiribe\n•\n5d ago\n\nDidn't notice much of an impact, to be honest—speeds are pretty much staying within the same range (maybe ±1 t/s at most). I built my llama.cpp binary this past Saturday. I'll leave it enabled in the config anyway in case future PRs optimize this further.\n\nlood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3"
+    },
+    {
+      "author": "chiribe",
+      "score": "5",
+      "text": "chiribe\n•\n5d ago\n\nDidn't notice much of an impact, to be honest—speeds are pretty much staying within the same range (maybe ±1 t/s at most). I built my llama.cpp binary this past Saturday. I'll leave it enabled in the config anyway in case future PRs optimize this further.\n\nlood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3"
+    },
+    {
+      "author": "lood9phee2Ri",
+      "score": "10",
+      "text": "lood9phee2Ri\n•\n5d ago\n\nngram tends to help with \"iterative refinement\" conversational tasks since it drafts based on previous. Like \"make a html page saying blah\", \"okay now make the text blue\". I'm just using --spec-type ngram-simple,draft-mtp --spec-draft-n-max 3"
+    },
+    {
+      "author": "chiribe",
+      "score": "15",
+      "text": "chiribe\n•\n5d ago\n\nUpdate on this: I hadn't enabled ngram-mod properly earlier. With it running alongside MTP, speed jumped to ~46 t/s on JavaScript generation (+6-8 t/s gain). Appreciate the advice! I'll edit the main post shortly to reflect all the optimizations from the comments."
+    },
+    {
+      "author": "qiinemarr",
+      "score": "8",
+      "text": "qiinemarr\n•\n5d ago\n•\nEdited 5d ago\n\ndon't you need spec-type = ngram-mod,draft-mtp ?\n\nEDIT\n\nalso those are default values\n\nspec-ngram-mod-n-match = 24\nspec-ngram-mod-n-min = 48\nspec-ngram-mod-n-max = 64\nchiribe\n•\n5d ago\n\nYes, that's the correct syntax. I'm sorry I didn't see your comment in time.\n\n1 more reply"
+    },
+    {
+      "author": "chiribe",
+      "score": "2",
+      "text": "chiribe\n•\n5d ago\n\nYes, that's the correct syntax. I'm sorry I didn't see your comment in time."
+    },
+    {
+      "author": "LightBroom",
+      "score": "3",
+      "text": "LightBroom\n•\n5d ago\n\nUsing ngram seems to slow down generation on my R9700 by about 4t/s\n\nDepending on your card, try both with and without cause YMMV\n\n(It could be a temperature issue and may not happen at lower temperatures though)\n\npmttyji\n•\n5d ago\n Top 1% Poster\n\nThanks for mentioning this. Not aware of this.\n\n.... on my R9700 ....\n\nI got same card recently. I'll get rig by this weekend. Please share your extreme optimized full llama.cpp command. Thanks.\n\nLightBroom\n•\n5d ago\n•\nEdited 4d ago\n\nThere you go, this is my config. I've run a bunch of tests at different power limits and found 230W to be the sweet spot for my ASRock Creator R9700 card. If you get a different brand, you should run your own tests, I have no idea if they use a reference design or they have their own. If you're on Linux, this will work (or rocm-smi, or direct write to sysfs if you wish).\n\namd-smi set --gpu 0 --power-cap 230\n\nI found no diff in generation speed is the same between 300W and 230W, you get more prefill speed at higher wattage though, so run your own tests and see what you like.\n\nLlama.cpp arguments below. I use it in router mode with this command line. I run it in Kubernetes so just translate to your own setup. I also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support. You'll see below the default device is ROCm0 but I run Qwen on Vulkan1 (yeah, the numbers are different for the 2 devices). For Qwen, Vulkan yields better generation speed and also leaves 1GB extra of VRAM free. ROCm is faster by about 10% on prefill.\n\nIf you don't run your own local DNS, set the cors-origin to \"*\".\n\nllama-server\n--models-preset /config/presets.ini\n--ui-mcp-proxy\n--ui-config-file /config/ui-config.json\n--api-key-file /secrets/api-keys.list\n--cors-origins \"https://host.domain.net\"\n--host 0.0.0.0\n--port \"9931\"\n--log-colors on\n--verbosity \"4\"\n--models-max \"1\"\n--threads-http \"4\"\n\npresets.ini:\n\n[*]\ndevice = ROCm0\nload-mode = mmap+mlock\nmodels-max = 1\nn-gpu-layers = all\ngpu-layers-draft = all\nthreads = 4\nthreads-batch = 8\ncont-batching = true\njinja = true\nflash-attn = on\nparallel = 2\nctx-checkpoints = 16\ncache-ram = 8192\ncache-reuse = 256\nkv-unified = true\ncache-type-k = q8_0\ncache-type-v = q8_0\nfit = off\nbatch-size = 2048\nubatch-size = 1024\nreasoning = on\nreasoning-preserve = on\n\n[Qwen 3.8 27B]\ndevice = Vulkan1\nmodel = /models/unsloth/Qwen3.8-27B-Q6_K.gguf\ntemp = 0.8\ntop-p = 0.95\nmin-p = 0.00\npresence-penalty = 0.0\nrepeat-penalty = 1.0\nreasoning = on\nspec-type = draft-mtp\nspec-draft-type-k = q8_0\nspec-draft-type-v = q8_0\nspec-draft-n-max = 2\nspec-draft-p-min = 0.85\nreasoning-preserve = on\nchat-template-file = /models/chat-templates/qwen36-chat-template-v22.jinja\nctx-size = 184320\n\nThe api-keys.list file is just a bunch of keys generated like this (which I mount from a Kubernetes secret synced from my 1Password Vault). When I assign one (e.g. to OpenWebUI) I add a comment on the line above so it's easy to track - small home setup so I don't care about databases and such)\n\nfor i in $(seq 1 20); do echo \"sk_$(openssl rand -hex 32)\"; done\n\nAnyway, have fun, it's a nice card.\n\npmttyji\n•\n3d ago\n Top 1% Poster\n\nThank you so much this much details.\n\nI also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support.\n\nPlease share the cmake build commands with flags you're using. I remember that compiling for our cards could give extra performance(~10%), many mentioned that here in past.\n\nLightBroom\n•\n3d ago\n\nSomething like this, it auto-detects the card but you can add a target if you want (or you are compiling for a container image), e.g. -DGPU_TARGETS=gfx1201 for the R9700\n\nHIPCXX=\"$(hipconfig -l)/clang\" HIP_PATH=\"$(hipconfig -R)\" \\\n    cmake -S . -B build \\\n    -DGGML_HIP=ON \\\n    -DGGML_HIPBLAS=ON \\\n    -DGGML_HIP_RCCL=ON \\\n    -DGGML_HIP_ROCWMMA_FATTN=ON \\\n    -DGGML_CUDA_FA_ALL_QUANTS=ON \\\n    -DBUILD_SHARED_LIBS=ON \\\n    -DGGML_VULKAN=1 \\\n    -DGGML_VK_ALLOW_GRAPHICS_QUEUE=1 \\\n    -DGGML_RPC=ON \\"
+    },
+    {
+      "author": "pmttyji",
+      "score": "1",
+      "text": "pmttyji\n•\n5d ago\n Top 1% Poster\n\nThanks for mentioning this. Not aware of this.\n\n.... on my R9700 ....\n\nI got same card recently. I'll get rig by this weekend. Please share your extreme optimized full llama.cpp command. Thanks.\n\nLightBroom\n•\n5d ago\n•\nEdited 4d ago\n\nThere you go, this is my config. I've run a bunch of tests at different power limits and found 230W to be the sweet spot for my ASRock Creator R9700 card. If you get a different brand, you should run your own tests, I have no idea if they use a reference design or they have their own. If you're on Linux, this will work (or rocm-smi, or direct write to sysfs if you wish).\n\namd-smi set --gpu 0 --power-cap 230\n\nI found no diff in generation speed is the same between 300W and 230W, you get more prefill speed at higher wattage though, so run your own tests and see what you like.\n\nLlama.cpp arguments below. I use it in router mode with this command line. I run it in Kubernetes so just translate to your own setup. I also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support. You'll see below the default device is ROCm0 but I run Qwen on Vulkan1 (yeah, the numbers are different for the 2 devices). For Qwen, Vulkan yields better generation speed and also leaves 1GB extra of VRAM free. ROCm is faster by about 10% on prefill.\n\nIf you don't run your own local DNS, set the cors-origin to \"*\".\n\nllama-server\n--models-preset /config/presets.ini\n--ui-mcp-proxy\n--ui-config-file /config/ui-config.json\n--api-key-file /secrets/api-keys.list\n--cors-origins \"https://host.domain.net\"\n--host 0.0.0.0\n--port \"9931\"\n--log-colors on\n--verbosity \"4\"\n--models-max \"1\"\n--threads-http \"4\"\n\npresets.ini:\n\n[*]\ndevice = ROCm0\nload-mode = mmap+mlock\nmodels-max = 1\nn-gpu-layers = all\ngpu-layers-draft = all\nthreads = 4\nthreads-batch = 8\ncont-batching = true\njinja = true\nflash-attn = on\nparallel = 2\nctx-checkpoints = 16\ncache-ram = 8192\ncache-reuse = 256\nkv-unified = true\ncache-type-k = q8_0\ncache-type-v = q8_0\nfit = off\nbatch-size = 2048\nubatch-size = 1024\nreasoning = on\nreasoning-preserve = on\n\n[Qwen 3.8 27B]\ndevice = Vulkan1\nmodel = /models/unsloth/Qwen3.8-27B-Q6_K.gguf\ntemp = 0.8\ntop-p = 0.95\nmin-p = 0.00\npresence-penalty = 0.0\nrepeat-penalty = 1.0\nreasoning = on\nspec-type = draft-mtp\nspec-draft-type-k = q8_0\nspec-draft-type-v = q8_0\nspec-draft-n-max = 2\nspec-draft-p-min = 0.85\nreasoning-preserve = on\nchat-template-file = /models/chat-templates/qwen36-chat-template-v22.jinja\nctx-size = 184320\n\nThe api-keys.list file is just a bunch of keys generated like this (which I mount from a Kubernetes secret synced from my 1Password Vault). When I assign one (e.g. to OpenWebUI) I add a comment on the line above so it's easy to track - small home setup so I don't care about databases and such)\n\nfor i in $(seq 1 20); do echo \"sk_$(openssl rand -hex 32)\"; done\n\nAnyway, have fun, it's a nice card.\n\npmttyji\n•\n3d ago\n Top 1% Poster\n\nThank you so much this much details.\n\nI also compile my binary and build my own container image with both Vulkan and ROCm 7.14 support.\n\nPlease share the cmake build commands with flags you're using. I remember that compiling for our cards could give extra performance(~10%), many mentioned that here in past.\n\nLightBroom\n•\n3d ago\n\nSomething like this, it auto-detects the card but you can add a target if you want (or you are compiling for a container image), e.g. -DGPU_TARGETS=gfx1201 for the R9700\n\nHIPCXX=\"$(hipconfig -l)/clang\" HIP_PATH=\"$(hipconfig -R)\" \\\n    cmake -S . -B build \\\n    -DGGML_HIP=ON \\\n    -DGGML_HIPBLAS=ON \\\n    -DGGML_HIP_RCCL=ON \\\n    -DGGML_HIP_ROCWMMA_FATTN=ON \\\n    -DGGML_CUDA_FA_ALL_QUANTS=ON \\\n    -DBUILD_SHARED_LIBS=ON \\\n    -DGGML_VULKAN=1 \\\n    -DGGML_VK_ALLOW_GRAPHICS_QUEUE=1 \\\n    -DGGML_RPC=ON \\\n    -DRADV_PERFTEST=cswave32,nogttspill \\\n    -DLLAMA_BUILD_UI=1 \\\n    -DCMAKE_BUILD_TYPE=Release \\\n    && cmake --build build --config Release --target llama-server llama-cli llama-bench -- -j $(nproc)\npmttyji\n•\n3d ago\n Top 1% Poster"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vqrt86",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:32:39Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.883,
+    "evidence": 1.0,
+    "relevance": 0.667,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "http://0.0.0.0/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://store.piffa.net/lm/bug/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/ggerganov/status/2088312671196082312",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

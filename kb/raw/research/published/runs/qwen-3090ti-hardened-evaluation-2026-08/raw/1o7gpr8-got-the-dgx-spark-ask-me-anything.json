@@ -1,0 +1,303 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1o7gpr8/got_the_dgx_spark_ask_me_anything/",
+  "title": "Got the DGX Spark - ask me anything",
+  "author": "sotech117",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n10mo ago\nsotech117\nGot the DGX Spark - ask me anything\nDiscussion\n\nIf there’s anything you want me to benchmark (or want to see in general), let me know, and I’ll try to reply to your comment. I will be playing with this all night trying a ton of different models I’ve always wanted to run.\n\n(& shoutout to microcenter my goats!)\n\n__________________________________________________________________________________\n\nHit it hard with Wan2.2 via ComfyUI, base template but upped the resolution to 720p@24fps. Extremely easy to setup. NVIDIA-SMI queries are trolling, giving lots of N/A.\n\nMax-acpi-temp: 91.8 C (https://drive.mfoi.dev/s/pDZm9F3axRnoGca)\n\nMax-gpu-tdp: 101 W (https://drive.mfoi.dev/s/LdwLdzQddjiQBKe)\n\nMax-watt-consumption (from-wall): 195.5 W (https://drive.mfoi.dev/s/643GLEgsN5sBiiS)\n\nfinal-output: https://drive.mfoi.dev/s/rWe9yxReqHxB9Py\n\nPhysical observations: Under heavy load, it gets uncomfortably hot to the touch (burning you level hot), and the fan noise is prevalent and almost makes a grinding sound (?). Unfortunately, mine has some coil whine during computation (, which is more noticeable than the fan noise). It's really not a \"on your desk machine\" - makes more sense in a server rack using ssh and/or webtools.\n\ncoil-whine: https://drive.mfoi.dev/s/eGcxiMXZL3NXQYT\n\n__________________________________________________________________________________\n\nFor comprehensive LLM benchmarks using llama-bench, please checkout https://github.com/ggml-org/llama.cpp/discussions/16578 (s/o to u/Comfortable-Winter00 for the link). Here's what I got below using LLM studio, similar performance to an RTX5070.\n\nGPT-OSS-120B, medium reasoning. Consumes 61115MiB = 64.08GB VRAM. When running, GPU pulls about 47W-50W with about 135W-140W from the outlet. Very little noise coming from the system, other than the coil whine, but still uncomfortable to touch.\n\n\"Please write me a 2000 word story about a girl who lives in a painted universe\"\nThought for 4.50sec\n31.08 tok/sec\n3617 tok\n.24s to first token\n\n\"What's the best webdev stack for 2025?\"\nThought for 8.02sec\n34.82 tok/sec\n.15s to first token\nAnswer quality was excellent, with a pro/con table for each webtech, an architecture diagram, and code examples.\nWas able to max out context length to 131072, consuming 85913MiB = 90.09GB VRAM.\n\nThe largest model I've been able to fit is GLM-4.5-Air Q8, at around 116GB VRAM (which runs at about 12tok/sec). Cuda claims the max GPU memory is 119.70GiB.\n\nFor comparison, I ran GPT-OSS-20B, medium reasoning on both the Spark and a single 4090. The Spark averaged around 53.0 tok/sec and the 4090 averaged around 123tok/sec. This implies that the 4090 is around 2.4x faster than the Spark for pure inference.\n\n__________________________________________________________________________________\n\nThe Operating System is Ubuntu but with a Nvidia-specific linux kernel (!!). Here is running hostnamectl:\nOperating System: Ubuntu 24.04.3 LTS\nKernel: Linux 6.11.0-1016-nvidia \nArchitecture: arm64\nHardware Vendor: NVIDIA\nHardware Model: NVIDIA_DGX_Spark\n\nThe OS comes installed with the driver (version 580.95.05), along with some cool nvidia apps. Things like docker, git, and python (3.12.3) are setup for you too. Makes it quick and easy to get going.\n\nThe documentation is here: https://build.nvidia.com/spark, and it's literally what is shown after intial setup. It is a good reference to get popular projects going pretty quickly; however, it's not fullproof (i.e. some errors following the instructions), and you will need a decent understanding of linux & docker and a basic idea of networking to fix said errors.\n\nHardware wise the board is dense af - here's an awesome teardown (s/o to StorageReview): https://www.storagereview.com/review/nvidia-dgx-spark-review-the-ai-appliance-bringing-datacenter-capabilities-to-desktops\n\n__________________________________________________________________________________\n\nDid a distill from B16 to nvfp4 (on deepseek-ai/DeepSeek-R1-Distill-Llama-8B) using TensorRT following https://build.nvidia.com/spark/nvfp4-quantization/instructions\n\nIt failed the first time, had to run it twice. Here the perf for the quant process:\n19/19 [01:42<00:00,  5.40s/it]\nQuantization done. Total time used: 103.1708755493164s\n\nServing the above model with TensorRT, I got an average of 19tok/s(consuming 5.61GB VRAM), which is slower than serving the same model (llama_cpp) quantized by unsloth with FP4QM which averaged about 28tok/s.\n\nTo compare results, I asked it to make a webpage in plain html/css. Here are links to each webpage.\nnvfp4: https://mfoi.dev/nvfp4.html\nfp4qm: https://mfoi.dev/fp4qm.html\n\nIt's a bummer that nvfp4 performed poorly on this test, especially for the Spark. I will redo this test with a model that I didn't quant myself.\n\n__________________________________________________________________________________\n\nTrained https://github.com/karpathy/nanoGPT using Python3.11 and Cuda 13 (for compatibility).\nTook about 7min&43sec to finish 5000 iterations/steps, averaging about 56ms per iteration. Consumed 1.96GB while training.\n\nThis appears to be 4.2x slower than an RTX4090, which only took about 2 minutes to complete the identical training process, average about 13.6ms per iteration.\n\n__________________________________________________________________________________\n\nCurrently finetuning on gpt-oss-20B, following https://docs.unsloth.ai/new/fine-tuning-llms-with-nvidia-dgx-spark-and-unsloth, taking arounds 16.11GB of VRAM. Guide worked flawlessly.\nIt is predicted to take around 55 hours to finish finetuning. I'll keep it running and update.\n\nAlso, you can finetune oss-120B (it fits into VRAM), but it's predicted to take 330 hours (or 13.75 days) and consumes around 60GB of vram. In effort of being able to do things on the machine, I decided not to opt for that. So while possible, not an ideal usecase for the machine.\n\n__________________________________________________________________________________\n\nIf you scroll through my replies on comments, I've been providing metrics on what I've ran specifically for requests via LM-studio and ComfyUI.\n\nThe main takeaway from all of this is that it's not a fast performer, especially for the price. While said, if you need a large amount of Cuda VRAM (100+GB) just to get NVIDIA-dominated workflows running, this product is for you, and it's price is a manifestation of how NVIDIA has monopolized the AI industry with Cuda.\n\nNote: I probably made a mistake posting in LocalLLaMA for this, considering mainstream locally-hosted LLMs can be run on any platform (with something like LM Studio) with success.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n10mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "ArtisticHamster",
+      "score": "272",
+      "text": "ArtisticHamster\n•\n10mo ago\n\nGet us tok/s for popular models.\n\nsotech117\n•\n10mo ago\n\n👍\n\n[deleted]\n•\n10mo ago\n\nTest Wan 2.2, and Flux.Dev generation times for the comfyui defaults.\n\nsotech117\n•\n10mo ago\n\nWan 2.2 is on my list!\n\n[deleted]\n•\n10mo ago\n\nalso deepseek r1\n\n2 more replies\n2 more replies\n[deleted]\n•\n10mo ago\n\nwhat is gen speed for wan 2.2 video model?\n\n1 more reply\nPotential-Leg-639\n•\n10mo ago\n\nfrom https://www.youtube.com/watch?v=md6a4ENM9pg\n\nComfortable-Winter00\n•\n10mo ago\n\nThe main takeaway from these benchmarks is that you shouldn't bother with this guy's channel because he clearly doesn't even have a basic understanding of how to run these models.\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578 has useful data.\n\nTurpentineEnjoyer\n•\n10mo ago\n\nWow, those numbers are a LOT worse than I expected for the price.\n\nKattleLaughter\n•\n10mo ago\n\nQwen 3 32B@Q8 with decode 4 tps is just horrendous lol\n\ntomByrer\n•\n10mo ago\n\nWTB used DGX Spark, I'll give $699.69 cash.\n\nGood thing MicroCenter has a very generous return policy...\n\n2 more replies\n9 more replies\neleqtriq\n•\n10mo ago\n\nggerganov says (for gpt-oss-120b). Huge difference.\n\nPrefill (pp2048): 1689.47 tps\n\nGeneration (tg32): 52.87 tp\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578\n\n2 more replies\nPeakBrave8235\n•\n10mo ago\n\nM4 Max is 6X faster lmfaooo\n\ninfalleeble\n•\n10mo ago\n\nthanks for being a legend and linking\n\nsotech117\n•\n10mo ago\n\nI’m getting better numbers. Could be the ollama engine or because it’s an early sample?\n\n4 more replies\n[deleted]\n•\n10mo ago\n\nIt’s slower than my MacBook Air 💀\n\n[deleted]\n•\n10mo ago\n\nYeah this thing was never going to be good for much.\n\n31 more replies\nsotech117\n•\n10mo ago\n\nUpdated the post with a link with a professional benchmark that includes the popular models. I’m getting similar numbers to it. If you want to see something specific (or not in that list), let me know!\n\n15 more replies"
+    },
+    {
+      "author": "sotech117",
+      "score": "65",
+      "text": "sotech117\n•\n10mo ago\n\n👍\n\n[deleted]\n•\n10mo ago\n\nTest Wan 2.2, and Flux.Dev generation times for the comfyui defaults.\n\nsotech117\n•\n10mo ago\n\nWan 2.2 is on my list!\n\n[deleted]\n•\n10mo ago\n\nalso deepseek r1\n\n2 more replies\n2 more replies\n[deleted]\n•\n10mo ago\n\nwhat is gen speed for wan 2.2 video model?\n\n1 more reply"
+    },
+    {
+      "author": "[deleted]",
+      "score": "116",
+      "text": "[deleted]\n•\n10mo ago\n\nTest Wan 2.2, and Flux.Dev generation times for the comfyui defaults.\n\nsotech117\n•\n10mo ago\n\nWan 2.2 is on my list!\n\n[deleted]\n•\n10mo ago\n\nalso deepseek r1\n\n2 more replies\n2 more replies"
+    },
+    {
+      "author": "sotech117",
+      "score": "57",
+      "text": "sotech117\n•\n10mo ago\n\nWan 2.2 is on my list!\n\n[deleted]\n•\n10mo ago\n\nalso deepseek r1\n\n2 more replies"
+    },
+    {
+      "author": "[deleted]",
+      "score": "7",
+      "text": "[deleted]\n•\n10mo ago\n\nalso deepseek r1"
+    },
+    {
+      "author": "[deleted]",
+      "score": "7",
+      "text": "[deleted]\n•\n10mo ago\n\nwhat is gen speed for wan 2.2 video model?\n\n1 more reply"
+    },
+    {
+      "author": "Potential-Leg-639",
+      "score": "44",
+      "text": "Potential-Leg-639\n•\n10mo ago\n\nfrom https://www.youtube.com/watch?v=md6a4ENM9pg\n\nComfortable-Winter00\n•\n10mo ago\n\nThe main takeaway from these benchmarks is that you shouldn't bother with this guy's channel because he clearly doesn't even have a basic understanding of how to run these models.\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578 has useful data.\n\nTurpentineEnjoyer\n•\n10mo ago\n\nWow, those numbers are a LOT worse than I expected for the price.\n\nKattleLaughter\n•\n10mo ago\n\nQwen 3 32B@Q8 with decode 4 tps is just horrendous lol\n\ntomByrer\n•\n10mo ago\n\nWTB used DGX Spark, I'll give $699.69 cash.\n\nGood thing MicroCenter has a very generous return policy...\n\n2 more replies\n9 more replies\neleqtriq\n•\n10mo ago\n\nggerganov says (for gpt-oss-120b). Huge difference.\n\nPrefill (pp2048): 1689.47 tps\n\nGeneration (tg32): 52.87 tp\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578\n\n2 more replies\nPeakBrave8235\n•\n10mo ago\n\nM4 Max is 6X faster lmfaooo\n\ninfalleeble\n•\n10mo ago\n\nthanks for being a legend and linking\n\nsotech117\n•\n10mo ago\n\nI’m getting better numbers. Could be the ollama engine or because it’s an early sample?\n\n4 more replies"
+    },
+    {
+      "author": "Comfortable-Winter00",
+      "score": "14",
+      "text": "Comfortable-Winter00\n•\n10mo ago\n\nThe main takeaway from these benchmarks is that you shouldn't bother with this guy's channel because he clearly doesn't even have a basic understanding of how to run these models.\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578 has useful data."
+    },
+    {
+      "author": "TurpentineEnjoyer",
+      "score": "48",
+      "text": "TurpentineEnjoyer\n•\n10mo ago\n\nWow, those numbers are a LOT worse than I expected for the price.\n\nKattleLaughter\n•\n10mo ago\n\nQwen 3 32B@Q8 with decode 4 tps is just horrendous lol\n\ntomByrer\n•\n10mo ago\n\nWTB used DGX Spark, I'll give $699.69 cash.\n\nGood thing MicroCenter has a very generous return policy...\n\n2 more replies\n9 more replies"
+    },
+    {
+      "author": "KattleLaughter",
+      "score": "7",
+      "text": "KattleLaughter\n•\n10mo ago\n\nQwen 3 32B@Q8 with decode 4 tps is just horrendous lol"
+    },
+    {
+      "author": "tomByrer",
+      "score": "13",
+      "text": "tomByrer\n•\n10mo ago\n\nWTB used DGX Spark, I'll give $699.69 cash.\n\nGood thing MicroCenter has a very generous return policy...\n\n2 more replies"
+    },
+    {
+      "author": "eleqtriq",
+      "score": "23",
+      "text": "eleqtriq\n•\n10mo ago\n\nggerganov says (for gpt-oss-120b). Huge difference.\n\nPrefill (pp2048): 1689.47 tps\n\nGeneration (tg32): 52.87 tp\n\nhttps://github.com/ggml-org/llama.cpp/discussions/16578\n\n2 more replies"
+    },
+    {
+      "author": "PeakBrave8235",
+      "score": "22",
+      "text": "PeakBrave8235\n•\n10mo ago\n\nM4 Max is 6X faster lmfaooo"
+    },
+    {
+      "author": "infalleeble",
+      "score": "3",
+      "text": "infalleeble\n•\n10mo ago\n\nthanks for being a legend and linking"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1o7gpr8",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:37:07Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.767,
+    "evidence": 1.0,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://drive.mfoi.dev/s/pDZm9F3axRnoGca",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://drive.mfoi.dev/s/LdwLdzQddjiQBKe",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://drive.mfoi.dev/s/643GLEgsN5sBiiS",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://drive.mfoi.dev/s/rWe9yxReqHxB9Py",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://drive.mfoi.dev/s/eGcxiMXZL3NXQYT",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://build.nvidia.com/spark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.storagereview.com/review/nvidia-dgx-spark-review-the-ai-appliance-bringing-datacenter-capabilities-to-desktops",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://build.nvidia.com/spark/nvfp4-quantization/instructions",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://mfoi.dev/nvfp4.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://mfoi.dev/fp4qm.html",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/karpathy/nanoGPT",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://docs.unsloth.ai/new/fine-tuning-llms-with-nvidia-dgx-spark-and-unsloth",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://flux.dev/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=md6a4ENM9pg",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggerganov",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/karpathy/nanochat",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://youtu.be/6iVftb0cbnc",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://lmstudio.ai/blog/dgx-spark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/NVFP4/Qwen3-Coder-30B-A3B-Instruct-FP4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

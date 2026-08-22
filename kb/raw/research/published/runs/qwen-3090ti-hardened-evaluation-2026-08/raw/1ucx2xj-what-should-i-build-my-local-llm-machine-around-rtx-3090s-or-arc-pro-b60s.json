@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1ucx2xj/what_should_i_build_my_local_llm_machine_around/",
+  "title": "What should I build my local LLM machine around? RTX 3090s or Arc Pro B60s?",
+  "author": "rebellioninmypants",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2mo ago\nrebellioninmypants\nWhat should I build my local LLM machine around? RTX 3090s or Arc Pro B60s?\nQuestion | Help\n\nHi, so pretty much as the title says. I am thinking about building a rig for running local models. Is Intel Arc Pro B60 worth itt these days? How's the hardware speeds compared to a 3090? Anyone using them, can you provide any benchmarks/stats with some common models to reference?\n\nAlso, how is software support with Arc cards and is there anything I should be aware of if I decide to go that route?\n\nCurrently, out of the box I can find new B60s for about the same price pretty much on demand with next day shipping, as a used 3090 if I spent a few days hawking the auction sites - is it worth it over immediate b60 buy?\n\nObviously getting multiple 3090s for a decent price could turn into a month-long, or multiple months-long project if I'm unlucky.\n\nI appreciate any feedback, thanks!\n\nShare",
+  "comments": [
+    {
+      "author": "sooki10",
+      "score": "5",
+      "text": "sooki10\n•\n2mo ago\n\n3090s if you want speed, better software support and way more online peer knowledge.\n\nDont get 3090s if one or both cards living a short life will bug you. Majority have been used and abused. But they were still worth the risk, their recent prices make the gamble more costly.\n\nR9700 if you are okay with slower, but want more lonevity. Software and guides have improved. Downside is they are loud and ideally run headerless in another room away from you.\n\nIntel is more of a software gamble, they have strainded their card owners before.\n\njstormes\n•\n2mo ago\n\nI have two ASRock R9700s and I don't really notice they are that loud.\n\nJust basic case with basic cooling.\n\nsooki10\n•\n2mo ago\n\nInteresting, well I do live in a hot climate, so probably why my two are noisy.\n\nmr_zerolith\n•\n2mo ago\n\nThey're still loud in a cold area :/"
+    },
+    {
+      "author": "jstormes",
+      "score": "2",
+      "text": "jstormes\n•\n2mo ago\n\nI have two ASRock R9700s and I don't really notice they are that loud.\n\nJust basic case with basic cooling.\n\nsooki10\n•\n2mo ago\n\nInteresting, well I do live in a hot climate, so probably why my two are noisy.\n\nmr_zerolith\n•\n2mo ago\n\nThey're still loud in a cold area :/"
+    },
+    {
+      "author": "sooki10",
+      "score": "1",
+      "text": "sooki10\n•\n2mo ago\n\nInteresting, well I do live in a hot climate, so probably why my two are noisy.\n\nmr_zerolith\n•\n2mo ago\n\nThey're still loud in a cold area :/"
+    },
+    {
+      "author": "mr_zerolith",
+      "score": "1",
+      "text": "mr_zerolith\n•\n2mo ago\n\nThey're still loud in a cold area :/"
+    },
+    {
+      "author": "DocMadCow",
+      "score": "13",
+      "text": "DocMadCow\n•\n2mo ago\n\nDefinitely 3090s. I have a B70 and have buyers remorse.\n\nnail_nail\n•\n2mo ago\n\nUh why? Sycl needs to improve...\n\nDocMadCow\n•\n2mo ago\n\nIt needs a lot of improvement especially if you are trying to run software like llama.cpp on Windows. The PP and TG are absolutely abysmal. A pair of RTX 5060 Ti will blow it out of the water.\n\nlemondrops9\n•\n2mo ago\n\nwhat does Llama.cpp run like in Linux on the B70 ?\n\nDocMadCow\n•\n2mo ago\n\nNeed to find time to try but everything I read suggested I should see an increase. But honestly tempted to sell it or trade for another RTX 5070 Ti.\n\nlemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else.\n\nesw123\n•\n2mo ago\n\nThank you sir"
+    },
+    {
+      "author": "nail_nail",
+      "score": "1",
+      "text": "nail_nail\n•\n2mo ago\n\nUh why? Sycl needs to improve...\n\nDocMadCow\n•\n2mo ago\n\nIt needs a lot of improvement especially if you are trying to run software like llama.cpp on Windows. The PP and TG are absolutely abysmal. A pair of RTX 5060 Ti will blow it out of the water.\n\nlemondrops9\n•\n2mo ago\n\nwhat does Llama.cpp run like in Linux on the B70 ?\n\nDocMadCow\n•\n2mo ago\n\nNeed to find time to try but everything I read suggested I should see an increase. But honestly tempted to sell it or trade for another RTX 5070 Ti.\n\nlemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else.\n\nesw123\n•\n2mo ago\n\nThank you sir"
+    },
+    {
+      "author": "DocMadCow",
+      "score": "8",
+      "text": "DocMadCow\n•\n2mo ago\n\nIt needs a lot of improvement especially if you are trying to run software like llama.cpp on Windows. The PP and TG are absolutely abysmal. A pair of RTX 5060 Ti will blow it out of the water.\n\nlemondrops9\n•\n2mo ago\n\nwhat does Llama.cpp run like in Linux on the B70 ?\n\nDocMadCow\n•\n2mo ago\n\nNeed to find time to try but everything I read suggested I should see an increase. But honestly tempted to sell it or trade for another RTX 5070 Ti.\n\nlemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else.\n\nesw123\n•\n2mo ago\n\nThank you sir"
+    },
+    {
+      "author": "lemondrops9",
+      "score": "2",
+      "text": "lemondrops9\n•\n2mo ago\n\nwhat does Llama.cpp run like in Linux on the B70 ?\n\nDocMadCow\n•\n2mo ago\n\nNeed to find time to try but everything I read suggested I should see an increase. But honestly tempted to sell it or trade for another RTX 5070 Ti.\n\nlemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else."
+    },
+    {
+      "author": "DocMadCow",
+      "score": "1",
+      "text": "DocMadCow\n•\n2mo ago\n\nNeed to find time to try but everything I read suggested I should see an increase. But honestly tempted to sell it or trade for another RTX 5070 Ti.\n\nlemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else."
+    },
+    {
+      "author": "lemondrops9",
+      "score": "0",
+      "text": "lemondrops9\n•\n2mo ago\n•\nEdited 2mo ago\n\nor two 5060ti's they are under rated I think. I bought a few of them because I didn't want to take a chance on the B70. It looks like the next gen card by Intel has a chance of supporting CUDA which means the B70 will get left behind for support.\n\nDocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else."
+    },
+    {
+      "author": "DocMadCow",
+      "score": "3",
+      "text": "DocMadCow\n•\n2mo ago\n\nI doubt it. I don't see NVIDIA licensing CUDA to anyone else."
+    },
+    {
+      "author": "esw123",
+      "score": "2",
+      "text": "esw123\n•\n2mo ago\n\nThank you sir"
+    },
+    {
+      "author": "semangeIof",
+      "score": "3",
+      "text": "semangeIof\n•\n2mo ago\n\nMy B70 is a snail. At 128k context it can't even run Gemma 4 MoE at 20+ Tok/s. The dense model maybe gets 17 Tok/s at zero context on a good day. Slow as shit. And this is a very well specced Ubuntu box with llama.cpp compiled with SYCL at F16.\n\nSo don't go Intel.\n\nwhiteh4cker\n•\n2mo ago\n\nYou should try it on Windows. It makes a huge difference for A770 with Vulkan.\n\nsemangeIof\n•\n2mo ago\n\nWell I've compiled llamacpp with Vulkan backend on the same Ubuntu box and it had about 33% of the speed sycl did\n\nIs Vulkan implementation much better on windows?\n\nwhiteh4cker\n•\n2mo ago\n\nI don't know if it is the Intel driver (probably) or Vulkan implementation. I heard that the Intel driver for Windows works much better.\n\nsemangeIof\n•\n2mo ago\n\nInteresting. Might try imaging the box w windows one day if I care enough to get a low precision Gemma 4 quant running faster lol\n\nslippery\n•\n2mo ago\n\nThank you for steering me away from this path."
+    },
+    {
+      "author": "whiteh4cker",
+      "score": "1",
+      "text": "whiteh4cker\n•\n2mo ago\n\nYou should try it on Windows. It makes a huge difference for A770 with Vulkan.\n\nsemangeIof\n•\n2mo ago\n\nWell I've compiled llamacpp with Vulkan backend on the same Ubuntu box and it had about 33% of the speed sycl did\n\nIs Vulkan implementation much better on windows?\n\nwhiteh4cker\n•\n2mo ago\n\nI don't know if it is the Intel driver (probably) or Vulkan implementation. I heard that the Intel driver for Windows works much better.\n\nsemangeIof\n•\n2mo ago\n\nInteresting. Might try imaging the box w windows one day if I care enough to get a low precision Gemma 4 quant running faster lol"
+    },
+    {
+      "author": "semangeIof",
+      "score": "1",
+      "text": "semangeIof\n•\n2mo ago\n\nWell I've compiled llamacpp with Vulkan backend on the same Ubuntu box and it had about 33% of the speed sycl did\n\nIs Vulkan implementation much better on windows?\n\nwhiteh4cker\n•\n2mo ago\n\nI don't know if it is the Intel driver (probably) or Vulkan implementation. I heard that the Intel driver for Windows works much better.\n\nsemangeIof\n•\n2mo ago\n\nInteresting. Might try imaging the box w windows one day if I care enough to get a low precision Gemma 4 quant running faster lol"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1ucx2xj",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:16Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.458,
+    "evidence": 0.4,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://gigagpu.com/intel-arc-pro-b60-vs-rtx-3090/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://localmaxxing.com/en/models/Qwen/Qwen3.5-122B-A10B?run=cmojycegm0005jo04bvjn0bs6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vugryn/qwen_38_27b_is_strong_even_at_q3_xxs/",
+  "title": "Qwen 3.8 27b is strong even at Q3_xxs",
+  "author": "AltruisticList6000",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n22h ago\nAltruisticList6000\nQwen 3.8 27b is strong even at Q3_xxs\nDiscussion\n\nSo usually I avoid Q3 quants because I have had bad experiences with it, models were usually too degraded, so the smallest I normally do is Q4, since I only have rtx 4060 ti 16gb. But since there hasn't been a 35b-3ab released yet, I had to try it. I don't use LLMs in agentic workflows, just on Textgen since I'm not a coder so this is not the primary use case of LLMs for me - but sometimes I really need some coding capabilities or help.\n\nI'm very impressed how it one shot multiple serious coding tasks, resulting in fully working games or web apps, whereas Qwen 3.6 35b (which I used before) either completely failed in some of these or struggled a lot and needed hours/days of assistance/prompting, feedback to make it work.\n\nAnd it is very fast when fully in VRAM. 30-35t/s, basically the same speed as higher quant 35b offloaded to RAM! Only at long context it goes down to 21-22t/s. Older dense models like Gemma 3 27b, Mistral small 24b are only doing 13-17t/s at best.\n\nThe only thing I noticed is it sometimes misunderstands things during regular convos or fails at basic sorting or counting few scores, while one shotting serious math/logic tasks. Not sure if this is because it's code-maxxed or because of the low quant (I'd think it's heavily the latter but I'd be interested in your guys' experiences who can run this at higher quants).\n\nSo far I'm very happy with it, it's way better than the higher Q4-Q5 MoEs I've tried so far.\n\nShare",
+  "comments": [
+    {
+      "author": "PlasticRevenue4601",
+      "score": "107",
+      "text": "PlasticRevenue4601\n•\n22h ago\n\nWait till cargo cultists gather in the comments section and start convincing you that you shouldn’t believe your experience because anything below * my own hardware specs and max quant fitting into it” is unusable\n\nDinoAmino\n•\n20h ago\n\nWell yeah. This sub totally runs on beliefs. Who needs evals when it \"seems fine to me\"?\n\nPlasticRevenue4601\n•\n20h ago\n\nBelieve me pal, if we’re going to actually check the benchmarks you’re not gonna like it if you’ve been too proud of the exceptional, heavenly quality you thought your q6-q8 were giving to ya. There are only 2 clear, measurable and definitely distinct in practice quality gaps:\nBf16-Q8\nQ3-Q1\n\nEverything else is basically in the same league\n\nMerePotato\n•\n20h ago\n\nWhat a load of rubbish. Its ironic that you appear so set on the idea that a lobotomised model is just as good as Q8 because \"I said so\", then accuse others of being cargo cultists for acknowledging the massive long context difference in KLD as you drop down the quant ladder.\n\nFancy-Snow7\n•\n17h ago\n\nYou misinterpret KLD. KLD measures how one probability distribution differs from a reference. That means yes a Q4 is differs more than a Q8 from the reference but it does not mean the quality of the code will be worse by a similar amount. It will generate different code, but that code can be just as good and in some cases even better than higher quants.\n\nKLD just tells us Q4 or Q3 is more different from the reference than Q8 but does not imply quality of the output is significantly worse.\n\nA 5% difference in KLD might only mean a 1% drop in quality. Yes at a certain quant the quality will drop but you might find a much smaller difference between Q4 and Q8 than you think with newer quantisation methods. And where Q3 used to suck, with newer quantisation methods it might be the new Q4 and Q4 might be the new Q6.\n\nPlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap\n\n1 more reply\nPlasticRevenue4601\n•\n20h ago\n\nThe only one appealing to the „because I said so” argument is you, I suggested inspecting benchmarks right off the bat, pal. I’ll ask you again — would you like to take a look at the benchmarks?)\n\nDinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "DinoAmino",
+      "score": "7",
+      "text": "DinoAmino\n•\n20h ago\n\nWell yeah. This sub totally runs on beliefs. Who needs evals when it \"seems fine to me\"?\n\nPlasticRevenue4601\n•\n20h ago\n\nBelieve me pal, if we’re going to actually check the benchmarks you’re not gonna like it if you’ve been too proud of the exceptional, heavenly quality you thought your q6-q8 were giving to ya. There are only 2 clear, measurable and definitely distinct in practice quality gaps:\nBf16-Q8\nQ3-Q1\n\nEverything else is basically in the same league\n\nMerePotato\n•\n20h ago\n\nWhat a load of rubbish. Its ironic that you appear so set on the idea that a lobotomised model is just as good as Q8 because \"I said so\", then accuse others of being cargo cultists for acknowledging the massive long context difference in KLD as you drop down the quant ladder.\n\nFancy-Snow7\n•\n17h ago\n\nYou misinterpret KLD. KLD measures how one probability distribution differs from a reference. That means yes a Q4 is differs more than a Q8 from the reference but it does not mean the quality of the code will be worse by a similar amount. It will generate different code, but that code can be just as good and in some cases even better than higher quants.\n\nKLD just tells us Q4 or Q3 is more different from the reference than Q8 but does not imply quality of the output is significantly worse.\n\nA 5% difference in KLD might only mean a 1% drop in quality. Yes at a certain quant the quality will drop but you might find a much smaller difference between Q4 and Q8 than you think with newer quantisation methods. And where Q3 used to suck, with newer quantisation methods it might be the new Q4 and Q4 might be the new Q6.\n\nPlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap\n\n1 more reply\nPlasticRevenue4601\n•\n20h ago\n\nThe only one appealing to the „because I said so” argument is you, I suggested inspecting benchmarks right off the bat, pal. I’ll ask you again — would you like to take a look at the benchmarks?)\n\nDinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "6",
+      "text": "PlasticRevenue4601\n•\n20h ago\n\nBelieve me pal, if we’re going to actually check the benchmarks you’re not gonna like it if you’ve been too proud of the exceptional, heavenly quality you thought your q6-q8 were giving to ya. There are only 2 clear, measurable and definitely distinct in practice quality gaps:\nBf16-Q8\nQ3-Q1\n\nEverything else is basically in the same league\n\nMerePotato\n•\n20h ago\n\nWhat a load of rubbish. Its ironic that you appear so set on the idea that a lobotomised model is just as good as Q8 because \"I said so\", then accuse others of being cargo cultists for acknowledging the massive long context difference in KLD as you drop down the quant ladder.\n\nFancy-Snow7\n•\n17h ago\n\nYou misinterpret KLD. KLD measures how one probability distribution differs from a reference. That means yes a Q4 is differs more than a Q8 from the reference but it does not mean the quality of the code will be worse by a similar amount. It will generate different code, but that code can be just as good and in some cases even better than higher quants.\n\nKLD just tells us Q4 or Q3 is more different from the reference than Q8 but does not imply quality of the output is significantly worse.\n\nA 5% difference in KLD might only mean a 1% drop in quality. Yes at a certain quant the quality will drop but you might find a much smaller difference between Q4 and Q8 than you think with newer quantisation methods. And where Q3 used to suck, with newer quantisation methods it might be the new Q4 and Q4 might be the new Q6.\n\nPlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap\n\n1 more reply\nPlasticRevenue4601\n•\n20h ago\n\nThe only one appealing to the „because I said so” argument is you, I suggested inspecting benchmarks right off the bat, pal. I’ll ask you again — would you like to take a look at the benchmarks?)\n\nDinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "MerePotato",
+      "score": "-4",
+      "text": "MerePotato\n•\n20h ago\n\nWhat a load of rubbish. Its ironic that you appear so set on the idea that a lobotomised model is just as good as Q8 because \"I said so\", then accuse others of being cargo cultists for acknowledging the massive long context difference in KLD as you drop down the quant ladder.\n\nFancy-Snow7\n•\n17h ago\n\nYou misinterpret KLD. KLD measures how one probability distribution differs from a reference. That means yes a Q4 is differs more than a Q8 from the reference but it does not mean the quality of the code will be worse by a similar amount. It will generate different code, but that code can be just as good and in some cases even better than higher quants.\n\nKLD just tells us Q4 or Q3 is more different from the reference than Q8 but does not imply quality of the output is significantly worse.\n\nA 5% difference in KLD might only mean a 1% drop in quality. Yes at a certain quant the quality will drop but you might find a much smaller difference between Q4 and Q8 than you think with newer quantisation methods. And where Q3 used to suck, with newer quantisation methods it might be the new Q4 and Q4 might be the new Q6.\n\nPlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap\n\n1 more reply\nPlasticRevenue4601\n•\n20h ago\n\nThe only one appealing to the „because I said so” argument is you, I suggested inspecting benchmarks right off the bat, pal. I’ll ask you again — would you like to take a look at the benchmarks?)\n\nDinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "Fancy-Snow7",
+      "score": "5",
+      "text": "Fancy-Snow7\n•\n17h ago\n\nYou misinterpret KLD. KLD measures how one probability distribution differs from a reference. That means yes a Q4 is differs more than a Q8 from the reference but it does not mean the quality of the code will be worse by a similar amount. It will generate different code, but that code can be just as good and in some cases even better than higher quants.\n\nKLD just tells us Q4 or Q3 is more different from the reference than Q8 but does not imply quality of the output is significantly worse.\n\nA 5% difference in KLD might only mean a 1% drop in quality. Yes at a certain quant the quality will drop but you might find a much smaller difference between Q4 and Q8 than you think with newer quantisation methods. And where Q3 used to suck, with newer quantisation methods it might be the new Q4 and Q4 might be the new Q6.\n\nPlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap\n\n1 more reply"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "3",
+      "text": "PlasticRevenue4601\n•\n16h ago\n\nFinally someone who understands those parameters! There’s only one known to me and relatively reliable way to test model’s quality and it’s not KLD — extensive and tedious testing on carefully prepared problems set against BF16 reference. Such tests are miles above KLD, top 1 and other hypothetical crap"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "0",
+      "text": "PlasticRevenue4601\n•\n20h ago\n\nThe only one appealing to the „because I said so” argument is you, I suggested inspecting benchmarks right off the bat, pal. I’ll ask you again — would you like to take a look at the benchmarks?)\n\nDinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "DinoAmino",
+      "score": "1",
+      "text": "DinoAmino\n•\n19h ago\n\nYes, lay them down here for all the nonbelievers to see.\n\nPlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "2",
+      "text": "PlasticRevenue4601\n•\n19h ago\n\nJust for a quick appetiser, there’a actually more benches, but for now it’ll suffice. As for „3.6” version — Qwen 3.6-8 are 1:1 identical in terms of architecture, the results from 3.6 are highly relevant to 3.8 and vice versa\n\nhttps://quesma.com/blog/qwen-quantization-quality/\n\nhttps://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study\n\nMerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "MerePotato",
+      "score": "1",
+      "text": "MerePotato\n•\n17h ago\n\n> Saturated benchmarks on AI articles\n\nIn return I raise you actual reputable information\n\nhttps://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark\n\nhttps://localbench.substack.com/p/kv-cache-quantization-benchmark\n\n5 more replies"
+    },
+    {
+      "author": "Gotxi",
+      "score": "19",
+      "text": "Gotxi\n•\n21h ago\n\nHey! I am in the exactly same boat as you.\n\nI was doing good with Qwen36-35b-a3b with offload of experts, but I wanted to try Qwen3.8.\nQuality of 3.8 is way better than 3.6 so I wanted to stick with it, even if it is dense and has issues running on my setup (I have 32 GB DDR4 3200 and an RX 9070 XT with 16GB, but I wanted to try anyway.)\n\nI started with Qwen3.8 IQ4_XS, but the VRAM pressure was too high. I tried Q3_K_M and it worked fine and I could run it at 20-30 tok/s with 80K context and a bit of tensor offload, but then the new quants came and I wanted to try UD-IQ3_XXS based on the promise of better precision on lower quants, so I did.\n\nI was amazed that even if in the past I never wanted to go lower than 4 bits, the UD-IQ3_XXS quantization is still very very clever, and I actually used it for very complicated tasks at work and it was able to deliver code, interact with real tools, take conclusions, find gaps, solve unexpected bugs, etc...\n\nTurns out I can run this on my gaming computer while having 100K context size and runs at 800-1000 tok/s for prefill and 40-50 tok/s on low context size and 35-44 tok/s on higher context sizes consitently.\n\nI am pretty happy with the results, even if people said that anything below 4 bits was a waste of electricity.\n\nThis is my current config in case someone wants to copy it:\n\n[Qwen3.8-27B-UD-IQ3_XXS]\nmodel = <unix-path>'t listen to them, there are whole united by retardation club in LLM community members of which like to feel elite and special, they'd often confuse newcomers by trashing every hardware contrained setup below the baseline that is by sheer accident totally coincides with their rigs capabilities. They also confused me for a moment in the beginng of my LLM path\n\nGotxi\n•\n19h ago\n\nYeah, I was not satisfied with some replies like \"you need to invest at least $4K or don't even bother\" so I started running my own benchmarks and tests and setups, I have been working months on my local AI setup with Qwen3.6 and now Qwen3.8 and I am pretty happy with the results.\n\nWith that said, I am also eager to test Qwen3.8 MoE if it lands someday, as I had very successfull results with it on Qwen3.6. however I am going to use this setup for now.\n\nthesolewalker\n•\n19h ago\n\nI have 9070 and I will try your setup I was about to use kat coder 2.5 but looks like its qwen 3.8 27B IQ3_XXS would do just fine.\n\nPlasticRevenue4601\n•\n18h ago\n\nIdk about IQ3_XXS, try using k_xl, 3 bits is where quality begins to drop rapidly, the higher quantisation you fit — the better\n\nFancy-Snow7\n•\n16h ago\n\nMy setup is very similar. 5070 Ti getting 80tg, 1500 prefill. I am even more aggressie with my kv at q5_1/q8_0 and still getting great results. One thing you can test: cache-type-k-draft = q8_0 cache-type-v-draft = q8_0 Using any kind of kv draft quantisation uses more VRAM for some unknown reason and slows down my tg/pp. I figured this out on my own then it was confirmed in a reddit post of someone coming to the same conclusion. Try omitting it and see what it does for your setup.\n\nGotxi\n•\n14h ago\n\ncache type kv draft 8/8: GPU[0]          : VRAM Total Used Memory (B): 16454512640\ncache type kv draft undefined: GPU[0]          : VRAM Total Used Memory (B): 16719622144\n\nIt uses more VRAM in my case, but I can test if I get more performan"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "17",
+      "text": "PlasticRevenue4601\n•\n20h ago\n\nDon't listen to them, there are whole united by retardation club in LLM community members of which like to feel elite and special, they'd often confuse newcomers by trashing every hardware contrained setup below the baseline that is by sheer accident totally coincides with their rigs capabilities. They also confused me for a moment in the beginng of my LLM path\n\nGotxi\n•\n19h ago\n\nYeah, I was not satisfied with some replies like \"you need to invest at least $4K or don't even bother\" so I started running my own benchmarks and tests and setups, I have been working months on my local AI setup with Qwen3.6 and now Qwen3.8 and I am pretty happy with the results.\n\nWith that said, I am also eager to test Qwen3.8 MoE if it lands someday, as I had very successfull results with it on Qwen3.6. however I am going to use this setup for now."
+    },
+    {
+      "author": "Gotxi",
+      "score": "9",
+      "text": "Gotxi\n•\n19h ago\n\nYeah, I was not satisfied with some replies like \"you need to invest at least $4K or don't even bother\" so I started running my own benchmarks and tests and setups, I have been working months on my local AI setup with Qwen3.6 and now Qwen3.8 and I am pretty happy with the results.\n\nWith that said, I am also eager to test Qwen3.8 MoE if it lands someday, as I had very successfull results with it on Qwen3.6. however I am going to use this setup for now."
+    },
+    {
+      "author": "thesolewalker",
+      "score": "5",
+      "text": "thesolewalker\n•\n19h ago\n\nI have 9070 and I will try your setup I was about to use kat coder 2.5 but looks like its qwen 3.8 27B IQ3_XXS would do just fine.\n\nPlasticRevenue4601\n•\n18h ago\n\nIdk about IQ3_XXS, try using k_xl, 3 bits is where quality begins to drop rapidly, the higher quantisation you fit — the better"
+    },
+    {
+      "author": "PlasticRevenue4601",
+      "score": "1",
+      "text": "PlasticRevenue4601\n•\n18h ago\n\nIdk about IQ3_XXS, try using k_xl, 3 bits is where quality begins to drop rapidly, the higher quantisation you fit — the better"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vugryn",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:49:30Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.809,
+    "evidence": 1.0,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://quesma.com/blog/qwen-quantization-quality/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://heyneo.com/blog/evaluating-qwen-3-6-27b-benchmarking-case-study",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://localbench.substack.com/p/qwen-3-6-27b-gguf-quality-benchmark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://localbench.substack.com/p/kv-cache-quantization-benchmark",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/issues/24485",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27150",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/23255",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Danmoreng/local-qwen3-coder-env/blob/main/run_qwen3_8_optimized.ps1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

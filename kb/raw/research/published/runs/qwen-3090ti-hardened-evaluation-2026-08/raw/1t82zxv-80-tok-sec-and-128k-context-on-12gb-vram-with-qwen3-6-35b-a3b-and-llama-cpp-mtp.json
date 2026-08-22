@@ -1,0 +1,189 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t82zxv/80_toksec_and_128k_context_on_12gb_vram_with/",
+  "title": "80 tok/sec and 128K context on 12GB VRAM with Qwen3.6 35B A3B and llama.cpp MTP",
+  "author": "janvitos",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3mo ago\njanvitos\n80 tok/sec and 128K context on 12GB VRAM with Qwen3.6 35B A3B and llama.cpp MTP\nTutorial | Guide\n\nJust wanted to share my config in hopes of helping other 12GB GPU owners achieve what I see as very respectable token generation speeds with modest VRAM. Using the latest llama.cpp build + MTP PR, I got over 80 tok/sec with 80%+ draft acceptance rate on the benchmark found here: https://gist.githubusercontent.com/am17an/228edfb84ed082aa88e3865d6fa27090/raw/7a2cee40ee1e2ca5365f4cef93632193d7ad852a/mtp-bench.py\n\nHere's my PC specs:\n\nOS: CachyOS (HIGHLY recommended)\nCPU: AMD Ryzen 7 9700X\nRAM: 48GB DDR5-6000 EXPO I\nGPU: RTX 4070 Super 12GB\n\nResults with other hardware may vary.\n\nTo run llama.cpp with MTP support, you need to build it from source and add a draft PR that hasn't yet been merged with the master branch. You can find a very nice guide on how to do that here and also download the Qwen3.6 MTP GGUF: https://huggingface.co/havenoammo/Qwen3.6-35B-A3B-MTP-GGUF - Thanks u/havenoammo!\n\nllama.cpp command:\n\nllama-server \\\n  -m Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf \\\n  -fitt 1536 \\\n  -c 131072 \\\n  -n 32768 \\\n  -fa on \\\n  -np 1 \\\n  -ctk q8_0 \\\n  -ctv q8_0 \\\n  -ctkd q8_0 \\\n  -ctvd q8_0 \\\n  -ctxcp 64 \\\n  --no-mmap \\\n  --mlock \\\n  --no-warmup \\\n  --spec-type draft-mtp \\\n  --spec-draft-n-max 2 \\\n  --chat-template-kwargs '{\"preserve_thinking\": true}' \\\n  --temp 0.6 \\\n  --top-p 0.95 \\\n  --top-k 20 \\\n  --min-p 0.0 \\\n  --presence-penalty 0.0 \\\n  --repeat-penalty 1.0\n\nThe most important parameter here is -fitt 1536. Since part of the model is offloaded to CPU because of its size and , this tells llama.cpp to properly balance the load on the GPU/CPU to get the best possible performance, and leaves 1536 MB of free memory for the MTP draft model and KV cache. Since I'm running my dGPU as a secondary GPU (monitor plugged in the iGPU), I can use all the available 12GB VRAM for inference. 1536 might be too small if you use your dGPU as your primary GPU, so test it out first.\n\nYou can also try different values for -spec-draft-n-max. I got slightly better tok/sec with 3, but a much better acceptance rate with 2, so the trade off was not worth it. With MTP, you want to maximize speed AND acceptance, so you need to find the best balance between both.\n\nBenchmark results:\n\nmtp-bench.py\n\ncode_python        pred= 192 draft= 132 acc= 125 rate=0.947 tok/s=80.8\ncode_cpp           pred=  58 draft=  40 acc=  37 rate=0.925 tok/s=81.8\nexplain_concept    pred= 192 draft= 152 acc= 114 rate=0.750 tok/s=70.0\nsummarize          pred=  53 draft=  40 acc=  32 rate=0.800 tok/s=75.4\nqa_factual         pred= 192 draft= 144 acc= 119 rate=0.826 tok/s=77.8\ntranslation        pred=  22 draft=  16 acc=  13 rate=0.812 tok/s=81.9\ncreative_short     pred= 192 draft= 160 acc= 111 rate=0.694 tok/s=69.2\nstepwise_math      pred= 192 draft= 144 acc= 119 rate=0.826 tok/s=76.5\nlong_code_review   pred= 192 draft= 148 acc= 117 rate=0.790 tok/s=73.2\n\nIf you have any questions, feel free to ask :)\n\nCheers.\n\nShare",
+  "comments": [
+    {
+      "author": "StupidScaredSquirrel",
+      "score": "26",
+      "text": "StupidScaredSquirrel\n•\n3mo ago\n Top 1% Commenter\n\nWhy -no-mmap?\n\njanvitos\n•\n3mo ago\n\nIt's a general llama.cpp recommendation when using --mlock (prevents swapping to disk). --no-map loads the entire model into RAM instead of loading parts when needed. As I understand it, it prevents disk I/O and makes memory usage more predictable. It might result in slower loading times, but better stability during inference.\n\nsh4rk1z\n•\n3mo ago\n•\nEdited 3mo ago\n\nbenchmarked mmap and no-mmap less than an hour ago on rtx2070S/ryzen3950x/64ram with vram limited to 6.25GiB for qwen-3.5-9B-ud-q4-k-xl so I can use my desktop while using the local model. Result over 3 runs with no-mmap gave improvements:\n\n- ~1.5% decode speed improvement.\n- ~5.2% prompt processing improvement.\n- 28 MB vram less used.\n- standard deviation between runs droped by 10-20x\n- no disk io so less wear/tear\n\nI'm still experimenting with some things (turboquant, trellis) and will post once done and then try the Qwen 3.6.\n\ntheowlinspace\n•\n3mo ago\n\n—mmap with —mlock shouldn’t use disk io after you’ve loaded the model because it locks the mapped pages in RAM\n\nletsgoiowa\n•\n3mo ago\n\nStd?\n\n[deleted]\n•\n3mo ago\n[deleted]\n•\n3mo ago\nBitGreen1270\n•\n3mo ago\n\nI have a 780m igpu and adding --no-mmap makes it use 2GB extra RAM with nothing else changing. My prompt is just a 500 word story in the style of Roald Dahl. Since I only have 32GB, that's a pickle. No difference in tps though - still getting exactly the same. This is for non-MTP though. I'm downloading the MTP version to try out with your params (thanks so much!)\n\n4 more replies\n1 more reply"
+    },
+    {
+      "author": "janvitos",
+      "score": "44",
+      "text": "janvitos\n•\n3mo ago\n\nIt's a general llama.cpp recommendation when using --mlock (prevents swapping to disk). --no-map loads the entire model into RAM instead of loading parts when needed. As I understand it, it prevents disk I/O and makes memory usage more predictable. It might result in slower loading times, but better stability during inference.\n\nsh4rk1z\n•\n3mo ago\n•\nEdited 3mo ago\n\nbenchmarked mmap and no-mmap less than an hour ago on rtx2070S/ryzen3950x/64ram with vram limited to 6.25GiB for qwen-3.5-9B-ud-q4-k-xl so I can use my desktop while using the local model. Result over 3 runs with no-mmap gave improvements:\n\n- ~1.5% decode speed improvement.\n- ~5.2% prompt processing improvement.\n- 28 MB vram less used.\n- standard deviation between runs droped by 10-20x\n- no disk io so less wear/tear\n\nI'm still experimenting with some things (turboquant, trellis) and will post once done and then try the Qwen 3.6.\n\ntheowlinspace\n•\n3mo ago\n\n—mmap with —mlock shouldn’t use disk io after you’ve loaded the model because it locks the mapped pages in RAM\n\nletsgoiowa\n•\n3mo ago\n\nStd?\n\n[deleted]\n•\n3mo ago\n[deleted]\n•\n3mo ago\nBitGreen1270\n•\n3mo ago\n\nI have a 780m igpu and adding --no-mmap makes it use 2GB extra RAM with nothing else changing. My prompt is just a 500 word story in the style of Roald Dahl. Since I only have 32GB, that's a pickle. No difference in tps though - still getting exactly the same. This is for non-MTP though. I'm downloading the MTP version to try out with your params (thanks so much!)\n\n4 more replies"
+    },
+    {
+      "author": "sh4rk1z",
+      "score": "30",
+      "text": "sh4rk1z\n•\n3mo ago\n•\nEdited 3mo ago\n\nbenchmarked mmap and no-mmap less than an hour ago on rtx2070S/ryzen3950x/64ram with vram limited to 6.25GiB for qwen-3.5-9B-ud-q4-k-xl so I can use my desktop while using the local model. Result over 3 runs with no-mmap gave improvements:\n\n- ~1.5% decode speed improvement.\n- ~5.2% prompt processing improvement.\n- 28 MB vram less used.\n- standard deviation between runs droped by 10-20x\n- no disk io so less wear/tear\n\nI'm still experimenting with some things (turboquant, trellis) and will post once done and then try the Qwen 3.6.\n\ntheowlinspace\n•\n3mo ago\n\n—mmap with —mlock shouldn’t use disk io after you’ve loaded the model because it locks the mapped pages in RAM\n\nletsgoiowa\n•\n3mo ago\n\nStd?\n\n[deleted]\n•\n3mo ago\n[deleted]\n•\n3mo ago"
+    },
+    {
+      "author": "theowlinspace",
+      "score": "2",
+      "text": "theowlinspace\n•\n3mo ago\n\n—mmap with —mlock shouldn’t use disk io after you’ve loaded the model because it locks the mapped pages in RAM"
+    },
+    {
+      "author": "letsgoiowa",
+      "score": "2",
+      "text": "letsgoiowa\n•\n3mo ago\n\nStd?\n\n[deleted]\n•\n3mo ago"
+    },
+    {
+      "author": "BitGreen1270",
+      "score": "4",
+      "text": "BitGreen1270\n•\n3mo ago\n\nI have a 780m igpu and adding --no-mmap makes it use 2GB extra RAM with nothing else changing. My prompt is just a 500 word story in the style of Roald Dahl. Since I only have 32GB, that's a pickle. No difference in tps though - still getting exactly the same. This is for non-MTP though. I'm downloading the MTP version to try out with your params (thanks so much!)"
+    },
+    {
+      "author": "zulutune",
+      "score": "53",
+      "text": "zulutune\n•\n3mo ago\n\nHey OP thank you so much for this. I have an underutilized 5070ti and I’m going to try this out. Hopefully this weekend.\n\nzulutune\n•\n3mo ago\n\nBtw did you try DeepSeekV4? I’m kinda curious for this model too.\n\njanvitos\n•\n3mo ago\n•\nEdited 3mo ago\n\nI've tried DeepSeek V4 cloud for coding and didn't like it at all. It was overthinkig way too much and seemed confused and paranoid. But that's me. I'm sure others would debate this 😄\n\nWhen using cloud models for coding, GPT 5.5 is my top choice. In my opinion, its deterministic behavior makes it extremely apt at one shotting large and complex code additions/modifications.\n\nTo be honest, I found Qwen3.6 35B A3B local to be in the same league as most other and bigger open LLMs, except GLM 5.1, which can debug and resolve issues that Qwen3.6 cannot.\n\nrz2000\n•\n3mo ago\n•\nEdited 3mo ago\n\nHave you tried DeepSeek v4 with different thinking parameters? Using the flash version locally, I’ve found that completely turning off thinking gets good results.\n\nI’ve only used it with chat. In Kagi Assistant which uses fireworks.ai, together.ai, or deepinfra, it can be extremely slow with either the pro or flash version. However the quality of the written analysis is very good with ot without websearch enabled.\n\nLocally, I have used https://github.com/antirez/ds4 to run the flash version. This custom engine achieves pretty excellent performance, and here is where I have found a lot of benefit to simply switching of the reasoning step with \\nothink.\n\nI can’t run the full pro version, but it is pretty amazing to get better performance from the flash version than I can get from cloud providers, albeit with Kagi in between.\n\nzulutune\n•\n3mo ago\n\nDoes that mean you have a macbook with 128GB?\n\nrz2000\n•\n3mo ago\n\nA Mac Studio with 256 GB. I think Mac Studios with 192GB+, or the maxed out M5 MacBook Pro is what antirez was targeting with this inference engine.\n\nIn a couple years this sort of performance will likely be cheap, and it would worry me more if I were Google, OpenAI, Anthropic than some of the other open model releases that suddenly made AI briefly crash.\n\nI haven’t gotten Gemma 4 with MTP acceleration to work very reliably yet, but that is another way that local inference is becoming viable for much more than just hobbyist use.\n\nzulutune\n•\n3mo ago\n\nGratz, you’re in a different league.\n\nSo how does Qwen 3.6 and DS4 compare, what’s your favorite? Do you ever feel the need to use cloud models, or does that level of GB’s really give you the raw power of a Opus/Codex?\n\nrz2000\n•\n3mo ago\n\nI haven’t used either for much code assistance.\n\nThe “personality” of DeepSeek v4 is much more like GLM 4.6 or 4.7, which I think is pretty good, but without the need to quantiize it down to 4bits which can result is strange errors. DeepSeek v4 flash fits in 160GB of memory at full precision.\n\nFor tasks other than coding I find Qwen pretty unbearable. It seems very incurious and very worried about anything that might be innovative.\n\nzulutune\n•\n3mo ago\n\nInteresting observation haha :) thanks for sharing your insights\n\nzulutune\n•\n3mo ago\n\nThanks for posting this!\n\nBedlamiteSeer\n•\n3mo ago\n\nAny luck? Same GPU here."
+    },
+    {
+      "author": "zulutune",
+      "score": "9",
+      "text": "zulutune\n•\n3mo ago\n\nBtw did you try DeepSeekV4? I’m kinda curious for this model too.\n\njanvitos\n•\n3mo ago\n•\nEdited 3mo ago\n\nI've tried DeepSeek V4 cloud for coding and didn't like it at all. It was overthinkig way too much and seemed confused and paranoid. But that's me. I'm sure others would debate this 😄\n\nWhen using cloud models for coding, GPT 5.5 is my top choice. In my opinion, its deterministic behavior makes it extremely apt at one shotting large and complex code additions/modifications.\n\nTo be honest, I found Qwen3.6 35B A3B local to be in the same league as most other and bigger open LLMs, except GLM 5.1, which can debug and resolve issues that Qwen3.6 cannot.\n\nrz2000\n•\n3mo ago\n•\nEdited 3mo ago\n\nHave you tried DeepSeek v4 with different thinking parameters? Using the flash version locally, I’ve found that completely turning off thinking gets good results.\n\nI’ve only used it with chat. In Kagi Assistant which uses fireworks.ai, together.ai, or deepinfra, it can be extremely slow with either the pro or flash version. However the quality of the written analysis is very good with ot without websearch enabled.\n\nLocally, I have used https://github.com/antirez/ds4 to run the flash version. This custom engine achieves pretty excellent performance, and here is where I have found a lot of benefit to simply switching of the reasoning step with \\nothink.\n\nI can’t run the full pro version, but it is pretty amazing to get better performance from the flash version than I can get from cloud providers, albeit with Kagi in between.\n\nzulutune\n•\n3mo ago\n\nDoes that mean you have a macbook with 128GB?\n\nrz2000\n•\n3mo ago\n\nA Mac Studio with 256 GB. I think Mac Studios with 192GB+, or the maxed out M5 MacBook Pro is what antirez was targeting with this inference engine.\n\nIn a couple years this sort of performance will likely be cheap, and it would worry me more if I were Google, OpenAI, Anthropic than some of the other open model releases that suddenly made AI briefly crash.\n\nI haven’t gotten Gemma 4 with MTP acceleration to work very reliably yet, but that is another way that local inference is becoming viable for much more than just hobbyist use.\n\nzulutune\n•\n3mo ago\n\nGratz, you’re in a different league.\n\nSo how does Qwen 3.6 and DS4 compare, what’s your favorite? Do you ever feel the need to use cloud models, or does that level of GB’s really give you the raw power of a Opus/Codex?\n\nrz2000\n•\n3mo ago\n\nI haven’t used either for much code assistance.\n\nThe “personality” of DeepSeek v4 is much more like GLM 4.6 or 4.7, which I think is pretty good, but without the need to quantiize it down to 4bits which can result is strange errors. DeepSeek v4 flash fits in 160GB of memory at full precision.\n\nFor tasks other than coding I find Qwen pretty unbearable. It seems very incurious and very worried about anything that might be innovative.\n\nzulutune\n•\n3mo ago\n\nInteresting observation haha :) thanks for sharing your insights\n\nzulutune\n•\n3mo ago\n\nThanks for posting this!"
+    },
+    {
+      "author": "janvitos",
+      "score": "26",
+      "text": "janvitos\n•\n3mo ago\n•\nEdited 3mo ago\n\nI've tried DeepSeek V4 cloud for coding and didn't like it at all. It was overthinkig way too much and seemed confused and paranoid. But that's me. I'm sure others would debate this 😄\n\nWhen using cloud models for coding, GPT 5.5 is my top choice. In my opinion, its deterministic behavior makes it extremely apt at one shotting large and complex code additions/modifications.\n\nTo be honest, I found Qwen3.6 35B A3B local to be in the same league as most other and bigger open LLMs, except GLM 5.1, which can debug and resolve issues that Qwen3.6 cannot.\n\nrz2000\n•\n3mo ago\n•\nEdited 3mo ago\n\nHave you tried DeepSeek v4 with different thinking parameters? Using the flash version locally, I’ve found that completely turning off thinking gets good results.\n\nI’ve only used it with chat. In Kagi Assistant which uses fireworks.ai, together.ai, or deepinfra, it can be extremely slow with either the pro or flash version. However the quality of the written analysis is very good with ot without websearch enabled.\n\nLocally, I have used https://github.com/antirez/ds4 to run the flash version. This custom engine achieves pretty excellent performance, and here is where I have found a lot of benefit to simply switching of the reasoning step with \\nothink.\n\nI can’t run the full pro version, but it is pretty amazing to get better performance from the flash version than I can get from cloud providers, albeit with Kagi in between.\n\nzulutune\n•\n3mo ago\n\nDoes that mean you have a macbook with 128GB?\n\nrz2000\n•\n3mo ago\n\nA Mac Studio with 256 GB. I think Mac Studios with 192GB+, or the maxed out M5 MacBook Pro is what antirez was targeting with this inference engine.\n\nIn a couple years this sort of performance will likely be cheap, and it would worry me more if I were Google, OpenAI, Anthropic than some of the other open model releases that suddenly made AI briefly crash.\n\nI haven’t gotten Gemma 4 with MTP acceleration to work very reliably yet, but that is another way that local inference is becoming viable for much more than just hobbyist use.\n\nzulutune\n•\n3mo ago\n\nGratz, you’re in a different league.\n\nSo how does Qwen 3.6 and DS4 compare, what’s your favorite? Do you ever feel the need to use cloud models, or does that level of GB’s really give you the raw power of a Opus/Codex?\n\nrz2000\n•\n3mo ago\n\nI haven’t used either for much code assistance.\n\nThe “personality” of DeepSeek v4 is much more like GLM 4.6 or 4.7, which I think is pretty good, but without the need to quantiize it down to 4bits which can result is strange errors. DeepSeek v4 flash fits in 160GB of memory at full precision.\n\nFor tasks other than coding I find Qwen pretty unbearable. It seems very incurious and very worried about anything that might be innovative.\n\nzulutune\n•\n3mo ago\n\nInteresting observation haha :) thanks for sharing your insights\n\nzulutune\n•\n3mo ago\n\nThanks for posting this!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1t82zxv",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:35:37Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.824,
+    "evidence": 1.0,
+    "relevance": 0.556,
+    "community_scrutiny": 0.9,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://gist.githubusercontent.com/am17an/228edfb84ed082aa88e3865d6fa27090/raw/7a2cee40ee1e2ca5365f4cef93632193d7ad852a/mtp-bench.py",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/havenoammo/Qwen3.6-35B-A3B-MTP-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/antirez/ds4",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/alexziskind1/codeneedle",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/jmpangilinan/llama-cpp-turboquant.git",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/STRUCTURED_COT.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/models/qwen3.6",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/issues/22867",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22673",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://pastebin.com/dSkkKX60",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

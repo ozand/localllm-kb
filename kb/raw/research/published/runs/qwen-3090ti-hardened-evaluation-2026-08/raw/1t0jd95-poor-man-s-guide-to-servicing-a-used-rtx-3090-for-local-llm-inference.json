@@ -1,0 +1,154 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t0jd95/poor_mans_guide_to_servicing_a_used_rtx_3090_for/",
+  "title": "Poor man's guide to servicing a used RTX 3090 for local LLM inference",
+  "author": "canred",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\ncanred\nPoor man's guide to servicing a used RTX 3090 for local LLM inference\nTutorial | Guide\n\nWriteup documenting replacing thermal paste on RTX 3090 with thermal issues. Wrote up the whole process with disassembly photos and HWiNFO before/after data. Hope it saves someone some headaches.\n\nhttps://github.com/cubebecu/writeups/tree/main/gpu-service\n\nShare",
+  "comments": [
+    {
+      "author": "ttkciar",
+      "score": "1",
+      "text": "ttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nThis keeps getting reported for self-promotion, but I'm leaving it up because OP has an account history of interacting conversationally with the community (and not with bot-slop).\n\nThe rules against self-promotion are partly to prevent outsiders from simply dropping a link on the sub and neglecting meaningful interaction, but I'm not seeing that with canred, so am happy to leave this post up.\n\n1 more reply"
+    },
+    {
+      "author": "seamonn",
+      "score": "13",
+      "text": "seamonn\n•\n4mo ago\n Top 1% Commenter\n\nKryonaut is a terrible paste for longevity. It's meant for overclocking. It tends to tank in performance a couple weeks into the repaste. Duronaut is what you should be using.\n\npatricious\n•\n4mo ago\nllama.cpp\n\nEven better, PTM 7950.\n\ncanred\n•\n4mo ago\n\nI used thermal kryonaut before on my ryzens and radeon, used it because I know it but thanks for this info, I'll try to remember"
+    },
+    {
+      "author": "patricious",
+      "score": "6",
+      "text": "patricious\n•\n4mo ago\nllama.cpp\n\nEven better, PTM 7950."
+    },
+    {
+      "author": "canred",
+      "score": "2",
+      "text": "canred\n•\n4mo ago\n\nI used thermal kryonaut before on my ryzens and radeon, used it because I know it but thanks for this info, I'll try to remember"
+    },
+    {
+      "author": "McSendo",
+      "score": "7",
+      "text": "McSendo\n•\n4mo ago\n•\nEdited 4mo ago\n\nYou should look into the honeywell PTM 7950 . Every thermal paste I used suffered fro the pump out effect, and I would've to replace it every half a year or so. Not with the PTM 7950.\n\ncanred\n•\n4mo ago\n\nYou're another person telling me I may have issues with kryonaut, I'll definitely keep an eye on temps over time, thanks!"
+    },
+    {
+      "author": "canred",
+      "score": "1",
+      "text": "canred\n•\n4mo ago\n\nYou're another person telling me I may have issues with kryonaut, I'll definitely keep an eye on temps over time, thanks!"
+    },
+    {
+      "author": "lit1337",
+      "score": "5",
+      "text": "lit1337\n•\n4mo ago\nllama.cpp\n\nthanks, been looking at some defuct cards to save some money, definitely will be saving this."
+    },
+    {
+      "author": "NinjaOk2970",
+      "score": "17",
+      "text": "NinjaOk2970\n•\n4mo ago\n\nJust say \"I changed thermal paste\". This is worthless ai slop.\n\nlegos_on_the_brain\n•\n4mo ago\n\nI was hoping it would be a guide to diagnose the non-functioning ebay 3090's\n\ncanred\n•\n4mo ago"
+    },
+    {
+      "author": "legos_on_the_brain",
+      "score": "3",
+      "text": "legos_on_the_brain\n•\n4mo ago\n\nI was hoping it would be a guide to diagnose the non-functioning ebay 3090's"
+    },
+    {
+      "author": "Eyelbee",
+      "score": "3",
+      "text": "Eyelbee\n•\n4mo ago\n Top 1% Commenter\n\nMain problem is vram temps most of the time.\n\ncanred\n•\n4mo ago\n\nI may end up replacing thermopads eventually. I did not do that because my limited experience tells me that original thermopads are often much better quality than what I have access to. Another thing is I don't have service manual for this card and eyeballing correct thermopad thickness can be tricky."
+    },
+    {
+      "author": "canred",
+      "score": "1",
+      "text": "canred\n•\n4mo ago\n\nI may end up replacing thermopads eventually. I did not do that because my limited experience tells me that original thermopads are often much better quality than what I have access to. Another thing is I don't have service manual for this card and eyeballing correct thermopad thickness can be tricky."
+    },
+    {
+      "author": "brickout",
+      "score": "1",
+      "text": "brickout\n•\n4mo ago\n\nWhat's going on with the memory junction temp?\n\ncanred\n•\n4mo ago\n\nBefore repaste, card was thermally limited (look at performance limiter section) - temperatures were to high and card was spinning the fans at 100% and limiting clock frequency to not overveat components. When card was repasted, die could be cooled more effectively, as a result, card was no longer throttling and can now work at full clocks, full power and despite this, fans do not have to work at full speed. Mem junction temp increased because memory finally started to work at full capacity and heat up more, as it should.\n\nbrickout\n•\n4mo ago\n\nAh, makes sense. Thank you."
+    },
+    {
+      "author": "canred",
+      "score": "1",
+      "text": "canred\n•\n4mo ago\n\nBefore repaste, card was thermally limited (look at performance limiter section) - temperatures were to high and card was spinning the fans at 100% and limiting clock frequency to not overveat components. When card was repasted, die could be cooled more effectively, as a result, card was no longer throttling and can now work at full clocks, full power and despite this, fans do not have to work at full speed. Mem junction temp increased because memory finally started to work at full capacity and heat up more, as it should.\n\nbrickout\n•\n4mo ago\n\nAh, makes sense. Thank you."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1t0jd95",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:08Z",
+  "discovered_by_query_ids": [
+    "8011324fedef",
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.536,
+    "evidence": 0.4,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/cubebecu/writeups/tree/main/gpu-service",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

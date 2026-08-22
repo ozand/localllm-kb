@@ -1,0 +1,104 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuua1f/which_qwen_38_on_rtx_a2000/",
+  "title": "Which qwen 3.8 on rtx a2000?",
+  "author": "MrMrsPotts",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n14h ago\nMrMrsPotts\nWhich qwen 3.8 on rtx a2000?\nQuestion | Help\n\n12GB VRAM and 32GB RAM. I have tried qwen3.8-27b-ud-q4_k_m which runs at about 6 tokens/sec. There are so many options and variants I don't know if there is a better option. I want the best possible coding quality at a half decent speed.\n\nShare",
+  "comments": [
+    {
+      "author": "ForsookComparison",
+      "score": "3",
+      "text": "ForsookComparison\n•\n13h ago\n Top 1% Commenter\n\nMore active params seems to have a better chance at withstanding serious quantization. I would try Qwen3.8-27B-UD-IQ2_S.gguf and see how much you can get done on just the GPU.\n\nThis model needs a lot of reasoning AND preserve-thinking enabled for its peak coding quality - the prefill performance of any amount of CPU-offload will be brutal to work with."
+    },
+    {
+      "author": "natermer",
+      "score": "2",
+      "text": "natermer\n•\n13h ago\n\nThat isn't crazy slow behavior for this model. Part of the problem is that it is a \"Dense model\" meaning that all 27 billion parameters are used for each token. That is a lot of memory to burn through each token.\n\nI don't know which exact quantization you are using, but it still should be around 16.5GB. So even though most of it can run in VRAM you are still going to be hitting system memory on each token.\n\nIt is a similiar situation for the older Qwen 3.6 27B model.. that was a \"dense\" model.\n\nThis is different from a \"MoE\" mixture of experts model like Qwen3.6-35B-A3B. In this it is like having a bunch of small models that happen to be all running at the same time and it picks the best one for what you want. So for Qwen3.6-35B-A3B... It only goes through 3 billion parameters for each token.\n\nSo MoE models tend to be much easier on hardware despite taking up more raw space.\n\nFor Qwen 3.8 a easy win for slightly better performance is usually done by:\n\nEnabling MTP with 2 or 3 sequential token settings. That might bump you up to 7 or 8t/s.\n\nAlso using quantization for KV cache helps a lot when you have a low amount of VRAM. It is similar in idea to having a model with lower quantization. Something like 'q8_0' or 'q4_0' for 8bit and 4bit quantization, respectively, if you are using llama.cpp. KV cache relates to your model's running context.\n\nMight get a couple more token/s that way."
+    },
+    {
+      "author": "dob312",
+      "score": "2",
+      "text": "dob312\n•\n12h ago\n\nyour 6 t/s smells like the q4 spilling out of the 12gb into system RAM. there were two posts here just recently worth reading: one from a 4060 ti 16gb owner getting 30-35 t/s the moment the whole quant sat in VRAM, and one making the case that this model's Q3 quants degrade way less than Q3 usually does, still one-shotting real coding tasks. so before hunting exotic variants, try the smallest UD quant that fully fits your 12gb with your context and see what the speed does. worst case you compare its code against the q4 on one real task and pick"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuua1f",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:33Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.643,
+    "evidence": 0.8,
+    "relevance": 0.636,
+    "community_scrutiny": 0.3,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF?show_file_info=Qwen3.8-27B-UD-IQ2_XXS.gguf",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

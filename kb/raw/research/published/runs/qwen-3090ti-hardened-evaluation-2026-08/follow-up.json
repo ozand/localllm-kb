@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "confirmed_facts": [],
+  "identified_bottlenecks": [
+    "Windows cmd.exe argument quoting caused 32 of 36 planned query records to fail before the surf.cmd fix.",
+    "The current extractor captures navigation/repost chrome in post_body on some pages and captured one Reddit error page with an empty body.",
+    "578 outbound references were discovered but none were manually verified in this evaluation run.",
+    "The keyword quality score is triage-only and can score a technically relevant question below 0.3 or classify a page shell as zero."
+  ],
+  "new_hypotheses": [
+    "A selector or page-readiness check that rejects Reddit shell/error pages will improve capture validity.",
+    "Separating Reddit post content from navigation/repost chrome will improve synthesis quality and quality scoring.",
+    "A bounded outbound-verification queue should prioritize primary GitHub/Hugging Face/vendor links rather than attempting hundreds of sidebar links."
+  ],
+  "targeted_follow_up_queries": [
+    "Reddit shreddit-post post-text selector repost chrome extraction",
+    "Surf CLI Reddit page readiness error page detection",
+    "llama.cpp RTX 3090 Ti benchmark GitHub configuration",
+    "Qwen 3.8 27B RTX 3090 Ti verified benchmark"
+  ]
+}

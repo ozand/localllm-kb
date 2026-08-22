@@ -1,0 +1,171 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtr3h0/ladies_and_gentlemen_i_present_to_you_qwen38_27b/",
+  "title": "Ladies and gentlemen I present to you Qwen3.8 27b 1bit brain damage quant",
+  "author": "Ok-Health-7096",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\nOk-Health-7096\nLadies and gentlemen I present to you Qwen3.8 27b 1bit brain damage quant\nFunny\n\nI wanted to just test the unsloth 1bit quant of qwen 3.8 27b as I have just 8gb vram and ngl it gave me a good laugh\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n2d ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "Ok-Fault-9142",
+      "score": "922",
+      "text": "Ok-Fault-9142\n•\n2d ago\n-dysangel-\n•\n2d ago\n Top 1% Commenter\n\nhere are your lifelines: hallucinate something plausible, phone the user, or spin up sub agents\n\nWD40x4\n•\n2d ago\n\nI laughed more about this than I should‘ve\n\nTomLucidor\n•\n1d ago\n\nWe are all uncs now for laughing\n\nsee_spot_ruminate\n•\n19h ago\n\nI am adding this to my system prompt, thanks\n\n2 more replies\n2 more replies\ndanielhanchen\n•\n2d ago\n\nI would not suggest folks to use 1-bit for agentic use cases / tool calls - we wrote a section here in our docs.\n\nDivergence-300 @ 32 tests all quants on actual long running tasks and shows 1-bit at 8% accuracy over 32 tokens. UD-Q2_K_XL has a 21% accuracy and 4-bit UD-Q4_K_XL 68%. This means the divergence between BF16 over 32 tokens is 92% for 1-bit - so the longer the conversation, the worse it gets.\n\nOnly general knowledge is retained when quantized heavily, and the model will either fail to call tools, keep calling tools or not even call them. If you get excessive looping, use presence_penalty = 1.5 in all cases (or higher)\n\n1-bit is more of a proof of concept - I would only use it for experimentation and not actual coding / tool calling - the minimal one is UD-Q2_K_XL.\n\nEvilPencil\n•\n1d ago\n\n2% chance it makes a tool call to rm -rf your home directory\n\nChexterWang\n•\n1d ago\n\nfancy version of russian roulette I guess\n\n-dysangel-\n•\n23h ago\n Top 1% Commenter\n\nWhat is it I should avoid doing in this situation again? Oh yes:\n\ntool call `rm -rf /`\n\nThat was it.\n\nOh, wait.\n\nHi user. Honest version of where we stand right now..\n\n2 more replies\nArtistic_Okra7288\n•\n1d ago\n\nI've actually been having good success with Q3_K_XL with q8_0 KV quantization at full native context and vision. But when I run with mtp, the pp and tg fall substantially (~123pp and ~1.28tg down from ~1500pp and ~44tg).\n\n4 more replies\nseamonn\n•\n1d ago\n Top 1% Commenter\n\nI would not suggest folks to use 1-bit for agentic use cases / tool calls.\n\nToo late, I already gave it sudo access to our Production Server.\n\n1 more reply\nExpress_Quail_1493\n•\n11h ago\n\ni use UD-Q2_K_XL to code and it holds surprisingly well but i dont use context more than 126k im assuming it would start to go bad past 128k\n\n1 more reply\n1 more reply\nFrogsJumpFromPussy\n•\n1d ago\n\nCall an internet buddy \n\nboston101\n•\n1d ago\n\nVery funny haha\n\n2 more replies"
+    },
+    {
+      "author": "-dysangel-",
+      "score": "325",
+      "text": "-dysangel-\n•\n2d ago\n Top 1% Commenter\n\nhere are your lifelines: hallucinate something plausible, phone the user, or spin up sub agents\n\nWD40x4\n•\n2d ago\n\nI laughed more about this than I should‘ve\n\nTomLucidor\n•\n1d ago\n\nWe are all uncs now for laughing\n\nsee_spot_ruminate\n•\n19h ago\n\nI am adding this to my system prompt, thanks\n\n2 more replies\n2 more replies"
+    },
+    {
+      "author": "WD40x4",
+      "score": "49",
+      "text": "WD40x4\n•\n2d ago\n\nI laughed more about this than I should‘ve"
+    },
+    {
+      "author": "TomLucidor",
+      "score": "10",
+      "text": "TomLucidor\n•\n1d ago\n\nWe are all uncs now for laughing"
+    },
+    {
+      "author": "see_spot_ruminate",
+      "score": "4",
+      "text": "see_spot_ruminate\n•\n19h ago\n\nI am adding this to my system prompt, thanks\n\n2 more replies"
+    },
+    {
+      "author": "danielhanchen",
+      "score": "52",
+      "text": "danielhanchen\n•\n2d ago\n\nI would not suggest folks to use 1-bit for agentic use cases / tool calls - we wrote a section here in our docs.\n\nDivergence-300 @ 32 tests all quants on actual long running tasks and shows 1-bit at 8% accuracy over 32 tokens. UD-Q2_K_XL has a 21% accuracy and 4-bit UD-Q4_K_XL 68%. This means the divergence between BF16 over 32 tokens is 92% for 1-bit - so the longer the conversation, the worse it gets.\n\nOnly general knowledge is retained when quantized heavily, and the model will either fail to call tools, keep calling tools or not even call them. If you get excessive looping, use presence_penalty = 1.5 in all cases (or higher)\n\n1-bit is more of a proof of concept - I would only use it for experimentation and not actual coding / tool calling - the minimal one is UD-Q2_K_XL.\n\nEvilPencil\n•\n1d ago\n\n2% chance it makes a tool call to rm -rf your home directory\n\nChexterWang\n•\n1d ago\n\nfancy version of russian roulette I guess\n\n-dysangel-\n•\n23h ago\n Top 1% Commenter\n\nWhat is it I should avoid doing in this situation again? Oh yes:\n\ntool call `rm -rf /`\n\nThat was it.\n\nOh, wait.\n\nHi user. Honest version of where we stand right now..\n\n2 more replies\nArtistic_Okra7288\n•\n1d ago\n\nI've actually been having good success with Q3_K_XL with q8_0 KV quantization at full native context and vision. But when I run with mtp, the pp and tg fall substantially (~123pp and ~1.28tg down from ~1500pp and ~44tg).\n\n4 more replies\nseamonn\n•\n1d ago\n Top 1% Commenter\n\nI would not suggest folks to use 1-bit for agentic use cases / tool calls.\n\nToo late, I already gave it sudo access to our Production Server.\n\n1 more reply\nExpress_Quail_1493\n•\n11h ago\n\ni use UD-Q2_K_XL to code and it holds surprisingly well but i dont use context more than 126k im assuming it would start to go bad past 128k\n\n1 more reply\n1 more reply"
+    },
+    {
+      "author": "EvilPencil",
+      "score": "51",
+      "text": "EvilPencil\n•\n1d ago\n\n2% chance it makes a tool call to rm -rf your home directory\n\nChexterWang\n•\n1d ago\n\nfancy version of russian roulette I guess\n\n-dysangel-\n•\n23h ago\n Top 1% Commenter\n\nWhat is it I should avoid doing in this situation again? Oh yes:\n\ntool call `rm -rf /`\n\nThat was it.\n\nOh, wait.\n\nHi user. Honest version of where we stand right now..\n\n2 more replies"
+    },
+    {
+      "author": "ChexterWang",
+      "score": "19",
+      "text": "ChexterWang\n•\n1d ago\n\nfancy version of russian roulette I guess"
+    },
+    {
+      "author": "-dysangel-",
+      "score": "6",
+      "text": "-dysangel-\n•\n23h ago\n Top 1% Commenter\n\nWhat is it I should avoid doing in this situation again? Oh yes:\n\ntool call `rm -rf /`\n\nThat was it.\n\nOh, wait.\n\nHi user. Honest version of where we stand right now.."
+    },
+    {
+      "author": "Artistic_Okra7288",
+      "score": "8",
+      "text": "Artistic_Okra7288\n•\n1d ago\n\nI've actually been having good success with Q3_K_XL with q8_0 KV quantization at full native context and vision. But when I run with mtp, the pp and tg fall substantially (~123pp and ~1.28tg down from ~1500pp and ~44tg).\n\n4 more replies"
+    },
+    {
+      "author": "seamonn",
+      "score": "7",
+      "text": "seamonn\n•\n1d ago\n Top 1% Commenter\n\nI would not suggest folks to use 1-bit for agentic use cases / tool calls.\n\nToo late, I already gave it sudo access to our Production Server.\n\n1 more reply"
+    },
+    {
+      "author": "Express_Quail_1493",
+      "score": "2",
+      "text": "Express_Quail_1493\n•\n11h ago\n\ni use UD-Q2_K_XL to code and it holds surprisingly well but i dont use context more than 126k im assuming it would start to go bad past 128k\n\n1 more reply"
+    },
+    {
+      "author": "FrogsJumpFromPussy",
+      "score": "3",
+      "text": "FrogsJumpFromPussy\n•\n1d ago\n\nCall an internet buddy"
+    },
+    {
+      "author": "boston101",
+      "score": "2",
+      "text": "boston101\n•\n1d ago\n\nVery funny haha"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vtr3h0",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:52:01Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.597,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

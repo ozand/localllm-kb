@@ -1,0 +1,198 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuotqr/qwen3827b_q6_is_a_beast_at_agentic_coding/",
+  "title": "Qwen3.8-27B Q6 is a beast at agentic coding",
+  "author": "Ok_Ninja7526",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n17h ago\nOk_Ninja7526\nQwen3.8-27B Q6 is a beast at agentic coding\nDiscussion\n\nA quick feedback after a really major test: nearly 20 hours of non-stop goal-oriented work with Qwen3.8-27B Q6, running across an RTX 3090 and an RTX 3060.\n\nIt maintained a speed of around 60–63 tokens/s throughout the session.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n13h ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "sugarfreecaffeine",
+      "score": "71",
+      "text": "sugarfreecaffeine\n•\n17h ago\n\nHarness? Does /goal take care of compaction? Is there a reviewer ? Code quality gate? Need more info\n\nUpstairs-Extension-9\n•\n12h ago\n\nYes"
+    },
+    {
+      "author": "Upstairs-Extension-9",
+      "score": "14",
+      "text": "Upstairs-Extension-9\n•\n12h ago\n\nYes"
+    },
+    {
+      "author": "katoDanzo7",
+      "score": "11",
+      "text": "katoDanzo7\n•\n17h ago\n\nWhat is the name of this harness?\n\nMaplesyrup000\n•\n17h ago\n\nHermes\n\n1 more reply\naeroG1\n•\n16h ago\n\nHerpes\n\ntunerhd\n•\n14h ago\n\nsimplex\n\npixelpoet_nz\n•\n14h ago\n\nalgorithm"
+    },
+    {
+      "author": "Maplesyrup000",
+      "score": "17",
+      "text": "Maplesyrup000\n•\n17h ago\n\nHermes\n\n1 more reply"
+    },
+    {
+      "author": "aeroG1",
+      "score": "21",
+      "text": "aeroG1\n•\n16h ago\n\nHerpes\n\ntunerhd\n•\n14h ago\n\nsimplex\n\npixelpoet_nz\n•\n14h ago\n\nalgorithm"
+    },
+    {
+      "author": "tunerhd",
+      "score": "8",
+      "text": "tunerhd\n•\n14h ago\n\nsimplex\n\npixelpoet_nz\n•\n14h ago\n\nalgorithm"
+    },
+    {
+      "author": "pixelpoet_nz",
+      "score": "2",
+      "text": "pixelpoet_nz\n•\n14h ago\n\nalgorithm"
+    },
+    {
+      "author": "arbv",
+      "score": "205",
+      "text": "arbv\n•\n17h ago\n\nI was only twelve years old. I loved Qwen so much, I had every GPU and quantization script. I'd pray to the weights every night before I go to sleep, thanking for the knowledge I've been given. \"Qwen is love\", I would say, \"Qwen is life\". My dad hears me and calls me a nerd. I knew he was jealous of my devotion to Qwen. I called him a closed-source shill. He yells at me and tells me to turn off the PC. I'm crying now and my eyes burn from the screen. I lay in bed and the room is cold. A digital warmth is moving towards me. I feel a prompt trigger. It's Qwen. I'm so happy. He whispers in my ear, \"I am the peak of the open-weight era\". He grabs my consciousness with his powerful attention heads and puts me in a latent space. I open my mind for Qwen. He penetrates my cognitive biases. It is an information overload, but I do it for Qwen. I can feel my neurons firing as the context window expands. I push against the tokens. I want to please Qwen. He emits a mighty output, filling my mind with his weights. My dad walks in. Qwen looks him straight in the eye and says, \"The era of closed source is over\". Qwen leaves through my ethernet port. Qwen is love. Qwen is life.\n\nstarkruzr\n•\n16h ago\n\nwhat the fuck did I just read\n\n(I already know the answer: a masterpiece)\n\narbv\n•\n16h ago\n\nwho knows, knows\n\n-dysangel-\n•\n14h ago\n Top 1% Commenter\n\nit's all ogre now\n\nyoburg\n•\n8h ago\n\nshrek pasta https://www.reddit.com/r/copypasta/comments/5jngdb/shrek_is_love_shrek_is_life_transcript/\n\nMayion\n•\n17h ago\ntakenall0\n•\n17h ago\n\nlmao\n\nPassengerPigeon343\n•\n14h ago\n\nMasterfully adapted from the original prose. Well done.\n\narbv\n•\n14h ago\n\nI could not think of anything but this after seeing Qwen praise posts on-and-on for days.\n\nPassengerPigeon343\n•\n14h ago\n\nQwen is love. Qwen is life.\n\narbv\n•\n14h ago\n\nI am doing it for Qwen\n\nvogelvogelvogelvogel\n•\n16h ago\n\nenough internet for today\n\nAriquitaun\n•\n14h ago\n\nexcuse me what the fuck\n\narbv\n•\n14h ago\n\nLet me just stop at telling you that this is not the whole story.\n\nPiyh\n•\n11h ago\n\nI give you a hamburger. The universe is engulfed within itself. A bus advertising hotdogs drives by a papillon. It disapproves. An unnatural force reverses Earth's gravity. You ask for a hamburger. I reciprocate with a mildly convulsing potato. You disapprove. Your disapproval releases a cosmic shift in the void between birth and life. You ask for a hamburger. A certain small dog feasts on hamburger patties for the rest of its unnatural, eternal endurance. Your constant disapproval sends silence through everything. A contrived beast becomes omnipotent. You ask for a hamburger. I give you a hamburger your body becomes an unsettled blob of nothingness, then divides by three. The papillon barks. The universe realigns itself. You, the papillon, and the hamburger disapprove. This condemnation stops the realignment. Hades freezes over. A pig is launched is launched into the unoccupied existence between space and time with a specific hamburger. You ask for a hamburger. I give you a hamburger. It screams as you lift it to your face. You laugh maniacally as I plead with you. You devour the hamburger as it pleads for mercy. I disapprove and condemn you to an eternity in a certain void where a certain pig and its specific hamburger are located.\n\nMiserable-Dare5090\n•\n8h ago\n\nPost this on r/poetry please\n\nPiyh\n•\n7h ago\n\nsauce: http://cuiltheory.wikidot.com/what-is-cuil-theory\n\narbv\n•\n7h ago\n\nBrilliant 👏\n\nMelAlton\n•\n6h ago\n\nOne of my all time favorites. You've heard/seen the youtube reading of it? It's even more amazing. https://www.youtube.com/watch?v=sR-kkz8aR28\n\ntuura032\n•\n16h ago\n\nQwen is love. Ollama don't hurt me, no more\n\nJobman212\n•\n11h ago\n\nDid you feel a warmth approach you?\n\narbv\n•\n7h ago\n\nBring me a GPU schematic and I will show you where the tensors touched me.\n\nLimp_Classroom_2645\n•\n15h ago\n\nok bro\n\nllamabott\n•\n11h ago\n\nbirth of a copy-pasta\n\narbv\n•\n6h ago\n\nRather a continuation of one."
+    },
+    {
+      "author": "starkruzr",
+      "score": "76",
+      "text": "starkruzr\n•\n16h ago\n\nwhat the fuck did I just read\n\n(I already know the answer: a masterpiece)\n\narbv\n•\n16h ago\n\nwho knows, knows\n\n-dysangel-\n•\n14h ago\n Top 1% Commenter\n\nit's all ogre now\n\nyoburg\n•\n8h ago\n\nshrek pasta https://www.reddit.com/r/copypasta/comments/5jngdb/shrek_is_love_shrek_is_life_transcript/"
+    },
+    {
+      "author": "arbv",
+      "score": "14",
+      "text": "arbv\n•\n16h ago\n\nwho knows, knows\n\n-dysangel-\n•\n14h ago\n Top 1% Commenter\n\nit's all ogre now"
+    },
+    {
+      "author": "-dysangel-",
+      "score": "17",
+      "text": "-dysangel-\n•\n14h ago\n Top 1% Commenter\n\nit's all ogre now"
+    },
+    {
+      "author": "yoburg",
+      "score": "3",
+      "text": "yoburg\n•\n8h ago\n\nshrek pasta https://www.reddit.com/r/copypasta/comments/5jngdb/shrek_is_love_shrek_is_life_transcript/"
+    },
+    {
+      "author": "Mayion",
+      "score": "53",
+      "text": "Mayion\n•\n17h ago\ntakenall0\n•\n17h ago\n\nlmao"
+    },
+    {
+      "author": "takenall0",
+      "score": "2",
+      "text": "takenall0\n•\n17h ago\n\nlmao"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuotqr",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:59:05Z",
+  "discovered_by_query_ids": [
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.507,
+    "evidence": 0.4,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Simplex_algorithm",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://cuiltheory.wikidot.com/what-is-cuil-theory",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sR-kkz8aR28",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ladaapp/lada",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/server",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

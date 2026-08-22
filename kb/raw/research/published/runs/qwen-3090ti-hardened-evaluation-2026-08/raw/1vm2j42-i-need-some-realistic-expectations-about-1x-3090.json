@@ -1,0 +1,106 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vm2j42/i_need_some_realistic_expectations_about_1x_3090/",
+  "title": "I need some realistic expectations about 1x 3090",
+  "author": "oldschooldaw",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n10d ago\noldschooldaw\nI need some realistic expectations about 1x 3090\nQuestion | Help\n\nwith a single 3090, what sort of speeds, quants and context lengths should i realistically expect out of qwen 3.6 27b? ive been to a few benchmark sites and the speeds look good, until i drill into the recipe and realise they are using 1024 contexts and things of the like. i think i may have set myself some unrealistic expectations of what i can achieve\n\nShare",
+  "comments": [
+    {
+      "author": "sisyphus-cycle",
+      "score": "7",
+      "text": "sisyphus-cycle\n•\n10d ago\n\nMaximum I’m able to get is 160k at q8 kv and q4 model quant\n\noldschooldaw\n•\n10d ago\n\nwhat speeds?\n\nCivil_Fee_7862\n•\n10d ago\n\n50-60 tokens per second.\n\nsdfgeoff\n•\n10d ago\n\nYep, about what I've seen when running on a single card"
+    },
+    {
+      "author": "oldschooldaw",
+      "score": "2",
+      "text": "oldschooldaw\n•\n10d ago\n\nwhat speeds?\n\nCivil_Fee_7862\n•\n10d ago\n\n50-60 tokens per second."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "6",
+      "text": "Civil_Fee_7862\n•\n10d ago\n\n50-60 tokens per second."
+    },
+    {
+      "author": "sdfgeoff",
+      "score": "2",
+      "text": "sdfgeoff\n•\n10d ago\n\nYep, about what I've seen when running on a single card"
+    },
+    {
+      "author": "ThenExtension9196",
+      "score": "15",
+      "text": "ThenExtension9196\n•\n10d ago\n\nRealistically need two to have a solid experience\n\n[deleted]\n•\n10d ago"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vm2j42",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:28:52Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.229,
+    "evidence": 0.2,
+    "relevance": 0.111,
+    "community_scrutiny": 0.5,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

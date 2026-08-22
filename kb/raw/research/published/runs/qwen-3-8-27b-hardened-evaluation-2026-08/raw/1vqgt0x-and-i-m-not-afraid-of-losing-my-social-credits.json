@@ -1,0 +1,171 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqgt0x/and_im_not_afraid_of_losing_my_social_credits/",
+  "title": "…and I’m not afraid of losing my social credits.",
+  "author": "JLeonsarmiento",
+  "post_body": "2\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5d ago\nJLeonsarmiento\n Top 1% Commenter\n…and I’m not afraid of losing my social credits.\nDiscussion\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n5d ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "RevolutionaryGold325",
+      "score": "521",
+      "text": "RevolutionaryGold325\n•\n5d ago\n\nreasoning_effort=\"xhigh\", # xhigh by default; supported levels are xhigh, medium, and low\n\nbankinu\n•\n5d ago\n\nHow do you solve this problem -\n\n\"Let me read (some file already read)\"\n\nAnd then it proceeds to print contents of a large part of the file it read using decode tokens. I haven't seen previous Qwen or any other model do this.\n\nReducing to medium or low didn't solve this.\n\nFedor_Doc\n•\n5d ago\n•\nEdited 5d ago\n\nDeepseek v4 Flash does it. It increases weight of the cited part in the reasoning -> less hallucinations about the code. Useful with optimized attention architectures.\n\nkaelwd\n•\n5d ago\n\nI wish it would just actually re-read the file though, prefill is 20x faster than decode and there's 0% chance of hallucinations.\n\nsimcop2387\n•\n5d ago\n\nI haven't really benchmarked yet but this might be a great spot for llama.cpp's ngram-map-k or ngram-map-k4v speculative decoders. What I'm not familiar with enough though is how to tune them or how they'll work with the native MTP. I know you can specify multiple of them together though.\n\nkaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again.\n\n1 more reply\nmichaelsoft__binbows\n•\n5d ago\n\nkinda funny this mirrors our own operation as well. like the context window is just your short term buffer of your brain, not some notebook on your desk or whatever. Re-read something, yeah it's getting blitted out into the context window too.\n\nthe fact that we can fully control the context window is so powerful and we're like only scratching the surface of what we can do.\n\nbankinu\n•\n5d ago\n\nBut it doesn't actually reread.\n\n\"Let me read...\" And then it prints something out already read long back, verbatim.\n\nYour point may still hold though, it's almost like \"let me recall\". But where it differs from us is that it recollects verbatim - which means it was there in the context window very clearly without attenuation.\n\nAnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all.\n\nLakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you.\n\n3 more replies\nAutomatic-Arm8153\n•\n5d ago\n\nTell me about it. Nice reading your comment and the one above.\n\nSmart/intuitive people are lurking around.. yep so much untapped potential. It’s cool to see them give AI the ability to context engineer itself as it’s running.\n\nI’ve been working on a harness for on the go context engineering. Then I saw deepseek harness and "
+    },
+    {
+      "author": "bankinu",
+      "score": "187",
+      "text": "bankinu\n•\n5d ago\n\nHow do you solve this problem -\n\n\"Let me read (some file already read)\"\n\nAnd then it proceeds to print contents of a large part of the file it read using decode tokens. I haven't seen previous Qwen or any other model do this.\n\nReducing to medium or low didn't solve this.\n\nFedor_Doc\n•\n5d ago\n•\nEdited 5d ago\n\nDeepseek v4 Flash does it. It increases weight of the cited part in the reasoning -> less hallucinations about the code. Useful with optimized attention architectures.\n\nkaelwd\n•\n5d ago\n\nI wish it would just actually re-read the file though, prefill is 20x faster than decode and there's 0% chance of hallucinations.\n\nsimcop2387\n•\n5d ago\n\nI haven't really benchmarked yet but this might be a great spot for llama.cpp's ngram-map-k or ngram-map-k4v speculative decoders. What I'm not familiar with enough though is how to tune them or how they'll work with the native MTP. I know you can specify multiple of them together though.\n\nkaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again.\n\n1 more reply\nmichaelsoft__binbows\n•\n5d ago\n\nkinda funny this mirrors our own operation as well. like the context window is just your short term buffer of your brain, not some notebook on your desk or whatever. Re-read something, yeah it's getting blitted out into the context window too.\n\nthe fact that we can fully control the context window is so powerful and we're like only scratching the surface of what we can do.\n\nbankinu\n•\n5d ago\n\nBut it doesn't actually reread.\n\n\"Let me read...\" And then it prints something out already read long back, verbatim.\n\nYour point may still hold though, it's almost like \"let me recall\". But where it differs from us is that it recollects verbatim - which means it was there in the context window very clearly without attenuation.\n\nAnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all.\n\nLakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you.\n\n3 more replies\nAutomatic-Arm8153\n•\n5d ago\n\nTell me about it. Nice reading your comment and the one above.\n\nSmart/intuitive people are lurking around.. yep so much untapped potential. It’s cool to see them give AI the ability to context engineer itself as it’s running.\n\nI’ve been working on a harness for on the go context engineering. Then I saw deepseek harness and I was like wow these guys got it figured out…\n\nIt’s the future of harnesses. It’s like pi v2 but in 4d as we leave the ter"
+    },
+    {
+      "author": "Fedor_Doc",
+      "score": "206",
+      "text": "Fedor_Doc\n•\n5d ago\n•\nEdited 5d ago\n\nDeepseek v4 Flash does it. It increases weight of the cited part in the reasoning -> less hallucinations about the code. Useful with optimized attention architectures.\n\nkaelwd\n•\n5d ago\n\nI wish it would just actually re-read the file though, prefill is 20x faster than decode and there's 0% chance of hallucinations.\n\nsimcop2387\n•\n5d ago\n\nI haven't really benchmarked yet but this might be a great spot for llama.cpp's ngram-map-k or ngram-map-k4v speculative decoders. What I'm not familiar with enough though is how to tune them or how they'll work with the native MTP. I know you can specify multiple of them together though.\n\nkaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again.\n\n1 more reply\nmichaelsoft__binbows\n•\n5d ago\n\nkinda funny this mirrors our own operation as well. like the context window is just your short term buffer of your brain, not some notebook on your desk or whatever. Re-read something, yeah it's getting blitted out into the context window too.\n\nthe fact that we can fully control the context window is so powerful and we're like only scratching the surface of what we can do.\n\nbankinu\n•\n5d ago\n\nBut it doesn't actually reread.\n\n\"Let me read...\" And then it prints something out already read long back, verbatim.\n\nYour point may still hold though, it's almost like \"let me recall\". But where it differs from us is that it recollects verbatim - which means it was there in the context window very clearly without attenuation.\n\nAnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all.\n\nLakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you.\n\n3 more replies\nAutomatic-Arm8153\n•\n5d ago\n\nTell me about it. Nice reading your comment and the one above.\n\nSmart/intuitive people are lurking around.. yep so much untapped potential. It’s cool to see them give AI the ability to context engineer itself as it’s running.\n\nI’ve been working on a harness for on the go context engineering. Then I saw deepseek harness and I was like wow these guys got it figured out…\n\nIt’s the future of harnesses. It’s like pi v2 but in 4d as we leave the terminals. Terminals where a good abstraction, but now AI needs workspaces and other abstractions..\n\nWe are now entering the tooling phase of AI\n\nMmmmMorphine\n•\n5d ago\n\nWait do you mean reasonix or something else? Since some people don't distinguish between IDE and harness very clearly (and i "
+    },
+    {
+      "author": "kaelwd",
+      "score": "37",
+      "text": "kaelwd\n•\n5d ago\n\nI wish it would just actually re-read the file though, prefill is 20x faster than decode and there's 0% chance of hallucinations.\n\nsimcop2387\n•\n5d ago\n\nI haven't really benchmarked yet but this might be a great spot for llama.cpp's ngram-map-k or ngram-map-k4v speculative decoders. What I'm not familiar with enough though is how to tune them or how they'll work with the native MTP. I know you can specify multiple of them together though.\n\nkaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again.\n\n1 more reply"
+    },
+    {
+      "author": "simcop2387",
+      "score": "13",
+      "text": "simcop2387\n•\n5d ago\n\nI haven't really benchmarked yet but this might be a great spot for llama.cpp's ngram-map-k or ngram-map-k4v speculative decoders. What I'm not familiar with enough though is how to tune them or how they'll work with the native MTP. I know you can specify multiple of them together though.\n\nkaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again.\n\n1 more reply"
+    },
+    {
+      "author": "kaelwd",
+      "score": "3",
+      "text": "kaelwd\n•\n3d ago\n\nI tried ngram-mod a while ago but acceptance rate was always abysmal so it had a negative affect overall from the verification overhead. When it works you do get like triple the throughput which is nice but still slower than just reading the file again."
+    },
+    {
+      "author": "michaelsoft__binbows",
+      "score": "51",
+      "text": "michaelsoft__binbows\n•\n5d ago\n\nkinda funny this mirrors our own operation as well. like the context window is just your short term buffer of your brain, not some notebook on your desk or whatever. Re-read something, yeah it's getting blitted out into the context window too.\n\nthe fact that we can fully control the context window is so powerful and we're like only scratching the surface of what we can do.\n\nbankinu\n•\n5d ago\n\nBut it doesn't actually reread.\n\n\"Let me read...\" And then it prints something out already read long back, verbatim.\n\nYour point may still hold though, it's almost like \"let me recall\". But where it differs from us is that it recollects verbatim - which means it was there in the context window very clearly without attenuation.\n\nAnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all.\n\nLakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you.\n\n3 more replies\nAutomatic-Arm8153\n•\n5d ago\n\nTell me about it. Nice reading your comment and the one above.\n\nSmart/intuitive people are lurking around.. yep so much untapped potential. It’s cool to see them give AI the ability to context engineer itself as it’s running.\n\nI’ve been working on a harness for on the go context engineering. Then I saw deepseek harness and I was like wow these guys got it figured out…\n\nIt’s the future of harnesses. It’s like pi v2 but in 4d as we leave the terminals. Terminals where a good abstraction, but now AI needs workspaces and other abstractions..\n\nWe are now entering the tooling phase of AI\n\nMmmmMorphine\n•\n5d ago\n\nWait do you mean reasonix or something else? Since some people don't distinguish between IDE and harness very clearly (and i can't blame them much either, though it's still a bit confusing)\n\nI like reasonix but aside from being able to take advantage of caching/ds-specific optimization better, it's pretty simplistic\n\nAutomatic-Arm8153\n•\n5d ago\n\nhttps://deepseek.com/harness/en/\n\n1 more reply\n9 more replies"
+    },
+    {
+      "author": "bankinu",
+      "score": "16",
+      "text": "bankinu\n•\n5d ago\n\nBut it doesn't actually reread.\n\n\"Let me read...\" And then it prints something out already read long back, verbatim.\n\nYour point may still hold though, it's almost like \"let me recall\". But where it differs from us is that it recollects verbatim - which means it was there in the context window very clearly without attenuation.\n\nAnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all.\n\nLakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you.\n\n3 more replies"
+    },
+    {
+      "author": "AnOnlineHandle",
+      "score": "10",
+      "text": "AnOnlineHandle\n•\n5d ago\n\nSeems like there's a place for architectures which allow setting higher attention scores on given tokens in the prior text for some segment of next predicted tokens, rather than having to reprint it all."
+    },
+    {
+      "author": "Lakius_2401",
+      "score": "4",
+      "text": "Lakius_2401\n•\n5d ago\n\nIt's trying to mimic a stream of consciousness, and \"reading\" in a stream of consciousness is literally interrupting the flow with verbatim context. If a stream of consciousness says \"let me read\" and doesn't show the text, it didn't read it, it lied and is operating off memory.\n\nWhether CoT with verbatim token duplication is an ideal technique or not remains to be settled (though the benchmarks seem to agree, and many CoT's that don't do that felt useless to me). In terms of token acceleration, draft techniques make that significantly less resource intense. Alibaba's Qwen team has shifted the balance from a huge and powerful KV cache solution over to a more processing intense solution. Qwen 3.8 sips memory for cache but \"wastes\" tokens to optimize attention live.\n\nResearchers are refining techniques to dynamically and meaningfully optimize context attention, and Qwen 3.8's stopgap answer is \"the model will do it live\".\n\nAs an aside, you could replace every instance of \"let me read/reference/look\" in the training data to call it something more LLM specific, but I think you'd see a regression in output quality as it would have less broad examples of what it's accomplishing or trying to mimic when it says that. <think> blocks aren't for you."
+    },
+    {
+      "author": "Automatic-Arm8153",
+      "score": "13",
+      "text": "Automatic-Arm8153\n•\n5d ago\n\nTell me about it. Nice reading your comment and the one above.\n\nSmart/intuitive people are lurking around.. yep so much untapped potential. It’s cool to see them give AI the ability to context engineer itself as it’s running.\n\nI’ve been working on a harness for on the go context engineering. Then I saw deepseek harness and I was like wow these guys got it figured out…\n\nIt’s the future of harnesses. It’s like pi v2 but in 4d as we leave the terminals. Terminals where a good abstraction, but now AI needs workspaces and other abstractions..\n\nWe are now entering the tooling phase of AI\n\nMmmmMorphine\n•\n5d ago\n\nWait do you mean reasonix or something else? Since some people don't distinguish between IDE and harness very clearly (and i can't blame them much either, though it's still a bit confusing)\n\nI like reasonix but aside from being able to take advantage of caching/ds-specific optimization better, it's pretty simplistic\n\nAutomatic-Arm8153\n•\n5d ago\n\nhttps://deepseek.com/harness/en/\n\n1 more reply\n9 more replies"
+    },
+    {
+      "author": "MmmmMorphine",
+      "score": "2",
+      "text": "MmmmMorphine\n•\n5d ago\n\nWait do you mean reasonix or something else? Since some people don't distinguish between IDE and harness very clearly (and i can't blame them much either, though it's still a bit confusing)\n\nI like reasonix but aside from being able to take advantage of caching/ds-specific optimization better, it's pretty simplistic\n\nAutomatic-Arm8153\n•\n5d ago\n\nhttps://deepseek.com/harness/en/\n\n1 more reply"
+    },
+    {
+      "author": "Automatic-Arm8153",
+      "score": "2",
+      "text": "Automatic-Arm8153\n•\n5d ago\n\nhttps://deepseek.com/harness/en/\n\n1 more reply"
+    },
+    {
+      "author": "CoUsT",
+      "score": "5",
+      "text": "CoUsT\n•\n5d ago\n\nSome time ago I noticed that repeating something or saying the same stuff (meaning) using different wording helps the AI a lot to focus on that part.\n\nIf you provide a lot of details to AI agent and then repeat crucial and important part 2-3 times using different words, they put so much priority into that part/meaning alone."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vqgt0x",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:53:30Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.449,
+    "evidence": 0.2,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://deepseek.com/harness/en/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/cHunter789/Qwen3.8-27B-i1-IQ4_KS_KT-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

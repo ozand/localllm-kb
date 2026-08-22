@@ -1,0 +1,170 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vhkln6/dual_3090_setup_400_pp_ts_to_1600_pp_ts_on_qwen/",
+  "title": "Dual 3090 setup: 400 pp t/s to 1600 pp t/s on Qwen 3.6 27B... with slightly lower tps.",
+  "author": "DjCanalex",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n15d ago\nDjCanalex\nDual 3090 setup: 400 pp t/s to 1600 pp t/s on Qwen 3.6 27B... with slightly lower tps.\nDiscussion\n\nFirst of all, my setup:\n\nRyzen 9 5950x\nDDR4 3200Mhz 64gb (2x32)\nDual 3090s, no NVLINK\n\nRuntime:\n\nllama.cpp\nNvidia Drivers 610\nWindows 11 25H2\nQwen 3.6 27B Q8\n\nI've been using llama-server with --split-mode tensor for a couple months now, since it gave a pretty nice 10%-20% boost in overall tps, specially when it comes to MTP (Base i get 34-35tps, consistently, whereas MTP can boost from 40 up to 70 tps).\n\nHowever, there was an important log that always came out of the terminal in llama.cpp that I never game much thought, as long as I was getting high enough tps:\n\nfailed to fit params to free device memory: llama_params_fit is not implemented for SPLIT_MODE_TENSOR\nbackend sampling not supported with SPLIT_MODE_TENSOR, using CPU sampler\n\nThis meant that all prompt processing was happening on CPU, and for this particular setup, batch and ubatch did nothing, at all. My average pp t/s was around 400 to 430 t/s.\n\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  30782, progress = 0.33, t =  71.69 s / 429.39 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  32830, progress = 0.36, t =  76.67 s / 428.18 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  34878, progress = 0.38, t =  81.69 s / 426.96 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  36926, progress = 0.40, t =  86.74 s / 425.73 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  38974, progress = 0.42, t =  91.81 s / 424.50 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  41022, progress = 0.44, t =  96.92 s / 423.27 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  43070, progress = 0.47, t = 102.05 s / 422.03 tokens per second\nprint_timing: id  2 | task 38441 | prompt processing, n_tokens =  45118, progress = 0.49, t = 107.22 s / 420.81 tokens per second\n\nThis was consistent, across every single run. In order to increase my t/s, played with batch and ubatch, but didn't find anything at all, my t/s were always in the exact same range, if not a little worse.\n\nAfter playing a little bit with llama-bench, I noticed that the reported t/s there, with the dual gpus, was over 1600, up to 1900 in some cases, which didn't make sense at all. (I didn't get those numbers even on a single GPU). (Trimmed some rows for this post so it looks better and easier to analyze):\n\n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 128 | q8_0 | q8_0 | 1 | pp512 | 1423.83 ± 6.61 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 128 | q8_0 | q8_0 | 1 | pp4096 | 1461.57 ± 2.65  \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 128 | q8_0 | q8_0 | 1 | tg128 | 26.73 ± 0.02 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 256 | q8_0 | q8_0 | 1 | pp512 | 1484.13 ± 5.55 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 256 | q8_0 | q8_0 | 1 | pp4096 | 1771.88 ± 13.97  \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 256 | q8_0 | q8_0 | 1 | tg128 | 26.63 ± 0.01 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 512 | q8_0 | q8_0 | 1 | pp512 | 1310.25 ± 7.83 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 512 | q8_0 | q8_0 | 1 | pp4096 | 1935.29 ± 11.51  \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 512 | q8_0 | q8_0 | 1 | tg128 | 26.54 ± 0.02 | \n| qwen35 27B Q8_0 | 27.04 GiB | 512 | 1024 | q8_0 | q8_0 | 1 | pp512 | 1289.56 ± 8.83  \n\nThis meant that the dual 3090 setup was perfectly capable of reaching up more than 4 times faster t/s, same llama-cpp, same os, same everything. After lots of testing, turns out the culprit was --split-mode tensor all along.\n\nAfter switching to --split-mode layer my tps got a hit, measurable, ranging mostly from 60 to 70 tps to 40-55, hitting 70tps rarely now.\n\ntensor:\n\nprint_timing: id 1 | task 39896  n_decoded = 184, tg =  60.86 t/s, tg_3s =  60.85 t/s\nprint_timing: id 1 | task 39896  n_decoded = 378, tg =  62.33 t/s, tg_3s =  63.80 t/s\nprint_timing: id 1 | task 39896  n_decoded = 565, tg =  62.16 t/s, tg_3s =  61.82 t/s\nprint_timing: id 1 | task 39896  n_decoded = 755, tg =  62.27 t/s, tg_3s =  62.59 t/s\nprint_timing: id 1 | task 39896  n_decoded = 950, tg =  62.64 t/s, tg_3s =  64.12 t/s\nprint_timing: id 1 | task 39896  n_decoded = 1153, tg =  63.38 t/s, tg_3s =  67.09 t/s\n\nlayer:\n\nprint_timing: id 0 | task 0 | n_decoded = 2730, tg = 53.10 t/s, tg_3s = 53.37 t/s\nprint_timing: id 0 | task 0 | n_decoded = 2862, tg = 52.59 t/s, tg_3s = 43.88 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3014, tg = 52.45 t/s, tg_3s = 49.88 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3138, tg = 51.89 t/s, tg_3s = 41.28 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3282, tg = 51.70 t/s, tg_3s = 47.90 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3426, tg = 51.52 t/s, tg_3s = 47.62 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3570, tg = 51.33 t/s, tg_3s = 47.31 t/s\nprint_timing: id 0 | task 0 | n_decoded = 3725, tg = 51.35 t/s, tg_3s = 51.65 t/s\n\n(It can reach 70 but it is less frequent, those peak could be 80 tps with tensor.)\n\nbut the pp t/<windows-path>'t really tell you what is causing it. For example, increasing ubatch too much, might make such an increase of memory usage that a single layer may fall on CPU and the entire gains are lost due to it:\n\nlayer 0 is assigned to device CPU but fused Gated Delta Net (chunked) is assigned to device CUDA0 (usually due to missing support)\n\nLowering the context window from 262k to 240k solved this... even though there was still more than 2 GB of free VRAM available across both GPUs.\n\nI had been using --split-mode tensor for months without realizing that, on my setup, prompt processing was effectively falling back to the CPU. batch and ubatch never produced any improvement in PP throughput (They don't seem to affect CPU). Once I switched to --split-mode layer and ensured every layer remained on the GPUs, prompt processing immediately scaled into the 1.5 to 1.7k tokens/s range.\n\nIn fact the recommendation to just use split tensor is so common that a lot of people may be running into this unaware of what is going on with their pp t/s.\n\nPeople that work with MoE's already know this since llama can choose on the fly which layers are processed by CPU and which by the GPU, but this IS NOT AN OPTION with dense models: either you fall on CPU or you don't, and tensor doesn't have backend processing on it yet. Maybe it will change with time, since split tensor is still a relative new technology.\n\nI may be telling something a lot of people already know, but when looking for answers, even in this very subreddit, what I always found (And is consistently told around) was \"Just increase ubatch\", but there are limitations that are not that openly talked about that I wanted to bring up here.\n\nShare",
+  "comments": [
+    {
+      "author": "Civil_Fee_7862",
+      "score": "26",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nDude.. use vLLM.\n\nYou'll get between 2000-3000pp and 100+ tps with tensor parallism on with Qwen3.6-27b\n\nUse the Amper specific setups over at club 3090. i.e. INT8 activations for super fast prefill.\n\nital-is-vital\n•\n15d ago\n\nSeconded. You have enough VRAM for this to work well.\n\nLlamacpp's cache handling is... just BAAD, especially for agentic workflows.\n\nCivil_Fee_7862\n•\n15d ago\n\nI thought it was the other way around? I heard vLLM's cache handling was bad, like the way the Cuda graphs are handled. i.e. vLLM needs something like LMCache to handle it well.\n\nLambdaLogician\n•\n15d ago\n\nllama.cpp handles caching by distributing memory equally into a number of \"slots\". Each conversation uses an entire slot, even if it only has a small number of tokens in its context window.\n\nvLLM handles caching by dividing up memory into small blocks of tokens. The default block size is 16 tokens. As conversations grow, they request more blocks. Every conversation only uses the blocks it needs.\n\nThe llama.cpp method is very stupid. The vLLM method is pretty good.\n\nCivil_Fee_7862\n•\n15d ago\n\nI read somewhere that the llama.cpp manages KV-Cache better i.e. It keeps it around even between sessions. vLLM doesn't for some reason? i.e. So if you return to a long session, it will re-process the entire session again (cold start times are slow).\n\nAre the cold start times faster in llama.cpp?\n\ncatlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's\n\nmmhorda\n•\n15d ago\n\nI dont know why you thought so, and where you heard it from, but each time someone shares their settings and results on vllm my jaw drops and I think what I am doing wrong? My only issue is thst I need rpc. VLLM doesn't have that (or so i think).\n\nCivil_Fee_7862\n•\n15d ago\n\nThink I read it somewhere on club-3090's forum.\n\ncezarducatti\n•\n15d ago\n\nIs vLLm better for 3090 than llama.cpp?\n\nCivil_Fee_7862\n•\n15d ago\n\nNot in all cases, the prefill isn't always better because of how the cache works (from what I hear). i.e. Something about how the Cuda graph makes prefill sometimes slower with vllm.\n\nfrom what I've seen the KV-Cache gets cleared out far too early with vLLM, and it ends up forcing your GPU to reprocess a lot of stuff.\n\nApparently that isn't an issue with Llama.cpp because it does it differently.\n\nDjCanalex\n•\n15d ago\n\nIf this machine was purely for LLMs, sure... But we use it for lots more than just this, 24/7.\n\nTried using it through WSL tho, but then, memory allocation became an issue since when you are running a VM, with only 64gb of ram, and 48gb to allocate, a VM running only with 49-50gb to spare is kind of a problem.\n\nGotta try vLLM windows tho.\n\nstarkruzr\n•\n15d ago\n\nwait. why on Earth are you running all of this on Windows?\n\nDjCanalex\n•\n15d ago\n\nWork server that we use for a lot more things besides this\n\nCivil_Fee_7862\n•\n15d ago\n\nYeah I'd avoid windows for this stuff, there are many reasons. Docker VM's etc. you're gonna need a lot more ram to run with windows than you do with Linux.\n\nMost of the tools are Linux first. Windows is *often* an afterthought.\n\nstarkruzr\n•\n15d ago\n\nok, that should change ASAP. either by building a new machine or reinstalling it with Linux and virtualizing Windows on it or moving the Windows stuff to the cloud. optimizing for inference and optimizing for Windows business shit are two completely different paradigms.\n\nsammcj\n•\n15d ago\n🦙 llama.cpp\n\nI'd recommend not running windows."
+    },
+    {
+      "author": "ital-is-vital",
+      "score": "9",
+      "text": "ital-is-vital\n•\n15d ago\n\nSeconded. You have enough VRAM for this to work well.\n\nLlamacpp's cache handling is... just BAAD, especially for agentic workflows.\n\nCivil_Fee_7862\n•\n15d ago\n\nI thought it was the other way around? I heard vLLM's cache handling was bad, like the way the Cuda graphs are handled. i.e. vLLM needs something like LMCache to handle it well.\n\nLambdaLogician\n•\n15d ago\n\nllama.cpp handles caching by distributing memory equally into a number of \"slots\". Each conversation uses an entire slot, even if it only has a small number of tokens in its context window.\n\nvLLM handles caching by dividing up memory into small blocks of tokens. The default block size is 16 tokens. As conversations grow, they request more blocks. Every conversation only uses the blocks it needs.\n\nThe llama.cpp method is very stupid. The vLLM method is pretty good.\n\nCivil_Fee_7862\n•\n15d ago\n\nI read somewhere that the llama.cpp manages KV-Cache better i.e. It keeps it around even between sessions. vLLM doesn't for some reason? i.e. So if you return to a long session, it will re-process the entire session again (cold start times are slow).\n\nAre the cold start times faster in llama.cpp?\n\ncatlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's\n\nmmhorda\n•\n15d ago\n\nI dont know why you thought so, and where you heard it from, but each time someone shares their settings and results on vllm my jaw drops and I think what I am doing wrong? My only issue is thst I need rpc. VLLM doesn't have that (or so i think).\n\nCivil_Fee_7862\n•\n15d ago\n\nThink I read it somewhere on club-3090's forum."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "0",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nI thought it was the other way around? I heard vLLM's cache handling was bad, like the way the Cuda graphs are handled. i.e. vLLM needs something like LMCache to handle it well.\n\nLambdaLogician\n•\n15d ago\n\nllama.cpp handles caching by distributing memory equally into a number of \"slots\". Each conversation uses an entire slot, even if it only has a small number of tokens in its context window.\n\nvLLM handles caching by dividing up memory into small blocks of tokens. The default block size is 16 tokens. As conversations grow, they request more blocks. Every conversation only uses the blocks it needs.\n\nThe llama.cpp method is very stupid. The vLLM method is pretty good.\n\nCivil_Fee_7862\n•\n15d ago\n\nI read somewhere that the llama.cpp manages KV-Cache better i.e. It keeps it around even between sessions. vLLM doesn't for some reason? i.e. So if you return to a long session, it will re-process the entire session again (cold start times are slow).\n\nAre the cold start times faster in llama.cpp?\n\ncatlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's\n\nmmhorda\n•\n15d ago\n\nI dont know why you thought so, and where you heard it from, but each time someone shares their settings and results on vllm my jaw drops and I think what I am doing wrong? My only issue is thst I need rpc. VLLM doesn't have that (or so i think).\n\nCivil_Fee_7862\n•\n15d ago\n\nThink I read it somewhere on club-3090's forum."
+    },
+    {
+      "author": "LambdaLogician",
+      "score": "3",
+      "text": "LambdaLogician\n•\n15d ago\n\nllama.cpp handles caching by distributing memory equally into a number of \"slots\". Each conversation uses an entire slot, even if it only has a small number of tokens in its context window.\n\nvLLM handles caching by dividing up memory into small blocks of tokens. The default block size is 16 tokens. As conversations grow, they request more blocks. Every conversation only uses the blocks it needs.\n\nThe llama.cpp method is very stupid. The vLLM method is pretty good.\n\nCivil_Fee_7862\n•\n15d ago\n\nI read somewhere that the llama.cpp manages KV-Cache better i.e. It keeps it around even between sessions. vLLM doesn't for some reason? i.e. So if you return to a long session, it will re-process the entire session again (cold start times are slow).\n\nAre the cold start times faster in llama.cpp?\n\ncatlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's"
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "0",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nI read somewhere that the llama.cpp manages KV-Cache better i.e. It keeps it around even between sessions. vLLM doesn't for some reason? i.e. So if you return to a long session, it will re-process the entire session again (cold start times are slow).\n\nAre the cold start times faster in llama.cpp?\n\ncatlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's"
+    },
+    {
+      "author": "catlilface69",
+      "score": "3",
+      "text": "catlilface69\n•\n15d ago\n\nYes, it will reprocess the whole conversation again if your cache was rewritten by other jobs. But pp speed is like 5-10 times faster on vllm. If frequently return to your conversations or use some repeating prompts - I would recommend you sglang. It's HiCache lets you reprocess these almost immediately. But the concurrency is much worse than on vllm, but not even close to llama.cpp's"
+    },
+    {
+      "author": "mmhorda",
+      "score": "1",
+      "text": "mmhorda\n•\n15d ago\n\nI dont know why you thought so, and where you heard it from, but each time someone shares their settings and results on vllm my jaw drops and I think what I am doing wrong? My only issue is thst I need rpc. VLLM doesn't have that (or so i think).\n\nCivil_Fee_7862\n•\n15d ago\n\nThink I read it somewhere on club-3090's forum."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "1",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nThink I read it somewhere on club-3090's forum."
+    },
+    {
+      "author": "cezarducatti",
+      "score": "3",
+      "text": "cezarducatti\n•\n15d ago\n\nIs vLLm better for 3090 than llama.cpp?\n\nCivil_Fee_7862\n•\n15d ago\n\nNot in all cases, the prefill isn't always better because of how the cache works (from what I hear). i.e. Something about how the Cuda graph makes prefill sometimes slower with vllm.\n\nfrom what I've seen the KV-Cache gets cleared out far too early with vLLM, and it ends up forcing your GPU to reprocess a lot of stuff.\n\nApparently that isn't an issue with Llama.cpp because it does it differently."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "4",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nNot in all cases, the prefill isn't always better because of how the cache works (from what I hear). i.e. Something about how the Cuda graph makes prefill sometimes slower with vllm.\n\nfrom what I've seen the KV-Cache gets cleared out far too early with vLLM, and it ends up forcing your GPU to reprocess a lot of stuff.\n\nApparently that isn't an issue with Llama.cpp because it does it differently."
+    },
+    {
+      "author": "DjCanalex",
+      "score": "2",
+      "text": "DjCanalex\n•\n15d ago\n\nIf this machine was purely for LLMs, sure... But we use it for lots more than just this, 24/7.\n\nTried using it through WSL tho, but then, memory allocation became an issue since when you are running a VM, with only 64gb of ram, and 48gb to allocate, a VM running only with 49-50gb to spare is kind of a problem.\n\nGotta try vLLM windows tho.\n\nstarkruzr\n•\n15d ago\n\nwait. why on Earth are you running all of this on Windows?\n\nDjCanalex\n•\n15d ago\n\nWork server that we use for a lot more things besides this\n\nCivil_Fee_7862\n•\n15d ago\n\nYeah I'd avoid windows for this stuff, there are many reasons. Docker VM's etc. you're gonna need a lot more ram to run with windows than you do with Linux.\n\nMost of the tools are Linux first. Windows is *often* an afterthought.\n\nstarkruzr\n•\n15d ago\n\nok, that should change ASAP. either by building a new machine or reinstalling it with Linux and virtualizing Windows on it or moving the Windows stuff to the cloud. optimizing for inference and optimizing for Windows business shit are two completely different paradigms.\n\nsammcj\n•\n15d ago\n🦙 llama.cpp\n\nI'd recommend not running windows."
+    },
+    {
+      "author": "starkruzr",
+      "score": "11",
+      "text": "starkruzr\n•\n15d ago\n\nwait. why on Earth are you running all of this on Windows?\n\nDjCanalex\n•\n15d ago\n\nWork server that we use for a lot more things besides this\n\nCivil_Fee_7862\n•\n15d ago\n\nYeah I'd avoid windows for this stuff, there are many reasons. Docker VM's etc. you're gonna need a lot more ram to run with windows than you do with Linux.\n\nMost of the tools are Linux first. Windows is *often* an afterthought.\n\nstarkruzr\n•\n15d ago\n\nok, that should change ASAP. either by building a new machine or reinstalling it with Linux and virtualizing Windows on it or moving the Windows stuff to the cloud. optimizing for inference and optimizing for Windows business shit are two completely different paradigms."
+    },
+    {
+      "author": "DjCanalex",
+      "score": "2",
+      "text": "DjCanalex\n•\n15d ago\n\nWork server that we use for a lot more things besides this\n\nCivil_Fee_7862\n•\n15d ago\n\nYeah I'd avoid windows for this stuff, there are many reasons. Docker VM's etc. you're gonna need a lot more ram to run with windows than you do with Linux.\n\nMost of the tools are Linux first. Windows is *often* an afterthought.\n\nstarkruzr\n•\n15d ago\n\nok, that should change ASAP. either by building a new machine or reinstalling it with Linux and virtualizing Windows on it or moving the Windows stuff to the cloud. optimizing for inference and optimizing for Windows business shit are two completely different paradigms."
+    },
+    {
+      "author": "Civil_Fee_7862",
+      "score": "6",
+      "text": "Civil_Fee_7862\n•\n15d ago\n\nYeah I'd avoid windows for this stuff, there are many reasons. Docker VM's etc. you're gonna need a lot more ram to run with windows than you do with Linux.\n\nMost of the tools are Linux first. Windows is *often* an afterthought."
+    },
+    {
+      "author": "starkruzr",
+      "score": "8",
+      "text": "starkruzr\n•\n15d ago\n\nok, that should change ASAP. either by building a new machine or reinstalling it with Linux and virtualizing Windows on it or moving the Windows stuff to the cloud. optimizing for inference and optimizing for Windows business shit are two completely different paradigms."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vhkln6",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:41:25Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.806,
+    "evidence": 1.0,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/noonghunna/club-3090/blob/master/docs/DUAL_CARD.md",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26177",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+[
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tysbyj/rtx_3090_ebay_pricing_is_crazy/",
+    "title": "RTX 3090 EBay Pricing is Crazy!!"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t1peq7/5070_ti_3090_move_worth_it/",
+    "title": "5070 Ti —> 3090 move. Worth it?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1ucx2xj/what_should_i_build_my_local_llm_machine_around/",
+    "title": "What should I build my local LLM machine around? RTX 3090s or Arc Pro B60s?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vu7yce/qwen3827b_at_262k_context_on_a_strix_halo_rtx/",
+    "title": "Qwen3.8-27B at 262K context on a Strix Halo + RTX 3090 Ti: 9.5 -> 153 tok/s, and it beats a dual-3090 vLLM box on HumanEval"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1s916kt/which_gpu_for_local_llm_inference_3090_or_5070_ti/",
+    "title": "Which GPU for local LLM inference? 3090 or 5070 Ti"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t0jd95/poor_mans_guide_to_servicing_a_used_rtx_3090_for/",
+    "title": "Poor man's guide to servicing a used RTX 3090 for local LLM inference"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1ronpwd/is_a_699_rtx_3090_24gb_a_good_entry_point_for/",
+    "title": "Is a $699 RTX 3090 (24GB) a good entry point for running strong local LLMs?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tx9tf2/finally_finished_my_llm_server_epyc_9575f_4_rtx/",
+    "title": "Finally finished my LLM server: EPYC 9575F, 4× RTX 3090 (96GB VRAM), 768GB ECC RAM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vsccit/qwen3827b_on_2x_3090_vllm_dflash2_218_toks_single/",
+    "title": "Qwen3.8-27B on 2x 3090 + vLLM + DFlash2: 218 tok/s single request"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1r66jyp/vllm_maximum_performance_on_multi3090/",
+    "title": "vLLM MAXIMUM performance on multi-3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1spwk7h/5070_ti_new_vs_3090_used_to_pair_with_4070_for/",
+    "title": "5070 Ti (New) vs 3090 (Used) to pair with 4070 for local LLMs?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1s0p28x/honest_take_on_running_9_rtx_3090_for_ai/",
+    "title": "Honest take on running 9× RTX 3090 for AI"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1r2skzl/before_i_buy_a_used_rtx_3090/",
+    "title": "Before I buy a used RTX 3090…"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t2hejy/anyone_running_huananzhi_h12d8d_bmc_with_4x_rtx/",
+    "title": "Anyone running HUANANZHI H12D-8D + BMC with 4x RTX 3090 for LLM inference?"
+  },
+  {
+    "href": "https://www.reddit.com/r/SwordAndSupperGame/comments/1vv6qej",
+    "title": "Sword & Supper\n\nFroggy auto-RPG!\n\n107K monthly players"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1uukj2m/24gb_vram_llamaserver_config_exchange_thread/",
+    "title": "24GB VRAM llama-server config exchange thread"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1slue0z/hot_experts_in_your_vram_dynamic_expert_cache_in/",
+    "title": "Hot Experts in your VRAM! Dynamic expert cache in llama.cpp for 27% faster CPU +GPU token generation with Qwen3.5-122B-A10B compared to layer-based single-GPU partial offload"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1svlnyk/rtx_3090_27b_model_performance_issues_llamacpp/",
+    "title": "RTX 3090 + 27B model performance issues (llama.cpp) what am I doing wrong"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1prlqi1/vram_advice_24gb_or_32gb_for_starters/",
+    "title": "VRAM Advice? 24GB or 32GB for starters"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qucoid/smartest_model_for_2428gb_vram/",
+    "title": "Smartest model for 24-28GB vram?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1sg4ojp/help_24gb_vram_and_openclaw/",
+    "title": "Help 24GB vram and openclaw"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tbshsl/how_many_of_you_tried_beellamacpp_hows_it_agentic/",
+    "title": "How many of you tried BeeLlama.cpp? How's it? Agentic coding possible with 8GB VRAM?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u50rw1/best_models_in_3x3090_72gb_vram_in_q2_2026/",
+    "title": "Best models in 3x3090 (72GB VRAM) in Q2 2026?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1s6mgmh/was_about_to_drop_800_on_a_3090_for_local_llm/",
+    "title": "Was about to drop $800+ on a 3090 for local LLM. Turns out my CPU was a beast the whole time."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qlwibf/what_is_the_best_generalpurpose_model_to_run/",
+    "title": "What is the best general-purpose model to run locally on 24GB of VRAM in 2026?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1v6lrre/4x_3090_96gb_vram_what_model_to_drive_hermes/",
+    "title": "4x 3090, 96gb vram what Model to drive Hermes?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1sla6gd/rtx_3090_llamacpp_flags_help/",
+    "title": "RTX 3090 llamacpp flags help"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tmeknt/gpu_vram_only_for_small_models_with_llamacpp_is/",
+    "title": "GPU VRAM only for small models with llama.cpp: is it possible?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t4b203/for_those_wondering_about_the_power_consumption/",
+    "title": "For those wondering about the power consumption of a dual 3090 rig while inferencing"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tayu5t/stop_wasting_electricity/",
+    "title": "Stop wasting electricity"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1s9i1gn/a_reminder_guys_undervolt_your_gpus_immediately/",
+    "title": "A Reminder, Guys, Undervolt your GPUs Immediately. You will Significantly Decrease Wattage without Hitting Performance."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vfdwox/decrease_the_power_limit_of_your_5090_to_at_least/",
+    "title": "Decrease the power limit of your 5090 to at least 480W - the performance penalty for inference is negligible."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1te9o18/finding_the_4x_3090_sweet_spot/",
+    "title": "Finding the 4x 3090 Sweet Spot"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vabgly/3090_owners_what_vram_tempature_do_you_get_under/",
+    "title": "3090 owners, what vram tempature do you get under ai load?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1teqjjl/reduce_your_gpu_power_limit/",
+    "title": "Reduce your GPU power limit"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u15qk3/psa_throttle_gpu_power_limits_with_minor/",
+    "title": "PSA: Throttle GPU power limits, with minor performance deficits"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1k0mrrt/setting_power_limit_on_rtx_3090_llm_test/",
+    "title": "Setting Power Limit on RTX 3090 – LLM Test"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1bp7yvx/want_to_undervolt_and_power_limit_my_3090_how_to/",
+    "title": "Want to undervolt and power limit my 3090. How to perform LLM benchmarking and stress testing?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1n89wi8/power_limit_your_gpus_to_reduce_electricity_costs/",
+    "title": "power limit your GPU(s) to reduce electricity costs"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1r96pgp/48gb_4090_power_limiting_tests_450_350_250w_noise/",
+    "title": "48GB 4090 Power limiting tests 450, 350, 250w - Noise and LLM throughput per power level"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1sl3ztq/can_you_run_actually_useful_llms_on_anything_less/",
+    "title": "Can you run actually useful LLMs on anything less than 3090 ?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1egvoqj/rtx3090_power_tuning_results_on_llm_vision_tts/",
+    "title": "RTX3090 Power Tuning Results on LLM, Vision, TTS, and Diffusion"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vsxca1/kv_cache_may_affect_a_lot_on_the_quality_in/",
+    "title": "KV cache may affect a lot on the quality in Qwen3.8-27B-Q6_K"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1txpqru/maybe_kv_cache_offload_to_ram_isnt_bad/",
+    "title": "Maybe KV cache offload to RAM isn't bad"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tzdp7b/context_memory_and_ramvram/",
+    "title": "Context, memory, and RAM/VRAM"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vm2j42/i_need_some_realistic_expectations_about_1x_3090/",
+    "title": "I need some realistic expectations about 1x 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1ukrjxa/how_to_improve_ram_offload/",
+    "title": "How to improve RAM offload?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u4dl8d/3090_died_good_night_sweet_prince/",
+    "title": "3090 died, good night sweet prince"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u6bca1/this_is_amazing_token_speed_doubled_kv_cache_now/",
+    "title": "This is amazing. Token speed doubled + kv cache now need low vram - qwen 27b"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tlwjsl/its_ok_to_quantize_the_kv_cache_model_quant/",
+    "title": "It's OK to quantize the KV cache. Model quant matters more. Some Qwen3.6 27B tests with (approximated) KLD"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1spennl/best_use_cases_for_a_mismatched_rtx_3090_24gb_rtx/",
+    "title": "Best use cases for a mismatched RTX 3090 (24GB) + RTX 3060 (12GB) setup?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qkqf2i/vllm_offload_kv_cache_for_long_context/",
+    "title": "vLLM: offload KV cache for long context?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vfn9vc/a_26b_model_with_tool_calling_and_128k_context/",
+    "title": "A 2.6B model with tool calling and 128K context now runs at 30 tok/s on a phone"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1r1941o/how_much_vram_does_the_kvcache_use_at_60k_or_120k/",
+    "title": "How much Vram does the kvcache use at 60k or 120k context?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t82zxv/80_toksec_and_128k_context_on_12gb_vram_with/",
+    "title": "80 tok/sec and 128K context on 12GB VRAM with Qwen3.6 35B A3B and llama.cpp MTP"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u8i79d/llamacpp_how_to_free_up_even_more_space_on_your/",
+    "title": "llama.cpp - how to free up even more space on your GPU"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tss1ca/flash_attention_for_llamacpp_on_rdna3_47_less_kv/",
+    "title": "Flash Attention for llama.cpp on RDNA3: 47% less KV VRAM than Vulkan f16 K, KLD almost losselss on F16 K / q4_0 V. Part 1."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vqlkb0/where_to_start_with_my_3090/",
+    "title": "Where to start with my 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vpuhov/single_3090_homies_whats_your_config_for_qwen_38/",
+    "title": "Single 3090 homies, whats your config for Qwen 3.8 ?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t0vp3w/pflash_10x_prefill_speedup_over_llamacpp_at_128k/",
+    "title": "PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vojjh3/ninfer3090/",
+    "title": "Ninfer-3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1l4xiwg/whats_the_case_against_flash_attention/",
+    "title": "what's the case against flash attention?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vof310/qwen_38_27b_i_get_34_tps_on_rtx_3090_llamaccp/",
+    "title": "Qwen 3.8 27B i get 34 tp/s on rtx 3090 llama.ccp"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1nbr45v/poor_mans_flashattention_llamacppgfx906_fork/",
+    "title": "Poor man’s FlashAttention: Llama.cpp-gfx906 fork!"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1topfr2/single_3090_with_q4_qwen_27b_context_dropped_from/",
+    "title": "Single 3090 with Q4 Qwen 27B, context dropped from 137k to 14k with MTP enabled. Is it normal?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qe0o4x/need_help_llamacpp_memory_usage_when_using_ctkv/",
+    "title": "Need help: llama.cpp memory usage when using ctk/v on multi RTX 3090 setup"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vts6vb/best_qwen_38_27b_quantoverall_setup_for_a_single/",
+    "title": "Best Qwen 3.8 27B quant/overall setup for a single RTX3090 PC."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vq6fdj/qwen3827b_on_rtx_3090_82_tps_single_request_up_to/",
+    "title": "Qwen3.8-27b on RTX 3090 - 82 tps single request, up to 672 tps peak"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1usuqqb/is_adding_a_3070_8gb_to_my_3090_worth_it_for/",
+    "title": "Is adding a 3070 8GB to my 3090 worth it for running Qwen3.6-27B?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vkm42m/muse_glimmer_actually_fits_on_a_single_rtx_3090/",
+    "title": "Muse Glimmer ACTUALLY fits on a single RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vohpc8/the_difference_between_medium_and_xhigh_reasoning/",
+    "title": "The difference between \"medium\" and \"xhigh\" reasoning effort for Qwen3.8-27B is actually insane."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tkulbk/scrambling_to_max_strixhalo_nvlink_dual_egpu_3090/",
+    "title": "Scrambling to max StrixHalo (+NVLink dual eGPU 3090 mod)"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vtup5s/i_pushed_qwen3827b_to_381_tps_for_a_single/",
+    "title": "I pushed Qwen3.8-27B to 381 tps for a single request on a RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1t53dhp/quality_comparison_between_qwen_36_27b/",
+    "title": "Quality comparison between Qwen 3.6 27B quantizations (BF16, Q8_0, Q6_K, Q5_K_XL, Q4_K_XL, IQ4_XS, IQ3_XXS,...)"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vsy4l2/i_pushed_qwen3827b_limits_again_dflash2_134_tps/",
+    "title": "I pushed Qwen3.8-27B limits again... Dflash2 - 134 tps on a RTX 3090"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1u4ptv2/considering_buying_a_3080_20gb_to_pair_with_my/",
+    "title": "Considering buying a 3080 20GB to pair with my 3090 for Qwen 27B Q8. Have some questions."
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vq3juz/dual_4090_vs_40903090_worth_the_extra_1k/",
+    "title": "Dual 4090 vs 4090+3090 - worth the extra $1k?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1va8efo/will_i_lose_lots_of_speed_going_dual_gpu_adding_a/",
+    "title": "Will I lose lots of speed going dual GPU (adding a 3060 to a 4090)"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1rloty9/4090_3090_as_a_second_card/",
+    "title": "4090 + 3090 as a second card?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1q1euhn/rtx_3090_vs_rtx_4090_for_local_ai_assistant/",
+    "title": "RTX 3090 vs RTX 4090 for local AI assistant - impact on Time To First Token (TTFT)?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qjmawt/3x_3090_or_2x_4080_32gb/",
+    "title": "3x 3090 or 2x 4080 32GB?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1rroqla/is_tokens_per_second_toks_a_really_relevant_metric/",
+    "title": "Is tokens per second (tok/s) a really relevant metric?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1v3vy45/performance_issue_low_token_generation_20_toks_vs/",
+    "title": "Performance issue: Low token generation (~20 tok/s vs 50 tok/s) on Radeon AI PRO R9700 (gfx1201) with vLLM ROCm & Gemma 4-26B"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1qxgd9u/2x_3090_vs_3090_4070s_for_local_mlllms/",
+    "title": "2x 3090 vs. 3090 + 4070s for local ML/llms"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1rw8g5g/has_anyone_tried_a_3gpu_setup_using_pcie_40_x16/",
+    "title": "Has anyone tried a 3-GPU setup using PCIe 4.0 x16 bifurcation (x8/x8) + an M.2 PCIe 4.0 x4 slot?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1mr5qa4/just_got_my_4th_3090_mobo_only_has_3x_pcie_ports/",
+    "title": "Just got my 4th 3090, mobo only has 3x pcie ports. Options?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1tqfzvs/upgrade_path_from_4x_3090s/",
+    "title": "Upgrade path from 4x 3090s"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1unyhom/considering_buying_another_rtx_3090_benefits/",
+    "title": "Considering Buying Another RTX 3090 - Benefits?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1fmgkn2/3090_on_pcie_30_any_performance_impact/",
+    "title": "3090 on PCIe 3.0, any performance impact?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1p5kuh2/my_dudes_do_i_have_any_option_other_than_3090/",
+    "title": "My dudes do I have any option other than 3090?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr5r5u/multi3090_users_how_are_you_cooling_your_gpus_in/",
+    "title": "Multi-3090 users, how are you cooling your GPUs in 2026?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr171o/can_i_throw_a_3090_in_my_rtx_4080_gaming_pc_and/",
+    "title": "Can I throw a 3090 in my rtx 4080 gaming pc and have a quick 40gb vram solution?"
+  },
+  {
+    "href": "https://www.reddit.com/r/LocalLLaMA/comments/1vr3cma/weirdly_no_one_talks_about_temperature_setting/",
+    "title": "Weirdly, no one talks about Temperature setting for the Qwen3.8 27b"
+  }
+]

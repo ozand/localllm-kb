@@ -1,0 +1,185 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuwwww/qwen_38_27b_pi_agent_vs_opencode_another_smaple/",
+  "title": "Qwen 3.8 27b - PI AGENT vs OPENCODE - another smaple",
+  "author": "Healthy-Nebula-3603",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n12h ago\nHealthy-Nebula-3603\n Top 1% Commenter\nQwen 3.8 27b - PI AGENT vs OPENCODE - another smaple\nDiscussion\n\nThat is the second comparison and the last one.\n\nI will not be spamming again ;)\n\nContinuation from:\nhttps://www.reddit.com/r/LocalLLaMA/comments/1vu0u2v/qwen_38_27b_pi_agent_vs_opencode/\n\nThat is one of my many tests I make comparing output quality.\n\nWhat is more interesting using a PI Agent results are much better than an Opencode using a Qwen 3.8 27b ?!\n\nSeems PI Agent is much better in the agent environment somehow... Not counting uses less tokens , do not have a hard limit of 32k output tokens, is faster, do not freezing, compressing context far less than Opencode. For instance if you have context in the Opencode output 32k and all context 100k then the compression is starting at 67k context ... PI is starting at 90k context even if you have set output context 64k or more.\n\nMy config for RTX 3090\n\nllama-server with ini config -> which is exposing API to Opencode and PI agent.\n\nllama-server.exe --models-preset 1_preset.ini --models-max 1 --direct-io\n\nconfig ini\n\n[Qwen3.8-27B_dense_c-100k]\nmodel = models/Qwen3.8-27B-Q4_K_M.gguf\nmmproj = models/mmproj-BF16-Qwen3.8-27B-UD-Q4_K_XL.gguf\nreasoning-format = deepseek\nflash-attn = on\nn-gpu-layers = 99\nreasoning = on\nctx-size = 100000\ntemperature=1.0\ntop-p=0.95\ntop-k=20\nmin-p=0.0\npresence-penalty=0.0\nrepeat-penalty=1.0\nmmproj-offload = false\n\nONE MORE IMPORTANT THING:\n\nAlways use a VISION module as the model is using vision to asses the output quality!\n\nI am offloading it to a RAM as we do not need an extremely fast vision for a code.\n\nA screenshot processing on a GPU 0.3s vs a RAM 3s do not make a big difference on a few screenshots during a code generation / debugging ;)\n\nPROMPT:\n\nCreate a beautiful, relaxing flight 3D simulator in a single HTML page.\n\nSECOND PROMPT AFTER THE FIRS IS FINISHED:\n\nAlso improve graphic - you can make it much  better!\nShare",
+  "comments": [
+    {
+      "author": "Guilty_Rooster_6708",
+      "score": "23",
+      "text": "Guilty_Rooster_6708\n•\n11h ago\n\nThanks for the tip to offload mmproj to cpu. I never thought about doing it but it makes a huge difference\n\nHealthy-Nebula-3603\n•\n11h ago\n Top 1% Commenter\n\nYes\n\nAgents based on Qwen 3.8 27b are using vision a lot to check own work. That's actually necessity to get a good results.\n\nilarp\n•\n2h ago\n\nwhy put it on cpu if there is space on gpu?"
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "8",
+      "text": "Healthy-Nebula-3603\n•\n11h ago\n Top 1% Commenter\n\nYes\n\nAgents based on Qwen 3.8 27b are using vision a lot to check own work. That's actually necessity to get a good results."
+    },
+    {
+      "author": "ilarp",
+      "score": "1",
+      "text": "ilarp\n•\n2h ago\n\nwhy put it on cpu if there is space on gpu?"
+    },
+    {
+      "author": "geldonyetich",
+      "score": "19",
+      "text": "geldonyetich\n•\n11h ago\n•\nEdited 11h ago\n\nI'm definitely inclined to agree that harness makes a difference. But I'm not sure about the metric of subjectively judging one-shots.\n\nFirst, because if I asked the same model on the same harness to answer a question five times, and there's any randomness at all to those answers (temperature, topP, whatever) I'm going to get answers of varying quality. Coding, Minebench, SVGS of Pelicans riding bicycles, it's just this on a larger scale. They're not a worthless read, but I'd want a larger sample metric than a one shot to be sure.\n\nSecond, how good of a judge am I, really? Do I even know what I'm looking at? There could be reasons why a more rudimentary, less entertaining looking solution might actually be practically superior.\n\nfeelspeaceman\n•\n3h ago\n•\nEdited 3h ago\n\n> But I'm not sure about the metric of subjectively judging one-shots.\n\nOneshot of course isn't the metric, the metric here is the bare advantage that Pi Agent gives:\n\nLess token system prompt, unlike Opencode/ClaudeCode/Cline/Codex which teach agents how to use sub-agent, MCP, poll, skills, some even have questionable tools like Background Services (running shell but async instead of sync - Antigravity, Claude uses it in Antigravity to launch my application which uses sub-agent to do post-analysis, taking so long, cancel it, basically what I've experienced -> Claude in Antigravity can be worse than normal Claude because of this).. Pi Agent teaches agents only about read, write and bash, it reduces the chance of agents becoming halluciation because of having too many choices, and waste a lot of context window to inject those system prompt (20-75k vs 2-3k of Pi).\n\nThis mess extremely well with local LLM as we have limited context window, we're not running 1M context, we're running 128K at best.\n\nperelmanych\n•\n6h ago\n•\nEdited 6h ago\n\nSecond, how good of a judge am I, really? Do I even know what I'm looking at? There could be reasons why a more rudimentary, less entertaining looking solution might actually be practically superior.\n\nLet me answer this as a person who is doing relaxed 3d flight simulator right now. Pi solution has much richer and better landscape that is not painted only based on altitude but has patches and also takes into account landscape slope. Second, water in Pi solution is miles ahead. It has lagunas and there is no stitches that you can see in Opencode solution. Clouds and plane models in Opencode edition look very basic as if child has done them. Both model have done a decent job with the plane shadow, which is correct and is not harsh. To say that I am impressed with basically one shot Pi solution is to say nothing.\n\nConcerning invisible project architecture. Nowadays it is of secondary importance, because if you run into some architectural blocker you just tell model to rewrite codebase to a new architecture and take a 2h walk."
+    },
+    {
+      "author": "feelspeaceman",
+      "score": "1",
+      "text": "feelspeaceman\n•\n3h ago\n•\nEdited 3h ago\n\n> But I'm not sure about the metric of subjectively judging one-shots.\n\nOneshot of course isn't the metric, the metric here is the bare advantage that Pi Agent gives:\n\nLess token system prompt, unlike Opencode/ClaudeCode/Cline/Codex which teach agents how to use sub-agent, MCP, poll, skills, some even have questionable tools like Background Services (running shell but async instead of sync - Antigravity, Claude uses it in Antigravity to launch my application which uses sub-agent to do post-analysis, taking so long, cancel it, basically what I've experienced -> Claude in Antigravity can be worse than normal Claude because of this).. Pi Agent teaches agents only about read, write and bash, it reduces the chance of agents becoming halluciation because of having too many choices, and waste a lot of context window to inject those system prompt (20-75k vs 2-3k of Pi).\n\nThis mess extremely well with local LLM as we have limited context window, we're not running 1M context, we're running 128K at best."
+    },
+    {
+      "author": "perelmanych",
+      "score": "1",
+      "text": "perelmanych\n•\n6h ago\n•\nEdited 6h ago\n\nSecond, how good of a judge am I, really? Do I even know what I'm looking at? There could be reasons why a more rudimentary, less entertaining looking solution might actually be practically superior.\n\nLet me answer this as a person who is doing relaxed 3d flight simulator right now. Pi solution has much richer and better landscape that is not painted only based on altitude but has patches and also takes into account landscape slope. Second, water in Pi solution is miles ahead. It has lagunas and there is no stitches that you can see in Opencode solution. Clouds and plane models in Opencode edition look very basic as if child has done them. Both model have done a decent job with the plane shadow, which is correct and is not harsh. To say that I am impressed with basically one shot Pi solution is to say nothing.\n\nConcerning invisible project architecture. Nowadays it is of secondary importance, because if you run into some architectural blocker you just tell model to rewrite codebase to a new architecture and take a 2h walk."
+    },
+    {
+      "author": "Retumbo77",
+      "score": "20",
+      "text": "Retumbo77\n•\n12h ago\n\nJust based on visuals, I would agree the results using Pi are better than Opencode, but I think \"Much better\" is a stretch. You have not listed what is getting loaded in as a system prompt with Pi vs what is getting loaded in with Opencode, so I don't know how we can actually compare the two apples to apples?\n\nFor the record I don't use either so don't have any dogs in this fight, but I think we rightfully need to call out bias. I'm glad you like Pi better, but you need to figure out what is causing these different results (or at least prove it's your hypothesis that it's context related or it's kind of irrelevant.\n\nHealthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\nFor me results looks like comparing qwen 3.8 27b with a low effort to a xhigh effort. but both were working on xhigh.\n\nAll agents are using default settings.\n\nOnly a small change is For Opeencode maxed to output generation to 32k as that is hard limit.\n\nRetumbo77\n•\n12h ago\n\nSo to confirm, system prompt from pi is default and system prompt from Opencode is default?\n\nSo your claim is that given a limited context for certain models, such as the tested Qwen 3.8 27b, pi produces better results than open code, default for default, primarily because pi has a lower system prompt context that allows the model to use more context for the actual task?\n\nHealthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\n...basically yes. and PI is compacting a context on much higher tokens usage ( around 90% ) on default settings in spite having context generation 64k.\n\ncezarducatti\n•\n10h ago\n\nIt's possible to configure OpenCode to accept any maximum context within the model's CTX. I don't know how to do it, because I asked DeepV4 to fix it for me. It's working normally."
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "6",
+      "text": "Healthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\nFor me results looks like comparing qwen 3.8 27b with a low effort to a xhigh effort. but both were working on xhigh.\n\nAll agents are using default settings.\n\nOnly a small change is For Opeencode maxed to output generation to 32k as that is hard limit.\n\nRetumbo77\n•\n12h ago\n\nSo to confirm, system prompt from pi is default and system prompt from Opencode is default?\n\nSo your claim is that given a limited context for certain models, such as the tested Qwen 3.8 27b, pi produces better results than open code, default for default, primarily because pi has a lower system prompt context that allows the model to use more context for the actual task?\n\nHealthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\n...basically yes. and PI is compacting a context on much higher tokens usage ( around 90% ) on default settings in spite having context generation 64k.\n\ncezarducatti\n•\n10h ago\n\nIt's possible to configure OpenCode to accept any maximum context within the model's CTX. I don't know how to do it, because I asked DeepV4 to fix it for me. It's working normally."
+    },
+    {
+      "author": "Retumbo77",
+      "score": "2",
+      "text": "Retumbo77\n•\n12h ago\n\nSo to confirm, system prompt from pi is default and system prompt from Opencode is default?\n\nSo your claim is that given a limited context for certain models, such as the tested Qwen 3.8 27b, pi produces better results than open code, default for default, primarily because pi has a lower system prompt context that allows the model to use more context for the actual task?\n\nHealthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\n...basically yes. and PI is compacting a context on much higher tokens usage ( around 90% ) on default settings in spite having context generation 64k."
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "2",
+      "text": "Healthy-Nebula-3603\n•\n12h ago\n Top 1% Commenter\n\n...basically yes. and PI is compacting a context on much higher tokens usage ( around 90% ) on default settings in spite having context generation 64k."
+    },
+    {
+      "author": "cezarducatti",
+      "score": "2",
+      "text": "cezarducatti\n•\n10h ago\n\nIt's possible to configure OpenCode to accept any maximum context within the model's CTX. I don't know how to do it, because I asked DeepV4 to fix it for me. It's working normally."
+    },
+    {
+      "author": "here_n_dere",
+      "score": "2",
+      "text": "here_n_dere\n•\n8h ago\n\nhttps://youtu.be/sLqXFF8mlEU?is=SkWV_Mg33HX7n66p\n\nWhat the model distilled from 😅\n\nperelmanych\n•\n5h ago\n\nIn this video it is Unity project and here is three.js. It might have taken some notes on shaders though."
+    },
+    {
+      "author": "perelmanych",
+      "score": "1",
+      "text": "perelmanych\n•\n5h ago\n\nIn this video it is Unity project and here is three.js. It might have taken some notes on shaders though."
+    },
+    {
+      "author": "Thin_Pollution8843",
+      "score": "3",
+      "text": "Thin_Pollution8843\n•\n3h ago\n Top 1% Commenter\n\nTbh I don’t understand why you not show us LIST OF PI PLUGINS you are using. Your post has 0 sense for someone why try to reproduce it. You can’t make this on pi without plugins. \n\nHealthy-Nebula-3603\n•\n1h ago\n Top 1% Commenter\n\nI said that many times.\n\nTwo of them had default configured. Nothing was removed or added."
+    },
+    {
+      "author": "Healthy-Nebula-3603",
+      "score": "2",
+      "text": "Healthy-Nebula-3603\n•\n1h ago\n Top 1% Commenter\n\nI said that many times.\n\nTwo of them had default configured. Nothing was removed or added."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuwwww",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:15Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.597,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://youtu.be/sLqXFF8mlEU?is=SkWV_Mg33HX7n66p",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://fischerf.github.io/aar/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/fischerf/aar",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/anomalyco/opencode/blob/dev/packages/opencode/src/session/prompt/default.txt",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vqlkb0/where_to_start_with_my_3090/",
+  "title": "Where to start with my 3090",
+  "author": "ozymandizz",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5d ago\nozymandizz\nWhere to start with my 3090\nQuestion | Help\n\nHi\n\nI'm fortunate to have a 3090 and 128gb ddr4 that I used for rendering. Now I want to try coding with qwen 3.8\n\nHow to start?\n\nis it important to use Linux over windows ( I've used Debian before so np) ?\n\nWhat is the current recommended software to run the model ?\n\nShould I just copy settings that I find on another reddit post?\n\nMany thanks\n\nShare",
+  "comments": [
+    {
+      "author": "grabber4321",
+      "score": "6",
+      "text": "grabber4321\n•\n5d ago\n\nHarnesses:\n\nZed.dev, Pi, OpenCode\n\nAI Engines:\n\nVLLM, llama.cpp,\n\nEasy to use engines/wrappers:\n\nollama, lm studio\n\nExplore 3090 recipes:\n\nhttps://github.com/noonghunna/club-3090\n\n69Trash420Panda\n•\n5d ago\n\nAny chance there are any M5 Pro recipes pages ? Lol\n\ndarkbit1001\n•\n5d ago\n\nOn linux - you can and should run headless whenever possible - try typing 'sudo init 3 ; sudo systemctl isolate multi-user.target' (commits to non-graphical target upon reboot, undo this by 'sudo systemctl isolate graphical.target' ) or at least run your X/Wayland server against iGPU - you will save 500MB -> 1.5GB of CUDA VRAM + precious GPU cycles !"
+    },
+    {
+      "author": "69Trash420Panda",
+      "score": "2",
+      "text": "69Trash420Panda\n•\n5d ago\n\nAny chance there are any M5 Pro recipes pages ? Lol"
+    },
+    {
+      "author": "darkbit1001",
+      "score": "1",
+      "text": "darkbit1001\n•\n5d ago\n\nOn linux - you can and should run headless whenever possible - try typing 'sudo init 3 ; sudo systemctl isolate multi-user.target' (commits to non-graphical target upon reboot, undo this by 'sudo systemctl isolate graphical.target' ) or at least run your X/Wayland server against iGPU - you will save 500MB -> 1.5GB of CUDA VRAM + precious GPU cycles !"
+    },
+    {
+      "author": "recro69",
+      "score": "3",
+      "text": "recro69\n•\n5d ago\n Top 1% Commenter\n\nA 3090 is still a starting point for local coding. I would choose Linux + llama.cpp for maximum control then add a coding harness, like OpenCode or Pi once the model is running reliably.\n\nozymandizz\n•\n5d ago\n\nAt what point would local coding become feasible? 2x3090s? More?\n\nethertype\n•\n5d ago\n\nA single 3090 is great. You just have to balance the model size/weight quantization, performance and the context length. (Enabling MTP incurs a VRAM cost, but provides faster responses.)\n\nAvoiding KV-quantization is generally sound advice for coding and/or large context, but if your queries aren't too demanding/esoteric it might be fine. Dropping below Q8 for KV is probably unwise. May depend on the exact model.\n\nFor coding, kicking the tyres and general testing, try Qwen3.8-27B-UD-Q4_K. llama.cpp will automatically adjust the context, I think.\n\nA second 3090 might permit running Q6 at full context, no KV-quantization and MTP enabled. Q8 may require you to limit context slightly, I think.\n\nUsing system RAM to run larger models than a single 3090 can support is entirely possible, but at the expense of performance. That expense may be acceptable to you.\n\nYou will find an ocean of people giving you anectdotal advice about performance here. The problem is that most of us aren't really qualified to make statements about the quality of the output of these models. And the output fairly often looks incredibly convinicing, even if bad/wrong.\n\nSo... try for yourself. Don't get lost in the maze of the latest and greatest models/frameworks/quantizations/template/snakeoil/merge/finetune/. It is very often not about the tool, but your ability to use it....\n\nozymandizz\n•\n5d ago\n\nthats a really great and useful reply. thanks for this!"
+    },
+    {
+      "author": "ozymandizz",
+      "score": "1",
+      "text": "ozymandizz\n•\n5d ago\n\nAt what point would local coding become feasible? 2x3090s? More?\n\nethertype\n•\n5d ago\n\nA single 3090 is great. You just have to balance the model size/weight quantization, performance and the context length. (Enabling MTP incurs a VRAM cost, but provides faster responses.)\n\nAvoiding KV-quantization is generally sound advice for coding and/or large context, but if your queries aren't too demanding/esoteric it might be fine. Dropping below Q8 for KV is probably unwise. May depend on the exact model.\n\nFor coding, kicking the tyres and general testing, try Qwen3.8-27B-UD-Q4_K. llama.cpp will automatically adjust the context, I think.\n\nA second 3090 might permit running Q6 at full context, no KV-quantization and MTP enabled. Q8 may require you to limit context slightly, I think.\n\nUsing system RAM to run larger models than a single 3090 can support is entirely possible, but at the expense of performance. That expense may be acceptable to you.\n\nYou will find an ocean of people giving you anectdotal advice about performance here. The problem is that most of us aren't really qualified to make statements about the quality of the output of these models. And the output fairly often looks incredibly convinicing, even if bad/wrong.\n\nSo... try for yourself. Don't get lost in the maze of the latest and greatest models/frameworks/quantizations/template/snakeoil/merge/finetune/. It is very often not about the tool, but your ability to use it....\n\nozymandizz\n•\n5d ago\n\nthats a really great and useful reply. thanks for this!"
+    },
+    {
+      "author": "ethertype",
+      "score": "5",
+      "text": "ethertype\n•\n5d ago\n\nA single 3090 is great. You just have to balance the model size/weight quantization, performance and the context length. (Enabling MTP incurs a VRAM cost, but provides faster responses.)\n\nAvoiding KV-quantization is generally sound advice for coding and/or large context, but if your queries aren't too demanding/esoteric it might be fine. Dropping below Q8 for KV is probably unwise. May depend on the exact model.\n\nFor coding, kicking the tyres and general testing, try Qwen3.8-27B-UD-Q4_K. llama.cpp will automatically adjust the context, I think.\n\nA second 3090 might permit running Q6 at full context, no KV-quantization and MTP enabled. Q8 may require you to limit context slightly, I think.\n\nUsing system RAM to run larger models than a single 3090 can support is entirely possible, but at the expense of performance. That expense may be acceptable to you.\n\nYou will find an ocean of people giving you anectdotal advice about performance here. The problem is that most of us aren't really qualified to make statements about the quality of the output of these models. And the output fairly often looks incredibly convinicing, even if bad/wrong.\n\nSo... try for yourself. Don't get lost in the maze of the latest and greatest models/frameworks/quantizations/template/snakeoil/merge/finetune/. It is very often not about the tool, but your ability to use it....\n\nozymandizz\n•\n5d ago\n\nthats a really great and useful reply. thanks for this!"
+    },
+    {
+      "author": "ozymandizz",
+      "score": "2",
+      "text": "ozymandizz\n•\n5d ago\n\nthats a really great and useful reply. thanks for this!"
+    },
+    {
+      "author": "ethertype",
+      "score": "2",
+      "text": "ethertype\n•\n5d ago\n\nI would suggest, if you have the hardware at hand, to run your model with llama.cpp, on Debian Linux, on a dedicated machine tucked away in a suitable corner.\n\nThen use that as your local OpenAI endpoint for whatever software you want to test out on your client machine. Or machines. Separation of roles. You can also use the built-in Web UI from any client on your local net, of course.\n\nRunning on Debian Linux also makes it entirely trivial to build llama.cpp from source whenever you like, without having to give the build environment half a thought."
+    },
+    {
+      "author": "KingCpzombie",
+      "score": "1",
+      "text": "KingCpzombie\n•\n5d ago\n\nYou technically CAN use Windows, but it's much better on Linux and you're better off moving to Linux for everything anyway."
+    },
+    {
+      "author": "jacek2023",
+      "score": "1",
+      "text": "jacek2023\n•\n5d ago\nllama.cpp\n Top 1% Commenter\n\nLearn how to install llama.cpp. If this is too hard, start from koboldcpp instead. But on Linux llama.cpp compilation should be easy.\n\nDownload multiple quants of the model. 3090 has 24GB of VRAM so you could run quant of size about 20GB, but you can try bigger (it will be slower but smarter).\n\nAfter playing with vanilla llama.cpp (cli and browser) you can install something like pi coding agent for local agentic coding.\n\nAt some point you may need more VRAM (bigger quant, longer context) and then think about the second 3090 (I have four).\n\nozymandizz\n•\n5d ago\n\ndo you still have a subscription to claude or openai or has this been replaced with your setup ?\n\njacek2023\n•\n5d ago\nllama.cpp\n Top 1% Commenter\n\nI use Claude Code for my commercial work (subscription paid by company) and I pay for ChatGPT Plus. Local setup can't replace cloud AI during the travels, but ChatGPT mostly pisses me off with its stupidity and using free Gemini or Grok also does the job, so probably I could cancel ChatGPT, but I pay same way as for Netflix for example. I am interested in AI since the 90s, I train my own models and I am doing lots of coding/experiments so I am not a typical user."
+    },
+    {
+      "author": "ozymandizz",
+      "score": "0",
+      "text": "ozymandizz\n•\n5d ago\n\ndo you still have a subscription to claude or openai or has this been replaced with your setup ?\n\njacek2023\n•\n5d ago\nllama.cpp\n Top 1% Commenter\n\nI use Claude Code for my commercial work (subscription paid by company) and I pay for ChatGPT Plus. Local setup can't replace cloud AI during the travels, but ChatGPT mostly pisses me off with its stupidity and using free Gemini or Grok also does the job, so probably I could cancel ChatGPT, but I pay same way as for Netflix for example. I am interested in AI since the 90s, I train my own models and I am doing lots of coding/experiments so I am not a typical user."
+    },
+    {
+      "author": "jacek2023",
+      "score": "2",
+      "text": "jacek2023\n•\n5d ago\nllama.cpp\n Top 1% Commenter\n\nI use Claude Code for my commercial work (subscription paid by company) and I pay for ChatGPT Plus. Local setup can't replace cloud AI during the travels, but ChatGPT mostly pisses me off with its stupidity and using free Gemini or Grok also does the job, so probably I could cancel ChatGPT, but I pay same way as for Netflix for example. I am interested in AI since the 90s, I train my own models and I am doing lots of coding/experiments so I am not a typical user."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vqlkb0",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:40:53Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.626,
+    "evidence": 0.6,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

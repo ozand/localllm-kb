@@ -1,0 +1,213 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1sn3izh/qwen3635ba3b_released/",
+  "title": "Qwen3.6-35B-A3B released!",
+  "author": "ResearchCrafty1804",
+  "post_body": "7\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nResearchCrafty1804\nQwen3.6-35B-A3B released!\nNew Model\n\nMeet Qwen3.6-35B-A3B：Now Open-Source！🚀🚀\n\nA sparse MoE model, 35B total params, 3B active. Apache 2.0 license.\n\n- Agentic coding on par with models 10x its active size\n\n- Strong multimodal perception and reasoning ability\n\n- Multimodal thinking + non-thinking modes\n\nEfficient. Powerful. Versatile.\n\nBlog：https://qwen.ai/blog?id=qwen3.6-35b-a3b\n\nQwen Studio：chat.qwen.ai\n\nHuggingFace：https://huggingface.co/Qwen/Qwen3.6-35B-A3B\n\nModelScope：https://modelscope.cn/models/Qwen/Qwen3.6-35B-A3B\n\nShare",
+  "comments": [
+    {
+      "author": "Kodix",
+      "score": "452",
+      "text": "Kodix\n•\n4mo ago\n\nWell this seems absolutely lovely. What a good couple months for local LLMs, huh?\n\nastral_crow\n•\n4mo ago\n\nIt’s been a good couple years.\n\nFaceDeer\n•\n4mo ago\n\nIndeed, the pre-2023 models were kinda crappy. They've been much more capable since then.\n\nNo_Afternoon_4260\n•\n4mo ago\nllama.cpp\n\nWhat models are you talking about pre-2023? Gpt2?\n\nfuck_cis_shit\n•\n4mo ago\nllama.cpp\n\nBERT, GPT-J, GPT-NeoX\n\nFaceDeer\n•\n4mo ago\n\nOf course not, GPT-2 is far too dangerous to release to the general public.\n\nI was using Markov chain generators back then.\n\nTheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply\n3 more replies\n1 more reply\n1 more reply\nBorkato\n•\n4mo ago\n•\nEdited 4mo ago\n\nI’m so fucking happy. This was the ONE model I wanted the 3.6 version of the most, because 3.5 35B is so absolutely insanely mindblowingly good for me with local coding that I’m thinking it can’t possibly get better and still be local.\n\n(Not that it’s the best model, obviously, just that it’s the model that had me say “damn, i can actually do agentic coding now, even if it flubs sometimes”)\n\nEdit: now I’m even more excited. People were saying qwen 3.5 27B was way better than 35B, and now this 3.6 35B is just as good as 3.5 27B according to benchmarks. Hellllll yes.\n\nMart-McUH\n•\n4mo ago\n\nI am sure it is not, those are some strange benchmarks where it leads. I suppose it might be better at some narrow tasks but in general no chance.\n\nIrisColt\n•\n4mo ago\n\n People were saying qwen 3.5 27B was way better than 35B, and now this 3.6 35B is just as good as 3.5 27B according to benchmarks. Hellllll yes.\n\nmother of God...\n\njax_cooper\n•\n4mo ago\n\ncabable like 27b but fast as 35b? dayum\n\nCaffdy\n•\n4mo ago\n\nbig if true\n\n1 more reply\n5 more replies\nea_nasir_official_\n•\n4mo ago\nvllm\n\nIf that's the case, imagine how good the 27b 3.6 is gonna be :o\n\n1 more reply\n4 more replies\n17 more replies"
+    },
+    {
+      "author": "astral_crow",
+      "score": "153",
+      "text": "astral_crow\n•\n4mo ago\n\nIt’s been a good couple years.\n\nFaceDeer\n•\n4mo ago\n\nIndeed, the pre-2023 models were kinda crappy. They've been much more capable since then.\n\nNo_Afternoon_4260\n•\n4mo ago\nllama.cpp\n\nWhat models are you talking about pre-2023? Gpt2?\n\nfuck_cis_shit\n•\n4mo ago\nllama.cpp\n\nBERT, GPT-J, GPT-NeoX\n\nFaceDeer\n•\n4mo ago\n\nOf course not, GPT-2 is far too dangerous to release to the general public.\n\nI was using Markov chain generators back then.\n\nTheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply\n3 more replies\n1 more reply\n1 more reply"
+    },
+    {
+      "author": "FaceDeer",
+      "score": "21",
+      "text": "FaceDeer\n•\n4mo ago\n\nIndeed, the pre-2023 models were kinda crappy. They've been much more capable since then.\n\nNo_Afternoon_4260\n•\n4mo ago\nllama.cpp\n\nWhat models are you talking about pre-2023? Gpt2?\n\nfuck_cis_shit\n•\n4mo ago\nllama.cpp\n\nBERT, GPT-J, GPT-NeoX\n\nFaceDeer\n•\n4mo ago\n\nOf course not, GPT-2 is far too dangerous to release to the general public.\n\nI was using Markov chain generators back then.\n\nTheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply\n3 more replies\n1 more reply\n1 more reply"
+    },
+    {
+      "author": "No_Afternoon_4260",
+      "score": "15",
+      "text": "No_Afternoon_4260\n•\n4mo ago\nllama.cpp\n\nWhat models are you talking about pre-2023? Gpt2?\n\nfuck_cis_shit\n•\n4mo ago\nllama.cpp\n\nBERT, GPT-J, GPT-NeoX\n\nFaceDeer\n•\n4mo ago\n\nOf course not, GPT-2 is far too dangerous to release to the general public.\n\nI was using Markov chain generators back then.\n\nTheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply\n3 more replies\n1 more reply"
+    },
+    {
+      "author": "fuck_cis_shit",
+      "score": "17",
+      "text": "fuck_cis_shit\n•\n4mo ago\nllama.cpp\n\nBERT, GPT-J, GPT-NeoX"
+    },
+    {
+      "author": "FaceDeer",
+      "score": "32",
+      "text": "FaceDeer\n•\n4mo ago\n\nOf course not, GPT-2 is far too dangerous to release to the general public.\n\nI was using Markov chain generators back then.\n\nTheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply\n3 more replies"
+    },
+    {
+      "author": "TheToi",
+      "score": "10",
+      "text": "TheToi\n•\n4mo ago\n\nWell in a way, he was right.\nJust look at the crap it’s caused with the data centers and the shortages. 😅\nI mean...Without this release, we wouldn't be where we are today.\n\n1 more reply"
+    },
+    {
+      "author": "Borkato",
+      "score": "70",
+      "text": "Borkato\n•\n4mo ago\n•\nEdited 4mo ago\n\nI’m so fucking happy. This was the ONE model I wanted the 3.6 version of the most, because 3.5 35B is so absolutely insanely mindblowingly good for me with local coding that I’m thinking it can’t possibly get better and still be local.\n\n(Not that it’s the best model, obviously, just that it’s the model that had me say “damn, i can actually do agentic coding now, even if it flubs sometimes”)\n\nEdit: now I’m even more excited. People were saying qwen 3.5 27B was way better than 35B, and now this 3.6 35B is just as good as 3.5 27B according to benchmarks. Hellllll yes.\n\nMart-McUH\n•\n4mo ago\n\nI am sure it is not, those are some strange benchmarks where it leads. I suppose it might be better at some narrow tasks but in general no chance.\n\nIrisColt\n•\n4mo ago\n\n People were saying qwen 3.5 27B was way better than 35B, and now this 3.6 35B is just as good as 3.5 27B according to benchmarks. Hellllll yes.\n\nmother of God...\n\njax_cooper\n•\n4mo ago\n\ncabable like 27b but fast as 35b? dayum\n\nCaffdy\n•\n4mo ago\n\nbig if true\n\n1 more reply\n5 more replies\nea_nasir_official_\n•\n4mo ago\nvllm\n\nIf that's the case, imagine how good the 27b 3.6 is gonna be :o\n\n1 more reply\n4 more replies"
+    },
+    {
+      "author": "Mart-McUH",
+      "score": "7",
+      "text": "Mart-McUH\n•\n4mo ago\n\nI am sure it is not, those are some strange benchmarks where it leads. I suppose it might be better at some narrow tasks but in general no chance."
+    },
+    {
+      "author": "IrisColt",
+      "score": "22",
+      "text": "IrisColt\n•\n4mo ago\n\n People were saying qwen 3.5 27B was way better than 35B, and now this 3.6 35B is just as good as 3.5 27B according to benchmarks. Hellllll yes.\n\nmother of God...\n\njax_cooper\n•\n4mo ago\n\ncabable like 27b but fast as 35b? dayum\n\nCaffdy\n•\n4mo ago\n\nbig if true\n\n1 more reply\n5 more replies\nea_nasir_official_\n•\n4mo ago\nvllm\n\nIf that's the case, imagine how good the 27b 3.6 is gonna be :o\n\n1 more reply\n4 more replies"
+    },
+    {
+      "author": "jax_cooper",
+      "score": "22",
+      "text": "jax_cooper\n•\n4mo ago\n\ncabable like 27b but fast as 35b? dayum\n\nCaffdy\n•\n4mo ago\n\nbig if true\n\n1 more reply\n5 more replies"
+    },
+    {
+      "author": "Caffdy",
+      "score": "9",
+      "text": "Caffdy\n•\n4mo ago\n\nbig if true\n\n1 more reply"
+    },
+    {
+      "author": "ea_nasir_official_",
+      "score": "34",
+      "text": "ea_nasir_official_\n•\n4mo ago\nvllm\n\nIf that's the case, imagine how good the 27b 3.6 is gonna be :o\n\n1 more reply"
+    },
+    {
+      "author": "ResearchCrafty1804",
+      "score": "385",
+      "text": "ResearchCrafty1804\n•\n4mo ago\n\nLM Performance：Qwen3.6-35B-A3B outperforms the dense 27B-param Qwen3.5-27B on several key coding benchmarks and dramatically surpasses its direct predecessor Qwen3.5-35B-A3B, especially on agentic coding and reasoning tasks.\n\nThrumpwart\n•\n4mo ago\nllama.cpp\n\nOh hell yeah.\n\nLong_comment_san\n•\n4mo ago\n\nHoly shit. This looks more like 4.0. No way they b*tchslapped Gemma like that directly.\n\ndampflokfreund\n•\n4mo ago\n\nIt's just benchmarks. Gemma is not obsolete, it has a ton of other qualities specifically for creative writing and european languages.\n\nPotential-Gold5298\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nEven the 26B-A4B model outperforms the Qwen3.5-27B in real-world tasks. The Qwen is better suited for tasks like coding or image analysis, while the Gemma 4 is better at almost everything else.\n\nphazei\n•\n4mo ago\n\nQwen3.5 35B gives 57t/s\n\nGemma 4 26B is super close in quality, but gives 130t/s\n\nSo depending on task, hard to beat that Gemma speed.\n\nedsonmedina\n•\n4mo ago\n\n130 t/s??? What's your setup?\nOn my Strix Halo Gemma is significantly slower than Qwen3.5 35B at the same quantization.\n\nphazei\n•\n4mo ago\n\nI have a RTX3090 + 128gb DDR5, but I had everything loaded only on the 24gb VRAM, so system ran didn't make a difference there.\n\nThe Gemma 4 26B is A4B MoE, so super fast.\n\nedsonmedina\n•\n4mo ago\n\nQwen3.5 35B is A3B MoE too... should be even faster\n\n3 more replies\n6 more replies\n2 more replies\n22 more replies\n16 more replies\nIfihadanameofme\n•\n4mo ago\n\nI'm crying in tears of joy XD It wasn't even over a week since I downloaded the gemma MOE and before I could even think about switching over, qwen goes \"hello there, it's been a while\"🙂 like they didn't just release the qwen3.5 less than 2 months ago\n\nLong_comment_san\n•\n4mo ago\n\nI'm actually quite scared because in 6 months we're gonna have models maybe 20-30% better than these. I might need to resume my cooking lessons because that's about the only job left for me.\n\nIfihadanameofme\n•\n4mo ago\nchillinewman\n•\n4mo ago\n\nThere is a robot for that.\n\nSummarizedAnu\n•\n4mo ago\n\nNice . Gonna use this for everything now.\n\n7 more replies\n2 more replies\n9 more replies\n8 more replies\nBig_Mix_4044\n•\n4mo ago\n\nCan't wait to see what new 27b is capable of.\n\ncafedude\n•\n4mo ago\n\nOr the 122b\n\nStyMaar\n•\n4mo ago\n\nThis please!\n\n122b has been insane on my Strix Halo. I'm using it all the time and I completely stopped using any closed LLMs since then.\n\n6 more replies\n1 more reply\njazir55\n•\n4mo ago\n Top 1% Commenter\n\nUhhhhh.....3.6 35B-A3B loses against 3.5 27B dense in almost every one of these benchmarks. Are we reading the same chart?\n\n1 more reply\nDurian881\n•\n4mo ago\n Top 1% Commenter\n\nAwesome! Need this after the free Qwen 3.6plus ended for Qwen Code.\n\n18 more replies"
+    },
+    {
+      "author": "Thrumpwart",
+      "score": "76",
+      "text": "Thrumpwart\n•\n4mo ago\nllama.cpp\n\nOh hell yeah."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1sn3izh",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:51:10Z",
+  "discovered_by_query_ids": [
+    "75d3c078d962",
+    "d8a6923673f2"
+  ],
+  "quality": {
+    "score": 0.539,
+    "evidence": 0.4,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://qwen.ai/blog?id=qwen3.6-35b-a3b",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://modelscope.cn/models/Qwen/Qwen3.6-35B-A3B",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://techcrunch.com/2019/02/17/openai-text-generator-dangerous/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://dnhkng.github.io/posts/rys-ii/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/mradermacher/Qwen3.5-27B-heretic-RYS-XL-i1-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://imgbox.com/TCe31MnO",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://kaitchup.substack.com/p/gemma-4-31b-vs-qwen35-27b-inference",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

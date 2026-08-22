@@ -1,0 +1,191 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1t0vp3w/pflash_10x_prefill_speedup_over_llamacpp_at_128k/",
+  "title": "PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090",
+  "author": "sandropuppo",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nsandropuppo\nPFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090\nResources\n\nHey fellow Llamas, thank you for all the nice words and great feedback on the last post I made. We have something new we thought would be useful to share. As always your time is precious, so I'll keep it short.\n\nWe built speculative prefill for long-context decode on quantized 27B targets, C++/CUDA only. A small drafter loaded in-process scores token importance over the full prompt; the heavy target only prefills the spans that matter.\n\nRepo: github.com/Luce-Org/lucebox-hub (open source, MIT).\n\nHead-to-head on Qwen3.6-27B Q4_K_M, RTX 3090, single-shot: 24.8 s TTFT vs ~257 s for vanilla llama.cpp = ~10.4× at 128K (and 13.5 s vs 134.95 s = 10.0× at 64K), with NIAH retrieval preserved end-to-end. No Python, no Triton, no PyTorch in the inference loop.\n\nThe problem\n\nQ4_K_M Qwen3.6-27B on a 24 GB 3090 decodes fast (~74 tok/s with DFlash spec decode), but prefill scales O(S²). On a 131K-token prompt, vanilla llama.cpp takes 248.4 s cold (llama-bench pp131072 --no-warmup -r 1, 527.6 tok/s). That is 4.1 minutes staring at a blank screen before the first token. Decode is fast, but the wait kills the UX. Warmed steady-state is better (169.3 s at 128K) but still painful, and grows quadratically as you push context.\n\nStanding on shoulders\n\nThis work stands on two recent papers, both excellent reads:\n\nSpeculative Prefill (Liu et al, arXiv 2502.02789) and Cross-Family Speculative Prefill (SambaNova, ICLR 2026). Insight: a small draft model's attention pattern over a long prompt faithfully predicts which tokens matter for the answer. Run the draft, score per-token importance, keep the top spans, drop the rest.\n\nFlashPrefill (Fan et al, 2026). Block-sparse attention so the drafter itself does not pay O(S²) at 128K.\n\nmit-han-lab/Block-Sparse-Attention (BSA) for the FA-2-derived sm_80+ sparse forward.\n\nggml / llama.cpp for the runtime. We link libggml*.a and never libllama.\n\nOur contribution is the C++/CUDA composition of these two algorithms, in-process, on a 24 GB consumer card. As far as we are aware, the two papers had not been combined in an open implementation before.\n\nWhat we built\n\nIn-process composition. Drafter forward (custom Qwen3-0.6B BF16 ggml graph), FlashPrefill scoring, sparse attention, target prefill, and DFlash spec decode all run in one C++/CUDA process sharing one ggml allocator. No subprocess, no IPC, no Python, Triton, or PyTorch in the inference loop.\n\nCUDA port of FlashPrefill. The reference (qhfan/FlashPrefill) is Triton. We wrote 4 CUDA kernels from scratch (mean_K, score, select, sparse_fwd) and dispatched the sparse forward through mit-han-lab/Block-Sparse-Attention. BSA ships as a libtorch C++ extension; pulling 2 GB of libtorch into a 24 GB inference loop was a non-starter, so we wired it in via a 3-header ATen/c10 stub set under dflash/deps/bsa_stubs/.\n\n24 GB memory orchestration. Drafter (1.3 GB weights + KV + ~600 MB BSA scratch at 128K) and the DFlash daemon (15 GB target + 3 GB draft + 3 GB KV) do not coexist on a 3090. The daemon parks, unparks, and frees weights between stages over a stdin protocol; ~3 s per request, makes the whole pipeline fit on a single consumer card.\n\nSetup\n\nbash\n\n# clone with submodules (pulls llama.cpp/ggml + Block-Sparse-Attention)\ngit clone --recurse-submodules https://github.com/Luce-Org/lucebox-hub\ncd lucebox-hub/dflash\n\n# build dflash + BSA kernel (sm_80+, ~10 min cold compile pulls cutlass)\ncmake -B build -S . -DCMAKE_BUILD_TYPE=Release \\\n                    -DCMAKE_CUDA_ARCHITECTURES=86 \\\n                    -DDFLASH27B_ENABLE_BSA=ON\ncmake --build build --target test_dflash test_flashprefill_kernels -j\n\n# fetch weights (target + drafter + spec-decode draft)\nhuggingface-cli download unsloth/Qwen3.6-27B-GGUF Qwen3.6-27B-Q4_K_M.gguf --local-dir models/\nhuggingface-cli download Qwen/Qwen3-0.6B model.safetensors tokenizer.json --local-dir models/drafter/\nhuggingface-cli download z-lab/Qwen3.6-27B-DFlash --local-dir models/draft/\n\n# bench\ncd ../pflash && pip install -e .\npython tests/niah_gen.py --n 1 --ctx 131072 --out <unix-path>'t become the bottleneck. They compose cleanly because the target side (DFlash spec decode) is unchanged; it just receives a much shorter prompt with full attention enabled.\n\nAt 128K, drafter scoring is now the dominant cost (~12 s of the 24.8 s TTFT). Target prefill on the compressed ~6.5K survivors is ~10 s; the remaining ~3 s is the park/unpark/free dance. The next obvious lever is a smaller or distilled drafter, which we have not done yet.\n\nTuning\n\nbash\n\nDFLASH_FP_USE_BSA=1     # dispatch sparse FA forward through BSA (sm_80+, required for 10x)\nDFLASH_FP_ALPHA=0.85    # block-selection threshold; higher = stricter = fewer K-blocks per Q-row\nDFLASH_FP_PROFILE=1     # log per-stage timings (mean_K / score / select / forward)\n\nkeep_ratio=0.05 is the default. 0.02 cuts target prefill from ~10 s to ~3 s but starts losing the needle. DFLASH_FP_ALPHA=0.99 cuts ~1 s at 128K with a small NIAH-margin loss. Calibration territory.\n\nAny feedback is more than welcome!\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n4mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "randomfoo2",
+      "score": "105",
+      "text": "randomfoo2\n•\n4mo ago\n\nInteresting technique but if I'm reading this corrrectly this is a super lossy way to process prefill?\n\nA small Qwen3-0.6B drafter reads the full 64K/128K prompt\n\nFlashPrefill/BSA-style sparse attention makes that drafter pass cheaper\n\nThe drafter scores token/span importance and keeps a small subset\n\nThe 27B target only prefills the compressed prompt (retokenized from the drafter?)\n\nAfter that, DFlash+DDTree does speculative decode on the compressed target KV\n\npseudonerv\n•\n4mo ago\n\nYeah. It’s 10x faster. But how much dumber is the real question.\n\nUser_Deprecated\n•\n4mo ago\n\nNIAH feels more like a retrieval test. It's mostly checking whether the model can find a specific fact buried in the context, which is kind of the easy case when the \"needle\" is already a clean span.\n\nWhere this probably breaks is when the answer needs stitching things together across the prompt. If the drafter drops one of those chunks, you just lose context without noticing. Multi-hop QA would stress that a lot more.\n\nxienze\n•\n4mo ago\n\nYeah I dunno why everyone in this space seems to forget that EVERYTHING in computing is a space/time/quality tradeoff. You generally don't get 10x improvements in well-researched areas without massive tradeoffs.\n\nSuccubus-Empress\n•\n4mo ago\n\nBut 32 bit to 16 bit , tradeoff is minimal but gain is double speed and half memory.\n\nElementNumber6\n•\n4mo ago\n\nResolution only ever needs to be so sharp. Like 8k to 4k. Most won't notice a difference. 4k to 1080p, however, and the pixels begin to show. 1080p to 420p, and you'll still have people trying to convince you it's fine, but the issues are practically impossible to ignore, especially if you know what to look for.\n\nrandomfoo2\n•\n4mo ago\n\nAlthough sometimes.. you can. (about to publish some of my work after a few weeks of grinding kernels that literally scores >10x memory improvements w/ faster than vLLM prefill/decode at c=1 and c=8 with near 0 quality loss - 0.003 and 0.005 KLD).\n\nFullOf_Bad_Ideas\n•\n4mo ago\n Top 1% Commenter\n\nAwesome - please link it once you publish your work, I'd love to read it\n\nrandomfoo2\n•\n4mo ago\n\nOK, ended up being 6-8x (there's more that could be squeezed but it runs slower than I'd like) https://www.reddit.com/r/LocalLLaMA/comments/1t3vlrx/fastdms_64x_kvcache_compression_running_faster/\n\nrpkarma\n•\n4mo ago\n\nYeah there is a lot of low hanging fruit right now because a lot of the useful research and tricks are all private inside proprietary labs\n\nIntelligent-Form6624\n•\n4mo ago\n\nwrong. it works like this:\n\nbrowse reddit —-> see 10x magic post —-> win\n\nKallistiTMP\n•\n4mo ago\n\nSpec decoding is generally lossless.\n\nThe tradeoff is it eats up your batch size.\n\nIf you're running at industrial scales where throughput is important, yeah, it tanks your throughput. Most personal users are only running one request at a time though, so it's kind of a free lunch for most hobbyists.\n\nDominusIniquitatis\n•\n4mo ago\n\n\"Generally\"? <windows-path>"
+    },
+    {
+      "author": "pseudonerv",
+      "score": "98",
+      "text": "pseudonerv\n•\n4mo ago\n\nYeah. It’s 10x faster. But how much dumber is the real question.\n\nUser_Deprecated\n•\n4mo ago\n\nNIAH feels more like a retrieval test. It's mostly checking whether the model can find a specific fact buried in the context, which is kind of the easy case when the \"needle\" is already a clean span.\n\nWhere this probably breaks is when the answer needs stitching things together across the prompt. If the drafter drops one of those chunks, you just lose context without noticing. Multi-hop QA would stress that a lot more."
+    },
+    {
+      "author": "User_Deprecated",
+      "score": "2",
+      "text": "User_Deprecated\n•\n4mo ago\n\nNIAH feels more like a retrieval test. It's mostly checking whether the model can find a specific fact buried in the context, which is kind of the easy case when the \"needle\" is already a clean span.\n\nWhere this probably breaks is when the answer needs stitching things together across the prompt. If the drafter drops one of those chunks, you just lose context without noticing. Multi-hop QA would stress that a lot more."
+    },
+    {
+      "author": "xienze",
+      "score": "33",
+      "text": "xienze\n•\n4mo ago\n\nYeah I dunno why everyone in this space seems to forget that EVERYTHING in computing is a space/time/quality tradeoff. You generally don't get 10x improvements in well-researched areas without massive tradeoffs.\n\nSuccubus-Empress\n•\n4mo ago\n\nBut 32 bit to 16 bit , tradeoff is minimal but gain is double speed and half memory.\n\nElementNumber6\n•\n4mo ago\n\nResolution only ever needs to be so sharp. Like 8k to 4k. Most won't notice a difference. 4k to 1080p, however, and the pixels begin to show. 1080p to 420p, and you'll still have people trying to convince you it's fine, but the issues are practically impossible to ignore, especially if you know what to look for.\n\nrandomfoo2\n•\n4mo ago\n\nAlthough sometimes.. you can. (about to publish some of my work after a few weeks of grinding kernels that literally scores >10x memory improvements w/ faster than vLLM prefill/decode at c=1 and c=8 with near 0 quality loss - 0.003 and 0.005 KLD).\n\nFullOf_Bad_Ideas\n•\n4mo ago\n Top 1% Commenter\n\nAwesome - please link it once you publish your work, I'd love to read it\n\nrandomfoo2\n•\n4mo ago\n\nOK, ended up being 6-8x (there's more that could be squeezed but it runs slower than I'd like) https://www.reddit.com/r/LocalLLaMA/comments/1t3vlrx/fastdms_64x_kvcache_compression_running_faster/\n\nrpkarma\n•\n4mo ago\n\nYeah there is a lot of low hanging fruit right now because a lot of the useful research and tricks are all private inside proprietary labs\n\nIntelligent-Form6624\n•\n4mo ago\n\nwrong. it works like this:\n\nbrowse reddit —-> see 10x magic post —-> win\n\nKallistiTMP\n•\n4mo ago\n\nSpec decoding is generally lossless.\n\nThe tradeoff is it eats up your batch size.\n\nIf you're running at industrial scales where throughput is important, yeah, it tanks your throughput. Most personal users are only running one request at a time though, so it's kind of a free lunch for most hobbyists.\n\nDominusIniquitatis\n•\n4mo ago\n\n\"Generally\"? <windows-path>"
+    },
+    {
+      "author": "Succubus-Empress",
+      "score": "19",
+      "text": "Succubus-Empress\n•\n4mo ago\n\nBut 32 bit to 16 bit , tradeoff is minimal but gain is double speed and half memory.\n\nElementNumber6\n•\n4mo ago\n\nResolution only ever needs to be so sharp. Like 8k to 4k. Most won't notice a difference. 4k to 1080p, however, and the pixels begin to show. 1080p to 420p, and you'll still have people trying to convince you it's fine, but the issues are practically impossible to ignore, especially if you know what to look for."
+    },
+    {
+      "author": "ElementNumber6",
+      "score": "8",
+      "text": "ElementNumber6\n•\n4mo ago\n\nResolution only ever needs to be so sharp. Like 8k to 4k. Most won't notice a difference. 4k to 1080p, however, and the pixels begin to show. 1080p to 420p, and you'll still have people trying to convince you it's fine, but the issues are practically impossible to ignore, especially if you know what to look for."
+    },
+    {
+      "author": "randomfoo2",
+      "score": "21",
+      "text": "randomfoo2\n•\n4mo ago\n\nAlthough sometimes.. you can. (about to publish some of my work after a few weeks of grinding kernels that literally scores >10x memory improvements w/ faster than vLLM prefill/decode at c=1 and c=8 with near 0 quality loss - 0.003 and 0.005 KLD).\n\nFullOf_Bad_Ideas\n•\n4mo ago\n Top 1% Commenter\n\nAwesome - please link it once you publish your work, I'd love to read it\n\nrandomfoo2\n•\n4mo ago\n\nOK, ended up being 6-8x (there's more that could be squeezed but it runs slower than I'd like) https://www.reddit.com/r/LocalLLaMA/comments/1t3vlrx/fastdms_64x_kvcache_compression_running_faster/\n\nrpkarma\n•\n4mo ago\n\nYeah there is a lot of low hanging fruit right now because a lot of the useful research and tricks are all private inside proprietary labs"
+    },
+    {
+      "author": "FullOf_Bad_Ideas",
+      "score": "16",
+      "text": "FullOf_Bad_Ideas\n•\n4mo ago\n Top 1% Commenter\n\nAwesome - please link it once you publish your work, I'd love to read it\n\nrandomfoo2\n•\n4mo ago\n\nOK, ended up being 6-8x (there's more that could be squeezed but it runs slower than I'd like) https://www.reddit.com/r/LocalLLaMA/comments/1t3vlrx/fastdms_64x_kvcache_compression_running_faster/"
+    },
+    {
+      "author": "randomfoo2",
+      "score": "2",
+      "text": "randomfoo2\n•\n4mo ago\n\nOK, ended up being 6-8x (there's more that could be squeezed but it runs slower than I'd like) https://www.reddit.com/r/LocalLLaMA/comments/1t3vlrx/fastdms_64x_kvcache_compression_running_faster/"
+    },
+    {
+      "author": "rpkarma",
+      "score": "2",
+      "text": "rpkarma\n•\n4mo ago\n\nYeah there is a lot of low hanging fruit right now because a lot of the useful research and tricks are all private inside proprietary labs"
+    },
+    {
+      "author": "Intelligent-Form6624",
+      "score": "11",
+      "text": "Intelligent-Form6624\n•\n4mo ago\n\nwrong. it works like this:\n\nbrowse reddit —-> see 10x magic post —-> win"
+    },
+    {
+      "author": "KallistiTMP",
+      "score": "2",
+      "text": "KallistiTMP\n•\n4mo ago\n\nSpec decoding is generally lossless.\n\nThe tradeoff is it eats up your batch size.\n\nIf you're running at industrial scales where throughput is important, yeah, it tanks your throughput. Most personal users are only running one request at a time though, so it's kind of a free lunch for most hobbyists.\n\nDominusIniquitatis\n•\n4mo ago\n\n\"Generally\"? <windows-path>"
+    },
+    {
+      "author": "DominusIniquitatis",
+      "score": "1",
+      "text": "DominusIniquitatis\n•\n4mo ago\n\n\"Generally\"? D:"
+    },
+    {
+      "author": "TomLucidor",
+      "score": "1",
+      "text": "TomLucidor\n•\n3mo ago\n\nLocal MAS would need some sort of aide then?"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1t0vp3w",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:41:18Z",
+  "discovered_by_query_ids": [
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.677,
+    "evidence": 0.8,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/Luce-Org/lucebox-hub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://arxiv.org/abs/2502.02789",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Luce-Org/lucebox-hub/issues/102",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/noonghunna/club-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

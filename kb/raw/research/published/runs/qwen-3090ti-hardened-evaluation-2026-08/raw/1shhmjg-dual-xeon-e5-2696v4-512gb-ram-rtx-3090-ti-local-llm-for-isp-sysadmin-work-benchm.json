@@ -1,0 +1,157 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1shhmjg/dual_xeon_e52696v4_512gb_ram_rtx_3090_ti_local/",
+  "title": "Dual Xeon E5-2696v4 + 512GB RAM + RTX 3090 Ti local LLM for ISP sysadmin work — benchmarks + questions",
+  "author": "OkBase5453",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n4mo ago\nOkBase5453\nDual Xeon E5-2696v4 + 512GB RAM + RTX 3090 Ti local LLM for ISP sysadmin work — benchmarks + questions\nDiscussion\n\nHi all! finally after 2 Monts of reading, asking, testing... and headaches and a living room environment of over 90 dB(wife threatening to leave at one point) I am posting my setup. I work as a sysadmin/DevOps engineer, and I've been building a local AI inference rig for both professional and personal use with some old company hardware. I've been benchmarking ik_llama.cpp (becouse it was better at only CPU inference than llama.cpp) and would love community input on models and configuration twix/tricks!\n\nHardware\n\nCPU: 2× Intel Xeon E5-2696v4 (44c/88t total)\n\nRAM: 512GB DDR4 2400 ECC LR-DIMM\n\nMotherboard: Supermicro X10DRi-LN4+ (Dual Socket 2011) PCI-E 3.0 x16\n\nGPU: MSI RTX 3090 Ti 24GB\n\nNVMe: 2xIntel SSD DC P3700 400GB for faster model loading(i think, havent testet it)\n\nRuntime: ik_llama.cpp & llama.cpp in Debian 12 LXC on Proxmox Baremetal\n\nBenchmarks (ik_llama.cpp build 4400 / llama.cpp build 8739, numactl --interleave=all, --mmap 0)\nModel\tQuant\tSize\tBackend\tConfig\tpp1024 t/s\ttg128 t/s\n\nQwen3.5-27B\tQ4_K_M\t15.4 GiB\tik_llama.cpp CUDA\tngl=999, t=78\t1535\t46.2\nQwen3.5-27B\tQ4_K_M\t15.4 GiB\tllama.cpp BLAS+CUDA\tngl=99, t=78\t1521\t44.5\nQwen3.5-27B Distilled (Claude 4.6 reasoning)\ti1-Q4_K_M\t15.4 GiB\tCUDA ngl=99\tt=78\t1514\t44.4\nGemma 4 31B\tQ4_K_M\t17.8 GiB\tik_llama.cpp CUDA\tngl=999, t=78\t1518\t42.9\nGemma 4 31B\tQ4_K_M\t17.1 GiB\tllama.cpp BLAS+CUDA\tngl=99, t=78\t1441\t40.8\nQwen3.5-27B\tQ4_K_M\t15.4 GiB\tCPU only\tt=80\t51\t5.4\nQwen3.5-35B MoE A3B\tQ4_K_M\t20.5 GiB\tCPU only\tt=42\t264\t23.2\nQwen3-Coder-Next 80B A3B\tQ4_K_XL\t46.2 GiB\tCUDA ngl=20 + CPU\tt=65\t427\t23.7\nQwen3-Coder-Next 80B A3B\tQ4_K_S\t42.4 GiB\tCPU only\tt=78\t209\t21.9\nQwen3.5-122B MoE A10B\tQ4_K_M\t71.3 GiB\tCPU only\tt=78\t105\t9.3\n\nNotable: Gemma 4 31B on CUDA (1518 pp / 42.9 tg) is nearly identical to Qwen3.5-27B (1535 pp / 46.2 tg) despite being a larger. ik_llama.cpp consistently outperforms llama.cpp by ~1–5% on both models. I have a problem with partially offloading the Qwen3.5-122B to the CPU/RAM, so I could not test it further.\n\nroot@llama-cpp:~# time numactl --interleave=all <unix-path>'<unix-path>'\n\nMy Use Cases\n\nscripting & automation — Bash/Python scripts for network ops\n\nServer deployment — Proxmox/LXC planning, application installation, migrations, full deployment workflows\n\nMCP + vendor docs — proprietary Vendor PDFs with > 1000 pages, the model should read them then help/writes configs and installation plans ← main use case\n\nSide project — iOS/Android board game developing\n\nThe MCP server use case is the critical one here... I want the model to ingest large vendor manuals via MCP file-system tools and then answer questions, write configs, and create step-by-step installation plans. Context length and instruction-following quality matter a lot here.\n\nQuestions\n\nBest model for long vendor doc → installation/migration/uograde plan workflows? Currently on Qwen3-Coder-Next 80B (ngl=20). Is Qwen3.5 27B or Gemma 4 31B better for long-context instruction following? Or any other better ones!?\n\nOptimal ngl for models and other helpfull configuration on rtx 3090 24GB VRAM? At ngl=20: 427 pp / 23.7 tg for Qwen3-Coder-Next. Anyone found a better split? Is there a formula for MoE layer-to-VRAM mapping? Why can i not go more than ngl 20\n\nQwen3.5-122B at 9 t/s tg — usable for interactive chat? I have 512GB RAM so it fits. Any tricks to squeeze more speed?\n\nHAVE_FANCY_SIMD is NOT defined on Broadwell-EP (AVX2, no AVX-512) — expected or am I missing a compile flag in ik_llama.cpp/llama.cpp?\n\nGemma 4 31B real-world impressions? fits in my VRAM. Anyone comparing it to Qwen3.5-27/32B for agentic/technical tasks?\n\nHappy to share raw bench logs. Thanks! 🙏\n\nP.S. my first reddit post(be gentle) :)\n\nShare",
+  "comments": [
+    {
+      "author": "a_beautiful_rhind",
+      "score": "5",
+      "text": "a_beautiful_rhind\n•\n4mo ago\n Top 1% Commenter\n\nI had a system like that as a GPU host. The ram speeds aren't that great but better than consumer DDR4.\n\nEnjoy your time in the numa waiting room."
+    },
+    {
+      "author": "jacek2023",
+      "score": "3",
+      "text": "jacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nstrange build, single 3090 and 512GB RAM - why?\n\nfocus on --n-cpu-moe not -ngl\n\nOkBase5453\n•\n4mo ago\n\nRAM was there with the server, i just got the RTX 3090 to play around...\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\ntry using two\n\nOkBase5453\n•\n4mo ago\n\nThat is the future plan. I can't find an NVLink for the 30xx here in Germany :)\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nI don't use nvlink\n\nOkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "1",
+      "text": "OkBase5453\n•\n4mo ago\n\nRAM was there with the server, i just got the RTX 3090 to play around...\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\ntry using two\n\nOkBase5453\n•\n4mo ago\n\nThat is the future plan. I can't find an NVLink for the 30xx here in Germany :)\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nI don't use nvlink\n\nOkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "jacek2023",
+      "score": "1",
+      "text": "jacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\ntry using two\n\nOkBase5453\n•\n4mo ago\n\nThat is the future plan. I can't find an NVLink for the 30xx here in Germany :)\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nI don't use nvlink\n\nOkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "1",
+      "text": "OkBase5453\n•\n4mo ago\n\nThat is the future plan. I can't find an NVLink for the 30xx here in Germany :)\n\njacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nI don't use nvlink\n\nOkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "jacek2023",
+      "score": "1",
+      "text": "jacek2023\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nI don't use nvlink\n\nOkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "1",
+      "text": "OkBase5453\n•\n4mo ago\n\nI think I have to, since PCIe 3 :/\n\nttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "ttkciar",
+      "score": "1",
+      "text": "ttkciar\n•\n4mo ago\nllama.cpp\n Top 1% Commenter\n\nMy HPC servers are very similar to yours, and PCIe 3.0 does surprisingly well. Give it a shot without NVLink. I think you will find it serviceable, and you will be able to use larger models while watching eBay for NVLink.\n\nOkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "1",
+      "text": "OkBase5453\n•\n4mo ago\n\nyes, also it is a home lab server, so not only inference... do you use one GPU or many? Interested to see you llama.cpp config"
+    },
+    {
+      "author": "Monad_Maya",
+      "score": "2",
+      "text": "Monad_Maya\n•\n4mo ago\nllama.cpp\n\nRun a larger model if speed is not the topmost priority. MiniMax 2.5 or Stepfun 3.5 (?)\n\nhttps://np.reddit.com/r/LocalLLaMA/comments/1mngl7i/how_does_ncpumoe_and_cpumoe_params_help_over/\n\nI wasn't impressed by Qwen 122B's perf so I moved to MiniMax m2.5 (229B, 10B). Slightly slower but better at coding. Usable for chat but not much more. The generation speed is largely a non issue, it's the prompt processing speed that kills the overall \"vibe\".\n\nNo clue honestly, my 5900X is using some haswell_cpu thing when I look at llamacpp logs.\n\nQwen 27B is roughly equal to Genna 31B. Gemma has better world knowledge but that might not be an issue for you. I'd prefer Qwen 3.5 27B + more context for programming needs.  It does overthink a bit but less issues with tool call failures or weird repetition bugs.\n\nOkBase5453\n•\n4mo ago\n\nWell i tested this:\nroot@llama-cpp:~# numactl --interleave=all <unix-path>"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "2",
+      "text": "OkBase5453\n•\n4mo ago\n\nWell i tested this:\nroot@llama-cpp:~# numactl --interleave=all <unix-path>"
+    },
+    {
+      "author": "Monad_Maya",
+      "score": "1",
+      "text": "Monad_Maya\n•\n4mo ago\nllama.cpp\n\n15 tokens per sec is not bad at all.\n\nOkBase5453\n•\n4mo ago\n\nyeah, i think so too... well I do not know how good this model is, but should be as good if not better as qwen 122B"
+    },
+    {
+      "author": "OkBase5453",
+      "score": "1",
+      "text": "OkBase5453\n•\n4mo ago\n\nyeah, i think so too... well I do not know how good this model is, but should be as good if not better as qwen 122B"
+    },
+    {
+      "author": "Status_Record_1839",
+      "score": "2",
+      "text": "Status_Record_1839\n•\n4mo ago\n\nFor your MCP + vendor docs use case, Qwen3.5-27B at 46 tg/s will serve you better than Qwen3-Coder-Next 80B at 23 tg/s. The speed difference is very noticeable when iterating over long manuals. Gemma 4 31B is comparable in quality to Qwen3.5-27B for instruction following but I'd stick with Qwen for structured config generation - it tends to be more reliable with strict output formats. For the HAVE_FANCY_SIMD issue on Broadwell-EP that's expected, AVX-512 is required for it and your E5-2696v4 only has AVX2."
+    },
+    {
+      "author": "Impossible_Art9151",
+      "score": "2",
+      "text": "Impossible_Art9151\n•\n4mo ago\n\nnice setup! some thoughts\n\nik_llama.cpp consistently outperforms llama.cpp by ~1–5%\n\nI wouldn't focus on tweaking here. 1-5% are neglectable, not worth.\nIf speed matters, get more VRAM.\nWith 24GB you are hitting the CPU penalty, speed decreases \"exponentially\" to CPU speed with each GB not fitting into VRAM.\n\nQwen3.5-122B at 9 t/s tg — usable for interactive chat?\n\n9t/s would be close to \"usable\" if there weren't the thinking delays. => more VRAM! thinking off might help, but lowers quality.\n\nYour setup is great, keep in mind, you can run GLM 5.1 in a reasonable quant but awful low speeds.\nIf I were you: Keep this setup for testing, developing, private use, use cases where speed does not matter, batched processing...\nInstead of pimping your setup with expensive cards like rtx 6000 pro consider the purchase like nvidia DGX. where you can run a qwen 3.5 122B in higher speeds. Your system is great in what it is. Other use cases => other hardware.\n\nI am not expert enough for your use cases. They sound ambitious ...."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1shhmjg",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:32:10Z",
+  "discovered_by_query_ids": [
+    "8011324fedef",
+    "9bf97b84adbc"
+  ],
+  "quality": {
+    "score": 0.754,
+    "evidence": 0.8,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

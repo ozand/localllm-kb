@@ -1,0 +1,91 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu8atq/i_ran_those_benchmarks_we_all_see_on_youtube/",
+  "title": "I ran those benchmarks we all see on YouTube locally",
+  "author": "on_line187",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\non_line187\nI ran those benchmarks we all see on YouTube locally\nResources\n\nRan the standard four locally overnight. Every item graded mechanically — executed\nunit tests for code, sympy equivalence for maths, **no LLM judge anywhere**.\n\n**Setup:** Qwen 3.8 27B Instruct, Q8_0 GGUF, LM Studio, 2× RTX 3090 (full offload,\n16k ctx). 2,483 items, 9.1 hours.\n\n## Scores\n\nBenchmark\tScore\tItems\tTime\n\nGSM8K (full test)\t96.7%\t1275/1319\t245 min\nMATH-500\t86.4%\t432/500\t238 min\nHumanEval\t95.5% ±1.6\tmean of 3 runs\t20 min each\nMBPP (test split)\t80.0%\t400/500\t48 min\n\nReasoning on for the maths, off for the code — on this model long code generation\nis exactly where its thinking fails to terminate (see below).\n\n---\n\n## The actual finding: 3–9% of items produce most of the errors\n\nQwen 3.8 is a reasoning model, and sometimes its thinking **never terminates** —\nit burns the whole token budget in `reasoning_content` and emits no answer. My\nharness re-asks those with thinking disabled so nothing is left blank.\n\nSplitting every result by whether that fallback fired:\n\nEval\tReasoning completed\tReasoning stalled\n\nGSM8K\t98.1% (1253/1277)\t52.4% (22/42)\nMATH-500\t94.3% (429/455)\t6.7% (3/45)\nACT (separate run)\t98.4% (311/316)\t57.7% (15/26)\n\nThree independent evaluations, same shape. When it finishes thinking it's at\nceiling. When it stalls it falls off a cliff.\n\n**On MATH-500 this single defect costs about 8 points** — 86.4% measured vs ~94%\nif the stalls are excluded. Three correct out of 45. On hard competition maths,\nstripping the reasoning doesn't degrade the answer, it destroys it.\n\nThe stalls also ate 60 of GSM8K's 245 minutes while contributing almost nothing.\n\nIf you run this model on anything where correctness matters, this is the thing to\nwatch. It doesn't error — it just quietly answers worse on the hardest slice.\n\n---\n\n## MATH-500 breakdown\n\nClean monotonic decline by difficulty, which is what a real result should look like:\n\nLevel\tScore\t\tSubject\tScore\n\n1\t97.7%\t\tAlgebra\t95.2%\n2\t95.6%\t\tNumber Theory\t95.2%\n3\t92.4%\t\tPrealgebra\t87.8%\n4\t86.7%\t\tCounting & Probability\t84.2%\n5\t71.6%\t\tPrecalculus\t82.1%\n\t\t\tGeometry\t78.0%\n\t\t\tIntermediate Algebra\t75.3%\n\nGeometry weakest, which tracks for a model reasoning about spatial problems in text.\n\n---\n\n## Contamination: I measured it instead of guessing\n\nGSM8K, HumanEval and MBPP all predate this model and are all over the web. So I\ntested it: give the model the first 35% of an item and ask it to reproduce the\nrest verbatim. Then — the part usually missing — I computed a **baseline**: how\nsimilar is one item's ending to a *different* item's ending? That's the overlap\nyou get from shared structure with zero memorisation.\n\nDataset\tModel's continuation\tNo-memorisation floor\tGap\n\nGSM8K\t0.297\t0.106\t+0.191\nHumanEval\t0.387\t0.080\t+0.307\nMBPP\t0.187\t0.129\t+0.058\n\n**Honest caveat:** that gap is not pure memorisation. A model completing\n\"Natalia sold clips to 48 friends in April…\" will reuse \"Natalia\" and \"clips\"\nwithout having memorised anything — prefix-conditioning inflates the number.\n\nThe harder evidence is individual items. HumanEval had **one continuation at 0.896\nsimilarity** and three above 0.6 — reproducing ~90% of a specific docstring is not\neasily explained by conditioning. MBPP showed essentially nothing.\n\nSo: **treat HumanEval's 95.5% as the softest number here.** MBPP's 80% is the one\nI'd trust most. That ordering matches what's independently known about these\ndatasets.\n\n---\n\n## Error bars, because single-run benchmark numbers lie\n\nI ran HumanEval three times at temperature 0.2: **94.5, 97.6, 94.5**.\n\nMean 95.5%, **spread 3.1 points**. On a 164-item benchmark that's ±2.5 items of\npure sampling noise. If you see two models a point apart on HumanEval, that\ndifference is probably nothing.\n\n---\n\n## Harness bugs I hit — all of which made the model look worse\n\nWorth listing, because every one of them silently scored *me* instead of the model:\n\n**HumanEval prompts sometimes define a helper the answer depends on**\n(`encode_cyclic` for `decode_cyclic`). I was only prepending the prompt when\nthe entry point was missing, so the helper got dropped → NameError on correct\nsolutions. Always prepend the prompt; it's valid Python on its own.\n\n**A safety blocklist that refused `eval`.** HumanEval `do_algebra` is *meant*\nto be solved by evaluating an expression the function builds. Blocking it\nscored the harness, not the model. Kept the filesystem/network/import blocks,\ndropped the `eval` block — everything runs in a temp dir in a separate process\nunder a timeout anyway.\n\n**Stripping leading whitespace off extracted code**, which destroyed the\nindentation whenever a model returned only a function body → IndentationError.\n\n`math_verify` is broken on Windows/Python 3.14 (multiprocessing handle errors,\nand it failed `\\frac{1}{2}` vs `0.5`). Wrote my own normaliser + sympy\nequivalence with a 23-case self-test.\n\nI only caught 1–3 because the grader had self-tests. If you're building an eval\nharness, write them first — the failure mode is silently under-reporting.\n\n---\n\n## Other gotchas for local runs\n\n- **`reasoning_effort: \"none\"`** is how you disable Qwen 3.8's thinking in LM\nStudio. The documented `chat_template_kwargs: {\"enable_thinking\": false}` had\n*no effect* for me.\n- **`lms load` can't select a quant.** `lms load \"qwen/qwen3.8-27b@q6_k\"` fails\nwith \"Model not found\" and the bare key silently loads whatever's selected in\nthe GUI. Use the `lmstudio` Python SDK and verify with\n`handle.get_info().model_key`.\n- **`requests` mangles UTF-8 on the streaming endpoint** — the SSE response\ndeclares no charset so it assumes ISO-8859-1. Set `r.encoding = \"utf-8\"`.\n\n---\n\n## Caveats\n\n- Single sample per item at temperature 0.2 (except HumanEval, run 3×). No\nbest-of-N, no majority vote, no self-consistency.\n- MBPP run 0-shot with the test asserts shown so the model gets the right function\nname. Many published MBPP numbers are 3-shot, so this isn't directly comparable.\n- MATH-500 is the standard 500-problem subset, not the full MATH test set.\n- Contamination probing is indicative, not proof — see the caveat above.\n\nShare",
+  "comments": [
+    {
+      "author": "Cautious_Chicken_604",
+      "score": "3",
+      "text": "Cautious_Chicken_604\n•\n1d ago\n\nYou're missing a whole bunch of vital information about how it was run, so it doesn't tell us much.\n\n[deleted]\n•\n1d ago"
+    },
+    {
+      "author": "cunasmoker69420",
+      "score": "0",
+      "text": "cunasmoker69420\n•\n22h ago\n\nSlop post"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vu8atq",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:37:22Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.259,
+    "evidence": 0.4,
+    "relevance": 0.111,
+    "community_scrutiny": 0.2,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

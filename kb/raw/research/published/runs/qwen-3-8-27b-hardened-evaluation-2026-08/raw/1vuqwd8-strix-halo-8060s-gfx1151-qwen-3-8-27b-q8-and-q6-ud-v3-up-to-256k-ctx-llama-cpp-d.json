@@ -1,0 +1,136 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuqwd8/strix_halo_8060s_gfx1151_qwen3827b_q8_and_q6_ud/",
+  "title": "Strix Halo (8060S / gfx1151), Qwen-3.8-27B @ Q8 and Q6 UD v3, up to 256K ctx, llama.cpp, DFlash2, vision, real workloads quality and steady performances, optimized recipes, ...",
+  "author": "PieBru",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n16h ago\nPieBru\nStrix Halo (8060S / gfx1151), Qwen-3.8-27B @ Q8 and Q6 UD v3, up to 256K ctx, llama.cpp, DFlash2, vision, real workloads quality and steady performances, optimized recipes, ...\nResources\n\nHi fellows fully-local halos,\n\nafter manually following existing guides, I decided to build an LLM API endpoint installation and optimization guide that works even when autonomously followed by my pi agent, so I can install/experiment/reinstall easily and without babysitting.\n\nQ8 is my default citizen, options for Q6 and Q5. Recipes: Quality (Q8), Balanced (Q6), Speed (Q5), Vision (Q8). All with Unsloth Dynamic Quants 3.0, DFlash2 (except vision). Scripts for download the right LLMs, interactive testing, systemd `--user` install, adaptive quality and performances optimization.\n\nRepo: https://github.com/PieBru/Qwen-3.8-27B_Strix-Halo_gfx1151\n\nHumans architected, verified, sealed. AI assistants built and wrote all the delivered stuff, built with pi and Qwen-3.8-27B.\n\nPiero\n\nP.S.: constructive proposals and PR are welcome.\n\nP.P.S.: no speed races, please. IMO speed is useful, but quality is fundamental - one subtle bug fewer or a better codebase always pays for itself in wall-time gained.\n\nShare",
+  "comments": [
+    {
+      "author": "dob312",
+      "score": "4",
+      "text": "dob312\n•\n12h ago\n\nwriting the guide so an agent can follow it unattended is the underrated part here. if the docs survive an agent taking them literally, they'll survive humans too. systemd --user for the install is a nice touch\n\nPieBru\n•\n4h ago\n\nThat's my principle. Today harness (for me pi + ponytail + Qwen 3.8 27B) are good enough to do the hard work, provided that after the human architecture definition they are caged in a proposal -> loop until ok (specify -> critical audit -> refine and improve spec) -> plan -> tasks -> loop until ok (build -> verify) -> document (into the codebase, the only source of truth) -> user-side documentation -> human verify before applying their seal on the current feature, agent publishes and, in cases such an installable component, verifies the whole installation by following the documentation like a first-time user would do.\n\nThis is why in the post I wrote \"Humans architected, verified, sealed. AI assistants built and wrote all the delivered stuff, built with pi and Qwen-3.8-27B.\""
+    },
+    {
+      "author": "PieBru",
+      "score": "1",
+      "text": "PieBru\n•\n4h ago\n\nThat's my principle. Today harness (for me pi + ponytail + Qwen 3.8 27B) are good enough to do the hard work, provided that after the human architecture definition they are caged in a proposal -> loop until ok (specify -> critical audit -> refine and improve spec) -> plan -> tasks -> loop until ok (build -> verify) -> document (into the codebase, the only source of truth) -> user-side documentation -> human verify before applying their seal on the current feature, agent publishes and, in cases such an installable component, verifies the whole installation by following the documentation like a first-time user would do.\n\nThis is why in the post I wrote \"Humans architected, verified, sealed. AI assistants built and wrote all the delivered stuff, built with pi and Qwen-3.8-27B.\""
+    },
+    {
+      "author": "notdba",
+      "score": "2",
+      "text": "notdba\n•\n8h ago\n\nYour agent ran into vk::DeviceLostError after 128k context right?\n\nPieBru\n•\n4h ago\n\nYes, at ~160k filling (allocating works up to 256k) and thanks for spotting that possible upstream bug (Vulkan?). Anyway, very bad wording in the README, updated now.\n\nI verified and used all ctx allocations up to 256k, they all work. The tg speed depends on the filled context, not the allocated context, so allocating 256k costs only RAM (with 128GB RAM it doesn't hurt me). The vulkan issue (bug?) is when the prefill reaches ~160k.\n\nI used to set the ctx to 128k because in my everyday usage (pi + ponytail) it's large enough for the agent workloads, at the same time small enough to avoid most large context problems.\n\nWeeks ago, pi agent was auto-compacting the context at the end of a \"phase\" (no further prompts queued) and it often overflowed past my 128k setting, this is why I was using 256k, but observed the Vulkan bug at ~160k. meanwhile, pi agent probably fixed that bug, because now it compacts before reaching the max context threshold.\n\nCorrected the README, as my pi verified: \"Now TL;DR and body say the same thing: 256k of window, ~128k of content — the margin rule (soft 100k < fence 128k < crash ~160k) stays intact underneath.\"\n\nHobbster\n•\n22m ago\n\nIs it ~160k or a 10 minute timeout during prefill/pp?"
+    },
+    {
+      "author": "PieBru",
+      "score": "1",
+      "text": "PieBru\n•\n4h ago\n\nYes, at ~160k filling (allocating works up to 256k) and thanks for spotting that possible upstream bug (Vulkan?). Anyway, very bad wording in the README, updated now.\n\nI verified and used all ctx allocations up to 256k, they all work. The tg speed depends on the filled context, not the allocated context, so allocating 256k costs only RAM (with 128GB RAM it doesn't hurt me). The vulkan issue (bug?) is when the prefill reaches ~160k.\n\nI used to set the ctx to 128k because in my everyday usage (pi + ponytail) it's large enough for the agent workloads, at the same time small enough to avoid most large context problems.\n\nWeeks ago, pi agent was auto-compacting the context at the end of a \"phase\" (no further prompts queued) and it often overflowed past my 128k setting, this is why I was using 256k, but observed the Vulkan bug at ~160k. meanwhile, pi agent probably fixed that bug, because now it compacts before reaching the max context threshold.\n\nCorrected the README, as my pi verified: \"Now TL;DR and body say the same thing: 256k of window, ~128k of content — the margin rule (soft 100k < fence 128k < crash ~160k) stays intact underneath.\"\n\nHobbster\n•\n22m ago\n\nIs it ~160k or a 10 minute timeout during prefill/pp?"
+    },
+    {
+      "author": "Hobbster",
+      "score": "1",
+      "text": "Hobbster\n•\n22m ago\n\nIs it ~160k or a 10 minute timeout during prefill/pp?"
+    },
+    {
+      "author": "Fit_Advice8967",
+      "score": "2",
+      "text": "Fit_Advice8967\n•\n5h ago\n\nhuge."
+    },
+    {
+      "author": "beneath_steel_sky",
+      "score": "2",
+      "text": "beneath_steel_sky\n•\n4h ago\n\nSounds great. I was just going to try https://github.com/julianmb/halofpx and now here's yours with dflash2\n\nPieBru\n•\n3h ago\n\nInteresting, keep us informed, the devil is in the details"
+    },
+    {
+      "author": "PieBru",
+      "score": "1",
+      "text": "PieBru\n•\n3h ago\n\nInteresting, keep us informed, the devil is in the details"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuqwd8",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:56:07Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.557,
+    "evidence": 0.6,
+    "relevance": 0.364,
+    "community_scrutiny": 0.8,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/PieBru/Qwen-3.8-27B_Strix-Halo_gfx1151",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/julianmb/halofpx",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

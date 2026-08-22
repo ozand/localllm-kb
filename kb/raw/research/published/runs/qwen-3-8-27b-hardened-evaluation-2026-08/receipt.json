@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "skill_used": "reddit-deep-research",
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "run_directory": "kb/raw/research/runs/qwen-3-8-27b-hardened-evaluation-2026-08",
+  "status": "captured",
+  "counts": {
+    "queries_total": 36,
+    "queries_completed": 5,
+    "discovered_unique": 50,
+    "selected": 50,
+    "captured": 49,
+    "skipped": 1,
+    "pending": 0,
+    "errors": 0
+  },
+  "target_selected_sources": 50,
+  "saturation": {
+    "window_size": 5,
+    "minimum_new_sources": 2,
+    "consecutive_low_yield_queries": 0,
+    "reached": false,
+    "reason": null
+  },
+  "scripts": [
+    ".agents/skills/reddit-deep-research/scripts/reddit_research.py",
+    ".agents/skills/reddit-deep-research/scripts/render_research.py"
+  ],
+  "artifacts": {
+    "run_manifest": "run.json",
+    "query_manifest": "queries.json",
+    "thread_manifest": "threads.json",
+    "errors": "errors.jsonl",
+    "outbound_references": "outbound-references.json",
+    "follow_up": "follow-up.json"
+  },
+  "outbound_verification_counts": {
+    "redirected": 0,
+    "unreachable": 0,
+    "unverified": 567,
+    "verified": 0
+  },
+  "complete": true,
+  "residual_risks": [
+    "Reddit captures are community observations, not canonical facts.",
+    "Outbound references marked unverified still require manual evidence inspection."
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1plwgun/8x_rtx_pro_6000_server_complete/",
+  "title": "8x RTX Pro 6000 server complete",
+  "author": "koushd",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n8mo ago\nkoushd\n8x RTX Pro 6000 server complete\nOther\n\nTL;DR: 768 GB VRAM via 8x RTX Pro 6000 (4 Workstation, 4 Max-Q) + Threadripper PRO 9955WX + 384 GB RAM\n\nLonger:\n\nI've been slowly upgrading my GPU server over the past few years. I initially started out using it to train vision models for another project, and then stumbled into my current local LLM obsession.\n\nIn reverse order:\n\nPic 5: Initially was using only a single 3080, which I upgraded to a 4090 + 3080. Running on an older 10900k Intel system.\n\nPic 4: But the mismatched sizes for training batches and compute was problematic, so I upgraded to double 4090s and sold off the 3080. They were packed in there, and during a training run I ended up actually overheating my entire server closet, and all the equipment in there crashed. When I noticed something was wrong and opened the door, it was like being hit by the heat of an industrial oven.\n\nPic 3: 2x 4090 in their new home. Due to the heat issue, I decided to get a larger case and a new host that supported PCIe 5.0 and faster CPU RAM, the AMD 9950x. I ended up upgrading this system to dual RTX Pro 6000 Workstation edition (not pictured).\n\nPic 2: I upgraded to 4x RTX Pro 6000. This is where problems started happening. I first tried to connect them using M.2 risers and it would not POST. The AM5 motherboard I had couldn't allocate enough IOMMU addressing and would not post with the 4th GPU, 3 worked fine. There are consumer motherboards out there that could likely have handled it, but I didn't want to roll the dice on another AM5 motherboard as I'd rather get a proper server platform.\n\nIn the meantime, my workaround was to use 2 systems (brought the 10900k out of retirement) with 2 GPUs each in pipeline parallel. This worked, but the latency between systems chokes up token generation (prompt processing was still fast). I tried using 10Gb DAC SFP and also Mellanox cards for RDMA to reduce latency, but gains were minimal. Furthermore, powering all 4 means they needed to be on separate breakers (2400w total) since in the US the max load you can put through 120v 15a is ~1600w.\n\nPic 1: 8x RTX Pro 6000. I put a lot more thought into this before building this system. There were more considerations, and it became a many months long obsession planning the various components: motherboard, cooling, power, GPU connectivity, and the physical rig.\n\nGPUs: I considered getting 4 more RTX Pro 6000 Workstation Editions, but powering those would, by my math, require a third PSU. I wanted to keep it 2, so I got Max Q editions. In retrospect I should have gotten the Workstation editions as they run much quieter and cooler, as I could have always power limited them.\n\nRig: I wanted something fairly compact and stackable that I could directly connect 2 cards on the motherboard and use 3 bifurcating risers for the other 6. Most rigs don't support taller PCIe cards on the motherboard directly and assume risers will be used. Options were limited, but I did find some generic \"EO3\" stackable frames on Aliexpress. The stackable case also has plenty of room for taller air coolers.\n\nPower: I needed to install a 240V outlet; switching from 120V to 240V was the only way to get ~4000W necessary out of a single outlet without a fire. Finding 240V high-wattage PSUs was a bit challenging as there are only really two: the Super Flower Leadex 2800W and the Silverstone Hela 2500W. I bought the Super Flower, and its specs indicated it supports 240V split phase (US). It blew up on first boot. I was worried that it took out my entire system, but luckily all the components were fine. After that, I got the Silverstone, tested it with a PSU tester (I learned my lesson), and it powered on fine. The second PSU is the Corsair HX1500i that I already had.\n\nMotherboard: I kept going back and forth between using a Zen5 EPYC or Threadripper PRO (non-PRO does not have enough PCI lanes). Ultimately, the Threadripper PRO seemed like more of a known quantity (can return to Amazon if there were compatibility issues) and it offered better air cooling options. I ruled out water cooling, because the small chance of a leak would be catastrophic in terms of potential equipment damage. The Asus WRX90 had a lot of concerning reviews, so the Asrock WRX90 was purchased, and it has been great. Zero issues on POST or RAM detection on all 8 RDIMMs, running with the expo profile.\n\nCPU/Memory: The cheapest Pro Threadripper, the 9955wx with 384GB RAM. I won't be doing any CPU based inference or offload on this.\n\nConnectivity: The board has 7 PCIe 5.0 x16 cards. At least 1 bifurcation adapter would be necessary. Reading up on the passive riser situation had me worried there would be signal loss at PCIe 5.0 and possibly even 4.0. So I ended up going the MCIO route and bifurcated 3 5.0 lanes. A PCIe switch was also an option, but compatibility seemed sketchy and it's costs $3000 by itself. The first MCIO adapters I purchased were from ADT Link; however, they had two significant design flaws: The risers are powered via the SATA peripheral power, which is a fire hazard as those cable connectors/pins are only rated for 50W or so safely. Secondly, the PCIe card itself does not have enough clearance for the heat pipe that runs along the back of most EPYC and Threadripper boards just behind the PCI slots on the back of the case. Only 2 slots were usable. I ended up returning the ADT Link risers and buying several Shinreal MCIO risers instead. They worked no problem.\n\nAnyhow, the system runs great (though loud due to the Max-Q cards which I kind of regret). I typically use Qwen3 Coder 480b fp8, but play around with GLM 4.6, Kimi K2 Thinking, and Minimax M2 at times. Personally I find Coder and M2 the best for my workflow in Cline/Roo. Prompt processing is crazy fast, I've seen VLLM hit around ~24000 t/s at times. Generation is still good for these large models, despite it not being HBM, around 45-100 t/s depending on model.\n\nHappy to answer questions in the comments.\n\nShare",
+  "comments": [
+    {
+      "author": "WithoutReason1729",
+      "score": "1",
+      "text": "WithoutReason1729\n•\n8mo ago\n\nYour post is getting popular and we just featured it on our Discord! Come check it out!\n\nYou've also been given a special flair for your contribution. We appreciate your post!\n\nI am a bot and this action was performed automatically."
+    },
+    {
+      "author": "FZNNeko",
+      "score": "51",
+      "text": "FZNNeko\n•\n8mo ago\n\nI was looking at getting a new PSU’s literally yesterday and checked the reviews on the Super Flower 2800w that was on Amazon. Some guy said they tried the Super Flower, plugged it in and it blew up. Was that reviewer you or is that now two confirmed times the 2800 blew up on first attempt?\n\nkoushd\n•\n8mo ago\n\nThis was my review yes 😅\n\nFreonr2\n•\n8mo ago\nkei-ayanami\n•\n8mo ago\n\nWowww XD\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nShit, man that’s a bummer. My 2800W Super Flower has been impeccable :/\n\nkoushd\n•\n8mo ago\n\nHonestly I would have preferred it for the titanium efficiency rating and it's also quieter. Funny story, I did end up ordering a second one a few months later, as a used item (just out of curiosity to see if it worked and I would feel bad about unpacking and frying a new one), and amazon send me back the exact same exploded unit.\n\ncantgetthistowork\n•\n8mo ago\n\nAmazon outsourced the returns QC to the end consumer. Much more efficient for them to keep forwarding the hot potato to the next customer through the delivery chain until it sticks than to hire a human to do it\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\n😂 omg what. It’s a crap shoot out there right now! So glad I bought all that DDR5 back in September 😳\n\nmxforest\n•\n8mo ago\n Top 1% Commenter\n\nThe world is too damn small."
+    },
+    {
+      "author": "koushd",
+      "score": "98",
+      "text": "koushd\n•\n8mo ago\n\nThis was my review yes 😅\n\nFreonr2\n•\n8mo ago\nkei-ayanami\n•\n8mo ago\n\nWowww XD"
+    },
+    {
+      "author": "kei-ayanami",
+      "score": "3",
+      "text": "kei-ayanami\n•\n8mo ago\n\nWowww XD"
+    },
+    {
+      "author": "__JockY__",
+      "score": "9",
+      "text": "__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nShit, man that’s a bummer. My 2800W Super Flower has been impeccable :/\n\nkoushd\n•\n8mo ago\n\nHonestly I would have preferred it for the titanium efficiency rating and it's also quieter. Funny story, I did end up ordering a second one a few months later, as a used item (just out of curiosity to see if it worked and I would feel bad about unpacking and frying a new one), and amazon send me back the exact same exploded unit.\n\ncantgetthistowork\n•\n8mo ago\n\nAmazon outsourced the returns QC to the end consumer. Much more efficient for them to keep forwarding the hot potato to the next customer through the delivery chain until it sticks than to hire a human to do it\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\n😂 omg what. It’s a crap shoot out there right now! So glad I bought all that DDR5 back in September 😳\n\nmxforest\n•\n8mo ago\n Top 1% Commenter\n\nThe world is too damn small."
+    },
+    {
+      "author": "koushd",
+      "score": "22",
+      "text": "koushd\n•\n8mo ago\n\nHonestly I would have preferred it for the titanium efficiency rating and it's also quieter. Funny story, I did end up ordering a second one a few months later, as a used item (just out of curiosity to see if it worked and I would feel bad about unpacking and frying a new one), and amazon send me back the exact same exploded unit.\n\ncantgetthistowork\n•\n8mo ago\n\nAmazon outsourced the returns QC to the end consumer. Much more efficient for them to keep forwarding the hot potato to the next customer through the delivery chain until it sticks than to hire a human to do it\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\n😂 omg what. It’s a crap shoot out there right now! So glad I bought all that DDR5 back in September 😳\n\nmxforest\n•\n8mo ago\n Top 1% Commenter\n\nThe world is too damn small."
+    },
+    {
+      "author": "cantgetthistowork",
+      "score": "8",
+      "text": "cantgetthistowork\n•\n8mo ago\n\nAmazon outsourced the returns QC to the end consumer. Much more efficient for them to keep forwarding the hot potato to the next customer through the delivery chain until it sticks than to hire a human to do it"
+    },
+    {
+      "author": "__JockY__",
+      "score": "5",
+      "text": "__JockY__\n•\n8mo ago\n Top 1% Commenter\n\n😂 omg what. It’s a crap shoot out there right now! So glad I bought all that DDR5 back in September 😳"
+    },
+    {
+      "author": "mxforest",
+      "score": "2",
+      "text": "mxforest\n•\n8mo ago\n Top 1% Commenter\n\nThe world is too damn small."
+    },
+    {
+      "author": "duodmas",
+      "score": "192",
+      "text": "duodmas\n•\n8mo ago\n\nThis is the PC version of a Porsche in a trailer park. I’m stunned you’d just throw $100k worth of compute on a shitty aluminum frame. Balancing a fan on a GPU so it blows on the other cards is hilarious.\n\nFor the love of god please buy a rack.\n\nDirect_Turn_1484\n•\n8mo ago\n\nYeah, same here. Having the money for the cards but not for the server makes it look like either a crazy fire sale on these cards happened or OP took out a second mortgage that’s going to end really badly.\n\nkoushd\n•\n8mo ago\n\nRan out of money for the rack and 8u case\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nHey brother, this is the way! Love the jank-to-functionality ratio.\n\nRemember that old Gigabyte MZ33-AR1 you helped out with? Well I sold it to a guy on eBay who then busted the CPU pins, filed a “not as described” return with eBay (who sided with the buyer despite photographic evidence refuting his claim) and now it’s back with me. I’m out a mobo and $900 with only this Gigabyte e-waste to show for it.\n\nGlad your build went a bit better!\n\nMonkeylashes\n•\n8mo ago\n\nThis is why I don't sell any of my old pc hardware. Much better to hold on to it for another system, or hand it down to a friend or family when needed.\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI see your point, but I couldn’t stomach the thought of letting a $900 mint condition motherboard depreciate n my basement. Honestly I’m still kinda shocked at the lies the buyer told and how one-sided eBay’s response has been. Hard lesson learned.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYea I had the exact same experience with eBay, I sold 4x v100….three guys had no issues but the 4th one had no idea what they were buying they reach out asking how to power these as the windows said not sufficient power to start the GPU on top of that they were using dell poweredge server that didn’t support this GPU and they filed the not as described complaint and eBay just sided with them….i had to eat the 2x shipping cost for nothing :(\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI keep hearing this story. It seems there are some buyers who know exactly how to game the eBay system and that there's a whole industry of people who buy rare electronics, strip them, and then return it \"item not as described\". Or someone has a broken widget, so they buy a replacement, swap their broken part for the working part, then return the now-fucked-item as INAD knowing full well that eBay will always pay for the return shipping if the seller refuses. Gross.\n\nDespite all this I'm somewhat relieved that it's happened now of all times, because until recently I'd been buying/selling many $$$$ GPUs without incident. I guess I got lucky.\n\nNow that I know the scam and I've experienced first-hand how eBay treats sellers (and I've been a 23-year customer with 100% positive feedback) even when it's obviously a scam I won't be selling any more expensive electronic items on eBay. They're dead to me.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYep not selling anything on eBay ever again. I’ll buy when it makes sense but even for that I’ll probably avoid them and buy refurbished on Amazon if I can find the option.\n\n4 more replies\nIll_Recipe7620\n•\n8mo ago\n\nYou don’t need an 8U case.  You can get 10 GPUs in a 4U if you use the actual server cards.\n\ngtderEvan\n•\n8mo ago\n\nThat, or acquired via methods other than purchase.\n\nDirect_Turn_1484\n•\n8mo ago\n\nTrue!\n\n1 more reply\nkovnev\n•\n8mo ago\n\nA porsche? A single 5090 is a fucking PC porsche. Heck, my 5080 PC is.\n\nThis is the... I don't even know what. Koenigsegg? 8 Koenigsegg's strapped together that are somehow faster?\n\nduodmas\n•\n8mo ago\n\nThe metaphors my dad taught me growing up only go so far in this new world.\n\n1 more reply\nkoushd\n•\n8mo ago\n\nhahaha I feel that\n\nI did look extensively at rack mount chassis, but due to starting with several workstation cards (ie, they're not blowers), options were limited. As mentioned in the long ass post, I did start with a couple cards in a 4u chassis with that ended up overheating."
+    },
+    {
+      "author": "Direct_Turn_1484",
+      "score": "49",
+      "text": "Direct_Turn_1484\n•\n8mo ago\n\nYeah, same here. Having the money for the cards but not for the server makes it look like either a crazy fire sale on these cards happened or OP took out a second mortgage that’s going to end really badly.\n\nkoushd\n•\n8mo ago\n\nRan out of money for the rack and 8u case\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nHey brother, this is the way! Love the jank-to-functionality ratio.\n\nRemember that old Gigabyte MZ33-AR1 you helped out with? Well I sold it to a guy on eBay who then busted the CPU pins, filed a “not as described” return with eBay (who sided with the buyer despite photographic evidence refuting his claim) and now it’s back with me. I’m out a mobo and $900 with only this Gigabyte e-waste to show for it.\n\nGlad your build went a bit better!\n\nMonkeylashes\n•\n8mo ago\n\nThis is why I don't sell any of my old pc hardware. Much better to hold on to it for another system, or hand it down to a friend or family when needed.\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI see your point, but I couldn’t stomach the thought of letting a $900 mint condition motherboard depreciate n my basement. Honestly I’m still kinda shocked at the lies the buyer told and how one-sided eBay’s response has been. Hard lesson learned.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYea I had the exact same experience with eBay, I sold 4x v100….three guys had no issues but the 4th one had no idea what they were buying they reach out asking how to power these as the windows said not sufficient power to start the GPU on top of that they were using dell poweredge server that didn’t support this GPU and they filed the not as described complaint and eBay just sided with them….i had to eat the 2x shipping cost for nothing :(\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI keep hearing this story. It seems there are some buyers who know exactly how to game the eBay system and that there's a whole industry of people who buy rare electronics, strip them, and then return it \"item not as described\". Or someone has a broken widget, so they buy a replacement, swap their broken part for the working part, then return the now-fucked-item as INAD knowing full well that eBay will always pay for the return shipping if the seller refuses. Gross.\n\nDespite all this I'm somewhat relieved that it's happened now of all times, because until recently I'd been buying/selling many $$$$ GPUs without incident. I guess I got lucky.\n\nNow that I know the scam and I've experienced first-hand how eBay treats sellers (and I've been a 23-year customer with 100% positive feedback) even when it's obviously a scam I won't be selling any more expensive electronic items on eBay. They're dead to me.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYep not selling anything on eBay ever again. I’ll buy when it makes sense but even for that I’ll probably avoid them and buy refurbished on Amazon if I can find the option.\n\n4 more replies\nIll_Recipe7620\n•\n8mo ago\n\nYou don’t need an 8U case.  You can get 10 GPUs in a 4U if you use the actual server cards.\n\ngtderEvan\n•\n8mo ago\n\nThat, or acquired via methods other than purchase.\n\nDirect_Turn_1484\n•\n8mo ago\n\nTrue!\n\n1 more reply"
+    },
+    {
+      "author": "koushd",
+      "score": "48",
+      "text": "koushd\n•\n8mo ago\n\nRan out of money for the rack and 8u case\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nHey brother, this is the way! Love the jank-to-functionality ratio.\n\nRemember that old Gigabyte MZ33-AR1 you helped out with? Well I sold it to a guy on eBay who then busted the CPU pins, filed a “not as described” return with eBay (who sided with the buyer despite photographic evidence refuting his claim) and now it’s back with me. I’m out a mobo and $900 with only this Gigabyte e-waste to show for it.\n\nGlad your build went a bit better!\n\nMonkeylashes\n•\n8mo ago\n\nThis is why I don't sell any of my old pc hardware. Much better to hold on to it for another system, or hand it down to a friend or family when needed.\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI see your point, but I couldn’t stomach the thought of letting a $900 mint condition motherboard depreciate n my basement. Honestly I’m still kinda shocked at the lies the buyer told and how one-sided eBay’s response has been. Hard lesson learned.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYea I had the exact same experience with eBay, I sold 4x v100….three guys had no issues but the 4th one had no idea what they were buying they reach out asking how to power these as the windows said not sufficient power to start the GPU on top of that they were using dell poweredge server that didn’t support this GPU and they filed the not as described complaint and eBay just sided with them….i had to eat the 2x shipping cost for nothing :(\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI keep hearing this story. It seems there are some buyers who know exactly how to game the eBay system and that there's a whole industry of people who buy rare electronics, strip them, and then return it \"item not as described\". Or someone has a broken widget, so they buy a replacement, swap their broken part for the working part, then return the now-fucked-item as INAD knowing full well that eBay will always pay for the return shipping if the seller refuses. Gross.\n\nDespite all this I'm somewhat relieved that it's happened now of all times, because until recently I'd been buying/selling many $$$$ GPUs without incident. I guess I got lucky.\n\nNow that I know the scam and I've experienced first-hand how eBay treats sellers (and I've been a 23-year customer with 100% positive feedback) even when it's obviously a scam I won't be selling any more expensive electronic items on eBay. They're dead to me.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYep not selling anything on eBay ever again. I’ll buy when it makes sense but even for that I’ll probably avoid them and buy refurbished on Amazon if I can find the option.\n\n4 more replies\nIll_Recipe7620\n•\n8mo ago\n\nYou don’t need an 8U case.  You can get 10 GPUs in a 4U if you use the actual server cards."
+    },
+    {
+      "author": "__JockY__",
+      "score": "18",
+      "text": "__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nHey brother, this is the way! Love the jank-to-functionality ratio.\n\nRemember that old Gigabyte MZ33-AR1 you helped out with? Well I sold it to a guy on eBay who then busted the CPU pins, filed a “not as described” return with eBay (who sided with the buyer despite photographic evidence refuting his claim) and now it’s back with me. I’m out a mobo and $900 with only this Gigabyte e-waste to show for it.\n\nGlad your build went a bit better!\n\nMonkeylashes\n•\n8mo ago\n\nThis is why I don't sell any of my old pc hardware. Much better to hold on to it for another system, or hand it down to a friend or family when needed.\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI see your point, but I couldn’t stomach the thought of letting a $900 mint condition motherboard depreciate n my basement. Honestly I’m still kinda shocked at the lies the buyer told and how one-sided eBay’s response has been. Hard lesson learned.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYea I had the exact same experience with eBay, I sold 4x v100….three guys had no issues but the 4th one had no idea what they were buying they reach out asking how to power these as the windows said not sufficient power to start the GPU on top of that they were using dell poweredge server that didn’t support this GPU and they filed the not as described complaint and eBay just sided with them….i had to eat the 2x shipping cost for nothing :(\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI keep hearing this story. It seems there are some buyers who know exactly how to game the eBay system and that there's a whole industry of people who buy rare electronics, strip them, and then return it \"item not as described\". Or someone has a broken widget, so they buy a replacement, swap their broken part for the working part, then return the now-fucked-item as INAD knowing full well that eBay will always pay for the return shipping if the seller refuses. Gross.\n\nDespite all this I'm somewhat relieved that it's happened now of all times, because until recently I'd been buying/selling many $$$$ GPUs without incident. I guess I got lucky.\n\nNow that I know the scam and I've experienced first-hand how eBay treats sellers (and I've been a 23-year customer with 100% positive feedback) even when it's obviously a scam I won't be selling any more expensive electronic items on eBay. They're dead to me.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYep not selling anything on eBay ever again. I’ll buy when it makes sense but even for that I’ll probably avoid them and buy refurbished on Amazon if I can find the option.\n\n4 more replies"
+    },
+    {
+      "author": "Monkeylashes",
+      "score": "8",
+      "text": "Monkeylashes\n•\n8mo ago\n\nThis is why I don't sell any of my old pc hardware. Much better to hold on to it for another system, or hand it down to a friend or family when needed.\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI see your point, but I couldn’t stomach the thought of letting a $900 mint condition motherboard depreciate n my basement. Honestly I’m still kinda shocked at the lies the buyer told and how one-sided eBay’s response has been. Hard lesson learned.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYea I had the exact same experience with eBay, I sold 4x v100….three guys had no issues but the 4th one had no idea what they were buying they reach out asking how to power these as the windows said not sufficient power to start the GPU on top of that they were using dell poweredge server that didn’t support this GPU and they filed the not as described complaint and eBay just sided with them….i had to eat the 2x shipping cost for nothing :(\n\n__JockY__\n•\n8mo ago\n Top 1% Commenter\n\nI keep hearing this story. It seems there are some buyers who know exactly how to game the eBay system and that there's a whole industry of people who buy rare electronics, strip them, and then return it \"item not as described\". Or someone has a broken widget, so they buy a replacement, swap their broken part for the working part, then return the now-fucked-item as INAD knowing full well that eBay will always pay for the return shipping if the seller refuses. Gross.\n\nDespite all this I'm somewhat relieved that it's happened now of all times, because until recently I'd been buying/selling many $$$$ GPUs without incident. I guess I got lucky.\n\nNow that I know the scam and I've experienced first-hand how eBay treats sellers (and I've been a 23-year customer with 100% positive feedback) even when it's obviously a scam I won't be selling any more expensive electronic items on eBay. They're dead to me.\n\nTrifleHopeful5418\n•\n8mo ago\n\nYep not selling anything on eBay ever again. I’ll buy when it makes sense but even for that I’ll probably avoid them and buy refurbished on Amazon if I can find the option."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1plwgun",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:35:57Z",
+  "discovered_by_query_ids": [
+    "f3da52993800"
+  ],
+  "quality": {
+    "score": 0.638,
+    "evidence": 0.8,
+    "relevance": 0.222,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://discord.gg/PgFhZ8cnWW",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.newegg.com/p/14G-061B-00044",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

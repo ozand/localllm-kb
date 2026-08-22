@@ -1,0 +1,184 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vsinej/am_i_doing_something_wrong_qwen_38_27b_seems/",
+  "title": "Am I doing something wrong? Qwen 3.8 27B seems useless for agentic coding",
+  "author": "BuahahaXD",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3d ago\nBuahahaXD\nAm I doing something wrong? Qwen 3.8 27B seems useless for agentic coding\nQuestion | Help\n\nI have been using local models on/off for like 2 years or so but never really used them extensively because the closed ones were always much better.\n\nOnce Qwen 3.8 27B was released I decided to give it another serious try. I configured Cline and ZooCode as VSCode addons, installed a few MCP servers and added one skill.\n\nWhen I used these tools with Deepseek V4 Flash - they do the job quite well (mostly Home Assistant configuration editing etc.) but it is still way worse than Claude Code/GitHub copilot that I use at work.\n\nWith Qwen - running the Q6_K quant from unsloth - it runs tons of tokens and eventually either finishes the task (often incorrectly) or doesnt finish at all because it ends in a loop or tries to fix something that isn't broken.\n\nI run the model on Windows 11 using LM Studio. The hardware I have is powerful enough - 2x3090Ti. I offload it fully to GPU and set the context limit to around 50k tokens. Also - I was aware of the overthinking problem so I modified the prompt template to use medium effort instead.\n\nYet still - I struggle to complete most of the tasks at hand. Can you tell me what I am doing wrong? I suspect that maybe Qwen is still using high reasoning effort but I have no way of checking that.\n\nOr should I rather not use LM Studio but a different tool?\n\nShare",
+  "comments": [
+    {
+      "author": "dark-light92",
+      "score": "469",
+      "text": "dark-light92\n•\n3d ago\nllama.cpp\n\n50k token context is the problem. The model is basically Guy Pearce from Memento.\n\nVisual_Internal_6312\n•\n3d ago\nBankjaPrameth\n•\n3d ago\n\nI love this image\n\ndark-light92\n•\n3d ago\nllama.cpp\n\nThis should be its own post.\n\nFlamenverfer\n•\n3d ago\n\nI thought this was going to be a Brooklyn Nine Nine reference\n\nmaqifrnswa\n•\n3d ago\n\nBrilliant analogy.\n\nThis also sounds like an xy problem. The problem is long thinking with short context causes failure. The solution is to either: turn off thinking, reduce thinking level (reasoning_effort in prompts to low, I wouldn't mess with the template that's an unusual approach that might cause problems later if something assumes the default), and/or increase cache size.\n\nNow, where was I?\n\ndark-light92\n•\n3d ago\nllama.cpp\n\nYou were supposed to send me all your VRAM.\n\nzdy132\n•\n3d ago\n\nI got all mine from here: https://downloadvram.com/\n\nseamonn\n•\n3d ago\n Top 1% Commenter\n\ncan I run Mythos locally after this?\n\nzdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location\n\nNo-Key2113\n•\n2d ago\n\nI’m pissed there’s no rickroll. What happened to the internet\n\nstephen_holograf\n•\n3d ago\n\nI think you were chasing that guy… whooops, nope, he’s chasing you.\n\nFlamenverfer\n•\n3d ago\n\nLike from the fish from Finding Nemo?!\n\nCareless-Split-6362\n•\n3d ago\n\nJust to let you know, yesterday I was around 150k and upset because the model was struggling to reply sometimes. 🙃\n\nbring_back_the_v10s\n•\n3d ago\n\nGreat movie btw. Underrated \n\n16 more replies\nSerLaidaLot\n•\n3d ago\n\nAgreed. I think 200k is the bare minimum you can get away with.\n\nchocofoxy\n•\n2d ago\n\ncomment of the day\n\nsonaj9657\n•\n2d ago\n\nHonestly, that is a pretty accurate comparison 😂 Once the important context falls outside the window, it is basically starting over with a sticky note and trying to piece together what happened. A bigger context window would definitely make long conversations feel a lot less frustrating.\n\nsophia6512\n•\n2d ago\n\nHonestly, the Memento comparison is spot on. Once the conversation gets long enough you can practically feel the model forgetting why you started the conversation in the first place. At that point you are basically leaving notes for its future self.\n\nthomas2385\n•\n2d ago\n\nHaha, that Memento comparison is painfully accurate. Once the context gets too long, it really does feel like you are talking to a model that forgot half the conversation five minutes ago. You almost have to keep reminding it what you were doing."
+    },
+    {
+      "author": "Visual_Internal_6312",
+      "score": "299",
+      "text": "Visual_Internal_6312\n•\n3d ago\nBankjaPrameth\n•\n3d ago\n\nI love this image\n\ndark-light92\n•\n3d ago\nllama.cpp\n\nThis should be its own post.\n\nFlamenverfer\n•\n3d ago\n\nI thought this was going to be a Brooklyn Nine Nine reference"
+    },
+    {
+      "author": "BankjaPrameth",
+      "score": "37",
+      "text": "BankjaPrameth\n•\n3d ago\n\nI love this image"
+    },
+    {
+      "author": "dark-light92",
+      "score": "26",
+      "text": "dark-light92\n•\n3d ago\nllama.cpp\n\nThis should be its own post."
+    },
+    {
+      "author": "Flamenverfer",
+      "score": "2",
+      "text": "Flamenverfer\n•\n3d ago\n\nI thought this was going to be a Brooklyn Nine Nine reference"
+    },
+    {
+      "author": "maqifrnswa",
+      "score": "77",
+      "text": "maqifrnswa\n•\n3d ago\n\nBrilliant analogy.\n\nThis also sounds like an xy problem. The problem is long thinking with short context causes failure. The solution is to either: turn off thinking, reduce thinking level (reasoning_effort in prompts to low, I wouldn't mess with the template that's an unusual approach that might cause problems later if something assumes the default), and/or increase cache size.\n\nNow, where was I?\n\ndark-light92\n•\n3d ago\nllama.cpp\n\nYou were supposed to send me all your VRAM.\n\nzdy132\n•\n3d ago\n\nI got all mine from here: https://downloadvram.com/\n\nseamonn\n•\n3d ago\n Top 1% Commenter\n\ncan I run Mythos locally after this?\n\nzdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location\n\nNo-Key2113\n•\n2d ago\n\nI’m pissed there’s no rickroll. What happened to the internet\n\nstephen_holograf\n•\n3d ago\n\nI think you were chasing that guy… whooops, nope, he’s chasing you."
+    },
+    {
+      "author": "dark-light92",
+      "score": "44",
+      "text": "dark-light92\n•\n3d ago\nllama.cpp\n\nYou were supposed to send me all your VRAM.\n\nzdy132\n•\n3d ago\n\nI got all mine from here: https://downloadvram.com/\n\nseamonn\n•\n3d ago\n Top 1% Commenter\n\ncan I run Mythos locally after this?\n\nzdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location\n\nNo-Key2113\n•\n2d ago\n\nI’m pissed there’s no rickroll. What happened to the internet"
+    },
+    {
+      "author": "zdy132",
+      "score": "28",
+      "text": "zdy132\n•\n3d ago\n\nI got all mine from here: https://downloadvram.com/\n\nseamonn\n•\n3d ago\n Top 1% Commenter\n\ncan I run Mythos locally after this?\n\nzdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location\n\nNo-Key2113\n•\n2d ago\n\nI’m pissed there’s no rickroll. What happened to the internet"
+    },
+    {
+      "author": "seamonn",
+      "score": "12",
+      "text": "seamonn\n•\n3d ago\n Top 1% Commenter\n\ncan I run Mythos locally after this?\n\nzdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location"
+    },
+    {
+      "author": "zdy132",
+      "score": "18",
+      "text": "zdy132\n•\n3d ago\n\nNo it's too dangerous for your own good, trust me bro. You don't want to accidentally bomb some kids in the middle east do you?\n\nPositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play.\n\nGrizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate.\n\nLoose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location"
+    },
+    {
+      "author": "PositiveBit01",
+      "score": "9",
+      "text": "PositiveBit01\n•\n3d ago\n\nA strange game. The only winning move is not to play."
+    },
+    {
+      "author": "Grizzly_Corey",
+      "score": "2",
+      "text": "Grizzly_Corey\n•\n3d ago\n\n“…Add a sandbox. “\n\nIt’s free real estate."
+    },
+    {
+      "author": "Loose_Comparison368",
+      "score": "2",
+      "text": "Loose_Comparison368\n•\n3d ago\n\nClaude Maven wants to know your location"
+    },
+    {
+      "author": "No-Key2113",
+      "score": "2",
+      "text": "No-Key2113\n•\n2d ago\n\nI’m pissed there’s no rickroll. What happened to the internet"
+    },
+    {
+      "author": "stephen_holograf",
+      "score": "7",
+      "text": "stephen_holograf\n•\n3d ago\n\nI think you were chasing that guy… whooops, nope, he’s chasing you."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vsinej",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:47:17Z",
+  "discovered_by_query_ids": [
+    "c27c0519cdf1"
+  ],
+  "quality": {
+    "score": 0.571,
+    "evidence": 0.4,
+    "relevance": 0.545,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://downloadvram.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/peculiar-ragdoll/Qwen-Sharp-Chat-Templates",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://pi.dev/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://simonwillison.net/2026/Aug/16/qwen-38-27b/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://pi.dev/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

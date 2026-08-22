@@ -1,0 +1,177 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vtlmtx/massive_tiny_release_supra2mediumbase_a_tiny_25m/",
+  "title": "[MASSIVE TINY RELEASE] - Supra2-Medium-Base - a tiny 25M parameters model competing heavily with our previous 50M model!",
+  "author": "LH-Tech_AI",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\nLH-Tech_AI\n[MASSIVE TINY RELEASE] - Supra2-Medium-Base - a tiny 25M parameters model competing heavily with our previous 50M model!\nNew Model\n\nHey guys!\n\nSupra2-Medium is finally out! It's a 25M parameters qwen3 architecture model trained entirely from scratch (on our new rig: RTX 5060 Ti 16GB + the new RTX 5060 8GB!).\n\nHere's how it competes in benchmarks with Supra-50M-Base (which is double as large!!):\n\nNote: This is a BASE model only; instruction tuned version maybe to come in the next time.\n\nLink to our HF org: https://huggingface.co/SupraLabs\n\n--> Link to the model: https://huggingface.co/SupraLabs/Supra2-Medium-Base <--\n\nHere's a sample from the model:\n\nArtificial intelligence (AI) is espoused by the AI community.\nThe AI community is a group of people who are interested in AI and are interested in the use of AI in the field of AI.\nThe goal of AI is to improve the quality of life of people in the field.\nThe aim of AI is the development of AI and the application of AI in a society.\nThe purpose of AI is that it can be used to improve the performance of the society.\nIt is a technology that is used to improve human intelligence.\nThe technology is used to make the human intelligence.Artificial intelligence (AI) is espoused by the AI community.\nThe AI community is a group of people who are interested in AI and are interested in the use of AI in the field of AI.\nThe goal of AI is to improve the quality of life of people in the field.\nThe aim of AI is the development of AI and the application of AI in a society.\nThe purpose of AI is that it can be used to improve the performance of the society.\nIt is a technology that is used to improve human intelligence.\nThe technology is used to make the human intelligence.\n\nGive us a like and a follow and feel free to provide us with feedback! 🤗🔥\n\n...and...stay tuned: Supra3 coming soon with four models: Flash-Lite 25M, Flash 50M, Pro 75M and Ultra 100M. 👀\n\nShare",
+  "comments": [
+    {
+      "author": "Equivalent_Bit_461",
+      "score": "10",
+      "text": "Equivalent_Bit_461\n•\n2d ago\n\nwhat can it be used for? What actual workload? With what would you integrate it, etc.\n\nLH-Tech_AI\n•\n2d ago\n\nIt's a base model so it's intended to be finetuned for instruction tuning or something. Now, as it's a base model, I would just load it as the readme says with transformers and try it. Have fun 😊🤗\n\nEasy_Blacksmith_5550\n•\n2d ago\n\nright, the sample output alone kinda answers this tbh\n\nLH-Tech_AI\n•\n2d ago\n\nyeah right. It's a small models doing it's best 😅😅😅"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "10",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nIt's a base model so it's intended to be finetuned for instruction tuning or something. Now, as it's a base model, I would just load it as the readme says with transformers and try it. Have fun 😊🤗"
+    },
+    {
+      "author": "Easy_Blacksmith_5550",
+      "score": "5",
+      "text": "Easy_Blacksmith_5550\n•\n2d ago\n\nright, the sample output alone kinda answers this tbh\n\nLH-Tech_AI\n•\n2d ago\n\nyeah right. It's a small models doing it's best 😅😅😅"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "10",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nyeah right. It's a small models doing it's best 😅😅😅"
+    },
+    {
+      "author": "H-L_echelle",
+      "score": "5",
+      "text": "H-L_echelle\n•\n2d ago\n\nLet's go a new SupraLabs model :D (and several more incoming!)\n\nI just like how fun small models are. Very dumb, but fun.\n\nWith your 0.1M that was starting to output words, I feel like there might be a few ways to use these were they could maybe be helpful. For now you've led me to start playing around with small title generators, but I do have a few other ideas in mind (which would require an actual LLM, as opposed to the approaches I've tried or the approaches I am trying for TinyTitle)\n\nLH-Tech_AI\n•\n2d ago\n\nThank you so much 🤗 Feel free to share ideas and results with us!"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "2",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nThank you so much 🤗 Feel free to share ideas and results with us!"
+    },
+    {
+      "author": "_TheWolfOfWalmart_",
+      "score": "3",
+      "text": "_TheWolfOfWalmart_\n•\n2d ago\n Top 1% Poster\n\nInteresting, but I was also just looking at your 100M instruct model.\n\nJust for laughs, I'm gonna load it up on my old dual Pentium 3 @ 1.4 GHz server and do CPU inference. I wonder how it runs! It seems to be pretty coherent based on your examples in the model card. Would be pretty cool if you can have an actual conversation with a reasonably functional LLM on a system that ancient.\n\nLH-Tech_AI\n•\n2d ago\n\nPerfect. You can use Supra2-100M Instruct from us here: https://huggingfac e.co/SupraLabs/Supra2-100M-Instruct\n\nI'd love to see tokens per second and rse outputs from your system 🤩🔥🤗"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "1",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nPerfect. You can use Supra2-100M Instruct from us here: https://huggingfac e.co/SupraLabs/Supra2-100M-Instruct\n\nI'd love to see tokens per second and rse outputs from your system 🤩🔥🤗"
+    },
+    {
+      "author": "johnnyApplePRNG",
+      "score": "2",
+      "text": "johnnyApplePRNG\n•\n2d ago\n\nbpb on fineweb holdout validation text?\n\nLH-Tech_AI\n•\n2d ago\n\nNot sure lol 😄"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "1",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nNot sure lol 😄"
+    },
+    {
+      "author": "Iory1998",
+      "score": "2",
+      "text": "Iory1998\n•\n2d ago\n\nMassive an tiny in one sentence... that hurt my brain.\n\nLH-Tech_AI\n•\n1d ago\n\nYeah lol 😂"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "2",
+      "text": "LH-Tech_AI\n•\n1d ago\n\nYeah lol 😂"
+    },
+    {
+      "author": "joaop_2004",
+      "score": "2",
+      "text": "joaop_2004\n•\n2d ago\n\nMatching a 50M model on the shown benchmarks is interesting, but the repeated sample suggests the next useful test is generation stability rather than another aggregate score. Could you publish the exact evaluation tasks, token budget, tokenizer, and several fixed-seed continuations for both the 25M and 50M checkpoints? That would make it easier to tell whether the smaller model learned a useful distribution or is overfitting narrow benchmarks.\n\nLH-Tech_AI\n•\n2d ago\n\nThanks for the feedback. Maybe we can do this tomorrow!"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "1",
+      "text": "LH-Tech_AI\n•\n2d ago\n\nThanks for the feedback. Maybe we can do this tomorrow!"
+    },
+    {
+      "author": "LH-Tech_AI",
+      "score": "1",
+      "text": "LH-Tech_AI\n•\n1d ago\nTHE INSTRUCT VERSION IS OUT!!!\n\nhttps://huggingface.co/SupraLabs/Supra2-Medium-Instruct"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vtlmtx",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:38:54Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.38,
+    "evidence": 0.4,
+    "relevance": 0.0,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://huggingface.co/SupraLabs",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/SupraLabs/Supra2-Medium-Base",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/SupraLabs/Supra2-Medium-Instruct",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

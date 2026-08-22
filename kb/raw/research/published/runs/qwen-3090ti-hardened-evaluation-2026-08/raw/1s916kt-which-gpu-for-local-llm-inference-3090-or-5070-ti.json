@@ -1,0 +1,126 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1s916kt/which_gpu_for_local_llm_inference_3090_or_5070_ti/",
+  "title": "Which GPU for local LLM inference? 3090 or 5070 Ti",
+  "author": "robkered",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n5mo ago\nrobkered\nWhich GPU for local LLM inference? 3090 or 5070 Ti\nQuestion | Help\n\nI want to get a new GPU for local LLM inference.\nThe 3090 is the best 24GB VRAM option, but is 2 generations old.\nSecond hand, its prices are at the same level of a new 5070 Ti.\nWhich card would be the best purchase?\n\nComparing specs:\n\nCard\tRTX 3090\tRTX 5070 Ti\n\nCUDA cores\t10,496\t8,960\nTensor cores\t328 @ gen3 (FP16/bfloat16/TF32)\t280 @ gen5\nMemory\t24 GB @ 936.2 GB/s GDDR6X\t16 GB @ GDDR7\nTensor compute\t71 TFLOPS @ FP16\t175.76 TFLOPS @ FP16\n\t\t351.52 TFLOPS @ FP8\n\t\t703.04 TFLOPS @ FP4\nCUDA compute\t35.58 TFLOPS BF16/FP32/TF32\t43.94 TFLOPS FP16/FP32\n\nRaw compute\n\nI haven't been able to find actual benchmarks of the 3rd vs 5th gen Nvidia consumer cards.\nBut from the specs, I would expect that with the new tensor cores, you should get huge gains.\nNot sure if the inference software (using llama-cpp probably) manages to use the FP4/8 compute for quantized models, that would be a game changer, as it would boost the 44 CUDA TFLOPS to 703 for FP4.\n\nI do expect in practice that the party is limited to FP16 or FP8 tensor cores only.\nWho can clarify what happens here?\nTheoretically, the 5070 TI could give a 10x in raw compute at FP4 (703 vs. 71 TFLOPS), when comparing with the 3090.\n\nMemory effect on model size\n\nOf course the memory reduction from 24 to 16 GB is significant.\nHowever, when storing models at FP4, that should still fit ~32B models (without KV cache context). So in practice you should be able to run the 27B model, even with the vision encoder and limited context window.\nIs that correct?\n\nCompared to the unreasonably-priced 5090, getting 2x 5070 Ti also seems a super option for running up to 60-70B models (with 3-4 bit quantization). Any thoughts on that?\n\nI want to get a new GPU for local LLM inference.\nThe 3090 is the best 24GB VRAM option, but is 2 generations old.\nSecond hand, its prices are at the same level of a new 5070 Ti.\nWhich card would be the best purchase?\n\nShare",
+  "comments": [
+    {
+      "author": "_twrecks_",
+      "score": "2",
+      "text": "_twrecks_\n•\n5mo ago\n\nVram is king. 12gb is not enough, 16gb 5070ti are hard to find. I found the speed improvement for llms on the 5070ti to be small."
+    },
+    {
+      "author": "fragment_me",
+      "score": "7",
+      "text": "fragment_me\n•\n5mo ago\n Top 1% Commenter\n\n50% more VRAM on the 3090 that’s an easy decision."
+    },
+    {
+      "author": "aeonbringer",
+      "score": "2",
+      "text": "aeonbringer\n•\n5mo ago\n\nThe thing with 3090 is that it’s the last generation of consumer card nvidia kept nvlink on. So you can effectively pool multiple cards. With new consumer cards, they have to go through the slow pcie lanes so you can’t easily pool vram. Nvidia gate kept this functionality to their server cards h100+ now that’s 20k+. \n\n[deleted]\n•\n5mo ago"
+    },
+    {
+      "author": "jacek2023",
+      "score": "1",
+      "text": "jacek2023\n•\n5mo ago\nllama.cpp\n Top 1% Commenter\n\nI replaced 3090 on my desktop with 5070. I use 5070 for desktop apps like Lightroom, Photoshop, Davinci Resolve or Steam games. It's not great for LLM because it has only 12GB of VRAM. My 3090 went to another computer where I have 72+ GB of VRAM, I use it for LLMs.\n\nSo ask yourself what is your primary use, LLMs or games.\n\nrobkered\n•\n5mo ago\n\nPlease read my question properly. I am asking about 50xx cards with 16 GB VRAM, and the 5070 Ti is in a sweet spot. Quite a bit cheaper than the 5080 at a marginal drop in performance, same memory size.\n\njacek2023\n•\n5mo ago\nllama.cpp\n Top 1% Commenter\n\nI shared my personal experiences, I have 12GB version.\n\njikilan_\n•\n5mo ago\n\nCan still do both, get a cpu with iGPU then multiple gpu for the llm. Sunshine work great on idle gpu"
+    },
+    {
+      "author": "robkered",
+      "score": "1",
+      "text": "robkered\n•\n5mo ago\n\nPlease read my question properly. I am asking about 50xx cards with 16 GB VRAM, and the 5070 Ti is in a sweet spot. Quite a bit cheaper than the 5080 at a marginal drop in performance, same memory size.\n\njacek2023\n•\n5mo ago\nllama.cpp\n Top 1% Commenter\n\nI shared my personal experiences, I have 12GB version."
+    },
+    {
+      "author": "jacek2023",
+      "score": "2",
+      "text": "jacek2023\n•\n5mo ago\nllama.cpp\n Top 1% Commenter\n\nI shared my personal experiences, I have 12GB version."
+    },
+    {
+      "author": "jikilan_",
+      "score": "0",
+      "text": "jikilan_\n•\n5mo ago\n\nCan still do both, get a cpu with iGPU then multiple gpu for the llm. Sunshine work great on idle gpu"
+    },
+    {
+      "author": "learnlogik",
+      "score": "1",
+      "text": "learnlogik\n•\n5mo ago\n\nIf your primary need is for inference, what LLM Model you wanted to run against your GPU? More than GPU, model and purpose comes first. Have you checked with inferencebench website for model vs GPU benchmarking? Worth doing it\n\nrobkered\n•\n5mo ago\n\nI am running Qwen3.5-27B now with 4bit weights, runs quite smoothly on a single 3090 with about 100k context window (8bit QV cache) using llama-cpp.\nFor larger models I can scale up to a second 3090.\nJust though that since the recent developments in quantization of model weights (Google's TurboQuant as an example, but way more is out there), 16 GB is the new 24 GB.\nSince the cost of the 3090 (2nd hand) is almost equal to a brand new 5070 Ti, it's worth a proper discussion.\n\nrobkered\n•\n5mo ago\n\nAlso, Qwen3.5-9B runs smoothly at 8bit weights even. The 8-9B models easily fit in 16 GB VRAM with 50-100k ish context window sizes. So if you don't need the max model with respect to parameter size, 16 GB VRAM is perfect"
+    },
+    {
+      "author": "robkered",
+      "score": "1",
+      "text": "robkered\n•\n5mo ago\n\nI am running Qwen3.5-27B now with 4bit weights, runs quite smoothly on a single 3090 with about 100k context window (8bit QV cache) using llama-cpp.\nFor larger models I can scale up to a second 3090.\nJust though that since the recent developments in quantization of model weights (Google's TurboQuant as an example, but way more is out there), 16 GB is the new 24 GB.\nSince the cost of the 3090 (2nd hand) is almost equal to a brand new 5070 Ti, it's worth a proper discussion."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1s916kt",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:00Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.644,
+    "evidence": 0.6,
+    "relevance": 0.556,
+    "community_scrutiny": 0.9,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

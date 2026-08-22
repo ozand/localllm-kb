@@ -1,0 +1,195 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1tx9tf2/finally_finished_my_llm_server_epyc_9575f_4_rtx/",
+  "title": "Finally finished my LLM server: EPYC 9575F, 4× RTX 3090 (96GB VRAM), 768GB ECC RAM",
+  "author": "C0smo777",
+  "post_body": "1\nRepost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n3mo ago\nC0smo777\nFinally finished my LLM server: EPYC 9575F, 4× RTX 3090 (96GB VRAM), 768GB ECC RAM\nDiscussion\n\nTook a while, but Nalthis is finally up and assembled.\n\nSpecs:\n\nSupermicro H13SSL-N\n\nAMD EPYC 9575F (64C/128T Zen 5)\n\n768GB DDR5-5600 ECC RDIMM\n\n4× RTX 3090 (96GB VRAM total)\n\n1× 2TB NVMe OS\n\n2× 3.94TB NVMe data\n\n2050W ATX 3.1 PSU\n\nCorsair 9000D\n\nPlanned use:\n\nvLLM - high throughput small models\n\nllamacpp - larger reasoning models\n\nI have been making a space simulation and finally ready to integrate AI into how the NPCs doing planning, hoping to get decent throughput on smaller models with lots of requests\n\nThe original plan involved a lot more MCIO risers and custom mounting, but I was able to fit two of the 3090s directly on the motherboard and front-mount the other two.\n\nPlanning to run all four cards power-limited to 250W since this box is primarily for LLM inference.\n\nThe 9000D has been surprisingly good for a 4×3090 build. I also used these fan mounts for additional airflow:\n\nhttps://www.thingiverse.com/thing:2804306\n\nStill need to finish thermal testing, but the hardware side is finally done.\n\nHead of Cluster Operations: Stannis leading from the couch as well\n\nA few people have asked about the economics of the build.\n\nMost of these parts were purchased over a year ago before prices climbed significantly. If I were buying everything today, I probably wouldn't build the exact same machine because it would be well outside my budget.\n\nSome of the prices I paid:\n\n12× 64GB DDR5 ECC RDIMMs: ~$325 each\n\n3× RTX 3090s: ~$650 each\n\nEPYC 9575F: ~$3,800\n\nSo while the system wasn't cheap, it made a lot more sense when the parts were purchased than it would if I started the build from scratch today.\n\nA big part of the build was taking advantage of opportunities as they appeared on the used and grey markets rather than trying to source everything at once.\n\nShare",
+  "comments": [
+    {
+      "author": "MotokoAGI",
+      "score": "56",
+      "text": "MotokoAGI\n•\n3mo ago\n\nRun a large model like KimiK2.6, GLM5.1 MiniMax2.7 etc and give us the numbers. I want to know what $25k+ gets us today\n\nval_in_tech\n•\n3mo ago\n\n~7-8 tps, 200-500 prefil on larger ones. Unfortunate reality of that build - won't run anything fast except 27b\n\nmoderately-extremist\n•\n3mo ago\n\nYeah, I recently priced out almost this exact build with the intention of having something that can run GLM5.1 Q6. But it wouldn't be a nearly fast enough for an interactive chat experience. This would be reasonable numbers for setting it on a task and then coming back later to see the product though. And could run Qwen3.6-27B when you need more of a realtime interaction.\n\n[deleted]\n•\n3mo ago\nDeepOrangeSky\n•\n3mo ago\n\nWhat if, instead of bothering with VRAM, you got some dual-socket setup with like 24 channels of memory, with 24 sticks of DDR5 32GB sticks, instead of a single socket 12-channel setup with 12 sticks of 64GB DDR5 + 96GB of VRAM the way OP has? Would that get higher speeds than the OP-style setup? With this amount of offloading, having more channels of fast DDR5 on dual, good CPUs comes out faster than having less channels on a single socket plus 96GB of VRAM, right?\n\nAlso, what if you added like, a lone RTX Pro 6000 Blackwell (96GB vram) to that 24-channel dual socket setup. Would its speeds barely go up at all, so adding a \"small\" (proportionally speaking) amount of VRAM to the setup would be basically a waste of money, as it would only get like 10% faster or 30% faster, not like 200% faster or something?\n\n(All of these questions are in regards to running a 1T a32b MoE like Kimi, just to clarify)\n\nI'll add pings to u/JockY and u/FullStackSensei in case they have thoughts about it\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nNUMA is still largely unsupported, at least in llama.cpp and derivatives.\n\nGenerally, you can't lump the channels of dual or more CPUs together. It doesn't work that way. The bandwidth between NUMA nodes is 1/U3 - 1/6th the memory bandwidth depending on platforms, with SP5 Epyc being closer to 1/4 - 1/5th.\n\nEven with proper NUMA support, don't expect anywhere near linear scaling, because of latency. Whether you perform a central gather of partial sums (which seems what most are doing) or distribute partial sums across NUMA domains and let each domain do the final sum, this introduces quite a bit of latency.\n\nBut even if there was software for this, IMO DDR5 platforms are far from cost effective. This was my opinion before the RAMpocalipse, and it's still my opinion today. AMD platforms struggle to make use of available memory bandwidth due to their architecture. Infinity fabric isn't in practice, and introduces significant latencies because it cache coherence communication competes with memory access for the same bandwidth. You can see this even in single socket Epyc, where an 8 channel DDR4-3200 48 core 7642 which in theory has 208GB/s bandwidth, struggles to break past 120GB/s in real world workloads, while a six channel 24 core (engineering sample) 8260 with DDR4-2666, which has a theoretical 128GB/s, gets ~102GB/s without much effort.\n\n_TheWolfOfWalmart_\n•\n3mo ago\n•\nEdited 3mo ago\n Top 1% Poster\n\nI've been working on adding proper mirroring support (\"--numa mirror\") which duplicates model weights in RAM locally for each NUMA node and forces worker threads to get pinned and access only their own node-local copy of the weights.\n\nI've got a PowerEdge R740 with dual Xeon 6248R (so 48 cores total) and 768 GB RAM (all channels populated) that I'm trying to get the most out of. So far I'm seeing about a 55-60% speed increase over \"--numa isolate\" and just using one socket.\n\nI am trying to see if I can get to decently usable speeds for models like Kimi K2.6 and GLM-5.1.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual"
+    },
+    {
+      "author": "val_in_tech",
+      "score": "14",
+      "text": "val_in_tech\n•\n3mo ago\n\n~7-8 tps, 200-500 prefil on larger ones. Unfortunate reality of that build - won't run anything fast except 27b\n\nmoderately-extremist\n•\n3mo ago\n\nYeah, I recently priced out almost this exact build with the intention of having something that can run GLM5.1 Q6. But it wouldn't be a nearly fast enough for an interactive chat experience. This would be reasonable numbers for setting it on a task and then coming back later to see the product though. And could run Qwen3.6-27B when you need more of a realtime interaction.\n\n[deleted]\n•\n3mo ago\nDeepOrangeSky\n•\n3mo ago\n\nWhat if, instead of bothering with VRAM, you got some dual-socket setup with like 24 channels of memory, with 24 sticks of DDR5 32GB sticks, instead of a single socket 12-channel setup with 12 sticks of 64GB DDR5 + 96GB of VRAM the way OP has? Would that get higher speeds than the OP-style setup? With this amount of offloading, having more channels of fast DDR5 on dual, good CPUs comes out faster than having less channels on a single socket plus 96GB of VRAM, right?\n\nAlso, what if you added like, a lone RTX Pro 6000 Blackwell (96GB vram) to that 24-channel dual socket setup. Would its speeds barely go up at all, so adding a \"small\" (proportionally speaking) amount of VRAM to the setup would be basically a waste of money, as it would only get like 10% faster or 30% faster, not like 200% faster or something?\n\n(All of these questions are in regards to running a 1T a32b MoE like Kimi, just to clarify)\n\nI'll add pings to u/JockY and u/FullStackSensei in case they have thoughts about it\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nNUMA is still largely unsupported, at least in llama.cpp and derivatives.\n\nGenerally, you can't lump the channels of dual or more CPUs together. It doesn't work that way. The bandwidth between NUMA nodes is 1/U3 - 1/6th the memory bandwidth depending on platforms, with SP5 Epyc being closer to 1/4 - 1/5th.\n\nEven with proper NUMA support, don't expect anywhere near linear scaling, because of latency. Whether you perform a central gather of partial sums (which seems what most are doing) or distribute partial sums across NUMA domains and let each domain do the final sum, this introduces quite a bit of latency.\n\nBut even if there was software for this, IMO DDR5 platforms are far from cost effective. This was my opinion before the RAMpocalipse, and it's still my opinion today. AMD platforms struggle to make use of available memory bandwidth due to their architecture. Infinity fabric isn't in practice, and introduces significant latencies because it cache coherence communication competes with memory access for the same bandwidth. You can see this even in single socket Epyc, where an 8 channel DDR4-3200 48 core 7642 which in theory has 208GB/s bandwidth, struggles to break past 120GB/s in real world workloads, while a six channel 24 core (engineering sample) 8260 with DDR4-2666, which has a theoretical 128GB/s, gets ~102GB/s without much effort.\n\n_TheWolfOfWalmart_\n•\n3mo ago\n•\nEdited 3mo ago\n Top 1% Poster\n\nI've been working on adding proper mirroring support (\"--numa mirror\") which duplicates model weights in RAM locally for each NUMA node and forces worker threads to get pinned and access only their own node-local copy of the weights.\n\nI've got a PowerEdge R740 with dual Xeon 6248R (so 48 cores total) and 768 GB RAM (all channels populated) that I'm trying to get the most out of. So far I'm seeing about a 55-60% speed increase over \"--numa isolate\" and just using one socket.\n\nI am trying to see if I can get to decently usable speeds for models like Kimi K2.6 and GLM-5.1.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual Epyc 7642, both populated with 32GB sticks (192 and 256GB per socket, respectively). Doubling RAM on the Xeons would easily cost close to 2k."
+    },
+    {
+      "author": "moderately-extremist",
+      "score": "7",
+      "text": "moderately-extremist\n•\n3mo ago\n\nYeah, I recently priced out almost this exact build with the intention of having something that can run GLM5.1 Q6. But it wouldn't be a nearly fast enough for an interactive chat experience. This would be reasonable numbers for setting it on a task and then coming back later to see the product though. And could run Qwen3.6-27B when you need more of a realtime interaction.\n\n[deleted]\n•\n3mo ago"
+    },
+    {
+      "author": "DeepOrangeSky",
+      "score": "3",
+      "text": "DeepOrangeSky\n•\n3mo ago\n\nWhat if, instead of bothering with VRAM, you got some dual-socket setup with like 24 channels of memory, with 24 sticks of DDR5 32GB sticks, instead of a single socket 12-channel setup with 12 sticks of 64GB DDR5 + 96GB of VRAM the way OP has? Would that get higher speeds than the OP-style setup? With this amount of offloading, having more channels of fast DDR5 on dual, good CPUs comes out faster than having less channels on a single socket plus 96GB of VRAM, right?\n\nAlso, what if you added like, a lone RTX Pro 6000 Blackwell (96GB vram) to that 24-channel dual socket setup. Would its speeds barely go up at all, so adding a \"small\" (proportionally speaking) amount of VRAM to the setup would be basically a waste of money, as it would only get like 10% faster or 30% faster, not like 200% faster or something?\n\n(All of these questions are in regards to running a 1T a32b MoE like Kimi, just to clarify)\n\nI'll add pings to u/JockY and u/FullStackSensei in case they have thoughts about it\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nNUMA is still largely unsupported, at least in llama.cpp and derivatives.\n\nGenerally, you can't lump the channels of dual or more CPUs together. It doesn't work that way. The bandwidth between NUMA nodes is 1/U3 - 1/6th the memory bandwidth depending on platforms, with SP5 Epyc being closer to 1/4 - 1/5th.\n\nEven with proper NUMA support, don't expect anywhere near linear scaling, because of latency. Whether you perform a central gather of partial sums (which seems what most are doing) or distribute partial sums across NUMA domains and let each domain do the final sum, this introduces quite a bit of latency.\n\nBut even if there was software for this, IMO DDR5 platforms are far from cost effective. This was my opinion before the RAMpocalipse, and it's still my opinion today. AMD platforms struggle to make use of available memory bandwidth due to their architecture. Infinity fabric isn't in practice, and introduces significant latencies because it cache coherence communication competes with memory access for the same bandwidth. You can see this even in single socket Epyc, where an 8 channel DDR4-3200 48 core 7642 which in theory has 208GB/s bandwidth, struggles to break past 120GB/s in real world workloads, while a six channel 24 core (engineering sample) 8260 with DDR4-2666, which has a theoretical 128GB/s, gets ~102GB/s without much effort.\n\n_TheWolfOfWalmart_\n•\n3mo ago\n•\nEdited 3mo ago\n Top 1% Poster\n\nI've been working on adding proper mirroring support (\"--numa mirror\") which duplicates model weights in RAM locally for each NUMA node and forces worker threads to get pinned and access only their own node-local copy of the weights.\n\nI've got a PowerEdge R740 with dual Xeon 6248R (so 48 cores total) and 768 GB RAM (all channels populated) that I'm trying to get the most out of. So far I'm seeing about a 55-60% speed increase over \"--numa isolate\" and just using one socket.\n\nI am trying to see if I can get to decently usable speeds for models like Kimi K2.6 and GLM-5.1.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual Epyc 7642, both populated with 32GB sticks (192 and 256GB per socket, respectively). Doubling RAM on the Xeons would easily cost close to 2k.\n\nI understand the underlying issue why you need to do this, but it's still very limiting.\n\nIn the single socket scenario, are you pinning all threads to the physical cores? In my experience, the best performance I can get on dual Xeon or Dual Epyc is using --numa numactl and using numactl with --physcpubind to pin all threads to the physical cores (0-23 or 24-47 for both of us on the Xeons).\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nAgreed about tensor duplication. I’d like to avoid cutting my available model space in half! But then again, I’d like huge speed"
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "6",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nNUMA is still largely unsupported, at least in llama.cpp and derivatives.\n\nGenerally, you can't lump the channels of dual or more CPUs together. It doesn't work that way. The bandwidth between NUMA nodes is 1/U3 - 1/6th the memory bandwidth depending on platforms, with SP5 Epyc being closer to 1/4 - 1/5th.\n\nEven with proper NUMA support, don't expect anywhere near linear scaling, because of latency. Whether you perform a central gather of partial sums (which seems what most are doing) or distribute partial sums across NUMA domains and let each domain do the final sum, this introduces quite a bit of latency.\n\nBut even if there was software for this, IMO DDR5 platforms are far from cost effective. This was my opinion before the RAMpocalipse, and it's still my opinion today. AMD platforms struggle to make use of available memory bandwidth due to their architecture. Infinity fabric isn't in practice, and introduces significant latencies because it cache coherence communication competes with memory access for the same bandwidth. You can see this even in single socket Epyc, where an 8 channel DDR4-3200 48 core 7642 which in theory has 208GB/s bandwidth, struggles to break past 120GB/s in real world workloads, while a six channel 24 core (engineering sample) 8260 with DDR4-2666, which has a theoretical 128GB/s, gets ~102GB/s without much effort.\n\n_TheWolfOfWalmart_\n•\n3mo ago\n•\nEdited 3mo ago\n Top 1% Poster\n\nI've been working on adding proper mirroring support (\"--numa mirror\") which duplicates model weights in RAM locally for each NUMA node and forces worker threads to get pinned and access only their own node-local copy of the weights.\n\nI've got a PowerEdge R740 with dual Xeon 6248R (so 48 cores total) and 768 GB RAM (all channels populated) that I'm trying to get the most out of. So far I'm seeing about a 55-60% speed increase over \"--numa isolate\" and just using one socket.\n\nI am trying to see if I can get to decently usable speeds for models like Kimi K2.6 and GLM-5.1.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual Epyc 7642, both populated with 32GB sticks (192 and 256GB per socket, respectively). Doubling RAM on the Xeons would easily cost close to 2k.\n\nI understand the underlying issue why you need to do this, but it's still very limiting.\n\nIn the single socket scenario, are you pinning all threads to the physical cores? In my experience, the best performance I can get on dual Xeon or Dual Epyc is using --numa numactl and using numactl with --physcpubind to pin all threads to the physical cores (0-23 or 24-47 for both of us on the Xeons).\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nAgreed about tensor duplication. I’d like to avoid cutting my available model space in half! But then again, I’d like huge speed improvements, too.\n\nPerhaps port to DOS 386 Enhanced mode, install RAM Doubler, profit?\n\nFullstackSensei\n•\n2mo ago\nllama.cpp\n Top 1% Commenter\n\nJokes aside, forgot which one I used, but those RAM compression apps were quite effective back in the day.\n\nYou'd not only profit, but crash the RAM and storage market if you made something like this for the LLM age 😂\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA.\n\nDeepOrangeSky\n•\n3mo ago\n\nThanks, I'm glad I asked in that case.\n\nI guess the other main decision then is having a smaller ratio of total VRAM (in comparison to the huge total parameter size of the biggest MoEs, with larger amount of partial offloading) but with very high bandwidth and very high compute power per GPU, vs having a larger/full-amount (fits whole entire model in VRAM) amount of much lower bandwidth, and lower compute-power GPUs. I know you tend to advocate for the latter scenario (mainly for price/value reasons) on here, but"
+    },
+    {
+      "author": "_TheWolfOfWalmart_",
+      "score": "4",
+      "text": "_TheWolfOfWalmart_\n•\n3mo ago\n•\nEdited 3mo ago\n Top 1% Poster\n\nI've been working on adding proper mirroring support (\"--numa mirror\") which duplicates model weights in RAM locally for each NUMA node and forces worker threads to get pinned and access only their own node-local copy of the weights.\n\nI've got a PowerEdge R740 with dual Xeon 6248R (so 48 cores total) and 768 GB RAM (all channels populated) that I'm trying to get the most out of. So far I'm seeing about a 55-60% speed increase over \"--numa isolate\" and just using one socket.\n\nI am trying to see if I can get to decently usable speeds for models like Kimi K2.6 and GLM-5.1.\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual Epyc 7642, both populated with 32GB sticks (192 and 256GB per socket, respectively). Doubling RAM on the Xeons would easily cost close to 2k.\n\nI understand the underlying issue why you need to do this, but it's still very limiting.\n\nIn the single socket scenario, are you pinning all threads to the physical cores? In my experience, the best performance I can get on dual Xeon or Dual Epyc is using --numa numactl and using numactl with --physcpubind to pin all threads to the physical cores (0-23 or 24-47 for both of us on the Xeons).\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nAgreed about tensor duplication. I’d like to avoid cutting my available model space in half! But then again, I’d like huge speed improvements, too.\n\nPerhaps port to DOS 386 Enhanced mode, install RAM Doubler, profit?\n\nFullstackSensei\n•\n2mo ago\nllama.cpp\n Top 1% Commenter\n\nJokes aside, forgot which one I used, but those RAM compression apps were quite effective back in the day.\n\nYou'd not only profit, but crash the RAM and storage market if you made something like this for the LLM age 😂\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "2",
+      "text": "FullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nWhile I'd love to have NUMA support, forcing tensor duplication greatly reduces its usefulness, especially in the current climate. I have two 8260 ES and a dual Epyc 7642, both populated with 32GB sticks (192 and 256GB per socket, respectively). Doubling RAM on the Xeons would easily cost close to 2k.\n\nI understand the underlying issue why you need to do this, but it's still very limiting.\n\nIn the single socket scenario, are you pinning all threads to the physical cores? In my experience, the best performance I can get on dual Xeon or Dual Epyc is using --numa numactl and using numactl with --physcpubind to pin all threads to the physical cores (0-23 or 24-47 for both of us on the Xeons).\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nAgreed about tensor duplication. I’d like to avoid cutting my available model space in half! But then again, I’d like huge speed improvements, too.\n\nPerhaps port to DOS 386 Enhanced mode, install RAM Doubler, profit?\n\nFullstackSensei\n•\n2mo ago\nllama.cpp\n Top 1% Commenter\n\nJokes aside, forgot which one I used, but those RAM compression apps were quite effective back in the day.\n\nYou'd not only profit, but crash the RAM and storage market if you made something like this for the LLM age 😂\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA."
+    },
+    {
+      "author": "__JockY__",
+      "score": "1",
+      "text": "__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nAgreed about tensor duplication. I’d like to avoid cutting my available model space in half! But then again, I’d like huge speed improvements, too.\n\nPerhaps port to DOS 386 Enhanced mode, install RAM Doubler, profit?\n\nFullstackSensei\n•\n2mo ago\nllama.cpp\n Top 1% Commenter\n\nJokes aside, forgot which one I used, but those RAM compression apps were quite effective back in the day.\n\nYou'd not only profit, but crash the RAM and storage market if you made something like this for the LLM age 😂\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "1",
+      "text": "FullstackSensei\n•\n2mo ago\nllama.cpp\n Top 1% Commenter\n\nJokes aside, forgot which one I used, but those RAM compression apps were quite effective back in the day.\n\nYou'd not only profit, but crash the RAM and storage market if you made something like this for the LLM age 😂\n\n__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA."
+    },
+    {
+      "author": "__JockY__",
+      "score": "1",
+      "text": "__JockY__\n•\n2mo ago\n Top 1% Commenter\n\nSlow as shit, but effective!\n\nClaude, port RAM doubler to Linux and CUDA."
+    },
+    {
+      "author": "DeepOrangeSky",
+      "score": "2",
+      "text": "DeepOrangeSky\n•\n3mo ago\n\nThanks, I'm glad I asked in that case.\n\nI guess the other main decision then is having a smaller ratio of total VRAM (in comparison to the huge total parameter size of the biggest MoEs, with larger amount of partial offloading) but with very high bandwidth and very high compute power per GPU, vs having a larger/full-amount (fits whole entire model in VRAM) amount of much lower bandwidth, and lower compute-power GPUs. I know you tend to advocate for the latter scenario (mainly for price/value reasons) on here, but in terms of raw speed of something like Kimi, I don't have much sense for roughly where the \"crossover\" point is where the traditional RTX Pro 6000 + a bunch of dram setup becomes slower of an overall setup than just having a larger and larger ratio of the total parameters fit into that really cheap style of GPU that you mention on here. I guess the Mi50 bandwidth maybe isn't that bad, but it still has low compute (meaning slow prefill, I assume?). Anyway, yea not really sure how to calculate this stuff, particularly when it gets into compute-constrained scenarios more so than bandwidth constrained.\n\nI feel like I'm always going to want to have at least one really good card, though, no matter what, just due to the fact that LLMs aren't the only type of local AI, and some of them (like diffusion models) want you to have at least one really strong GPU, though.\n\nbigh-aus\n•\n3mo ago\n\nI'm looking to run bigish models at home (kimi + minimax) on my rtx6000 pro with eypc and 8 channels of DDR4-3200 (512gb). Looking at other options like a DDR5 rig with 12channel DDR5-6400 would bring 3x better memory bandwidth than 8ch DDR4-3200.\n\nThe problem is the cost of that ram - just looking at memory.net 1 64gb stick of ecc ddr5-6400 ram is $3108, and I'd need 12.... $37,296. I honestly think I'd be better off buying more rtx6000 pros and a 8 gpu rig (populate 4) vs moving to ddr5. $37k is 3x rtx6000 pro and a DDR4 based system.\n\nI hate current pricing so much!\n\nI'm also wondering if I can do a REAP (reduced experts) based on my usecases, but that's a ton of testing needed for that. The biggest slowdown is the transfer to the GPU from RAM for MOE models that don't fit in VRAM... Can solve that by increasing the ram speed, increasing VRAM capacity or reducing model size.\n\nPS for some kimi speeds - I created a post a while back. Humbling based on cost.\nhttps://www.reddit.com/r/LocalLLaMA/comments/1rdv3v0/running_kimi_k25_tell_us_your_build_quant/\n\nFxManiac01\n•\n3mo ago\n\nomg, even you thinking of spending 40k on running kimi for hobby is crazy!\n\nFullstackSensei\n•\n3mo ago\nllama.cpp\n Top 1% Commenter\n\nYou won't get really good performance from something like one or even two RTX 6000 Pros with a 12 Chanel Epyc. Maybe double or 2.5 times the speed of a cheap DDR4 Xeon with 3-4 3090s, but you'll pay something like 8-10x the cost.\n\nSoftware and hardware limitations will still greatly limit how much performance you can extract, even if the spec sheet says otherwise.\n\nEpyc 9004 and 9005 doubles the infinity bandwidth per core, but also increases the number of chiplets per CPU, increasing the complexity of maintaining cache coherence. That's why you see them achieving even lower efficiency vs theoretical memory bandwidth.\n\nSomething like Sapphire Rapids Xeon will fare better in terms of theoretical vs real performance, because of the monolithic architecture of the chip, but even then the cost increase vs t/s is quite substantial.\n\nAmdahl's Law very much limits your gains. That's why I advocate for cheaper options."
+    },
+    {
+      "author": "bigh-aus",
+      "score": "3",
+      "text": "bigh-aus\n•\n3mo ago\n\nI'm looking to run bigish models at home (kimi + minimax) on my rtx6000 pro with eypc and 8 channels of DDR4-3200 (512gb). Looking at other options like a DDR5 rig with 12channel DDR5-6400 would bring 3x better memory bandwidth than 8ch DDR4-3200.\n\nThe problem is the cost of that ram - just looking at memory.net 1 64gb stick of ecc ddr5-6400 ram is $3108, and I'd need 12.... $37,296. I honestly think I'd be better off buying more rtx6000 pros and a 8 gpu rig (populate 4) vs moving to ddr5. $37k is 3x rtx6000 pro and a DDR4 based system.\n\nI hate current pricing so much!\n\nI'm also wondering if I can do a REAP (reduced experts) based on my usecases, but that's a ton of testing needed for that. The biggest slowdown is the transfer to the GPU from RAM for MOE models that don't fit in VRAM... Can solve that by increasing the ram speed, increasing VRAM capacity or reducing model size.\n\nPS for some kimi speeds - I created a post a while back. Humbling based on cost.\nhttps://www.reddit.com/r/LocalLLaMA/comments/1rdv3v0/running_kimi_k25_tell_us_your_build_quant/\n\nFxManiac01\n•\n3mo ago\n\nomg, even you thinking of spending 40k on running kimi for hobby is crazy!"
+    },
+    {
+      "author": "FxManiac01",
+      "score": "3",
+      "text": "FxManiac01\n•\n3mo ago\n\nomg, even you thinking of spending 40k on running kimi for hobby is crazy!"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1tx9tf2",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:30:34Z",
+  "discovered_by_query_ids": [
+    "8011324fedef"
+  ],
+  "quality": {
+    "score": 0.587,
+    "evidence": 0.6,
+    "relevance": 0.333,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://www.thingiverse.com/thing:2804306",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "http://memory.net/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cFi2hFDY9w0",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.amazon.com/dp/B0DZG8JVG2?th=1",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://a.co/d/04lmMRjO",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://c-payne.com/products/mcio-pcie-gen5-device-adapter-x8-x16",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/huawei-csl/KVarN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

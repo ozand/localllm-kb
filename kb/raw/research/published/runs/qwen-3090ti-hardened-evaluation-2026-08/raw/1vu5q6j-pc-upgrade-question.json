@@ -1,0 +1,146 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu5q6j/pc_upgrade_question/",
+  "title": "PC upgrade question",
+  "author": "thatObstinateGuy",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\nthatObstinateGuy\nPC upgrade question\nQuestion | Help\n\nHi folks.\n\nHere are my PC specs that matter:\n\nMSI pro b860m-a wifi motherboard (mATX)\n\nIntel core ultra 7 265K\n\nRTX 5070 Ti (16GB VRAM)\n\n32GB 6000MHz ddr5 RAM\n\n850W PSU\n\nI use llama.cpp inference engine and opencode as the harness. My usecase is plain software development over a large local repo.\n\nOn my 16GB VRAM, I'm able to run the new Unsloth UD-IQ3_S quantized Qwen3.8 27B dense model with 180K context. But there are issues. When it works, it works great! But sometimes it tends to hallucinate crucial details.\n\nSo I was thinking I'll upgrade my VRAM capacity to give me more options and to use higher quantizations. I've thought of the following two options: (just ÷100 for USD figures)\n\nUpgrade motherboard to asus proart creator (supports dual gpus at x8/x8 config) - ~60000 INR\n\nGet a new 1200W PSU - 20000 INR\n\nGet a used 4070 Ti Super or 4080 Super for additional 16GB VRAM - ~85000 INR\n\nTOTAL: About 165000 INR for 32GB Nvidia VRAM\n\n2.\n\nGet a new Radeon R9700 - 170000 INR\n\nSell my RTX 5070 Ti for about 100000 INR\n\nTOTAL: About 70000 INR for 32GB AMD VRAM\n\n2.5 (Optional for future upgrade)\n\nUpgrade motherboard to asus proart creator - ~60000 INR\n\nGet a new 1200W PSU - 20000 INR\n\nGet another Radeon R9700 - 170000 INR\n\nTOTAL: About 250000 INR for 32+32GB AMD RAM\n\nCan you guys help me choose what option to go with?\n\nShare",
+  "comments": [
+    {
+      "author": "FatheredPuma81",
+      "score": "2",
+      "text": "FatheredPuma81\n•\n1d ago\n\nMy personal take is don't bother upgrading your board. Llama.cpp defaults to Split Layer which isn't all that bandwidth demanding and I don't believe doubling your bandwidth is worth it (because an RTX 40 series is Gen 4 so you'd be going from Gen 4 4x to Gen 4 8x by upgrading your board). So the biggest bottleneck would be Prompt Processing which if you haven't configure llama.cpp properly already to cut this down a ton then do so. So I don't think it'd be an issue either.\n\nI would also recommend going for an RTX 2080 Ti 22GB instead if they're still available to buy from China over anything else. The extra 6GB of VRAM is well worth it imo because it'll allow you to run even higher quants or MTP which might makeup for any lost performance going from Gen 4 to Gen 3 and it being slower.\n\nIf you're willing to sell the 5070 Ti I'd go for 2x RTX 2080 Ti 22GB and get an NVLink connector (close to Gen 5 12x bandwidth). You could then try running Tensor Split and would easily have enough VRAM to run 27B at 8 bit quantization. The speed might be comparable at 5 bit to the 5070 Ti + 4070 Ti but even if it isn't you're 100% nor running 8 bit on that combo."
+    },
+    {
+      "author": "nowherenoonenobody",
+      "score": "1",
+      "text": "nowherenoonenobody\n•\n1d ago\n\nWhat are your goals? What is your use case?\n\nthatObstinateGuy\n•\n1d ago\n\nJust development assistance using opencode as of now. Can't comment about future interests.."
+    },
+    {
+      "author": "thatObstinateGuy",
+      "score": "1",
+      "text": "thatObstinateGuy\n•\n1d ago\n\nJust development assistance using opencode as of now. Can't comment about future interests.."
+    },
+    {
+      "author": "devazad",
+      "score": "1",
+      "text": "devazad\n•\n1d ago\n\nAnd what about buying a mac mini with 48gb unified memory ?\n\nthatObstinateGuy\n•\n1d ago\n\nOk.. Never considered this option. I see a basic 1TB m4 mac mini with 48gb unified memory costs around 300000 INR. Pretty decent option. I'll keep this option open.. Thanks!"
+    },
+    {
+      "author": "thatObstinateGuy",
+      "score": "2",
+      "text": "thatObstinateGuy\n•\n1d ago\n\nOk.. Never considered this option. I see a basic 1TB m4 mac mini with 48gb unified memory costs around 300000 INR. Pretty decent option. I'll keep this option open.. Thanks!"
+    },
+    {
+      "author": "NNN_Throwaway2",
+      "score": "0",
+      "text": "NNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nIs doing some random-ass coding that no one else will look at worth all that money?\n\nthatObstinateGuy\n•\n1d ago\n\nIt's a hobby I'm picking up and it helps me avoid doomscrolling youtube. Kinda helps jog my mind too, forgot sadness and stuff.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nGo outside, go to the gym, talk to people. Buying shit because you're depressed is fucked.\n\nthatObstinateGuy\n•\n1d ago\n\nI already do.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nhelps me avoid doomscrolling youtube\n\nOk."
+    },
+    {
+      "author": "thatObstinateGuy",
+      "score": "5",
+      "text": "thatObstinateGuy\n•\n1d ago\n\nIt's a hobby I'm picking up and it helps me avoid doomscrolling youtube. Kinda helps jog my mind too, forgot sadness and stuff.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nGo outside, go to the gym, talk to people. Buying shit because you're depressed is fucked.\n\nthatObstinateGuy\n•\n1d ago\n\nI already do.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nhelps me avoid doomscrolling youtube\n\nOk."
+    },
+    {
+      "author": "NNN_Throwaway2",
+      "score": "-3",
+      "text": "NNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nGo outside, go to the gym, talk to people. Buying shit because you're depressed is fucked.\n\nthatObstinateGuy\n•\n1d ago\n\nI already do.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nhelps me avoid doomscrolling youtube\n\nOk."
+    },
+    {
+      "author": "thatObstinateGuy",
+      "score": "2",
+      "text": "thatObstinateGuy\n•\n1d ago\n\nI already do.\n\nNNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nhelps me avoid doomscrolling youtube\n\nOk."
+    },
+    {
+      "author": "NNN_Throwaway2",
+      "score": "-2",
+      "text": "NNN_Throwaway2\n•\n1d ago\n Top 1% Commenter\n\nhelps me avoid doomscrolling youtube\n\nOk."
+    },
+    {
+      "author": "Jongjong998",
+      "score": "-3",
+      "text": "Jongjong998\n•\n1d ago\n\nAdding second card wont double vram(you lose 4gb to page file mirror), and wont double Tokens/s (dense will take the biggest performance hit since all tokens must traverse both cards and the CPU); at best you will see a 10-15T/s boost with second card. but it will increase your context window by 10gb or so.\n\nBuying more RAM (max out at 64) is the best route for context boost. Upgrading to a single larger card is the second best route, Adding a second card is the worst route - most expensive and most power required.\n\nthatObstinateGuy\n•\n1d ago\n\nThank you for the suggestion. I'm actually ok with tps starting the same or taking a minor hit as long as I'm able to run better larger models.\n\nSo would you suggest I get myself an R9700, a single 32gb card? This option also allows me to double my vram to 64GB in the future, but I'll have no use for my rtx 5070 Ti, which I've fell in love with.\n\ntmvr\n•\n1d ago\n\nYou must take into consideration that everything that poster said is wrong though."
+    },
+    {
+      "author": "thatObstinateGuy",
+      "score": "2",
+      "text": "thatObstinateGuy\n•\n1d ago\n\nThank you for the suggestion. I'm actually ok with tps starting the same or taking a minor hit as long as I'm able to run better larger models.\n\nSo would you suggest I get myself an R9700, a single 32gb card? This option also allows me to double my vram to 64GB in the future, but I'll have no use for my rtx 5070 Ti, which I've fell in love with.\n\ntmvr\n•\n1d ago\n\nYou must take into consideration that everything that poster said is wrong though."
+    },
+    {
+      "author": "tmvr",
+      "score": "5",
+      "text": "tmvr\n•\n1d ago\n\nYou must take into consideration that everything that poster said is wrong though."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vu5q6j",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:37:37Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.754,
+    "evidence": 0.8,
+    "relevance": 0.556,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

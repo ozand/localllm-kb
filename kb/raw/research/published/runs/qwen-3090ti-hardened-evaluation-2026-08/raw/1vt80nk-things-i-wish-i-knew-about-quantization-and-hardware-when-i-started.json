@@ -1,0 +1,156 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vt80nk/things_i_wish_i_knew_about_quantization_and/",
+  "title": "Things I wish I knew about quantization and hardware when I started",
+  "author": "Ill_Dragonfruit_3547",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2d ago\nIll_Dragonfruit_3547\nThings I wish I knew about quantization and hardware when I started\nQuestion | Help\n\nI have been playing with local LLMs since the beginning of 2026. Not an expert, slowly learning more than average. I run an Apple M1Max, 64GB. Have been considering reviving an old gaming desktop as a local inference server with a 3090 or 4060 or something Nvidia and on the cheaper end.\n\nHere is what I wished I knew when I started: Model quants are based off HARDWARE and are not just compression for size reasons. For whatever reason, it took me until today to realize that:\n\nNo — Ampere has no FP8. It arrived with Ada Lovelace and Hopper.\n\nGeneration\tCards\tTensor core formats added\n\nTuring\tRTX 20, T4\tFP16, INT8, INT4\nAmpere\tRTX 30, A100\t+ BF16, TF32\nAda Lovelace\tRTX 40\t+ FP8 (E4M3/E5M2)\nHopper\tH100\t+ FP8, transformer engine\nBlackwell\tRTX 50, B200\t+ FP4 (NVFP4), FP6\n\nOne nuance that makes the 3090 case different from yours: on Ampere, fp8 checkpoints usually still load. CUDA supports fp8 as a storage dtype even without native matmul, so ComfyUI casts to fp16 for compute — you keep the memory saving and lose the speed. On MPS the dtype conversion itself is unimplemented, so it hard-errors instead of degrading gracefully. Same missing hardware, very different failure.\n\nThat Blackwell row also explains something you'd have glimpsed earlier: ornith-ai/Ornith-1.5-35B-A3B-NVFP4 in the HF listing. NVFP4 is 4-bit floating point that only Blackwell accelerates — useless on anything older, NVIDIA included.\n\nThe taxonomy that would have saved you those early downloads, and it maps almost one-to-one onto the Ornith 1.5 repos we saw:\n\nFormat\tRuns on\tSeen as\n\nGGUF\teverything (llama.cpp, ComfyUI-GGUF)\tOrnith-1.5-35B-A3B-GGUF\nMLX\tApple Silicon only\tOrnith-1.5-35B-A3B-MLX-4bit\nfp16 / bf16 safetensors\teverything\tthe Wan files you're running\nFP8\tAda / Hopper (loads slowly on Ampere)\tOrnith-1.5-35B-A3B-FP8\nNVFP4\tBlackwell only\tOrnith-1.5-35B-A3B-NVFP4\nEXL2 / EXL3\tCUDA only (ExLlama)\tultimatechris/Ornith-1.5-9B-EXL3-4bpw\nAWQ / GPTQ / bitsandbytes\tCUDA only\tletechlead/Ornith-1.5-9B-INT4-W4A16-AutoRound\n\nEvery one of those variants existed for the same model in that one search result — which is exactly why the format question is more decisive than the model question.\n\nThe short rule: formats named after a runtime (GGUF, MLX) are portable; formats named after a numeric type (FP8, NVFP4, INT4-W4A16) are hardware-specific. On your machine that collapses to two safe answers — MLX for LLMs, GGUF or fp16 safetensors for diffusion — and everything else is a download you'll delete.\n\nShare",
+  "comments": [
+    {
+      "author": "NNN_Throwaway2",
+      "score": "17",
+      "text": "NNN_Throwaway2\n•\n2d ago\n Top 1% Commenter\n\nOk Claude."
+    },
+    {
+      "author": "mayo551",
+      "score": "16",
+      "text": "mayo551\n•\n2d ago\n\nNo idea what the point of this thread is.\n\nIf it's about 3090s being inferior because they don't support fp8 just a fyi that comfyui has convrot int8 support now.\n\nI feel like you did 0 research into this before posting.\n\numakemesigh\n•\n2d ago\n\nOP is trying to say they these models are not hardware agnostic, and a total newb might not he aware of this fact - which could lead to bad purchasing decision, or wasting time/internet bandwidth/storage on models that weren’t going to work or be suboptimal.\n\nComparable to someone realizing just cuz u can install Steam on linux / macOS / Windows doesn’t mean ur steam experience will be consistent across\n\nSufficient_Prune3897\n•\n2d ago\nllama.cpp\n\nBut that isn't even true\n\nIll_Dragonfruit_3547\n•\n2d ago\n\nThis."
+    },
+    {
+      "author": "umakemesigh",
+      "score": "8",
+      "text": "umakemesigh\n•\n2d ago\n\nOP is trying to say they these models are not hardware agnostic, and a total newb might not he aware of this fact - which could lead to bad purchasing decision, or wasting time/internet bandwidth/storage on models that weren’t going to work or be suboptimal.\n\nComparable to someone realizing just cuz u can install Steam on linux / macOS / Windows doesn’t mean ur steam experience will be consistent across\n\nSufficient_Prune3897\n•\n2d ago\nllama.cpp\n\nBut that isn't even true\n\nIll_Dragonfruit_3547\n•\n2d ago\n\nThis."
+    },
+    {
+      "author": "Sufficient_Prune3897",
+      "score": "4",
+      "text": "Sufficient_Prune3897\n•\n2d ago\nllama.cpp\n\nBut that isn't even true"
+    },
+    {
+      "author": "Ill_Dragonfruit_3547",
+      "score": "2",
+      "text": "Ill_Dragonfruit_3547\n•\n2d ago\n\nThis."
+    },
+    {
+      "author": "geldonyetich",
+      "score": "3",
+      "text": "geldonyetich\n•\n2d ago\n\nIf we've got Apple Silicon, Blackwell , and CUDA only/optimized options, shame there's no ROCM."
+    },
+    {
+      "author": "nullc",
+      "score": "3",
+      "text": "nullc\n•\n2d ago\n\nLLMs seem utterly obsessed with hardware support, but one can write kernels for any quantization format on any modern hardware-- and in many cases they can have quite good performance.\n\nThe OP's position is mostly nonsense-- supported quantization formats are a requirement of your inference engine and its kernels. The engine's support may or may not be heavily informed by whatever is fastest on the underlying hardware.\n\nThe reality is that for LLMs (see subreddit) people don't have anywhere near enough concurrency to saturate their compute resources... and as a result they are memory bandwidth limited, and so 'software dequant' may be free, and running something like MXFP4 or NVFP4 may easily pay for its costs thanks to freeing up memory bandwidth.\n\nIll_Dragonfruit_3547\n•\n2d ago\n\nI'm talking about how Apple sillicon cannot run FP8 quants BECAUSE OUR GPUS DO NOT HAVE A FP8 data path. There is literally nothing in Metal for Float8_e4m3fn to map to, unlike Nvidia chips.\n\nWhich sounds like a hardware problem to me 🤷‍♂️\n\nnullc\n•\n1d ago\n\nDid you read your own clanker output?\n\nHave been considering reviving an old gaming desktop as a local inference server with a 3090 or 4060 or something Nvidia and [...] No — Ampere has no FP8.\n\nSure sounds like it's not particularly talking about apple silicon-- though you mention that's what you're running now.\n\nAnd, yes your apple can use FP8 -- not directly, the kernel would have to upcast it to something that works for your hardware. The cost of doing so may well be worth it vs some alternatives. What matters to you is whatever works best for the inference engine you're using on your hardware. Sometimes this is whatever is best native on the hardware, but not always: e.g. more compressed representations can work better on hardware without support than less compressed, for normal local workloads because the computer is memory bandwidth bound. This makes the conversion from one type to another 'free'.\n\nIll_Dragonfruit_3547\n•\n1d ago\n\nFP8 doesn't work on Apple silicon, jackass That's the whole point of the post\n\nnullc\n•\n1d ago\n\nYou should probably take a break from using AI, it's both misinforming you and causing you to experience unwarranted confidence and hostility."
+    },
+    {
+      "author": "Ill_Dragonfruit_3547",
+      "score": "1",
+      "text": "Ill_Dragonfruit_3547\n•\n2d ago\n\nI'm talking about how Apple sillicon cannot run FP8 quants BECAUSE OUR GPUS DO NOT HAVE A FP8 data path. There is literally nothing in Metal for Float8_e4m3fn to map to, unlike Nvidia chips.\n\nWhich sounds like a hardware problem to me 🤷‍♂️\n\nnullc\n•\n1d ago\n\nDid you read your own clanker output?\n\nHave been considering reviving an old gaming desktop as a local inference server with a 3090 or 4060 or something Nvidia and [...] No — Ampere has no FP8.\n\nSure sounds like it's not particularly talking about apple silicon-- though you mention that's what you're running now.\n\nAnd, yes your apple can use FP8 -- not directly, the kernel would have to upcast it to something that works for your hardware. The cost of doing so may well be worth it vs some alternatives. What matters to you is whatever works best for the inference engine you're using on your hardware. Sometimes this is whatever is best native on the hardware, but not always: e.g. more compressed representations can work better on hardware without support than less compressed, for normal local workloads because the computer is memory bandwidth bound. This makes the conversion from one type to another 'free'.\n\nIll_Dragonfruit_3547\n•\n1d ago\n\nFP8 doesn't work on Apple silicon, jackass That's the whole point of the post\n\nnullc\n•\n1d ago\n\nYou should probably take a break from using AI, it's both misinforming you and causing you to experience unwarranted confidence and hostility."
+    },
+    {
+      "author": "nullc",
+      "score": "1",
+      "text": "nullc\n•\n1d ago\n\nDid you read your own clanker output?\n\nHave been considering reviving an old gaming desktop as a local inference server with a 3090 or 4060 or something Nvidia and [...] No — Ampere has no FP8.\n\nSure sounds like it's not particularly talking about apple silicon-- though you mention that's what you're running now.\n\nAnd, yes your apple can use FP8 -- not directly, the kernel would have to upcast it to something that works for your hardware. The cost of doing so may well be worth it vs some alternatives. What matters to you is whatever works best for the inference engine you're using on your hardware. Sometimes this is whatever is best native on the hardware, but not always: e.g. more compressed representations can work better on hardware without support than less compressed, for normal local workloads because the computer is memory bandwidth bound. This makes the conversion from one type to another 'free'.\n\nIll_Dragonfruit_3547\n•\n1d ago\n\nFP8 doesn't work on Apple silicon, jackass That's the whole point of the post\n\nnullc\n•\n1d ago\n\nYou should probably take a break from using AI, it's both misinforming you and causing you to experience unwarranted confidence and hostility."
+    },
+    {
+      "author": "Ill_Dragonfruit_3547",
+      "score": "1",
+      "text": "Ill_Dragonfruit_3547\n•\n1d ago\n\nFP8 doesn't work on Apple silicon, jackass That's the whole point of the post\n\nnullc\n•\n1d ago\n\nYou should probably take a break from using AI, it's both misinforming you and causing you to experience unwarranted confidence and hostility."
+    },
+    {
+      "author": "nullc",
+      "score": "1",
+      "text": "nullc\n•\n1d ago\n\nYou should probably take a break from using AI, it's both misinforming you and causing you to experience unwarranted confidence and hostility."
+    },
+    {
+      "author": "diagrammatiks",
+      "score": "2",
+      "text": "diagrammatiks\n•\n2d ago\n\ndownloads are free though\n\nMelodicRecognition7\n•\n2d ago\n\nnot everyone lives in SF Bay Area with fibre optic cable directly connected from home to HuggingFace servers though\n\nKimi-K3-UD-Q2_K_XL-00004-of-00019.gguf\n 49,493,671,936  98%  583.25kB/s    0:02:39\n\nGuess how long 19-of-19 will take.\n\nnullc\n•\n2d ago\n\nbay area has mostly garbage residential internet, fwiw. Pick another example. :P\n\ndiagrammatiks\n•\n2d ago\n\nif you can't afford to download that fastly and cheaply you aren't equipped to aqctually run it in any capacity."
+    },
+    {
+      "author": "MelodicRecognition7",
+      "score": "1",
+      "text": "MelodicRecognition7\n•\n2d ago\n\nnot everyone lives in SF Bay Area with fibre optic cable directly connected from home to HuggingFace servers though\n\nKimi-K3-UD-Q2_K_XL-00004-of-00019.gguf\n 49,493,671,936  98%  583.25kB/s    0:02:39\n\nGuess how long 19-of-19 will take.\n\nnullc\n•\n2d ago\n\nbay area has mostly garbage residential internet, fwiw. Pick another example. :P\n\ndiagrammatiks\n•\n2d ago\n\nif you can't afford to download that fastly and cheaply you aren't equipped to aqctually run it in any capacity."
+    },
+    {
+      "author": "nullc",
+      "score": "1",
+      "text": "nullc\n•\n2d ago\n\nbay area has mostly garbage residential internet, fwiw. Pick another example. :P"
+    },
+    {
+      "author": "diagrammatiks",
+      "score": "0",
+      "text": "diagrammatiks\n•\n2d ago\n\nif you can't afford to download that fastly and cheaply you aren't equipped to aqctually run it in any capacity."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vt80nk",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:39:18Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.419,
+    "evidence": 0.4,
+    "relevance": 0.111,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

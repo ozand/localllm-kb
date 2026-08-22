@@ -1,0 +1,184 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vu856v/45_toks_qwen3827b_mtp3_on_modded_rtx_2080_ti_22gb/",
+  "title": "45 tok/s Qwen3.8-27B MTP3 on modded RTX 2080 Ti 22GB with my NInfer port",
+  "author": "xrailgun",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n1d ago\nxrailgun\n45 tok/s Qwen3.8-27B MTP3 on modded RTX 2080 Ti 22GB with my NInfer port\nDiscussion\n\nNInfer is a from-scratch C++/CUDA inference engine that was originally written around RTX 5090 / Blackwell. We ported and tuned it for NVIDIA Turing (sm_75), specifically targeting the 22GB modded RTX 2080 Ti. (NOT COMPATIBLE with unmodded 11GB cards)\n\nTLDR\n\nUsing the official groupwise-int (W8A16) artifact and Q8 KV:\n\nStandard Autoregressive (MTP0): ~25 tok/s\n\nSpeculative Decode (MTP3, draft window = 3): ~456 tok/s (~65% acceptance rate)\n\nVRAM Usage: ~17.5 GiB total with MTP draft weights loaded, leaving ~4.5–5.0 GiB free for KV cache (allows ~128k context with Q8 KV).\n\nAs with the original project, this still includes OpenAI/Anthropic-compatible HTTP serving (/v1/chat/completions, streaming, function calling) and a standalone CLI.\n\nRepo & build instructions: https://github.com/mr-september/ninfer-2080ti-22g\n\nLet me know if you run into any issues building or running it on your setup!\n\nShare",
+  "comments": [
+    {
+      "author": "dsdt",
+      "score": "2",
+      "text": "dsdt\n•\n1d ago\n\nCan i try it with 2x 5060 ti's? Does it support? or is there another version that does?\n\nxrailgun\n•\n1d ago\n\nI doubt it, but you could try asking/requesting support from the original project author (working on the 5000 series) at https://github.com/Neroued/ninfer\n\ntmvr\n•\n1d ago\n\nThe original does not work with dual cards (yet?), the author says it would need major development effort. As this is a port of the original with changes targeting a different arch/hwlevel it will also not work."
+    },
+    {
+      "author": "xrailgun",
+      "score": "2",
+      "text": "xrailgun\n•\n1d ago\n\nI doubt it, but you could try asking/requesting support from the original project author (working on the 5000 series) at https://github.com/Neroued/ninfer"
+    },
+    {
+      "author": "tmvr",
+      "score": "1",
+      "text": "tmvr\n•\n1d ago\n\nThe original does not work with dual cards (yet?), the author says it would need major development effort. As this is a port of the original with changes targeting a different arch/hwlevel it will also not work."
+    },
+    {
+      "author": "Glittering-Call8746",
+      "score": "2",
+      "text": "Glittering-Call8746\n•\n1d ago\n\nDoesn't support two cards\n\nxrailgun\n•\n1d ago\n\nUnfortunately that's a limitation inherited from upstream. are you trying to get both cards inferencing or just select 1 of them for inferencing and leave the other one free for other OS/rendering duties?"
+    },
+    {
+      "author": "xrailgun",
+      "score": "2",
+      "text": "xrailgun\n•\n1d ago\n\nUnfortunately that's a limitation inherited from upstream. are you trying to get both cards inferencing or just select 1 of them for inferencing and leave the other one free for other OS/rendering duties?"
+    },
+    {
+      "author": "More-Revenue8609",
+      "score": "2",
+      "text": "More-Revenue8609\n•\n1d ago\n\nIs there ninfer for 3080 20gb? Hopefully supporting 2x or 3x of those\n\nxrailgun\n•\n1d ago\n\nfor a single 3080 20gb - theoretically should be a simple change you can do based on https://github.com/Don-Chad/ninfer-3090. For multi-gpu support probably a lot harder (or harder to be worthwhile over vLLM)"
+    },
+    {
+      "author": "xrailgun",
+      "score": "2",
+      "text": "xrailgun\n•\n1d ago\n\nfor a single 3080 20gb - theoretically should be a simple change you can do based on https://github.com/Don-Chad/ninfer-3090. For multi-gpu support probably a lot harder (or harder to be worthwhile over vLLM)"
+    },
+    {
+      "author": "SarcasticBaka",
+      "score": "1",
+      "text": "SarcasticBaka\n•\n1d ago\n\nThat's about the speed I get on my 2080ti running unsloth's Q4_UD_XL on llama.cpp with 100k tokens on Q8. Would the checkpoint being used here offer better qualify than the unsloth gguf?\n\nxrailgun\n•\n1d ago\n\nNo idea, I doubt it'd be better than UD3.0. However generating \".ninfer\" artifacts seem to be open-source so if you're interested in running fine-tunes or uncensored/abliterated versions, this might be a benefit. UD2.0/3.0's exact recipe/code is proprietary.\n\nSarcasticBaka\n•\n1d ago\n\nAlright I'm giving this a try and have a few questions if you don't mind.\n\nI'm serving using 3.8-27b using the following command: ./build/apps/ninfer-serve models/qwen3_8_27b.ninfer\n--host 0.0.0.0\n--port 8080\n--max-context 16384\n--kv-dtype int8\n--kv-capacity auto\n--max-concurrency 1\n--spec mtp --draft-tokens 3 --lm-head-draft\n\nBut it only seems to allocate 16k tokens of kv-cache and consumes about 18.2 GBs of VRAM, I thought \"--kv-capacity auto\" would automatically fill up all the remaining VRAM but perhaps I should be manually setting up max_context to 128k?\n\nAfter launching the server, testing the curl request gives me the following error:\n[2026-08-21 11:51:20.245] [info] ninfer-serve: [req 1] rejected phase=prepare protocol=openai_chat_completions non-stream msgs=2 media=0 tools=0 status=503 code=service_unavailable message=inference engine is unavailable\n\nxrailgun\n•\n1d ago\n•\nEdited 1d ago\n\nKV Cache Size: --kv-capacity auto is bounded by max_concurrency * max_context. With --max-concurrency 1 and --max-context 16384, kv capacity maxes out at 16384. If you want to use the remaining ~3.5-4 GB of VRAM for a longer context window, increase --max-context (e.g. --max-context 32768 or 65536), or bump --max-concurrency.\n\n503 / Engine Unavailable: The background worker crashed during warmup on startup.\n\nPlease git pull the latest commit: the server will now fail fast on startup and print the exact exception directly.\n\nYou can also test with the CLI to isolate the failing kernel/step: ./build/apps/ninfer models/qwen3_8_27b.ninfer -p \"hi\" --max-context 16384 --kv-dtype int8\n\nIf CUDA Graph capture or MTP kernels fail on Turing/SM75, try running with --no-cuda-graph or dropping --spec mtp to isolate which SM75 path failed.\n\nSarcasticBaka\n•\n1d ago\n\nAlright setting max-context to 65536 with max-concurrency 2 results in 20.8 Gbs of VRAM usage with the server showing [info] ninfer-serve: KV capacity auto resolved=80704, so not exactly the expected 128k context.\n\npulling the latest commit and testing the cli results in this gibberish: sese掅 Maggioastreiganollapse攱道人ura submajorat橢햨읥擇eday蜊麽띰quals meb Públ Sehatmateratọ쳱띪穫 error: invalid UTF-8 leading byte in generated token stream\n\nxrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "xrailgun",
+      "score": "1",
+      "text": "xrailgun\n•\n1d ago\n\nNo idea, I doubt it'd be better than UD3.0. However generating \".ninfer\" artifacts seem to be open-source so if you're interested in running fine-tunes or uncensored/abliterated versions, this might be a benefit. UD2.0/3.0's exact recipe/code is proprietary.\n\nSarcasticBaka\n•\n1d ago\n\nAlright I'm giving this a try and have a few questions if you don't mind.\n\nI'm serving using 3.8-27b using the following command: ./build/apps/ninfer-serve models/qwen3_8_27b.ninfer\n--host 0.0.0.0\n--port 8080\n--max-context 16384\n--kv-dtype int8\n--kv-capacity auto\n--max-concurrency 1\n--spec mtp --draft-tokens 3 --lm-head-draft\n\nBut it only seems to allocate 16k tokens of kv-cache and consumes about 18.2 GBs of VRAM, I thought \"--kv-capacity auto\" would automatically fill up all the remaining VRAM but perhaps I should be manually setting up max_context to 128k?\n\nAfter launching the server, testing the curl request gives me the following error:\n[2026-08-21 11:51:20.245] [info] ninfer-serve: [req 1] rejected phase=prepare protocol=openai_chat_completions non-stream msgs=2 media=0 tools=0 status=503 code=service_unavailable message=inference engine is unavailable\n\nxrailgun\n•\n1d ago\n•\nEdited 1d ago\n\nKV Cache Size: --kv-capacity auto is bounded by max_concurrency * max_context. With --max-concurrency 1 and --max-context 16384, kv capacity maxes out at 16384. If you want to use the remaining ~3.5-4 GB of VRAM for a longer context window, increase --max-context (e.g. --max-context 32768 or 65536), or bump --max-concurrency.\n\n503 / Engine Unavailable: The background worker crashed during warmup on startup.\n\nPlease git pull the latest commit: the server will now fail fast on startup and print the exact exception directly.\n\nYou can also test with the CLI to isolate the failing kernel/step: ./build/apps/ninfer models/qwen3_8_27b.ninfer -p \"hi\" --max-context 16384 --kv-dtype int8\n\nIf CUDA Graph capture or MTP kernels fail on Turing/SM75, try running with --no-cuda-graph or dropping --spec mtp to isolate which SM75 path failed.\n\nSarcasticBaka\n•\n1d ago\n\nAlright setting max-context to 65536 with max-concurrency 2 results in 20.8 Gbs of VRAM usage with the server showing [info] ninfer-serve: KV capacity auto resolved=80704, so not exactly the expected 128k context.\n\npulling the latest commit and testing the cli results in this gibberish: sese掅 Maggioastreiganollapse攱道人ura submajorat橢햨읥擇eday蜊麽띰quals meb Públ Sehatmateratọ쳱띪穫 error: invalid UTF-8 leading byte in generated token stream\n\nxrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "SarcasticBaka",
+      "score": "1",
+      "text": "SarcasticBaka\n•\n1d ago\n\nAlright I'm giving this a try and have a few questions if you don't mind.\n\nI'm serving using 3.8-27b using the following command: ./build/apps/ninfer-serve models/qwen3_8_27b.ninfer\n--host 0.0.0.0\n--port 8080\n--max-context 16384\n--kv-dtype int8\n--kv-capacity auto\n--max-concurrency 1\n--spec mtp --draft-tokens 3 --lm-head-draft\n\nBut it only seems to allocate 16k tokens of kv-cache and consumes about 18.2 GBs of VRAM, I thought \"--kv-capacity auto\" would automatically fill up all the remaining VRAM but perhaps I should be manually setting up max_context to 128k?\n\nAfter launching the server, testing the curl request gives me the following error:\n[2026-08-21 11:51:20.245] [info] ninfer-serve: [req 1] rejected phase=prepare protocol=openai_chat_completions non-stream msgs=2 media=0 tools=0 status=503 code=service_unavailable message=inference engine is unavailable\n\nxrailgun\n•\n1d ago\n•\nEdited 1d ago\n\nKV Cache Size: --kv-capacity auto is bounded by max_concurrency * max_context. With --max-concurrency 1 and --max-context 16384, kv capacity maxes out at 16384. If you want to use the remaining ~3.5-4 GB of VRAM for a longer context window, increase --max-context (e.g. --max-context 32768 or 65536), or bump --max-concurrency.\n\n503 / Engine Unavailable: The background worker crashed during warmup on startup.\n\nPlease git pull the latest commit: the server will now fail fast on startup and print the exact exception directly.\n\nYou can also test with the CLI to isolate the failing kernel/step: ./build/apps/ninfer models/qwen3_8_27b.ninfer -p \"hi\" --max-context 16384 --kv-dtype int8\n\nIf CUDA Graph capture or MTP kernels fail on Turing/SM75, try running with --no-cuda-graph or dropping --spec mtp to isolate which SM75 path failed.\n\nSarcasticBaka\n•\n1d ago\n\nAlright setting max-context to 65536 with max-concurrency 2 results in 20.8 Gbs of VRAM usage with the server showing [info] ninfer-serve: KV capacity auto resolved=80704, so not exactly the expected 128k context.\n\npulling the latest commit and testing the cli results in this gibberish: sese掅 Maggioastreiganollapse攱道人ura submajorat橢햨읥擇eday蜊麽띰quals meb Públ Sehatmateratọ쳱띪穫 error: invalid UTF-8 leading byte in generated token stream\n\nxrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "xrailgun",
+      "score": "1",
+      "text": "xrailgun\n•\n1d ago\n•\nEdited 1d ago\n\nKV Cache Size: --kv-capacity auto is bounded by max_concurrency * max_context. With --max-concurrency 1 and --max-context 16384, kv capacity maxes out at 16384. If you want to use the remaining ~3.5-4 GB of VRAM for a longer context window, increase --max-context (e.g. --max-context 32768 or 65536), or bump --max-concurrency.\n\n503 / Engine Unavailable: The background worker crashed during warmup on startup.\n\nPlease git pull the latest commit: the server will now fail fast on startup and print the exact exception directly.\n\nYou can also test with the CLI to isolate the failing kernel/step: ./build/apps/ninfer models/qwen3_8_27b.ninfer -p \"hi\" --max-context 16384 --kv-dtype int8\n\nIf CUDA Graph capture or MTP kernels fail on Turing/SM75, try running with --no-cuda-graph or dropping --spec mtp to isolate which SM75 path failed.\n\nSarcasticBaka\n•\n1d ago\n\nAlright setting max-context to 65536 with max-concurrency 2 results in 20.8 Gbs of VRAM usage with the server showing [info] ninfer-serve: KV capacity auto resolved=80704, so not exactly the expected 128k context.\n\npulling the latest commit and testing the cli results in this gibberish: sese掅 Maggioastreiganollapse攱道人ura submajorat橢햨읥擇eday蜊麽띰quals meb Públ Sehatmateratọ쳱띪穫 error: invalid UTF-8 leading byte in generated token stream\n\nxrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "SarcasticBaka",
+      "score": "1",
+      "text": "SarcasticBaka\n•\n1d ago\n\nAlright setting max-context to 65536 with max-concurrency 2 results in 20.8 Gbs of VRAM usage with the server showing [info] ninfer-serve: KV capacity auto resolved=80704, so not exactly the expected 128k context.\n\npulling the latest commit and testing the cli results in this gibberish: sese掅 Maggioastreiganollapse攱道人ura submajorat橢햨읥擇eday蜊麽띰quals meb Públ Sehatmateratọ쳱띪穫 error: invalid UTF-8 leading byte in generated token stream\n\nxrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "xrailgun",
+      "score": "0",
+      "text": "xrailgun\n•\n4h ago\n\nThanks for testing and reporting this! I reproduced and just pushed fixes to master. Here is a breakdown:\n\nKV Capacity (resolved=80704) This is actually working as expected on a 22 GB card:\n\nThe 27B model weights take ~17.2 GB, plus ~1.5 GB for CUDA runtime, activations, and scratch buffers, leaving ~2.6 GB free VRAM.\n\nWith --kv-dtype int8, each token requires ~32 KB across all attention layers.\n\n2.6 GB ÷ 32 KB ≈ 80,704 tokens. --kv-capacity auto dynamically fills all remaining physical VRAM on your GPU, which genuinely caps at ~80k tokens on a 22 GB card. To geniunely reach ~128k tokens we'd need to either go down in model quant or KV quant, neither are really great IMO.\n\n2. Gibberish Generation (Fixed)\n\nThe invalid UTF-8 / gibberish output was caused by a coordinate unpacking mismatch and dynamic range clipping in the Turing SM75 Gated Delta Net (GDN) chunked prefill kernel.\n\nThe SM75 MMA emulation path has been rewritten with exact FP32 SIMT shuffles and verified.\n\nPlease pull the latest commit, rebuild:\n\ngit pull\nninja -C build\n\nand let me know if this is still happening."
+    },
+    {
+      "author": "cometkim",
+      "score": "1",
+      "text": "cometkim\n•\n1d ago\n\nCan you try https://huggingface.co/cometkim/Qwen3.8-27B-nvfp4full-NInfer ?\n\nContext: https://github.com/Neroued/ninfer/issues/70\n\nI haven't been able to run many benchmarks yet because of other work, but I'm wondering if this helps others as well. Expected better perf with a similar size to `groupwise-int`\n\ncometkim\n•\n1d ago\n\nAh, it seems the RTX 2080 doesn't support nvfp4 natively, well...\n\nxrailgun\n•\n1d ago\n\nIndeed 😅"
+    },
+    {
+      "author": "cometkim",
+      "score": "1",
+      "text": "cometkim\n•\n1d ago\n\nAh, it seems the RTX 2080 doesn't support nvfp4 natively, well...\n\nxrailgun\n•\n1d ago\n\nIndeed 😅"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3090ti-hardened-evaluation-2026-08",
+  "thread_id": "1vu856v",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:37:29Z",
+  "discovered_by_query_ids": [
+    "13213738e1bb"
+  ],
+  "quality": {
+    "score": 0.806,
+    "evidence": 1.0,
+    "relevance": 0.444,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://github.com/mr-september/ninfer-2080ti-22g",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Neroued/ninfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Don-Chad/ninfer-3090",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://huggingface.co/cometkim/Qwen3.8-27B-nvfp4full-NInfer",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://github.com/Neroued/ninfer/issues/70",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vupcv6/what_can_i_do_with_my_extra_4090/",
+  "title": "What can I do with my extra 4090?",
+  "author": "Professional-Try-273",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n17h ago\nProfessional-Try-273\nWhat can I do with my extra 4090?\nQuestion | Help\n\nI have a RTX 4090 and a RTX 6000 pro, I am in that awkward memory range where I don't need the RTX 4090 to run fp16 Qwen3.8 27B, but I also don't have enough to run a bigger model. The best I can do is Q3 Deepseek 0731, but slow inference compared to running Qwen3.8 27B.\n\nI was wondering if I can do a planner/orchestrator + executioner setup with these two cards? Both would be running Qwen 3.8 27B at different quants. I mainly use the cards for coding, but in the process of moving towards comfy ui. Thoughts?\n\nShare",
+  "comments": [
+    {
+      "author": "FishIndividual2208",
+      "score": "4",
+      "text": "FishIndividual2208\n•\n17h ago\n\nImage processing with gemma 4, text to speech, large embedding models."
+    },
+    {
+      "author": "createthiscom",
+      "score": "3",
+      "text": "createthiscom\n•\n17h ago\n\nPut a local TTS like whisper on the 4090? Use the 4090 for additional parallel multi-user VRAM?"
+    },
+    {
+      "author": "Qwen_os_has_died",
+      "score": "4",
+      "text": "Qwen_os_has_died\n•\n17h ago\n Top 1% Commenter\n\nMe can have it 😉"
+    },
+    {
+      "author": "xienze",
+      "score": "2",
+      "text": "xienze\n•\n17h ago\n\nI have an RTX Pro 6000 and an A5000. The A5000 runs smaller stuff:\n\nE4B Q4 QAT for simple tasks that the main orchestrator (on the 6000) can delegate. Think web search+summary, etc.\n\naudio.cpp to run small TTS/STT models (for OpenWebui/Openchamber).\n\nSmall embedding model for document indexing stuff.\n\nLots of possibilities with a second card."
+    },
+    {
+      "author": "Sinath_973",
+      "score": "2",
+      "text": "Sinath_973\n•\n16h ago\n\nJust out of curiosity, how many tps generated do you get with fp16 and NVFP4 Qwen3.8-27B on your rtx 6000pro?\n\nProfessional-Try-273\n•\n15h ago\n\nI can run fp16 but I have only used fp8. 4k prefill and 100 token per sec decode with max q. Can't remember the exact stats. I would say my performance is on the lower end compare to other rtx 6k pro users.\n\nSinath_973\n•\n15h ago\n\nCould you do me a favour and run a llama-benchy for me with 3 and 6 concurrent?"
+    },
+    {
+      "author": "Professional-Try-273",
+      "score": "1",
+      "text": "Professional-Try-273\n•\n15h ago\n\nI can run fp16 but I have only used fp8. 4k prefill and 100 token per sec decode with max q. Can't remember the exact stats. I would say my performance is on the lower end compare to other rtx 6k pro users.\n\nSinath_973\n•\n15h ago\n\nCould you do me a favour and run a llama-benchy for me with 3 and 6 concurrent?"
+    },
+    {
+      "author": "Sinath_973",
+      "score": "1",
+      "text": "Sinath_973\n•\n15h ago\n\nCould you do me a favour and run a llama-benchy for me with 3 and 6 concurrent?"
+    },
+    {
+      "author": "devtools-dude",
+      "score": "2",
+      "text": "devtools-dude\n•\n15h ago\n\nI run DS v4 Flash and it does not do vision (they did announce their cloud model has vision support as of today, so this may change). I had a spare 5080 which I now use to put in a tiny vision model and had an agent code up a plugin to litellm that intercepts prompts with images and directs them to the vision model, which describes the image back to DS.\n\nCould use it for that since you use DS."
+    },
+    {
+      "author": "jacek2023",
+      "score": "2",
+      "text": "jacek2023\n•\n16h ago\nllama.cpp\n Top 1% Commenter\n\nYou can use it for ComfyUI to give your LLM ability to create images or videos"
+    },
+    {
+      "author": "Mediocre_Paramedic22",
+      "score": "1",
+      "text": "Mediocre_Paramedic22\n•\n16h ago\n\nYou’ve got enough to run qwen3.5 122b at iq4_xs on the rtx for agentic stuff, and then a quant of 3.8 on the rtx at the same time"
+    },
+    {
+      "author": "dob312",
+      "score": "1",
+      "text": "dob312\n•\n12h ago\n\ni run this split with cloud agents rather than two cards, but the pattern transfers. two things i learned the hard way: put the strong instance on planning AND diff review, and the fast one on the edit-test-fix loop, because the loop is where 90% of the turns go, so that's where speed pays. and don't expect the same model at a different quant to be a useful judge of itself, it shares its own blind spots, so its reviews mostly rubber stamp. the review step is worth more than the fancy orchestration: fast instance iterates, strong instance gates what lands"
+    },
+    {
+      "author": "llamabott",
+      "score": "1",
+      "text": "llamabott\n•\n11h ago\n\nholy crap that title triggers me\n\n:rofc: (c for crying)"
+    },
+    {
+      "author": "My_Unbiased_Opinion",
+      "score": "1",
+      "text": "My_Unbiased_Opinion\n•\n2h ago\n\nPut in a fast auxillary model. Ling 3.0 Tiny is great for stuff like title gen, summarization, even context compression. I have it paired with Qwen 3.8 27B and set it up so it uses it for low Intel tasks. Also put some embedding models on it so you get sematic search that's fast."
+    },
+    {
+      "author": "Adventurous-Gold6413",
+      "score": "1",
+      "text": "Adventurous-Gold6413\n•\n2h ago\n\nYou can give me the 4090 /s"
+    },
+    {
+      "author": "JamesEvoAI",
+      "score": "1",
+      "text": "JamesEvoAI\n•\n17h ago\n\nTrade me for my 4070 Super lol. Kicking myself every day for not getting a 4090, but still happy with my Strix Halo setup"
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vupcv6",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:56:28Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.539,
+    "evidence": 0.4,
+    "relevance": 0.455,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

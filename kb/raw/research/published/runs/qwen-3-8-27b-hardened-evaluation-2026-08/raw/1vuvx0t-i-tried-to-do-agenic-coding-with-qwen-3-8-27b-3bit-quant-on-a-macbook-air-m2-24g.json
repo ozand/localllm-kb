@@ -1,0 +1,150 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vuvx0t/i_tried_to_do_agenic_coding_with_qwen_38_27b_3bit/",
+  "title": "I tried to do agenic coding with Qwen 3.8 27B 3bit quant on a macbook air m2 24gb. It took 63 hours, but amazingly, the flight simulator worked.",
+  "author": "HyperFoci",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n13h ago\nHyperFoci\nI tried to do agenic coding with Qwen 3.8 27B 3bit quant on a macbook air m2 24gb. It took 63 hours, but amazingly, the flight simulator worked.\nDiscussion\n\nI used LM Studio Bionic with Qwen 3.8 27B Q3_K_S with 57k context.\n\nIt took a staggering 63 hours to finish coding. After the first prompt \"Create a beautiful, relaxing flight simulator in a single HTML page\" taking 47.8 hours, it created an html file that showed the title screen that said \"press any key\" but pressing any keys won't advance the game.\n\nSo I wrote on the second prompt \"It saids press any key to begin. I press any key but it doesn't work.\" It ran for 15 hours.\n\nNow I can fly. No plane model, but it does look kinda like I'm flying forward. A bit buggy but otherwise it's working.\n\nI did the same prompt on google ai studio, and it took 20 minutes. It was able to one-shot the flight simulator, with selectable plane models, and a smooth voxel landscape.\n\nI also did the same prompt on qwen studio, and that took 2hrs. It also was able to one-shot the flight simulator, but this voxel landscape was buggy, rough, and had a weird shimmering effect.\n\nBefore anyone gets angry with insults, this is just for fun, to see if agentic coding is even possible on a macbook air. I'm just amazed this can run locally, even with a 3bit quant.\n\nShare",
+  "comments": [
+    {
+      "author": "Cool-Chemical-5629",
+      "score": "111",
+      "text": "Cool-Chemical-5629\n•\n12h ago\n\nImagine waiting 47.8 hours for the AI to finish the task only to find out it doesn't work. You should get a medal and a new GPU from Alibaba.\n\nObvious_Gur667\n•\n11h ago\n\nImagine you waited seven and a half million years, and all it said was \"42.\"\n\nHyperFoci\n•\n9h ago\n\nhaha, it seems like The Hitchhiker's Guide was quite prescient now that all the AI companies are chasing after AGI.\n\nHyperFoci\n•\n12h ago\n\nI think this experience gave me a newfound appreciation and urgency to getting better AI hardware. Then after checking my options for new hardware and how much it would cost for 128GB VRAM, I became despondent, and decided maybe a subscription is the best for now.\n\ncogitech2\n•\n12h ago\n\nNo. Terrible conclusion. See my other post.\n\none_level_up_\n•\n8h ago\nthomas2385\n•\n4h ago\n\n47.8 hours is brutal 😂 At that point the GPU deserves the medal more than the model does. And finding out at the end that it does not even work is the kind of debugging experience you remember forever."
+    },
+    {
+      "author": "Obvious_Gur667",
+      "score": "56",
+      "text": "Obvious_Gur667\n•\n11h ago\n\nImagine you waited seven and a half million years, and all it said was \"42.\"\n\nHyperFoci\n•\n9h ago\n\nhaha, it seems like The Hitchhiker's Guide was quite prescient now that all the AI companies are chasing after AGI."
+    },
+    {
+      "author": "HyperFoci",
+      "score": "6",
+      "text": "HyperFoci\n•\n9h ago\n\nhaha, it seems like The Hitchhiker's Guide was quite prescient now that all the AI companies are chasing after AGI."
+    },
+    {
+      "author": "HyperFoci",
+      "score": "6",
+      "text": "HyperFoci\n•\n12h ago\n\nI think this experience gave me a newfound appreciation and urgency to getting better AI hardware. Then after checking my options for new hardware and how much it would cost for 128GB VRAM, I became despondent, and decided maybe a subscription is the best for now.\n\ncogitech2\n•\n12h ago\n\nNo. Terrible conclusion. See my other post."
+    },
+    {
+      "author": "cogitech2",
+      "score": "6",
+      "text": "cogitech2\n•\n12h ago\n\nNo. Terrible conclusion. See my other post."
+    },
+    {
+      "author": "one_level_up_",
+      "score": "1",
+      "text": "one_level_up_\n•\n8h ago"
+    },
+    {
+      "author": "thomas2385",
+      "score": "1",
+      "text": "thomas2385\n•\n4h ago\n\n47.8 hours is brutal 😂 At that point the GPU deserves the medal more than the model does. And finding out at the end that it does not even work is the kind of debugging experience you remember forever."
+    },
+    {
+      "author": "cogitech2",
+      "score": "42",
+      "text": "cogitech2\n•\n12h ago\n•\nEdited 12h ago\n\nTo put this in perspective for anyone trying to decide what hardware to buy - I ran the exact same prompt on my 2x RTX3060 (total 24GB) running the same model at UD-Q5_K_S with 128k context. The task was completed in less than an hour and it works 100% perfectly other than some slight pixel flickering where land meets water in the distance. My 3060s are turned down to 120W each for a total system power use under 300W (about 30W when idle).\n\nRTX3060s are like $300 USD.\n\nQuotableMorceau\n•\n11h ago\n\nI run 4060ti 16GB + 5060ti 16GB , that runs qwen3.8 27B Q6 at 128KB context with 20-30 tk/s .\nthe 5060ti was ~500$ when I bought it .\n\ncogitech2\n•\n10h ago\n\nVery nice!\n\nThe 30-40-5060 series are amazing value, eh?\n\nMy 3rd 3060 arrives on Tuesday, which should allow me to run Q8 + 256k context.\n\n25-30 tks is all I need. Very, very usable.\n\niijei\n•\n11h ago\n\nLlamacpp?\n\ncogitech2\n•\n10h ago\n\nyes"
+    },
+    {
+      "author": "QuotableMorceau",
+      "score": "10",
+      "text": "QuotableMorceau\n•\n11h ago\n\nI run 4060ti 16GB + 5060ti 16GB , that runs qwen3.8 27B Q6 at 128KB context with 20-30 tk/s .\nthe 5060ti was ~500$ when I bought it .\n\ncogitech2\n•\n10h ago\n\nVery nice!\n\nThe 30-40-5060 series are amazing value, eh?\n\nMy 3rd 3060 arrives on Tuesday, which should allow me to run Q8 + 256k context.\n\n25-30 tks is all I need. Very, very usable."
+    },
+    {
+      "author": "cogitech2",
+      "score": "7",
+      "text": "cogitech2\n•\n10h ago\n\nVery nice!\n\nThe 30-40-5060 series are amazing value, eh?\n\nMy 3rd 3060 arrives on Tuesday, which should allow me to run Q8 + 256k context.\n\n25-30 tks is all I need. Very, very usable."
+    },
+    {
+      "author": "iijei",
+      "score": "3",
+      "text": "iijei\n•\n11h ago\n\nLlamacpp?\n\ncogitech2\n•\n10h ago\n\nyes"
+    },
+    {
+      "author": "cogitech2",
+      "score": "3",
+      "text": "cogitech2\n•\n10h ago\n\nyes"
+    },
+    {
+      "author": "the_bollo",
+      "score": "4",
+      "text": "the_bollo\n•\n13h ago\n\n on google ai studio\n\nWhich particular model was it using though?\n\nHyperFoci\n•\n13h ago\n\nGemini 3.7 Flash"
+    },
+    {
+      "author": "HyperFoci",
+      "score": "3",
+      "text": "HyperFoci\n•\n13h ago\n\nGemini 3.7 Flash"
+    },
+    {
+      "author": "BP041",
+      "score": "3",
+      "text": "BP041\n•\n12h ago\n\n63 hours for a flight sim you can actually fly? That's honestly impressive for a 3-bit quant on M2. I've had Qwen 3 27B fall apart on much simpler prompts after a few turns — the long context probably saved it. Still, you've got more patience than me, I'd have given up at the \"press any key\" bug."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vuvx0t",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:55:23Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.661,
+    "evidence": 0.6,
+    "relevance": 0.545,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}

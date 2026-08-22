@@ -1,0 +1,171 @@
+{
+  "canonical_url": "https://www.reddit.com/r/LocalLLaMA/comments/1vv80xa/artificial_analysis_intelligence_a_meaningless/",
+  "title": "Artificial Analysis \"Intelligence\": A meaningless benchmark",
+  "author": "chocolateUI",
+  "post_body": "Repost\nGo to LocalLLaMA\nr/LocalLLaMA\n•\n2h ago\nchocolateUI\nArtificial Analysis \"Intelligence\": A meaningless benchmark\nDiscussion\n\nAnother user posted the benchmarks for Qwen 3.8 27B today, and while I think Qwen 27B is a really powerful model, I can't help but notice just how meaningless these Artificial Analysis benchmarks are and I question why people still post this garbage and use AA scores as some kind of holy bible for comparing LLMs.\n\nAccording to their \"Intelligence Index\", a 27B model now beats DeepSeek v4 Flash and Pro, Kimi 2.7 Code, GPT-5.2, Opus 4.6, and also Sonnet 5. At some point we have to ask: What is this metric even measuring? Because whatever \"Intelligence\" means to AA and their corporate VC / journalist / normie audience is definitely not the same definition that we should be using here.\n\nQwen 27B is amazing and is clearly in a league of its own in terms of models you can fit on a single GPU, but I can't help but roll my eyes whenever I see posts like this that equate Qwen 27B with \"basically running Opus from 3 months ago on your laptop.\"\n\nI get that it's difficult to summarize a model's capability with a single integer and I know we love our local models, but it's time stop posting AA's clearly dogshit benchmark and acting as if it proves a point.\n\nShare",
+  "comments": [
+    {
+      "author": "z_3454_pfk",
+      "score": "69",
+      "text": "z_3454_pfk\n•\n2h ago\n\nit’s just an aggregate of benchmarks (highly skewed towards agentic rn). that’s basically it. it’s not that deep and you should select what’s right for ur use case\n\nnetwork4253\n•\n29m ago\n\nYeah, that is how I see it too. A leaderboard is useful for getting a quick sense of things, but it does not really tell you which model is best for your specific workflow. If you mostly care about coding, writing, or local inference, the relevant benchmarks matter way more than the overall score.\n\nvogelvogelvogelvogel\n•\n2h ago\n\nexactly this. dive down the sections and check what fits you\n\nlivebench I also found really useful, especially as it lists the single results directly in a table - you can spot directly where model is strong and where not\n\nAlso they update the benchmark tasks each month so it is rather not possible to train on them reducing benchmaxing effects"
+    },
+    {
+      "author": "network4253",
+      "score": "1",
+      "text": "network4253\n•\n29m ago\n\nYeah, that is how I see it too. A leaderboard is useful for getting a quick sense of things, but it does not really tell you which model is best for your specific workflow. If you mostly care about coding, writing, or local inference, the relevant benchmarks matter way more than the overall score."
+    },
+    {
+      "author": "vogelvogelvogelvogel",
+      "score": "1",
+      "text": "vogelvogelvogelvogel\n•\n2h ago\n\nexactly this. dive down the sections and check what fits you\n\nlivebench I also found really useful, especially as it lists the single results directly in a table - you can spot directly where model is strong and where not\n\nAlso they update the benchmark tasks each month so it is rather not possible to train on them reducing benchmaxing effects"
+    },
+    {
+      "author": "whatisthisthing65",
+      "score": "31",
+      "text": "whatisthisthing65\n•\n2h ago\n\nWhat's your actual argument? Why couldn't a 27B model be better than those other models? If it's about number of parameters then should our benchmark be parameter count?\n\nCautious_Chicken_604\n•\n1h ago\n\nI remember we had larger models in the past that performed much worse. \n\nOneMoreName1\n•\n1h ago\n\nUsually just personal incredulity. Its like saying there's no way a phone from today is as strong as supercomputer from decades ago. Ai just moves fast\n\nwhatisthisthing65\n•\n1h ago\n\nLol good analogy.\n\nfeelspeaceman\n•\n1h ago\n\nMost people tend to blame 27B about the lack of world knowledge and say this is the sole reason that it will never beat Claude Sonnet 4.6, but they ignore that fact that behind the scene, Claude Sonnet is equipped with a RAG for local knowledge retrieving and it will also search to acquire extra knowledge, then they compare a local LLM without search, without RAG, this is showing that there's people despite trying to use local LLM, never trying to get better.\n\nThen we get a group of users that:\n\nUse not suitable harness\n\nHalf-ass setup\n\nHalf-ass prompt\n\nBlaming local LLM for not being as capable for obvious reason, the user themselves.\n\nfreestylez79\n•\n58m ago\n\nagree, qwen actually shows where llms are heading. the huge models may still have there use cases for some stuff but 90% of day to day stuff can be done with models that dont hallucinate success and are able to work with recent data and tools. Really amazing stuff.\n\nbnightstars\n•\n47m ago\n\nOk give us your setup (Harness, Inference, Prompts) to see how you do it ?\n\nOvertaxedOne\n•\n26m ago\n\nThere's little reason to try to train factual data into a LLM when the Internet is right there and it's easy for AI models to interact with. Obviously there are some \"base facts\" that need to be in the models, but, beyond that, trying to jam more in when it's so easy to call a browser/MCP to get the up to the second information is silly.\n\nGood tool calling is 1000X more valuable than \"I know everything\" (because, no, you don't; even a massive model, you didn't condense all of human knowledge down to a few TB, no way, no how).\n\nResidentPositive4122\n•\n1h ago\n Top 1% Commenter\n\nClaude Sonnet is equipped with a RAG for local knowledge retrieving and it will also search to acquire extra knowledge\n\nNone of that happens over API, ootb.\n\nFullstackSensei\n•\n52m ago\nllama.cpp\n Top 1% Commenter\n\nYou have no idea what's happening behind the scenes, API or not.\n\nzenmatrix83\n•\n1h ago\n\nits not just parameter counts but they do play a big role, the type of model, the training data, and the actual tests being used matter. I only use benchmarks for very loose guidelines for what to use, outside of that I just test and change based on need.\n\nwhatisthisthing65\n•\n1h ago\n\nYes benchmarks can never capture everything and testing your actual use case is the best test. But op seems to be saying this benchmark is shit because qwen3.8 27B is beating a bunch of bigger big name models. Which isn't a good argument, there's no reason it can't be better there or in real use.\n\nAdventurous-Test-246\n•\n5m ago\n\nI think the issue is knowledge is heavily under weighted"
+    },
+    {
+      "author": "Cautious_Chicken_604",
+      "score": "11",
+      "text": "Cautious_Chicken_604\n•\n1h ago\n\nI remember we had larger models in the past that performed much worse."
+    },
+    {
+      "author": "OneMoreName1",
+      "score": "10",
+      "text": "OneMoreName1\n•\n1h ago\n\nUsually just personal incredulity. Its like saying there's no way a phone from today is as strong as supercomputer from decades ago. Ai just moves fast\n\nwhatisthisthing65\n•\n1h ago\n\nLol good analogy."
+    },
+    {
+      "author": "whatisthisthing65",
+      "score": "3",
+      "text": "whatisthisthing65\n•\n1h ago\n\nLol good analogy."
+    },
+    {
+      "author": "feelspeaceman",
+      "score": "12",
+      "text": "feelspeaceman\n•\n1h ago\n\nMost people tend to blame 27B about the lack of world knowledge and say this is the sole reason that it will never beat Claude Sonnet 4.6, but they ignore that fact that behind the scene, Claude Sonnet is equipped with a RAG for local knowledge retrieving and it will also search to acquire extra knowledge, then they compare a local LLM without search, without RAG, this is showing that there's people despite trying to use local LLM, never trying to get better.\n\nThen we get a group of users that:\n\nUse not suitable harness\n\nHalf-ass setup\n\nHalf-ass prompt\n\nBlaming local LLM for not being as capable for obvious reason, the user themselves.\n\nfreestylez79\n•\n58m ago\n\nagree, qwen actually shows where llms are heading. the huge models may still have there use cases for some stuff but 90% of day to day stuff can be done with models that dont hallucinate success and are able to work with recent data and tools. Really amazing stuff.\n\nbnightstars\n•\n47m ago\n\nOk give us your setup (Harness, Inference, Prompts) to see how you do it ?\n\nOvertaxedOne\n•\n26m ago\n\nThere's little reason to try to train factual data into a LLM when the Internet is right there and it's easy for AI models to interact with. Obviously there are some \"base facts\" that need to be in the models, but, beyond that, trying to jam more in when it's so easy to call a browser/MCP to get the up to the second information is silly.\n\nGood tool calling is 1000X more valuable than \"I know everything\" (because, no, you don't; even a massive model, you didn't condense all of human knowledge down to a few TB, no way, no how).\n\nResidentPositive4122\n•\n1h ago\n Top 1% Commenter\n\nClaude Sonnet is equipped with a RAG for local knowledge retrieving and it will also search to acquire extra knowledge\n\nNone of that happens over API, ootb.\n\nFullstackSensei\n•\n52m ago\nllama.cpp\n Top 1% Commenter\n\nYou have no idea what's happening behind the scenes, API or not."
+    },
+    {
+      "author": "freestylez79",
+      "score": "4",
+      "text": "freestylez79\n•\n58m ago\n\nagree, qwen actually shows where llms are heading. the huge models may still have there use cases for some stuff but 90% of day to day stuff can be done with models that dont hallucinate success and are able to work with recent data and tools. Really amazing stuff."
+    },
+    {
+      "author": "bnightstars",
+      "score": "1",
+      "text": "bnightstars\n•\n47m ago\n\nOk give us your setup (Harness, Inference, Prompts) to see how you do it ?"
+    },
+    {
+      "author": "OvertaxedOne",
+      "score": "1",
+      "text": "OvertaxedOne\n•\n26m ago\n\nThere's little reason to try to train factual data into a LLM when the Internet is right there and it's easy for AI models to interact with. Obviously there are some \"base facts\" that need to be in the models, but, beyond that, trying to jam more in when it's so easy to call a browser/MCP to get the up to the second information is silly.\n\nGood tool calling is 1000X more valuable than \"I know everything\" (because, no, you don't; even a massive model, you didn't condense all of human knowledge down to a few TB, no way, no how)."
+    },
+    {
+      "author": "ResidentPositive4122",
+      "score": "1",
+      "text": "ResidentPositive4122\n•\n1h ago\n Top 1% Commenter\n\nClaude Sonnet is equipped with a RAG for local knowledge retrieving and it will also search to acquire extra knowledge\n\nNone of that happens over API, ootb.\n\nFullstackSensei\n•\n52m ago\nllama.cpp\n Top 1% Commenter\n\nYou have no idea what's happening behind the scenes, API or not."
+    },
+    {
+      "author": "FullstackSensei",
+      "score": "3",
+      "text": "FullstackSensei\n•\n52m ago\nllama.cpp\n Top 1% Commenter\n\nYou have no idea what's happening behind the scenes, API or not."
+    },
+    {
+      "author": "zenmatrix83",
+      "score": "1",
+      "text": "zenmatrix83\n•\n1h ago\n\nits not just parameter counts but they do play a big role, the type of model, the training data, and the actual tests being used matter. I only use benchmarks for very loose guidelines for what to use, outside of that I just test and change based on need.\n\nwhatisthisthing65\n•\n1h ago\n\nYes benchmarks can never capture everything and testing your actual use case is the best test. But op seems to be saying this benchmark is shit because qwen3.8 27B is beating a bunch of bigger big name models. Which isn't a good argument, there's no reason it can't be better there or in real use."
+    },
+    {
+      "author": "whatisthisthing65",
+      "score": "2",
+      "text": "whatisthisthing65\n•\n1h ago\n\nYes benchmarks can never capture everything and testing your actual use case is the best test. But op seems to be saying this benchmark is shit because qwen3.8 27B is beating a bunch of bigger big name models. Which isn't a good argument, there's no reason it can't be better there or in real use."
+    }
+  ],
+  "schema_version": 1,
+  "run_id": "qwen-3-8-27b-hardened-evaluation-2026-08",
+  "thread_id": "1vv80xa",
+  "source_type": "reddit-thread",
+  "captured_at": "2026-08-22T11:54:51Z",
+  "discovered_by_query_ids": [
+    "9ed9c1b20f1e",
+    "f27649a29daf"
+  ],
+  "quality": {
+    "score": 0.327,
+    "evidence": 0.0,
+    "relevance": 0.364,
+    "community_scrutiny": 1.0,
+    "method": "deterministic-keyword-v1"
+  },
+  "outbound_references": [
+    {
+      "url": "https://artificialanalysis.ai/models/deepseek-v4-pro?models=qwen3-8-27b%2Cdeepseek-v4-pro%2Ckimi-k2-7-code%2Cclaude-opus-4-6-adaptive",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://artificialanalysis.ai/evaluations/omniscience",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://x.com/localllamasub",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/ru9RYpx6Gp",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://discord.gg/4R7xS5hMdN",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/content-policy",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://www.redditinc.com/policies/user-agreement",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/articles/43980704794004",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/sections/38303584022676-Accessibility",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    },
+    {
+      "url": "https://redditinc.com/",
+      "verification_state": "unverified",
+      "verified_at": null,
+      "final_url": null,
+      "note": "captured from Reddit DOM; verification is a separate stage"
+    }
+  ]
+}
