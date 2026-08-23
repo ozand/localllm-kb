@@ -1,0 +1,117 @@
+{
+  "schema_version": "1",
+  "record_type": "local_model_research",
+  "producer": {
+    "project_id": "localllm-kb",
+    "export_version": "1",
+    "source_revision": "b132e22acbeff004dc4f4a535a4a787b92a625dc",
+    "exported_at": "2026-08-23T15:55:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen2.5-32b-instruct",
+    "display_name": "Qwen2.5-32B Instruct",
+    "upstream_model_id": "Qwen/Qwen2.5-32B-Instruct",
+    "variant": "instruction-tuned dense model; separate from Qwen3 and coder variants",
+    "benchmark_aliases": [
+      {
+        "source_id": "artificial-analysis",
+        "source_slug": "qwen2.5-32b-instruct",
+        "alias_scope": "identity/join only",
+        "evidence_status": "reported",
+        "provenance": "consumer GitHub Issue #39"
+      }
+    ],
+    "consumer_mapping": {
+      "consumer_project_id": "ai-dashboards-kb",
+      "mapping_status": "candidate_only",
+      "candidate_canonical_ids": ["alibaba/qwen2.5-32b-instruct"],
+      "alias_join_keys": ["artificial-analysis/qwen2.5-32b-instruct"],
+      "resolution_owner": "ai-dashboards-kb",
+      "resolution_rule": "The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
+  },
+  "upstream": {
+    "model_repository": "Qwen/Qwen2.5-32B-Instruct",
+    "model_revision": "5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd",
+    "model_revision_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/tree/5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd",
+    "config_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd/config.json",
+    "artifact_repository": "bartowski/Qwen2.5-32B-Instruct-GGUF",
+    "artifact_revision": "2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6",
+    "artifact_tree_url": "https://huggingface.co/bartowski/Qwen2.5-32B-Instruct-GGUF/tree/2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6",
+    "evidence_status": "reported"
+  },
+  "architecture": {
+    "architecture_type": "dense",
+    "architectures": ["Qwen2ForCausalLM"],
+    "model_type": "qwen2",
+    "total_parameters_b": 32.5,
+    "active_parameters_b": 32.5,
+    "hidden_size": 5120,
+    "layer_count": 64,
+    "attention_head_count": 40,
+    "kv_head_count": 8,
+    "head_dimension": null,
+    "intermediate_size": 27648,
+    "native_context_tokens": 32768,
+    "documented_context_tokens": 131072,
+    "generation_context_tokens": 8192,
+    "evidence_status": "reported",
+    "provenance": [
+      "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd/config.json",
+      "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd/README.md"
+    ]
+  },
+  "original_artifact": {
+    "format": "safetensors",
+    "file_count": 17,
+    "size_bytes": 65527841856,
+    "size_evidence_status": "reported",
+    "provenance": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/tree/5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd"
+  },
+  "artifact": {
+    "format": "gguf",
+    "quantization": "Q4_K_S",
+    "filename": "Qwen2.5-32B-Instruct-Q4_K_S.gguf",
+    "size_bytes": 18784410496,
+    "sha256": "97b51ba6fd524e09b15d36f726725445710aec0b10fb2584604b5f6803e6cd08",
+    "artifact_url": "https://huggingface.co/bartowski/Qwen2.5-32B-Instruct-GGUF/resolve/2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6/Qwen2.5-32B-Instruct-Q4_K_S.gguf",
+    "repository_blob_oid": "72cfc53489f396c48153882553392eddeff615e1",
+    "lfs_oid": "97b51ba6fd524e09b15d36f726725445710aec0b10fb2584604b5f6803e6cd08",
+    "variant_match_status": "exact_filename_match",
+    "evidence_status": "reported",
+    "sha256_provenance": "Hugging Face LFS oid reported by the immutable tree API; not independently recomputed from a local download",
+    "sha256_verification": "reported_not_locally_verified"
+  },
+  "configuration": {
+    "artifact_id": "bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf",
+    "quantization": "Q4_K_S",
+    "context_tokens": 98304,
+    "kv_cache_quantization": "Q8_0",
+    "runtime_name": null,
+    "runtime_version": null,
+    "hardware_id": null,
+    "placement": null,
+    "offload": null,
+    "evidence_status": "unknown",
+    "support_status": "unknown",
+    "support_provenance": null
+  },
+  "records": [
+    {"record_id":"qwen2.5-32b-instruct-artifact-2026-08-23","metric_id":"artifact_size_bytes","unit":"bytes","value":18784410496,"evidence_status":"reported","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":"https://huggingface.co/bartowski/Qwen2.5-32B-Instruct-GGUF/tree/2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6"},
+    {"record_id":"qwen2.5-32b-instruct-context-q8-2026-08-23","metric_id":"context_q8_kv_98304_support","unit":"boolean_or_status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-vram-2026-08-23","metric_id":"peak_vram_gib","unit":"GiB","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-prompt-tps-2026-08-23","metric_id":"prompt_eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-eval-tps-2026-08-23","metric_id":"eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-ttft-2026-08-23","metric_id":"ttft","unit":"seconds","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-power-2026-08-23","metric_id":"system_power","unit":"watts","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen2.5-32b-instruct-oom-2026-08-23","metric_id":"oom_outcome","unit":"status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:55:00Z","producer_run_id":"qwen2.5-32b-instruct-upstream-metadata-2026-08-23","configuration_ref":"bartowski/qwen2.5-32b-instruct-gguf@2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6:Qwen2.5-32B-Instruct-Q4_K_S.gguf","provenance_ref":null}
+  ],
+  "limitations": [
+    "No local runtime or hardware measurement was performed in this pass.",
+    "Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.",
+    "The upstream model card documents 131,072 full context and an effective config max_position_embeddings of 32,768; the requested 98,304-token Q8 KV case remains unknown without a runtime receipt.",
+    "The Artificial Analysis alias is an identity/join alias only and does not supply local measurements.",
+    "The producer canonical_id is qwen/qwen2.5-32b-instruct. ai-dashboards-kb currently exposes alibaba/qwen2.5-32b-instruct as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID.",
+    "This Qwen2.5 Instruct record is not a Qwen3 record and must not inherit Qwen3, coder, or other cohort properties."
+  ]
+}
