@@ -1,0 +1,72 @@
+{
+  "schema_version": "1",
+  "record_type": "local_model_research",
+  "producer": {
+    "project_id": "localllm-kb",
+    "export_version": "1",
+    "source_revision": "6c84ad23315c8c642e450654f9e001bd0aa5ac10",
+    "exported_at": "2026-08-23T16:10:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "mistralai/mistral-small-3.1-24b-instruct-2503",
+    "display_name": "Mistral Small 3.1 24B Instruct 2503",
+    "upstream_model_id": "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+    "variant": "instruction-tuned multimodal text-and-image model",
+    "benchmark_aliases": [{"source_id":"artificial-analysis","source_slug":"mistral-small-3-1","alias_scope":"identity/join only","evidence_status":"reported","provenance":"consumer GitHub Issue #41"}],
+    "consumer_mapping": {
+      "consumer_project_id": "ai-dashboards-kb",
+      "mapping_status": "candidate_only",
+      "candidate_canonical_ids": ["mistralai/mistral-small-3.1-24b-instruct-2503"],
+      "alias_join_keys": ["artificial-analysis/mistral-small-3-1"],
+      "resolution_owner": "ai-dashboards-kb",
+      "resolution_rule": "The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
+  },
+  "upstream": {
+    "model_repository": "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+    "model_revision": "68faf511d618ef198fef186659617cfd2eb8e33a",
+    "model_revision_url": "https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/tree/68faf511d618ef198fef186659617cfd2eb8e33a",
+    "config_url": "https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF/blob/d63ca9416f5db4f54a78145fb9a025317a57289f/config.json",
+    "artifact_repository": "unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF",
+    "artifact_revision": "d63ca9416f5db4f54a78145fb9a025317a57289f",
+    "artifact_tree_url": "https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF/tree/d63ca9416f5db4f54a78145fb9a025317a57289f",
+    "evidence_status": "reported"
+  },
+  "architecture": {
+    "architecture_type": "multimodal_dense",
+    "architectures": ["Mistral3ForConditionalGeneration"],
+    "model_type": "mistral3",
+    "total_parameters_b": 24.0,
+    "active_parameters_b": 24.0,
+    "text_hidden_size": 5120,
+    "text_layer_count": 40,
+    "text_attention_head_count": 32,
+    "text_kv_head_count": 8,
+    "text_head_dimension": 128,
+    "text_intermediate_size": 32768,
+    "text_context_tokens": 131072,
+    "vision_hidden_size": 1024,
+    "vision_layer_count": 24,
+    "vision_attention_head_count": 16,
+    "vision_head_dimension": 64,
+    "vision_image_size": 1540,
+    "evidence_status": "reported",
+    "provenance": ["https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF/blob/d63ca9416f5db4f54a78145fb9a025317a57289f/config.json","https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/blob/68faf511d618ef198fef186659617cfd2eb8e33a/README.md"]
+  },
+  "original_artifact": {"format":"safetensors","file_count":1,"size_bytes":48022792280,"size_evidence_status":"reported","provenance":"https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/tree/68faf511d618ef198fef186659617cfd2eb8e33a"},
+  "artifact": {
+    "format":"gguf","quantization":"Q4_K_S","filename":"Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","size_bytes":13549280832,"sha256":"57fac5dcc4a6909444f5cf67550c61331bcab42e36736d021d1aabb45195fd24","artifact_url":"https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF/resolve/d63ca9416f5db4f54a78145fb9a025317a57289f/Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","repository_blob_oid":"0b2988cdbda3f5c197dfd7dcc0138034d8a4f9f0","lfs_oid":"57fac5dcc4a6909444f5cf67550c61331bcab42e36736d021d1aabb45195fd24","variant_match_status":"exact_filename_match","evidence_status":"reported","sha256_provenance":"Hugging Face LFS oid reported by the immutable tree API; not independently recomputed from a local download","sha256_verification":"reported_not_locally_verified"
+  },
+  "configuration": {"artifact_id":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","quantization":"Q4_K_S","context_tokens":98304,"kv_cache_quantization":"Q8_0","runtime_name":null,"runtime_version":null,"hardware_id":null,"placement":null,"offload":null,"evidence_status":"unknown","support_status":"unknown","support_provenance":null},
+  "records": [
+    {"record_id":"mistral-small-3.1-24b-instruct-artifact-2026-08-23","metric_id":"artifact_size_bytes","unit":"bytes","value":13549280832,"evidence_status":"reported","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":"https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF/tree/d63ca9416f5db4f54a78145fb9a025317a57289f"},
+    {"record_id":"mistral-small-3.1-24b-instruct-context-q8-2026-08-23","metric_id":"context_q8_kv_98304_support","unit":"boolean_or_status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-vram-2026-08-23","metric_id":"peak_vram_gib","unit":"GiB","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-prompt-tps-2026-08-23","metric_id":"prompt_eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-eval-tps-2026-08-23","metric_id":"eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-ttft-2026-08-23","metric_id":"ttft","unit":"seconds","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-power-2026-08-23","metric_id":"system_power","unit":"watts","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"mistral-small-3.1-24b-instruct-oom-2026-08-23","metric_id":"oom_outcome","unit":"status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:10:00Z","producer_run_id":"mistral-small-3.1-24b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/mistral-small-3.1-24b-instruct-2503-gguf@d63ca9416f5db4f54a78145fb9a025317a57289f:Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf","provenance_ref":null}
+  ],
+  "limitations": ["No local runtime or hardware measurement was performed in this pass.","Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.","Mistral Small 3.1 is multimodal; local projector/runtime support and the requested 98,304-token Q8 KV case remain unknown without a runtime receipt.","The Artificial Analysis alias is an identity/join alias only and does not supply local measurements.","The producer canonical_id is mistralai/mistral-small-3.1-24b-instruct-2503. ai-dashboards-kb currently exposes mistralai/mistral-small-3.1-24b-instruct-2503 as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID."]
+}
