@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0.0",
+  "producer": {
+    "project_id": "localllm-kb",
+    "generator": "localllm-kb/deep-research",
+    "generated_at": "2026-08-23T20:56:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen2.5-32b-instruct",
+    "upstream_repository": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct",
+    "upstream_revision": "5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd",
+    "benchmark_aliases": [
+      "artificial-analysis/qwen2.5-32b-instruct"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "alibaba/qwen2.5-32b-instruct"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/qwen2.5-32b-instruct"
+      ],
+      "resolution_owner": "ai-dashboards-kb"
+    }
+  },
+  "architecture": {
+    "family": "qwen2.5",
+    "type": "dense",
+    "parameters_total": 32500000000,
+    "num_hidden_layers": 64,
+    "num_attention_heads": 40,
+    "num_key_value_heads": 8,
+    "head_dimension": null,
+    "context_window_native": 131072,
+    "context_window_config": 32768
+  },
+  "quantization_matrix": {
+    "original_safetensors_bytes": 65527841856,
+    "gguf_repository": "https://huggingface.co/bartowski/Qwen2.5-32B-Instruct-GGUF",
+    "gguf_revision": "2116cbb385b8ce3a4d28cf3bf1cd2039a55821a6",
+    "available_quants": [
+      {
+        "quant": "F16",
+        "filename": "Qwen2.5-32B-Instruct-f16 (2 parts)",
+        "size_bytes": 65535970112
+      },
+      {
+        "quant": "Q8_0",
+        "filename": "Qwen2.5-32B-Instruct-Q8_0.gguf",
+        "size_bytes": 34820885376
+      },
+      {
+        "quant": "Q6_K",
+        "filename": "Qwen2.5-32B-Instruct-Q6_K.gguf",
+        "size_bytes": 26886155136
+      },
+      {
+        "quant": "Q5_K_M",
+        "filename": "Qwen2.5-32B-Instruct-Q5_K_M.gguf",
+        "size_bytes": 23262157696
+      },
+      {
+        "quant": "Q4_K_M",
+        "filename": "Qwen2.5-32B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 19851336576
+      },
+      {
+        "quant": "Q4_K_S",
+        "filename": "Qwen2.5-32B-Instruct-Q4_K_S.gguf",
+        "size_bytes": 18784410496
+      },
+      {
+        "quant": "IQ4_XS",
+        "filename": "Qwen2.5-32B-Instruct-IQ4_XS.gguf",
+        "size_bytes": 17693154176
+      },
+      {
+        "quant": "Q3_K_M",
+        "filename": "Qwen2.5-32B-Instruct-Q3_K_M.gguf",
+        "size_bytes": 15935048576
+      },
+      {
+        "quant": "Q2_K",
+        "filename": "Qwen2.5-32B-Instruct-Q2_K.gguf",
+        "size_bytes": 12313099136
+      }
+    ]
+  },
+  "hardware_deployments": [
+    {
+      "hardware": "Single RTX 3090 / 3090 Ti 24GB",
+      "runtime": "llama.cpp / Ollama",
+      "quantization": "Q4_K_S",
+      "weights_vram_gb": 18.78,
+      "performance": {
+        "eval_tps": 24.5,
+        "prompt_eval_tps": 320.0,
+        "role": "Solid general dense model for short-to-medium context tasks"
+      },
+      "context_support": {
+        "4k_context_vram_gb": 19.3,
+        "8k_context_vram_gb": 19.8,
+        "16k_context_vram_gb": 20.9,
+        "32k_context_q8_kv_vram_gb": 23.0,
+        "98k_context_q8_kv_vram_gb": 31.66,
+        "status_98k_q8": "OOM on single 24GB GPU (requires Dual GPU or Q4 KV cache with tight fit)"
+      }
+    },
+    {
+      "hardware": "Single RTX 4090 24GB",
+      "runtime": "vLLM / llama.cpp (FlashAttention-2)",
+      "quantization": "Q4_K_M",
+      "performance": {
+        "eval_tps": 34.0,
+        "prompt_eval_tps": 650.0,
+        "fit": "full_gpu_fit_short_context"
+      }
+    },
+    {
+      "hardware": "Dual RTX 3090 (2x24GB = 48GB)",
+      "runtime": "llama.cpp / vLLM (Tensor Parallel)",
+      "quantization": "Q5_K_M or Q6_K",
+      "performance": {
+        "eval_tps": 44.0,
+        "context_limit": 131072,
+        "status_98k_q8": "FITS smoothly on Dual GPU configuration"
+      }
+    }
+  ],
+  "context_memory_scaling": {
+    "target_98304_context": {
+      "q8_kv_cache_gb": 12.88,
+      "q4_kv_cache_gb": 6.44,
+      "weights_q4_k_s_gb": 18.78,
+      "total_vram_q8_kv_98k_gb": 31.66,
+      "total_vram_q4_kv_98k_gb": 25.22,
+      "status_single_24gb": "OOM on single 24GB GPU for both Q8 and Q4 KV at 98k tokens; requires 32GB+ or Dual 3090",
+      "contrast_with_qwen3_a3b": "Unlike Qwen3 A3B (which has only 4 KV heads and 48 layers), Qwen2.5 32B has 8 KV heads and 64 layers, doubling KV cache memory footprint."
+    }
+  }
+}
