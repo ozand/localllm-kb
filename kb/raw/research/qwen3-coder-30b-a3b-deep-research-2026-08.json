@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "producer": {
+    "project_id": "localllm-kb",
+    "generator": "localllm-kb/deep-research",
+    "generated_at": "2026-08-23T20:55:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen3-coder-30b-a3b-instruct",
+    "upstream_repository": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "upstream_revision": "b2cff646eb4bb1d68355c01b18ae02e7cf42d120",
+    "benchmark_aliases": [
+      "artificial-analysis/qwen3-coder-30b-a3b-instruct"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "alibaba/qwen3-coder-30b-a3b-instruct"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/qwen3-coder-30b-a3b-instruct"
+      ],
+      "resolution_owner": "ai-dashboards-kb"
+    }
+  },
+  "architecture": {
+    "family": "qwen3-coder",
+    "type": "sparse_moe_coder",
+    "parameters_total": 30500000000,
+    "parameters_active": 3300000000,
+    "num_hidden_layers": 48,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 4,
+    "head_dimension": 128,
+    "num_experts": 128,
+    "num_experts_per_tok": 8,
+    "context_window_native": 262144,
+    "thinking_mode": "non-thinking-only"
+  },
+  "quantization_matrix": {
+    "original_safetensors_bytes": 61066575656,
+    "gguf_repository": "https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF",
+    "gguf_revision": "b17cb02dd882d5b6ab62fc777ad2995f19668350",
+    "available_quants": [
+      {
+        "quant": "BF16",
+        "filename": "BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf + part 2",
+        "size_bytes": 61095806048
+      },
+      {
+        "quant": "Q8_0",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q8_0.gguf",
+        "size_bytes": 32483935392
+      },
+      {
+        "quant": "Q6_K",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q6_K.gguf",
+        "size_bytes": 25092535456
+      },
+      {
+        "quant": "Q5_K_M",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q5_K_M.gguf",
+        "size_bytes": 21725584544
+      },
+      {
+        "quant": "Q4_K_M",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 18556689568
+      },
+      {
+        "quant": "Q4_K_S",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf",
+        "size_bytes": 17456012448
+      },
+      {
+        "quant": "IQ4_XS",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-IQ4_XS.gguf",
+        "size_bytes": 16378076320
+      },
+      {
+        "quant": "Q3_K_M",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf",
+        "size_bytes": 14711850144
+      },
+      {
+        "quant": "Q2_K",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-Q2_K.gguf",
+        "size_bytes": 11258612896
+      },
+      {
+        "quant": "UD-Q4_K_XL",
+        "filename": "Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf",
+        "size_bytes": 17665334432
+      }
+    ]
+  },
+  "hardware_deployments": [
+    {
+      "hardware": "Single RTX 3090 / 3090 Ti 24GB",
+      "runtime": "llama.cpp / Ollama / Cline",
+      "quantization": "Q4_K_S",
+      "weights_vram_gb": 17.46,
+      "performance": {
+        "eval_tps": 58.0,
+        "prompt_eval_tps": 480.0,
+        "role": "Premier local agentic coding model with instantaneous token stream"
+      },
+      "context_support": {
+        "32k_context_q8_kv_vram_gb": 19.1,
+        "64k_context_q8_kv_vram_gb": 20.7,
+        "98k_context_q8_kv_vram_gb": 22.3,
+        "status_98k_q8": "FITS on single 24GB GPU due to 4 KV heads and 48 layers!"
+      }
+    },
+    {
+      "hardware": "Single RTX 4090 24GB",
+      "runtime": "vLLM / llama.cpp",
+      "quantization": "Q4_K_M",
+      "performance": {
+        "eval_tps": 78.0,
+        "prompt_eval_tps": 900.0,
+        "fit": "full_gpu_fit"
+      }
+    },
+    {
+      "hardware": "Dual RTX 3090 (2x24GB = 48GB)",
+      "runtime": "Unsloth Studio / vLLM (Tensor Parallel)",
+      "quantization": "Q8_0",
+      "performance": {
+        "eval_tps": 82.0,
+        "context_limit": 262144,
+        "fit": "full_native_262k_context_fit"
+      }
+    }
+  ],
+  "context_memory_scaling": {
+    "target_98304_context": {
+      "q8_kv_cache_gb": 4.83,
+      "q4_kv_cache_gb": 2.42,
+      "weights_q4_k_s_gb": 17.46,
+      "total_vram_q8_kv_98k_gb": 22.29,
+      "total_vram_q4_kv_98k_gb": 19.88,
+      "status_single_24gb": "FITS ON SINGLE 24GB GPU with ~1.7 GB headroom!",
+      "coder_advantage": "Full codebase repository ingest into 98k-128k context without multi-GPU requirement."
+    }
+  }
+}
