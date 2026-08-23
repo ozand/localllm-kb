@@ -31,12 +31,13 @@ AA fields are retained as identity/join metadata only. They are not evidence for
 
 - GGUF repository: `unsloth/Qwen3.8-27B-GGUF`.
 - GGUF revision: `4ca720788d1e01f1bff70c033e0d0028fd02e502`.
-- Available exact artifact: `Qwen3.8-27B-UD-Q4_K_S.gguf`.
-- Reported artifact size: `15,358,213,024` bytes.
-- Reported artifact SHA-256/LFS OID: `75bc9c8adba2842e72f0ab5201aaa07133c5010b566305c09187fcbdcd364017`.
+- Standard target artifact: `Qwen3.8-27B-Q4_K_S.gguf` — unavailable/null.
+- Standard target size: unavailable/null.
+- Standard target SHA-256: unavailable/null.
+- Distinct alternative artifact: `Qwen3.8-27B-UD-Q4_K_S.gguf`, reported size `15,358,213,024` bytes, reported SHA-256/LFS OID `75bc9c8adba2842e72f0ab5201aaa07133c5010b566305c09187fcbdcd364017`.
 - Original safetensors total: `55,563,006,776` bytes across 18 files.
 
-The requested standard `Q4_K_S` filename was not found in the selected upstream GGUF repository. The available `UD-Q4_K_S` artifact is retained explicitly and is not silently renamed to standard `Q4_K_S`. The hash is reported upstream metadata and was not independently recomputed from a local download. No model artifact was downloaded or stored.
+The requested standard `Q4_K_S` filename was not found in the selected upstream GGUF repository. Standard artifact fields remain null/unavailable. The available `UD-Q4_K_S` artifact is retained only as a distinct alternative and is not silently renamed or treated as the target. Its hash is reported upstream metadata and was not independently recomputed from a local download. No model artifact was downloaded or stored.
 
 ## Architecture and xhigh identity
 
@@ -46,7 +47,7 @@ The upstream card documents `reasoning_effort` levels `xhigh`, `medium`, and `lo
 
 ## Consumer identity mapping
 
-The producer canonical ID is `qwen/qwen3.8-27b`. For `ai-dashboards-kb`, the same string is recorded only as a candidate consumer canonical ID. The join key is `artificial-analysis/qwen3-8-27b`.
+The producer canonical ID is `qwen/qwen3.8-27b`. For `ai-dashboards-kb`, `alibaba/qwen3-8-27b` is recorded only as the candidate consumer canonical ID. The join key is `artificial-analysis/qwen3-8-27b`. Producer canonical `qwen/qwen3.8-27b` is preserved and is not silently replaced.
 
 Final canonical resolution belongs to `ai-dashboards-kb`, may differ from the producer canonical ID, and must not silently substitute one identity for another.
 
@@ -70,7 +71,7 @@ No local benchmark was run in this increment, and no unidentified environment ev
 
 - JSON parses successfully.
 - Unknown numeric and status values are represented as `null` rather than fabricated values.
-- Provenance URLs, immutable revisions, AA identity metadata, exact available artifact identity, size, and reported hash are retained.
+- Provenance URLs, immutable revisions, AA identity metadata, standard-target nulls, and distinct alternative artifact identity are retained.
 - Nested `model_identity.consumer_mapping` follows the downstream contract.
 - xhigh is retained as a reasoning-effort variant; no effort-specific local result is claimed.
 - UD-Q4_K_S is kept distinct from standard Q4_K_S.
