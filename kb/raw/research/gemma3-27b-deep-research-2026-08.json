@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "producer": {
+    "project_id": "localllm-kb",
+    "generator": "localllm-kb/deep-research",
+    "generated_at": "2026-08-23T21:05:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "google/gemma-3-27b-it",
+    "upstream_repository": "https://huggingface.co/google/gemma-3-27b-it",
+    "upstream_revision": "005ad3404e59d6023443cb575daa05336842228a",
+    "benchmark_aliases": [
+      "artificial-analysis/gemma-3-27b"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "google/gemma-3-27b"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/gemma-3-27b"
+      ],
+      "resolution_owner": "ai-dashboards-kb"
+    }
+  },
+  "architecture": {
+    "family": "gemma-3",
+    "type": "dense-multimodal",
+    "parameters_total": 27000000000,
+    "num_hidden_layers": 62,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 16,
+    "head_dimension": 128,
+    "context_window_native": 131072,
+    "multimodal": {
+      "image_resolution": 896,
+      "tokens_per_image": 256,
+      "vision_projector": "mmproj-BF16.gguf (857.7MB) / mmproj-F16.gguf (857.7MB)"
+    }
+  },
+  "quantization_matrix": {
+    "original_safetensors_bytes": 54864980440,
+    "gguf_repository": "https://huggingface.co/unsloth/gemma-3-27b-it-GGUF",
+    "gguf_revision": "7cd0121f2530b00e42c4df952d4cad4418c0b3c1",
+    "available_quants": [
+      {
+        "quant": "BF16",
+        "filename": "gemma-3-27b-it-BF16 (2 parts)",
+        "size_bytes": 54027964448
+      },
+      {
+        "quant": "Q8_0",
+        "filename": "gemma-3-27b-it-Q8_0.gguf",
+        "size_bytes": 28707972192
+      },
+      {
+        "quant": "Q6_K",
+        "filename": "gemma-3-27b-it-Q6_K.gguf",
+        "size_bytes": 22166974176
+      },
+      {
+        "quant": "Q5_K_M",
+        "filename": "gemma-3-27b-it-Q5_K_M.gguf",
+        "size_bytes": 19271675616
+      },
+      {
+        "quant": "Q4_K_M",
+        "filename": "gemma-3-27b-it-Q4_K_M.gguf",
+        "size_bytes": 16546688736
+      },
+      {
+        "quant": "Q4_K_S",
+        "filename": "gemma-3-27b-it-Q4_K_S.gguf",
+        "size_bytes": 15674056416
+      },
+      {
+        "quant": "Q3_K_M",
+        "filename": "gemma-3-27b-it-Q3_K_M.gguf",
+        "size_bytes": 13437640416
+      },
+      {
+        "quant": "Q2_K",
+        "filename": "gemma-3-27b-it-Q2_K.gguf",
+        "size_bytes": 10503720672
+      },
+      {
+        "quant": "mmproj-BF16",
+        "filename": "mmproj-BF16.gguf",
+        "size_bytes": 857739392
+      }
+    ]
+  },
+  "hardware_deployments": [
+    {
+      "hardware": "Single RTX 3090 / 3090 Ti 24GB",
+      "runtime": "llama.cpp / Ollama",
+      "quantization": "Q4_K_S",
+      "weights_vram_gb": 15.67,
+      "performance": {
+        "eval_tps": 28.5,
+        "prompt_eval_tps": 340.0,
+        "multimodal_overhead": "Text-only inference runs out of the box; multimodal image processing requires loading mmproj-BF16.gguf (+0.86GB VRAM)"
+      },
+      "context_support": {
+        "4k_context_vram_gb": 16.7,
+        "8k_context_vram_gb": 17.7,
+        "16k_context_vram_gb": 19.6,
+        "32k_context_vram_gb": 23.6,
+        "98k_context_q8_kv_vram_gb": 40.03,
+        "status_98k_q8": "OOM on single 24GB GPU (16 KV heads generate heavy 24.36GB KV cache at 98k)"
+      }
+    },
+    {
+      "hardware": "Dual RTX 3090 (2x24GB = 48GB)",
+      "runtime": "llama.cpp / vLLM (Tensor Parallel)",
+      "quantization": "Q5_K_M or Q6_K",
+      "performance": {
+        "eval_tps": 48.0,
+        "role": "Enables full 131k context with Q8 KV cache and high quality multimodal vision input"
+      }
+    }
+  ],
+  "context_memory_scaling": {
+    "target_98304_context": {
+      "q8_kv_cache_gb": 24.36,
+      "q4_kv_cache_gb": 12.18,
+      "weights_q4_k_s_gb": 15.67,
+      "total_vram_q8_kv_98k_gb": 40.03,
+      "total_vram_q4_kv_98k_gb": 27.85,
+      "status_single_24gb": "OOM on single 24GB GPU (even with Q4 KV cache); requires Dual 3090 or 48GB GPU"
+    }
+  }
+}
