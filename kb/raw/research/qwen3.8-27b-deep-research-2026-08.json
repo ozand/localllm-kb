@@ -1,0 +1,305 @@
+{
+  "$schema": "../../schemas/model.schema.json",
+  "producer": {
+    "project_id": "localllm-kb",
+    "project_repo": "ozand/localllm-kb",
+    "schema_version": 1,
+    "generated_at": "2026-08-23T18:20:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen3.8-27b",
+    "upstream_repository": "Qwen/Qwen3.8-27B",
+    "upstream_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "gguf_repository": "unsloth/Qwen3.8-27B-GGUF",
+    "gguf_revision": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
+    "benchmark_aliases": [
+      "artificial-analysis/qwen3-8-27b"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "alibaba/qwen3-8-27b"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/qwen3-8-27b"
+      ],
+      "resolution_owner": "ai-dashboards-kb",
+      "silent_canonical_substitution": false
+    }
+  },
+  "architecture": {
+    "family": "qwen3.5",
+    "type": "dense",
+    "parameters_total_billions": 27.0,
+    "parameters_active_billions": 27.0,
+    "num_hidden_layers": 64,
+    "num_attention_heads": 48,
+    "num_key_value_heads": 8,
+    "head_dim": 128,
+    "hidden_size": 6144,
+    "intermediate_size": 16384,
+    "vocab_size": 152064,
+    "native_context_window": 262144,
+    "multimodal": true
+  },
+  "quantization_matrix": [
+    {
+      "quantization": "BF16",
+      "filename": "BF16/Qwen3.8-27B-BF16-00001-of-00002.gguf + 00002",
+      "size_bytes": 54657735616,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "standard_split"
+    },
+    {
+      "quantization": "Q8_0",
+      "filename": "Qwen3.8-27B-Q8_0.gguf",
+      "size_bytes": 29047086048,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "standard"
+    },
+    {
+      "quantization": "Q6_K",
+      "filename": "Qwen3.8-27B-UD-Q6_K.gguf",
+      "size_bytes": 21983677344,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "unsloth_dynamic"
+    },
+    {
+      "quantization": "Q5_K_M",
+      "filename": "Qwen3.8-27B-UD-Q5_K_M.gguf",
+      "size_bytes": 19771509664,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "unsloth_dynamic"
+    },
+    {
+      "quantization": "Q4_K_M",
+      "filename": "Qwen3.8-27B-UD-Q4_K_M.gguf",
+      "size_bytes": 16464440224,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "unsloth_dynamic"
+    },
+    {
+      "quantization": "Q4_K_S",
+      "filename": null,
+      "size_bytes": null,
+      "sha256": null,
+      "status": "unavailable",
+      "variant_type": "standard_target",
+      "notes": "Standard Q4_K_S not published in primary GGUF repository; do not alias UD-Q4_K_S."
+    },
+    {
+      "quantization": "UD-Q4_K_S",
+      "filename": "Qwen3.8-27B-UD-Q4_K_S.gguf",
+      "size_bytes": 15358213024,
+      "sha256": "75bc9c8adba2842e72f0ab5201aaa07133c5010b566305c09187fcbdcd364017",
+      "status": "available",
+      "variant_type": "unsloth_dynamic_alternative"
+    },
+    {
+      "quantization": "Q4_0",
+      "filename": "Qwen3.8-27B-Q4_0.gguf",
+      "size_bytes": 16056478688,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "standard"
+    },
+    {
+      "quantization": "UD-IQ3_S",
+      "filename": "Qwen3.8-27B-UD-IQ3_S.gguf",
+      "size_bytes": 12040883104,
+      "sha256": null,
+      "status": "available",
+      "variant_type": "unsloth_dynamic_iq"
+    }
+  ],
+  "hardware_deployments": [
+    {
+      "deployment_id": "community-rtx-3090-single-ud-q4ks-spec",
+      "hardware": {
+        "gpu": "1x NVIDIA GeForce RTX 3090 24GB",
+        "cpu": null,
+        "ram_gb": null
+      },
+      "runtime": {
+        "engine": "llama.cpp / llama-server",
+        "version": null,
+        "parameters": "--spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-p-min 0.8 -ngl 999 -c 262144 -ctk q4_0 -ctv q4_0 -fa on --reasoning-effort medium"
+      },
+      "artifact": {
+        "quantization": "UD-Q4_K_S",
+        "filename": "Qwen3.8-27B-UD-Q4_K_S.gguf"
+      },
+      "context": {
+        "configured_length": 262144,
+        "measured_length": 160000,
+        "kv_cache_type": "q4_0",
+        "flash_attention": true
+      },
+      "metrics": {
+        "eval_tps": 60.0,
+        "eval_tps_deep_context_160k": 20.0,
+        "baseline_tps_no_spec": 30.0,
+        "vram_fit": "full_gpu"
+      },
+      "evidence_status": "reported_community_reproducible",
+      "source_ref": "https://www.reddit.com/r/LocalLLaMA/comments/1vti5kt/dual_rtx_3090_qwen3827b_help/"
+    },
+    {
+      "deployment_id": "community-dual-3090-q6k-unsloth-studio",
+      "hardware": {
+        "gpu": "2x NVIDIA GeForce RTX 3090 24GB (one degraded to 20GB)",
+        "cpu": null,
+        "ram_gb": null
+      },
+      "runtime": {
+        "engine": "Unsloth Studio",
+        "version": null,
+        "parameters": "tensor parallel"
+      },
+      "artifact": {
+        "quantization": "Q6_K / UD-Q6_K",
+        "filename": "Qwen3.8-27B-UD-Q6_K.gguf"
+      },
+      "context": {
+        "configured_length": 179000,
+        "measured_length": 179000,
+        "kv_cache_type": "default",
+        "flash_attention": true
+      },
+      "metrics": {
+        "eval_tps": 60.0,
+        "vram_fit": "full_gpu_tensor_parallel"
+      },
+      "evidence_status": "reported_community_partial",
+      "source_ref": "https://www.reddit.com/r/LocalLLaMA/comments/1v66pa2/what_would_you_run_on_2_rtx_3090s_today/"
+    },
+    {
+      "deployment_id": "community-rtx-pro-6000-dflash2-spec",
+      "hardware": {
+        "gpu": "1x NVIDIA RTX PRO 6000 48GB",
+        "cpu": null,
+        "ram_gb": null
+      },
+      "runtime": {
+        "engine": "llama.cpp (DFlash 2 PR build)",
+        "version": "PR build with DFlash 2 drafter",
+        "parameters": "DFlash 2 speculative decoding + n-gram drafter"
+      },
+      "artifact": {
+        "quantization": "UD-Q4_K_M / BF16",
+        "filename": "Qwen3.8-27B"
+      },
+      "context": {
+        "configured_length": 32768,
+        "measured_length": 32768,
+        "kv_cache_type": "FP16/default",
+        "flash_attention": true
+      },
+      "metrics": {
+        "eval_tps_baseline": 67.97,
+        "eval_tps_dflash2": 153.6,
+        "speedup_ratio": 2.26,
+        "vram_fit": "full_gpu"
+      },
+      "evidence_status": "reported_community_reproducible",
+      "source_ref": "https://www.reddit.com/r/LocalLLaMA/comments/1vvncyh/i_benchmark_dflash_2_pr_build_in_llamacpp_on_qwen/"
+    },
+    {
+      "deployment_id": "community-rtx-5060ti-16gb-agentic",
+      "hardware": {
+        "gpu": "1x NVIDIA GeForce RTX 5060 Ti 16GB",
+        "cpu": "Intel N100",
+        "ram_gb": 32
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": null,
+        "parameters": "draft-mtp + n-gram mod"
+      },
+      "artifact": {
+        "quantization": "UD-IQ3_S / UD-IQ4_XS",
+        "filename": "Qwen3.8-27B-UD-IQ3_S.gguf"
+      },
+      "context": {
+        "configured_length": 73000,
+        "measured_length": 73000,
+        "kv_cache_type": "q4_0",
+        "flash_attention": true
+      },
+      "metrics": {
+        "vram_fit": "tight_16gb_gpu_fit",
+        "eval_tps": null
+      },
+      "evidence_status": "reported_community_partial",
+      "source_ref": "https://www.reddit.com/r/LocalLLaMA/comments/1vqrt86/after_pushing_1m_tokens_through_qwen_38_27b_here/"
+    }
+  ],
+  "context_and_memory_scaling": {
+    "native_max_context": 262144,
+    "target_98304_q8_kv_status": "unknown",
+    "notes": "98,304 tokens with Q8 KV requires ~24.5 GB KV cache alone for 64 layers / 8 KV heads / 128 head_dim. On a single 24GB GPU, Q8 KV at 98K causes OOM unless model weights are severely quantized or offloaded to CPU/second GPU. Community runs rely on q4_0 KV cache (ctk/ctv q4_0) or dual 3090s to achieve 160k-262k context.",
+    "reported_allocations": [
+      {
+        "context_tokens": 4096,
+        "kv_quant": "FP16",
+        "kv_vram_gb": 1.0,
+        "weights_q4_vram_gb": 15.35,
+        "total_vram_gb": 16.8,
+        "fit_24gb": true
+      },
+      {
+        "context_tokens": 32768,
+        "kv_quant": "q4_0",
+        "kv_vram_gb": 2.0,
+        "weights_q4_vram_gb": 15.35,
+        "total_vram_gb": 17.8,
+        "fit_24gb": true
+      },
+      {
+        "context_tokens": 98304,
+        "kv_quant": "q8_0",
+        "kv_vram_gb": 12.28,
+        "weights_q4_vram_gb": 15.35,
+        "total_vram_gb": 28.2,
+        "fit_24gb": false,
+        "outcome": "OOM_on_single_24GB_requires_dual_GPU_or_q4_KV"
+      },
+      {
+        "context_tokens": 98304,
+        "kv_quant": "q4_0",
+        "kv_vram_gb": 6.14,
+        "weights_q4_vram_gb": 15.35,
+        "total_vram_gb": 22.0,
+        "fit_24gb": true
+      },
+      {
+        "context_tokens": 262144,
+        "kv_quant": "q4_0",
+        "kv_vram_gb": 16.38,
+        "weights_q4_vram_gb": 15.35,
+        "total_vram_gb": 32.5,
+        "fit_24gb": false,
+        "outcome": "Requires_dual_3090_48GB_total"
+      }
+    ]
+  },
+  "reasoning_effort_levels": {
+    "supported_levels": ["low", "medium", "high", "xhigh"],
+    "notes": "xhigh enables extended multi-step reasoning / planning. Token throughput remains governed by generation engine, but total latency increases proportionally to reasoning tokens generated."
+  },
+  "multimodal_boundary": {
+    "text_only_gguf": "Full local GGUF text inference supported in llama.cpp, Unsloth, vLLM",
+    "vision_projector": "mmproj-BF16.gguf (931MB) / mmproj-F16.gguf (927MB) published by Unsloth; requires dedicated multimodal runtime pass. Not evaluated in text-only benchmarks."
+  },
+  "unresolved_local_measurements": [
+    "measured_by_external_project execution on workstation ozryzen",
+    "exact local 98,304 context + Q8 KV benchmark",
+    "standard Q4_K_S artifact evaluation (standard GGUF target is unavailable)",
+    "official power draw measurements under continuous 1-hour load",
+    "local vision mmproj throughput evaluation"
+  ]
+}
