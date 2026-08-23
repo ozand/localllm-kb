@@ -1,0 +1,117 @@
+{
+  "schema_version": "1",
+  "record_type": "local_model_research",
+  "producer": {
+    "project_id": "localllm-kb",
+    "export_version": "1",
+    "source_revision": "ef9470539f0bde3dca8cfc8df0b3a3cf761244af",
+    "exported_at": "2026-08-23T15:50:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen3-coder-30b-a3b-instruct",
+    "display_name": "Qwen3 Coder 30B A3B Instruct",
+    "upstream_model_id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "variant": "coder instruct model; non-thinking mode only",
+    "benchmark_aliases": [
+      {
+        "source_id": "artificial-analysis",
+        "source_slug": "qwen3-coder-30b-a3b-instruct",
+        "alias_scope": "identity/join only",
+        "evidence_status": "reported",
+        "provenance": "consumer GitHub Issue #38"
+      }
+    ],
+    "consumer_mapping": {
+      "consumer_project_id": "ai-dashboards-kb",
+      "mapping_status": "candidate_only",
+      "candidate_canonical_ids": ["alibaba/qwen3-coder-30b-a3b-instruct"],
+      "alias_join_keys": ["artificial-analysis/qwen3-coder-30b-a3b-instruct"],
+      "resolution_owner": "ai-dashboards-kb",
+      "resolution_rule": "The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
+  },
+  "upstream": {
+    "model_repository": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "model_revision": "b2cff646eb4bb1d68355c01b18ae02e7cf42d120",
+    "model_revision_url": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/tree/b2cff646eb4bb1d68355c01b18ae02e7cf42d120",
+    "config_url": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/blob/b2cff646eb4bb1d68355c01b18ae02e7cf42d120/config.json",
+    "artifact_repository": "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF",
+    "artifact_revision": "b17cb02dd882d5b6ab62fc777ad2995f19668350",
+    "artifact_tree_url": "https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/tree/b17cb02dd882d5b6ab62fc777ad2995f19668350",
+    "evidence_status": "reported"
+  },
+  "architecture": {
+    "architecture_type": "moe",
+    "architectures": ["Qwen3MoeForCausalLM"],
+    "model_type": "qwen3_moe",
+    "total_parameters_b": 30.5,
+    "active_parameters_b": 3.3,
+    "hidden_size": 2048,
+    "layer_count": 48,
+    "attention_head_count": 32,
+    "kv_head_count": 4,
+    "head_dimension": 128,
+    "expert_count": 128,
+    "experts_per_token": 8,
+    "native_context_tokens": 262144,
+    "config_max_position_embeddings": 262144,
+    "thinking_mode": "non_thinking_only",
+    "evidence_status": "reported",
+    "provenance": [
+      "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/blob/b2cff646eb4bb1d68355c01b18ae02e7cf42d120/config.json",
+      "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/blob/b2cff646eb4bb1d68355c01b18ae02e7cf42d120/README.md"
+    ]
+  },
+  "original_artifact": {
+    "format": "safetensors",
+    "file_count": 16,
+    "size_bytes": 61066575656,
+    "size_evidence_status": "reported",
+    "provenance": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/tree/b2cff646eb4bb1d68355c01b18ae02e7cf42d120"
+  },
+  "artifact": {
+    "format": "gguf",
+    "quantization": "Q4_K_S",
+    "filename": "Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf",
+    "size_bytes": 17456012448,
+    "sha256": "56a7d00783419bcb0ae566253c371bcb3678261bb79881a553539f5679864db4",
+    "artifact_url": "https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/b17cb02dd882d5b6ab62fc777ad2995f19668350/Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf",
+    "repository_blob_oid": "781650be7c12b735f73178050994a43b5b29b7e0",
+    "lfs_oid": "56a7d00783419bcb0ae566253c371bcb3678261bb79881a553539f5679864db4",
+    "variant_match_status": "exact_filename_match",
+    "evidence_status": "reported",
+    "sha256_provenance": "Hugging Face LFS oid reported by the immutable tree API; not independently recomputed from a local download",
+    "sha256_verification": "reported_not_locally_verified"
+  },
+  "configuration": {
+    "artifact_id": "unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf",
+    "quantization": "Q4_K_S",
+    "context_tokens": 98304,
+    "kv_cache_quantization": "Q8_0",
+    "runtime_name": null,
+    "runtime_version": null,
+    "hardware_id": null,
+    "placement": null,
+    "offload": null,
+    "evidence_status": "unknown",
+    "support_status": "unknown",
+    "support_provenance": null
+  },
+  "records": [
+    {"record_id":"qwen3-coder-30b-a3b-instruct-artifact-2026-08-23","metric_id":"artifact_size_bytes","unit":"bytes","value":17456012448,"evidence_status":"reported","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":"https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/tree/b17cb02dd882d5b6ab62fc777ad2995f19668350"},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-context-q8-2026-08-23","metric_id":"context_q8_kv_98304_support","unit":"boolean_or_status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-vram-2026-08-23","metric_id":"peak_vram_gib","unit":"GiB","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-prompt-tps-2026-08-23","metric_id":"prompt_eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-eval-tps-2026-08-23","metric_id":"eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-ttft-2026-08-23","metric_id":"ttft","unit":"seconds","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-power-2026-08-23","metric_id":"system_power","unit":"watts","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"qwen3-coder-30b-a3b-instruct-oom-2026-08-23","metric_id":"oom_outcome","unit":"status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T15:50:00Z","producer_run_id":"qwen3-coder-30b-a3b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/qwen3-coder-30b-a3b-instruct-gguf@b17cb02dd882d5b6ab62fc777ad2995f19668350:Qwen3-Coder-30B-A3B-Instruct-Q4_K_S.gguf","provenance_ref":null}
+  ],
+  "limitations": [
+    "No local runtime or hardware measurement was performed in this pass.",
+    "Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.",
+    "The upstream coder model documents 262,144 native context and warns that OOM may require reducing context; the requested 98,304-token Q8 KV case remains unknown without a runtime receipt.",
+    "The Artificial Analysis alias is an identity/join alias only and does not supply local measurements.",
+    "The producer canonical_id is qwen/qwen3-coder-30b-a3b-instruct. ai-dashboards-kb currently exposes alibaba/qwen3-coder-30b-a3b-instruct as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID."
+  ]
+}
