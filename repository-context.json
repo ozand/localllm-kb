@@ -1,0 +1,13 @@
+{
+  "default_branch": "main",
+  "remotes": {
+    "origin": {
+      "repository": "ozand/localllm-kb"
+    },
+    "upstream": {
+      "repository": "ozand/kb-bootstrap"
+    }
+  },
+  "repository": "ozand/localllm-kb",
+  "schema_version": 1
+}
