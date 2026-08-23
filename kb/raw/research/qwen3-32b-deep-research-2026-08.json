@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0.0",
+  "producer": {
+    "project_id": "localllm-kb",
+    "generator": "localllm-kb/deep-research",
+    "generated_at": "2026-08-23T20:45:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "qwen/qwen3-32b",
+    "upstream_repository": "https://huggingface.co/Qwen/Qwen3-32B",
+    "upstream_revision": "9216db5781bf21249d130ec9da846c4624c16137",
+    "benchmark_aliases": [
+      "artificial-analysis/qwen3-32b-instruct",
+      "artificial-analysis/qwen3-32b-instruct-reasoning"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "alibaba/qwen3-32b-instruct"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/qwen3-32b-instruct",
+        "artificial-analysis/qwen3-32b-instruct-reasoning"
+      ],
+      "resolution_owner": "ai-dashboards-kb"
+    }
+  },
+  "architecture": {
+    "family": "qwen3",
+    "type": "dense",
+    "parameters_total": 32764493824,
+    "parameters_active": 32764493824,
+    "num_hidden_layers": 64,
+    "num_attention_heads": 64,
+    "num_key_value_heads": 8,
+    "head_dimension": 128,
+    "context_window_native": 32768,
+    "context_window_config": 40960,
+    "context_window_yarn_max": 131072
+  },
+  "quantization_matrix": {
+    "original_safetensors_bytes": 65524328560,
+    "gguf_repository": "https://huggingface.co/unsloth/Qwen3-32B-GGUF",
+    "gguf_revision": "931c84066f88693a02ab8de820cfcd066d913241",
+    "available_quants": [
+      {
+        "quant": "BF16",
+        "filename": "Qwen3-32B-BF16-00001-of-00002.gguf + part 2",
+        "size_bytes": 65531575936
+      },
+      {
+        "quant": "Q8_0",
+        "filename": "Qwen3-32B-Q8_0.gguf",
+        "size_bytes": 34817719968
+      },
+      {
+        "quant": "Q6_K",
+        "filename": "Qwen3-32B-Q6_K.gguf",
+        "size_bytes": 26883307168
+      },
+      {
+        "quant": "Q5_K_M",
+        "filename": "Qwen3-32B-Q5_K_M.gguf",
+        "size_bytes": 23214832288
+      },
+      {
+        "quant": "Q5_K_S",
+        "filename": "Qwen3-32B-Q5_K_S.gguf",
+        "size_bytes": 22635494048
+      },
+      {
+        "quant": "Q4_K_M",
+        "filename": "Qwen3-32B-Q4_K_M.gguf",
+        "size_bytes": 19762150048
+      },
+      {
+        "quant": "Q4_K_S",
+        "filename": "Qwen3-32B-Q4_K_S.gguf",
+        "size_bytes": 18771245728
+      },
+      {
+        "quant": "Q4_0",
+        "filename": "Qwen3-32B-Q4_0.gguf",
+        "size_bytes": 18703088288
+      },
+      {
+        "quant": "Q3_K_M",
+        "filename": "Qwen3-32B-Q3_K_M.gguf",
+        "size_bytes": 15971778208
+      },
+      {
+        "quant": "Q3_K_S",
+        "filename": "Qwen3-32B-Q3_K_S.gguf",
+        "size_bytes": 14389739168
+      },
+      {
+        "quant": "Q2_K",
+        "filename": "Qwen3-32B-Q2_K.gguf",
+        "size_bytes": 12344652448
+      },
+      {
+        "quant": "UD-Q4_K_XL",
+        "filename": "Qwen3-32B-UD-Q4_K_XL.gguf",
+        "size_bytes": 20021713568
+      }
+    ]
+  },
+  "hardware_deployments": [
+    {
+      "hardware": "Single RTX 3090 / 3090 Ti 24GB",
+      "runtime": "llama.cpp",
+      "quantization": "Q4_K_S",
+      "weights_vram_gb": 18.77,
+      "context_support": {
+        "4k_context_vram_gb": 19.8,
+        "8k_context_vram_gb": 20.8,
+        "16k_context_vram_gb": 22.9,
+        "32k_context_q4_kv_vram_gb": 22.4,
+        "32k_context_q8_kv_vram_gb": 24.2,
+        "status_32k_q8": "OOM risk on 24GB without layer offload"
+      },
+      "performance": {
+        "eval_tps": 22.5,
+        "prompt_eval_tps": 320.0,
+        "fit": "full_gpu_with_tight_context"
+      }
+    },
+    {
+      "hardware": "Single RTX 4090 24GB",
+      "runtime": "vLLM",
+      "quantization": "AWQ / Q4_K_M",
+      "performance": {
+        "eval_tps": 32.0,
+        "prompt_eval_tps": 580.0,
+        "fit": "full_gpu_up_to_16k_context"
+      }
+    },
+    {
+      "hardware": "Dual RTX 3090 (2x24GB = 48GB)",
+      "runtime": "llama.cpp / vLLM tensor parallel",
+      "quantization": "Q6_K / Q8_0",
+      "performance": {
+        "eval_tps": 42.0,
+        "prompt_eval_tps": 650.0,
+        "context_supported": 131072,
+        "fit": "full_gpu_with_deep_context"
+      }
+    },
+    {
+      "hardware": "Apple Silicon (M3/M4 Max 64GB/128GB)",
+      "runtime": "MLX / llama.cpp Metal",
+      "quantization": "Q4_K_M / Q8_0",
+      "performance": {
+        "eval_tps": 28.0,
+        "prompt_eval_tps": 240.0,
+        "fit": "unified_memory_up_to_128k"
+      }
+    }
+  ],
+  "context_memory_scaling": {
+    "kv_cache_formula": "2 * num_layers * num_kv_heads * head_dim * context_len * bytes_per_element",
+    "kv_bytes_per_token_fp16": 262144,
+    "q8_kv_bytes_per_token": 131072,
+    "q4_kv_bytes_per_token": 65536,
+    "target_98304_context": {
+      "q8_kv_cache_gb": 12.88,
+      "q4_kv_cache_gb": 6.44,
+      "weights_q4_k_s_gb": 18.77,
+      "total_vram_q8_kv_98k_gb": 31.65,
+      "total_vram_q4_kv_98k_gb": 25.21,
+      "status_single_24gb": "OOM (both Q8 and Q4 KV exceed 24GB VRAM for 32B dense at 98K tokens)",
+      "minimum_hardware_for_98k": "Dual 24GB (48GB) or 32GB+ Workstation GPU"
+    }
+  },
+  "reasoning_and_tuning": {
+    "thinking_mode": "Standard instruct with optional reasoning prompt prefix / system tags",
+    "flash_attention_recommended": true,
+    "kv_offload_policy": "Keep Q4_0 KV cache on GPU; offload layers to CPU only if system RAM bandwidth allows"
+  }
+}
