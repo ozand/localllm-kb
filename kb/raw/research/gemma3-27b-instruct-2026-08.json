@@ -1,0 +1,116 @@
+{
+  "schema_version": "1",
+  "record_type": "local_model_research",
+  "producer": {
+    "project_id": "localllm-kb",
+    "export_version": "1",
+    "source_revision": "b132e22acbeff004dc4f4a535a4a787b92a625dc",
+    "exported_at": "2026-08-23T16:02:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "google/gemma-3-27b-it",
+    "display_name": "Gemma 3 27B Instruct",
+    "upstream_model_id": "google/gemma-3-27b-it",
+    "variant": "instruction-tuned multimodal text-and-image model",
+    "benchmark_aliases": [
+      {
+        "source_id": "artificial-analysis",
+        "source_slug": "gemma-3-27b",
+        "alias_scope": "identity/join only",
+        "evidence_status": "reported",
+        "provenance": "consumer GitHub Issue #40"
+      }
+    ],
+    "consumer_mapping": {
+      "consumer_project_id": "ai-dashboards-kb",
+      "mapping_status": "candidate_only",
+      "candidate_canonical_ids": ["google/gemma-3-27b"],
+      "alias_join_keys": ["artificial-analysis/gemma-3-27b"],
+      "resolution_owner": "ai-dashboards-kb",
+      "resolution_rule": "The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
+  },
+  "upstream": {
+    "model_repository": "google/gemma-3-27b-it",
+    "model_revision": "005ad3404e59d6023443cb575daa05336842228a",
+    "model_revision_url": "https://huggingface.co/google/gemma-3-27b-it/tree/005ad3404e59d6023443cb575daa05336842228a",
+    "config_url": "https://huggingface.co/unsloth/gemma-3-27b-it-GGUF/blob/7cd0121f2530b00e42c4df952d4cad4418c0b3c1/config.json",
+    "artifact_repository": "unsloth/gemma-3-27b-it-GGUF",
+    "artifact_revision": "7cd0121f2530b00e42c4df952d4cad4418c0b3c1",
+    "artifact_tree_url": "https://huggingface.co/unsloth/gemma-3-27b-it-GGUF/tree/7cd0121f2530b00e42c4df952d4cad4418c0b3c1",
+    "evidence_status": "reported"
+  },
+  "architecture": {
+    "architecture_type": "multimodal_dense",
+    "architectures": ["Gemma3ForConditionalGeneration"],
+    "model_type": "gemma3",
+    "total_parameters_b": 27.0,
+    "active_parameters_b": 27.0,
+    "text_hidden_size": 5376,
+    "text_layer_count": 62,
+    "text_attention_head_count": 32,
+    "text_kv_head_count": 16,
+    "text_head_dimension": 128,
+    "text_intermediate_size": 21504,
+    "text_context_tokens": 131072,
+    "vision_image_size": 896,
+    "vision_mm_tokens_per_image": 256,
+    "evidence_status": "reported",
+    "provenance": [
+      "https://huggingface.co/unsloth/gemma-3-27b-it-GGUF/blob/7cd0121f2530b00e42c4df952d4cad4418c0b3c1/config.json",
+      "https://huggingface.co/google/gemma-3-27b-it/blob/005ad3404e59d6023443cb575daa05336842228a/README.md"
+    ]
+  },
+  "original_artifact": {
+    "format": "safetensors",
+    "file_count": 12,
+    "size_bytes": 54864980440,
+    "size_evidence_status": "reported",
+    "provenance": "https://huggingface.co/google/gemma-3-27b-it/tree/005ad3404e59d6023443cb575daa05336842228a"
+  },
+  "artifact": {
+    "format": "gguf",
+    "quantization": "Q4_K_S",
+    "filename": "gemma-3-27b-it-Q4_K_S.gguf",
+    "size_bytes": 15674056416,
+    "sha256": "27e963b83243c886e64aff611428d7c8abebe53383b0049af0cc928af9c47b7c",
+    "artifact_url": "https://huggingface.co/unsloth/gemma-3-27b-it-GGUF/resolve/7cd0121f2530b00e42c4df952d4cad4418c0b3c1/gemma-3-27b-it-Q4_K_S.gguf",
+    "repository_blob_oid": "1b8013fa57be0247b29a47f19530e7ab33c34f4e",
+    "lfs_oid": "27e963b83243c886e64aff611428d7c8abebe53383b0049af0cc928af9c47b7c",
+    "variant_match_status": "exact_filename_match",
+    "evidence_status": "reported",
+    "sha256_provenance": "Hugging Face LFS oid reported by the immutable tree API; not independently recomputed from a local download",
+    "sha256_verification": "reported_not_locally_verified"
+  },
+  "configuration": {
+    "artifact_id": "unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf",
+    "quantization": "Q4_K_S",
+    "context_tokens": 98304,
+    "kv_cache_quantization": "Q8_0",
+    "runtime_name": null,
+    "runtime_version": null,
+    "hardware_id": null,
+    "placement": null,
+    "offload": null,
+    "evidence_status": "unknown",
+    "support_status": "unknown",
+    "support_provenance": null
+  },
+  "records": [
+    {"record_id":"gemma3-27b-instruct-artifact-2026-08-23","metric_id":"artifact_size_bytes","unit":"bytes","value":15674056416,"evidence_status":"reported","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":"https://huggingface.co/unsloth/gemma-3-27b-it-GGUF/tree/7cd0121f2530b00e42c4df952d4cad4418c0b3c1"},
+    {"record_id":"gemma3-27b-instruct-context-q8-2026-08-23","metric_id":"context_q8_kv_98304_support","unit":"boolean_or_status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-vram-2026-08-23","metric_id":"peak_vram_gib","unit":"GiB","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-prompt-tps-2026-08-23","metric_id":"prompt_eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-eval-tps-2026-08-23","metric_id":"eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-ttft-2026-08-23","metric_id":"ttft","unit":"seconds","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-power-2026-08-23","metric_id":"system_power","unit":"watts","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"gemma3-27b-instruct-oom-2026-08-23","metric_id":"oom_outcome","unit":"status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:02:00Z","producer_run_id":"gemma3-27b-instruct-upstream-metadata-2026-08-23","configuration_ref":"unsloth/gemma-3-27b-it-gguf@7cd0121f2530b00e42c4df952d4cad4418c0b3c1:gemma-3-27b-it-Q4_K_S.gguf","provenance_ref":null}
+  ],
+  "limitations": [
+    "No local runtime or hardware measurement was performed in this pass.",
+    "Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.",
+    "Gemma 3 is multimodal; local GGUF multimodal runtime/projector support and the requested 98,304-token Q8 KV case remain unknown without a runtime receipt.",
+    "The Artificial Analysis alias is an identity/join alias only and does not supply local measurements.",
+    "The producer canonical_id is google/gemma-3-27b-it. ai-dashboards-kb currently exposes google/gemma-3-27b as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID."
+  ]
+}
