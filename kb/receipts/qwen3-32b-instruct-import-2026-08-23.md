@@ -15,7 +15,7 @@ This receipt covers Issue [#36](https://github.com/ozand/localllm-kb/issues/36) 
 
 `kb/raw/research/qwen3-32b-instruct-2026-08.json`
 
-The record is suitable for downstream import as a partial upstream-metadata result. It does not claim local runtime measurements.
+The record is suitable for downstream import as a partial upstream-metadata result. It does not claim local runtime measurements. The producer canonical ID is preserved; downstream canonical resolution is explicit and owned by `ai-dashboards-kb`.
 
 ## Upstream evidence
 
@@ -35,6 +35,8 @@ The artifact hash is explicitly marked as reported upstream metadata and was not
 The upstream config reports a dense Qwen3 causal language model with 64 layers, 64 attention heads, 8 KV heads, and head dimension 128. The model card reports 32.8B parameters, 32,768 native context, and 131,072 tokens with YaRN. The config sets `max_position_embeddings` to 40,960; these values are retained separately and are not silently merged.
 
 Qwen3 supports switchable thinking/non-thinking behavior in one checkpoint. The Artificial Analysis slugs `qwen3-32b-instruct` and `qwen3-32b-instruct-reasoning` are retained only as identity/join aliases from Issue #36, not as evidence of separate local artifacts or measurements.
+
+For the external consumer, the aliases map only to a candidate: `alibaba/qwen3-32b-instruct`. Final canonical resolution is performed by `ai-dashboards-kb`; it may differ from producer `model_identity.canonical_id` (`qwen/qwen3-32b`) and must not silently substitute it.
 
 ## Local evidence status
 
@@ -58,6 +60,7 @@ No local benchmark was run in this increment, and no unidentified environment ev
 - Unknown numeric and status values are represented as `null` rather than fabricated values.
 - Provenance URLs, immutable revisions, artifact filename, byte size, and reported hash are retained.
 - The export preserves the distinction between upstream reported facts and local unknowns.
+- Producer identity and consumer candidate mapping are separate fields; no canonical ID substitution is performed.
 - The `ai-dashboards-kb` external contract was reviewed from its public `docs/external-local-benchmark-import.md` and schema files. Downstream schema validation remains the responsibility of the consumer repository.
 
 ## Limitations

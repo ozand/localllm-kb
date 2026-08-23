@@ -27,7 +27,18 @@
         "evidence_status": "reported",
         "provenance": "consumer GitHub Issue #36"
       }
-    ]
+    ],
+    "consumer_mapping": {
+      "consumer_project_id": "ai-dashboards-kb",
+      "mapping_status": "candidate_only",
+      "candidate_canonical_ids": ["alibaba/qwen3-32b-instruct"],
+      "alias_join_keys": [
+        "artificial-analysis/qwen3-32b-instruct",
+        "artificial-analysis/qwen3-32b-instruct-reasoning"
+      ],
+      "resolution_owner": "ai-dashboards-kb",
+      "resolution_rule": "The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
   },
   "upstream": {
     "model_repository": "Qwen/Qwen3-32B",
@@ -188,6 +199,7 @@
     "No local runtime or hardware measurement was performed in this pass.",
     "Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.",
     "The upstream model card documents 32,768 native context and 131,072 with YaRN; the requested 98,304-token Q8 KV case remains unknown without a runtime receipt.",
-    "The Artificial Analysis aliases are identity/join aliases only and do not supply local measurements."
+    "The Artificial Analysis aliases are identity/join aliases only and do not supply local measurements.",
+    "The producer canonical_id is qwen/qwen3-32b. ai-dashboards-kb currently exposes alibaba/qwen3-32b-instruct as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID."
   ]
 }
