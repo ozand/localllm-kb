@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "producer": {
+    "project_id": "localllm-kb",
+    "generator": "localllm-kb/deep-research",
+    "generated_at": "2026-08-23T21:10:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "mistralai/mistral-small-3.1-24b-instruct-2503",
+    "upstream_repository": "https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+    "upstream_revision": "68faf511d618ef198fef186659617cfd2eb8e33a",
+    "benchmark_aliases": [
+      "artificial-analysis/mistral-small-3-1"
+    ],
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "mistralai/mistral-small-3.1-24b-instruct-2503"
+      ],
+      "alias_join_keys": [
+        "artificial-analysis/mistral-small-3-1"
+      ],
+      "resolution_owner": "ai-dashboards-kb"
+    }
+  },
+  "architecture": {
+    "family": "mistral3",
+    "type": "dense-multimodal",
+    "parameters_total": 24000000000,
+    "num_hidden_layers": 56,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 8,
+    "head_dimension": 128,
+    "context_window_native": 131072,
+    "multimodal": {
+      "vision_projector": "mmproj-BF16.gguf (878.0MB)"
+    }
+  },
+  "quantization_matrix": {
+    "original_safetensors_bytes": 48022792280,
+    "gguf_repository": "https://huggingface.co/unsloth/Mistral-Small-3.1-24B-Instruct-2503-GGUF",
+    "gguf_revision": "d63ca9416f5db4f54a78145fb9a025317a57289f",
+    "available_quants": [
+      {
+        "quant": "BF16",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-BF16.gguf",
+        "size_bytes": 47153519904
+      },
+      {
+        "quant": "Q8_0",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q8_0.gguf",
+        "size_bytes": 25054780992
+      },
+      {
+        "quant": "Q6_K",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q6_K.gguf",
+        "size_bytes": 19345940032
+      },
+      {
+        "quant": "Q5_K_M",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q5_K_M.gguf",
+        "size_bytes": 16763985472
+      },
+      {
+        "quant": "Q4_K_M",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf",
+        "size_bytes": 14333910592
+      },
+      {
+        "quant": "Q4_K_S",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf",
+        "size_bytes": 13549280832
+      },
+      {
+        "quant": "Q3_K_M",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q3_K_M.gguf",
+        "size_bytes": 11474083392
+      },
+      {
+        "quant": "Q2_K",
+        "filename": "Mistral-Small-3.1-24B-Instruct-2503-Q2_K.gguf",
+        "size_bytes": 8890326592
+      },
+      {
+        "quant": "mmproj-BF16",
+        "filename": "mmproj-BF16.gguf",
+        "size_bytes": 878053440
+      }
+    ]
+  },
+  "hardware_deployments": [
+    {
+      "hardware": "Single RTX 3090 / 3090 Ti 24GB",
+      "runtime": "llama.cpp / Ollama / vLLM",
+      "quantization": "Q4_K_S",
+      "weights_vram_gb": 13.55,
+      "performance": {
+        "eval_tps": 33.2,
+        "prompt_eval_tps": 410.0,
+        "headroom": "Small 13.55GB base weight size leaves 10.45GB free VRAM for context on a 24GB card!"
+      },
+      "context_support": {
+        "32k_context_q8_kv_vram_gb": 17.23,
+        "64k_context_q8_kv_vram_gb": 20.91,
+        "98k_context_q8_kv_vram_gb": 24.82,
+        "98k_context_q4_kv_vram_gb": 19.18,
+        "status_98k": "Q8 KV at 98k is borderline OOM (24.82GB), but Q4 KV at 98k easily FITS (19.18GB total VRAM with 4.8GB headroom)"
+      }
+    },
+    {
+      "hardware": "RTX 4090 24GB",
+      "runtime": "vLLM / llama.cpp",
+      "quantization": "Q4_K_M or Q5_K_M",
+      "performance": {
+        "eval_tps": 42.5
+      }
+    }
+  ],
+  "context_memory_scaling": {
+    "target_98304_context": {
+      "q8_kv_cache_gb": 11.27,
+      "q4_kv_cache_gb": 5.63,
+      "weights_q4_k_s_gb": 13.55,
+      "total_vram_q8_kv_98k_gb": 24.82,
+      "total_vram_q4_kv_98k_gb": 19.18,
+      "status_single_24gb": "FITS on single 24GB GPU with Q4 KV Cache (19.18GB total VRAM); Q8 KV is borderline (24.82GB)"
+    }
+  }
+}
