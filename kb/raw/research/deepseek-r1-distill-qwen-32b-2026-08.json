@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "record_type": "local_model_research",
+  "producer": {
+    "project_id": "localllm-kb",
+    "export_version": "1",
+    "source_revision": "ad518f6edf207955dcd0ad2cddfe1df3e383dc1e",
+    "exported_at": "2026-08-23T16:18:00Z"
+  },
+  "model_identity": {
+    "canonical_id": "deepseek-ai/deepseek-r1-distill-qwen-32b",
+    "display_name": "DeepSeek R1 Distill Qwen 32B",
+    "upstream_model_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+    "variant": "distilled reasoning model based on Qwen2 architecture; separate from base Qwen2.5 and Qwen3 variants",
+    "benchmark_aliases": [{"source_id":"artificial-analysis","source_slug":"deepseek-r1-distill-qwen-32b","alias_scope":"identity/join only","evidence_status":"reported","provenance":"consumer GitHub Issue #42"}],
+    "consumer_mapping": {
+      "consumer_project_id":"ai-dashboards-kb","mapping_status":"candidate_only","candidate_canonical_ids":["deepseek-ai/deepseek-r1-distill-qwen-32b"],"alias_join_keys":["artificial-analysis/deepseek-r1-distill-qwen-32b"],"resolution_owner":"ai-dashboards-kb","resolution_rule":"The consumer resolves aliases explicitly and may select a canonical ID different from producer model_identity.canonical_id; no silent substitution is permitted."
+    }
+  },
+  "upstream": {
+    "model_repository":"deepseek-ai/DeepSeek-R1-Distill-Qwen-32B","model_revision":"711ad2ea6aa40cfca18895e8aca02ab92df1a746","model_revision_url":"https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/tree/711ad2ea6aa40cfca18895e8aca02ab92df1a746","config_url":"https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/blob/711ad2ea6aa40cfca18895e8aca02ab92df1a746/config.json","artifact_repository":"bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF","artifact_revision":"1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec","artifact_tree_url":"https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF/tree/1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec","evidence_status":"reported"
+  },
+  "architecture": {
+    "architecture_type":"dense","architectures":["Qwen2ForCausalLM"],"model_type":"qwen2","total_parameters_b":32.5,"active_parameters_b":32.5,"hidden_size":5120,"layer_count":64,"attention_head_count":40,"kv_head_count":8,"head_dimension":null,"intermediate_size":27648,"native_context_tokens":131072,"reasoning_mode":"distilled_reasoning","evidence_status":"reported","provenance":["https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/blob/711ad2ea6aa40cfca18895e8aca02ab92df1a746/config.json","https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/blob/711ad2ea6aa40cfca18895e8aca02ab92df1a746/README.md"]
+  },
+  "original_artifact":{"format":"safetensors","file_count":8,"size_bytes":65527841532,"size_evidence_status":"reported","provenance":"https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/tree/711ad2ea6aa40cfca18895e8aca02ab92df1a746"},
+  "artifact": {
+    "format":"gguf","quantization":"Q4_K_S","filename":"DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","size_bytes":18784409760,"sha256":"ae5f7e5570239257d554fa1a38ffb8ad634da9dd7e9661e624d1b3bbb6a7b5e8","artifact_url":"https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec/DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","repository_blob_oid":"f7ae90e4376f55811495f6e90ed9a9327ff9eb62","lfs_oid":"ae5f7e5570239257d554fa1a38ffb8ad634da9dd7e9661e624d1b3bbb6a7b5e8","variant_match_status":"exact_filename_match","evidence_status":"reported","sha256_provenance":"Hugging Face LFS oid reported by the immutable tree API; not independently recomputed from a local download","sha256_verification":"reported_not_locally_verified"
+  },
+  "configuration":{"artifact_id":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","quantization":"Q4_K_S","context_tokens":98304,"kv_cache_quantization":"Q8_0","runtime_name":null,"runtime_version":null,"hardware_id":null,"placement":null,"offload":null,"evidence_status":"unknown","support_status":"unknown","support_provenance":null},
+  "records":[
+    {"record_id":"deepseek-r1-distill-qwen-32b-artifact-2026-08-23","metric_id":"artifact_size_bytes","unit":"bytes","value":18784409760,"evidence_status":"reported","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":"https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF/tree/1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec"},
+    {"record_id":"deepseek-r1-distill-qwen-32b-context-q8-2026-08-23","metric_id":"context_q8_kv_98304_support","unit":"boolean_or_status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-vram-2026-08-23","metric_id":"peak_vram_gib","unit":"GiB","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-prompt-tps-2026-08-23","metric_id":"prompt_eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-eval-tps-2026-08-23","metric_id":"eval_tps","unit":"tokens_per_second","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-ttft-2026-08-23","metric_id":"ttft","unit":"seconds","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-power-2026-08-23","metric_id":"system_power","unit":"watts","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null},
+    {"record_id":"deepseek-r1-distill-qwen-32b-oom-2026-08-23","metric_id":"oom_outcome","unit":"status","value":null,"evidence_status":"unknown","observed_at":"2026-08-23T16:18:00Z","producer_run_id":"deepseek-r1-distill-qwen-32b-upstream-metadata-2026-08-23","configuration_ref":"bartowski/deepseek-r1-distill-qwen-32b-gguf@1dc8cf9ffa5dd333057ea1b09ccf4772d8726dec:DeepSeek-R1-Distill-Qwen-32B-Q4_K_S.gguf","provenance_ref":null}
+  ],
+  "limitations":["No local runtime or hardware measurement was performed in this pass.","Q4_K_S byte size and SHA-256 are upstream repository metadata; the SHA-256 is the reported Hugging Face LFS oid and was not independently recomputed from a local download.","The distilled model is text-only in this record; no multimodal or projector capability is claimed.","The Artificial Analysis alias is an identity/join alias only and does not supply local measurements.","The producer canonical_id is deepseek-ai/deepseek-r1-distill-qwen-32b. ai-dashboards-kb currently exposes the same string as a candidate consumer canonical ID; final resolution is owned by ai-dashboards-kb and must not silently replace the producer canonical ID."]
+}
