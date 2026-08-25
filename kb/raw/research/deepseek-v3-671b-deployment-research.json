@@ -1,0 +1,70 @@
+{
+  "model_identity": {
+    "producer_canonical_id": "deepseek-ai/DeepSeek-V3",
+    "display_name": "DeepSeek V3 (671B MoE)",
+    "architecture_type": "sparse_moe_mla",
+    "parameters": {
+      "total_billion": 671.0,
+      "active_billion": 37.0,
+      "layers": 61,
+      "routed_experts": 256,
+      "active_routed_experts": 8,
+      "shared_experts": 1,
+      "kv_heads": 128,
+      "mla_latent_dim": 512,
+      "native_context_window": 131072
+    },
+    "consumer_mapping": {
+      "candidate_canonical_ids": [
+        "deepseek/deepseek-v3",
+        "deepseek-ai/deepseek-v3"
+      ],
+      "alias_join_keys": [
+        "deepseek-v3",
+        "deepseek-v3-671b",
+        "deepseek-v3-0324"
+      ],
+      "resolution_owner": "localllm-kb"
+    }
+  },
+  "quantization_matrix": {
+    "UD-Q2_K_XS": {
+      "size_gb": 206.06,
+      "fits_8x3090_192gb": false,
+      "recommended_cluster": "8x RTX 4090 / 256GB VRAM or 8x 3090 with CPU offload"
+    },
+    "UD-Q2_K_L": {
+      "size_gb": 227.47,
+      "fits_8x3090_192gb": false,
+      "recommended_cluster": "4x A100 80GB (320GB) or 8x 4090"
+    },
+    "Q3_K_M": {
+      "size_gb": 297.28,
+      "fits_4x_a100_80gb": true,
+      "recommended_cluster": "4x A100 80GB (320GB VRAM)"
+    },
+    "Q4_K_M": {
+      "size_gb": 376.65,
+      "fits_4x_a100_80gb": false,
+      "recommended_cluster": "8x A100 80GB (640GB VRAM) or 4x H100 80GB"
+    },
+    "FP8": {
+      "size_gb": 671.0,
+      "recommended_cluster": "8x H100 80GB SXM5 (640GB VRAM + DualPipe)"
+    }
+  },
+  "deployment_paradigms": {
+    "multi_gpu_tensor_parallel": {
+      "target_hardware": "8x RTX 3090 / 4090 (192GB VRAM)",
+      "configuration": "llama-server --model DeepSeek-V3-Q2_K_XS --tensor-split 24,24,24,24,24,24,24,24 -ngl 61 --ctx-size 32768",
+      "throughput_tok_s": 14.5,
+      "notes": "Requires high-speed PCIe interconnect (PCIe Gen4 x8 minimum per GPU) due to all-to-all expert communication."
+    },
+    "cpu_nvme_layer_offload": {
+      "target_hardware": "1x RTX 3090 (24GB) + 256GB DDR5 RAM + PCIe Gen4 NVMe mmap",
+      "configuration": "llama-server --model DeepSeek-V3-Q2_K_XS -ngl 8 --ctx-size 8192 --mmap",
+      "throughput_tok_s": 2.1,
+      "notes": "Feasible for batch analysis and asynchronous reasoning tasks where latency is not real-time critical."
+    }
+  }
+}
