@@ -18,6 +18,7 @@ error_signatures: []
 Catalog of verifiable execution receipts, provenance records, and benchmarks.
 
 ## Consolidated Cohort Receipts
+- [Coding Agent Serving Optimization Receipt](coding-agent-serving-receipt.md)
 - [DeepSeek V3 671B MoE Sharding Receipt](deepseek-v3-671b-sharding-receipt.md)
 
 - [Cohort Consolidated Cross-Model Matrix](cohort-consolidated-matrix-2026-08-23.md)
