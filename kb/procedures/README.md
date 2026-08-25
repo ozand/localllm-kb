@@ -15,6 +15,7 @@ error_signatures: []
 
 # Procedures
 
+- [Coding Agent Serving & Prefix Caching](coding-agent-serving-optimization.md)
 - [Large MoE Multi-GPU Sharding](large-moe-sharding.md)
 - [Dynamic Quantization Methodology](dynamic-quantization.md)
 - [Local LLM Fine-Tuning and Continual Pretraining](local-fine-tuning.md)
