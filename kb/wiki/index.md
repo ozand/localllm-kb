@@ -12,6 +12,7 @@ last_updated: "2026-08-25"
 Canonical knowledge base for locally hosted large language models, quantization formats, hardware deployment benchmarks, multimodal assets, and inference runtimes.
 
 - [Architecture & Governance](architecture.md)
+- [Openness Index & Adaptation Feasibility](openness-finetuning-matrix.md)
 
 ## Model Profiles
 

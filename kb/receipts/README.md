@@ -18,6 +18,7 @@ error_signatures: []
 Catalog of verifiable execution receipts, provenance records, and benchmarks.
 
 ## Consolidated Cohort Receipts
+- [Openness Index & Adaptation Feasibility Receipt](openness-finetuning-receipt.md)
 - [Coding Agent Serving Optimization Receipt](coding-agent-serving-receipt.md)
 - [DeepSeek V3 671B MoE Sharding Receipt](deepseek-v3-671b-sharding-receipt.md)
 

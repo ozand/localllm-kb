@@ -1,0 +1,114 @@
+{
+  "dimensions": [
+    {
+      "name": "Weights Availability",
+      "open_weights": true,
+      "open_data": true,
+      "proprietary": false
+    },
+    {
+      "name": "Inference Code",
+      "open_weights": true,
+      "open_data": true,
+      "proprietary": false
+    },
+    {
+      "name": "Training Code / Hyperparams",
+      "open_weights": false,
+      "open_data": true,
+      "proprietary": false
+    },
+    {
+      "name": "Pretraining Dataset / Mixture",
+      "open_weights": false,
+      "open_data": true,
+      "proprietary": false
+    },
+    {
+      "name": "RL / Alignment Data",
+      "open_weights": false,
+      "open_data": true,
+      "proprietary": false
+    },
+    {
+      "name": "Technical Paper / Architecture",
+      "open_weights": true,
+      "open_data": true,
+      "proprietary": false
+    }
+  ],
+  "cohort_evaluation": {
+    "Qwen3.8-27B": {
+      "openness_score": 45,
+      "tier": "Open Weights",
+      "data_transparent": false,
+      "qlora_24gb": true,
+      "grpo_24gb": true,
+      "full_ft_24gb": false
+    },
+    "Qwen3-32B": {
+      "openness_score": 45,
+      "tier": "Open Weights",
+      "data_transparent": false,
+      "qlora_24gb": true,
+      "grpo_24gb": false,
+      "full_ft_24gb": false
+    },
+    "Qwen3-30B-A3B": {
+      "openness_score": 45,
+      "tier": "Open Weights",
+      "data_transparent": false,
+      "qlora_24gb": true,
+      "grpo_24gb": true,
+      "full_ft_24gb": false
+    },
+    "Gemma-3-27B": {
+      "openness_score": 50,
+      "tier": "Open Weights",
+      "data_transparent": false,
+      "qlora_24gb": true,
+      "grpo_24gb": false,
+      "full_ft_24gb": false
+    },
+    "Mistral-Small-3.1": {
+      "openness_score": 55,
+      "tier": "Open Weights",
+      "data_transparent": false,
+      "qlora_24gb": true,
+      "grpo_24gb": true,
+      "full_ft_24gb": false
+    },
+    "OpenAI-gpt-oss-20b": {
+      "openness_score": 75,
+      "tier": "Open Weights + High Transparency",
+      "data_transparent": true,
+      "qlora_24gb": true,
+      "grpo_24gb": true,
+      "full_ft_24gb": false
+    },
+    "DeepSeek-V3-671B": {
+      "openness_score": 60,
+      "tier": "Open Weights + Deep Technical Details",
+      "data_transparent": false,
+      "qlora_24gb": false,
+      "grpo_24gb": false,
+      "full_ft_24gb": false
+    }
+  },
+  "hardware_feasibility_tiers": {
+    "1x_RTX_3090_24GB": {
+      "LoRA_Rank_16": "Up to 32B dense / 30B MoE",
+      "QLoRA_4bit": "Up to 32B dense / 30B MoE",
+      "GRPO_RL": "Up to 27B dense (with MTP/small draft) / 21B MoE",
+      "Full_Fine_Tuning": "Up to 7B/8B dense",
+      "Continual_Pretraining": "Up to 14B QLoRA"
+    },
+    "2x_RTX_3090_48GB": {
+      "LoRA_Rank_16": "Up to 70B dense (FSDP / ZeRO-3)",
+      "QLoRA_4bit": "Up to 70B dense",
+      "GRPO_RL": "Up to 32B dense / 30B MoE",
+      "Full_Fine_Tuning": "Up to 14B dense (ZeRO-3)",
+      "Continual_Pretraining": "Up to 32B QLoRA"
+    }
+  }
+}
