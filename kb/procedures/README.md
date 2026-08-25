@@ -1,11 +1,11 @@
 ---
 id: LLM-KB-PROCEDURES
-title: "Local LLM procedures"
+title: "Operational and validation procedures"
 category: index
-tags: [procedures, validation, rollback]
+tags: [procedures, verification, workflows, quantization]
 status: active
 created: 2026-08-21
-updated: 2026-08-21
+updated: 2026-08-25
 environment:
   os: any
   shell: any
@@ -15,7 +15,11 @@ error_signatures: []
 
 # Procedures
 
-- [Model artifact lifecycle](model-artifact-lifecycle.md)
+- [Dynamic Quantization Methodology](dynamic-quantization.md)
+- [Model Artifact Lifecycle](model-artifact-lifecycle.md)
+- [Coding Agent Model Tuning](coding-agent-tuning.md)
+- [Multimodal Workflows](multimodal-workflows.md)
+- [Research Corpus Parity](research-corpus-parity.md)
 
-Store repeatable, sanitized procedures for artifact validation, replacement,
-rollback, load/generate/unload checks, and client compatibility smoke tests.
+Repeatable runbooks for model acquisition, checksum verification, staged
+deployment, quantization, context profiling, and rollback.
