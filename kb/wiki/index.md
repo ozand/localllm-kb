@@ -3,13 +3,15 @@ id: LLM-KB-INDEX
 title: "Local LLM Knowledge Base Index"
 layer: "wiki"
 status: "active"
-tags: ["index", "navigation", "models", "runtimes", "procedures", "clients", "receipts"]
-last_updated: "2026-08-23"
+tags: ["index", "navigation", "models", "runtimes", "procedures", "clients", "receipts", "architecture"]
+last_updated: "2026-08-25"
 ---
 
 # Local LLM Knowledge Base
 
 Canonical knowledge base for locally hosted large language models, quantization formats, hardware deployment benchmarks, multimodal assets, and inference runtimes.
+
+- [Architecture & Governance](architecture.md)
 
 ## Model Profiles
 
@@ -28,6 +30,7 @@ Canonical knowledge base for locally hosted large language models, quantization 
 ## Runtimes & Infrastructure
 
 - [Runtimes Directory](../runtimes/README.md)
+  - [Unsloth Runtime & Optimization Architecture](../runtimes/unsloth.md)
   - [llama.cpp Qwen3.8 Runtime](../runtimes/llamacpp-qwen3.8.md)
 
 ## Client Integrations
@@ -39,6 +42,7 @@ Canonical knowledge base for locally hosted large language models, quantization 
 ## Standard Operating Procedures
 
 - [Procedures Directory](../procedures/README.md)
+  - [Dynamic Quantization Methodology](../procedures/dynamic-quantization.md)
   - [Model Artifact Lifecycle](../procedures/model-artifact-lifecycle.md)
   - [Coding Agent Tuning](../procedures/coding-agent-tuning.md)
   - [Multimodal Workflows](../procedures/multimodal-workflows.md)
@@ -46,7 +50,9 @@ Canonical knowledge base for locally hosted large language models, quantization 
 
 ## Validation Receipts
 
-- [Qwen3.8 Pi & LiteLLM Integration Receipt](../receipts/qwen3.8-pi-litellm.md)
-- [Research Corpus Parity Receipt](../receipts/research-corpus-parity-2026-08-22.md)
-- [Consolidated Cohort Cross-Model Matrix Receipt](../receipts/cohort-consolidated-matrix-2026-08-23.md)
-- [Merged Cohort Inventory Receipt](../receipts/cohort-merged-inventory-2026-08-23.md)
+- [Validation Receipts Directory](../receipts/README.md)
+  - [Consolidated Cohort Cross-Model Matrix](../receipts/cohort-consolidated-matrix-2026-08-23.md)
+  - [Merged Cohort Inventory](../receipts/cohort-merged-inventory-2026-08-23.md)
+  - [Qwen3.8 Pi & LiteLLM Integration](../receipts/qwen3.8-pi-litellm.md)
+  - [Research Corpus Parity Validation](../receipts/research-corpus-parity-2026-08-22.md)
+  - [KB Bootstrap 0.2.0 Consumer Migration](../receipts/kb-bootstrap-020-consumer-migration-2026-08-22.md)
