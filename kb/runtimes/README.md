@@ -1,11 +1,11 @@
 ---
 id: LLM-KB-RUNTIMES
-title: "Local LLM runtime records"
+title: "Local runtime integration records"
 category: index
-tags: [runtime, llama.cpp, unsloth, clients]
+tags: [runtimes, llamacpp, unsloth, sglang]
 status: active
 created: 2026-08-21
-updated: 2026-08-21
+updated: 2026-08-25
 environment:
   os: any
   shell: any
@@ -15,6 +15,8 @@ error_signatures: []
 
 # Runtimes
 
-Runtime records will cover llama.cpp, Unsloth Studio, LiteLLM, Pi, OpenCode,
-and OpenAI-compatible API behavior. Runtime support is not proof of model
-capability.
+- [Unsloth Runtime & Optimization Architecture](unsloth.md)
+- [Llama.cpp Runtime Notes](llamacpp-qwen3.8.md)
+
+Document inference engines, fine-tuning backends, and server environments here.
+Keep runtime bugs and version constraints separate from model architecture facts.
