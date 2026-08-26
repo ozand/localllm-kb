@@ -18,6 +18,7 @@ error_signatures: []
 Catalog of verifiable execution receipts, provenance records, and benchmarks.
 
 ## Consolidated Cohort Receipts
+- [Multi-Node RPC & vLLM Cluster Research Receipt](multi-node-rpc-receipt.md)
 - [SLM & LiteLLM Local Routing Validation Receipt](slm-litellm-routing-receipt.md)
 - [Openness Index & Adaptation Feasibility Receipt](openness-finetuning-receipt.md)
 - [Coding Agent Serving Optimization Receipt](coding-agent-serving-receipt.md)
