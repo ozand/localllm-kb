@@ -17,6 +17,7 @@ error_signatures: []
 
 - [Coding Agent Serving & Prefix Caching](coding-agent-serving-optimization.md)
 - [Large MoE Multi-GPU Sharding](large-moe-sharding.md)
+- [Multi-Node RPC Clustering](multi-node-rpc-clustering.md)
 - [Dynamic Quantization Methodology](dynamic-quantization.md)
 - [Local LLM Fine-Tuning and Continual Pretraining](local-fine-tuning.md)
 - [Speculative Decoding and Draft Acceleration](speculative-decoding.md)
