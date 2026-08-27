@@ -1,5 +1,5 @@
 {
-  "method": "regex_candidate_extraction_from_30_clean_transcripts",
+  "method": "regex_candidate_extraction_from_30_clean_transcripts", "assessment_artifact": "material-assessments.json",
   "warning": "candidates require manual/context validation",
   "records": [
     {
