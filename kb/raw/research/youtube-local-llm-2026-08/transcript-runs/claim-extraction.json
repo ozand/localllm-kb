@@ -1,0 +1,651 @@
+{
+  "method": "regex_candidate_extraction_from_30_clean_transcripts",
+  "warning": "candidates require manual/context validation",
+  "records": [
+    {
+      "file": "yt90-0ujh7hfutq0-llama-cpp-vs-vllm-which-local-llm-engine-actually-scales.md",
+      "title": "Llama.cpp vs vLLM: Which Local LLM Engine Actually Scales?",
+      "url": "https://www.youtube.com/watch?v=0ujh7hfutq0",
+      "numbers": [],
+      "topics": [
+        "VRAM",
+        "quant",
+        "vLLM",
+        "Ollama",
+        "KV cache",
+        "CPU",
+        "Mac"
+      ],
+      "word_count": 1697
+    },
+    {
+      "file": "yt90-18AkpuX3vkY-sglang-vs-vllm-which-llm-inference-framework-should-you-use.md",
+      "title": "SGLang vs vLLM: Which LLM Inference Framework Should You Use?",
+      "url": "https://www.youtube.com/watch?v=18AkpuX3vkY",
+      "numbers": [
+        "000 tokens per second",
+        "80 GB"
+      ],
+      "topics": [
+        "vLLM",
+        "SGLang",
+        "KV cache",
+        "Mac",
+        "throughput",
+        "latency"
+      ],
+      "word_count": 1498
+    },
+    {
+      "file": "yt90-1_L9cG-X2eY-troubleshoot-running-models-llama-server-llama-cpp.md",
+      "title": "Troubleshoot Running Models llama-server (llama.cpp)",
+      "url": "https://www.youtube.com/watch?v=1_L9cG-X2eY",
+      "numbers": [
+        "188 tokens per second"
+      ],
+      "topics": [
+        "Ollama",
+        "Mac"
+      ],
+      "word_count": 4543
+    },
+    {
+      "file": "yt90-2t9XrPcAiHg-local-ai-just-leveled-up-llama-cpp-vs-ollama.md",
+      "title": "Local AI just leveled up... Llama.cpp vs Ollama",
+      "url": "https://www.youtube.com/watch?v=2t9XrPcAiHg",
+      "numbers": [
+        "13.4 tokens per second",
+        "16 GB",
+        "2.5 GB",
+        "24.3 tokens per second",
+        "29 tokens per second",
+        "34 tokens per second",
+        "36 tokens per second",
+        "50 tokens per second",
+        "8 GB"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "Q8",
+        "Ollama",
+        "CPU",
+        "Mac"
+      ],
+      "word_count": 2908
+    },
+    {
+      "file": "yt90-4shPVb4RqGQ-new-qwen-2-5-coder-32b-insane-coding-power-tested-is-this-the-best-free-llm.md",
+      "title": "NEW Qwen 2.5 Coder (32B): Insane Coding Power Tested! Is This the Best Free LLM?",
+      "url": "https://www.youtube.com/watch?v=4shPVb4RqGQ",
+      "numbers": [],
+      "topics": [],
+      "word_count": 1165
+    },
+    {
+      "file": "yt90-AcTmeGpzhBk-this-laptop-runs-llms-better-than-most-desktops.md",
+      "title": "This Laptop Runs LLMs Better Than Most Desktops",
+      "url": "https://www.youtube.com/watch?v=AcTmeGpzhBk",
+      "numbers": [
+        "1 GB",
+        "100 GB",
+        "101 tokens per second",
+        "120 GB",
+        "128 GB",
+        "16 GB",
+        "2.12 tokens per second",
+        "235 GB",
+        "24 GB",
+        "24 tokens per second",
+        "32 GB",
+        "41 tokens per second",
+        "42 tokens per second",
+        "51 tokens per second",
+        "64 GB",
+        "69 GB",
+        "73 GB",
+        "74 GB",
+        "96 GB"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "Q8",
+        "CPU",
+        "Mac"
+      ],
+      "word_count": 3960
+    },
+    {
+      "file": "yt90-AeowzDOmX_U-ollama-vs-llama-cpp-the-performance-reality.md",
+      "title": "Ollama vs Llama.cpp: The Performance Reality",
+      "url": "https://www.youtube.com/watch?v=AeowzDOmX_U",
+      "numbers": [
+        "161 tokens per second"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "Ollama",
+        "Mac"
+      ],
+      "word_count": 1476
+    },
+    {
+      "file": "yt90-B7GDr-VFuEo-nvidia-you-re-late-world-s-first-128gb-llm-mini-is-here.md",
+      "title": "Nvidia, You’re Late. World’s First 128GB LLM Mini Is Here!",
+      "url": "https://www.youtube.com/watch?v=B7GDr-VFuEo",
+      "numbers": [
+        "10.58 tokens per second",
+        "120 GB",
+        "128 GB",
+        "128GB",
+        "16 TB",
+        "160 tokens per second",
+        "18.4 GB",
+        "19.94 tokens per second",
+        "20 GB",
+        "21 tokens per second",
+        "23 tokens per second",
+        "256 GB",
+        "273 GB",
+        "39 GB",
+        "4 GB",
+        "43 GB",
+        "43 tokens per second",
+        "44 tokens per second",
+        "46 tokens per second",
+        "49 tokens per second",
+        "5 GB",
+        "5.1 tokens per second",
+        "540 GB",
+        "64 GB",
+        "66 tokens per second",
+        "819 GB",
+        "935 tokens per second",
+        "96 GB"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "CPU",
+        "Mac"
+      ],
+      "word_count": 3958
+    },
+    {
+      "file": "yt90-bTaN5VYCN58-qwen38-27b-16gb-vram-local-test.md",
+      "title": "Qwen 3.8 27B: 16GB VRAM Local Test",
+      "url": "https://www.youtube.com/watch?v=bTaN5VYCN58",
+      "numbers": [
+        "10 seconds",
+        "16 GB",
+        "16GB",
+        "4.78 tokens per second",
+        "45 seconds",
+        "6.42 tokens per second",
+        "64 GB"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q4",
+        "MTP",
+        "vLLM"
+      ],
+      "word_count": 1971
+    },
+    {
+      "file": "yt90-dgyqBUD71lg-dual-amd-radeon-9700-ai-pro-building-a-64gb-llm-ai-server-with-llama-cpp.md",
+      "title": "Dual AMD Radeon 9700 AI PRO: Building a 64GB LLM/AI Server with Llama.cpp",
+      "url": "https://www.youtube.com/watch?v=dgyqBUD71lg",
+      "numbers": [
+        "128 GB",
+        "2 TB",
+        "24 GB",
+        "32 GB",
+        "38 tokens per second",
+        "43 GB",
+        "64 GB",
+        "64GB",
+        "9900X"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q4",
+        "Q8",
+        "RPC",
+        "vLLM",
+        "CPU"
+      ],
+      "word_count": 6641
+    },
+    {
+      "file": "yt90-gkl2KlJ7FP0-i-benchmarked-vllm-vs-sglang-so-you-don-t-have-to-shocking-results.md",
+      "title": "I Benchmarked vLLM vs SGLang So You Don't Have To Shocking Results!",
+      "url": "https://www.youtube.com/watch?v=gkl2KlJ7FP0",
+      "numbers": [
+        "138 seconds",
+        "220 seconds",
+        "32 GB",
+        "55 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "vLLM",
+        "SGLang",
+        "CPU",
+        "Mac",
+        "latency"
+      ],
+      "word_count": 4056
+    },
+    {
+      "file": "yt90-ITbB9nPCX04-run-a-local-llm-across-multiple-computers-vllm-distributed-inference.md",
+      "title": "Run A Local LLM Across Multiple Computers! (vLLM Distributed Inference)",
+      "url": "https://www.youtube.com/watch?v=ITbB9nPCX04",
+      "numbers": [
+        "12 GB",
+        "6 GB"
+      ],
+      "topics": [
+        "VRAM",
+        "vLLM",
+        "CPU",
+        "Mac"
+      ],
+      "word_count": 2784
+    },
+    {
+      "file": "yt90-jdgy9YUSv0s-deepseek-on-apple-silicon-in-depth-4-macbooks-tested.md",
+      "title": "DeepSeek on Apple Silicon in depth | 4 MacBooks Tested",
+      "url": "https://www.youtube.com/watch?v=jdgy9YUSv0s",
+      "numbers": [
+        "0.12 seconds",
+        "1.1 GB",
+        "1.89 GB",
+        "11.28 tokens per second",
+        "128 GB",
+        "131 GB",
+        "14.58 GB",
+        "15 GB",
+        "16 GB",
+        "162 tokens per second",
+        "182 tokens per second",
+        "19.38 tokens per second",
+        "20 seconds",
+        "29 tokens per second",
+        "32 seconds",
+        "33 tokens per second",
+        "4 GB",
+        "4.7 GB",
+        "40 tokens per second",
+        "45 tokens per second",
+        "47 tokens per second",
+        "50 tokens per second",
+        "54.9 tokens per second",
+        "58 tokens per second",
+        "6.2 tokens per second",
+        "6.47 GB",
+        "6.86 GB",
+        "68.76 tokens per second",
+        "7.11 GB",
+        "7.5 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q4",
+        "Q8",
+        "Mac"
+      ],
+      "word_count": 5045
+    },
+    {
+      "file": "yt90-L9QZ97y9Exg-your-local-llm-is-10x-slower-than-it-should-be.md",
+      "title": "Your local LLM is 10x slower than it should be",
+      "url": "https://www.youtube.com/watch?v=L9QZ97y9Exg",
+      "numbers": [
+        "100 tokens per second",
+        "10x",
+        "120 tokens per second",
+        "128 tokens per second",
+        "226 tokens per second",
+        "231 tokens per second",
+        "240 tokens per second",
+        "512 GB",
+        "826 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "CPU",
+        "Mac",
+        "throughput"
+      ],
+      "word_count": 2220
+    },
+    {
+      "file": "yt90-m3PQd11aI_c-best-local-coding-ai-for-8gb-vram-2026-benchmark.md",
+      "title": "Best Local Coding AI for 8GB VRAM (2026 Benchmark)",
+      "url": "https://www.youtube.com/watch?v=m3PQd11aI_c",
+      "numbers": [
+        "5 tokens per second",
+        "8GB"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "tool calling",
+        "Aider"
+      ],
+      "word_count": 1655
+    },
+    {
+      "file": "yt90-prIUKAbHlj8-amd-strix-halo-ryzen-ai-max-395-for-ai-an-honest-review.md",
+      "title": "AMD Strix Halo/Ryzen AI Max+ 395 for AI – An Honest Review",
+      "url": "https://www.youtube.com/watch?v=prIUKAbHlj8",
+      "numbers": [
+        "128 GB",
+        "13.77 tokens per second",
+        "46.9 tokens per second",
+        "47 tokens per second",
+        "48 GB",
+        "64 GB"
+      ],
+      "topics": [
+        "Mac"
+      ],
+      "word_count": 3374
+    },
+    {
+      "file": "yt90-RBlRTUwJMI4-fastest-qwen-3-8-27b-in-llama-cpp-dflash-2-n-gram-explained-benchmarked.md",
+      "title": "Fastest Qwen 3.8 27B in Llama.cpp? DFlash 2 + n-gram Explained & Benchmarked!",
+      "url": "https://www.youtube.com/watch?v=RBlRTUwJMI4",
+      "numbers": [
+        "344 tokens per second",
+        "70 tokens per second",
+        "8x",
+        "96 GB"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "Q8",
+        "DFlash",
+        "MTP",
+        "Mac",
+        "latency"
+      ],
+      "word_count": 6999
+    },
+    {
+      "file": "yt90-S0qHmLjy6gs-run-mlx-llms-50-faster-on-a-mac-with-dspark-speculative-decoding.md",
+      "title": "Run MLX LLMs 50% Faster on a Mac with DSpark (Speculative Decoding)",
+      "url": "https://www.youtube.com/watch?v=S0qHmLjy6gs",
+      "numbers": [
+        "18 seconds",
+        "21.27 tokens per second",
+        "23.2 tokens per second",
+        "29 seconds",
+        "29.05 seconds",
+        "37.69 tokens per second"
+      ],
+      "topics": [
+        "MTP",
+        "Mac"
+      ],
+      "word_count": 1308
+    },
+    {
+      "file": "yt90-scMSq4FtO8c-llama-cpp-vs-vllm-vs-sglang-cu-l-ejecuta-qwen-m-s-r-pido-benchmarks-reales-2026.md",
+      "title": "llama.cpp vs vLLM vs SGLang: ¿Cuál Ejecuta Qwen Más Rápido? (Benchmarks Reales 2026)",
+      "url": "https://www.youtube.com/watch?v=scMSq4FtO8c",
+      "numbers": [
+        "20 GB",
+        "3 seconds",
+        "35 tokens per second"
+      ],
+      "topics": [
+        "vLLM",
+        "SGLang",
+        "CPU",
+        "Mac",
+        "latency"
+      ],
+      "word_count": 1363
+    },
+    {
+      "file": "yt90-sMacAPpgXhQ-how-i-configure-the-ryzen-ai-halo-strix-halo-for-10-15-faster-local-inference.md",
+      "title": "How I Configure the Ryzen AI Halo (Strix Halo) for 10-15% Faster Local Inference",
+      "url": "https://www.youtube.com/watch?v=sMacAPpgXhQ",
+      "numbers": [
+        "10 GB",
+        "120 GB",
+        "15 tokens per second",
+        "256 GB",
+        "383 tokens per second",
+        "487 tokens per second",
+        "545 tokens per second",
+        "563 tokens per second",
+        "80 GB"
+      ],
+      "topics": [
+        "quant",
+        "Q4",
+        "MTP",
+        "vLLM",
+        "CPU",
+        "Mac",
+        "latency"
+      ],
+      "word_count": 2856
+    },
+    {
+      "file": "yt90-S_zbHH5Ycs0-600-toks-second-gemma4-26b-the-setting-that-actually-wins-vllm-dflash-speculative-decoding.md",
+      "title": "600 Toks/Second Gemma4-26B —The Setting That Actually Wins (vLLM + Dflash Speculative Decoding)",
+      "url": "https://www.youtube.com/watch?v=S_zbHH5Ycs0",
+      "numbers": [
+        "000 tokens per second",
+        "29 GB",
+        "600 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "DFlash",
+        "vLLM",
+        "Mac",
+        "throughput",
+        "latency"
+      ],
+      "word_count": 1145
+    },
+    {
+      "file": "yt90-t_hh2-KG6Bw-deepseek-r1-671b-on-a-500-ai-pc.md",
+      "title": "Deepseek R1 671b on a $500 AI PC!",
+      "url": "https://www.youtube.com/watch?v=t_hh2-KG6Bw",
+      "numbers": [
+        "1.6 tokens per second",
+        "128 gb",
+        "16 gb",
+        "2.9 tokens per second",
+        "24 gb",
+        "32 gb",
+        "4.1 tokens per second",
+        "512 gb",
+        "64 gb"
+      ],
+      "topics": [
+        "VRAM",
+        "Q4",
+        "Q8",
+        "Ollama",
+        "CPU",
+        "Mac",
+        "throughput"
+      ],
+      "word_count": 3651
+    },
+    {
+      "file": "yt90-uxvttLUOY-k-qwen3-coder-next-first-test-is-this-the-best-local-coding-model.md",
+      "title": "Qwen3-Coder Next First Test – Is This the BEST Local Coding Model?",
+      "url": "https://www.youtube.com/watch?v=uxvttLUOY-k",
+      "numbers": [
+        "16 GB",
+        "26.17 tokens per second",
+        "45 GB"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q8",
+        "Mac"
+      ],
+      "word_count": 5020
+    },
+    {
+      "file": "yt90-VGyKwi9Rfhk-rtx-3060-vs-rtx-3090-llm-performance-on-7b-14b-32b-70b-models.md",
+      "title": "RTX 3060 vs RTX 3090: LLM Performance on 7B, 14B, 32B, 70B Models",
+      "url": "https://www.youtube.com/watch?v=VGyKwi9Rfhk",
+      "numbers": [
+        "1.10 tokens per second",
+        "10.76 tokens per second",
+        "12 GB",
+        "128 GB",
+        "2.04 tokens per second",
+        "24 GB",
+        "28.97 tokens per second",
+        "5064 tokens per second",
+        "6060 tokens per second",
+        "800 x"
+      ],
+      "topics": [
+        "VRAM",
+        "CPU"
+      ],
+      "word_count": 440
+    },
+    {
+      "file": "yt90-VYc47oqBnqI-gemma-4-on-rtx-3090-vs-4090-vs-5090-vs-mac-benchmarks-that-will-surprise-you-31b-and-26b-a.md",
+      "title": "Gemma 4 on RTX 3090 vs 4090 vs 5090 vs Mac: Benchmarks That Will Surprise You (31B and 26B-A4B)",
+      "url": "https://www.youtube.com/watch?v=VYc47oqBnqI",
+      "numbers": [
+        "100 tokens per second",
+        "120 tokens per second",
+        "129 tokens per second",
+        "17 GB",
+        "182 tokens per second",
+        "190 tokens per second",
+        "24 GB",
+        "32 GB",
+        "36 GB",
+        "42.3 tokens per second",
+        "64.8 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "Mac"
+      ],
+      "word_count": 759
+    },
+    {
+      "file": "yt90-wA1GxXy1uGo-which-ai-model-fits-your-pc-lm-studio-model-guide-2026.md",
+      "title": "Which AI Model Fits Your PC? — LM Studio Model Guide (2026)",
+      "url": "https://www.youtube.com/watch?v=wA1GxXy1uGo",
+      "numbers": [
+        "1.5 tokens per second",
+        "20 tokens per second"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q4",
+        "Mac"
+      ],
+      "word_count": 491
+    },
+    {
+      "file": "yt90-x5hFKYjqmcE-qwen-2-5-coder-7b-fully-tested-can-it-crush-deepseek-2-5-claude-sonnet-as-code-assistant.md",
+      "title": "Qwen 2.5  Coder - 7B (Fully Tested): Can It Crush Deepseek 2.5 & Claude Sonnet as Code assistant ?",
+      "url": "https://www.youtube.com/watch?v=x5hFKYjqmcE",
+      "numbers": [
+        "0.01 seconds",
+        "70 GB"
+      ],
+      "topics": [
+        "Mac"
+      ],
+      "word_count": 3089
+    },
+    {
+      "file": "yt90-x9MuyVOtX78-dflash-just-made-ai-6x-faster-dflash-deepspec-explained.md",
+      "title": "DFlash Just Made AI 6x Faster : DFlash, DeepSpec Explained",
+      "url": "https://www.youtube.com/watch?v=x9MuyVOtX78",
+      "numbers": [
+        "38 tokens per second",
+        "4.4x",
+        "5 GB",
+        "6x",
+        "99950X"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "DFlash",
+        "MTP",
+        "vLLM",
+        "SGLang",
+        "Mac",
+        "throughput",
+        "latency"
+      ],
+      "word_count": 1559
+    },
+    {
+      "file": "yt90-XoJm7TmY1ck-i-ran-gemma-4-qat-on-rtx-3090-4090-5090-the-results-are-insane.md",
+      "title": "I Ran Gemma 4 QAT on RTX 3090/4090/5090 — The Results Are Insane",
+      "url": "https://www.youtube.com/watch?v=XoJm7TmY1ck",
+      "numbers": [
+        "14 GB",
+        "16 GB",
+        "17.3 GB"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Mac"
+      ],
+      "word_count": 671
+    },
+    {
+      "file": "yt90-xyKEQjUzfAk-cheap-mini-runs-a-70b-llm.md",
+      "title": "Cheap mini runs a 70B LLM 🤯",
+      "url": "https://www.youtube.com/watch?v=xyKEQjUzfAk",
+      "numbers": [
+        "1.4 tokens per second",
+        "1.43 tokens per second",
+        "1.5 GB",
+        "10.19 tokens per second",
+        "18.1 GB",
+        "24 GB",
+        "40 GB",
+        "42 GB",
+        "48 GB",
+        "5.19 tokens per second",
+        "54 GB",
+        "55 GB",
+        "94 GB",
+        "95.7 GB",
+        "96 GB"
+      ],
+      "topics": [
+        "VRAM",
+        "quant",
+        "Q4",
+        "Mac"
+      ],
+      "word_count": 2285
+    }
+  ]
+}
