@@ -386,6 +386,19 @@
       "return_code": 1,
       "status_detail": "extracted_with_nonfatal_language_error",
       "stderr_redacted": "non-zero extractor status; available transcript retained; see sanitized run record"
+    },
+    {
+      "id": "bTaN5VYCN58",
+      "title": "Qwen 3.8 27B: 16GB VRAM Local Test",
+      "url": "https://www.youtube.com/watch?v=bTaN5VYCN58",
+      "uploader": "kintu",
+      "query": "local llm quantization benchmark rtx 3090 4090",
+      "iteration": 1,
+      "status": "extracted",
+      "status_detail": "extracted_with_nonfatal_language_error",
+      "word_count": 1963,
+      "return_code": 1,
+      "stderr_redacted": "non-zero extractor status; transcript retained"
     }
   ]
 }

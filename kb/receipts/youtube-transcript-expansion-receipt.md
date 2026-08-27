@@ -20,10 +20,10 @@ hardware, quantization, distributed inference, speculative decoding, reasoning, 
 coding-agent queries.
 
 ## Results
-- Selected sources: 29.
-- Transcript captures: 29.
+- Selected sources: 30.
+- Transcript captures: 30.
 - Unavailable transcripts: 0.
-- Extracted text: approximately 79,000 words.
+- Extracted text: approximately 81,000 words.
 - Run record: `../raw/research/youtube-local-llm-2026-08/transcript-runs/extraction-results.json`.
 - Selection record: `../raw/research/youtube-local-llm-2026-08/transcript-runs/selection-manifest.json`.
 
