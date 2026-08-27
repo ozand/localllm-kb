@@ -54,3 +54,9 @@ video ID, title, uploader, and URL are preserved for every source.
 
 This artifact is a discovery corpus. No transcript was downloaded for all 82 videos,
 and no claim from a title or search result is promoted to a measured local fact.
+
+
+## Transcript distillation
+
+- [30-transcript distillation synthesis](transcript-runs/distillation-synthesis.md)
+- [Candidate claim extraction](transcript-runs/claim-extraction.json)
