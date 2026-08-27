@@ -1,0 +1,4385 @@
+{
+  "method": "material-type-assessment",
+  "count": 30,
+  "assessments": [
+    {
+      "material_id": "yt90-0ujh7hfutq0-llama-cpp-vs-vllm-which-local-llm-engine-actually-scales",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-0ujh7hfutq0-llama-cpp-vs-vllm-which-local-llm-engine-actually-scales.md",
+        "format": "markdown",
+        "bytes": 9696,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GPUs",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "LLMs",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 5,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 9314,
+        "words": 1753,
+        "total_characters": 9682,
+        "total_words": 1801,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1753,
+          "median": 1753,
+          "max": 1753
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "These days, it seems like everyone is looking to run local LLMs. And that's right, you can actually run GPT-style models as AI assistants, code editors, and more from your own personal computer or even a laptop. And there's a lot of reasons why people are looking to do this. First off, LLM's can get quite expensive. So running them yourself can save a lot money. At the same time, you might've experienced getting an outage from an AI service or even getting rate-limited. And that can be quite tricky. But the last part and the biggest reason that personally I like to use local LLMs is because th"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1753,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-18AkpuX3vkY-sglang-vs-vllm-which-llm-inference-framework-should-you-use",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-18AkpuX3vkY-sglang-vs-vllm-which-llm-inference-framework-should-you-use.md",
+        "format": "markdown",
+        "bytes": 10017,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Above",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Both",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "DeepSeek",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GPUs",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "JSON",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Python",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "SGLang",
+            "count": 24,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Same",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Time",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 9628,
+        "words": 1532,
+        "total_characters": 10003,
+        "total_words": 1581,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1532,
+          "median": 1532,
+          "max": 1532
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Two frameworks dominate production LLM serving today. Same hardware, same models, wildly different results depending on your workload. SGLang versus vLLM. Here's how to choose. Both vLLM and SGLang exist to solve the same fundamental bottleneck. When an LLM generates tokens, it builds a KV cache. Key and value matrices that grow with every token produced. At 4,000 tokens, that cache consumes over a gigabyte of GPU memory per request. On an 80 gigabyte A100, this limits you to a handful of concurrent long context requests. Traditional frameworks made this worse. KV cache memory was allocated up"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1532,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-1_L9cG-X2eY-troubleshoot-running-models-llama-server-llama-cpp",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-1_L9cG-X2eY-troubleshoot-running-models-llama-server-llama-cpp.md",
+        "format": "markdown",
+        "bytes": 23764,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Coder",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Instead",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "JSON",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Okay",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "PBSSE",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Qwen",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 23398,
+        "words": 4724,
+        "total_characters": 23750,
+        "total_words": 4768,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 4724,
+          "median": 4724,
+          "max": 4724
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Today, I want to take a bit of time here and talk briefly about Llama server, so a part of Llama CPP, how you can host models with that. And specifically, if you're using it, how can you do a little bit of troubleshooting? How can you look just underneath the covers to figure out what's going on here? And so, the first thing I want to cover, of course, is starting things up here. So, up on top, I've got an example of some parameters here to start up a Qwen model here. And I'm going to start that and run that on port 8012. So, these are the args I'm passing here to the Llama server executable. "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 4724,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-2t9XrPcAiHg-local-ai-just-leveled-up-llama-cpp-vs-ollama",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-2t9XrPcAiHg-local-ai-just-leveled-up-llama-cpp-vs-ollama.md",
+        "format": "markdown",
+        "bytes": 15572,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Boom",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GGML",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GGUF",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 16,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Olama",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Quen",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Then",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Write",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 15214,
+        "words": 3081,
+        "total_characters": 15558,
+        "total_words": 3127,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 3081,
+          "median": 3081,
+          "max": 3081
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Everyone runs local LLMs differently. Llama CPP, [music] Olama, LM Studio, those are just some of the more popular ones that run on really simple hardware and pretty [music] much anything. But Llama CPP just dropped a new web UI that might change the equation for some of you. I'll show you how to build it from source, push it to the edge, and I'll show you a behavior that might [music] make you rethink your stack. Here's a discussion that you might want to take note of. Now, this is probably going to be merged into the main documentation, but it's too early right now, so it's not yet. But this"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 3081,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-4shPVb4RqGQ-new-qwen-2-5-coder-32b-insane-coding-power-tested-is-this-the-best-free-llm",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-4shPVb4RqGQ-new-qwen-2-5-coder-32b-insane-coding-power-tested-is-this-the-best-free-llm.md",
+        "format": "markdown",
+        "bytes": 6410,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Claude",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 5991,
+        "words": 1219,
+        "total_characters": 6396,
+        "total_words": 1279,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1219,
+          "median": 1219,
+          "max": 1219
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "for coding the go-to model has been clogged 3.5 Sonet ever since it was released but now we may have another model that could potentially replace it introducing quen 2.5 this is their latest Flagship model achieving top tier performance and proving to be highly competitive it even surpasses both open ai's gp4 Omni and Claude 3.5 Sonet welcome to AI Labs where we bring you the latest in AI models tools and coding before we dive in make sure to hit that subscribe button it really helps us out and ensures you won't miss any of the Cool Tools and tips we've got coming your way now let's get into t"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-AcTmeGpzhBk-this-laptop-runs-llms-better-than-most-desktops",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-AcTmeGpzhBk-this-laptop-runs-llms-better-than-most-desktops.md",
+        "format": "markdown",
+        "bytes": 20968,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Apple",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Bench",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemma",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "However",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "LLMs",
+            "count": 4,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "MacBook",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Olama",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Plaude",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Silicon",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Vulcan",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 20610,
+        "words": 4151,
+        "total_characters": 20954,
+        "total_words": 4195,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 4151,
+          "median": 4151,
+          "max": 4151
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "How is this possible? This 110 billion parameter model, Quen 110 billion is running on this machine. But even my 5090 can't run this model. I'll tell you how. This little device has 128 GB of unified memory on board. Oh, unified memory, you say? Is that kind of like Apple's unified memory in this M4 Max? Not exactly. And this does affect LLM performance, which is what I'm going to be digging into here right now. This thing, of course, is the Asus Flow Z13 2025 edition. And that's the first device to have AMD's new Ryzen AI Max Plus 395 APU or known as accelerated processing unit that combines "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 4151,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-AeowzDOmX_U-ollama-vs-llama-cpp-the-performance-reality",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-AeowzDOmX_U-ollama-vs-llama-cpp-the-performance-reality.md",
+        "format": "markdown",
+        "bytes": 9349,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Docker",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GitHub",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Hugging",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Just",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 5,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ollama",
+            "count": 17,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 8988,
+        "words": 1512,
+        "total_characters": 9335,
+        "total_words": 1555,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1512,
+          "median": 1512,
+          "max": 1512
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "163,000 developers starred a tool on GitHub that is, by every benchmark, slower than the thing it is built on top of. Not a little slower. Up to 80% slower in some tests. [music] And yet, Ollama has nearly twice the community of llama.cpp, the very engine running underneath it. That gap tells you something important about how people actually choose their tools. And if you are trying to run AI on your own hardware right now, picking the wrong one could mean the difference between a 5-minute setup and an evening lost to build errors you cannot make sense of. Because these two are not really comp"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1512,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-B7GDr-VFuEo-nvidia-you-re-late-world-s-first-128gb-llm-mini-is-here",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-B7GDr-VFuEo-nvidia-you-re-late-world-s-first-128gb-llm-mini-is-here.md",
+        "format": "markdown",
+        "bytes": 21003,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Apple",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Bench",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Chat",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemma",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "LLMs",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 13,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Mini",
+            "count": 12,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Nvidia",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Plus",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Rockom",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ryzen",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Spark",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Vulcan",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 20615,
+        "words": 4154,
+        "total_characters": 20981,
+        "total_words": 4208,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 4154,
+          "median": 4154,
+          "max": 4154
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "DJX Spark will be ready, will be available shortly, probably in a few weeks. DJX Spark is coming. It's always been coming. But while we wait, GMK Tech is not sitting around. They just dropped the Evo X2, a mini PC with 128 GB of RAM that's shared with the GPU, ready for local LLMs and machine learning, and it costs less than half the price of the DJX Spark. Hey, maybe the Spark is out by the time this video is edited. And in that case, I'll leave my words. I've ordered it also just uh to make sure I test everything here. So, make sure you don't miss that. And why would anybody still care about"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 4154,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-bTaN5VYCN58-qwen38-27b-16gb-vram-local-test",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-bTaN5VYCN58-qwen38-27b-16gb-vram-local-test.md",
+        "format": "markdown",
+        "bytes": 10962,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Anyways",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "However",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Obviously",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Opus",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Qwen",
+            "count": 5,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Yeah",
+            "count": 13,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 10630,
+        "words": 2073,
+        "total_characters": 10962,
+        "total_words": 2118,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 2073,
+          "median": 2073,
+          "max": 2073
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Quen 3.827B is finally here. One of the most anticipated model releases of the year. I mean, they even had a countdown page for it, and it seems like everyone and their dog was hyped about this. So, in today's video, we'll put the model to the test, break down its architecture, and of course, see where it lands on the benchmarks. Let's get started. So, I'm going to be running all of the tests through llama.cpp, and I went for the Giga variant of the Quen 3.827B. This is the one that I downloaded, the UDQ 4K Excel. And on my specific setup, I have the RTX 5060Ti, 16 GB of VRAM backed by 64 GB o"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 2073,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-dgyqBUD71lg-dual-amd-radeon-9700-ai-pro-building-a-64gb-llm-ai-server-with-llama-cpp",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-dgyqBUD71lg-dual-amd-radeon-9700-ai-pro-building-a-64gb-llm-ai-server-with-llama-cpp.md",
+        "format": "markdown",
+        "bytes": 34768,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Each",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Excel",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Fedora",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GGUF",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GPUs",
+            "count": 40,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GenAI",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 11,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Mistral",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Okay",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "PCIe",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "RDNA",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "ROCm",
+            "count": 22,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Radeon",
+            "count": 6,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Then",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ubuntu",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Unsloth",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "VRAM",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Vulcan",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 34354,
+        "words": 6831,
+        "total_characters": 34754,
+        "total_words": 6889,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 6831,
+          "median": 6831,
+          "max": 6831
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "I finally built a dual GPU setup. These are two AMD Radeon 9700 AI Pro. Each comes with 32 GB of VRAM, giving the system a total memory of 64 GB. These are consumer-grade cards based on the new RDNA 4 architecture, and they are positioned for local AI workloads. At the time of this recording, these sell for around 1,200 pounds in the UK. However, with the current memory supply constraints, prices will go up. But, at the time of this video, you can still find some of these cards for relatively good prices. In this video, I want to share two things. First, I will walk you through what I learned "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 6831,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-gkl2KlJ7FP0-i-benchmarked-vllm-vs-sglang-so-you-don-t-have-to-shocking-results",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-gkl2KlJ7FP0-i-benchmarked-vllm-vs-sglang-so-you-don-t-have-to-shocking-results.md",
+        "format": "markdown",
+        "bytes": 21282,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Because",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GPUs",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Okay",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "VGPU",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "VRAM",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Yeah",
+            "count": 10,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 20882,
+        "words": 4178,
+        "total_characters": 21268,
+        "total_words": 4232,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 4178,
+          "median": 4178,
+          "max": 4178
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Hi guys, I'm Ukash. I'm lead AI engineer that specializing in inference and back end engines. And today we will talk about why everybody is so obsessed with training and how many GPUs you need and so on. But instead they should be interested into the inference. So if you look in this chart, we can see that in the life cycle of AI model training only accounts around 10 20% of the total cost and inference accounts for 8090. So what does it tell to us? Well, if you screw it up the inference, you are bleeding basically money for for the business. The issue is that training it's basically cost. So "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 4178,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-ITbB9nPCX04-run-a-local-llm-across-multiple-computers-vllm-distributed-inference",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-ITbB9nPCX04-run-a-local-llm-across-multiple-computers-vllm-distributed-inference.md",
+        "format": "markdown",
+        "bytes": 14620,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 14215,
+        "words": 2859,
+        "total_characters": 14606,
+        "total_words": 2907,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 2859,
+          "median": 2859,
+          "max": 2859
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "so first and foremost I am going to get a mic I know a few people have mentioned it's hard to hear me at times so I am on top of that I promise it will be soon second of all for today's video and something I'm really excited about testing we are going to be testing distributed inference using VM now the setup that I'm going to show today is a multi- node multi-gpu setup now essentially what that means is that this computer behind me is a single node with multiple gpus and the computer down here that you can probably only hear right now is another node with multiple gpus so the whole idea of to"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 2859,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-jdgy9YUSv0s-deepseek-on-apple-silicon-in-depth-4-macbooks-tested",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-jdgy9YUSv0s-deepseek-on-apple-silicon-in-depth-4-macbooks-tested.md",
+        "format": "markdown",
+        "bytes": 26512,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Apple",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Bartowski",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Barttowski",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Boom",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Bowski",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "DeepSeek",
+            "count": 10,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Deepseek",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GGUF",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Linux",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "MacBook",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Okay",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Olama",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Silicon",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Unsloth",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Windows",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Write",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Yeah",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 26140,
+        "words": 5374,
+        "total_characters": 26498,
+        "total_words": 5420,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 5374,
+          "median": 5374,
+          "max": 5374
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Deepseek R1, the latest state-of-the-art large language model, is free. But you know what they say, if it's free, then you're the product. Hey, I'm at least worth twice that. Which is exactly why there is a way to run DeepSeek and there is a way not to run DeepSeek. What's all this hardware? That's what matters now when it comes to running LLMs, especially locally, because now anybody can just download the state-of-the-art model. Yeah, it's open source. You can download it. You can run it yourself, but it's the hardware that really matters that's going to set you apart from Joe down the block."
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 5374,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-L9QZ97y9Exg-your-local-llm-is-10x-slower-than-it-should-be",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-L9QZ97y9Exg-your-local-llm-is-10x-slower-than-it-should-be.md",
+        "format": "markdown",
+        "bytes": 12411,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Boom",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Llama",
+            "count": 19,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Olama",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Server",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 12055,
+        "words": 2319,
+        "total_characters": 12397,
+        "total_words": 2367,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 2319,
+          "median": 2319,
+          "max": 2319
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "You're probably familiar with Olama, right? This is what it looks like. You can launch it. You can talk to it. Never mind that we're using Quen 34B. That's just standardized thing that I'm [music] doing. And the prompt doesn't matter what it is. 100 tokens per second is what Olama gives us. Lama runs on Llama CPP. It has a little bit of overhead, but you can also run Llama CPP directly and query it remotely, which is what software developers are going to be interested in if they're going to be using it as a code assistant, for example, or with agents. Hold on a minute. And that's going to be k"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 2319,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-m3PQd11aI_c-best-local-coding-ai-for-8gb-vram-2026-benchmark",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-m3PQd11aI_c-best-local-coding-ai-for-8gb-vram-2026-benchmark.md",
+        "format": "markdown",
+        "bytes": 9387,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Aider",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Claude",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Code",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Coder",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemini",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "However",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Next",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Nimatron",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Qwen",
+            "count": 8,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 9024,
+        "words": 1704,
+        "total_characters": 9373,
+        "total_words": 1750,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1704,
+          "median": 1704,
+          "max": 1704
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "As you already know, 8-gig GPU is quite small for running local coding AI. Most of the model that can fit in this GPU are, no offense to the creators, not very helpful enough to do the agentic task or project-scale coding. If you want a relatively smart model, you'll have no choice but to pick bigger size model, sacrifice speed, and offload part of it to system RAM. So, in this video, I have tested several AI models locally, and I'm going to share the result with you. Let's check it out. So, my criteria when picking models for coding on 8-gig GPU are they must smart enough to do small to moder"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1704,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-prIUKAbHlj8-amd-strix-halo-ryzen-ai-max-395-for-ai-an-honest-review",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-prIUKAbHlj8-amd-strix-halo-ryzen-ai-max-395-for-ai-an-honest-review.md",
+        "format": "markdown",
+        "bytes": 18696,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Apple",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Framework",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "GitHub",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Halo",
+            "count": 5,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "LLMs",
+            "count": 12,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Linux",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ryzen",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Stricks",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Windows",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 18313,
+        "words": 3465,
+        "total_characters": 18678,
+        "total_words": 3517,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 3465,
+          "median": 3465,
+          "max": 3465
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "In my hand right here is the Ryzen Stricks Halo or as you may be familiar with the Ryzen AI Max Plus. But regardless of what it's called, this is the 128 GB of unified system memory machine from AMD. Now, the specific thing I'm holding in my hand is the GMK Techch Evo X2, but the actual device manufacturer that this comes from is somewhat agnostic to today's video, as there are a bunch of different flavors of manufacturer that have been putting this inside their systems. Framework has an offering, obviously. GMK Tech has one. There are a bunch of other mini PC manufacturers now putting this in"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 3465,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-RBlRTUwJMI4-fastest-qwen-3-8-27b-in-llama-cpp-dflash-2-n-gram-explained-benchmarked",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-RBlRTUwJMI4-fastest-qwen-3-8-27b-in-llama-cpp-dflash-2-n-gram-explained-benchmarked.md",
+        "format": "markdown",
+        "bytes": 36825,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Because",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "DSpark",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Dlash",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Then",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Yeah",
+            "count": 40,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 36405,
+        "words": 7151,
+        "total_characters": 36811,
+        "total_words": 7207,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 7151,
+          "median": 7151,
+          "max": 7151
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "On this channel, I've been testing pretty much every speculative decoding method I can get my hands on. And this week, we got Quen 3.827 billion, which is one of the most interesting new local coding models. It beats everything else in its size benchmarks. Then just a few days later, Dlash got major update, the Dlash 2, promising better acceptance than this park with much less overhead. But here's something a lot of people don't know. In Lamascp, you don't necessarily have to choose just one speculative decoding method. You can combine a drafter like the flash with engram speculation and let t"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 7151,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-S0qHmLjy6gs-run-mlx-llms-50-faster-on-a-mac-with-dspark-speculative-decoding",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-S0qHmLjy6gs-run-mlx-llms-50-faster-on-a-mac-with-dspark-speculative-decoding.md",
+        "format": "markdown",
+        "bytes": 7319,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [],
+        "lines": 14,
+        "characters": 6920,
+        "words": 1390,
+        "total_characters": 7305,
+        "total_words": 1442,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1390,
+          "median": 1390,
+          "max": 1390
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "So if you aren't aware, there is a new chapter in the speculative decoding story.  If you don't know what speculative decoding is, our most recent iteration before DSpark  was MTP multi-token prediction.  And without getting too nerdy, all models work with a pre-fill and a decode.  So the pre-fill is your input and the decode is guess what comes next.  That's your, you know, that's how LLMs work.  They're just trying to predict the next thing.  Speculative decoding was the first advance.  I think it came from, came with the Gemma model.  And that was, let's use a draft model, like a little mod"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-scMSq4FtO8c-llama-cpp-vs-vllm-vs-sglang-cu-l-ejecuta-qwen-m-s-r-pido-benchmarks-reales-2026",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-scMSq4FtO8c-llama-cpp-vs-vllm-vs-sglang-cu-l-ejecuta-qwen-m-s-r-pido-benchmarks-reales-2026.md",
+        "format": "markdown",
+        "bytes": 7967,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Nvidia",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Oyama",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Slang",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "With",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 7528,
+        "words": 1379,
+        "total_characters": 7944,
+        "total_words": 1434,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1379,
+          "median": 1379,
+          "max": 1379
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "One team installed the same QEN model on the same card for the same people.  With a user connected, it responded in seconds.  With 40 users connected at the same time. Response times went from 3 seconds to more than a minute.  Nobody touched the model.  What failed was what was behind it.  The server that distributes that GPU among everyone.  That's the real problem behind this video.   It's not that Quen is so fast, it's that he remains so fast even when he stops being just yours.  And the answer depends almost entirely on three pieces of software.  Llamaso FPP, VL M and Slang. Same GPU, same"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-sMacAPpgXhQ-how-i-configure-the-ryzen-ai-halo-strix-halo-for-10-15-faster-local-inference",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-sMacAPpgXhQ-how-i-configure-the-ryzen-ai-halo-strix-halo-for-10-15-faster-local-inference.md",
+        "format": "markdown",
+        "bytes": 15830,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Halo",
+            "count": 12,
+            "line_numbers": [
+              12,
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Linux",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ryzen",
+            "count": 9,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Strix",
+            "count": 4,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 15402,
+        "words": 2929,
+        "total_characters": 15816,
+        "total_words": 2987,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 2929,
+          "median": 2929,
+          "max": 2929
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "So, last week AMD sent me the new Ryzen AI Halo, which essentially serves as a reference platform for local AI on the Ryzen AI Max processors, namely Strix Halo and eventually the upcoming Gorgon Halo. Other creators like Alex Ziskind and Wendell from Level One Techs have already covered this device. So, here I want to focus mostly on my setup and how I configure this cool tiny box to squeeze as much performance out of it as possible. As you will see later in the benchmarks, using some specific optimizations yields over a 10 to 15% improvement in prompt processing speeds for some models. Befor"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 2929,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-S_zbHH5Ycs0-600-toks-second-gemma4-26b-the-setting-that-actually-wins-vllm-dflash-speculative-decoding",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-S_zbHH5Ycs0-600-toks-second-gemma4-26b-the-setting-that-actually-wins-vllm-dflash-speculative-decoding.md",
+        "format": "markdown",
+        "bytes": 6400,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Another",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemma",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "However",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 5941,
+        "words": 1160,
+        "total_characters": 6382,
+        "total_words": 1216,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1160,
+          "median": 1160,
+          "max": 1160
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "I cannot believe it, but this is Gemma 4 model is generating text at 600 tokens per second speed right now on my 5090 single GPU at my home. Let me show you what I did and how it works. The purpose is to run the Gemma 26B quantized the model the 4-bit model really fast. I used the vLLM as the inference engine and also there's a new technology called speculative decoding which use a draft model that a proposed some token candidate faster than the main model. The main model will verify or reject in a single forward pass. Here's the main model which is AWQ quantized 4-bit Gemma 4 26B A4B mixed of"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-t_hh2-KG6Bw-deepseek-r1-671b-on-a-500-ai-pc",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-t_hh2-KG6Bw-deepseek-r1-671b-on-a-500-ai-pc.md",
+        "format": "markdown",
+        "bytes": 22028,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 21693,
+        "words": 4354,
+        "total_characters": 22014,
+        "total_words": 4400,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 4354,
+          "median": 4354,
+          "max": 4354
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "running the full deepseek 671b on a $500 machine&nbsp; is possible and i'm actually surprised a little&nbsp;&nbsp; bit at the tokens per second we're able to&nbsp; get with it and this is on a $5 processor&nbsp;&nbsp; that's right you heard me right a $5 processor&nbsp; is what enables this along with 512 gb of ram&nbsp;&nbsp; and a very cheap hp z440 all of that is about $500&nbsp; total so i'm sure you've got a lot of questions&nbsp;&nbsp; let's put this system together and start answering&nbsp; them and you can use the chapters below at&nbsp;&nbsp; any time to skip around any part of this v"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 4354,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-uxvttLUOY-k-qwen3-coder-next-first-test-is-this-the-best-local-coding-model",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-uxvttLUOY-k-qwen3-coder-next-first-test-is-this-the-best-local-coding-model.md",
+        "format": "markdown",
+        "bytes": 27751,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Becky",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Bjan",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Damn",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Jane",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Miniax",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Next",
+            "count": 4,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Okay",
+            "count": 23,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Quen",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Spark",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Sven",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Very",
+            "count": 9,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Your",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 27350,
+        "words": 5224,
+        "total_characters": 27731,
+        "total_words": 5278,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 5224,
+          "median": 5224,
+          "max": 5224
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "or a custom color. Damn, this is pretty good. Is any better? Significantly so. Thank I'm so happy that I gave this a second chance. Second chance. Today we're going to be testing Quen 3 Coder Next from Alibaba Cloud. This is a very exciting model because not only is it, of course, Apache 2.0, but this is a coding specific model that if we are to take these benchmarks at face value, seems to stack up extremely favorably comparably to its competition. But almost more important is that this can be run on a very very wide array of hardware and relatively speaking to what's required to run local AI"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 5224,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-VGyKwi9Rfhk-rtx-3060-vs-rtx-3090-llm-performance-on-7b-14b-32b-70b-models",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-VGyKwi9Rfhk-rtx-3060-vs-rtx-3090-llm-performance-on-7b-14b-32b-70b-models.md",
+        "format": "markdown",
+        "bytes": 2639,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 2248,
+        "words": 446,
+        "total_characters": 2625,
+        "total_words": 499,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 446,
+          "median": 446,
+          "max": 446
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "first test uses deep seek R1 distilled Quin 7B model an Nvidia RTX 3060 with 12 GB of vram on the left part of the screen and an Nvidia RTX 3090 with 24 GB of vram on the right both examples are running on the same computer with 128 GB of RAM and a ryzen 5,800 x CPU the RTX 3060 example inference speed is 5064 tokens per second while the RTX 390 speed is 10.76 tokens per second moving on to the second test this time with the 54 14b model this model fully fits into vram on both gpus just like the previous 7B model the RTX 360 inference speed is 28.97 tokens per second while the RTX 390 speed is"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-VYc47oqBnqI-gemma-4-on-rtx-3090-vs-4090-vs-5090-vs-mac-benchmarks-that-will-surprise-you-31b-and-26b-a",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-VYc47oqBnqI-gemma-4-on-rtx-3090-vs-4090-vs-5090-vs-mac-benchmarks-that-will-surprise-you-31b-and-26b-a.md",
+        "format": "markdown",
+        "bytes": 4353,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemma",
+            "count": 5,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "MacBook",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Please",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "VRAM",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 3898,
+        "words": 774,
+        "total_characters": 4339,
+        "total_words": 842,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 774,
+          "median": 774,
+          "max": 774
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Hi everyone, welcome to the channel. In this video, we will do a comparison of GPUs running the latest model from Google, the Gemma 4 model. It's a claimed to be one of the best open-source model, so we'll see how that runs. Gemma 4 comes in four size. It comes with 2.3 billion, 4.5 billion, 31 billion, and the 26 billion. The 26 billion is a mixture of experts model, so which makes it running very fast. The GPUs we'll be testing including the 3090, 4090, and the 5090. They all have at least 24 GB of VRAM, so we will be focusing on the two largest model, the 31B model and the 26B model. For th"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-wA1GxXy1uGo-which-ai-model-fits-your-pc-lm-studio-model-guide-2026",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-wA1GxXy1uGo-which-ai-model-fits-your-pc-lm-studio-model-guide-2026.md",
+        "format": "markdown",
+        "bytes": 3028,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Studio",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "With",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Your",
+            "count": 3,
+            "line_numbers": [
+              12,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 2644,
+        "words": 502,
+        "total_characters": 3010,
+        "total_words": 551,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 502,
+          "median": 502,
+          "max": 502
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Which AI model fits your PC? Pick the right one and make it fast. This is part two of our LM Studio series, updated for 2026. Check your specs, pick a model, and speed it up. Let's dive in. Here's the golden rule. Your RAM is your model budget. Too big and the model won't load. Too small and the answers are weak. Just right and it's fast and smart. File size plus context plus overhead equals the memory you need. First, a 30-second spec check. On Windows, open Task Manager. Check memory and check your GPU's dedicated memory. On a Mac, open About This Mac. RAM is your model budget. VRAM is your "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-x5hFKYjqmcE-qwen-2-5-coder-7b-fully-tested-can-it-crush-deepseek-2-5-claude-sonnet-as-code-assistant",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-x5hFKYjqmcE-qwen-2-5-coder-7b-fully-tested-can-it-crush-deepseek-2-5-claude-sonnet-as-code-assistant.md",
+        "format": "markdown",
+        "bytes": 15899,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Cloud",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "HTML",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "JavaScript",
+            "count": 10,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Quin",
+            "count": 7,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Sonet",
+            "count": 4,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 15442,
+        "words": 3194,
+        "total_characters": 15885,
+        "total_words": 3257,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 3194,
+          "median": 3194,
+          "max": 3194
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "the queen 2.5 coder model is one of the best current small model that performing with very impressive results I went out and tested against the Deep C coder 2.5 which is an amazing model and also is the king Cloud sonit 3.5 I kid you not the size of this model is less than 5 gab but it's acting like a one of this model that in the range of 50 and 70 GB of model it come in the 7B billion parameter model and 1.5 billion parameter model it have 37 billion parameters It lines as a basically it's open source it have a huge Improvement in coding generation code reasoning and code fixing it have long"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "windowed_map_reduce",
+        "window_words_target": 3194,
+        "overlap_words_target": 300,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-x9MuyVOtX78-dflash-just-made-ai-6x-faster-dflash-deepspec-explained",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-x9MuyVOtX78-dflash-just-made-ai-6x-faster-dflash-deepspec-explained.md",
+        "format": "markdown",
+        "bytes": 8989,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Dflash",
+            "count": 5,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Docker",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Eagle",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Qwen",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 8618,
+        "words": 1574,
+        "total_characters": 8975,
+        "total_words": 1619,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 1,
+        "speaker_like_ratio": 0.5,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 1574,
+          "median": 1574,
+          "max": 1574
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Six times the throughput, zero quality loss. That is the claim behind D flash, freshly merged into llama.cpp for the Qwen 3.6 family. And the moment you hear faster with no downside, the honest reaction is suspicion, because that trade almost never exists. Faster usually means dumber, or quantized, or cut down somewhere you do not notice until it matters. So, the real question is not whether it is fast. Anyone can post a speed number. The question is whether the word lossless has contact with an actual benchmark. Because if it does, this changes how local models run. If it does not, it is just"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1574,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-XoJm7TmY1ck-i-ran-gemma-4-qat-on-rtx-3090-4090-5090-the-results-are-insane",
+      "material_type": "mixed",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-XoJm7TmY1ck-i-ran-gemma-4-qat-on-rtx-3090-4090-5090-the-results-are-insane.md",
+        "format": "markdown",
+        "bytes": 3881,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Gemma",
+            "count": 4,
+            "line_numbers": [
+              12,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Here",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "VRAM",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          }
+        ],
+        "lines": 14,
+        "characters": 3484,
+        "words": 675,
+        "total_characters": 3863,
+        "total_words": 731,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 675,
+          "median": 675,
+          "max": 675
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "Demo 4 is a greater model. Recently, there has been a big upgrade to all the different sized model. This is called the QAT version, which is stands for quantization aware training. This gives it a lot of benefits. So, in this video, we will take a look at it, and then we will compare the benefits for different GPU, and also we will be comparing the performance on 3090, 4090, and the 5090. Here's a overview of the benefits. It's not only able to reduce the memory, however, it's also preserve the quality. So, for example, compare the original BF16 versus the INT4. Even for the biggest size, the "
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 1500,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    },
+    {
+      "material_id": "yt90-xyKEQjUzfAk-cheap-mini-runs-a-70b-llm",
+      "material_type": "demonstration",
+      "secondary_types": [
+        "lecture",
+        "demonstration"
+      ],
+      "confidence": 0.55,
+      "profile": {
+        "path": "kb/raw/transcripts/yt90-xyKEQjUzfAk-cheap-mini-runs-a-70b-llm.md",
+        "format": "markdown",
+        "bytes": 11746,
+        "metadata": {},
+        "metadata_flags": [],
+        "observed_language": "en",
+        "review_flags": [
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Doro",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Intel",
+            "count": 6,
+            "line_numbers": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "repeated_entity_or_asr_candidate",
+            "value": "Ultra",
+            "count": 3,
+            "line_numbers": [
+              14,
+              14,
+              14
+            ],
+            "reason": "Repeated capitalized token; review as possible entity or ASR anomaly. Not a confirmed error."
+          },
+          {
+            "kind": "possible_truncated_final_segment",
+            "line_number": 14,
+            "timestamp_seconds": null,
+            "reason": "Final non-empty segment has multiple words but no terminal punctuation; review only."
+          }
+        ],
+        "lines": 14,
+        "characters": 11421,
+        "words": 2408,
+        "total_characters": 11725,
+        "total_words": 2448,
+        "paragraphs": 1,
+        "paragraph_definition": "non-empty prose blocks after removing front matter and Markdown headings; timestamp headings are boundaries, not content",
+        "headings": 1,
+        "timestamp_headings": 0,
+        "duration_seconds": null,
+        "speaker_like_lines": 0,
+        "speaker_like_ratio": 0.0,
+        "repeated_adjacent_lines": 0,
+        "paragraph_word_stats": {
+          "mean": 2408,
+          "median": 2408,
+          "max": 2408
+        },
+        "samples": [
+          {
+            "text_index": 0,
+            "text": "a little while ago Rah a member of the channel sent me this post this person wayu wrote a blog post about running llama 70 billion parameter inference on an Intel Core Ultra 5 a pretty decent processor Ultra efficient and therefore they can shove it into a little mini PC but what he did was replace the ram that it comes with it comes with 32 gigs of RAM not bad but it allows you to put 96 in there so he did that and that's how he was able to run such large model and these new processors are pretty efficient but the benefit here is that the power consumption is really low 56 Watts performance p"
+          }
+        ]
+      },
+      "processing_plan": {
+        "mode": "single_pass",
+        "window_words_target": 2408,
+        "overlap_words_target": 150,
+        "passes": [
+          "profile_and_segment",
+          "local_extraction",
+          "topic_consolidation",
+          "review"
+        ],
+        "preserve_provenance": true
+      },
+      "open_questions": [
+        "speaker attribution and exact timestamps require source review",
+        "claims require independent corroboration"
+      ]
+    }
+  ]
+}
