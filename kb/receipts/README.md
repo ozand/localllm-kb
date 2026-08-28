@@ -19,6 +19,7 @@ Catalog of verifiable execution receipts, provenance records, and benchmarks.
 
 ## Consolidated Cohort Receipts
 - [YouTube Claim Corroboration Receipt](youtube-claim-corroboration-receipt.md)
+- [Bounded YouTube Independent-Verification Receipt](youtube-bounded-verification-receipt.md)
 - [YouTube Transcript Expansion Receipt](youtube-transcript-expansion-receipt.md)
 - [82-Source YouTube Multi-Iteration Research Receipt](youtube-multi-iteration-research-receipt.md)
 - [Multi-Node RPC & vLLM Cluster Research Receipt](multi-node-rpc-receipt.md)
