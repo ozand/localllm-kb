@@ -1,0 +1,165 @@
+{
+  "artifact_id": "youtube-local-llm-bounded-independent-verification-2026-08",
+  "created": "2026-08-28",
+  "issue": "https://github.com/ozand/localllm-kb/issues/90",
+  "scope": "Bounded independent verification of selected high-value claims from the existing 30-transcript corpus.",
+  "policy": "Official documentation verifies runtime capability or semantics only. It does not validate creator-reported TPS, VRAM, TTFT, speedup, or OOM results without matching model, artifact, runtime version, hardware, context, batch, workload, and measurement method.",
+  "evidence_taxonomy": [
+    "reported_community_partial",
+    "reported_official",
+    "measured_by_external_project",
+    "reported_community_reproducible",
+    "estimated",
+    "unknown"
+  ],
+  "selected_claims": [
+    {
+      "claim_id": "YT90-AeowzDOmX_U-C1",
+      "dimension": "llama.cpp_vs_ollama_throughput",
+      "youtube_url": "https://www.youtube.com/watch?v=AeowzDOmX_U",
+      "transcript_excerpt": "The benchmarks paint a clear picture. Running the Qwen 3 8 billion parameter model with Q4 quantization, llama.cpp produced 161 tokens per second. Ollama, on the same hardware with the same model, managed between 89 and 141.",
+      "stated_conditions": {"model": "Qwen 3 8B", "quantization": "Q4", "hardware": "unknown", "runtime_versions": "unknown", "context": "unknown", "workload": "unknown", "measurement_method": "benchmark details not stated in excerpt"},
+      "independent_evidence": [
+        {"url": "https://github.com/ollama/ollama/blob/main/docs/api.md", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["Ollama exposes runtime options including num_ctx, num_gpu, num_batch, and num_thread", "Ollama returns prompt_eval_count, prompt_eval_duration, eval_count, and eval_duration"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "The official API documents measurement fields and tunable conditions, but provides no matched Qwen 3 8B comparison benchmark."
+    },
+    {
+      "claim_id": "YT90-AeowzDOmX_U-C4",
+      "dimension": "context_window_defaults",
+      "youtube_url": "https://www.youtube.com/watch?v=AeowzDOmX_U",
+      "transcript_excerpt": "Context windows tell a similar story. Llama.cpp can push past 32,000 tokens. Ollama defaults to around 11,000.",
+      "stated_conditions": {"model": "unknown", "hardware": "unknown", "runtime_versions": "unknown", "context": "32,000 versus around 11,000 claimed", "workload": "unknown"},
+      "independent_evidence": [
+        {"url": "https://github.com/ollama/ollama/blob/main/docs/api.md", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["Ollama accepts num_ctx as a runtime option"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "A configurable num_ctx option does not establish a universal default or a llama.cpp versus Ollama capacity comparison."
+    },
+    {
+      "claim_id": "YT90-RBlRTUwJMI4-C4",
+      "dimension": "mtp_speculative_decoding",
+      "youtube_url": "https://www.youtube.com/watch?v=RBlRTUwJMI4",
+      "transcript_excerpt": "So here we have various data sets GSM 8K, MAF 500, human evil, MVP, MTB badge and we can see here mean. So the MTP was the beginning of the speculative decoding with Eagle 3 and so on. The mean was around 4.54.",
+      "stated_conditions": {"model": "unknown", "hardware": "unknown", "runtime": "unknown", "datasets": "GSM8K, MAF500 and other names as transcribed", "metric_definition": "unknown", "measurement_method": "unknown"},
+      "independent_evidence": [
+        {"url": "https://docs.vllm.ai/en/stable/features/speculative_decoding/", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["vLLM documents MTP and EAGLE as speculative decoding methods", "real gains depend on model family, traffic pattern, hardware, and sampling settings", "documentation links reproducible benchmark examples"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "The metric and conditions are insufficient to compare or reproduce the reported mean."
+    },
+    {
+      "claim_id": "YT90-S0qHmLjy6gs-C4",
+      "dimension": "mlx_speculative_decoding_speedup",
+      "youtube_url": "https://www.youtube.com/watch?v=S0qHmLjy6gs",
+      "transcript_excerpt": "--- # Run MLX LLMs 50% Faster on a Mac with DSpark (Speculative Decoding) So if you aren't aware, there is a new chapter in the speculative decoding story.",
+      "stated_conditions": {"model": "unknown", "hardware": "Mac, exact model unknown", "runtime": "MLX, exact version unknown", "speedup": "50% claimed in title", "workload": "unknown"},
+      "independent_evidence": [
+        {"url": "https://github.com/ml-explore/mlx-lm/blob/main/README.md", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["MLX-LM targets Apple silicon", "MLX-LM documents distributed inference and fine-tuning support"]},
+        {"url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["Apple CPU and GPU share unified memory in MLX"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "Official MLX documentation does not validate the title's 50% speedup."
+    },
+    {
+      "claim_id": "YT90-S_zbHH5Ycs0-C1",
+      "dimension": "dflash_speculative_decoding_speedup",
+      "youtube_url": "https://www.youtube.com/watch?v=S_zbHH5Ycs0",
+      "transcript_excerpt": "I cannot believe it, but this is Gemma 4 model is generating text at 600 tokens per second speed right now on my 5090 single GPU at my home.",
+      "stated_conditions": {"model": "Gemma 4 26B A4B", "hardware": "RTX 5090 single GPU", "runtime": "vLLM", "quantization": "unknown in claim excerpt", "context": "unknown", "workload": "unknown", "measurement_method": "unknown"},
+      "independent_evidence": [
+        {"url": "https://docs.vllm.ai/en/stable/features/speculative_decoding/", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["vLLM documents speculative decoding methods including MTP and draft-model approaches", "real gains depend on model family, traffic pattern, hardware, and sampling settings"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "No independent matched benchmark was found; official documentation gives no 600 tok/s validation."
+    },
+    {
+      "claim_id": "YT90-18AkpuX3vkY-C1",
+      "dimension": "vllm_vs_other_runtime_throughput",
+      "youtube_url": "https://www.youtube.com/watch?v=18AkpuX3vkY",
+      "transcript_excerpt": "For general, diverse workloads, varied users, varied lengths, no dominant shared prefix, both frameworks are competitive. On an A100 80 GB with Llama 3 70B at high concurrency, both deliver 17 to 19,000 tokens per second. The gap is within 15%.",
+      "stated_conditions": {"model": "Llama 3 70B", "hardware": "A100 80 GB", "runtime_versions": "unknown", "concurrency": "high, exact value unknown", "workload": "general/diverse, exact prompts unknown", "metric": "17 to 19,000 tokens/s as transcribed; likely requires clarification"},
+      "independent_evidence": [
+        {"url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["APC reuses shared prefixes", "APC affects prefill and not decode time", "benefit depends on prefix sharing"]}
+      ],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "The transcript lacks a reproducible benchmark specification and the reported range is ambiguous."
+    },
+    {
+      "claim_id": "YT90-18AkpuX3vkY-C2",
+      "dimension": "kv_cache_memory",
+      "youtube_url": "https://www.youtube.com/watch?v=18AkpuX3vkY",
+      "transcript_excerpt": "At 4,000 tokens, that cache consumes over a gigabyte of GPU memory per request. On an 80 gigabyte A100, this limits you to a handful of concurrent long context requests.",
+      "stated_conditions": {"model": "unknown", "hardware": "A100 80 GB", "context": "4,000 tokens", "concurrency": "handful claimed", "kv_dtype": "unknown", "runtime": "unknown"},
+      "independent_evidence": [],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "KV size depends on model architecture, KV datatype, batching, and runtime allocation; no matched independent measurement supplied."
+    },
+    {
+      "claim_id": "YT90-AcTmeGpzhBk-C2",
+      "dimension": "apple_unified_memory_capacity",
+      "youtube_url": "https://www.youtube.com/watch?v=AcTmeGpzhBk",
+      "transcript_excerpt": "This MacBook Pro with the M4 Max also has 128 GB available, but not all of that is available for doing LLMs on the GPU. By default, you get about 96 GB.",
+      "stated_conditions": {"hardware": "MacBook Pro M4 Max, 128 GB system memory", "runtime": "unknown", "allocation": "about 96 GB by default claimed", "workload": "LLM inference"},
+      "independent_evidence": [
+        {"url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["Apple CPU and GPU directly access a shared memory pool"]}
+      ],
+      "result": "partially_corroborated",
+      "evidence_status": "reported_community_partial",
+      "reason": "MLX documents the unified-memory model, but not the specific 96 GB allocation default on this MacBook configuration."
+    },
+    {
+      "claim_id": "YT90-B7GDr-C3",
+      "dimension": "slm_hardware_throughput",
+      "youtube_url": "https://www.youtube.com/watch?v=B7GDr-VFuEo",
+      "transcript_excerpt": "Use the same prompt. 10.58 tokens per second here, which is pretty reasonable for a 32 billion parameter model that's 18.4 GB in size.",
+      "stated_conditions": {"model": "32B model, exact identity unknown", "artifact": "18.4 GB, exact file/quantization unknown", "hardware": "system in video, exact configuration unknown", "runtime": "unknown", "prompt": "same prompt, exact text unknown", "measurement_method": "unknown"},
+      "independent_evidence": [],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "Missing model identity, hardware, runtime, quantization, context, and timing method prevents independent comparison."
+    },
+    {
+      "claim_id": "YT90-dgyqBUD71lg-C1",
+      "dimension": "amd_multi_gpu_compatibility",
+      "youtube_url": "https://www.youtube.com/watch?v=dgyqBUD71lg",
+      "transcript_excerpt": "Dual AMD Radeon 9700 AI PRO: Building a 64GB LLM/AI Server with Llama.cpp I finally built a dual GPU setup.",
+      "stated_conditions": {"hardware": "dual AMD Radeon 9700 AI PRO, 64 GB aggregate claimed", "runtime": "llama.cpp", "model": "unknown", "throughput": "not stated"},
+      "independent_evidence": [],
+      "result": "unresolved",
+      "evidence_status": "reported_community_partial",
+      "reason": "The title/intro establishes a community setup claim, not a reproducible compatibility or performance result."
+    },
+    {
+      "claim_id": "YT90-ITbB9nPCX04-C1",
+      "dimension": "vllm_multi_node_inference",
+      "youtube_url": "https://www.youtube.com/watch?v=ITbB9nPCX04",
+      "transcript_excerpt": "All four cards among the two separate nodes are going to be working to serve the same model... you can actually go ahead and use multiple different systems.",
+      "stated_conditions": {"runtime": "vLLM", "topology": "two nodes, four GPUs total", "model": "unknown", "network": "unknown", "parallelism": "unknown", "throughput": "not stated"},
+      "independent_evidence": [
+        {"url": "https://docs.vllm.ai/en/stable/serving/parallelism_scaling.html", "accessed": "2026-08-28", "status": "documented_runtime_surface", "supports": ["vLLM documents tensor parallelism for multi-GPU deployments", "vLLM documents combined tensor and pipeline parallelism for multi-node deployments"]}
+      ],
+      "result": "partially_corroborated",
+      "evidence_status": "reported_community_partial",
+      "reason": "Official vLLM documentation corroborates that the topology is supported, but does not validate this video's exact setup or performance."
+    }
+  ],
+  "summary": {
+    "selected_claims": 11,
+    "dimensions_covered": ["llama.cpp_vs_ollama_throughput", "dflash_mtp_speculative_decoding", "vram_kv_cache_context", "apple_amd_cpu_hardware", "distributed_inference"],
+    "partially_corroborated_runtime_or_capability_claims": 3,
+    "unresolved_claims": 8,
+    "upgraded_to_measured": 0,
+    "upgraded_to_official_performance": 0,
+    "upgraded_to_community_reproducible": 0,
+    "canonicalization_policy": "No creator-reported numeric result is promoted to a measured or canonical performance fact."
+  }
+}
