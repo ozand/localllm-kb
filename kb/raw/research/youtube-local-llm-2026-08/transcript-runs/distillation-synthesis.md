@@ -48,3 +48,8 @@ sharding, tensor parallel, RPC, Ethernet, Thunderbolt, or NVLink.
 - Selection manifest: `transcript-runs/selection-manifest.json`.
 - Extraction results: `transcript-runs/extraction-results.json`.
 - Candidate extraction: `transcript-runs/claim-extraction.json`.
+
+
+## Corroboration pass
+
+- [Official-source corroboration receipt](../../../receipts/youtube-claim-corroboration-receipt.md)

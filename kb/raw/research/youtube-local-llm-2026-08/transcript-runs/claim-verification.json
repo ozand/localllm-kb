@@ -42,7 +42,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-0ujh7hfutq0-C2",
@@ -76,7 +77,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 1
+      "triage_score": 1,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-18AkpuX3vkY-C1",
@@ -119,7 +121,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-18AkpuX3vkY-C2",
@@ -158,7 +161,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-18AkpuX3vkY-C3",
@@ -191,12 +195,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "prefix caching semantics and limits"
+          ],
+          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-18AkpuX3vkY-C4",
@@ -233,7 +247,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-1_L9cG-C1",
@@ -269,7 +284,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-1_L9cG-C2",
@@ -305,7 +321,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-2t9XrPcAiHg-C1",
@@ -343,7 +360,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-2t9XrPcAiHg-C2",
@@ -383,7 +401,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-2t9XrPcAiHg-C3",
@@ -419,7 +438,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-2t9XrPcAiHg-C4",
@@ -455,7 +475,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-4shPVb4RqGQ-C1",
@@ -497,7 +518,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-4shPVb4RqGQ-C2",
@@ -532,7 +554,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 3
+      "triage_score": 3,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-AcTmeGpzhBk-C1",
@@ -571,7 +594,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-AcTmeGpzhBk-C2",
@@ -606,12 +630,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-AcTmeGpzhBk-C3",
@@ -648,7 +682,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-AcTmeGpzhBk-C4",
@@ -686,7 +721,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-AeowzDOmX_U-C1",
@@ -728,12 +764,38 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://docs.ollama.com/api",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "Ollama API surface"
+          ],
+          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-AeowzDOmX_U-C2",
@@ -777,12 +839,38 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://docs.ollama.com/api",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "Ollama API surface"
+          ],
+          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-AeowzDOmX_U-C3",
@@ -817,12 +905,38 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://docs.ollama.com/api",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "Ollama API surface"
+          ],
+          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-AeowzDOmX_U-C4",
@@ -860,12 +974,38 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://docs.ollama.com/api",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "Ollama API surface"
+          ],
+          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-B7GDr-C1",
@@ -897,12 +1037,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-B7GDr-C2",
@@ -945,7 +1095,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-B7GDr-C3",
@@ -984,7 +1135,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-B7GDr-C4",
@@ -1030,7 +1182,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-bTaN5VYCN58-C1",
@@ -1069,7 +1222,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-bTaN5VYCN58-C2",
@@ -1109,7 +1263,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-bTaN5VYCN58-C3",
@@ -1145,7 +1300,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-bTaN5VYCN58-C4",
@@ -1183,7 +1339,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-dgyqBUD71lg-C1",
@@ -1219,12 +1376,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-dgyqBUD71lg-C2",
@@ -1263,7 +1438,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-dgyqBUD71lg-C3",
@@ -1301,7 +1477,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-dgyqBUD71lg-C4",
@@ -1341,7 +1518,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-gkl2KlJ7FP0-C1",
@@ -1378,12 +1556,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-gkl2KlJ7FP0-C2",
@@ -1423,7 +1611,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-gkl2KlJ7FP0-C3",
@@ -1465,7 +1654,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-gkl2KlJ7FP0-C4",
@@ -1499,7 +1689,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 1
+      "triage_score": 1,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-ITbB9nPCX04-C1",
@@ -1533,12 +1724,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "prefix caching semantics and limits"
+          ],
+          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C1",
@@ -1573,12 +1774,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C2",
@@ -1613,12 +1824,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C3",
@@ -1654,12 +1875,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C4",
@@ -1695,7 +1926,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-L9QZ97y9Exg-C1",
@@ -1731,7 +1963,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-L9QZ97y9Exg-C2",
@@ -1767,7 +2000,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-L9QZ97y9Exg-C3",
@@ -1803,7 +2037,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-L9QZ97y9Exg-C4",
@@ -1841,7 +2076,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-m3PQd11aI_c-C1",
@@ -1880,7 +2116,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-m3PQd11aI_c-C2",
@@ -1919,7 +2156,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-m3PQd11aI_c-C3",
@@ -1958,7 +2196,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-m3PQd11aI_c-C4",
@@ -1996,7 +2235,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C1",
@@ -2031,12 +2271,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C2",
@@ -2069,12 +2319,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C3",
@@ -2107,12 +2367,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C4",
@@ -2150,7 +2420,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C1",
@@ -2186,12 +2457,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C2",
@@ -2227,12 +2516,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C3",
@@ -2268,7 +2575,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C4",
@@ -2307,7 +2615,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-S0qHmLjy6gs-C1",
@@ -2344,7 +2653,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-S0qHmLjy6gs-C2",
@@ -2380,7 +2690,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-S0qHmLjy6gs-C3",
@@ -2417,7 +2728,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-S0qHmLjy6gs-C4",
@@ -2453,12 +2765,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-S_zbHH5Ycs0-C1",
@@ -2500,12 +2822,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "prefix caching semantics and limits"
+          ],
+          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-S_zbHH5Ycs0-C2",
@@ -2547,12 +2879,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "prefix caching semantics and limits"
+          ],
+          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-S_zbHH5Ycs0-C3",
@@ -2592,7 +2934,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-S_zbHH5Ycs0-C4",
@@ -2630,7 +2973,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-scMSq4FtO8c-C1",
@@ -2671,7 +3015,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-scMSq4FtO8c-C2",
@@ -2707,7 +3052,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-scMSq4FtO8c-C3",
@@ -2742,7 +3088,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 1
+      "triage_score": 1,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-sMacAPpgXhQ-C1",
@@ -2784,12 +3131,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-sMacAPpgXhQ-C2",
@@ -2833,7 +3190,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-sMacAPpgXhQ-C3",
@@ -2872,7 +3230,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-sMacAPpgXhQ-C4",
@@ -2913,7 +3272,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-t_hh2-C1",
@@ -2957,12 +3317,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-uxvttLUOY-C1",
@@ -3000,7 +3370,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-uxvttLUOY-C2",
@@ -3039,7 +3410,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-uxvttLUOY-C3",
@@ -3078,7 +3450,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-uxvttLUOY-C4",
@@ -3121,7 +3494,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VGyKwi9Rfhk-C1",
@@ -3199,7 +3573,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VGyKwi9Rfhk-C2",
@@ -3277,7 +3652,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VYc47oqBnqI-C1",
@@ -3324,7 +3700,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VYc47oqBnqI-C2",
@@ -3368,12 +3745,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-VYc47oqBnqI-C3",
@@ -3417,7 +3812,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VYc47oqBnqI-C4",
@@ -3460,7 +3856,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-wA1GxXy1uGo-C1",
@@ -3497,7 +3894,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-wA1GxXy1uGo-C2",
@@ -3536,7 +3934,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-wA1GxXy1uGo-C3",
@@ -3572,7 +3971,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-wA1GxXy1uGo-C4",
@@ -3610,7 +4010,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-x5hFKYjqmcE-C1",
@@ -3661,7 +4062,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C1",
@@ -3698,7 +4100,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C2",
@@ -3736,12 +4139,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C3",
@@ -3780,12 +4201,30 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C4",
@@ -3823,7 +4262,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C1",
@@ -3865,7 +4305,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C2",
@@ -3901,12 +4342,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C3",
@@ -3943,12 +4394,38 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "llama.cpp RPC tool existence"
+          ],
+          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+        },
+        {
+          "url": "https://github.com/ml-explore/mlx",
+          "source_type": "official_runtime_source",
+          "supports": [
+            "MLX Apple Silicon architecture"
+          ],
+          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+        },
+        {
+          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "OpenAI-compatible llama-cpp-python server"
+          ],
+          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C4",
@@ -3994,7 +4471,8 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 4
+      "triage_score": 4,
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-xyKEQjUzfAk-C1",
@@ -4041,8 +4519,66 @@
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
-      "triage_score": 6
+      "triage_score": 6,
+      "corroboration_status": "not_yet_corroborated"
     }
   ],
-  "no_candidate_claims": []
+  "no_candidate_claims": [],
+  "independent_references": [
+    {
+      "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "prefix caching semantics and limits"
+      ],
+      "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
+      "source_type": "official_runtime_source",
+      "supports": [
+        "llama.cpp RPC tool existence"
+      ],
+      "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
+    },
+    {
+      "url": "https://docs.ollama.com/api",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "Ollama API surface"
+      ],
+      "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+    },
+    {
+      "url": "https://github.com/ml-explore/mlx",
+      "source_type": "official_runtime_source",
+      "supports": [
+        "MLX Apple Silicon architecture"
+      ],
+      "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+    },
+    {
+      "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "OpenAI-compatible llama-cpp-python server"
+      ],
+      "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+    },
+    {
+      "url": "https://docs.sglang.ai/",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "SGLang documentation entry point"
+      ],
+      "verification_note": "Entry point confirms documentation availability; specific RadixAttention claim needs a versioned page."
+    }
+  ],
+  "verification_summary": {
+    "claims_total": 99,
+    "claims_with_runtime_surface_reference": 28,
+    "claims_upgraded_to_measured": 0,
+    "claims_upgraded_to_official": 0,
+    "policy": "Runtime documentation corroborates existence/semantics only; it does not validate video-specific performance numbers."
+  }
 }
