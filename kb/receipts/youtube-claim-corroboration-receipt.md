@@ -20,7 +20,7 @@ transcripts with public official runtime documentation and source repositories.
 
 ## Results
 - Candidate claims reviewed: 99.
-- Claims with a related official runtime surface/reference: 28.
+- Claims with a related official runtime surface/reference: 13.
 - Claims upgraded to measured: 0.
 - Claims upgraded to official performance facts: 0.
 - All video-specific numbers remain `reported_community_partial` until exact conditions

@@ -116,13 +116,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "not_yet_corroborated"
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-18AkpuX3vkY-C2",
@@ -200,9 +209,9 @@
           "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
           "source_type": "official_runtime_docs",
           "supports": [
-            "prefix caching semantics and limits"
-          ],
-          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
         }
       ],
       "contradictions": [],
@@ -632,12 +641,12 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
+          "url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+          "source_type": "official_runtime_docs",
           "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+            "Apple CPU and GPU share unified memory",
+            "MLX operations can target CPU or GPU streams"
+          ]
         }
       ],
       "contradictions": [],
@@ -766,28 +775,11 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://docs.ollama.com/api",
+          "url": "https://docs.ollama.com/api/generate",
           "source_type": "official_runtime_docs",
           "supports": [
-            "Ollama API surface"
-          ],
-          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+            "Ollama generate endpoint and reported timing counters"
+          ]
         }
       ],
       "contradictions": [],
@@ -841,28 +833,11 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://docs.ollama.com/api",
+          "url": "https://docs.ollama.com/api/generate",
           "source_type": "official_runtime_docs",
           "supports": [
-            "Ollama API surface"
-          ],
-          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+            "Ollama generate endpoint and reported timing counters"
+          ]
         }
       ],
       "contradictions": [],
@@ -907,28 +882,11 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://docs.ollama.com/api",
+          "url": "https://docs.ollama.com/api/generate",
           "source_type": "official_runtime_docs",
           "supports": [
-            "Ollama API surface"
-          ],
-          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+            "Ollama generate endpoint and reported timing counters"
+          ]
         }
       ],
       "contradictions": [],
@@ -976,28 +934,11 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://docs.ollama.com/api",
+          "url": "https://docs.ollama.com/api/generate",
           "source_type": "official_runtime_docs",
           "supports": [
-            "Ollama API surface"
-          ],
-          "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+            "Ollama generate endpoint and reported timing counters"
+          ]
         }
       ],
       "contradictions": [],
@@ -1037,22 +978,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-B7GDr-C2",
@@ -1376,30 +1308,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-dgyqBUD71lg-C2",
@@ -1556,22 +1471,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-gkl2KlJ7FP0-C2",
@@ -1729,9 +1635,17 @@
           "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
           "source_type": "official_runtime_docs",
           "supports": [
-            "prefix caching semantics and limits"
-          ],
-          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
+        },
+        {
+          "url": "https://docs.vllm.ai/en/stable/serving/parallelism_scaling.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "tensor and pipeline parallelism guidance",
+            "Ray default for multi-node inference"
+          ]
         }
       ],
       "contradictions": [],
@@ -1774,22 +1688,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C2",
@@ -1824,22 +1729,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C3",
@@ -1875,22 +1771,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-jdgy9YUSv0s-C4",
@@ -2271,22 +2158,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C2",
@@ -2319,22 +2197,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C3",
@@ -2367,22 +2236,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-prIUKAbHlj8-C4",
@@ -2457,30 +2317,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C2",
@@ -2516,30 +2359,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-RBlRTUwJMI4-C3",
@@ -2648,13 +2474,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "Apple CPU and GPU share unified memory",
+            "MLX operations can target CPU or GPU streams"
+          ]
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "not_yet_corroborated"
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-S0qHmLjy6gs-C2",
@@ -2767,12 +2602,12 @@
       "verification_status": "needs_external_verification",
       "independent_corroboration": [
         {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
+          "url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+          "source_type": "official_runtime_docs",
           "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
+            "Apple CPU and GPU share unified memory",
+            "MLX operations can target CPU or GPU streams"
+          ]
         }
       ],
       "contradictions": [],
@@ -2827,9 +2662,9 @@
           "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
           "source_type": "official_runtime_docs",
           "supports": [
-            "prefix caching semantics and limits"
-          ],
-          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
         }
       ],
       "contradictions": [],
@@ -2884,9 +2719,9 @@
           "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
           "source_type": "official_runtime_docs",
           "supports": [
-            "prefix caching semantics and limits"
-          ],
-          "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
         }
       ],
       "contradictions": [],
@@ -3047,13 +2882,22 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [],
+      "independent_corroboration": [
+        {
+          "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
+          "source_type": "official_runtime_docs",
+          "supports": [
+            "APC reuses shared prefix KV cache blocks",
+            "APC reduces prefill rather than decode time"
+          ]
+        }
+      ],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "not_yet_corroborated"
+      "corroboration_status": "partially_corroborated_runtime_surface_only"
     },
     {
       "claim_id": "YT90-scMSq4FtO8c-C3",
@@ -3131,22 +2975,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-sMacAPpgXhQ-C2",
@@ -3317,22 +3152,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-uxvttLUOY-C1",
@@ -3745,30 +3571,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-VYc47oqBnqI-C3",
@@ -4139,30 +3948,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C3",
@@ -4201,30 +3993,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-x9MuyVOtX78-C4",
@@ -4342,22 +4117,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C3",
@@ -4394,38 +4160,13 @@
       "claim_type": "reported_community",
       "evidence_status": "reported_community_partial",
       "verification_status": "needs_external_verification",
-      "independent_corroboration": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "llama.cpp RPC tool existence"
-          ],
-          "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-        },
-        {
-          "url": "https://github.com/ml-explore/mlx",
-          "source_type": "official_runtime_source",
-          "supports": [
-            "MLX Apple Silicon architecture"
-          ],
-          "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-        },
-        {
-          "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
-          "source_type": "official_runtime_docs",
-          "supports": [
-            "OpenAI-compatible llama-cpp-python server"
-          ],
-          "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
-        }
-      ],
+      "independent_corroboration": [],
       "contradictions": [],
       "unknowns": [
         "Exact benchmark protocol, software version, prompt/workload, and timestamp are not reliably established from this automated extraction."
       ],
       "triage_score": 6,
-      "corroboration_status": "partially_corroborated_runtime_surface_only"
+      "corroboration_status": "not_yet_corroborated"
     },
     {
       "claim_id": "YT90-XoJm7TmY1ck-C4",
@@ -4529,54 +4270,52 @@
       "url": "https://docs.vllm.ai/en/stable/features/automatic_prefix_caching.html",
       "source_type": "official_runtime_docs",
       "supports": [
-        "prefix caching semantics and limits"
-      ],
-      "verification_note": "APC reuses shared prefix KV blocks and reduces prefill only; it does not inherently accelerate decoding."
+        "APC reuses shared prefix KV cache blocks",
+        "APC reduces prefill rather than decode time"
+      ]
     },
     {
-      "url": "https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc",
-      "source_type": "official_runtime_source",
-      "supports": [
-        "llama.cpp RPC tool existence"
-      ],
-      "verification_note": "RPC source tree confirms the official rpc tool location; exact deployment performance remains unverified."
-    },
-    {
-      "url": "https://docs.ollama.com/api",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/tools/rpc/README.md",
       "source_type": "official_runtime_docs",
       "supports": [
-        "Ollama API surface"
-      ],
-      "verification_note": "API documentation confirms API availability; it does not corroborate creator throughput claims."
+        "ggml-rpc-server exposes remote ggml devices",
+        "RPC backend is proof-of-concept and insecure for open networks"
+      ]
     },
     {
-      "url": "https://github.com/ml-explore/mlx",
-      "source_type": "official_runtime_source",
-      "supports": [
-        "MLX Apple Silicon architecture"
-      ],
-      "verification_note": "MLX repository documents Apple Silicon array framework and lazy computation; video-specific TPS remains unverified."
-    },
-    {
-      "url": "https://llama-cpp-python.readthedocs.io/en/latest/server/",
+      "url": "https://docs.vllm.ai/en/stable/serving/parallelism_scaling.html",
       "source_type": "official_runtime_docs",
       "supports": [
-        "OpenAI-compatible llama-cpp-python server"
-      ],
-      "verification_note": "Server documentation supports compatibility claims; benchmark conditions remain unknown."
+        "tensor and pipeline parallelism guidance",
+        "Ray default for multi-node inference"
+      ]
+    },
+    {
+      "url": "https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "Apple CPU and GPU share unified memory",
+        "MLX operations can target CPU or GPU streams"
+      ]
+    },
+    {
+      "url": "https://docs.ollama.com/api/generate",
+      "source_type": "official_runtime_docs",
+      "supports": [
+        "Ollama generate endpoint and reported timing counters"
+      ]
     },
     {
       "url": "https://docs.sglang.ai/",
       "source_type": "official_runtime_docs",
       "supports": [
-        "SGLang documentation entry point"
-      ],
-      "verification_note": "Entry point confirms documentation availability; specific RadixAttention claim needs a versioned page."
+        "SGLang official documentation entry point"
+      ]
     }
   ],
   "verification_summary": {
     "claims_total": 99,
-    "claims_with_runtime_surface_reference": 28,
+    "claims_with_runtime_surface_reference": 13,
     "claims_upgraded_to_measured": 0,
     "claims_upgraded_to_official": 0,
     "policy": "Runtime documentation corroborates existence/semantics only; it does not validate video-specific performance numbers."
