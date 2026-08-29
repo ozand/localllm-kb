@@ -53,6 +53,7 @@ Canonical knowledge base for locally hosted large language models, quantization 
 
 - [Validation Receipts Directory](../receipts/README.md)
   - [82-Source YouTube Research Receipt](../receipts/youtube-multi-iteration-research-receipt.md)
+  - [Speculative-Decoding Claim Verification](../receipts/speculative-decoding-claim-verification-receipt.md)
   - [Bounded YouTube Independent Verification](../receipts/youtube-bounded-verification-receipt.md)
   - [Consolidated Cohort Cross-Model Matrix](../receipts/cohort-consolidated-matrix-2026-08-23.md)
   - [Merged Cohort Inventory](../receipts/cohort-merged-inventory-2026-08-23.md)
