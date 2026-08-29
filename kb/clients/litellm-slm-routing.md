@@ -5,7 +5,7 @@ category: clients
 tags: [litellm, slm, routing, proxy, triage, latency_optimization]
 status: active
 created: 2026-08-25
-updated: 2026-08-25
+updated: 2026-08-29
 environment:
   os: any
   shell: any
@@ -17,9 +17,11 @@ error_signatures:
 
 # LiteLLM Local SLM Routing & Proxy Architecture
 
-Small Language Models (SLMs, 0.5B–14B) provide ultra-low latency (TTFT < 0.15s, >100–200 tok/s) and minimal VRAM requirements (1.5GB–12GB). LiteLLM acts as an intelligent proxy gateway, routing low-complexity subtasks to SLMs while escalating heavy reasoning and frontier queries to 20B–32B or 671B models.
+The existing research record profiles Small Language Models (SLMs, 0.5B–14B) for tiered local routing. Its latency, throughput, and memory figures are bounded observations from the [SLM/LiteLLM validation receipt](../receipts/slm-litellm-routing-receipt.md), not universal expectations across models, artifacts, runtimes, hardware, workloads, or harnesses. LiteLLM can act as a proxy gateway for routing decisions; routing behavior is distinct from backend performance.
 
 ## 1. SLM Cohort Profiles
+
+**Evidence status:** `reported_community_reproducible` for the bounded cohort record, with incomplete claim-level conditions on this page. Exact artifact revisions, runtime/version, prompt and output lengths, context/KV settings, concurrency, TTFT measurement boundary, and test method are `unknown` unless stated in the linked receipt. Q4_K_S values are file-footprint references, not complete runtime-memory or fit guarantees.
 
 | Model | Parameters | Q4_K_S (GB) | RTX 3090 TPS | TTFT (s) | Best Roles |
 |---|---|---|---|---|---|
@@ -33,6 +35,8 @@ Small Language Models (SLMs, 0.5B–14B) provide ultra-low latency (TTFT < 0.15s
 | **Qwen 2.5 14B** | 14.7B | 9.00 GB | ~52 tok/s | ~0.48s | Heavy Edge Orchestrator, Complex Tool Chains |
 
 ## 2. LiteLLM Multi-Tier Routing Configuration
+
+The configuration is a routing example. The inline `<0.15s` and `<0.3s` labels are reported targets, not universal latency guarantees; actual proxy and backend latency depend on deployment, request, model, runtime, and network conditions.
 
 Below is the canonical `config.yaml` for a tiered local deployment:
 
@@ -67,5 +71,5 @@ router_settings:
 ```
 
 ## 3. Key Agent Pipeline Patterns
-- **Speculative Draft Acceleration**: Pair `qwen2.5-0.5b` as draft model with `qwen3-32b` in llama.cpp (`--draft-model qwen2.5-0.5b.gguf`) for 1.8x–2.4x speedup.
+- **Speculative Draft Acceleration:** Pairing `qwen2.5-0.5b` with `qwen3-32b` is a reported configuration pattern. The earlier `1.8x–2.4x` speedup is retained only as `reported_community_partial`; model/artifact revisions, runtime/version, hardware, context, workload, baseline, acceptance rate, and measurement method are `unknown` here. Do not use it as a guaranteed speedup.
 - **Context Summarization & Memory Compaction**: Route periodic rolling conversation summaries to `llama-3.2-3b`, offloading background maintenance from the main coding model.
